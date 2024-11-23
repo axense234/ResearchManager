@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,204 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  username String @default("Username")
+  email    String @unique
+  hash     String
+
+  profileImageSrc    String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365178/Research%20Manager/users/profileImages/abstract-user-flat-4_fimqzi.png")
+  backgroundImageSrc String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365146/Research%20Manager/users/backgroundImages/signupwallpaper_der2zw.jpg")
+
+  activityFeed       ActivityFeed?
+  settings           Setting[]
+  tags               Tag[]
+  researchActivities ResearchActivity[]
+
+  archivedTags               Tag[]              @relation("archived")
+  archivedResearchActivities ResearchActivity[] @relation("archived")
+  archivedResearchPhases     ResearchPhase[]    @relation("archived")
+  archivedResearchSessions   ResearchSession[]  @relation("archived")
+  archivedResearchLogs       ResearchLog[]      @relation("archived")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Setting {
+  id    String @id @default(uuid())
+  label String
+  value String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  id                        String @id @default(uuid())
+  title                     String @default("Usual")
+  backgroundColorOrImageSrc String @default("#D54E5D") // Pastel Red Hex Code
+  fontSize                  Int    @default(16)
+  fontFamily                String @default("Irish Grover")
+
+  user                     User   @relation(fields: [userId], references: [id])
+  userId                   String
+  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
+  userIdForArchivePurposes String
+
+  researchActivities ResearchActivity[]
+  researchPhases     ResearchPhase[]
+  researchSessions   ResearchSession[]
+  researchLogs       ResearchLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ResearchActivity {
+  id                        String @id @default(uuid())
+  name                      String @default("Research Activity")
+  backgroundColorOrImageSrc String @default("#D8E5E4") // Whiteish Hex Code
+
+  user                     User   @relation(fields: [userId], references: [id])
+  userId                   String
+  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
+  userIdForArchivePurposes String
+
+  activityFeed ActivityFeed?
+
+  tags           Tag[]
+  researchPhases ResearchPhase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ResearchPhase {
+  id                        String @id @default(uuid())
+  name                      String @default("Research Phase")
+  backgroundColorOrImageSrc String @default("#D8E5E4") // Whiteish Hex Code
+
+  researchActivity   ResearchActivity @relation(fields: [researchActivityId], references: [id])
+  researchActivityId String
+
+  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
+  userIdForArchivePurposes String
+
+  tags             Tag[]
+  researchSessions ResearchSession[]
+  researchLogs     ResearchLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ResearchLog {
+  id                        String   @id @default(uuid())
+  name                      String   @default("Research Log")
+  backgroundColorOrImageSrc String   @default("#D8E5E4") // Whiteish Hex Code
+  researchPoints            Int      @default(0)
+  content                   String   @default("No content written.")
+  imagesSrc                 String[] @default([])
+
+  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
+  userIdForArchivePurposes String
+
+  researchPhase   ResearchPhase @relation(fields: [researchPhaseId], references: [id])
+  researchPhaseId String
+
+  tags Tag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ResearchSession {
+  id                        String   @id @default(uuid())
+  name                      String   @default("Research Session")
+  backgroundColorOrImageSrc String   @default("#D8E5E4") // Whiteish Hex Code
+  researchPoints            Int      @default(0)
+  content                   String   @default("No content written.")
+  imagesSrc                 String[] @default([])
+
+  currentStatusType ResearchSessionStatusType @default(STARTED)
+  currentStatusDate DateTime                  @default(now())
+
+  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
+  userIdForArchivePurposes String
+
+  researchPhase   ResearchPhase @relation(fields: [researchPhaseId], references: [id])
+  researchPhaseId String
+
+  tags Tag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ActivityFeed {
+  id   String           @id @default(uuid())
+  type ActivityFeedType @default(USER)
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  researchActivity   ResearchActivity @relation(fields: [researchActivityId], references: [id])
+  researchActivityId String           @unique
+
+  dayActivities DayActivity[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DayActivity {
+  id String @id @default(uuid())
+
+  activityFeed   ActivityFeed @relation(fields: [activityFeedId], references: [id])
+  activityFeedId String
+  activities     Activity[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Activity {
+  id            String          @id @default(uuid())
+  createdAt     DateTime        @default(now())
+  subject       ActivitySubject @default(OTHER)
+  message       String          @default("Other activity noticed, something is wrong.")
+  messageValues String[]        @default([])
+
+  dayActivities DayActivity[]
+}
+
+enum ResearchSessionStatusType {
+  STARTED
+  PAUSED
+  RESUMED
+  FINISHED
+}
+
+enum ActivityFeedType {
+  USER
+  RESEARCH_ACTIVITY
+}
+
+enum ActivitySubject {
+  CREATE
+  UPDATE
+  DELETE
+  RESTORE
+  PURGE
+  RESEARCH_START
+  RESEARCH_PAUSE
+  RESEARCH_RESUME
+  RESEARCH_END
+  SETTINGS
+  OTHER
 }
