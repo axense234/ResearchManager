@@ -15,3 +15,21 @@ export class CreateResearchPhaseDto {
   @IsUUID()
   userIdForArchivePurposes: string;
 }
+
+export class UpdateResearchPhaseDto {
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  backgroundColorOrImageSrc: string;
+
+  @IsUUID()
+  @IsOptional()
+  researchActivityId: string;
+
+  @IsUUID()
+  @IsOptional()
+  userIdForArchivePurposes: string;
+}

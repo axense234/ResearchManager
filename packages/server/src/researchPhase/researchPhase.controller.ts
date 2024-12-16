@@ -2,8 +2,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -15,7 +17,7 @@ import { ResearchPhaseService } from './researchPhase.service';
 // Types
 import GetResearchPhasesQueryParams from './types/GetResearchPhasesQueryParams';
 // Dto
-import { CreateResearchPhaseDto } from './dto';
+import { CreateResearchPhaseDto, UpdateResearchPhaseDto } from './dto';
 
 @UseGuards(JwtGuard)
 @Controller('researchPhases')
@@ -35,5 +37,19 @@ export class ResearchPhaseController {
   @Post('create')
   createResearchPhase(@Body() dto: CreateResearchPhaseDto) {
     console.log(dto);
+    return this.researchPhaseService.createResearchPhase(dto);
+  }
+
+  @Patch(':researchPhaseId/update')
+  updateResearchPhase(
+    @Param('researchPhaseId') researchPhaseId: string,
+    @Body() dto: UpdateResearchPhaseDto,
+  ) {
+    return this.researchPhaseService.updateResearchPhase(dto, researchPhaseId);
+  }
+
+  @Delete(':researchPhaseId/delete')
+  deleteResearchPhase(@Param('researchPhaseId') researchPhaseId: string) {
+    return this.researchPhaseService.deleteResearchPhase(researchPhaseId);
   }
 }
