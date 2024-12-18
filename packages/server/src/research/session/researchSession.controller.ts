@@ -2,8 +2,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -15,7 +17,7 @@ import GetResearchSessionsQueryParams from './types/GetResearchSessionsQueryPara
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Dtos
-import { CreateResearchSessionDto } from './dto';
+import { CreateResearchSessionDto, UpdateResearchSessionDto } from './dto';
 
 @UseGuards(JwtGuard)
 @Controller('researchSessions')
@@ -35,5 +37,21 @@ export class ResearchSessionController {
   @Post('create')
   createResearchSession(@Body() dto: CreateResearchSessionDto) {
     return this.researchSessionService.createResearchSession(dto);
+  }
+
+  @Patch(':researchSessionId/update')
+  updateResearchSession(
+    @Param('researchSessionId') researchSessionId: string,
+    @Body() dto: UpdateResearchSessionDto,
+  ) {
+    return this.researchSessionService.updateResearchSession(
+      dto,
+      researchSessionId,
+    );
+  }
+
+  @Delete(':researchSessionId/delete')
+  deleteResearchSession(@Param('researchSessionId') researchSessionId: string) {
+    return this.researchSessionService.deleteResearchSession(researchSessionId);
   }
 }

@@ -46,3 +46,41 @@ export class CreateResearchSessionDto {
   @IsUUID()
   researchPhaseId: string;
 }
+
+export class UpdateResearchSessionDto {
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  backgroundColorOrImageSrc: string;
+
+  @IsNumber()
+  @IsOptional()
+  researchPoints: number;
+
+  @IsString()
+  @IsOptional()
+  content: string;
+
+  @IsArray()
+  @IsOptional()
+  imagesSrc: string[];
+
+  @IsEnum(ResearchSessionStatusType)
+  @IsOptional()
+  currentStatusType: ResearchSessionStatusType;
+
+  @IsDateString()
+  @IsOptional()
+  currentStatusDate: Date;
+
+  @IsUUID()
+  @IsOptional()
+  userIdForArchivePurposes: string;
+
+  @IsUUID()
+  @IsOptional()
+  researchPhaseId: string;
+}

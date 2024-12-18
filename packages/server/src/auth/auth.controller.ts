@@ -1,5 +1,5 @@
 // Nest
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 // Providers
 import { AuthService } from './auth.service';
 // Auth
@@ -15,11 +15,13 @@ export class AuthController {
   }
 
   @Post('signin')
+  @HttpCode(200)
   signIn(@Body() dto: AuthDto) {
     return this.authService.signIn(dto);
   }
 
   @Post('logout')
+  @HttpCode(200)
   logOut() {
     return this.authService.logOut();
   }

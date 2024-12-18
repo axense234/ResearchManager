@@ -175,7 +175,7 @@ model Activity {
   id            String          @id @default(uuid())
   createdAt     DateTime        @default(now())
   subject       ActivitySubject @default(OTHER)
-  message       String          @default("Other activity noticed, something is wrong.")
+  message       String          @default("Other activity noticed, something is very wrong. The apocalypse is coming. Run.")
   messageValues String[]        @default([])
 
   dayActivities DayActivity[]

@@ -4,10 +4,12 @@ import { Module } from '@nestjs/common';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { ResearchActivityModule } from './researchActivity/researchActivity.module';
-import { ResearchPhaseModule } from './researchPhase/researchPhase.module';
-import { ResearchLogModule } from './researchLog/researchLog.module';
-import { ResearchSessionModule } from './researchSession/researchSession.module';
+import { ResearchActivityModule } from './research/activity/researchActivity.module';
+import { ResearchPhaseModule } from './research/phase/researchPhase.module';
+import { ResearchLogModule } from './research/log/researchLog.module';
+import { ResearchSessionModule } from './research/session/researchSession.module';
+import { TagModule } from './tag/tag.module';
+import { SettingModule } from './setting/setting.module';
 // Config Module
 import { ConfigModule } from '@nestjs/config';
 
@@ -17,6 +19,8 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     AuthModule,
     PrismaModule,
+    TagModule,
+    SettingModule,
     ResearchActivityModule,
     ResearchPhaseModule,
     ResearchLogModule,

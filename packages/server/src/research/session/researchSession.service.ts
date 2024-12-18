@@ -8,7 +8,8 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 // Types
 import GetResearchSessionsQueryParams from './types/GetResearchSessionsQueryParams';
-import { CreateResearchSessionDto } from './dto';
+// Dtos
+import { CreateResearchSessionDto, UpdateResearchSessionDto } from './dto';
 
 @Injectable()
 export class ResearchSessionService {
@@ -84,6 +85,82 @@ export class ResearchSessionService {
       return {
         message: `Successfully created Research Session ${createdResearchSession.name}!`,
         researchSession: createdResearchSession,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateResearchSession(
+    dto: UpdateResearchSessionDto,
+    researchSessionId: string,
+  ) {
+    try {
+      if (!researchSessionId) {
+        throw new BadRequestException('No Research Session Id provided.');
+      }
+
+      const foundResearchSessionToBeUpdated =
+        await this.prisma.researchSession.findUnique({
+          where: { id: researchSessionId },
+        });
+
+      if (!foundResearchSessionToBeUpdated) {
+        throw new NotFoundException(
+          'Could not find any Research Session to be updated with the provided information.',
+        );
+      }
+
+      const updatedResearchSession = await this.prisma.researchSession.update({
+        where: { id: researchSessionId },
+        data: { ...dto },
+      });
+
+      if (!updatedResearchSession) {
+        throw new BadRequestException(
+          'Could not update Research Session with the provided information.',
+        );
+      }
+
+      return {
+        message: `Successfully updated Research Session named ${updatedResearchSession.name}!`,
+        researchSession: updatedResearchSession,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteResearchSession(researchSessionId: string) {
+    try {
+      if (!researchSessionId) {
+        throw new BadRequestException('No Research Session Id provided.');
+      }
+
+      const foundResearchSessionToBeDeleted =
+        await this.prisma.researchSession.findUnique({
+          where: { id: researchSessionId },
+        });
+
+      if (!foundResearchSessionToBeDeleted) {
+        throw new NotFoundException(
+          'Could not find any Research Session with the data provided.',
+        );
+      }
+
+      const deletedResearchSession = await this.prisma.researchSession.delete({
+        where: { id: researchSessionId },
+      });
+
+      if (!deletedResearchSession) {
+        throw new BadRequestException(
+          'Could not delete Research Session with the data provided.',
+        );
+      }
+
+      return {
+        message: `Successfully deleted Research Session named ${deletedResearchSession.name}!`,
+        researchSession: deletedResearchSession,
       };
     } catch (error) {
       throw error;
