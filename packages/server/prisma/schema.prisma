@@ -16,7 +16,7 @@ model User {
   profileImageSrc    String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365178/Research%20Manager/users/profileImages/abstract-user-flat-4_fimqzi.png")
   backgroundImageSrc String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365146/Research%20Manager/users/backgroundImages/signupwallpaper_der2zw.jpg")
 
-  activityFeed       ActivityFeed?
+  activityFeed       ActivityFeed[]
   settings           Setting[]
   tags               Tag[]
   researchActivities ResearchActivity[]
@@ -149,10 +149,10 @@ model ActivityFeed {
   type ActivityFeedType @default(USER)
 
   user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
+  userId String
 
-  researchActivity   ResearchActivity @relation(fields: [researchActivityId], references: [id])
-  researchActivityId String           @unique
+  researchActivity   ResearchActivity? @relation(fields: [researchActivityId], references: [id])
+  researchActivityId String?           @unique
 
   dayActivities DayActivity[]
 
@@ -163,15 +163,15 @@ model ActivityFeed {
 model DayActivity {
   id String @id @default(uuid())
 
-  activityFeed   ActivityFeed @relation(fields: [activityFeedId], references: [id])
+  activityFeed   ActivityFeed  @relation(fields: [activityFeedId], references: [id])
   activityFeedId String
-  activities     Activity[]
+  activities     ActivityLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Activity {
+model ActivityLog {
   id            String          @id @default(uuid())
   createdAt     DateTime        @default(now())
   subject       ActivitySubject @default(OTHER)

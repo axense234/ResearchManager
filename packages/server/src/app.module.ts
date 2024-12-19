@@ -10,6 +10,9 @@ import { ResearchLogModule } from './research/log/researchLog.module';
 import { ResearchSessionModule } from './research/session/researchSession.module';
 import { TagModule } from './tag/tag.module';
 import { SettingModule } from './setting/setting.module';
+import { ActivityFeedModule } from './activity/feed/feed.module';
+import { DayActivityModule } from './activity/day/day.module';
+import { ActivityLogModule } from './activity/log/log.module';
 // Config Module
 import { ConfigModule } from '@nestjs/config';
 
@@ -25,6 +28,9 @@ import { ConfigModule } from '@nestjs/config';
     ResearchPhaseModule,
     ResearchLogModule,
     ResearchSessionModule,
+    ActivityFeedModule,
+    DayActivityModule,
+    ActivityLogModule,
   ],
 })
 export class AppModule {}
