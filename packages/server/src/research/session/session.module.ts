@@ -1,9 +1,9 @@
 // NestJS
 import { Module } from '@nestjs/common';
 // Services
-import { ResearchSessionService } from './researchSession.service';
+import { ResearchSessionService } from './session.service';
 // Controllers
-import { ResearchSessionController } from './researchSession.controller';
+import { ResearchSessionController } from './session.controller';
 
 @Module({
   providers: [ResearchSessionService],

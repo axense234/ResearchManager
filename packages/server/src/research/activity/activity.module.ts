@@ -1,9 +1,9 @@
 // NestJS
 import { Module } from '@nestjs/common';
 // Controllers
-import { ResearchActivityController } from './researchActivity.controller';
+import { ResearchActivityController } from './activity.controller';
 // Services
-import { ResearchActivityService } from './researchActivity.service';
+import { ResearchActivityService } from './activity.service';
 
 @Module({
   controllers: [ResearchActivityController],

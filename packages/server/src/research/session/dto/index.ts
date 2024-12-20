@@ -1,1 +1,1 @@
-export * from './researchSession.dto';
+export * from './session.dto';

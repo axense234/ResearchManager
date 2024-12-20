@@ -11,7 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 // Services
-import { ResearchSessionService } from './researchSession.service';
+import { ResearchSessionService } from './session.service';
 // Types
 import GetResearchSessionsQueryParams from './types/GetResearchSessionsQueryParams';
 // Custom Guard

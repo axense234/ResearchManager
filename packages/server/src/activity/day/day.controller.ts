@@ -11,42 +11,42 @@ import {
   UseGuards,
 } from '@nestjs/common';
 // Services
-import { DayActivityService } from './day.service';
+import { ActivityDayService } from './day.service';
 // Dtos
-import { CreateDayActivityDto, UpdateDayActivityDto } from './dto/day.dto';
+import { CreateActivityDayDto, UpdateActivityDayDto } from './dto/day.dto';
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 
 @UseGuards(JwtGuard)
-@Controller('dayActivities')
-export class DayActivityController {
-  constructor(private dayActivityService: DayActivityService) {}
+@Controller('activityDays')
+export class ActivityDayController {
+  constructor(private activityDayService: ActivityDayService) {}
 
   @Get()
   getDayActivities(@Query('activityFeedId') activityFeedId: string) {
-    return this.dayActivityService.getDayActivities(activityFeedId);
+    return this.activityDayService.getActivityDays(activityFeedId);
   }
 
-  @Get(':dayActivityId')
-  getDayActivity(@Param('dayActivityId') dayActivityId: string) {
-    return this.dayActivityService.getDayActivity(dayActivityId);
+  @Get(':activityDayId')
+  getDayActivity(@Param('activityDayId') activityDayId: string) {
+    return this.activityDayService.getActivityDay(activityDayId);
   }
 
   @Post('create')
-  createDayActivity(@Body() dto: CreateDayActivityDto) {
-    return this.dayActivityService.createDayActivity(dto);
+  createDayActivity(@Body() dto: CreateActivityDayDto) {
+    return this.activityDayService.createActivityDay(dto);
   }
 
-  @Patch(':dayActivityId/update')
+  @Patch(':activityDayId/update')
   updateDayActivity(
-    @Param('dayActivityId') dayActivityId: string,
-    @Body() dto: UpdateDayActivityDto,
+    @Param('activityDayId') activityDayId: string,
+    @Body() dto: UpdateActivityDayDto,
   ) {
-    return this.dayActivityService.updateDayActivity(dto, dayActivityId);
+    return this.activityDayService.updateActivityDay(dto, activityDayId);
   }
 
-  @Delete(':dayActivityId/delete')
-  deleteDayActivity(@Param('dayActivityId') dayActivityId: string) {
-    return this.dayActivityService.deleteDayActivity(dayActivityId);
+  @Delete(':activityDayId/delete')
+  deleteDayActivity(@Param('activityDayId') activityDayId: string) {
+    return this.activityDayService.deleteActivityDay(activityDayId);
   }
 }

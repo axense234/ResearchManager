@@ -8,10 +8,14 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 // Dto
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class ResearchActivityService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
   async getResearchActivity(researchActivityId: string) {
     try {
@@ -41,6 +45,7 @@ export class ResearchActivityService {
 
   async getResearchActivities(userId?: string) {
     try {
+      await this.redis.test();
       const foundResearchActivities =
         await this.prisma.researchActivity.findMany({
           where: { AND: [{ userId }] },

@@ -13,7 +13,7 @@ import {
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Service
-import { ResearchActivityService } from './researchActivity.service';
+import { ResearchActivityService } from './activity.service';
 // Dto
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
 

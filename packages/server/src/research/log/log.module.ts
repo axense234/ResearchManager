@@ -1,9 +1,9 @@
 // NestJS
 import { Module } from '@nestjs/common';
 // Services
-import { ResearchLogService } from './researchLog.service';
+import { ResearchLogService } from './log.service';
 // Controllers
-import { ResearchLogController } from './researchLog.controller';
+import { ResearchLogController } from './log.controller';
 
 @Module({
   providers: [ResearchLogService],

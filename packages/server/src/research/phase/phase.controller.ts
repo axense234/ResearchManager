@@ -13,7 +13,7 @@ import {
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Services
-import { ResearchPhaseService } from './researchPhase.service';
+import { ResearchPhaseService } from './phase.service';
 // Types
 import GetResearchPhasesQueryParams from './types/GetResearchPhasesQueryParams';
 // Dto

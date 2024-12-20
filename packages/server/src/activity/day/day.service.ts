@@ -6,149 +6,150 @@ import {
 } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateDayActivityDto, UpdateDayActivityDto } from './dto/day.dto';
+// Dtos
+import { CreateActivityDayDto, UpdateActivityDayDto } from './dto/day.dto';
 
 @Injectable()
-export class DayActivityService {
+export class ActivityDayService {
   constructor(private prisma: PrismaService) {}
 
-  async getDayActivities(activityFeedId?: string) {
+  async getActivityDays(activityFeedId?: string) {
     try {
-      const foundDayActivities = await this.prisma.dayActivity.findMany({
+      const foundActivityDays = await this.prisma.activityDay.findMany({
         where: { AND: [{ activityFeedId }] },
       });
 
-      if (foundDayActivities.length < 1) {
+      if (foundActivityDays.length < 1) {
         return {
           nbHits: 0,
-          message: 'Could not find any Day Activities given the data.',
+          message: 'Could not find any Activity Days given the data.',
           dayActivities: [],
         };
       }
 
       return {
-        nbHits: foundDayActivities.length,
-        message: `Successfully found ${foundDayActivities.length} Day Activities given the data`,
-        dayActivities: foundDayActivities,
+        nbHits: foundActivityDays.length,
+        message: `Successfully found ${foundActivityDays.length} Activity Days given the data`,
+        dayActivities: foundActivityDays,
       };
     } catch (error) {
       throw error;
     }
   }
 
-  async getDayActivity(dayActivityId: string) {
+  async getActivityDay(activityDayId: string) {
     try {
-      if (!dayActivityId) {
-        throw new BadRequestException('No Day Activity Id provided.');
+      if (!activityDayId) {
+        throw new BadRequestException('No Activity Day Id provided.');
       }
 
-      const foundDayActivity = await this.prisma.dayActivity.findUnique({
-        where: { id: dayActivityId },
+      const foundActivityDay = await this.prisma.activityDay.findUnique({
+        where: { id: activityDayId },
       });
 
-      if (!foundDayActivity) {
+      if (!foundActivityDay) {
         throw new NotFoundException(
-          'Could not find any Day Activity matching the provided information.',
+          'Could not find any Activity Day matching the provided information.',
         );
       }
 
       return {
-        message: `Successfully found Day Activity!`,
-        dayActivity: foundDayActivity,
+        message: `Successfully found Activity Day!`,
+        dayActivity: foundActivityDay,
       };
     } catch (error) {
       throw error;
     }
   }
 
-  async createDayActivity(dto: CreateDayActivityDto) {
+  async createActivityDay(dto: CreateActivityDayDto) {
     try {
-      const createdDayActivity = await this.prisma.dayActivity.create({
+      const createdActivityDay = await this.prisma.activityDay.create({
         data: { ...dto },
       });
 
-      if (!createdDayActivity) {
+      if (!createdActivityDay) {
         throw new BadRequestException(
-          'Could not create Day Activity with the data provided.',
+          'Could not create Activity Day with the data provided.',
         );
       }
 
       return {
-        message: `Successfully created Day Activity!`,
-        dayActivity: createdDayActivity,
+        message: `Successfully created Activity Day!`,
+        dayActivity: createdActivityDay,
       };
     } catch (error) {
       throw error;
     }
   }
 
-  async updateDayActivity(dto: UpdateDayActivityDto, dayActivityId: string) {
+  async updateActivityDay(dto: UpdateActivityDayDto, activityDayId: string) {
     try {
-      if (!dayActivityId) {
-        throw new BadRequestException('No Day Activity Id provided.');
+      if (!activityDayId) {
+        throw new BadRequestException('No Activity Day Id provided.');
       }
 
-      const foundDayActivityToBeUpdated =
-        await this.prisma.dayActivity.findUnique({
-          where: { id: dayActivityId },
+      const foundActivityDayToBeUpdated =
+        await this.prisma.activityDay.findUnique({
+          where: { id: activityDayId },
         });
 
-      if (!foundDayActivityToBeUpdated) {
+      if (!foundActivityDayToBeUpdated) {
         throw new NotFoundException(
-          'Could not find any Day Activity to be updated with the given data.',
+          'Could not find any Activity Day to be updated with the given data.',
         );
       }
 
-      const updatedDayActivity = await this.prisma.dayActivity.update({
-        where: { id: dayActivityId },
+      const updatedActivityDay = await this.prisma.activityDay.update({
+        where: { id: activityDayId },
         data: { ...dto },
       });
 
-      if (!updatedDayActivity) {
+      if (!updatedActivityDay) {
         throw new BadRequestException(
-          'Could not update Day Activity with the given data.',
+          'Could not update Activity Day with the given data.',
         );
       }
 
       return {
-        message: `Successfully updated Day Activity!`,
-        dayActivity: updatedDayActivity,
+        message: `Successfully updated Activity Day!`,
+        dayActivity: updatedActivityDay,
       };
     } catch (error) {
       throw error;
     }
   }
 
-  async deleteDayActivity(dayActivityId: string) {
+  async deleteActivityDay(dayActivityId: string) {
     try {
       if (!dayActivityId) {
-        throw new BadRequestException('No Day Activity Id provided.');
+        throw new BadRequestException('No Activity Day Id provided.');
       }
 
-      const foundDayActivityToBeDeleted =
-        await this.prisma.dayActivity.findUnique({
+      const foundActivityDayToBeDeleted =
+        await this.prisma.activityDay.findUnique({
           where: { id: dayActivityId },
         });
 
-      if (!foundDayActivityToBeDeleted) {
+      if (!foundActivityDayToBeDeleted) {
         throw new NotFoundException(
-          'Could not find any Day Activity with the given data.',
+          'Could not find any Activity Day with the given data.',
         );
       }
 
-      const deletedDayActivity = await this.prisma.dayActivity.delete({
+      const deletedActivityDay = await this.prisma.activityDay.delete({
         where: { id: dayActivityId },
       });
 
-      if (!deletedDayActivity) {
+      if (!deletedActivityDay) {
         throw new BadRequestException(
-          'Could not delete Day Activity with the provided information.',
+          'Could not delete Activity Day with the provided information.',
         );
       }
 
       return {
-        message: `Successfully deleted Day Activity!`,
-        dayActivity: deletedDayActivity,
+        message: `Successfully deleted Activity Day!`,
+        dayActivity: deletedActivityDay,
       };
     } catch (error) {
       throw error;

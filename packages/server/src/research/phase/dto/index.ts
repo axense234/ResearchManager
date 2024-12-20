@@ -1,1 +1,1 @@
-export * from './researchPhase.dto';
+export * from './phase.dto';

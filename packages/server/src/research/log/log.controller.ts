@@ -13,7 +13,7 @@ import {
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Services
-import { ResearchLogService } from './researchLog.service';
+import { ResearchLogService } from './log.service';
 // Types
 import GetResearchLogsQueryParams from './types/GetResearchLogsQueryParams';
 // Dtos

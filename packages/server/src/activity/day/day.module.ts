@@ -1,12 +1,12 @@
 // NestJS
 import { Module } from '@nestjs/common';
 // Services
-import { DayActivityService } from './day.service';
+import { ActivityDayService } from './day.service';
 // Controllers
-import { DayActivityController } from './day.controller';
+import { ActivityDayController } from './day.controller';
 
 @Module({
-  providers: [DayActivityService],
-  controllers: [DayActivityController],
+  providers: [ActivityDayService],
+  controllers: [ActivityDayController],
 })
-export class DayActivityModule {}
+export class ActivityDayModule {}

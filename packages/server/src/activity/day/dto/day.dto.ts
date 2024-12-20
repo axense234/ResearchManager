@@ -1,6 +1,6 @@
 import { IsDateString, IsOptional, IsUUID } from 'class-validator';
 
-export class CreateDayActivityDto {
+export class CreateActivityDayDto {
   @IsDateString()
   @IsOptional()
   createdAt: Date;
@@ -9,7 +9,7 @@ export class CreateDayActivityDto {
   activityFeedId: string;
 }
 
-export class UpdateDayActivityDto {
+export class UpdateActivityDayDto {
   @IsDateString()
   @IsOptional()
   createdAt: Date;

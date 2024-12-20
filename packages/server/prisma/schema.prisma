@@ -154,13 +154,13 @@ model ActivityFeed {
   researchActivity   ResearchActivity? @relation(fields: [researchActivityId], references: [id])
   researchActivityId String?           @unique
 
-  dayActivities DayActivity[]
+  dayActivities ActivityDay[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model DayActivity {
+model ActivityDay {
   id String @id @default(uuid())
 
   activityFeed   ActivityFeed  @relation(fields: [activityFeedId], references: [id])
@@ -178,7 +178,7 @@ model ActivityLog {
   message       String          @default("Other activity noticed, something is very wrong. The apocalypse is coming. Run.")
   messageValues String[]        @default([])
 
-  dayActivities DayActivity[]
+  dayActivities ActivityDay[]
 }
 
 enum ResearchSessionStatusType {
