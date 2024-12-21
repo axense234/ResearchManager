@@ -10,23 +10,37 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import GetResearchPhasesQueryParams from './types/GetResearchPhasesQueryParams';
 // Dto
 import { CreateResearchPhaseDto, UpdateResearchPhaseDto } from './dto';
+// Redis Caching
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class ResearchPhaseService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getResearchPhases(queryParams: GetResearchPhasesQueryParams) {
+  async getResearchPhases(
+    queryParams: GetResearchPhasesQueryParams,
+    url: string,
+  ) {
     try {
-      const foundResearchPhases = await this.prisma.researchPhase.findMany({
-        where: {
-          AND: [
-            {
-              userIdForArchivePurposes: queryParams.userId,
-              researchActivityId: queryParams.researchActivityId,
+      const foundResearchPhases = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const researchPhases = await this.prisma.researchPhase.findMany({
+            where: {
+              AND: [
+                {
+                  userIdForArchivePurposes: queryParams.userId,
+                  researchActivityId: queryParams.researchActivityId,
+                },
+              ],
             },
-          ],
+          });
+          return researchPhases;
         },
-      });
+      );
 
       if (foundResearchPhases.length < 1) {
         return {
@@ -45,15 +59,21 @@ export class ResearchPhaseService {
     }
   }
 
-  async getResearchPhase(researchPhaseId: string) {
+  async getResearchPhase(researchPhaseId: string, url: string) {
     try {
       if (!researchPhaseId) {
         throw new BadRequestException('No Research Activity Id provided.');
       }
 
-      const foundResearchPhase = await this.prisma.researchPhase.findUnique({
-        where: { id: researchPhaseId },
-      });
+      const foundResearchPhase = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const researchPhase = await this.prisma.researchPhase.findUnique({
+            where: { id: researchPhaseId },
+          });
+          return researchPhase;
+        },
+      );
 
       if (!foundResearchPhase) {
         throw new NotFoundException(
@@ -81,6 +101,11 @@ export class ResearchPhaseService {
           'Could not create Research Phase with the given information.',
         );
       }
+
+      await this.redis.handleCacheMutation(
+        'researchPhases',
+        createdResearchPhase.userIdForArchivePurposes,
+      );
 
       return {
         message: `Successfully created Research Phase named ${createdResearchPhase.name}!`,

@@ -8,6 +8,7 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 // Dto
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
+// Caching with Redis
 import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
@@ -17,16 +18,22 @@ export class ResearchActivityService {
     private redis: RedisService,
   ) {}
 
-  async getResearchActivity(researchActivityId: string) {
+  async getResearchActivity(researchActivityId: string, url: string) {
     try {
       if (!researchActivityId) {
         throw new BadRequestException('No Research Activity Id provided.');
       }
 
-      const foundResearchActivity =
-        await this.prisma.researchActivity.findUnique({
-          where: { id: researchActivityId },
-        });
+      const foundResearchActivity = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const researchActivity =
+            await this.prisma.researchActivity.findUnique({
+              where: { id: researchActivityId },
+            });
+          return researchActivity;
+        },
+      );
 
       if (!foundResearchActivity) {
         throw new NotFoundException(
@@ -43,13 +50,18 @@ export class ResearchActivityService {
     }
   }
 
-  async getResearchActivities(userId?: string) {
+  async getResearchActivities(userId?: string, url?: string) {
     try {
-      await this.redis.test();
-      const foundResearchActivities =
-        await this.prisma.researchActivity.findMany({
-          where: { AND: [{ userId }] },
-        });
+      const foundResearchActivities = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const researchActivities =
+            await this.prisma.researchActivity.findMany({
+              where: { AND: [{ userId }] },
+            });
+          return researchActivities;
+        },
+      );
 
       if (foundResearchActivities.length < 1) {
         return {
@@ -80,6 +92,11 @@ export class ResearchActivityService {
           'Could not create Research Activity with the data provided.',
         );
       }
+
+      await this.redis.handleCacheMutation(
+        'researchActivities',
+        createdResearchActivity.userId,
+      );
 
       return {
         message: `Successfully created Research Activity: ${createdResearchActivity.name}!`,
@@ -120,6 +137,12 @@ export class ResearchActivityService {
         );
       }
 
+      await this.redis.handleCacheMutation(
+        'researchActivities',
+        updatedResearchActivity.userId,
+        updatedResearchActivity.id,
+      );
+
       return {
         message: `Successfully updated Research Activity named ${updatedResearchActivity.name}!`,
         researchActivity: updatedResearchActivity,
@@ -155,6 +178,12 @@ export class ResearchActivityService {
           'Could not delete Research Activity with the data provided.',
         );
       }
+
+      await this.redis.handleCacheMutation(
+        'researchActivities',
+        deletedResearchActivity.userId,
+        deletedResearchActivity.id,
+      );
 
       return {
         message: `Successfully deleted Research Activity named ${deletedResearchActivity.name}!`,

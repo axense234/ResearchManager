@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 // Custom Guard
@@ -23,13 +24,20 @@ export class ResearchActivityController {
   constructor(private researchActivityService: ResearchActivityService) {}
 
   @Get()
-  getResearchActivities(@Query('userId') userId: string) {
-    return this.researchActivityService.getResearchActivities(userId);
+  getResearchActivities(@Query('userId') userId: string, @Req() req: Request) {
+    console.log(req.url);
+    return this.researchActivityService.getResearchActivities(userId, req.url);
   }
 
   @Get(':researchActivityId')
-  getResearchActivity(@Param('researchActivityId') researchActivityId: string) {
-    return this.researchActivityService.getResearchActivity(researchActivityId);
+  getResearchActivity(
+    @Param('researchActivityId') researchActivityId: string,
+    @Req() req: Request,
+  ) {
+    return this.researchActivityService.getResearchActivity(
+      researchActivityId,
+      req.url,
+    );
   }
 
   @Post('create')

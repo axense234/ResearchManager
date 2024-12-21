@@ -1,28 +1,21 @@
 // Config
 import { ConfigService } from '@nestjs/config';
 // Cache
-import { CacheModule, CacheStore } from '@nestjs/cache-manager';
-import { redisStore } from 'cache-manager-redis-yet';
+import { CacheModule } from '@nestjs/cache-manager';
 // NestJS
 import { Module } from '@nestjs/common';
 
 @Module({})
 export class RedisCacheModule {
-  static async registerStore(config: ConfigService) {
+  static async registerStore() {
     return CacheModule.registerAsync({
-      useFactory: async () => {
-        const store = await redisStore({
-          socket: {
-            host: config.get('REDIS_HOST'),
-            port: config.get('REDIS_PORT'),
-          },
-        });
-
-        return {
-          store: store as unknown as CacheStore,
-          ttl: 3 * 60000,
-        };
-      },
+      useFactory: async (configService: ConfigService) => ({
+        store: (await import('cache-manager-redis-yet')).redisStore,
+        host: configService.get('REDIS_HOST'),
+        port: configService.get('REDIS_PORT'),
+        password: configService.get('REDIS_PASSWORD'),
+      }),
+      inject: [ConfigService],
     });
   }
 }
