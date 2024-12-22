@@ -102,9 +102,19 @@ export class ResearchPhaseService {
         );
       }
 
-      await this.redis.handleCacheMutation(
-        'researchPhases',
-        createdResearchPhase.userIdForArchivePurposes,
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchPhasees',
+        [
+          {
+            label: 'userId',
+            value: createdResearchPhase.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchActivityId',
+            value: createdResearchPhase.researchActivityId,
+          },
+        ],
+        'create',
       );
 
       return {
@@ -147,6 +157,21 @@ export class ResearchPhaseService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchPhasees',
+        [
+          {
+            label: 'userId',
+            value: updatedResearchPhase.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchActivityId',
+            value: updatedResearchPhase.researchActivityId,
+          },
+        ],
+        'modify',
+      );
+
       return {
         message: `Successfully updated Research Phase named ${updatedResearchPhase.name}!`,
         researchPhase: updatedResearchPhase,
@@ -182,6 +207,21 @@ export class ResearchPhaseService {
           'Could not delete Research Phase with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchPhasees',
+        [
+          {
+            label: 'userId',
+            value: deletedResearchPhase.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchActivityId',
+            value: deletedResearchPhase.researchActivityId,
+          },
+        ],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted Research Phase named ${deletedResearchPhase.name}!`,

@@ -25,7 +25,6 @@ export class ResearchActivityController {
 
   @Get()
   getResearchActivities(@Query('userId') userId: string, @Req() req: Request) {
-    console.log(req.url);
     return this.researchActivityService.getResearchActivities(userId, req.url);
   }
 

@@ -5,62 +5,74 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 // Config
 import { ConfigService } from '@nestjs/config';
+// IORedis
+import { RedisStore } from 'cache-manager-ioredis-yet';
+// Types
+import DeleteCacheSpecifiers from './types/DeleteCacheSpecifiers';
 
 @Injectable()
 export class RedisService {
   constructor(
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    @Inject(CACHE_MANAGER) private redisCacheManager: Cache<RedisStore>,
     private config: ConfigService,
   ) {}
 
-  // unused
-  async getCache(key: any, cb: any) {
-    const data = await this.cacheManager.get(key);
-
-    if (data !== undefined && data !== null) {
-      return JSON.parse(data as string);
-    }
-
-    const plainData = await cb();
-    return plainData;
+  async test() {
+    console.log(this.redisCacheManager.store);
   }
 
   async getOrSetCache(key: any, cb: any) {
-    const data = await this.cacheManager.get(key);
+    const data = await this.redisCacheManager.store.client.get(key);
 
-    if (data !== undefined && data !== null) {
-      return JSON.parse(data as string);
+    if (JSON.parse(data) !== null) {
+      return JSON.parse(data);
     }
 
     const freshData = await cb();
-    await this.cacheManager.set(
+    await this.redisCacheManager.store.client.setex(
       key,
-      JSON.stringify(freshData),
       eval(this.config.get('REDIS_CACHE_EXP_TIME')),
+      JSON.stringify(freshData),
     );
 
     return freshData;
   }
 
-  async deleteAllCacheThatIncludedGivenKey(key1: string, key2?: string) {
-    const pattern = key2 ? `*${key1}*${key2}*` : `*${key1}*`;
-    // i do not know if the same cacheManager.store.keys works like a redisClient.keys
-    // if it works like that then the following lines are a performance drop since the keys function is always O(n), where n is the number of keys in the db
-    // normally you would use the scan function which is O(1) for every call and in the worst case is O(n)
-    // since this app is most likely not going to be that big we shall ignore this problem
-    const keysToBeDeleted = await this.cacheManager.store.keys(pattern);
-    keysToBeDeleted.forEach(async (key) => {
-      await this.cacheManager.del(key);
-    });
-  }
+  async deleteAllCacheThatIncludesGivenKeys(
+    base: string,
+    specifiers: DeleteCacheSpecifiers,
+    type: 'modify' | 'create',
+  ) {
+    let cursor = 0;
+    const pattern = `/${base}${type === 'create' ? '[^/]' : ''}*`;
+    console.log(pattern);
+    let keysToDelete: string[] = [];
 
-  async handleCacheMutation(key: string, userId?: string, entityId?: string) {
-    if (userId) {
-      await this.deleteAllCacheThatIncludedGivenKey(key, userId);
-    }
+    do {
+      const scanResponse = await this.redisCacheManager.store.client.scan(
+        cursor,
+        'MATCH',
+        pattern,
+      );
+      cursor = Number(scanResponse[0]);
+      console.log(scanResponse[1]);
+      keysToDelete = keysToDelete.concat(
+        scanResponse[1].filter(
+          (key) =>
+            !specifiers.some(
+              (specifier) =>
+                key.includes(specifier.label) && !key.includes(specifier.value),
+            ),
+        ),
+      );
+    } while (cursor !== 0);
+    keysToDelete = keysToDelete.concat([`/${base}`]);
+    console.log(keysToDelete);
 
-    if (entityId) {
-      await this.deleteAllCacheThatIncludedGivenKey(entityId);
+    if (keysToDelete.length > 0) {
+      await Promise.all(
+        keysToDelete.map((key) => this.redisCacheManager.store.client.del(key)),
+      );
     }
   }
 }

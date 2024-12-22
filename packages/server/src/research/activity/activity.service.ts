@@ -24,6 +24,8 @@ export class ResearchActivityService {
         throw new BadRequestException('No Research Activity Id provided.');
       }
 
+      await this.redis.test();
+
       const foundResearchActivity = await this.redis.getOrSetCache(
         url,
         async () => {
@@ -93,9 +95,10 @@ export class ResearchActivityService {
         );
       }
 
-      await this.redis.handleCacheMutation(
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
         'researchActivities',
-        createdResearchActivity.userId,
+        [{ label: 'userId', value: createdResearchActivity.userId }],
+        'create',
       );
 
       return {
@@ -137,10 +140,10 @@ export class ResearchActivityService {
         );
       }
 
-      await this.redis.handleCacheMutation(
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
         'researchActivities',
-        updatedResearchActivity.userId,
-        updatedResearchActivity.id,
+        [{ label: 'userId', value: updatedResearchActivity.userId }],
+        'modify',
       );
 
       return {
@@ -179,10 +182,10 @@ export class ResearchActivityService {
         );
       }
 
-      await this.redis.handleCacheMutation(
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
         'researchActivities',
-        deletedResearchActivity.userId,
-        deletedResearchActivity.id,
+        [{ label: 'userId', value: deletedResearchActivity.userId }],
+        'modify',
       );
 
       return {
