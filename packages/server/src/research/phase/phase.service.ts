@@ -103,7 +103,7 @@ export class ResearchPhaseService {
       }
 
       await this.redis.deleteAllCacheThatIncludesGivenKeys(
-        'researchPhasees',
+        'researchPhases',
         [
           {
             label: 'userId',
@@ -158,7 +158,7 @@ export class ResearchPhaseService {
       }
 
       await this.redis.deleteAllCacheThatIncludesGivenKeys(
-        'researchPhasees',
+        'researchPhases',
         [
           {
             label: 'userId',
@@ -209,7 +209,7 @@ export class ResearchPhaseService {
       }
 
       await this.redis.deleteAllCacheThatIncludesGivenKeys(
-        'researchPhasees',
+        'researchPhases',
         [
           {
             label: 'userId',

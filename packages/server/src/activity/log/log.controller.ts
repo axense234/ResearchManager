@@ -8,6 +8,7 @@ import {
   UseGuards,
   Delete,
   Patch,
+  Req,
 } from '@nestjs/common';
 // Services
 import { ActivityLogService } from './log.service';
@@ -22,13 +23,16 @@ export class ActivityLogController {
   constructor(private activityLogService: ActivityLogService) {}
 
   @Get()
-  getActivityLogs() {
-    return this.activityLogService.getActivityLogs();
+  getActivityLogs(@Req() req: Request) {
+    return this.activityLogService.getActivityLogs(req.url);
   }
 
   @Get(':activityLogId')
-  getActivityLog(@Param('activityLogId') activityLogId: string) {
-    return this.activityLogService.getActivityLog(activityLogId);
+  getActivityLog(
+    @Param('activityLogId') activityLogId: string,
+    @Req() req: Request,
+  ) {
+    return this.activityLogService.getActivityLog(activityLogId, req.url);
   }
 
   @Post('create')

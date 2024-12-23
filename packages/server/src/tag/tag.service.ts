@@ -8,15 +8,23 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 // Dtos
 import { CreateTagDto, UpdateTagDto } from './dto';
+// Redis
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class TagService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getTags(userId?: string) {
+  async getTags(userId: string, url: string) {
     try {
-      const foundTags = await this.prisma.tag.findMany({
-        where: { AND: [{ userId }] },
+      const foundTags = await this.redis.getOrSetCache(url, async () => {
+        const tags = await this.prisma.tag.findMany({
+          where: { AND: [{ userId }] },
+        });
+        return tags;
       });
 
       if (foundTags.length < 1) {
@@ -37,14 +45,17 @@ export class TagService {
     }
   }
 
-  async getTag(tagId: string) {
+  async getTag(tagId: string, url: string) {
     try {
       if (!tagId) {
         throw new BadRequestException('No Tag Id provided!');
       }
 
-      const foundTag = await this.prisma.tag.findUnique({
-        where: { id: tagId },
+      const foundTag = await this.redis.getOrSetCache(url, async () => {
+        const tag = await this.prisma.tag.findUnique({
+          where: { id: tagId },
+        });
+        return tag;
       });
 
       if (!foundTag) {
@@ -73,6 +84,17 @@ export class TagService {
           'Could not create Tag with the data provided.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'tags',
+        [
+          {
+            label: 'userId',
+            value: createdTag.userId,
+          },
+        ],
+        'create',
+      );
 
       return {
         message: `Successfully created Tag named ${createdTag.title}!`,
@@ -110,6 +132,17 @@ export class TagService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'tags',
+        [
+          {
+            label: 'userId',
+            value: updatedTag.userId,
+          },
+        ],
+        'modify',
+      );
+
       return {
         message: `Successfully updated Tag named ${updatedTag.title}!`,
         tag: updatedTag,
@@ -142,6 +175,17 @@ export class TagService {
           'Could not delete Tag with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'tags',
+        [
+          {
+            label: 'userId',
+            value: deletedTag.userId,
+          },
+        ],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted Tag named ${deletedTag.title}!`,

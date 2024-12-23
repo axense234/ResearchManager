@@ -6,15 +6,27 @@ import {
 } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
+// Dtos
 import { CreateActivityLogDto, UpdateActivityLogDto } from './dto';
+// Redis
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class ActivityLogService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getActivityLogs() {
+  async getActivityLogs(url: string) {
     try {
-      const foundActivityLogs = await this.prisma.activityLog.findMany({});
+      const foundActivityLogs = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const activityLogs = await this.prisma.activityLog.findMany({});
+          return activityLogs;
+        },
+      );
 
       if (foundActivityLogs.length < 1) {
         return {
@@ -34,14 +46,17 @@ export class ActivityLogService {
     }
   }
 
-  async getActivityLog(activityLogId: string) {
+  async getActivityLog(activityLogId: string, url: string) {
     try {
       if (!activityLogId) {
         throw new BadRequestException('Please provide an Activity Log Id!');
       }
 
-      const foundActivityLog = await this.prisma.activityLog.findUnique({
-        where: { id: activityLogId },
+      const foundActivityLog = await this.redis.getOrSetCache(url, async () => {
+        const activityLog = await this.prisma.activityLog.findUnique({
+          where: { id: activityLogId },
+        });
+        return activityLog;
       });
 
       if (!foundActivityLog) {
@@ -70,6 +85,12 @@ export class ActivityLogService {
           'Could not create Activity Log with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityLogs',
+        [],
+        'create',
+      );
 
       return {
         message: `Successfully created Activity Log!`,
@@ -108,6 +129,12 @@ export class ActivityLogService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityLogs',
+        [],
+        'modify',
+      );
+
       return {
         message: `Successfully updated Activity Log!`,
         activityLog: updatedActivityLog,
@@ -143,6 +170,12 @@ export class ActivityLogService {
           'Could not delete Activity Log with the given data.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityLogs',
+        [],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted Activity Log!`,

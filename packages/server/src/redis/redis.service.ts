@@ -2,18 +2,17 @@
 import { Inject, Injectable } from '@nestjs/common';
 // Cache
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
 // Config
 import { ConfigService } from '@nestjs/config';
 // IORedis
-import { RedisStore } from 'cache-manager-ioredis-yet';
+import { RedisCache } from 'cache-manager-ioredis-yet';
 // Types
 import DeleteCacheSpecifiers from './types/DeleteCacheSpecifiers';
 
 @Injectable()
 export class RedisService {
   constructor(
-    @Inject(CACHE_MANAGER) private redisCacheManager: Cache<RedisStore>,
+    @Inject(CACHE_MANAGER) private redisCacheManager: RedisCache,
     private config: ConfigService,
   ) {}
 

@@ -9,11 +9,13 @@ import {
   Post,
   Delete,
   Patch,
+  Req,
 } from '@nestjs/common';
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Services
 import { SettingService } from './setting.service';
+// Dtos
 import { CreateSettingDto, UpdateSettingDto } from './dto';
 
 @UseGuards(JwtGuard)
@@ -22,13 +24,13 @@ export class SettingController {
   constructor(private settingService: SettingService) {}
 
   @Get()
-  getSettings(@Query('userId') userId: string) {
-    return this.settingService.getSettings(userId);
+  getSettings(@Query('userId') userId: string, @Req() req: Request) {
+    return this.settingService.getSettings(userId, req.url);
   }
 
   @Get(':settingId')
-  getSetting(@Param('settingId') settingId: string) {
-    return this.settingService.getSetting(settingId);
+  getSetting(@Param('settingId') settingId: string, @Req() req: Request) {
+    return this.settingService.getSetting(settingId, req.url);
   }
 
   @Post('create')

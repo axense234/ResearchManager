@@ -8,16 +8,27 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 // Dtos
 import { CreateActivityDayDto, UpdateActivityDayDto } from './dto/day.dto';
+// Redis
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class ActivityDayService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getActivityDays(activityFeedId?: string) {
+  async getActivityDays(activityFeedId: string, url: string) {
     try {
-      const foundActivityDays = await this.prisma.activityDay.findMany({
-        where: { AND: [{ activityFeedId }] },
-      });
+      const foundActivityDays = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const activityDays = await this.prisma.activityDay.findMany({
+            where: { AND: [{ activityFeedId }] },
+          });
+          return activityDays;
+        },
+      );
 
       if (foundActivityDays.length < 1) {
         return {
@@ -37,14 +48,17 @@ export class ActivityDayService {
     }
   }
 
-  async getActivityDay(activityDayId: string) {
+  async getActivityDay(activityDayId: string, url: string) {
     try {
       if (!activityDayId) {
         throw new BadRequestException('No Activity Day Id provided.');
       }
 
-      const foundActivityDay = await this.prisma.activityDay.findUnique({
-        where: { id: activityDayId },
+      const foundActivityDay = await this.redis.getOrSetCache(url, async () => {
+        const activityDay = await this.prisma.activityDay.findUnique({
+          where: { id: activityDayId },
+        });
+        return activityDay;
       });
 
       if (!foundActivityDay) {
@@ -73,6 +87,17 @@ export class ActivityDayService {
           'Could not create Activity Day with the data provided.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityDays',
+        [
+          {
+            label: 'activityFeedId',
+            value: createdActivityDay.activityFeedId,
+          },
+        ],
+        'create',
+      );
 
       return {
         message: `Successfully created Activity Day!`,
@@ -111,6 +136,17 @@ export class ActivityDayService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityDays',
+        [
+          {
+            label: 'activityFeedId',
+            value: updatedActivityDay.activityFeedId,
+          },
+        ],
+        'modify',
+      );
+
       return {
         message: `Successfully updated Activity Day!`,
         dayActivity: updatedActivityDay,
@@ -146,6 +182,17 @@ export class ActivityDayService {
           'Could not delete Activity Day with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityDays',
+        [
+          {
+            label: 'activityFeedId',
+            value: deletedActivityDay.activityFeedId,
+          },
+        ],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted Activity Day!`,

@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 // Services
@@ -25,13 +26,25 @@ export class ResearchSessionController {
   constructor(private researchSessionService: ResearchSessionService) {}
 
   @Get()
-  getResearchSessions(@Query() queryParams: GetResearchSessionsQueryParams) {
-    return this.researchSessionService.getResearchSessions(queryParams);
+  getResearchSessions(
+    @Query() queryParams: GetResearchSessionsQueryParams,
+    @Req() req: Request,
+  ) {
+    return this.researchSessionService.getResearchSessions(
+      queryParams,
+      req.url,
+    );
   }
 
   @Get(':researchSessionId')
-  getResearchSession(@Param('researchSessionId') researchSessionId: string) {
-    return this.researchSessionService.getResearchSession(researchSessionId);
+  getResearchSession(
+    @Param('researchSessionId') researchSessionId: string,
+    @Req() req: Request,
+  ) {
+    return this.researchSessionService.getResearchSession(
+      researchSessionId,
+      req.url,
+    );
   }
 
   @Post('create')

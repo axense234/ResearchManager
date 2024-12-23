@@ -6,16 +6,25 @@ import {
 } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
+// Dtos
 import { CreateSettingDto, UpdateSettingDto } from './dto';
+// Redis
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class SettingService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getSettings(userId?: string) {
+  async getSettings(userId?: string, url?: string) {
     try {
-      const foundSettings = await this.prisma.setting.findMany({
-        where: { AND: [{ userId }] },
+      const foundSettings = await this.redis.getOrSetCache(url, async () => {
+        const settings = await this.prisma.setting.findMany({
+          where: { AND: [{ userId }] },
+        });
+        return settings;
       });
 
       if (foundSettings.length < 1) {
@@ -36,14 +45,17 @@ export class SettingService {
     }
   }
 
-  async getSetting(settingId: string) {
+  async getSetting(settingId: string, url: string) {
     try {
       if (!settingId) {
         throw new BadRequestException('No Setting Id provided.');
       }
 
-      const foundSetting = await this.prisma.setting.findUnique({
-        where: { id: settingId },
+      const foundSetting = await this.redis.getOrSetCache(url, async () => {
+        const setting = await this.prisma.setting.findUnique({
+          where: { id: settingId },
+        });
+        return setting;
       });
 
       if (!foundSetting) {
@@ -72,6 +84,17 @@ export class SettingService {
           'Could not create Setting with the provided data.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'settings',
+        [
+          {
+            label: 'userId',
+            value: createdSetting.userId,
+          },
+        ],
+        'create',
+      );
 
       return {
         message: `Successfully created Setting with the label: ${createdSetting.label}!`,
@@ -109,6 +132,17 @@ export class SettingService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'settings',
+        [
+          {
+            label: 'userId',
+            value: updatedSetting.userId,
+          },
+        ],
+        'modify',
+      );
+
       return {
         message: `Successfully updated Setting with the label: ${updatedSetting.label}!`,
         setting: updatedSetting,
@@ -143,6 +177,17 @@ export class SettingService {
           'Could not delete Setting with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'settings',
+        [
+          {
+            label: 'userId',
+            value: deletedSetting.userId,
+          },
+        ],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted Setting with the label: ${deletedSetting.label}!`,

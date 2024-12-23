@@ -17,11 +17,14 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import AuthDto from './dto/auth.dto';
 // Argon
 import * as argon from 'argon2';
+// Redis
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
+    private redis: RedisService,
     private jwt: JwtService,
     private config: ConfigService,
   ) {}
@@ -121,9 +124,13 @@ export class AuthService {
     }
   }
 
-  async logOut() {
+  async logOut(userId: string) {
     try {
-      // when setup with redis, add an eventual userid param so we can delete everything associated with it from cache
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        '/',
+        [{ label: 'userId', value: userId }],
+        'modify',
+      );
     } catch (error) {
       throw error;
     }

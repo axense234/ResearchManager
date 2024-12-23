@@ -10,21 +10,31 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import GetResearchLogsQueryParams from './types/GetResearchLogsQueryParams';
 // Dtos
 import { CreateResearchLogDto, UpdateResearchLogDto } from './dto';
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class ResearchLogService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getResearchLogs(queryParams: GetResearchLogsQueryParams) {
+  async getResearchLogs(queryParams: GetResearchLogsQueryParams, url: string) {
     try {
-      const foundResearchLogs = await this.prisma.researchLog.findMany({
-        where: {
-          AND: [
-            { userIdForArchivePurposes: queryParams.userId },
-            { researchPhaseId: queryParams.researchPhaseId },
-          ],
+      const foundResearchLogs = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const researchLogs = await this.prisma.researchLog.findMany({
+            where: {
+              AND: [
+                { userIdForArchivePurposes: queryParams.userId },
+                { researchPhaseId: queryParams.researchPhaseId },
+              ],
+            },
+          });
+          return researchLogs;
         },
-      });
+      );
 
       if (foundResearchLogs.length < 1) {
         return {
@@ -44,14 +54,17 @@ export class ResearchLogService {
     }
   }
 
-  async getResearchLog(researchLogId: string) {
+  async getResearchLog(researchLogId: string, url: string) {
     try {
       if (!researchLogId) {
         throw new BadRequestException('No Research Log Id provided!');
       }
 
-      const foundResearchLog = await this.prisma.researchLog.findUnique({
-        where: { id: researchLogId },
+      const foundResearchLog = await this.redis.getOrSetCache(url, async () => {
+        const researchLog = await this.prisma.researchLog.findUnique({
+          where: { id: researchLogId },
+        });
+        return researchLog;
       });
 
       if (!foundResearchLog) {
@@ -80,6 +93,21 @@ export class ResearchLogService {
           'Could not create Research Log with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchPhases',
+        [
+          {
+            label: 'userId',
+            value: createdResearchLog.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchPhaseId',
+            value: createdResearchLog.researchPhaseId,
+          },
+        ],
+        'create',
+      );
 
       return {
         message: `Successfully created Research Log named ${createdResearchLog.name}!`,
@@ -117,6 +145,21 @@ export class ResearchLogService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchPhases',
+        [
+          {
+            label: 'userId',
+            value: updatedResearchLog.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchPhaseId',
+            value: updatedResearchLog.researchPhaseId,
+          },
+        ],
+        'modify',
+      );
+
       return {
         message: `Successfully updated Research Log named ${updatedResearchLog.name}!`,
         researchLog: updatedResearchLog,
@@ -151,6 +194,21 @@ export class ResearchLogService {
           'Could not delete Research Log with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchPhases',
+        [
+          {
+            label: 'userId',
+            value: deletedResearchLog.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchPhaseId',
+            value: deletedResearchLog.researchPhaseId,
+          },
+        ],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted Research Log named ${deletedResearchLog.name}!`,

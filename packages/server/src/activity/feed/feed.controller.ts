@@ -9,6 +9,7 @@ import {
   Post,
   Delete,
   Patch,
+  Req,
 } from '@nestjs/common';
 // Services
 import { ActivityFeedService } from './feed.service';
@@ -25,13 +26,19 @@ export class ActivityFeedController {
   constructor(private activityFeedService: ActivityFeedService) {}
 
   @Get()
-  getActivityFeeds(@Query() queryParams: GetActivityFeedsQueryParams) {
-    return this.activityFeedService.getActivityFeeds(queryParams);
+  getActivityFeeds(
+    @Query() queryParams: GetActivityFeedsQueryParams,
+    @Req() req: Request,
+  ) {
+    return this.activityFeedService.getActivityFeeds(queryParams, req.url);
   }
 
   @Get(':activityFeedId')
-  getActivityFeed(@Param('activityFeedId') activityFeedId: string) {
-    return this.activityFeedService.getActivityFeed(activityFeedId);
+  getActivityFeed(
+    @Param('activityFeedId') activityFeedId: string,
+    @Req() req: Request,
+  ) {
+    return this.activityFeedService.getActivityFeed(activityFeedId, req.url);
   }
 
   @Post('create')

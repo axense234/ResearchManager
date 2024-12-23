@@ -10,21 +10,36 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import GetResearchSessionsQueryParams from './types/GetResearchSessionsQueryParams';
 // Dtos
 import { CreateResearchSessionDto, UpdateResearchSessionDto } from './dto';
+// Services
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class ResearchSessionService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getResearchSessions(queryParams: GetResearchSessionsQueryParams) {
+  async getResearchSessions(
+    queryParams: GetResearchSessionsQueryParams,
+    url: string,
+  ) {
     try {
-      const foundResearchSessions = await this.prisma.researchSession.findMany({
-        where: {
-          AND: [
-            { userIdForArchivePurposes: queryParams.userId },
-            { researchPhaseId: queryParams.researchPhaseId },
-          ],
+      const foundResearchSessions = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const researchSessions = await this.prisma.researchSession.findMany({
+            where: {
+              AND: [
+                { userIdForArchivePurposes: queryParams.userId },
+                { researchPhaseId: queryParams.researchPhaseId },
+              ],
+            },
+          });
+
+          return researchSessions;
         },
-      });
+      );
 
       if (foundResearchSessions.length < 1) {
         return {
@@ -45,14 +60,20 @@ export class ResearchSessionService {
     }
   }
 
-  async getResearchSession(researchSessionId: string) {
+  async getResearchSession(researchSessionId: string, url: string) {
     try {
       if (!researchSessionId) {
         throw new BadRequestException('Please provide a Research Session Id!');
       }
 
-      const foundResearchSession = await this.prisma.researchSession.findUnique(
-        { where: { id: researchSessionId } },
+      const foundResearchSession = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const researchSession = await this.prisma.researchSession.findUnique({
+            where: { id: researchSessionId },
+          });
+          return researchSession;
+        },
       );
 
       if (!foundResearchSession) {
@@ -81,6 +102,21 @@ export class ResearchSessionService {
           'Could not create Research Session with the provided information.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchSessions',
+        [
+          {
+            label: 'userId',
+            value: createdResearchSession.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchPhaseId',
+            value: createdResearchSession.researchPhaseId,
+          },
+        ],
+        'create',
+      );
 
       return {
         message: `Successfully created Research Session ${createdResearchSession.name}!`,
@@ -122,6 +158,21 @@ export class ResearchSessionService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchSessions',
+        [
+          {
+            label: 'userId',
+            value: updatedResearchSession.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchPhaseId',
+            value: updatedResearchSession.researchPhaseId,
+          },
+        ],
+        'modify',
+      );
+
       return {
         message: `Successfully updated Research Session named ${updatedResearchSession.name}!`,
         researchSession: updatedResearchSession,
@@ -157,6 +208,21 @@ export class ResearchSessionService {
           'Could not delete Research Session with the data provided.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'researchSessions',
+        [
+          {
+            label: 'userId',
+            value: deletedResearchSession.userIdForArchivePurposes,
+          },
+          {
+            label: 'researchPhaseId',
+            value: deletedResearchSession.researchPhaseId,
+          },
+        ],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted Research Session named ${deletedResearchSession.name}!`,

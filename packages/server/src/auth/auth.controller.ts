@@ -1,5 +1,5 @@
 // Nest
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Query } from '@nestjs/common';
 // Providers
 import { AuthService } from './auth.service';
 // Auth
@@ -22,7 +22,7 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(200)
-  logOut() {
-    return this.authService.logOut();
+  logOut(@Query('userId') userId: string) {
+    return this.authService.logOut(userId);
   }
 }

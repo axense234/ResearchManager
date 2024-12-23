@@ -11,14 +11,18 @@ import { User } from '@prisma/client';
 import UpdateUserDto from './dto/user.dto';
 // Password hashing
 import * as argon from 'argon2';
+// Redis
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
   async getProfile(user: User) {
     try {
-      // will have to add some more redis functionality here but for now this is fine
       return { message: `Successfully found user ${user.username}.`, user };
     } catch (error) {
       throw error;
@@ -58,6 +62,11 @@ export class UserService {
       }
 
       delete updatedUser.hash;
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        '',
+        [{ label: 'userId', value: updatedUser.id }],
+        'modify',
+      );
 
       return {
         message: `Successfully updated user ${updatedUser.username}!`,
@@ -93,6 +102,12 @@ export class UserService {
           'Could not delete user with the data provided.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        '',
+        [{ label: 'userId', value: deletedUser.id }],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted user named ${deletedUser.username}!`,

@@ -9,6 +9,7 @@ import {
   Delete,
   Patch,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 // Services
 import { ActivityDayService } from './day.service';
@@ -23,13 +24,19 @@ export class ActivityDayController {
   constructor(private activityDayService: ActivityDayService) {}
 
   @Get()
-  getDayActivities(@Query('activityFeedId') activityFeedId: string) {
-    return this.activityDayService.getActivityDays(activityFeedId);
+  getDayActivities(
+    @Query('activityFeedId') activityFeedId: string,
+    @Req() req: Request,
+  ) {
+    return this.activityDayService.getActivityDays(activityFeedId, req.url);
   }
 
   @Get(':activityDayId')
-  getDayActivity(@Param('activityDayId') activityDayId: string) {
-    return this.activityDayService.getActivityDay(activityDayId);
+  getDayActivity(
+    @Param('activityDayId') activityDayId: string,
+    @Req() req: Request,
+  ) {
+    return this.activityDayService.getActivityDay(activityDayId, req.url);
   }
 
   @Post('create')

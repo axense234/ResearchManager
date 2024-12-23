@@ -8,23 +8,38 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 // Types
 import GetActivityFeedsQueryParams from './types/GetActivityFeedsQueryParams';
+// Dtos
 import { CreateActivityFeedDto, UpdateActivityFeedDto } from './dto';
+// Redis
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class ActivityFeedService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
 
-  async getActivityFeeds(queryParams: GetActivityFeedsQueryParams) {
+  async getActivityFeeds(
+    queryParams: GetActivityFeedsQueryParams,
+    url: string,
+  ) {
     try {
-      const foundActivityFeeds = await this.prisma.activityFeed.findMany({
-        where: {
-          AND: [
-            { userId: queryParams.userId },
-            { researchActivityId: queryParams.researchActivityId },
-          ],
-          type: queryParams.type,
+      const foundActivityFeeds = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const activityFeeds = await this.prisma.activityFeed.findMany({
+            where: {
+              AND: [
+                { userId: queryParams.userId },
+                { researchActivityId: queryParams.researchActivityId },
+              ],
+              type: queryParams.type,
+            },
+          });
+          return activityFeeds;
         },
-      });
+      );
 
       if (foundActivityFeeds.length < 1) {
         return {
@@ -44,15 +59,21 @@ export class ActivityFeedService {
     }
   }
 
-  async getActivityFeed(activityFeedId: string) {
+  async getActivityFeed(activityFeedId: string, url: string) {
     try {
       if (!activityFeedId) {
         throw new BadRequestException('No Activity Feed Id provided.');
       }
 
-      const foundActivityFeed = await this.prisma.activityFeed.findUnique({
-        where: { id: activityFeedId },
-      });
+      const foundActivityFeed = await this.redis.getOrSetCache(
+        url,
+        async () => {
+          const activityFeed = await this.prisma.activityFeed.findUnique({
+            where: { id: activityFeedId },
+          });
+          return activityFeed;
+        },
+      );
 
       if (!foundActivityFeed) {
         throw new NotFoundException(
@@ -82,6 +103,21 @@ export class ActivityFeedService {
       }
 
       //   NOTE: create multiple conditions
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityFeeds',
+        [
+          {
+            label: 'userId',
+            value: createdActivityFeed.userId,
+          },
+          {
+            label: 'researchActivityId',
+            value: createdActivityFeed.researchActivityId,
+          },
+        ],
+        'create',
+      );
 
       return {
         message: `Successfully created Activity Feed of type ${createdActivityFeed.type}!`,
@@ -120,6 +156,21 @@ export class ActivityFeedService {
         );
       }
 
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityFeeds',
+        [
+          {
+            label: 'userId',
+            value: updatedActivityFeed.userId,
+          },
+          {
+            label: 'researchActivityId',
+            value: updatedActivityFeed.researchActivityId,
+          },
+        ],
+        'modify',
+      );
+
       return {
         message: `Succesfully updated ${updatedActivityFeed.type} Activity Feed!`,
         activityFeed: updatedActivityFeed,
@@ -155,6 +206,21 @@ export class ActivityFeedService {
           'Could not delete Activity Feed with the provided data.',
         );
       }
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys(
+        'activityFeeds',
+        [
+          {
+            label: 'userId',
+            value: deletedActivityFeed.userId,
+          },
+          {
+            label: 'researchActivityId',
+            value: deletedActivityFeed.researchActivityId,
+          },
+        ],
+        'modify',
+      );
 
       return {
         message: `Successfully deleted ${deletedActivityFeed.type} Activity Feed!`,

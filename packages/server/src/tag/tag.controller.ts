@@ -9,6 +9,7 @@ import {
   Post,
   Delete,
   Patch,
+  Req,
 } from '@nestjs/common';
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
@@ -23,13 +24,13 @@ export class TagController {
   constructor(private tagService: TagService) {}
 
   @Get()
-  getTags(@Query('userId') userId: string) {
-    return this.tagService.getTags(userId);
+  getTags(@Query('userId') userId: string, @Req() req: Request) {
+    return this.tagService.getTags(userId, req.url);
   }
 
   @Get(':tagId')
-  getTag(@Param('tagId') tagId: string) {
-    return this.tagService.getTag(tagId);
+  getTag(@Param('tagId') tagId: string, @Req() req: Request) {
+    return this.tagService.getTag(tagId, req.url);
   }
 
   @Post('create')
