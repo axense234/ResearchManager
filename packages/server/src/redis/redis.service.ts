@@ -16,10 +16,6 @@ export class RedisService {
     private config: ConfigService,
   ) {}
 
-  async test() {
-    console.log(this.redisCacheManager.store);
-  }
-
   async getOrSetCache(key: any, cb: any) {
     const data = await this.redisCacheManager.store.client.get(key);
 

@@ -24,8 +24,6 @@ export class ResearchActivityService {
         throw new BadRequestException('No Research Activity Id provided.');
       }
 
-      await this.redis.test();
-
       const foundResearchActivity = await this.redis.getOrSetCache(
         url,
         async () => {
