@@ -11,7 +11,7 @@ import {
   Req,
 } from '@nestjs/common';
 // Services
-import { ActivityLogService } from './log.service';
+import { ActivityLogService } from './services/index.service';
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Dtos
@@ -24,7 +24,9 @@ export class ActivityLogController {
 
   @Get()
   getActivityLogs(@Req() req: Request) {
-    return this.activityLogService.getActivityLogs(req.url);
+    return this.activityLogService.GetActivityLogsService.getActivityLogs(
+      req.url,
+    );
   }
 
   @Get(':activityLogId')
@@ -32,12 +34,17 @@ export class ActivityLogController {
     @Param('activityLogId') activityLogId: string,
     @Req() req: Request,
   ) {
-    return this.activityLogService.getActivityLog(activityLogId, req.url);
+    return this.activityLogService.GetActivityLogService.getActivityLog(
+      activityLogId,
+      req.url,
+    );
   }
 
   @Post('create')
   createActivityLog(@Body() dto: CreateActivityLogDto) {
-    return this.activityLogService.createActivityLog(dto);
+    return this.activityLogService.CreateActivityLogService.createActivityLog(
+      dto,
+    );
   }
 
   @Patch(':activityLogId/update')
@@ -45,11 +52,16 @@ export class ActivityLogController {
     @Param('activityLogId') activityLogId: string,
     @Body() dto: UpdateActivityLogDto,
   ) {
-    return this.activityLogService.updateActivityLog(dto, activityLogId);
+    return this.activityLogService.UpdateActivityLogService.updateActivityLog(
+      dto,
+      activityLogId,
+    );
   }
 
   @Delete(':activityLogId/delete')
   deleteActivityLog(@Param('activityLogId') activityLogId: string) {
-    return this.activityLogService.deleteActivityLog(activityLogId);
+    return this.activityLogService.DeleteActivityLogService.deleteActivityLog(
+      activityLogId,
+    );
   }
 }

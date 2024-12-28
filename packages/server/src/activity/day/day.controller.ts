@@ -12,7 +12,7 @@ import {
   Req,
 } from '@nestjs/common';
 // Services
-import { ActivityDayService } from './day.service';
+import { ActivityDayService } from './services/index.service';
 // Dtos
 import { CreateActivityDayDto, UpdateActivityDayDto } from './dto/day.dto';
 // Custom Guard
@@ -28,7 +28,10 @@ export class ActivityDayController {
     @Query('activityFeedId') activityFeedId: string,
     @Req() req: Request,
   ) {
-    return this.activityDayService.getActivityDays(activityFeedId, req.url);
+    return this.activityDayService.GetActivityDaysService.getActivityDays(
+      activityFeedId,
+      req.url,
+    );
   }
 
   @Get(':activityDayId')
@@ -36,12 +39,17 @@ export class ActivityDayController {
     @Param('activityDayId') activityDayId: string,
     @Req() req: Request,
   ) {
-    return this.activityDayService.getActivityDay(activityDayId, req.url);
+    return this.activityDayService.GetActivityDayService.getActivityDay(
+      activityDayId,
+      req.url,
+    );
   }
 
   @Post('create')
   createDayActivity(@Body() dto: CreateActivityDayDto) {
-    return this.activityDayService.createActivityDay(dto);
+    return this.activityDayService.CreateActivityDayService.createActivityDay(
+      dto,
+    );
   }
 
   @Patch(':activityDayId/update')
@@ -49,11 +57,16 @@ export class ActivityDayController {
     @Param('activityDayId') activityDayId: string,
     @Body() dto: UpdateActivityDayDto,
   ) {
-    return this.activityDayService.updateActivityDay(dto, activityDayId);
+    return this.activityDayService.UpdateActivityDayService.updateActivityDay(
+      dto,
+      activityDayId,
+    );
   }
 
   @Delete(':activityDayId/delete')
   deleteDayActivity(@Param('activityDayId') activityDayId: string) {
-    return this.activityDayService.deleteActivityDay(activityDayId);
+    return this.activityDayService.DeleteActivityDayService.deleteActivityDay(
+      activityDayId,
+    );
   }
 }

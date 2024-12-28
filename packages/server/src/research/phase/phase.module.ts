@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 // Controllers
 import { ResearchPhaseController } from './phase.controller';
 // Services
-import { ResearchPhaseService } from './phase.service';
+import { ResearchPhaseService } from './services/index.service';
 
 @Module({
   providers: [ResearchPhaseService],

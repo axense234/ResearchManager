@@ -1,7 +1,7 @@
 // NestJS
 import { Module } from '@nestjs/common';
 // Services
-import { ResearchSessionService } from './session.service';
+import { ResearchSessionService } from './services/index.service';
 // Controllers
 import { ResearchSessionController } from './session.controller';
 

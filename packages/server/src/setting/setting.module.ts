@@ -1,7 +1,7 @@
 // NestJS
 import { Module } from '@nestjs/common';
 // Services
-import { SettingService } from './setting.service';
+import { SettingService } from './services/index.service';
 // Controllers
 import { SettingController } from './setting.controller';
 

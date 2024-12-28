@@ -2,40 +2,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 // Cache
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-// Config
-import { ConfigService } from '@nestjs/config';
 // IORedis
 import { RedisCache } from 'cache-manager-ioredis-yet';
 // Types
-import DeleteCacheSpecifiers from './types/DeleteCacheSpecifiers';
+import DeleteCacheSpecifiers from '../types/DeleteCacheSpecifiers';
 
 @Injectable()
-export class RedisService {
-  constructor(
-    @Inject(CACHE_MANAGER) private redisCacheManager: RedisCache,
-    private config: ConfigService,
-  ) {}
-
-  async test() {
-    console.log(this.redisCacheManager.store);
-  }
-
-  async getOrSetCache(key: any, cb: any) {
-    const data = await this.redisCacheManager.store.client.get(key);
-
-    if (JSON.parse(data) !== null) {
-      return JSON.parse(data);
-    }
-
-    const freshData = await cb();
-    await this.redisCacheManager.store.client.setex(
-      key,
-      eval(this.config.get('REDIS_CACHE_EXP_TIME')),
-      JSON.stringify(freshData),
-    );
-
-    return freshData;
-  }
+export class DeleteAllCacheThatIncludesGivenKeysService {
+  constructor(@Inject(CACHE_MANAGER) private redisCacheManager: RedisCache) {}
 
   async deleteAllCacheThatIncludesGivenKeys(
     base: string,

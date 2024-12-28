@@ -14,7 +14,7 @@ import {
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Services
-import { TagService } from './tag.service';
+import { TagService } from './services/index.service';
 // Dtos
 import { CreateTagDto, UpdateTagDto } from './dto';
 

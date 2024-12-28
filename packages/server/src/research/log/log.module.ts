@@ -1,7 +1,7 @@
 // NestJS
 import { Module } from '@nestjs/common';
 // Services
-import { ResearchLogService } from './log.service';
+import { ResearchLogService } from './services/index.service';
 // Controllers
 import { ResearchLogController } from './log.controller';
 

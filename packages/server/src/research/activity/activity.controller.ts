@@ -13,10 +13,10 @@ import {
 } from '@nestjs/common';
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
-// Service
-import { ResearchActivityService } from './activity.service';
 // Dto
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
+// Services
+import { ResearchActivityService } from './services/index.service';
 
 @UseGuards(JwtGuard)
 @Controller('researchActivities')
@@ -25,7 +25,10 @@ export class ResearchActivityController {
 
   @Get()
   getResearchActivities(@Query('userId') userId: string, @Req() req: Request) {
-    return this.researchActivityService.getResearchActivities(userId, req.url);
+    return this.researchActivityService.GetResearchActivitiesService.getResearchActivities(
+      userId,
+      req.url,
+    );
   }
 
   @Get(':researchActivityId')
@@ -33,7 +36,7 @@ export class ResearchActivityController {
     @Param('researchActivityId') researchActivityId: string,
     @Req() req: Request,
   ) {
-    return this.researchActivityService.getResearchActivity(
+    return this.researchActivityService.GetResearchActivityService.getResearchActivity(
       researchActivityId,
       req.url,
     );
@@ -41,7 +44,9 @@ export class ResearchActivityController {
 
   @Post('create')
   createResearchActivity(@Body() dto: CreateResearchActivityDto) {
-    return this.researchActivityService.createResearchActivity(dto);
+    return this.researchActivityService.CreateResearchActivityService.createResearchActivity(
+      dto,
+    );
   }
 
   @Patch(':researchActivityId/update')
@@ -49,7 +54,7 @@ export class ResearchActivityController {
     @Param('researchActivityId') researchActivityId: string,
     @Body() dto: UpdateResearchActivityDto,
   ) {
-    return this.researchActivityService.updateResearchActivity(
+    return this.researchActivityService.UpdateResearchActivityService.updateResearchActivity(
       dto,
       researchActivityId,
     );
@@ -59,7 +64,7 @@ export class ResearchActivityController {
   deleteResearchActivity(
     @Param('researchActivityId') researchActivityId: string,
   ) {
-    return this.researchActivityService.deleteResearchActivity(
+    return this.researchActivityService.DeleteResearchActivityService.deleteResearchActivity(
       researchActivityId,
     );
   }

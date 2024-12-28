@@ -1,7 +1,7 @@
 // Nest
 import { Module } from '@nestjs/common';
 // Providers
-import { UserService } from './user.service';
+import { UserService } from './services/index.service';
 // Controllers
 import { UserController } from './user.controller';
 

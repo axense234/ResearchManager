@@ -1,7 +1,7 @@
 // NestJS
 import { Global, Module } from '@nestjs/common';
 // Services
-import { RedisService } from './redis.service';
+import { RedisService } from './services/index.service';
 // Cache
 import { RedisCacheModule } from './cache.module';
 

@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 // Providers
-import { UserService } from './user.service';
+import { UserService } from './services/index.service';
 // Param Decorators
 import { GetUser } from 'src/auth/decorator';
 // Prisma
@@ -26,16 +26,16 @@ export class UserController {
 
   @Get('profile')
   getProfile(@GetUser() user: User) {
-    return this.userService.getProfile(user);
+    return this.userService.GetProfileService.getProfile(user);
   }
 
   @Patch(':userId/update')
   updateUser(@Param('userId') userId: string, @Body() dto: UpdateUserDto) {
-    return this.userService.updateUser(dto, userId);
+    return this.userService.UpdateUserService.updateUser(dto, userId);
   }
 
   @Delete(':userId/delete')
   deleteUser(@Param('userId') userId: string) {
-    return this.userService.deleteUser(userId);
+    return this.userService.DeleteUserService.deleteUser(userId);
   }
 }

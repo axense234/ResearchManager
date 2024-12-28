@@ -12,7 +12,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 // Services
-import { ResearchSessionService } from './session.service';
+import { ResearchSessionService } from './services/index.service';
 // Types
 import GetResearchSessionsQueryParams from './types/GetResearchSessionsQueryParams';
 // Custom Guard
@@ -30,7 +30,7 @@ export class ResearchSessionController {
     @Query() queryParams: GetResearchSessionsQueryParams,
     @Req() req: Request,
   ) {
-    return this.researchSessionService.getResearchSessions(
+    return this.researchSessionService.GetResearchSessionsService.getResearchSessions(
       queryParams,
       req.url,
     );
@@ -41,7 +41,7 @@ export class ResearchSessionController {
     @Param('researchSessionId') researchSessionId: string,
     @Req() req: Request,
   ) {
-    return this.researchSessionService.getResearchSession(
+    return this.researchSessionService.GetResearchSessionService.getResearchSession(
       researchSessionId,
       req.url,
     );
@@ -49,7 +49,9 @@ export class ResearchSessionController {
 
   @Post('create')
   createResearchSession(@Body() dto: CreateResearchSessionDto) {
-    return this.researchSessionService.createResearchSession(dto);
+    return this.researchSessionService.CreateResearchSessionService.createResearchSession(
+      dto,
+    );
   }
 
   @Patch(':researchSessionId/update')
@@ -57,7 +59,7 @@ export class ResearchSessionController {
     @Param('researchSessionId') researchSessionId: string,
     @Body() dto: UpdateResearchSessionDto,
   ) {
-    return this.researchSessionService.updateResearchSession(
+    return this.researchSessionService.UpdateResearchSessionService.updateResearchSession(
       dto,
       researchSessionId,
     );
@@ -65,6 +67,8 @@ export class ResearchSessionController {
 
   @Delete(':researchSessionId/delete')
   deleteResearchSession(@Param('researchSessionId') researchSessionId: string) {
-    return this.researchSessionService.deleteResearchSession(researchSessionId);
+    return this.researchSessionService.DeleteResearchSessionService.deleteResearchSession(
+      researchSessionId,
+    );
   }
 }

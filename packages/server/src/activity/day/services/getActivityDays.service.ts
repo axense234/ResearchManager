@@ -1,0 +1,42 @@
+// NestJS
+import { Injectable } from '@nestjs/common';
+// DB Services
+import { PrismaService } from 'src/prisma/prisma.service';
+// Redis
+import { RedisService } from 'src/redis/services/index.service';
+
+@Injectable()
+export class GetActivityDaysService {
+  constructor(
+    private prisma: PrismaService,
+    private redis: RedisService,
+  ) {}
+
+  async getActivityDays(activityFeedId: string, url: string) {
+    try {
+      const foundActivityDays =
+        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
+          const activityDays = await this.prisma.activityDay.findMany({
+            where: { AND: [{ activityFeedId }] },
+          });
+          return activityDays;
+        });
+
+      if (foundActivityDays.length < 1) {
+        return {
+          nbHits: 0,
+          message: 'Could not find any Activity Days given the data.',
+          dayActivities: [],
+        };
+      }
+
+      return {
+        nbHits: foundActivityDays.length,
+        message: `Successfully found ${foundActivityDays.length} Activity Days given the data`,
+        dayActivities: foundActivityDays,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+}
