@@ -13,10 +13,10 @@ import {
 } from '@nestjs/common';
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
-// Services
-import { TagService } from './services/index.service';
 // Dtos
 import { CreateTagDto, UpdateTagDto } from './dto';
+// Services
+import { TagService } from './services/tag.service';
 
 @UseGuards(JwtGuard)
 @Controller('tags')

@@ -7,7 +7,7 @@ import {
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class DeleteResearchSessionService {
@@ -43,9 +43,9 @@ export class DeleteResearchSessionService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'researchSessions',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'researchSessions',
+        specifiers: [
           {
             label: 'userId',
             value: deletedResearchSession.userIdForArchivePurposes,
@@ -55,8 +55,8 @@ export class DeleteResearchSessionService {
             value: deletedResearchSession.researchPhaseId,
           },
         ],
-        'modify',
-      );
+        type: 'modify',
+      });
 
       return {
         message: `Successfully deleted Research Session named ${deletedResearchSession.name}!`,

@@ -1,7 +1,7 @@
 // Nest
 import { Injectable } from '@nestjs/common';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class LogOutService {
@@ -9,11 +9,11 @@ export class LogOutService {
 
   async logOut(userId: string) {
     try {
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        '/',
-        [{ label: 'userId', value: userId }],
-        'modify',
-      );
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: '/',
+        specifiers: [{ label: 'userId', value: userId }],
+        type: 'modify',
+      });
     } catch (error) {
       throw error;
     }

@@ -9,7 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // Dtos
 import { UpdateActivityFeedDto } from '../dto';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class UpdateActivityFeedService {
@@ -46,9 +46,9 @@ export class UpdateActivityFeedService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'activityFeeds',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'activityFeeds',
+        specifiers: [
           {
             label: 'userId',
             value: updatedActivityFeed.userId,
@@ -58,8 +58,8 @@ export class UpdateActivityFeedService {
             value: updatedActivityFeed.researchActivityId,
           },
         ],
-        'modify',
-      );
+        type: 'modify',
+      });
 
       return {
         message: `Succesfully updated ${updatedActivityFeed.type} Activity Feed!`,

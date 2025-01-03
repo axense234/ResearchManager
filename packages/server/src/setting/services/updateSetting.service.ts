@@ -7,7 +7,7 @@ import {
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Dto
 import { UpdateSettingDto } from '../dto';
 
@@ -45,16 +45,16 @@ export class UpdateSettingService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'settings',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'settings',
+        specifiers: [
           {
             label: 'userId',
             value: updatedSetting.userId,
           },
         ],
-        'modify',
-      );
+        type: 'modify',
+      });
 
       return {
         message: `Successfully updated Setting with the label: ${updatedSetting.label}!`,

@@ -3,7 +3,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Dtos
 import { CreateTagDto } from '../dto';
 
@@ -26,16 +26,16 @@ export class CreateTagService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'tags',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'tags',
+        specifiers: [
           {
             label: 'userId',
             value: createdTag.userId,
           },
         ],
-        'create',
-      );
+        type: 'create',
+      });
 
       return {
         message: `Successfully created Tag named ${createdTag.title}!`,

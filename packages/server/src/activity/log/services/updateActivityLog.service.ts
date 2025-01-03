@@ -9,7 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // Dtos
 import { UpdateActivityLogDto } from '../dto';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class UpdateActivityLogService {
@@ -46,11 +46,11 @@ export class UpdateActivityLogService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'activityLogs',
-        [],
-        'modify',
-      );
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'activityLogs',
+        specifiers: [],
+        type: 'modify',
+      });
 
       return {
         message: `Successfully updated Activity Log!`,

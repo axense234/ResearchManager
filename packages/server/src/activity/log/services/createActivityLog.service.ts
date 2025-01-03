@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // Dtos
 import { CreateActivityLogDto } from '../dto';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class CreateActivityLogService {
@@ -26,11 +26,11 @@ export class CreateActivityLogService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'activityLogs',
-        [],
-        'create',
-      );
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'activityLogs',
+        specifiers: [],
+        type: 'create',
+      });
 
       return {
         message: `Successfully created Activity Log!`,

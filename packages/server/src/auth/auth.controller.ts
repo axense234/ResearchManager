@@ -1,7 +1,7 @@
 // Nest
 import { Body, Controller, HttpCode, Post, Query } from '@nestjs/common';
 // Providers
-import { AuthService } from './services/index.service';
+import { AuthService } from './services/auth.service';
 // Auth
 import AuthDto from './dto/auth.dto';
 
@@ -11,18 +11,18 @@ export class AuthController {
 
   @Post('signup')
   signUp(@Body() dto: AuthDto) {
-    return this.authService.SignUpService.signUp(dto);
+    return this.authService.signUp(dto);
   }
 
   @Post('signin')
   @HttpCode(200)
   signIn(@Body() dto: AuthDto) {
-    return this.authService.SignInService.signIn(dto);
+    return this.authService.signIn(dto);
   }
 
   @Post('logout')
   @HttpCode(200)
   logOut(@Query('userId') userId: string) {
-    return this.authService.LogOutService.logOut(userId);
+    return this.authService.logOut(userId);
   }
 }

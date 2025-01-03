@@ -16,7 +16,7 @@ import { JwtGuard } from 'src/auth/guard';
 // Dto
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
 // Services
-import { ResearchActivityService } from './services/index.service';
+import { ResearchActivityService } from './services/activity.service';
 
 @UseGuards(JwtGuard)
 @Controller('researchActivities')
@@ -25,10 +25,7 @@ export class ResearchActivityController {
 
   @Get()
   getResearchActivities(@Query('userId') userId: string, @Req() req: Request) {
-    return this.researchActivityService.GetResearchActivitiesService.getResearchActivities(
-      userId,
-      req.url,
-    );
+    return this.researchActivityService.getResearchActivities(userId, req.url);
   }
 
   @Get(':researchActivityId')
@@ -36,7 +33,7 @@ export class ResearchActivityController {
     @Param('researchActivityId') researchActivityId: string,
     @Req() req: Request,
   ) {
-    return this.researchActivityService.GetResearchActivityService.getResearchActivity(
+    return this.researchActivityService.getResearchActivity(
       researchActivityId,
       req.url,
     );
@@ -44,9 +41,7 @@ export class ResearchActivityController {
 
   @Post('create')
   createResearchActivity(@Body() dto: CreateResearchActivityDto) {
-    return this.researchActivityService.CreateResearchActivityService.createResearchActivity(
-      dto,
-    );
+    return this.researchActivityService.createResearchActivity(dto);
   }
 
   @Patch(':researchActivityId/update')
@@ -54,7 +49,7 @@ export class ResearchActivityController {
     @Param('researchActivityId') researchActivityId: string,
     @Body() dto: UpdateResearchActivityDto,
   ) {
-    return this.researchActivityService.UpdateResearchActivityService.updateResearchActivity(
+    return this.researchActivityService.updateResearchActivity(
       dto,
       researchActivityId,
     );
@@ -64,7 +59,7 @@ export class ResearchActivityController {
   deleteResearchActivity(
     @Param('researchActivityId') researchActivityId: string,
   ) {
-    return this.researchActivityService.DeleteResearchActivityService.deleteResearchActivity(
+    return this.researchActivityService.deleteResearchActivity(
       researchActivityId,
     );
   }

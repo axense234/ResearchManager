@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // Dtos
 import { CreateActivityFeedDto } from '../dto';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class CreateActivityFeedService {
@@ -26,9 +26,9 @@ export class CreateActivityFeedService {
         );
       }
       //   NOTE: create multiple conditions
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'activityFeeds',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'activityFeeds',
+        specifiers: [
           {
             label: 'userId',
             value: createdActivityFeed.userId,
@@ -38,8 +38,8 @@ export class CreateActivityFeedService {
             value: createdActivityFeed.researchActivityId,
           },
         ],
-        'create',
-      );
+        type: 'create',
+      });
 
       return {
         message: `Successfully created Activity Feed of type ${createdActivityFeed.type}!`,

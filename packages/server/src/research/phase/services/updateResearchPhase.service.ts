@@ -7,7 +7,7 @@ import {
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Dtos
 import { UpdateResearchPhaseDto } from '../dto';
 
@@ -49,9 +49,9 @@ export class UpdateResearchPhaseService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'researchPhases',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'researchPhases',
+        specifiers: [
           {
             label: 'userId',
             value: updatedResearchPhase.userIdForArchivePurposes,
@@ -61,8 +61,8 @@ export class UpdateResearchPhaseService {
             value: updatedResearchPhase.researchActivityId,
           },
         ],
-        'modify',
-      );
+        type: 'modify',
+      });
 
       return {
         message: `Successfully updated Research Phase named ${updatedResearchPhase.name}!`,

@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // Dtos
 import { CreateActivityDayDto } from '../dto';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class CreateActivityDayService {
@@ -26,16 +26,16 @@ export class CreateActivityDayService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'activityDays',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'activityDays',
+        specifiers: [
           {
             label: 'activityFeedId',
             value: createdActivityDay.activityFeedId,
           },
         ],
-        'create',
-      );
+        type: 'create',
+      });
 
       return {
         message: `Successfully created Activity Day!`,

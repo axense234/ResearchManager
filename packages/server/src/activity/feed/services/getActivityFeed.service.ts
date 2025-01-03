@@ -7,7 +7,7 @@ import {
 // DB Services
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetActivityFeedService {
@@ -22,13 +22,15 @@ export class GetActivityFeedService {
         throw new BadRequestException('No Activity Feed Id provided.');
       }
 
-      const foundActivityFeed =
-        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
+      const foundActivityFeed = await this.redis.getOrSetCache(
+        url,
+        async () => {
           const activityFeed = await this.prisma.activityFeed.findUnique({
             where: { id: activityFeedId },
           });
           return activityFeed;
-        });
+        },
+      );
 
       if (!foundActivityFeed) {
         throw new NotFoundException(

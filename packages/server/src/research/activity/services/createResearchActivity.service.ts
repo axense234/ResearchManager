@@ -3,7 +3,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Dtos
 import { CreateResearchActivityDto } from '../dto';
 
@@ -26,11 +26,13 @@ export class CreateResearchActivityService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'researchActivities',
-        [{ label: 'userId', value: createdResearchActivity.userId }],
-        'create',
-      );
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'researchActivities',
+        specifiers: [
+          { label: 'userId', value: createdResearchActivity.userId },
+        ],
+        type: 'create',
+      });
 
       return {
         message: `Successfully created Research Activity: ${createdResearchActivity.name}!`,

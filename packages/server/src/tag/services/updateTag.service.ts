@@ -7,7 +7,7 @@ import {
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Dtos
 import { UpdateTagDto } from '../dto';
 
@@ -45,16 +45,16 @@ export class UpdateTagService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'tags',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'tags',
+        specifiers: [
           {
             label: 'userId',
             value: updatedTag.userId,
           },
         ],
-        'modify',
-      );
+        type: 'modify',
+      });
 
       return {
         message: `Successfully updated Tag named ${updatedTag.title}!`,

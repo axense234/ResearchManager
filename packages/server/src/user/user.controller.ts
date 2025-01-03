@@ -6,10 +6,11 @@ import {
   Get,
   Param,
   Patch,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 // Providers
-import { UserService } from './services/index.service';
+import { UserService } from './services/users.service';
 // Param Decorators
 import { GetUser } from 'src/auth/decorator';
 // Prisma
@@ -24,18 +25,28 @@ import UpdateUserDto from './dto/user.dto';
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Get()
+  getUsers(@Req() req: Request) {
+    return this.userService.getUsers(req.url);
+  }
+
+  @Get(':userId')
+  getUser(@Param('userId') userId: string, @Req() req: Request) {
+    return this.userService.getUser(userId, req.url);
+  }
+
   @Get('profile')
   getProfile(@GetUser() user: User) {
-    return this.userService.GetProfileService.getProfile(user);
+    return this.userService.getProfile(user);
   }
 
   @Patch(':userId/update')
   updateUser(@Param('userId') userId: string, @Body() dto: UpdateUserDto) {
-    return this.userService.UpdateUserService.updateUser(dto, userId);
+    return this.userService.updateUser(dto, userId);
   }
 
   @Delete(':userId/delete')
   deleteUser(@Param('userId') userId: string) {
-    return this.userService.DeleteUserService.deleteUser(userId);
+    return this.userService.deleteUser(userId);
   }
 }

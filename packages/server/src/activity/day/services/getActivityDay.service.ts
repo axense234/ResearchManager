@@ -7,7 +7,7 @@ import {
 // DB Services
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetActivityDayService {
@@ -22,13 +22,12 @@ export class GetActivityDayService {
         throw new BadRequestException('No Activity Day Id provided.');
       }
 
-      const foundActivityDay =
-        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
-          const activityDay = await this.prisma.activityDay.findUnique({
-            where: { id: activityDayId },
-          });
-          return activityDay;
+      const foundActivityDay = await this.redis.getOrSetCache(url, async () => {
+        const activityDay = await this.prisma.activityDay.findUnique({
+          where: { id: activityDayId },
         });
+        return activityDay;
+      });
 
       if (!foundActivityDay) {
         throw new NotFoundException(

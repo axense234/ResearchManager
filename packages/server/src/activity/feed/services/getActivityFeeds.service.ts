@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // Types
 import GetActivityFeedsQueryParams from '../types/GetActivityFeedsQueryParams';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetActivityFeedsService {
@@ -19,8 +19,9 @@ export class GetActivityFeedsService {
     url: string,
   ) {
     try {
-      const foundActivityFeeds =
-        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
+      const foundActivityFeeds = await this.redis.getOrSetCache(
+        url,
+        async () => {
           const activityFeeds = await this.prisma.activityFeed.findMany({
             where: {
               AND: [
@@ -31,7 +32,8 @@ export class GetActivityFeedsService {
             },
           });
           return activityFeeds;
-        });
+        },
+      );
 
       if (foundActivityFeeds.length < 1) {
         return {

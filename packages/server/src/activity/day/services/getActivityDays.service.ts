@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 // DB Services
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetActivityDaysService {
@@ -14,13 +14,15 @@ export class GetActivityDaysService {
 
   async getActivityDays(activityFeedId: string, url: string) {
     try {
-      const foundActivityDays =
-        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
+      const foundActivityDays = await this.redis.getOrSetCache(
+        url,
+        async () => {
           const activityDays = await this.prisma.activityDay.findMany({
             where: { AND: [{ activityFeedId }] },
           });
           return activityDays;
-        });
+        },
+      );
 
       if (foundActivityDays.length < 1) {
         return {

@@ -9,7 +9,7 @@ import UpdateUserDto from '../dto/user.dto';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Argon
 import * as argon from 'argon2';
 
@@ -53,11 +53,11 @@ export class UpdateUserService {
       }
 
       delete updatedUser.hash;
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        '',
-        [{ label: 'userId', value: updatedUser.id }],
-        'modify',
-      );
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: '',
+        specifiers: [{ label: 'userId', value: updatedUser.id }],
+        type: 'modify',
+      });
 
       return {
         message: `Successfully updated user ${updatedUser.username}!`,

@@ -7,7 +7,7 @@ import {
 // DB Services
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetActivityLogService {
@@ -22,13 +22,12 @@ export class GetActivityLogService {
         throw new BadRequestException('Please provide an Activity Log Id!');
       }
 
-      const foundActivityLog =
-        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
-          const activityLog = await this.prisma.activityLog.findUnique({
-            where: { id: activityLogId },
-          });
-          return activityLog;
+      const foundActivityLog = await this.redis.getOrSetCache(url, async () => {
+        const activityLog = await this.prisma.activityLog.findUnique({
+          where: { id: activityLogId },
         });
+        return activityLog;
+      });
 
       if (!foundActivityLog) {
         throw new NotFoundException(

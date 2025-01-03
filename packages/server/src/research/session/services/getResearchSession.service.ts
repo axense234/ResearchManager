@@ -7,7 +7,7 @@ import {
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetResearchSessionService {
@@ -22,13 +22,15 @@ export class GetResearchSessionService {
         throw new BadRequestException('Please provide a Research Session Id!');
       }
 
-      const foundResearchSession =
-        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
+      const foundResearchSession = await this.redis.getOrSetCache(
+        url,
+        async () => {
           const researchSession = await this.prisma.researchSession.findUnique({
             where: { id: researchSessionId },
           });
           return researchSession;
-        });
+        },
+      );
 
       if (!foundResearchSession) {
         throw new NotFoundException(

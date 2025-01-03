@@ -7,7 +7,7 @@ import {
 // DB Services
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class DeleteActivityFeedService {
@@ -43,9 +43,9 @@ export class DeleteActivityFeedService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'activityFeeds',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'activityFeeds',
+        specifiers: [
           {
             label: 'userId',
             value: deletedActivityFeed.userId,
@@ -55,8 +55,8 @@ export class DeleteActivityFeedService {
             value: deletedActivityFeed.researchActivityId,
           },
         ],
-        'modify',
-      );
+        type: 'modify',
+      });
 
       return {
         message: `Successfully deleted ${deletedActivityFeed.type} Activity Feed!`,

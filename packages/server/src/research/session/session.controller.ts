@@ -12,7 +12,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 // Services
-import { ResearchSessionService } from './services/index.service';
+import { ResearchSessionService } from './services/session.service';
 // Types
 import GetResearchSessionsQueryParams from './types/GetResearchSessionsQueryParams';
 // Custom Guard
@@ -30,7 +30,7 @@ export class ResearchSessionController {
     @Query() queryParams: GetResearchSessionsQueryParams,
     @Req() req: Request,
   ) {
-    return this.researchSessionService.GetResearchSessionsService.getResearchSessions(
+    return this.researchSessionService.getResearchSessions(
       queryParams,
       req.url,
     );
@@ -41,7 +41,7 @@ export class ResearchSessionController {
     @Param('researchSessionId') researchSessionId: string,
     @Req() req: Request,
   ) {
-    return this.researchSessionService.GetResearchSessionService.getResearchSession(
+    return this.researchSessionService.getResearchSession(
       researchSessionId,
       req.url,
     );
@@ -49,9 +49,7 @@ export class ResearchSessionController {
 
   @Post('create')
   createResearchSession(@Body() dto: CreateResearchSessionDto) {
-    return this.researchSessionService.CreateResearchSessionService.createResearchSession(
-      dto,
-    );
+    return this.researchSessionService.createResearchSession(dto);
   }
 
   @Patch(':researchSessionId/update')
@@ -59,7 +57,7 @@ export class ResearchSessionController {
     @Param('researchSessionId') researchSessionId: string,
     @Body() dto: UpdateResearchSessionDto,
   ) {
-    return this.researchSessionService.UpdateResearchSessionService.updateResearchSession(
+    return this.researchSessionService.updateResearchSession(
       dto,
       researchSessionId,
     );
@@ -67,8 +65,6 @@ export class ResearchSessionController {
 
   @Delete(':researchSessionId/delete')
   deleteResearchSession(@Param('researchSessionId') researchSessionId: string) {
-    return this.researchSessionService.DeleteResearchSessionService.deleteResearchSession(
-      researchSessionId,
-    );
+    return this.researchSessionService.deleteResearchSession(researchSessionId);
   }
 }

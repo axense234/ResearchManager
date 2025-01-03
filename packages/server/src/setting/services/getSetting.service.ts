@@ -7,7 +7,7 @@ import {
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetSettingService {
@@ -22,15 +22,12 @@ export class GetSettingService {
         throw new BadRequestException('No Setting Id provided.');
       }
 
-      const foundSetting = await this.redis.GetOrSetCacheService.getOrSetCache(
-        url,
-        async () => {
-          const setting = await this.prisma.setting.findUnique({
-            where: { id: settingId },
-          });
-          return setting;
-        },
-      );
+      const foundSetting = await this.redis.getOrSetCache(url, async () => {
+        const setting = await this.prisma.setting.findUnique({
+          where: { id: settingId },
+        });
+        return setting;
+      });
 
       if (!foundSetting) {
         throw new NotFoundException(

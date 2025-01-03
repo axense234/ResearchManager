@@ -5,17 +5,17 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 // IORedis
 import { RedisCache } from 'cache-manager-ioredis-yet';
 // Types
-import DeleteCacheSpecifiers from '../types/DeleteCacheSpecifiers';
+import DeleteAllCacheThatIncludesGivenKeysType from '../types/DeleteAllCacheThatIncludesGivenKeys';
 
 @Injectable()
 export class DeleteAllCacheThatIncludesGivenKeysService {
   constructor(@Inject(CACHE_MANAGER) private redisCacheManager: RedisCache) {}
 
-  async deleteAllCacheThatIncludesGivenKeys(
-    base: string,
-    specifiers: DeleteCacheSpecifiers,
-    type: 'modify' | 'create',
-  ) {
+  async deleteAllCacheThatIncludesGivenKeys({
+    base,
+    type,
+    specifiers,
+  }: DeleteAllCacheThatIncludesGivenKeysType) {
     let cursor = 0;
     const pattern = `/${base}${type === 'create' ? '[^/]' : ''}*`;
     console.log(pattern);

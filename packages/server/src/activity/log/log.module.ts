@@ -1,12 +1,24 @@
 // NestJS
 import { Module } from '@nestjs/common';
-// Services
-import { ActivityLogService } from './log.service';
-// Controller
+// Controllers
 import { ActivityLogController } from './log.controller';
+// Services
+import { ActivityLogService } from './services/log.service';
+import { GetActivityLogsService } from './services/getActivityLogs.service';
+import { GetActivityLogService } from './services/getActivityLog.service';
+import { CreateActivityLogService } from './services/createActivityLog.service';
+import { UpdateActivityLogService } from './services/updateActivityLog.service';
+import { DeleteActivityLogService } from './services/deleteActivityLog.service';
 
 @Module({
-  providers: [ActivityLogService],
+  providers: [
+    ActivityLogService,
+    GetActivityLogsService,
+    GetActivityLogService,
+    CreateActivityLogService,
+    UpdateActivityLogService,
+    DeleteActivityLogService,
+  ],
   controllers: [ActivityLogController],
 })
 export class ActivityLogModule {}

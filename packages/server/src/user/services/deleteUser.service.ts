@@ -7,7 +7,7 @@ import {
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class DeleteUserService {
@@ -42,11 +42,11 @@ export class DeleteUserService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        '',
-        [{ label: 'userId', value: deletedUser.id }],
-        'modify',
-      );
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: '',
+        specifiers: [{ label: 'userId', value: deletedUser.id }],
+        type: 'modify',
+      });
 
       return {
         message: `Successfully deleted user named ${deletedUser.username}!`,

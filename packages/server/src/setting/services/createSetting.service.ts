@@ -3,7 +3,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Dto
 import { CreateSettingDto } from '../dto';
 
@@ -26,16 +26,16 @@ export class CreateSettingService {
         );
       }
 
-      await this.redis.DeleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-        'settings',
-        [
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'settings',
+        specifiers: [
           {
             label: 'userId',
             value: createdSetting.userId,
           },
         ],
-        'create',
-      );
+        type: 'create',
+      });
 
       return {
         message: `Successfully created Setting with the label: ${createdSetting.label}!`,

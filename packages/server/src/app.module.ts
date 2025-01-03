@@ -21,19 +21,19 @@ import { RedisModule } from './redis/redis.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    UserModule,
+    PrismaModule,
     AuthModule,
+    ResearchActivityModule,
     TagModule,
     SettingModule,
-    ResearchActivityModule,
     ResearchPhaseModule,
     ResearchLogModule,
     ResearchSessionModule,
     ActivityFeedModule,
     ActivityDayModule,
     ActivityLogModule,
-    PrismaModule,
     RedisModule,
+    UserModule,
   ],
 })
 export class AppModule {}

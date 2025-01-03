@@ -14,7 +14,7 @@ import {
 // Custom Guard
 import { JwtGuard } from 'src/auth/guard';
 // Services
-import { ResearchLogService } from './services/index.service';
+import { ResearchLogService } from './services/log.service';
 // Types
 import GetResearchLogsQueryParams from './types/GetResearchLogsQueryParams';
 // Dtos
@@ -30,10 +30,7 @@ export class ResearchLogController {
     @Query() queryParams: GetResearchLogsQueryParams,
     @Req() req: Request,
   ) {
-    return this.researchLogService.GetResearchLogsService.getResearchLogs(
-      queryParams,
-      req.url,
-    );
+    return this.researchLogService.getResearchLogs(queryParams, req.url);
   }
 
   @Get(':researchLogId')
@@ -41,17 +38,12 @@ export class ResearchLogController {
     @Param('researchLogId') researchLogId: string,
     @Req() req: Request,
   ) {
-    return this.researchLogService.GetResearchLogService.getResearchLog(
-      researchLogId,
-      req.url,
-    );
+    return this.researchLogService.getResearchLog(researchLogId, req.url);
   }
 
   @Post('create')
   createResearchLog(@Body() dto: CreateResearchLogDto) {
-    return this.researchLogService.CreateResearchLogService.createResearchLog(
-      dto,
-    );
+    return this.researchLogService.createResearchLog(dto);
   }
 
   @Patch(':researchLogId/update')
@@ -59,16 +51,11 @@ export class ResearchLogController {
     @Param('researchLogId') researchLogId: string,
     @Body() dto: UpdateResearchLogDto,
   ) {
-    return this.researchLogService.UpdateResearchLogService.updateResearchLog(
-      dto,
-      researchLogId,
-    );
+    return this.researchLogService.updateResearchLog(dto, researchLogId);
   }
 
   @Delete(':researchLogId/delete')
   deleteResearchLog(@Param('researchLogId') researchLogId: string) {
-    return this.researchLogService.DeleteResearchLogService.deleteResearchLog(
-      researchLogId,
-    );
+    return this.researchLogService.deleteResearchLog(researchLogId);
   }
 }

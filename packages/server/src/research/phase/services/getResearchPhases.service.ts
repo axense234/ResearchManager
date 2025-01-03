@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 // Types
 import GetResearchPhasesQueryParams from '../types/GetResearchPhasesQueryParams';
 
@@ -19,8 +19,9 @@ export class GetResearchPhasesService {
     url: string,
   ) {
     try {
-      const foundResearchPhases =
-        await this.redis.GetOrSetCacheService.getOrSetCache(url, async () => {
+      const foundResearchPhases = await this.redis.getOrSetCache(
+        url,
+        async () => {
           const researchPhases = await this.prisma.researchPhase.findMany({
             where: {
               AND: [
@@ -32,7 +33,8 @@ export class GetResearchPhasesService {
             },
           });
           return researchPhases;
-        });
+        },
+      );
 
       if (foundResearchPhases.length < 1) {
         return {

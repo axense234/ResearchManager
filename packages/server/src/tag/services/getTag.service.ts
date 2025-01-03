@@ -4,10 +4,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { Tag } from '@prisma/client';
 // Prisma
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
-import { RedisService } from 'src/redis/services/index.service';
+import { RedisService } from 'src/redis/services/redis.service';
 
 @Injectable()
 export class GetTagService {
@@ -22,15 +23,12 @@ export class GetTagService {
         throw new BadRequestException('No Tag Id provided!');
       }
 
-      const foundTag = await this.redis.GetOrSetCacheService.getOrSetCache(
-        url,
-        async () => {
-          const tag = await this.prisma.tag.findUnique({
-            where: { id: tagId },
-          });
-          return tag;
-        },
-      );
+      const foundTag = (await this.redis.getOrSetCache(url, async () => {
+        const tag = await this.prisma.tag.findUnique({
+          where: { id: tagId },
+        });
+        return tag;
+      })) as Tag;
 
       if (!foundTag) {
         throw new NotFoundException(
