@@ -4,6 +4,9 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/redis/services/redis.service';
+// Types
+import GetResearchActivitiesQueryParams from '../types/GetResearchActivitiesQueryParams';
+import GetResearchActivitiesQueryObject from '../types/GetResearchActivitiesQueryCustomObject';
 
 @Injectable()
 export class GetResearchActivitiesService {
@@ -12,14 +15,38 @@ export class GetResearchActivitiesService {
     private redis: RedisService,
   ) {}
 
-  async getResearchActivities(userId?: string, url?: string) {
+  async getResearchActivities(
+    queryParams: GetResearchActivitiesQueryParams,
+    url?: string,
+  ) {
     try {
+      const { userId, searchByKey, searchByValue, sortByKey, sortByOrder } =
+        queryParams;
+
+      const queryObject: GetResearchActivitiesQueryObject = {};
+      const orderByObject = {};
+
+      if (userId) {
+        queryObject.userId = userId;
+      }
+
+      if (searchByKey) {
+        queryObject[searchByKey] = {
+          contains: searchByValue,
+        };
+      }
+
+      if (sortByKey) {
+        orderByObject[sortByKey] = sortByOrder;
+      }
+
       const foundResearchActivities = await this.redis.getOrSetCache(
         url,
         async () => {
           const researchActivities =
             await this.prisma.researchActivity.findMany({
-              where: { AND: [{ userId }] },
+              where: queryObject,
+              orderBy: orderByObject,
             });
           return researchActivities;
         },

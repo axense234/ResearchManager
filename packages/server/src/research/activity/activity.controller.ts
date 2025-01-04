@@ -17,6 +17,8 @@ import { JwtGuard } from 'src/auth/guard';
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
 // Services
 import { ResearchActivityService } from './services/activity.service';
+// Types
+import GetResearchActivitiesQueryParams from './types/GetResearchActivitiesQueryParams';
 
 @UseGuards(JwtGuard)
 @Controller('researchActivities')
@@ -24,8 +26,14 @@ export class ResearchActivityController {
   constructor(private researchActivityService: ResearchActivityService) {}
 
   @Get()
-  getResearchActivities(@Query('userId') userId: string, @Req() req: Request) {
-    return this.researchActivityService.getResearchActivities(userId, req.url);
+  getResearchActivities(
+    @Query() queryParams: GetResearchActivitiesQueryParams,
+    @Req() req: Request,
+  ) {
+    return this.researchActivityService.getResearchActivities(
+      queryParams,
+      req.url,
+    );
   }
 
   @Get(':researchActivityId')

@@ -30,14 +30,14 @@ export class UserController {
     return this.userService.getUsers(req.url);
   }
 
-  @Get(':userId')
-  getUser(@Param('userId') userId: string, @Req() req: Request) {
-    return this.userService.getUser(userId, req.url);
-  }
-
   @Get('profile')
   getProfile(@GetUser() user: User) {
     return this.userService.getProfile(user);
+  }
+
+  @Get(':userId')
+  getUser(@Param('userId') userId: string, @Req() req: Request) {
+    return this.userService.getUser(userId, req.url);
   }
 
   @Patch(':userId/update')

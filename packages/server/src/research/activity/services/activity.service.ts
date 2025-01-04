@@ -8,6 +8,8 @@ import { UpdateResearchActivityService } from './updateResearchActivity.service'
 import { DeleteResearchActivityService } from './deleteResearchActivity.service';
 // Dtos
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from '../dto';
+// Types
+import GetResearchActivitiesQueryParams from '../types/GetResearchActivitiesQueryParams';
 
 @Injectable()
 export class ResearchActivityService {
@@ -19,9 +21,12 @@ export class ResearchActivityService {
     private deleteResearchActivityService: DeleteResearchActivityService,
   ) {}
 
-  async getResearchActivities(userId?: string, url?: string) {
+  async getResearchActivities(
+    queryParams: GetResearchActivitiesQueryParams,
+    url?: string,
+  ) {
     return await this.getResearchActivitiesService.getResearchActivities(
-      userId,
+      queryParams,
       url,
     );
   }
