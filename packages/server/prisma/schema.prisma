@@ -68,8 +68,9 @@ model ResearchActivity {
   name                      String @default("Research Activity")
   backgroundColorOrImageSrc String @default("#D8E5E4") // Whiteish Hex Code
 
-  user                     User   @relation(fields: [userId], references: [id])
-  userId                   String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
   userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
   userIdForArchivePurposes String
 
