@@ -11,11 +11,9 @@ import {
   GetResearchActivitiesQueryParams,
   ResearchActivityFindManyObject,
   ResearchActivityOrderByObject,
-  ResearchActivityQueryObject,
 } from '../types';
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 // Data
-import { researchActivitiesAllowedSearchByKeyValues } from '../data/options/allowedSearchByKeyValues';
 import { researchActivitiesAllowedSortByKeysValues } from '../data/options/allowedSortByKeysValues';
 
 @Injectable()
@@ -44,11 +42,9 @@ export class GetResearchActivitiesService {
 
       const additionalNotes: string[] = [];
 
-      const queryObject: ResearchActivityQueryObject = {};
       const orderByObject: ResearchActivityOrderByObject[] = [];
       const findManyObject: ResearchActivityFindManyObject = {};
 
-      // Include Object
       const { optionObject, additionalNotes: additionalOptionNotes } =
         this.objectBuilder.buildOptionObject({
           entityType: 'researchActivity',
@@ -65,25 +61,14 @@ export class GetResearchActivitiesService {
         findManyObject[chosenOptionType] = optionObject;
       }
 
-      // QUERY OBJECT
+      const { queryObject, additionalNotes: additionalQueryNotes } =
+        this.objectBuilder.buildQueryObject({
+          entityType: 'researchActivity',
+          queryParams: { userId, searchByKey, searchByValue },
+        });
 
-      if (userId) {
-        queryObject.userId = userId;
-      }
-
-      if (!searchByKey && searchByValue) {
-        const message = `No searchByKey query parameter provided even tho searchByValue was given.`;
-        additionalNotes.push(message);
-      } else if (searchByKey && !searchByValue) {
-        const message = `No searchByValue query parameter provided even tho searchByKey was given.`;
-        additionalNotes.push(message);
-      } else if (searchByKey && searchByValue) {
-        if (researchActivitiesAllowedSearchByKeyValues.includes(searchByKey)) {
-          queryObject[searchByKey] = { contains: searchByValue };
-        } else {
-          const message = `Invalid searchByKey given.`;
-          additionalNotes.push(message);
-        }
+      if (additionalQueryNotes) {
+        additionalNotes.push(additionalQueryNotes);
       }
 
       findManyObject.where = queryObject;
@@ -135,8 +120,6 @@ export class GetResearchActivitiesService {
       }
 
       findManyObject.orderBy = orderByObject;
-
-      // INCLUDE/SELECT OBJECTS
 
       const foundResearchActivities = await this.redis.getOrSetCache(
         url,

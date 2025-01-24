@@ -11,7 +11,6 @@ import { CreateResearchActivityDto } from '../dto';
 // Types
 import {
   CreateResearchActivityQueryParams,
-  ResearchActivityCreateDataObject,
   ResearchActivityCreateObject,
 } from '../types';
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
@@ -31,29 +30,10 @@ export class CreateResearchActivityService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject: ResearchActivityCreateDataObject = { ...(dto as any) };
-
-      if (dto.researchPhases) {
-        dataObject.researchPhases = {
-          connect: dto.researchPhases.map((id) => {
-            return { id };
-          }),
-        };
-      }
-
-      if (dto.tags) {
-        dataObject.tags = {
-          connect: dto.tags.map((id) => {
-            return { id };
-          }),
-        };
-      }
-
-      if (dto.activityFeed) {
-        dataObject.activityFeed = {
-          connect: { id: dto.activityFeed },
-        };
-      }
+      const dataObject = this.objectBuilder.buildDataObject({
+        dto,
+        entityType: 'researchActivity',
+      });
 
       const createObject: ResearchActivityCreateObject = { data: dataObject };
 

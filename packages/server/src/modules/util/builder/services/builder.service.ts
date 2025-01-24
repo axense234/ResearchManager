@@ -3,10 +3,16 @@ import { Injectable } from '@nestjs/common';
 // Services
 import { ReturnObjectBuilderService } from './returnObjectBuilder.service';
 import { OptionObjectBuilderService } from './optionObjectBuilder.service';
+import { DataObjectBuilderService } from './dataObjectBuilder.service';
+import { QueryObjectBuilderService } from './queryObjectBuilder.service';
 // Types
 import {
+  DataObjectBuilderDataObject,
+  DataObjectBuilderParams,
   OptionObjectBuilderParams,
   OptionObjectBuilderReturnObject,
+  QueryObjectBuilderParams,
+  QueryObjectBuilderReturnObject,
   ReturnObjectBuilderParams,
   ReturnObjectBuilderReturnObject,
 } from '../types';
@@ -16,6 +22,8 @@ export class ObjectBuilderService {
   constructor(
     private returnObjectBuilderService: ReturnObjectBuilderService,
     private optionObjectBuilderService: OptionObjectBuilderService,
+    private dataObjectBuilderService: DataObjectBuilderService,
+    private queryObjectBuilderService: QueryObjectBuilderService,
   ) {}
 
   buildReturnObject({
@@ -45,6 +53,26 @@ export class ObjectBuilderService {
       chosenOptionType,
       includeValues,
       selectValues,
+    });
+  }
+
+  buildDataObject({
+    dto,
+    entityType,
+  }: DataObjectBuilderParams): DataObjectBuilderDataObject {
+    return this.dataObjectBuilderService.buildDataObject({
+      dto,
+      entityType,
+    });
+  }
+
+  buildQueryObject({
+    entityType,
+    queryParams,
+  }: QueryObjectBuilderParams): QueryObjectBuilderReturnObject {
+    return this.queryObjectBuilderService.buildQueryObject({
+      entityType,
+      queryParams,
     });
   }
 }

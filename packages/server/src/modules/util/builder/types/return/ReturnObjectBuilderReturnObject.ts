@@ -1,10 +1,12 @@
-import { ResearchActivity } from '@prisma/client';
+// Validators
 import {
   IsNumber,
   IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
+// Types
+import { Entity } from '../general/Entity';
 
 export class ReturnObjectBuilderReturnObject {
   @IsNumber()
@@ -20,5 +22,5 @@ export class ReturnObjectBuilderReturnObject {
 
   @ValidateNested()
   @IsOptional()
-  payload?: ResearchActivity | ResearchActivity[];
+  payload?: Entity | Entity[];
 }

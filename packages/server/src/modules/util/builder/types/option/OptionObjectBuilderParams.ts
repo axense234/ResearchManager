@@ -1,11 +1,11 @@
 // Validators
 import { IsString, IsOptional } from 'class-validator';
-
-export type OptionObjectBuilderParamsEntityType = 'researchActivity';
+// Types
+import { EntityType } from '../general/EntityType';
 
 export class OptionObjectBuilderParams {
   @IsString()
-  entityType: OptionObjectBuilderParamsEntityType;
+  entityType: EntityType;
 
   @IsString()
   @IsOptional()

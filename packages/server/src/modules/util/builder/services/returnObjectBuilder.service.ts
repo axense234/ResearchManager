@@ -1,10 +1,7 @@
 // NestJS
 import { Injectable } from '@nestjs/common';
 // Types
-import {
-  ReturnObjectBuilderParams,
-  ReturnObjectBuilderParamsEntity,
-} from '../types/return/ReturnObjectBuilderParams';
+import { ReturnObjectBuilderParams } from '../types/return/ReturnObjectBuilderParams';
 import { ReturnObjectBuilderReturnObject } from '../types';
 
 @Injectable()
@@ -33,7 +30,7 @@ export class ReturnObjectBuilderService {
       returnObject.notes = additionalNotes;
     }
 
-    returnObject.payload = entity as ReturnObjectBuilderParamsEntity;
+    returnObject.payload = entity;
 
     return returnObject;
   }

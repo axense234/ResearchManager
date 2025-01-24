@@ -2,10 +2,10 @@
 import { Injectable } from '@nestjs/common';
 // Types
 import {
+  EntityType,
   OptionObjectBuilderAllowedOptionValuesReturnObject,
   OptionObjectBuilderIncludeObject,
   OptionObjectBuilderParams,
-  OptionObjectBuilderParamsEntityType,
   OptionObjectBuilderReturnObject,
   OptionObjectBuilderSelectObject,
 } from '../types';
@@ -18,7 +18,7 @@ export class OptionObjectBuilderService {
   constructor() {}
 
   chooseAllowedOptionValues(
-    entityType: OptionObjectBuilderParamsEntityType,
+    entityType: EntityType,
   ): OptionObjectBuilderAllowedOptionValuesReturnObject {
     let allowedIncludeValues: string[] = [];
     let allowedSelectValues: string[] = [];

@@ -1,24 +1,17 @@
 // Prisma
-import { ResearchActivity } from '@prisma/client';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
-
-export type ReturnObjectBuilderParamsActionType =
-  | 'GET SINGLE'
-  | 'GET MULTIPLE'
-  | 'CREATE'
-  | 'UPDATE'
-  | 'DELETE';
-
-export type ReturnObjectBuilderParamsEntity = ResearchActivity;
+// Types
+import { Entity } from '../general/Entity';
+import { ActionType } from '../general/ActionType';
 
 export class ReturnObjectBuilderParams {
   @IsString()
-  actionType: ReturnObjectBuilderParamsActionType;
+  actionType: ActionType;
 
   @IsString()
   message: string;
 
-  entity: ReturnObjectBuilderParamsEntity;
+  entity: Entity | Entity[];
 
   @IsOptional()
   additionalNotes?: string | string[];
