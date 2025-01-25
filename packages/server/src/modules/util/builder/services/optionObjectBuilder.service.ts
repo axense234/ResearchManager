@@ -12,6 +12,8 @@ import {
 // Allowed Option Values
 import { researchActivityAllowedIncludeValues } from 'src/modules/entity/research/activity/data/options/allowedIncludeValues';
 import { researchActivityAllowedSelectValues } from 'src/modules/entity/research/activity/data/options/allowedSelectValues';
+import { researchLogAllowedIncludeValues } from 'src/modules/entity/research/log/data/options/allowedIncludeValues';
+import { researchLogAllowedSelectValues } from 'src/modules/entity/research/log/data/options/allowedSelectValues';
 
 @Injectable()
 export class OptionObjectBuilderService {
@@ -28,6 +30,9 @@ export class OptionObjectBuilderService {
         allowedIncludeValues = researchActivityAllowedIncludeValues;
         allowedSelectValues = researchActivityAllowedSelectValues;
         break;
+      case 'researchLog':
+        allowedIncludeValues = researchLogAllowedIncludeValues;
+        allowedSelectValues = researchLogAllowedSelectValues;
       default:
         break;
     }

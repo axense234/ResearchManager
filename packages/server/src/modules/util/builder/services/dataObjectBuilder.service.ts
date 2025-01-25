@@ -9,6 +9,7 @@ import {
 } from '../types';
 // Data
 import { researchActivityAllowedConnectValues } from 'src/modules/entity/research/activity/data/connect/allowedConnectValues';
+import { researchLogAllowedConnectValues } from 'src/modules/entity/research/log/data/connect/allowedConnectValues';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -22,6 +23,9 @@ export class DataObjectBuilderService {
     switch (entityType) {
       case 'researchActivity':
         allowedConnectValues = researchActivityAllowedConnectValues;
+        break;
+      case 'researchLog':
+        allowedConnectValues = researchLogAllowedConnectValues;
         break;
       default:
         break;
@@ -43,6 +47,13 @@ export class DataObjectBuilderService {
           case 'OTO':
             dataObject[connectValue.entityType] = {
               connect: { id: dto[connectValue.entityType] },
+            };
+            break;
+          case 'MTM':
+            dataObject[connectValue.entityType] = {
+              connect: dto[connectValue.entityType].map((id: string) => {
+                return { id };
+              }),
             };
             break;
           case 'OTM':

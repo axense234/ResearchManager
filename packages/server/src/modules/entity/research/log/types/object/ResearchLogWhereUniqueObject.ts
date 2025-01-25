@@ -1,7 +1,7 @@
 // Validators
 import { IsUUID } from 'class-validator';
 
-export class ResearchActivityWhereUniqueObject {
+export class ResearchLogWhereUniqueObject {
   @IsUUID()
   id: string;
 }

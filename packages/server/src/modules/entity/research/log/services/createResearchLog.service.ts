@@ -4,21 +4,56 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Dtos
 import { CreateResearchLogDto } from '../dto';
+// Types
+import {
+  CreateResearchLogQueryParams,
+  ResearchLogCreateDataObject,
+  ResearchLogCreateObject,
+} from '../types';
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 
 @Injectable()
 export class CreateResearchLogService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async createResearchLog(dto: CreateResearchLogDto) {
+  async createResearchLog(
+    queryParams: CreateResearchLogQueryParams,
+    dto: CreateResearchLogDto,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      const createdResearchLog = await this.prisma.researchLog.create({
-        data: { ...dto },
-      });
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const dataObject = this.objectBuilder.buildDataObject({
+        dto,
+        entityType: 'researchLog',
+      }) as ResearchLogCreateDataObject;
+
+      const createObject: ResearchLogCreateObject = {
+        data: dataObject,
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'researchLog',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        createObject[chosenOptionType] = optionObject;
+      }
+
+      const createdResearchLog =
+        await this.prisma.researchLog.create(createObject);
 
       if (!createdResearchLog) {
         throw new BadRequestException(
@@ -41,10 +76,12 @@ export class CreateResearchLogService {
         type: 'create',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'CREATE',
+        entity: createdResearchLog,
         message: `Successfully created Research Log named ${createdResearchLog.name}!`,
-        researchLog: createdResearchLog,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

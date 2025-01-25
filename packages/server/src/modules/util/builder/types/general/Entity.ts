@@ -1,4 +1,4 @@
 // Entity Types
-import { ResearchActivity } from '@prisma/client';
+import { ResearchActivity, ResearchLog } from '@prisma/client';
 
-export type Entity = ResearchActivity;
+export type Entity = ResearchActivity | ResearchLog;

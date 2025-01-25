@@ -5,12 +5,15 @@ import { ReturnObjectBuilderService } from './returnObjectBuilder.service';
 import { OptionObjectBuilderService } from './optionObjectBuilder.service';
 import { DataObjectBuilderService } from './dataObjectBuilder.service';
 import { QueryObjectBuilderService } from './queryObjectBuilder.service';
+import { OrderByObjectBuilderService } from './orderByObjectBuilder';
 // Types
 import {
   DataObjectBuilderDataObject,
   DataObjectBuilderParams,
   OptionObjectBuilderParams,
   OptionObjectBuilderReturnObject,
+  OrderByObjectBuilderParams,
+  OrderByObjectBuilderReturnObject,
   QueryObjectBuilderParams,
   QueryObjectBuilderReturnObject,
   ReturnObjectBuilderParams,
@@ -24,6 +27,7 @@ export class ObjectBuilderService {
     private optionObjectBuilderService: OptionObjectBuilderService,
     private dataObjectBuilderService: DataObjectBuilderService,
     private queryObjectBuilderService: QueryObjectBuilderService,
+    private orderByObjectBuilderService: OrderByObjectBuilderService,
   ) {}
 
   buildReturnObject({
@@ -71,6 +75,16 @@ export class ObjectBuilderService {
     queryParams,
   }: QueryObjectBuilderParams): QueryObjectBuilderReturnObject {
     return this.queryObjectBuilderService.buildQueryObject({
+      entityType,
+      queryParams,
+    });
+  }
+
+  buildOrderByObject({
+    entityType,
+    queryParams,
+  }: OrderByObjectBuilderParams): OrderByObjectBuilderReturnObject {
+    return this.orderByObjectBuilderService.buildOrderByObject({
       entityType,
       queryParams,
     });

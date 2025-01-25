@@ -15,7 +15,12 @@ export * from './general/Entity';
 export * from './general/EntityType';
 export * from './general/EntityTypePlural';
 export * from './general/ActionType';
+export * from './general/EntityUpdateObject';
 
 export * from './query/QueryObjectBuilderQueryObject';
 export * from './query/QueryObjectBuilderParams';
 export * from './query/QueryObjectBuilderReturnObject';
+
+export * from './orderBy/OrderByObjectBuilderParams';
+export * from './orderBy/OrderByObjectBuilderOrderByObject';
+export * from './orderBy/OrderByObjectBuilderReturnObject';

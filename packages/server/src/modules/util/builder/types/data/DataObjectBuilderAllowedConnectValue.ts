@@ -4,5 +4,5 @@ import { EntityTypePlural } from '../general/EntityTypePlural';
 
 export class DataObjectBuilderAllowedConnectValue {
   entityType: EntityType | EntityTypePlural;
-  rel: 'OTM' | 'OTO';
+  rel: 'OTM' | 'OTO' | 'MTM';
 }

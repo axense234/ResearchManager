@@ -1,14 +1,16 @@
+// Validators
 import { Type } from 'class-transformer';
 import { IsOptional, ValidateNested } from 'class-validator';
+// Types
 import { ResearchActivityIncludeObject } from './ResearchActivityIncludeObject';
 import { ResearchActivitySelectObject } from './ResearchActivitySelectObject';
-import { ResearchActivityWhereCustomObject } from './ResearchActivityWhereObject';
+import { ResearchActivityWhereObject } from './ResearchActivityWhereObject';
 import { ResearchActivityOrderByObject } from './ResearchActivityOrderByObject';
 
 export class ResearchActivityFindManyObject {
-  @Type(() => ResearchActivityWhereCustomObject)
+  @Type(() => ResearchActivityWhereObject)
   @IsOptional()
-  where?: ResearchActivityWhereCustomObject;
+  where?: ResearchActivityWhereObject;
 
   @Type(() => ResearchActivityIncludeObject)
   @IsOptional()

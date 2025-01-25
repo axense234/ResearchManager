@@ -11,6 +11,7 @@ import { CreateResearchActivityDto } from '../dto';
 // Types
 import {
   CreateResearchActivityQueryParams,
+  ResearchActivityCreateDataObject,
   ResearchActivityCreateObject,
 } from '../types';
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
@@ -33,7 +34,7 @@ export class CreateResearchActivityService {
       const dataObject = this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchActivity',
-      });
+      }) as ResearchActivityCreateDataObject;
 
       const createObject: ResearchActivityCreateObject = { data: dataObject };
 

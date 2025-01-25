@@ -1,14 +1,15 @@
 // Validators
 import { Type } from 'class-transformer';
 import {
-  IsDateString,
+  IsUUID,
   IsOptional,
   IsString,
-  IsUUID,
+  IsDateString,
   ValidateNested,
+  IsNumber,
 } from 'class-validator';
 
-export class ResearchActivityWhereObject {
+export class ResearchLogWhereObject {
   @IsUUID()
   @IsOptional()
   id?: string;
@@ -19,11 +20,19 @@ export class ResearchActivityWhereObject {
 
   @IsString()
   @IsOptional()
+  content?: string;
+
+  @IsNumber()
+  @IsOptional()
+  researchPoints?: number;
+
+  @IsString()
+  @IsOptional()
   backgroundColorOrImageSrc?: string;
 
   @IsUUID()
   @IsOptional()
-  userId?: string;
+  researchPhaseId?: string;
 
   @IsUUID()
   @IsOptional()
@@ -37,16 +46,16 @@ export class ResearchActivityWhereObject {
   @IsOptional()
   updatedAt?: Date;
 
-  @Type(() => ResearchActivityWhereObject)
+  @Type(() => ResearchLogWhereObject)
   @IsOptional()
-  AND?: ResearchActivityWhereObject;
+  AND?: ResearchLogWhereObject;
 
-  @Type(() => ResearchActivityWhereObject)
+  @Type(() => ResearchLogWhereObject)
   @IsOptional()
-  NOT?: ResearchActivityWhereObject;
+  NOT?: ResearchLogWhereObject;
 
   @ValidateNested()
-  @Type(() => ResearchActivityWhereObject)
+  @Type(() => ResearchLogWhereObject)
   @IsOptional()
-  OR?: ResearchActivityWhereObject[];
+  OR?: ResearchLogWhereObject[];
 }

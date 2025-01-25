@@ -7,15 +7,19 @@ import { EntityType } from '../general/EntityType';
 export class QueryObjectBuilderParamsQuery {
   @IsString()
   @IsOptional()
-  userId: string;
+  userId?: string;
 
   @IsString()
   @IsOptional()
-  searchByKey: string;
+  researchPhaseId?: string;
 
   @IsString()
   @IsOptional()
-  searchByValue: string;
+  searchByKey?: string;
+
+  @IsString()
+  @IsOptional()
+  searchByValue?: string;
 }
 
 export class QueryObjectBuilderParams {

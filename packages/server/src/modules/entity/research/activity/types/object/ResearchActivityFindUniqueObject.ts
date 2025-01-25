@@ -1,13 +1,14 @@
-// Types
+// Validators
+import { Type } from 'class-transformer';
 import { IsOptional } from 'class-validator';
+// Types
 import { ResearchActivityIncludeObject } from './ResearchActivityIncludeObject';
 import { ResearchActivitySelectObject } from './ResearchActivitySelectObject';
-import { ResearchActivityWhereUniqueCustomObject } from './ResearchActivityWhereUniqueObject';
-import { Type } from 'class-transformer';
+import { ResearchActivityWhereUniqueObject } from './ResearchActivityWhereUniqueObject';
 
 export class ResearchActivityFindUniqueObject {
-  @Type(() => ResearchActivityWhereUniqueCustomObject)
-  where: ResearchActivityWhereUniqueCustomObject;
+  @Type(() => ResearchActivityWhereUniqueObject)
+  where: ResearchActivityWhereUniqueObject;
 
   @Type(() => ResearchActivityIncludeObject)
   @IsOptional()

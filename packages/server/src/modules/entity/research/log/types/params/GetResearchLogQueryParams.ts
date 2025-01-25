@@ -1,0 +1,16 @@
+// Validaotrs
+import { IsString, IsOptional } from 'class-validator';
+
+export class GetResearchLogQueryParams {
+  @IsString()
+  @IsOptional()
+  includeValues: string;
+
+  @IsString()
+  @IsOptional()
+  selectValues: string;
+
+  @IsString()
+  @IsOptional()
+  chosenOptionType: 'include' | 'select';
+}

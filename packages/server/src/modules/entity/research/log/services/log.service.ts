@@ -7,7 +7,12 @@ import { CreateResearchLogService } from './createResearchLog.service';
 import { UpdateResearchLogService } from './updateResearchLog.service';
 import { DeleteResearchLogService } from './deleteResearchLog.service';
 // Types
-import GetResearchLogsQueryParams from '../types/GetResearchLogsQueryParams';
+import {
+  CreateResearchLogQueryParams,
+  DeleteResearchLogQueryParams,
+  GetResearchLogQueryParams,
+  GetResearchLogsQueryParams,
+} from '../types';
 // Dtos
 import { CreateResearchLogDto, UpdateResearchLogDto } from '../dto';
 
@@ -25,12 +30,26 @@ export class ResearchLogService {
     return await this.getResearchLogsService.getResearchLogs(queryParams, url);
   }
 
-  async getResearchLog(researchLogId: string, url: string) {
-    return await this.getResearchLogService.getResearchLog(researchLogId, url);
+  async getResearchLog(
+    queryParams: GetResearchLogQueryParams,
+    researchLogId: string,
+    url: string,
+  ) {
+    return await this.getResearchLogService.getResearchLog(
+      queryParams,
+      researchLogId,
+      url,
+    );
   }
 
-  async createResearchLog(dto: CreateResearchLogDto) {
-    return await this.createResearchLogService.createResearchLog(dto);
+  async createResearchLog(
+    queryParams: CreateResearchLogQueryParams,
+    dto: CreateResearchLogDto,
+  ) {
+    return await this.createResearchLogService.createResearchLog(
+      queryParams,
+      dto,
+    );
   }
 
   async updateResearchLog(dto: UpdateResearchLogDto, researchLogId: string) {
@@ -40,7 +59,13 @@ export class ResearchLogService {
     );
   }
 
-  async deleteResearchLog(researchLogId: string) {
-    return await this.deleteResearchLogService.deleteResearchLog(researchLogId);
+  async deleteResearchLog(
+    queryParams: DeleteResearchLogQueryParams,
+    researchLogId: string,
+  ) {
+    return await this.deleteResearchLogService.deleteResearchLog(
+      queryParams,
+      researchLogId,
+    );
   }
 }

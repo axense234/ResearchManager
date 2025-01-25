@@ -1,5 +1,7 @@
 export type EntityType =
   | 'researchActivity'
+  | 'researchLog'
   | 'researchPhase'
   | 'tag'
-  | 'activityFeed';
+  | 'activityFeed'
+  | 'userForArchivePurposes';

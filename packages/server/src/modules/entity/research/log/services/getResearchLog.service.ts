@@ -6,20 +6,51 @@ import {
 } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Types
+import {
+  GetResearchLogQueryParams,
+  ResearchLogFindUniqueObject,
+} from '../types';
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 
 @Injectable()
 export class GetResearchLogService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getResearchLog(researchLogId: string, url: string) {
+  async getResearchLog(
+    queryParams: GetResearchLogQueryParams,
+    researchLogId: string,
+    url: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!researchLogId) {
         throw new BadRequestException('No Research Log Id provided!');
+      }
+
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const findUniqueObject: ResearchLogFindUniqueObject = {
+        where: { id: researchLogId },
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'researchLog',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        findUniqueObject[chosenOptionType] = optionObject;
       }
 
       const foundResearchLog = await this.redis.getOrSetCache(url, async () => {
@@ -35,10 +66,12 @@ export class GetResearchLogService {
         );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET SINGLE',
         message: `Successfully found Research Log named ${foundResearchLog.name}!`,
-        researchLog: foundResearchLog,
-      };
+        entity: foundResearchLog,
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }
