@@ -10,6 +10,7 @@ import {
 // Data
 import { researchActivityAllowedConnectValues } from 'src/modules/entity/research/activity/data/connect/allowedConnectValues';
 import { researchLogAllowedConnectValues } from 'src/modules/entity/research/log/data/connect/allowedConnectValues';
+import { researchPhaseAllowedConnectValues } from 'src/modules/entity/research/phase/data/connect/allowedConnectValues';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -23,6 +24,9 @@ export class DataObjectBuilderService {
     switch (entityType) {
       case 'researchActivity':
         allowedConnectValues = researchActivityAllowedConnectValues;
+        break;
+      case 'researchPhase':
+        allowedConnectValues = researchPhaseAllowedConnectValues;
         break;
       case 'researchLog':
         allowedConnectValues = researchLogAllowedConnectValues;

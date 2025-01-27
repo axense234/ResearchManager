@@ -4,21 +4,54 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Dtos
 import { CreateResearchPhaseDto } from '../dto';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  CreateResearchPhaseQueryParams,
+  ResearchPhaseCreateDataObject,
+  ResearchPhaseCreateObject,
+} from '../types';
 
 @Injectable()
 export class CreateResearchPhaseService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async createResearchPhase(dto: CreateResearchPhaseDto) {
+  async createResearchPhase(
+    queryParams: CreateResearchPhaseQueryParams,
+    dto: CreateResearchPhaseDto,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      const createdResearchPhase = await this.prisma.researchPhase.create({
-        data: { ...dto },
-      });
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const dataObject = this.objectBuilder.buildDataObject({
+        entityType: 'researchPhase',
+        dto,
+      }) as ResearchPhaseCreateDataObject;
+
+      const createObject: ResearchPhaseCreateObject = { data: dataObject };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'researchPhase',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        createObject[chosenOptionType] = optionObject;
+      }
+
+      const createdResearchPhase =
+        await this.prisma.researchPhase.create(createObject);
 
       if (!createdResearchPhase) {
         throw new BadRequestException(
@@ -41,10 +74,12 @@ export class CreateResearchPhaseService {
         type: 'create',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'CREATE',
+        entity: createdResearchPhase,
         message: `Successfully created Research Phase named ${createdResearchPhase.name}!`,
-        researchPhase: createdResearchPhase,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

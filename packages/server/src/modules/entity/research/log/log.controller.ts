@@ -23,6 +23,7 @@ import {
   DeleteResearchLogQueryParams,
   GetResearchLogQueryParams,
   GetResearchLogsQueryParams,
+  UpdateResearchLogQueryParams,
 } from './types';
 
 @UseGuards(JwtGuard)
@@ -61,10 +62,15 @@ export class ResearchLogController {
 
   @Patch(':researchLogId/update')
   updateResearchLog(
+    @Query() queryParams: UpdateResearchLogQueryParams,
     @Param('researchLogId') researchLogId: string,
     @Body() dto: UpdateResearchLogDto,
   ) {
-    return this.researchLogService.updateResearchLog(dto, researchLogId);
+    return this.researchLogService.updateResearchLog(
+      queryParams,
+      dto,
+      researchLogId,
+    );
   }
 
   @Delete(':researchLogId/delete')

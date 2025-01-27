@@ -1,1 +1,6 @@
-export type EntityTypePlural = 'researchActivities' | 'researchPhases' | 'tags';
+export type EntityTypePlural =
+  | 'researchActivities'
+  | 'researchPhases'
+  | 'tags'
+  | 'researchLogs'
+  | 'researchSessions';

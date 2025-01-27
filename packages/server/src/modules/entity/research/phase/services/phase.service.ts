@@ -6,10 +6,16 @@ import { GetResearchPhaseService } from './getResearchPhase.service';
 import { CreateResearchPhaseService } from './createResearchPhase.service';
 import { UpdateResearchPhaseService } from './updateResearchPhase.service';
 import { DeleteResearchPhaseService } from './deleteResearchPhase.service';
-// Types
-import GetResearchPhasesQueryParams from '../types/GetResearchPhasesQueryParams';
 // Dtos
 import { CreateResearchPhaseDto, UpdateResearchPhaseDto } from '../dto';
+// Types
+import {
+  CreateResearchPhaseQueryParams,
+  DeleteResearchPhaseQueryParams,
+  GetResearchPhaseQueryParams,
+  GetResearchPhasesQueryParams,
+  UpdateResearchPhaseQueryParams,
+} from '../types';
 
 @Injectable()
 export class ResearchPhaseService {
@@ -31,29 +37,46 @@ export class ResearchPhaseService {
     );
   }
 
-  async getResearchPhase(researchPhaseId: string, url: string) {
+  async getResearchPhase(
+    queryParams: GetResearchPhaseQueryParams,
+    researchPhaseId: string,
+    url: string,
+  ) {
     return await this.getResearchPhaseService.getResearchPhase(
+      queryParams,
       researchPhaseId,
       url,
     );
   }
 
-  async createResearchPhase(dto: CreateResearchPhaseDto) {
-    return await this.createResearchPhaseService.createResearchPhase(dto);
+  async createResearchPhase(
+    queryParams: CreateResearchPhaseQueryParams,
+    dto: CreateResearchPhaseDto,
+  ) {
+    return await this.createResearchPhaseService.createResearchPhase(
+      queryParams,
+      dto,
+    );
   }
 
   async updateResearchPhase(
+    queryParams: UpdateResearchPhaseQueryParams,
     dto: UpdateResearchPhaseDto,
     researchPhaseId: string,
   ) {
     return await this.updateResearchPhaseService.updateResearchPhase(
+      queryParams,
       dto,
       researchPhaseId,
     );
   }
 
-  async deleteResearchPhase(researchPhaseId: string) {
+  async deleteResearchPhase(
+    queryParams: DeleteResearchPhaseQueryParams,
+    researchPhaseId: string,
+  ) {
     return await this.deleteResearchPhaseService.deleteResearchPhase(
+      queryParams,
       researchPhaseId,
     );
   }

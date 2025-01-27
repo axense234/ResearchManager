@@ -11,6 +11,10 @@ export class QueryObjectBuilderParamsQuery {
 
   @IsString()
   @IsOptional()
+  researchActivityId?: string;
+
+  @IsString()
+  @IsOptional()
   researchPhaseId?: string;
 
   @IsString()

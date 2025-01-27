@@ -8,26 +8,56 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  GetResearchPhaseQueryParams,
+  ResearchPhaseFindUniqueObject,
+} from '../types';
 
 @Injectable()
 export class GetResearchPhaseService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getResearchPhase(researchPhaseId: string, url: string) {
+  async getResearchPhase(
+    queryParams: GetResearchPhaseQueryParams,
+    researchPhaseId: string,
+    url: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!researchPhaseId) {
         throw new BadRequestException('No Research Activity Id provided.');
       }
 
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const findUniqueObject: ResearchPhaseFindUniqueObject = {
+        where: { id: researchPhaseId },
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'researchPhase',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        findUniqueObject[chosenOptionType] = optionObject;
+      }
+
       const foundResearchPhase = await this.redis.getOrSetCache(
         url,
         async () => {
-          const researchPhase = await this.prisma.researchPhase.findUnique({
-            where: { id: researchPhaseId },
-          });
+          const researchPhase =
+            await this.prisma.researchPhase.findUnique(findUniqueObject);
           return researchPhase;
         },
       );
@@ -38,10 +68,12 @@ export class GetResearchPhaseService {
         );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET SINGLE',
+        entity: foundResearchPhase,
         message: `Successfully found Research Phase named ${foundResearchPhase.name}!`,
-        researchPhase: foundResearchPhase,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

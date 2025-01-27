@@ -10,6 +10,7 @@ import {
 // Data
 import { researchActivitiesAllowedSearchByKeyValues } from 'src/modules/entity/research/activity/data/options/allowedSearchByKeyValues';
 import { researchLogsAllowedSearchByKeyValues } from 'src/modules/entity/research/log/data/options/allowedSearchByKeyValues';
+import { researchPhaseAllowedSearchByKeyValues } from 'src/modules/entity/research/phase/data/options/allowedSearchByKeyValues';
 
 @Injectable()
 export class QueryObjectBuilderService {
@@ -20,6 +21,9 @@ export class QueryObjectBuilderService {
     switch (entityType) {
       case 'researchActivity':
         allowedSearchByKeyValues = researchActivitiesAllowedSearchByKeyValues;
+        break;
+      case 'researchPhase':
+        allowedSearchByKeyValues = researchPhaseAllowedSearchByKeyValues;
         break;
       case 'researchLog':
         allowedSearchByKeyValues = researchLogsAllowedSearchByKeyValues;
@@ -34,7 +38,13 @@ export class QueryObjectBuilderService {
     queryParams,
   }: QueryObjectBuilderParams): QueryObjectBuilderReturnObject {
     let additionalNotes: string = '';
-    const { searchByKey, searchByValue, userId, researchPhaseId } = queryParams;
+    const {
+      searchByKey,
+      searchByValue,
+      userId,
+      researchPhaseId,
+      researchActivityId,
+    } = queryParams;
     const allowedSearchByKeyValues =
       this.chooseAllowedSearchByKeyValues(entityType);
     const queryObject: QueryObjectBuilderQueryObject = {};
@@ -45,6 +55,10 @@ export class QueryObjectBuilderService {
 
     if (researchPhaseId) {
       queryObject.researchPhaseId = researchPhaseId;
+    }
+
+    if (researchActivityId) {
+      queryObject.researchActivityId = researchActivityId;
     }
 
     if (!searchByKey && searchByValue) {

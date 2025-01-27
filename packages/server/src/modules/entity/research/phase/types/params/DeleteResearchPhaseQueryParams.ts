@@ -1,7 +1,7 @@
 // Validators
-import { IsOptional, IsString } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
-export class DeleteResearchActivityQueryParams {
+export class DeleteResearchPhaseQueryParams {
   @IsString()
   @IsOptional()
   includeValues: string;

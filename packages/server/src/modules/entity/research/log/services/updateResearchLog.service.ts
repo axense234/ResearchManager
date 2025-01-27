@@ -8,36 +8,73 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Dtos
 import { UpdateResearchLogDto } from '../dto';
+// Types
+import {
+  ResearchLogUpdateDataObject,
+  ResearchLogUpdateObject,
+  UpdateResearchLogQueryParams,
+} from '../types';
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 
 @Injectable()
 export class UpdateResearchLogService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async updateResearchLog(dto: UpdateResearchLogDto, researchLogId: string) {
+  async updateResearchLog(
+    queryParams: UpdateResearchLogQueryParams,
+    dto: UpdateResearchLogDto,
+    researchLogId: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!researchLogId) {
         throw new BadRequestException('Please provide a Research Log Id!');
+      }
+
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const dataObject = this.objectBuilder.buildDataObject({
+        dto,
+        entityType: 'researchLog',
+      }) as ResearchLogUpdateDataObject;
+
+      const updateObject: ResearchLogUpdateObject = {
+        where: { id: researchLogId },
+        data: dataObject,
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'researchLog',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        updateObject[chosenOptionType] = optionObject;
       }
 
       const foundResearchLogToBeUpdated =
         await this.prisma.researchLog.findUnique({
           where: { id: researchLogId },
         });
+
       if (!foundResearchLogToBeUpdated) {
         throw new NotFoundException(
           'Could not find any Research Log to be updated with the provided information.',
         );
       }
 
-      const updatedResearchLog = await this.prisma.researchLog.update({
-        where: { id: researchLogId },
-        data: { ...dto },
-      });
+      const updatedResearchLog =
+        await this.prisma.researchLog.update(updateObject);
 
       if (!updatedResearchLog) {
         throw new BadRequestException(
@@ -60,10 +97,12 @@ export class UpdateResearchLogService {
         type: 'modify',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'UPDATE',
+        entity: updatedResearchLog,
         message: `Successfully updated Research Log named ${updatedResearchLog.name}!`,
-        researchLog: updatedResearchLog,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

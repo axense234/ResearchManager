@@ -8,18 +8,50 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  DeleteResearchPhaseQueryParams,
+  ResearchPhaseFindUniqueObject,
+} from '../types';
 
 @Injectable()
 export class DeleteResearchPhaseService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async deleteResearchPhase(researchPhaseId: string) {
+  async deleteResearchPhase(
+    queryParams: DeleteResearchPhaseQueryParams,
+    researchPhaseId: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!researchPhaseId) {
         throw new BadRequestException('No Research Activity Id provided.');
+      }
+
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const deleteObject: ResearchPhaseFindUniqueObject = {
+        where: {
+          id: researchPhaseId,
+        },
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'researchPhase',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        deleteObject[chosenOptionType] = optionObject;
       }
 
       const foundResearchPhaseToBeDeleted =
@@ -33,9 +65,8 @@ export class DeleteResearchPhaseService {
         );
       }
 
-      const deletedResearchPhase = await this.prisma.researchPhase.delete({
-        where: { id: researchPhaseId },
-      });
+      const deletedResearchPhase =
+        await this.prisma.researchPhase.delete(deleteObject);
 
       if (!deletedResearchPhase) {
         throw new BadRequestException(
@@ -58,10 +89,12 @@ export class DeleteResearchPhaseService {
         type: 'modify',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'DELETE',
+        entity: deletedResearchPhase,
         message: `Successfully deleted Research Phase named ${deletedResearchPhase.name}!`,
-        researchPhase: deletedResearchPhase,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

@@ -3,6 +3,6 @@ import { DataObjectBuilderAllowedConnectValue } from 'src/modules/util/builder/t
 export const researchActivityAllowedConnectValues: DataObjectBuilderAllowedConnectValue[] =
   [
     { entityType: 'researchPhases', rel: 'OTM' },
-    { entityType: 'tags', rel: 'OTM' },
+    { entityType: 'tags', rel: 'MTM' },
     { entityType: 'activityFeed', rel: 'OTO' },
   ];

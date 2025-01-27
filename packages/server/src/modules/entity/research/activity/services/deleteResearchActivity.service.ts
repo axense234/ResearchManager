@@ -11,11 +11,11 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   DeleteResearchActivityQueryParams,
   ResearchActivityFindUniqueObject,
 } from '../types';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 
 @Injectable()
 export class DeleteResearchActivityService {

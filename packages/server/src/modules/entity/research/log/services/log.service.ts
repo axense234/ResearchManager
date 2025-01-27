@@ -12,6 +12,7 @@ import {
   DeleteResearchLogQueryParams,
   GetResearchLogQueryParams,
   GetResearchLogsQueryParams,
+  UpdateResearchLogQueryParams,
 } from '../types';
 // Dtos
 import { CreateResearchLogDto, UpdateResearchLogDto } from '../dto';
@@ -52,8 +53,13 @@ export class ResearchLogService {
     );
   }
 
-  async updateResearchLog(dto: UpdateResearchLogDto, researchLogId: string) {
+  async updateResearchLog(
+    queryParams: UpdateResearchLogQueryParams,
+    dto: UpdateResearchLogDto,
+    researchLogId: string,
+  ) {
     return await this.updateResearchLogService.updateResearchLog(
+      queryParams,
       dto,
       researchLogId,
     );

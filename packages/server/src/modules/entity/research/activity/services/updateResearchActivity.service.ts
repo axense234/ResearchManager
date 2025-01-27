@@ -14,6 +14,7 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 import { UpdateResearchActivityDto } from '../dto';
 // Types
 import {
+  ResearchActivityUpdateDataObject,
   ResearchActivityUpdateObject,
   UpdateResearchActivityQueryParams,
 } from '../types';
@@ -42,7 +43,7 @@ export class UpdateResearchActivityService {
       const dataObject = this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchActivity',
-      });
+      }) as ResearchActivityUpdateDataObject;
 
       const updateObject: ResearchActivityUpdateObject = {
         where: { id: researchActivityId },

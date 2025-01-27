@@ -10,6 +10,7 @@ import {
 // Data
 import { researchActivitiesAllowedSortByKeysValues } from 'src/modules/entity/research/activity/data/options/allowedSortByKeysValues';
 import { researchLogsAllowedSortByKeysValues } from 'src/modules/entity/research/log/data/options/allowedSortByKeysValues';
+import { researchPhaseAllowedSortByKeysValues } from 'src/modules/entity/research/phase/data/options/allowedSortByKeysValues';
 
 @Injectable()
 export class OrderByObjectBuilderService {
@@ -21,6 +22,8 @@ export class OrderByObjectBuilderService {
       case 'researchActivity':
         allowedSortByKeysValues = researchActivitiesAllowedSortByKeysValues;
         break;
+      case 'researchPhase':
+        allowedSortByKeysValues = researchPhaseAllowedSortByKeysValues;
       case 'researchLog':
         allowedSortByKeysValues = researchLogsAllowedSortByKeysValues;
       default:
@@ -59,7 +62,12 @@ export class OrderByObjectBuilderService {
         additionalNotes = `Given sortByOrders are not valid.`;
       } else {
         filteredSortByKeysArray.forEach((sortByKey, index) => {
-          if (sortByKey === 'tags' || sortByKey === 'researchPhases') {
+          if (
+            sortByKey === 'tags' ||
+            sortByKey === 'researchPhases' ||
+            sortByKey === 'researchSessions' ||
+            sortByKey === 'researchLogs'
+          ) {
             orderByObject.push({
               [sortByKey]: {
                 _count: sortByOrdersArray[index] as 'asc' | 'desc',

@@ -1,9 +1,10 @@
-// Types
+// Validators
+import { Type } from 'class-transformer';
 import { IsOptional } from 'class-validator';
+// Types
 import { ResearchActivityIncludeObject } from './ResearchActivityIncludeObject';
 import { ResearchActivitySelectObject } from './ResearchActivitySelectObject';
 import { ResearchActivityCreateDataObject } from './ResearchActivityCreateDataObject';
-import { Type } from 'class-transformer';
 
 export class ResearchActivityCreateObject {
   @Type(() => ResearchActivityCreateDataObject)
