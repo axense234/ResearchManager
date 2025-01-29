@@ -6,10 +6,16 @@ import { GetResearchSessionService } from './getResearchSession.service';
 import { CreateResearchSessionService } from './createResearchSession.service';
 import { UpdateResearchSessionService } from './updateResearchSession.service';
 import { DeleteResearchSessionService } from './deleteResearchSession.service';
-// Types
-import GetResearchSessionsQueryParams from '../types/GetResearchSessionsQueryParams';
 // Dtos
 import { CreateResearchSessionDto, UpdateResearchSessionDto } from '../dto';
+// Types
+import {
+  CreateResearchSessionQueryParams,
+  DeleteResearchSessionQueryParams,
+  GetResearchSessionQueryParams,
+  GetResearchSessionsQueryParams,
+  UpdateResearchSessionQueryParams,
+} from '../types';
 
 @Injectable()
 export class ResearchSessionService {
@@ -31,29 +37,46 @@ export class ResearchSessionService {
     );
   }
 
-  async getResearchSession(researchSessionId: string, url: string) {
+  async getResearchSession(
+    queryParams: GetResearchSessionQueryParams,
+    researchSessionId: string,
+    url: string,
+  ) {
     return await this.getResearchSessionService.getResearchSession(
+      queryParams,
       researchSessionId,
       url,
     );
   }
 
-  async createResearchSession(dto: CreateResearchSessionDto) {
-    return await this.createResearchSessionService.createResearchSession(dto);
+  async createResearchSession(
+    queryParams: CreateResearchSessionQueryParams,
+    dto: CreateResearchSessionDto,
+  ) {
+    return await this.createResearchSessionService.createResearchSession(
+      queryParams,
+      dto,
+    );
   }
 
   async updateResearchSession(
+    queryParams: UpdateResearchSessionQueryParams,
     dto: UpdateResearchSessionDto,
     researchSessionId: string,
   ) {
     return await this.updateResearchSessionService.updateResearchSession(
+      queryParams,
       dto,
       researchSessionId,
     );
   }
 
-  async deleteResearchSession(researchSessionId: string) {
+  async deleteResearchSession(
+    queryParams: DeleteResearchSessionQueryParams,
+    researchSessionId: string,
+  ) {
     return await this.deleteResearchSessionService.deleteResearchSession(
+      queryParams,
       researchSessionId,
     );
   }

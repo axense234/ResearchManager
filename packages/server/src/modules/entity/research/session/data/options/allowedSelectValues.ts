@@ -1,0 +1,17 @@
+export const researchSessionAllowedSelectValues = [
+  'backgroundColorOrImageSrc',
+  'content',
+  'createdAt',
+  'updatedAt',
+  'name',
+  'researchPoints',
+  'id',
+  'imagesSrc',
+  'researchPhase',
+  'researchPhaseId',
+  'tags',
+  'userIdForArchivePurposes',
+  'userForArchivePurposes',
+  'currentStatusDate',
+  'currentStatusType',
+];

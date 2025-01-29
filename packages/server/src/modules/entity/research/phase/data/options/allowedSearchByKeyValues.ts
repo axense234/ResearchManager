@@ -1,4 +1,4 @@
-export const researchPhaseAllowedSearchByKeyValues = [
+export const researchPhasesAllowedSearchByKeyValues = [
   'id',
   'name',
   'backgroundColorOrImageSrc',

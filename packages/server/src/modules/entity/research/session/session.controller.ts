@@ -13,12 +13,18 @@ import {
 } from '@nestjs/common';
 // Services
 import { ResearchSessionService } from './services/session.service';
-// Types
-import GetResearchSessionsQueryParams from './types/GetResearchSessionsQueryParams';
 // Custom Guard
 import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dtos
 import { CreateResearchSessionDto, UpdateResearchSessionDto } from './dto';
+// Types
+import {
+  CreateResearchSessionQueryParams,
+  DeleteResearchSessionQueryParams,
+  GetResearchSessionQueryParams,
+  GetResearchSessionsQueryParams,
+  UpdateResearchSessionQueryParams,
+} from './types';
 
 @UseGuards(JwtGuard)
 @Controller('researchSessions')
@@ -38,33 +44,46 @@ export class ResearchSessionController {
 
   @Get(':researchSessionId')
   getResearchSession(
+    @Query() queryParams: GetResearchSessionQueryParams,
     @Param('researchSessionId') researchSessionId: string,
     @Req() req: Request,
   ) {
     return this.researchSessionService.getResearchSession(
+      queryParams,
       researchSessionId,
       req.url,
     );
   }
 
   @Post('create')
-  createResearchSession(@Body() dto: CreateResearchSessionDto) {
-    return this.researchSessionService.createResearchSession(dto);
+  createResearchSession(
+    @Query() queryParams: CreateResearchSessionQueryParams,
+    @Body() dto: CreateResearchSessionDto,
+  ) {
+    return this.researchSessionService.createResearchSession(queryParams, dto);
   }
 
   @Patch(':researchSessionId/update')
   updateResearchSession(
+    @Query() queryParams: UpdateResearchSessionQueryParams,
     @Param('researchSessionId') researchSessionId: string,
     @Body() dto: UpdateResearchSessionDto,
   ) {
     return this.researchSessionService.updateResearchSession(
+      queryParams,
       dto,
       researchSessionId,
     );
   }
 
   @Delete(':researchSessionId/delete')
-  deleteResearchSession(@Param('researchSessionId') researchSessionId: string) {
-    return this.researchSessionService.deleteResearchSession(researchSessionId);
+  deleteResearchSession(
+    @Query() queryParams: DeleteResearchSessionQueryParams,
+    @Param('researchSessionId') researchSessionId: string,
+  ) {
+    return this.researchSessionService.deleteResearchSession(
+      queryParams,
+      researchSessionId,
+    );
   }
 }

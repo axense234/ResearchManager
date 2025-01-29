@@ -11,6 +11,7 @@ import {
   ResearchPhaseCreateDataObject,
   ResearchPhaseUpdateDataObject,
 } from 'src/modules/entity/research/phase/types';
+import { ResearchSessionCreateDataObject } from 'src/modules/entity/research/session/types';
 
 export type DataObjectBuilderDataObject =
   | ResearchActivityCreateDataObject
@@ -18,4 +19,5 @@ export type DataObjectBuilderDataObject =
   | ResearchLogCreateDataObject
   | ResearchLogUpdateDataObject
   | ResearchPhaseCreateDataObject
-  | ResearchPhaseUpdateDataObject;
+  | ResearchPhaseUpdateDataObject
+  | ResearchSessionCreateDataObject;

@@ -1,17 +1,23 @@
 // NestJS
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Type
-import GetResearchSessionsQueryParams from '../types/GetResearchSessionsQueryParams';
+import {
+  GetResearchSessionsQueryParams,
+  ResearchSessionFindManyObject,
+} from '../types';
 
 @Injectable()
 export class GetResearchSessionsService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
   async getResearchSessions(
@@ -19,36 +25,85 @@ export class GetResearchSessionsService {
     url: string,
   ) {
     try {
+      const {
+        researchPhaseId,
+        searchByKey,
+        searchByValue,
+        sortByKeys,
+        sortByOrders,
+        includeValues,
+        selectValues,
+        chosenOptionType,
+      } = queryParams;
+
+      const additionalNotes: string[] = [];
+
+      const findManyObject: ResearchSessionFindManyObject = {};
+
+      const { optionObject, additionalNotes: additionalOptionNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'researchSession',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (additionalOptionNotes) {
+        additionalNotes.push(additionalOptionNotes);
+      }
+
+      if (chosenOptionType && optionObject) {
+        findManyObject[chosenOptionType] = optionObject;
+      }
+
+      const { queryObject, additionalNotes: additionalQueryNotes } =
+        this.objectBuilder.buildQueryObject({
+          entityType: 'researchSession',
+          queryParams: { searchByKey, searchByValue, researchPhaseId },
+        });
+
+      if (additionalQueryNotes) {
+        additionalNotes.push(additionalQueryNotes);
+      }
+
+      findManyObject.where = queryObject;
+
+      const { orderByObject, additionalNotes: additionalOrderByNotes } =
+        this.objectBuilder.buildOrderByObject({
+          entityType: 'researchSession',
+          queryParams: { sortByKeys, sortByOrders },
+        });
+
+      if (additionalOrderByNotes) {
+        additionalNotes.push(additionalOrderByNotes);
+      }
+
+      if (orderByObject.length > 0) {
+        findManyObject.orderBy = orderByObject;
+      }
+
       const foundResearchSessions = await this.redis.getOrSetCache(
         url,
         async () => {
-          const researchSessions = await this.prisma.researchSession.findMany({
-            where: {
-              AND: [
-                { userIdForArchivePurposes: queryParams.userId },
-                { researchPhaseId: queryParams.researchPhaseId },
-              ],
-            },
-          });
-
+          const researchSessions =
+            await this.prisma.researchSession.findMany(findManyObject);
           return researchSessions;
         },
       );
 
       if (foundResearchSessions.length < 1) {
-        return {
-          nbHits: 0,
-          message:
-            'Could not find any Research Sessions matching the query params.',
-          researchSessions: [],
-        };
+        throw new NotFoundException(
+          `Could not find any Research Sessions given the input.`,
+        );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET MULTIPLE',
+        entity: foundResearchSessions,
         nbHits: foundResearchSessions.length,
         message: `Successfully found ${foundResearchSessions.length} Research Sessions using the given query params.`,
-        researchSessions: foundResearchSessions,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

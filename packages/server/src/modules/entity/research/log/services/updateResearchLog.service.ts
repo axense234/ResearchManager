@@ -13,12 +13,12 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Dtos
 import { UpdateResearchLogDto } from '../dto';
 // Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   ResearchLogUpdateDataObject,
   ResearchLogUpdateObject,
   UpdateResearchLogQueryParams,
 } from '../types';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 
 @Injectable()
 export class UpdateResearchLogService {

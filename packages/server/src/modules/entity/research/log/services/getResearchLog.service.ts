@@ -11,11 +11,11 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   GetResearchLogQueryParams,
   ResearchLogFindUniqueObject,
 } from '../types';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 
 @Injectable()
 export class GetResearchLogService {
@@ -54,9 +54,8 @@ export class GetResearchLogService {
       }
 
       const foundResearchLog = await this.redis.getOrSetCache(url, async () => {
-        const researchLog = await this.prisma.researchLog.findUnique({
-          where: { id: researchLogId },
-        });
+        const researchLog =
+          await this.prisma.researchLog.findUnique(findUniqueObject);
         return researchLog;
       });
 
