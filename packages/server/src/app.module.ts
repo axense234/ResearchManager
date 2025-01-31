@@ -13,7 +13,7 @@ import { ResearchPhaseModule } from './modules/entity/research/phase/phase.modul
 import { ResearchLogModule } from './modules/entity/research/log/log.module';
 import { ResearchSessionModule } from './modules/entity/research/session/session.module';
 import { TagModule } from './modules/entity/tag/tag.module';
-import { SettingModule } from './modules/entity/setting/setting.module';
+import { SettingModule } from './modules/entity/settings/settings.module';
 import { ActivityFeedModule } from './modules/entity/activity/feed/feed.module';
 import { ActivityDayModule } from './modules/entity/activity/day/day.module';
 import { ActivityLogModule } from './modules/entity/activity/log/log.module';

@@ -16,8 +16,9 @@ model User {
   profileImageSrc    String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365178/Research%20Manager/users/profileImages/abstract-user-flat-4_fimqzi.png")
   backgroundImageSrc String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365146/Research%20Manager/users/backgroundImages/signupwallpaper_der2zw.jpg")
 
+  settings Settings?
+
   activityFeed       ActivityFeed[]
-  settings           Setting[]
   tags               Tag[]
   researchActivities ResearchActivity[]
 
@@ -31,15 +32,19 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model Setting {
-  id    String @id @default(uuid())
-  label String
-  value String
+model Settings {
+  id String @id @default(uuid())
+
+  sidebarPosition             SettingsSidebarPosition @default(LEFT)
+  warningOverlayTimeInSeconds Int                     @default(10)
+  purgeDirectly               Boolean                 @default(false)
+  allowNotifications          Boolean                 @default(false)
 
   user   User   @relation(fields: [userId], references: [id])
-  userId String
+  userId String @unique
 
   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 }
 
 model Tag {
@@ -149,9 +154,8 @@ model ActivityFeed {
   id   String           @id @default(uuid())
   type ActivityFeedType @default(USER)
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
+  user               User?             @relation(fields: [userId], references: [id])
+  userId             String?           @unique
   researchActivity   ResearchActivity? @relation(fields: [researchActivityId], references: [id])
   researchActivityId String?           @unique
 
@@ -180,6 +184,11 @@ model ActivityLog {
   messageValues String[]        @default([])
 
   dayActivities ActivityDay[]
+}
+
+enum SettingsSidebarPosition {
+  LEFT
+  RIGHT
 }
 
 enum ResearchSessionStatusType {

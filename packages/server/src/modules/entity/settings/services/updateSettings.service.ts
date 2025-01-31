@@ -8,51 +8,51 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Dto
+import { UpdateSettingsDto } from '../dto';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
-// Dtos
-import { UpdateResearchActivityDto } from '../dto';
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
-  ResearchActivityUpdateDataObject,
-  ResearchActivityUpdateObject,
-  UpdateResearchActivityQueryParams,
+  SettingsUpdateDataObject,
+  SettingsUpdateObject,
+  UpdateSettingsQueryParams,
 } from '../types';
 
 @Injectable()
-export class UpdateResearchActivityService {
+export class UpdateSettingsService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
     private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async updateResearchActivity(
-    queryParams: UpdateResearchActivityQueryParams,
-    dto: UpdateResearchActivityDto,
-    researchActivityId: string,
+  async updateSettings(
+    queryParams: UpdateSettingsQueryParams,
+    dto: UpdateSettingsDto,
+    settingsId: string,
   ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      if (!researchActivityId) {
-        throw new BadRequestException('No Research Activity Id provided.');
+      if (!settingsId) {
+        throw new BadRequestException('No Settings Id provided.');
       }
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
       const dataObject = this.objectBuilder.buildDataObject({
         dto,
-        entityType: 'researchActivity',
-      }) as ResearchActivityUpdateDataObject;
+        entityType: 'settings',
+      }) as SettingsUpdateDataObject;
 
-      const updateObject: ResearchActivityUpdateObject = {
-        where: { id: researchActivityId },
+      const updateObject: SettingsUpdateObject = {
+        where: { id: settingsId },
         data: dataObject,
       };
 
       const { optionObject, additionalNotes } =
         this.objectBuilder.buildOptionObject({
-          entityType: 'researchActivity',
+          entityType: 'settings',
           chosenOptionType,
           includeValues,
           selectValues,
@@ -62,38 +62,39 @@ export class UpdateResearchActivityService {
         updateObject[chosenOptionType] = optionObject;
       }
 
-      const foundResearchActivityToBeUpdated =
-        await this.prisma.researchActivity.findUnique({
-          where: { id: researchActivityId },
-        });
+      const foundSettingsToBeUpdated = await this.prisma.settings.findUnique({
+        where: { id: settingsId },
+      });
 
-      if (!foundResearchActivityToBeUpdated) {
+      if (!foundSettingsToBeUpdated) {
         throw new NotFoundException(
-          'Could not find any Research Activities to be updated with the given id.',
+          'Could not find Settings to be updated with the provided data.',
         );
       }
 
-      const updatedResearchActivity =
-        await this.prisma.researchActivity.update(updateObject);
+      const updatedSettings = await this.prisma.settings.update(updateObject);
 
-      if (!updatedResearchActivity) {
+      if (!updatedSettings) {
         throw new BadRequestException(
-          'Could not update Research Activity with the provided information.',
+          'Could not update Settings with the provided data.',
         );
       }
 
       await this.redis.deleteAllCacheThatIncludesGivenKeys({
-        base: 'researchActivities',
+        base: 'settings',
         specifiers: [
-          { label: 'userId', value: updatedResearchActivity.userId },
+          {
+            label: 'userId',
+            value: updatedSettings.userId,
+          },
         ],
         type: 'modify',
       });
 
       return this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
-        entity: updatedResearchActivity,
-        message: `Successfully updated Research Activity named ${updatedResearchActivity.name}!`,
+        entity: updatedSettings,
+        message: `Successfully updated Settings for the user: ${updatedSettings.userId}!`,
         additionalNotes,
       });
     } catch (error) {

@@ -1,7 +1,7 @@
 // Validators
-import { IsOptional, IsString } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
-export class CreateResearchActivityQueryParams {
+export class CreateSettingsQueryParams {
   @IsString()
   @IsOptional()
   includeValues: string;

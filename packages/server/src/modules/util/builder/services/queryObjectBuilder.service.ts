@@ -12,6 +12,7 @@ import { researchActivitiesAllowedSearchByKeyValues } from 'src/modules/entity/r
 import { researchLogsAllowedSearchByKeyValues } from 'src/modules/entity/research/log/data/options/allowedSearchByKeyValues';
 import { researchPhasesAllowedSearchByKeyValues } from 'src/modules/entity/research/phase/data/options/allowedSearchByKeyValues';
 import { researchSessionsAllowedSearchByKeyValues } from 'src/modules/entity/research/session/data/options/allowedSearchByKeyValues';
+import { settingsAllowedSearchByKeyValues } from 'src/modules/entity/settings/data/options/allowedSearchByKeyValues';
 
 @Injectable()
 export class QueryObjectBuilderService {
@@ -31,6 +32,10 @@ export class QueryObjectBuilderService {
         break;
       case 'researchLog':
         allowedSearchByKeyValues = researchLogsAllowedSearchByKeyValues;
+        break;
+      case 'settings':
+        allowedSearchByKeyValues = settingsAllowedSearchByKeyValues;
+        break;
       default:
         break;
     }

@@ -3,4 +3,6 @@ export type EntityTypePlural =
   | 'researchPhases'
   | 'tags'
   | 'researchLogs'
-  | 'researchSessions';
+  | 'researchSessions'
+  | 'settings'
+  | 'users';

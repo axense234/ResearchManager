@@ -12,39 +12,36 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
-import {
-  GetResearchActivityQueryParams,
-  ResearchActivityFindUniqueObject,
-} from '../types';
+import { GetSettingsQueryParams, SettingsFindUniqueObject } from '../types';
 
 @Injectable()
-export class GetResearchActivityService {
+export class GetSettingsService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
     private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getResearchActivity(
-    queryParams: GetResearchActivityQueryParams,
-    researchActivityId: string,
+  async getSettings(
+    queryParams: GetSettingsQueryParams,
+    settingsId: string,
     url: string,
   ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      if (!researchActivityId) {
-        throw new BadRequestException('No Research Activity Id provided.');
+      if (!settingsId) {
+        throw new BadRequestException('No Settings Id provided.');
       }
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const findUniqueObject: ResearchActivityFindUniqueObject = {
-        where: { id: researchActivityId },
+      const findUniqueObject: SettingsFindUniqueObject = {
+        where: { id: settingsId },
       };
 
       const { optionObject, additionalNotes } =
         this.objectBuilder.buildOptionObject({
           chosenOptionType,
-          entityType: 'researchActivity',
+          entityType: 'settings',
           includeValues,
           selectValues,
         });
@@ -53,25 +50,22 @@ export class GetResearchActivityService {
         findUniqueObject[chosenOptionType] = optionObject;
       }
 
-      const foundResearchActivity = await this.redis.getOrSetCache(
-        url,
-        async () => {
-          const researchActivity =
-            await this.prisma.researchActivity.findUnique(findUniqueObject);
-          return researchActivity;
-        },
-      );
+      const foundSettings = await this.redis.getOrSetCache(url, async () => {
+        const settings =
+          await this.prisma.settings.findUnique(findUniqueObject);
+        return settings;
+      });
 
-      if (!foundResearchActivity) {
+      if (!foundSettings) {
         throw new NotFoundException(
-          'Could not find any Research Activity with the provided id.',
+          'Could not find any Settings with the provided data.',
         );
       }
 
       return this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
-        message: `Successfully found Research Activity: ${foundResearchActivity.name}!`,
-        entity: foundResearchActivity,
+        entity: foundSettings,
+        message: `Successfully found Settings for the user: ${foundSettings.userId}!`,
         additionalNotes,
       });
     } catch (error) {

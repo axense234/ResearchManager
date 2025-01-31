@@ -18,6 +18,8 @@ import { researchPhaseAllowedIncludeValues } from 'src/modules/entity/research/p
 import { researchPhaseAllowedSelectValues } from 'src/modules/entity/research/phase/data/options/allowedSelectValues';
 import { researchSessionAllowedIncludeValues } from 'src/modules/entity/research/session/data/options/allowedIncludeValues';
 import { researchSessionAllowedSelectValues } from 'src/modules/entity/research/session/data/options/allowedSelectValues';
+import { settingsAllowedIncludeValues } from 'src/modules/entity/settings/data/options/allowedIncludeValues';
+import { settingsAllowedSelectValues } from 'src/modules/entity/settings/data/options/allowedSelectValues';
 
 @Injectable()
 export class OptionObjectBuilderService {
@@ -45,6 +47,11 @@ export class OptionObjectBuilderService {
       case 'researchLog':
         allowedIncludeValues = researchLogAllowedIncludeValues;
         allowedSelectValues = researchLogAllowedSelectValues;
+        break;
+      case 'settings':
+        allowedIncludeValues = settingsAllowedIncludeValues;
+        allowedSelectValues = settingsAllowedSelectValues;
+        break;
       default:
         break;
     }

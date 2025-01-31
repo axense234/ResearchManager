@@ -1,7 +1,7 @@
 // Validators
 import { IsOptional, IsString } from 'class-validator';
 
-export class GetResearchActivitiesQueryParams {
+export class GetManySettingsQueryParams {
   @IsOptional()
   @IsString()
   userId: string;
