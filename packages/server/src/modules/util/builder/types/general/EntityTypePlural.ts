@@ -5,4 +5,6 @@ export type EntityTypePlural =
   | 'researchLogs'
   | 'researchSessions'
   | 'settings'
-  | 'users';
+  | 'users'
+  | 'activityFeeds'
+  | 'activityDays';

@@ -1,5 +1,6 @@
 // Entity Types
 import {
+  ActivityFeed,
   ResearchActivity,
   ResearchLog,
   ResearchPhase,
@@ -12,4 +13,5 @@ export type Entity =
   | ResearchPhase
   | ResearchLog
   | ResearchSession
-  | Settings;
+  | Settings
+  | ActivityFeed;

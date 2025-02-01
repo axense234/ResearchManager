@@ -1,4 +1,5 @@
 // Types
+import { ActivityFeedOrderByObject } from 'src/modules/entity/activity/feed/types';
 import { ResearchActivityOrderByObject } from 'src/modules/entity/research/activity/types';
 import { ResearchLogOrderByObject } from 'src/modules/entity/research/log/types';
 import { ResearchPhaseOrderByObject } from 'src/modules/entity/research/phase/types';
@@ -10,4 +11,5 @@ export type OrderByObjectBuilderOrderByObject =
   | ResearchLogOrderByObject
   | ResearchPhaseOrderByObject
   | ResearchSessionOrderByObject
-  | SettingsOrderByObject;
+  | SettingsOrderByObject
+  | ActivityFeedOrderByObject;

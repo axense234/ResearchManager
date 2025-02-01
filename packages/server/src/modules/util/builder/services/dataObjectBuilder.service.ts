@@ -13,6 +13,7 @@ import { researchLogAllowedConnectValues } from 'src/modules/entity/research/log
 import { researchPhaseAllowedConnectValues } from 'src/modules/entity/research/phase/data/connect/allowedConnectValues';
 import { researchSessionAllowedConnectValues } from 'src/modules/entity/research/session/data/connect/allowedConnectValues';
 import { settingsAllowedConnectValues } from 'src/modules/entity/settings/data/connect/allowedConnectValues';
+import { activityFeedAllowedConnectValues } from 'src/modules/entity/activity/feed/data/connect/allowedConnectValues';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -38,6 +39,9 @@ export class DataObjectBuilderService {
         break;
       case 'settings':
         allowedConnectValues = settingsAllowedConnectValues;
+        break;
+      case 'activityFeed':
+        allowedConnectValues = activityFeedAllowedConnectValues;
         break;
       default:
         break;

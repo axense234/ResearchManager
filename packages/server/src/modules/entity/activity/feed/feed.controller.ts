@@ -13,12 +13,18 @@ import {
 } from '@nestjs/common';
 // Custom Guard
 import { JwtGuard } from 'src/modules/entity/auth/guard';
-// Types
-import GetActivityFeedsQueryParams from './types/GetActivityFeedsQueryParams';
 // Dtos
 import { CreateActivityFeedDto, UpdateActivityFeedDto } from './dto';
 // Services
 import { ActivityFeedService } from './services/feed.service';
+// Types
+import {
+  CreateActivityFeedQueryParams,
+  DeleteActivityFeedQueryParams,
+  GetActivityFeedQueryParams,
+  GetActivityFeedsQueryParams,
+  UpdateActivityFeedQueryParams,
+} from './types';
 
 @UseGuards(JwtGuard)
 @Controller('activityFeeds')
@@ -35,27 +41,46 @@ export class ActivityFeedController {
 
   @Get(':activityFeedId')
   getActivityFeed(
+    @Query() queryParams: GetActivityFeedQueryParams,
     @Param('activityFeedId') activityFeedId: string,
     @Req() req: Request,
   ) {
-    return this.activityFeedService.getActivityFeed(activityFeedId, req.url);
+    return this.activityFeedService.getActivityFeed(
+      queryParams,
+      activityFeedId,
+      req.url,
+    );
   }
 
   @Post('create')
-  createActivityFeed(@Body() dto: CreateActivityFeedDto) {
-    return this.activityFeedService.createActivityFeed(dto);
+  createActivityFeed(
+    @Query() queryParams: CreateActivityFeedQueryParams,
+    @Body() dto: CreateActivityFeedDto,
+  ) {
+    return this.activityFeedService.createActivityFeed(queryParams, dto);
   }
 
   @Patch(':activityFeedId/update')
   updateActivityFeed(
+    @Query() queryParams: UpdateActivityFeedQueryParams,
     @Param('activityFeedId') activityFeedId: string,
     @Body() dto: UpdateActivityFeedDto,
   ) {
-    return this.activityFeedService.updateActivityFeed(dto, activityFeedId);
+    return this.activityFeedService.updateActivityFeed(
+      queryParams,
+      dto,
+      activityFeedId,
+    );
   }
 
   @Delete(':activityFeedId/delete')
-  deleteActivityFeed(@Param('activityFeedId') activityFeedId: string) {
-    return this.activityFeedService.deleteActivityFeed(activityFeedId);
+  deleteActivityFeed(
+    @Query() queryParams: DeleteActivityFeedQueryParams,
+    @Param('activityFeedId') activityFeedId: string,
+  ) {
+    return this.activityFeedService.deleteActivityFeed(
+      queryParams,
+      activityFeedId,
+    );
   }
 }

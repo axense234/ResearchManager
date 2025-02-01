@@ -8,26 +8,56 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  ActivityFeedFindUniqueObject,
+  GetActivityFeedQueryParams,
+} from '../types';
 
 @Injectable()
 export class GetActivityFeedService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getActivityFeed(activityFeedId: string, url: string) {
+  async getActivityFeed(
+    queryParams: GetActivityFeedQueryParams,
+    activityFeedId: string,
+    url: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!activityFeedId) {
         throw new BadRequestException('No Activity Feed Id provided.');
       }
 
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const findUniqueObject: ActivityFeedFindUniqueObject = {
+        where: { id: activityFeedId },
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          chosenOptionType,
+          entityType: 'activityFeed',
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        findUniqueObject[chosenOptionType] = optionObject;
+      }
+
       const foundActivityFeed = await this.redis.getOrSetCache(
         url,
         async () => {
-          const activityFeed = await this.prisma.activityFeed.findUnique({
-            where: { id: activityFeedId },
-          });
+          const activityFeed =
+            await this.prisma.activityFeed.findUnique(findUniqueObject);
           return activityFeed;
         },
       );
@@ -38,10 +68,12 @@ export class GetActivityFeedService {
         );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET SINGLE',
+        entity: foundActivityFeed,
         message: `Successfully found ${foundActivityFeed.type} Activity Feed.`,
-        activityFeed: foundActivityFeed,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

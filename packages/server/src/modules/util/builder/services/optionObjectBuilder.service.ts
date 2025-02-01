@@ -20,6 +20,8 @@ import { researchSessionAllowedIncludeValues } from 'src/modules/entity/research
 import { researchSessionAllowedSelectValues } from 'src/modules/entity/research/session/data/options/allowedSelectValues';
 import { settingsAllowedIncludeValues } from 'src/modules/entity/settings/data/options/allowedIncludeValues';
 import { settingsAllowedSelectValues } from 'src/modules/entity/settings/data/options/allowedSelectValues';
+import { activityFeedAllowedIncludeValues } from 'src/modules/entity/activity/feed/data/options/allowedIncludeValues';
+import { activityFeedAllowedSelectValues } from 'src/modules/entity/activity/feed/data/options/allowedSelectValues';
 
 @Injectable()
 export class OptionObjectBuilderService {
@@ -51,6 +53,10 @@ export class OptionObjectBuilderService {
       case 'settings':
         allowedIncludeValues = settingsAllowedIncludeValues;
         allowedSelectValues = settingsAllowedSelectValues;
+        break;
+      case 'activityFeed':
+        allowedIncludeValues = activityFeedAllowedIncludeValues;
+        allowedSelectValues = activityFeedAllowedSelectValues;
         break;
       default:
         break;

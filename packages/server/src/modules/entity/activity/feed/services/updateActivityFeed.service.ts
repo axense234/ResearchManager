@@ -10,18 +10,56 @@ import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 import { UpdateActivityFeedDto } from '../dto';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  ActivityFeedUpdateDataObject,
+  ActivityFeedUpdateObject,
+  UpdateActivityFeedQueryParams,
+} from '../types';
 
 @Injectable()
 export class UpdateActivityFeedService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async updateActivityFeed(dto: UpdateActivityFeedDto, activityFeedId: string) {
+  async updateActivityFeed(
+    queryParams: UpdateActivityFeedQueryParams,
+    dto: UpdateActivityFeedDto,
+    activityFeedId: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!activityFeedId) {
         throw new BadRequestException('No Activity Feed Id provided.');
+      }
+
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const dataObject = this.objectBuilder.buildDataObject({
+        dto,
+        entityType: 'activityFeed',
+      }) as ActivityFeedUpdateDataObject;
+
+      const updateObject: ActivityFeedUpdateObject = {
+        where: { id: activityFeedId },
+        data: dataObject,
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'activityFeed',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        updateObject[chosenOptionType] = optionObject;
       }
 
       const foundActivityFeedToBeUpdated =
@@ -61,10 +99,12 @@ export class UpdateActivityFeedService {
         type: 'modify',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'UPDATE',
+        entity: updatedActivityFeed,
         message: `Succesfully updated ${updatedActivityFeed.type} Activity Feed!`,
-        activityFeed: updatedActivityFeed,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

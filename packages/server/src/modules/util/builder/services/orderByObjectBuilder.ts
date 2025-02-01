@@ -14,6 +14,7 @@ import { researchLogsAllowedSortByKeysValues } from 'src/modules/entity/research
 import { researchPhaseAllowedSortByKeysValues } from 'src/modules/entity/research/phase/data/options/allowedSortByKeysValues';
 import { researchSessionAllowedSortByKeysValues } from 'src/modules/entity/research/session/data/options/allowedSortByKeysValues';
 import { settingsAllowedSortByKeysValues } from 'src/modules/entity/settings/data/options/allowedSortByKeysValues';
+import { activityFeedAllowedSortByKeysValues } from 'src/modules/entity/activity/feed/data/options/allowedSortByKeysValues';
 import { entityValues } from '../data/entityValues';
 
 @Injectable()
@@ -36,8 +37,11 @@ export class OrderByObjectBuilderService {
         allowedSortByKeysValues = researchLogsAllowedSortByKeysValues;
         break;
       case 'settings':
-        break;
         allowedSortByKeysValues = settingsAllowedSortByKeysValues;
+        break;
+      case 'activityFeed':
+        allowedSortByKeysValues = activityFeedAllowedSortByKeysValues;
+        break;
       default:
         break;
     }

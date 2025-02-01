@@ -7,4 +7,5 @@ export type EntityType =
   | 'userForArchivePurposes'
   | 'researchSession'
   | 'settings'
-  | 'user';
+  | 'user'
+  | 'activityDay';

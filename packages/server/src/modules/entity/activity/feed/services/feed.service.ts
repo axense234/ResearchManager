@@ -6,10 +6,16 @@ import { GetActivityFeedService } from './getActivityFeed.service';
 import { CreateActivityFeedService } from './createActivityFeed.service';
 import { UpdateActivityFeedService } from './updateActivityFeed.service';
 import { DeleteActivityFeedService } from './deleteActivityFeed.service';
-// Types
-import GetActivityFeedsQueryParams from '../types/GetActivityFeedsQueryParams';
 // Dtos
 import { CreateActivityFeedDto, UpdateActivityFeedDto } from '../dto';
+// Types
+import {
+  CreateActivityFeedQueryParams,
+  DeleteActivityFeedQueryParams,
+  GetActivityFeedQueryParams,
+  GetActivityFeedsQueryParams,
+  UpdateActivityFeedQueryParams,
+} from '../types';
 
 @Injectable()
 export class ActivityFeedService {
@@ -31,26 +37,46 @@ export class ActivityFeedService {
     );
   }
 
-  async getActivityFeed(activityFeedId: string, url: string) {
+  async getActivityFeed(
+    queryParams: GetActivityFeedQueryParams,
+    activityFeedId: string,
+    url: string,
+  ) {
     return await this.getActivityFeedService.getActivityFeed(
+      queryParams,
       activityFeedId,
       url,
     );
   }
 
-  async createActivityFeed(dto: CreateActivityFeedDto) {
-    return await this.createActivityFeedService.createActivityFeed(dto);
+  async createActivityFeed(
+    queryParams: CreateActivityFeedQueryParams,
+    dto: CreateActivityFeedDto,
+  ) {
+    return await this.createActivityFeedService.createActivityFeed(
+      queryParams,
+      dto,
+    );
   }
 
-  async updateActivityFeed(dto: UpdateActivityFeedDto, activityFeedId: string) {
+  async updateActivityFeed(
+    queryParams: UpdateActivityFeedQueryParams,
+    dto: UpdateActivityFeedDto,
+    activityFeedId: string,
+  ) {
     return await this.updateActivityFeedService.updateActivityFeed(
+      queryParams,
       dto,
       activityFeedId,
     );
   }
 
-  async deleteActivityFeed(activityFeedId: string) {
+  async deleteActivityFeed(
+    queryParams: DeleteActivityFeedQueryParams,
+    activityFeedId: string,
+  ) {
     return await this.deleteActivityFeedService.deleteActivityFeed(
+      queryParams,
       activityFeedId,
     );
   }

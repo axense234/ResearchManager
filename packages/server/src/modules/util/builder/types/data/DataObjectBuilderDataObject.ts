@@ -1,4 +1,5 @@
 // Types
+import { ActivityFeedCreateDataObject } from 'src/modules/entity/activity/feed/types';
 import {
   ResearchActivityCreateDataObject,
   ResearchActivityUpdateDataObject,
@@ -26,4 +27,5 @@ export type DataObjectBuilderDataObject =
   | ResearchPhaseUpdateDataObject
   | ResearchSessionCreateDataObject
   | ResearchSessionUpdateDataObject
-  | SettingsCreateDataObject;
+  | SettingsCreateDataObject
+  | ActivityFeedCreateDataObject;
