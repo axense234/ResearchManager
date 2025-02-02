@@ -8,24 +8,54 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  ActivityDayFindUniqueObject,
+  GetActivityDayQueryParams,
+} from '../types';
 
 @Injectable()
 export class GetActivityDayService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getActivityDay(activityDayId: string, url: string) {
+  async getActivityDay(
+    queryParams: GetActivityDayQueryParams,
+    activityDayId: string,
+    url: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!activityDayId) {
         throw new BadRequestException('No Activity Day Id provided.');
       }
 
-      const foundActivityDay = await this.redis.getOrSetCache(url, async () => {
-        const activityDay = await this.prisma.activityDay.findUnique({
-          where: { id: activityDayId },
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const findUniqueObject: ActivityDayFindUniqueObject = {
+        where: { id: activityDayId },
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          chosenOptionType,
+          entityType: 'activityDay',
+          includeValues,
+          selectValues,
         });
+
+      if (chosenOptionType && optionObject) {
+        findUniqueObject[chosenOptionType] = optionObject;
+      }
+
+      const foundActivityDay = await this.redis.getOrSetCache(url, async () => {
+        const activityDay =
+          await this.prisma.activityDay.findUnique(findUniqueObject);
         return activityDay;
       });
 
@@ -35,10 +65,12 @@ export class GetActivityDayService {
         );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET SINGLE',
+        entity: foundActivityDay,
         message: `Successfully found Activity Day!`,
-        dayActivity: foundActivityDay,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

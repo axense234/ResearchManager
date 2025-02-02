@@ -8,4 +8,5 @@ export type EntityType =
   | 'researchSession'
   | 'settings'
   | 'user'
-  | 'activityDay';
+  | 'activityDay'
+  | 'activityLog';

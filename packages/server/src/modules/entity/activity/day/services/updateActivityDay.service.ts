@@ -10,18 +10,55 @@ import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 import { UpdateActivityDayDto } from '../dto';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import {
+  ActivityDayUpdateDataObject,
+  ActivityDayUpdateObject,
+  UpdateActivityDayQueryParams,
+} from '../types';
 
 @Injectable()
 export class UpdateActivityDayService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async updateActivityDay(dto: UpdateActivityDayDto, activityDayId: string) {
+  async updateActivityDay(
+    queryParams: UpdateActivityDayQueryParams,
+    dto: UpdateActivityDayDto,
+    activityDayId: string,
+  ) {
     try {
       if (!activityDayId) {
         throw new BadRequestException('No Activity Day Id provided.');
+      }
+
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const dataObject = this.objectBuilder.buildDataObject({
+        dto,
+        entityType: 'activityDay',
+      }) as ActivityDayUpdateDataObject;
+
+      const updateObject: ActivityDayUpdateObject = {
+        where: { id: activityDayId },
+        data: dataObject,
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'activityDay',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        updateObject[chosenOptionType] = optionObject;
       }
 
       const foundActivityDayToBeUpdated =
@@ -35,10 +72,8 @@ export class UpdateActivityDayService {
         );
       }
 
-      const updatedActivityDay = await this.prisma.activityDay.update({
-        where: { id: activityDayId },
-        data: { ...dto },
-      });
+      const updatedActivityDay =
+        await this.prisma.activityDay.update(updateObject);
 
       if (!updatedActivityDay) {
         throw new BadRequestException(
@@ -57,10 +92,12 @@ export class UpdateActivityDayService {
         type: 'modify',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'UPDATE',
+        entity: updatedActivityDay,
         message: `Successfully updated Activity Day!`,
-        dayActivity: updatedActivityDay,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

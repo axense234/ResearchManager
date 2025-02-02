@@ -1,5 +1,8 @@
 // Types
-import { ActivityFeedCreateDataObject } from 'src/modules/entity/activity/feed/types';
+import {
+  ActivityFeedCreateDataObject,
+  ActivityFeedUpdateDataObject,
+} from 'src/modules/entity/activity/feed/types';
 import {
   ResearchActivityCreateDataObject,
   ResearchActivityUpdateDataObject,
@@ -16,7 +19,10 @@ import {
   ResearchSessionCreateDataObject,
   ResearchSessionUpdateDataObject,
 } from 'src/modules/entity/research/session/types';
-import { SettingsCreateDataObject } from 'src/modules/entity/settings/types';
+import {
+  SettingsCreateDataObject,
+  SettingsUpdateDataObject,
+} from 'src/modules/entity/settings/types';
 
 export type DataObjectBuilderDataObject =
   | ResearchActivityCreateDataObject
@@ -28,4 +34,6 @@ export type DataObjectBuilderDataObject =
   | ResearchSessionCreateDataObject
   | ResearchSessionUpdateDataObject
   | SettingsCreateDataObject
-  | ActivityFeedCreateDataObject;
+  | SettingsUpdateDataObject
+  | ActivityFeedCreateDataObject
+  | ActivityFeedUpdateDataObject;

@@ -1,4 +1,5 @@
 // Types
+import { ActivityDayQueryObject } from 'src/modules/entity/activity/day/types/object/ActivityDayQueryObject';
 import { ActivityFeedQueryObject } from 'src/modules/entity/activity/feed/types';
 import { ResearchActivityQueryObject } from 'src/modules/entity/research/activity/types';
 import { ResearchLogQueryObject } from 'src/modules/entity/research/log/types';
@@ -11,4 +12,5 @@ export type QueryObjectBuilderQueryObject = ResearchActivityQueryObject &
   ResearchPhaseQueryObject &
   ResearchSessionQueryObject &
   SettingsQueryObject &
-  ActivityFeedQueryObject;
+  ActivityFeedQueryObject &
+  ActivityDayQueryObject;

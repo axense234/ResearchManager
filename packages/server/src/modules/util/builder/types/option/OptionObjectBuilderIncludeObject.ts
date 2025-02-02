@@ -1,4 +1,5 @@
 // Types
+import { ActivityDayIncludeObject } from 'src/modules/entity/activity/day/types';
 import { ActivityFeedIncludeObject } from 'src/modules/entity/activity/feed/types';
 import { ResearchActivityIncludeObject } from 'src/modules/entity/research/activity/types';
 import { ResearchLogIncludeObject } from 'src/modules/entity/research/log/types';
@@ -11,4 +12,5 @@ export type OptionObjectBuilderIncludeObject = ResearchActivityIncludeObject &
   ResearchPhaseIncludeObject &
   ResearchSessionIncludeObject &
   SettingsIncludeObject &
-  ActivityFeedIncludeObject;
+  ActivityFeedIncludeObject &
+  ActivityDayIncludeObject;

@@ -14,6 +14,7 @@ import { researchPhasesAllowedSearchByKeyValues } from 'src/modules/entity/resea
 import { researchSessionsAllowedSearchByKeyValues } from 'src/modules/entity/research/session/data/options/allowedSearchByKeyValues';
 import { settingsAllowedSearchByKeyValues } from 'src/modules/entity/settings/data/options/allowedSearchByKeyValues';
 import { activityFeedsAllowedSearchByKeyValues } from 'src/modules/entity/activity/feed/data/options/allowedSearchByKeyValues';
+import { activityDaysAllowedSearchByKeyValues } from 'src/modules/entity/activity/day/data/options/allowedSearchByKeyValues';
 
 @Injectable()
 export class QueryObjectBuilderService {
@@ -39,6 +40,9 @@ export class QueryObjectBuilderService {
         break;
       case 'activityFeed':
         allowedSearchByKeyValues = activityFeedsAllowedSearchByKeyValues;
+        break;
+      case 'activityDay':
+        allowedSearchByKeyValues = activityDaysAllowedSearchByKeyValues;
         break;
       default:
         break;

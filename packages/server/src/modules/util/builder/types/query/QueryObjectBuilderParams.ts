@@ -1,21 +1,25 @@
 // Validators
 import { Type } from 'class-transformer';
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 // General
 import { EntityType } from '../general/EntityType';
 
 export class QueryObjectBuilderParamsQuery {
-  @IsString()
+  @IsUUID()
   @IsOptional()
   userId?: string;
 
-  @IsString()
+  @IsUUID()
   @IsOptional()
   researchActivityId?: string;
 
-  @IsString()
+  @IsUUID()
   @IsOptional()
   researchPhaseId?: string;
+
+  @IsUUID()
+  @IsOptional()
+  activityFeedId?: string;
 
   @IsString()
   @IsOptional()

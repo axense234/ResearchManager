@@ -14,6 +14,7 @@ import { researchPhaseAllowedConnectValues } from 'src/modules/entity/research/p
 import { researchSessionAllowedConnectValues } from 'src/modules/entity/research/session/data/connect/allowedConnectValues';
 import { settingsAllowedConnectValues } from 'src/modules/entity/settings/data/connect/allowedConnectValues';
 import { activityFeedAllowedConnectValues } from 'src/modules/entity/activity/feed/data/connect/allowedConnectValues';
+import { activityDayAllowedConnectValues } from 'src/modules/entity/activity/day/data/connect/allowedConnectValues';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -42,6 +43,9 @@ export class DataObjectBuilderService {
         break;
       case 'activityFeed':
         allowedConnectValues = activityFeedAllowedConnectValues;
+        break;
+      case 'activityDay':
+        allowedConnectValues = activityDayAllowedConnectValues;
         break;
       default:
         break;

@@ -1,4 +1,5 @@
 // NestJS
+import { ActivityDaySelectObject } from 'src/modules/entity/activity/day/types';
 import { ActivityFeedSelectObject } from 'src/modules/entity/activity/feed/types';
 import { ResearchActivitySelectObject } from 'src/modules/entity/research/activity/types';
 import { ResearchLogSelectObject } from 'src/modules/entity/research/log/types';
@@ -11,4 +12,5 @@ export type OptionObjectBuilderSelectObject = ResearchActivitySelectObject &
   ResearchPhaseSelectObject &
   ResearchSessionSelectObject &
   SettingsSelectObject &
-  ActivityFeedSelectObject;
+  ActivityFeedSelectObject &
+  ActivityDaySelectObject;

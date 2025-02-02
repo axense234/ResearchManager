@@ -1,7 +1,7 @@
 // Validators
 import { IsString, IsOptional } from 'class-validator';
 
-export class UpdateResearchActivityQueryParams {
+export class GetActivityDayQueryParams {
   @IsString()
   @IsOptional()
   includeValues: string;

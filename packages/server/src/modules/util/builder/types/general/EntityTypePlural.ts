@@ -7,4 +7,5 @@ export type EntityTypePlural =
   | 'settings'
   | 'users'
   | 'activityFeeds'
-  | 'activityDays';
+  | 'activityDays'
+  | 'activityLogs';

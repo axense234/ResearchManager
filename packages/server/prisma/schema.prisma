@@ -168,9 +168,10 @@ model ActivityFeed {
 model ActivityDay {
   id String @id @default(uuid())
 
-  activityFeed   ActivityFeed  @relation(fields: [activityFeedId], references: [id])
+  activityFeed   ActivityFeed @relation(fields: [activityFeedId], references: [id])
   activityFeedId String
-  activities     ActivityLog[]
+
+  activityLogs ActivityLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
