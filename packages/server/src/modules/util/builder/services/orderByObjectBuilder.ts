@@ -15,8 +15,9 @@ import { researchPhaseAllowedSortByKeysValues } from 'src/modules/entity/researc
 import { researchSessionAllowedSortByKeysValues } from 'src/modules/entity/research/session/data/options/allowedSortByKeysValues';
 import { settingsAllowedSortByKeysValues } from 'src/modules/entity/settings/data/options/allowedSortByKeysValues';
 import { activityFeedAllowedSortByKeysValues } from 'src/modules/entity/activity/feed/data/options/allowedSortByKeysValues';
-import { entityValues } from '../data/entityValues';
 import { activityDayAllowedSortByKeysValues } from 'src/modules/entity/activity/day/data/options/allowedSortByKeysValues';
+import { activityLogAllowedSortByKeysValues } from 'src/modules/entity/activity/log/data/options/allowedSortByKeysValues';
+import { entityValues } from '../data/entityValues';
 
 @Injectable()
 export class OrderByObjectBuilderService {
@@ -45,6 +46,9 @@ export class OrderByObjectBuilderService {
         break;
       case 'activityDay':
         allowedSortByKeysValues = activityDayAllowedSortByKeysValues;
+        break;
+      case 'activityLog':
+        allowedSortByKeysValues = activityLogAllowedSortByKeysValues;
         break;
       default:
         break;

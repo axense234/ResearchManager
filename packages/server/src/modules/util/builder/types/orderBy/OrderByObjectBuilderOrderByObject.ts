@@ -1,6 +1,7 @@
 // Types
 import { ActivityDayOrderByObject } from 'src/modules/entity/activity/day/types';
 import { ActivityFeedOrderByObject } from 'src/modules/entity/activity/feed/types';
+import { ActivityLogOrderByObject } from 'src/modules/entity/activity/log/types';
 import { ResearchActivityOrderByObject } from 'src/modules/entity/research/activity/types';
 import { ResearchLogOrderByObject } from 'src/modules/entity/research/log/types';
 import { ResearchPhaseOrderByObject } from 'src/modules/entity/research/phase/types';
@@ -14,4 +15,5 @@ export type OrderByObjectBuilderOrderByObject =
   | ResearchSessionOrderByObject
   | SettingsOrderByObject
   | ActivityFeedOrderByObject
-  | ActivityDayOrderByObject;
+  | ActivityDayOrderByObject
+  | ActivityLogOrderByObject;

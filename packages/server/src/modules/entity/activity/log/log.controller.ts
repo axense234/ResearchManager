@@ -9,6 +9,7 @@ import {
   Delete,
   Patch,
   Req,
+  Query,
 } from '@nestjs/common';
 // Services
 import { ActivityLogService } from './services/log.service';
@@ -16,6 +17,14 @@ import { ActivityLogService } from './services/log.service';
 import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dtos
 import { CreateActivityLogDto, UpdateActivityLogDto } from './dto';
+// Types
+import {
+  CreateActivityLogQueryParams,
+  DeleteActivityLogQueryParams,
+  GetActivityLogQueryParams,
+  GetActivityLogsQueryParams,
+  UpdateActivityLogQueryParams,
+} from './types';
 
 @UseGuards(JwtGuard)
 @Controller('activityLogs')
@@ -23,33 +32,55 @@ export class ActivityLogController {
   constructor(private activityLogService: ActivityLogService) {}
 
   @Get()
-  getActivityLogs(@Req() req: Request) {
-    return this.activityLogService.getActivityLogs(req.url);
+  getActivityLogs(
+    @Query() queryParams: GetActivityLogsQueryParams,
+    @Req() req: Request,
+  ) {
+    return this.activityLogService.getActivityLogs(queryParams, req.url);
   }
 
   @Get(':activityLogId')
   getActivityLog(
+    @Query() queryParams: GetActivityLogQueryParams,
     @Param('activityLogId') activityLogId: string,
     @Req() req: Request,
   ) {
-    return this.activityLogService.getActivityLog(activityLogId, req.url);
+    return this.activityLogService.getActivityLog(
+      queryParams,
+      activityLogId,
+      req.url,
+    );
   }
 
   @Post('create')
-  createActivityLog(@Body() dto: CreateActivityLogDto) {
-    return this.activityLogService.createActivityLog(dto);
+  createActivityLog(
+    @Query() queryParams: CreateActivityLogQueryParams,
+    @Body() dto: CreateActivityLogDto,
+  ) {
+    return this.activityLogService.createActivityLog(queryParams, dto);
   }
 
   @Patch(':activityLogId/update')
   updateActivityLog(
+    @Query() queryParams: UpdateActivityLogQueryParams,
     @Param('activityLogId') activityLogId: string,
     @Body() dto: UpdateActivityLogDto,
   ) {
-    return this.activityLogService.updateActivityLog(dto, activityLogId);
+    return this.activityLogService.updateActivityLog(
+      queryParams,
+      dto,
+      activityLogId,
+    );
   }
 
   @Delete(':activityLogId/delete')
-  deleteActivityLog(@Param('activityLogId') activityLogId: string) {
-    return this.activityLogService.deleteActivityLog(activityLogId);
+  deleteActivityLog(
+    @Query() queryParams: DeleteActivityLogQueryParams,
+    @Param('activityLogId') activityLogId: string,
+  ) {
+    return this.activityLogService.deleteActivityLog(
+      queryParams,
+      activityLogId,
+    );
   }
 }

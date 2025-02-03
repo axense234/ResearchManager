@@ -8,6 +8,14 @@ import { UpdateActivityLogService } from './updateActivityLog.service';
 import { DeleteActivityLogService } from './deleteActivityLog.service';
 // Dtos
 import { CreateActivityLogDto, UpdateActivityLogDto } from '../dto';
+// Types
+import {
+  CreateActivityLogQueryParams,
+  DeleteActivityLogQueryParams,
+  GetActivityLogQueryParams,
+  GetActivityLogsQueryParams,
+  UpdateActivityLogQueryParams,
+} from '../types';
 
 @Injectable()
 export class ActivityLogService {
@@ -19,26 +27,51 @@ export class ActivityLogService {
     private deleteActivityLogService: DeleteActivityLogService,
   ) {}
 
-  async getActivityLogs(url: string) {
-    return await this.getActivityLogsService.getActivityLogs(url);
+  async getActivityLogs(queryParams: GetActivityLogsQueryParams, url: string) {
+    return await this.getActivityLogsService.getActivityLogs(queryParams, url);
   }
 
-  async getActivityLog(activityLogId: string, url: string) {
-    return await this.getActivityLogService.getActivityLog(activityLogId, url);
+  async getActivityLog(
+    queryParams: GetActivityLogQueryParams,
+    activityLogId: string,
+    url: string,
+  ) {
+    return await this.getActivityLogService.getActivityLog(
+      queryParams,
+      activityLogId,
+      url,
+    );
   }
 
-  async createActivityLog(dto: CreateActivityLogDto) {
-    return await this.createActivityLogService.createActivityLog(dto);
+  async createActivityLog(
+    queryParams: CreateActivityLogQueryParams,
+    dto: CreateActivityLogDto,
+  ) {
+    return await this.createActivityLogService.createActivityLog(
+      queryParams,
+      dto,
+    );
   }
 
-  async updateActivityLog(dto: UpdateActivityLogDto, activityLogId: string) {
+  async updateActivityLog(
+    queryParams: UpdateActivityLogQueryParams,
+    dto: UpdateActivityLogDto,
+    activityLogId: string,
+  ) {
     return await this.updateActivityLogService.updateActivityLog(
+      queryParams,
       dto,
       activityLogId,
     );
   }
 
-  async deleteActivityLog(activityLogId: string) {
-    return await this.deleteActivityLogService.deleteActivityLog(activityLogId);
+  async deleteActivityLog(
+    queryParams: DeleteActivityLogQueryParams,
+    activityLogId: string,
+  ) {
+    return await this.deleteActivityLogService.deleteActivityLog(
+      queryParams,
+      activityLogId,
+    );
   }
 }

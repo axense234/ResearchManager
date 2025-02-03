@@ -178,11 +178,10 @@ model ActivityDay {
 }
 
 model ActivityLog {
-  id            String          @id @default(uuid())
-  createdAt     DateTime        @default(now())
-  subject       ActivitySubject @default(OTHER)
-  message       String          @default("Other activity noticed, something is very wrong. The apocalypse is coming. Run.")
-  messageValues String[]        @default([])
+  id        String          @id @default(uuid())
+  createdAt DateTime        @default(now())
+  subject   ActivitySubject @default(OTHER)
+  message   String          @default("Other activity noticed, something is very wrong. The apocalypse is coming. Run.")
 
   activityDays ActivityDay[]
 }

@@ -3,6 +3,7 @@ import {
   ActivityFeedCreateDataObject,
   ActivityFeedUpdateDataObject,
 } from 'src/modules/entity/activity/feed/types';
+import { ActivityLogCreateDataObject } from 'src/modules/entity/activity/log/types';
 import {
   ResearchActivityCreateDataObject,
   ResearchActivityUpdateDataObject,
@@ -36,4 +37,5 @@ export type DataObjectBuilderDataObject =
   | SettingsCreateDataObject
   | SettingsUpdateDataObject
   | ActivityFeedCreateDataObject
-  | ActivityFeedUpdateDataObject;
+  | ActivityFeedUpdateDataObject
+  | ActivityLogCreateDataObject;

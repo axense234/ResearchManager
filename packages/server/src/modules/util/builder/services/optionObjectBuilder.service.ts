@@ -24,6 +24,8 @@ import { activityFeedAllowedIncludeValues } from 'src/modules/entity/activity/fe
 import { activityFeedAllowedSelectValues } from 'src/modules/entity/activity/feed/data/options/allowedSelectValues';
 import { activityDayAllowedIncludeValues } from 'src/modules/entity/activity/day/data/options/allowedIncludeValues';
 import { activityDayAllowedSelectValues } from 'src/modules/entity/activity/day/data/options/allowedSelectValues';
+import { activityLogAllowedIncludeValues } from 'src/modules/entity/activity/log/data/options/allowedIncludeValues';
+import { activityLogAllowedSelectValues } from 'src/modules/entity/activity/log/data/options/allowedSelectValues';
 
 @Injectable()
 export class OptionObjectBuilderService {
@@ -63,6 +65,10 @@ export class OptionObjectBuilderService {
       case 'activityDay':
         allowedIncludeValues = activityDayAllowedIncludeValues;
         allowedSelectValues = activityDayAllowedSelectValues;
+        break;
+      case 'activityLog':
+        allowedIncludeValues = activityLogAllowedIncludeValues;
+        allowedSelectValues = activityLogAllowedSelectValues;
         break;
       default:
         break;

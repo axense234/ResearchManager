@@ -8,24 +8,54 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  ActivityLogFindUniqueObject,
+  GetActivityLogQueryParams,
+} from '../types';
 
 @Injectable()
 export class GetActivityLogService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getActivityLog(activityLogId: string, url: string) {
+  async getActivityLog(
+    queryParams: GetActivityLogQueryParams,
+    activityLogId: string,
+    url: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!activityLogId) {
         throw new BadRequestException('Please provide an Activity Log Id!');
       }
 
-      const foundActivityLog = await this.redis.getOrSetCache(url, async () => {
-        const activityLog = await this.prisma.activityLog.findUnique({
-          where: { id: activityLogId },
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const findUniqueObject: ActivityLogFindUniqueObject = {
+        where: { id: activityLogId },
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          chosenOptionType,
+          entityType: 'activityLog',
+          includeValues,
+          selectValues,
         });
+
+      if (chosenOptionType && optionObject) {
+        findUniqueObject[chosenOptionType] = optionObject;
+      }
+
+      const foundActivityLog = await this.redis.getOrSetCache(url, async () => {
+        const activityLog =
+          await this.prisma.activityLog.findUnique(findUniqueObject);
         return activityLog;
       });
 
@@ -35,10 +65,12 @@ export class GetActivityLogService {
         );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET SINGLE',
+        entity: foundActivityLog,
         message: `Successfully found Activity Log!`,
-        activityLog: foundActivityLog,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }
