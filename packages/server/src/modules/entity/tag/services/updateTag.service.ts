@@ -10,18 +10,56 @@ import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Dtos
 import { UpdateTagDto } from '../dto';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  TagUpdateDataObject,
+  TagUpdateObject,
+  UpdateTagQueryParams,
+} from '../types';
 
 @Injectable()
 export class UpdateTagService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async updateTag(dto: UpdateTagDto, tagId: string) {
+  async updateTag(
+    queryParams: UpdateTagQueryParams,
+    dto: UpdateTagDto,
+    tagId: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!tagId) {
         throw new BadRequestException('No Tag Id provided.');
+      }
+
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const dataObject = this.objectBuilder.buildDataObject({
+        entityType: 'tag',
+        dto,
+      }) as TagUpdateDataObject;
+
+      const updateObject: TagUpdateObject = {
+        where: { id: tagId },
+        data: dataObject,
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'tag',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        updateObject[chosenOptionType] = optionObject;
       }
 
       const foundTagToBeUpdated = await this.prisma.tag.findUnique({
@@ -34,10 +72,7 @@ export class UpdateTagService {
         );
       }
 
-      const updatedTag = await this.prisma.tag.update({
-        where: { id: tagId },
-        data: { ...dto },
-      });
+      const updatedTag = await this.prisma.tag.update(updateObject);
 
       if (!updatedTag) {
         throw new BadRequestException(
@@ -56,10 +91,12 @@ export class UpdateTagService {
         type: 'modify',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'UPDATE',
+        entity: updatedTag,
         message: `Successfully updated Tag named ${updatedTag.title}!`,
-        tag: updatedTag,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

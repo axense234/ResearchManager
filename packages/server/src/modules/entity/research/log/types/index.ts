@@ -13,6 +13,5 @@ export * from './object/ResearchLogFindUniqueObject';
 export * from './object/ResearchLogFindManyObject';
 export * from './object/ResearchLogWhereObject';
 export * from './object/ResearchLogOrderByObject';
-export * from './object/ResearchLogQueryObject';
 export * from './object/ResearchLogUpdateDataObject';
 export * from './object/ResearchLogUpdateObject';

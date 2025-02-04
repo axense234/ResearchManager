@@ -17,6 +17,14 @@ import { JwtGuard } from 'src/modules/entity/auth/guard';
 import { CreateTagDto, UpdateTagDto } from './dto';
 // Services
 import { TagService } from './services/tag.service';
+// Types
+import {
+  CreateTagQueryParams,
+  DeleteTagQueryParams,
+  GetTagQueryParams,
+  GetTagsQueryParams,
+  UpdateTagQueryParams,
+} from './types';
 
 @UseGuards(JwtGuard)
 @Controller('tags')
@@ -24,27 +32,41 @@ export class TagController {
   constructor(private tagService: TagService) {}
 
   @Get()
-  getTags(@Query('userId') userId: string, @Req() req: Request) {
-    return this.tagService.getTags(userId, req.url);
+  getTags(@Query() queryParams: GetTagsQueryParams, @Req() req: Request) {
+    return this.tagService.getTags(queryParams, req.url);
   }
 
   @Get(':tagId')
-  getTag(@Param('tagId') tagId: string, @Req() req: Request) {
-    return this.tagService.getTag(tagId, req.url);
+  getTag(
+    @Query() queryParams: GetTagQueryParams,
+    @Param('tagId') tagId: string,
+    @Req() req: Request,
+  ) {
+    return this.tagService.getTag(queryParams, tagId, req.url);
   }
 
   @Post('create')
-  createTag(@Body() dto: CreateTagDto) {
-    return this.tagService.createTag(dto);
+  createTag(
+    @Query() queryParams: CreateTagQueryParams,
+    @Body() dto: CreateTagDto,
+  ) {
+    return this.tagService.createTag(queryParams, dto);
   }
 
   @Patch(':tagId/update')
-  updateTag(@Param('tagId') tagId: string, @Body() dto: UpdateTagDto) {
-    return this.tagService.updateTag(dto, tagId);
+  updateTag(
+    @Query() queryParams: UpdateTagQueryParams,
+    @Param('tagId') tagId: string,
+    @Body() dto: UpdateTagDto,
+  ) {
+    return this.tagService.updateTag(queryParams, dto, tagId);
   }
 
   @Delete(':tagId/delete')
-  deleteTag(@Param('tagId') tagId: string) {
-    return this.tagService.deleteTag(tagId);
+  deleteTag(
+    @Query() queryParams: DeleteTagQueryParams,
+    @Param('tagId') tagId: string,
+  ) {
+    return this.tagService.deleteTag(queryParams, tagId);
   }
 }

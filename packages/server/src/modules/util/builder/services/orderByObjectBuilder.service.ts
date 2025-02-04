@@ -17,6 +17,7 @@ import { settingsAllowedSortByKeysValues } from 'src/modules/entity/settings/dat
 import { activityFeedAllowedSortByKeysValues } from 'src/modules/entity/activity/feed/data/options/allowedSortByKeysValues';
 import { activityDayAllowedSortByKeysValues } from 'src/modules/entity/activity/day/data/options/allowedSortByKeysValues';
 import { activityLogAllowedSortByKeysValues } from 'src/modules/entity/activity/log/data/options/allowedSortByKeysValues';
+import { tagAllowedSortByKeysValues } from 'src/modules/entity/tag/data/options/allowedSortByKeysValues';
 import { entityValues } from '../data/entityValues';
 
 @Injectable()
@@ -40,6 +41,9 @@ export class OrderByObjectBuilderService {
         break;
       case 'settings':
         allowedSortByKeysValues = settingsAllowedSortByKeysValues;
+        break;
+      case 'tag':
+        allowedSortByKeysValues = tagAllowedSortByKeysValues;
         break;
       case 'activityFeed':
         allowedSortByKeysValues = activityFeedAllowedSortByKeysValues;

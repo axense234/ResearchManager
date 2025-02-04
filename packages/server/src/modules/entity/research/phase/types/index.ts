@@ -13,6 +13,5 @@ export * from './object/ResearchPhaseFindUniqueObject';
 export * from './object/ResearchPhaseWhereObject';
 export * from './object/ResearchPhaseFindManyObject';
 export * from './object/ResearchPhaseOrderByObject';
-export * from './object/ResearchPhaseQueryObject';
 export * from './object/ResearchPhaseUpdateDataObject';
 export * from './object/ResearchPhaseUpdateObject';

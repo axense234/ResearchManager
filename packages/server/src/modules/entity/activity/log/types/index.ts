@@ -13,6 +13,5 @@ export * from './object/ActivityLogWhereUniqueObject';
 export * from './object/ActivityLogFindManyObject';
 export * from './object/ActivityLogWhereObject';
 export * from './object/ActivityLogOrderByObject';
-export * from './object/ActivityLogQueryObject';
 export * from './object/ActivityLogUpdateDataObject';
 export * from './object/ActivityLogUpdateObject';

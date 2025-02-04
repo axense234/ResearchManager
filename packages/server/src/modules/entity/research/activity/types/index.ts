@@ -1,5 +1,4 @@
 export * from './object/ResearchActivityOrderByObject';
-export * from './object/ResearchActivityQueryObject';
 export * from './object/ResearchActivityIncludeObject';
 export * from './object/ResearchActivityCreateObject';
 export * from './object/ResearchActivityFindUniqueObject';

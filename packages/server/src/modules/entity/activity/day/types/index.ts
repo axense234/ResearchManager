@@ -13,6 +13,5 @@ export * from './object/ActivityDayFindUniqueObject';
 export * from './object/ActivityDayWhereObject';
 export * from './object/ActivityDayFindManyObject';
 export * from './object/ActivityDayOrderByObject';
-export * from './object/ActivityDayQueryObject';
 export * from './object/ActivityDayUpdateDataObject';
 export * from './object/ActivityDayUpdateObject';

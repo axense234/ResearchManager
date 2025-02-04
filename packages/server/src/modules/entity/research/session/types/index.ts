@@ -13,6 +13,5 @@ export * from './object/ResearchSessionFindUniqueObject';
 export * from './object/ResearchSessionFindManyObject';
 export * from './object/ResearchSessionWhereObject';
 export * from './object/ResearchSessionOrderByObject';
-export * from './object/ResearchSessionQueryObject';
 export * from './object/ResearchSessionUpdateDataObject';
 export * from './object/ResearchSessionUpdateObject';

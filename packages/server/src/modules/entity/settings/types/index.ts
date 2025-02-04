@@ -13,6 +13,5 @@ export * from './object/SettingsFindUniqueObject';
 export * from './object/SettingsFindManyObject';
 export * from './object/SettingsWhereObject';
 export * from './object/SettingsOrderByObject';
-export * from './object/SettingsQueryObject';
 export * from './object/SettingsUpdateDataObject';
 export * from './object/SettingsUpdateObject';

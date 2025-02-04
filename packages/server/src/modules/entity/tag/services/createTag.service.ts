@@ -6,19 +6,51 @@ import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Dtos
 import { CreateTagDto } from '../dto';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  CreateTagQueryParams,
+  TagCreateDataObject,
+  TagCreateObject,
+} from '../types';
 
 @Injectable()
 export class CreateTagService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async createTag(dto: CreateTagDto) {
+  async createTag(
+    queryParams: CreateTagQueryParams,
+    dto: CreateTagDto,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      const createdTag = await this.prisma.tag.create({
-        data: { ...dto },
-      });
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const dataObject = this.objectBuilder.buildDataObject({
+        entityType: 'tag',
+        dto,
+      }) as TagCreateDataObject;
+
+      const createObject: TagCreateObject = { data: dataObject };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'tag',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        createObject[chosenOptionType] = optionObject;
+      }
+
+      const createdTag = await this.prisma.tag.create(createObject);
 
       if (!createdTag) {
         throw new BadRequestException(
@@ -37,10 +69,12 @@ export class CreateTagService {
         type: 'create',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'CREATE',
+        entity: createdTag,
         message: `Successfully created Tag named ${createdTag.title}!`,
-        tag: createdTag,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

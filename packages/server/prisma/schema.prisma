@@ -48,11 +48,11 @@ model Settings {
 }
 
 model Tag {
-  id                        String @id @default(uuid())
-  title                     String @default("Usual")
-  backgroundColorOrImageSrc String @default("#D54E5D") // Pastel Red Hex Code
-  fontSize                  Int    @default(16)
-  fontFamily                String @default("Irish Grover")
+  id                        String        @id @default(uuid())
+  title                     String        @default("Usual")
+  backgroundColorOrImageSrc String        @default("#D54E5D") // Pastel Red Hex Code
+  fontSize                  Int           @default(16)
+  fontFamily                TagFontFamily @default(ARIAL)
 
   user                     User   @relation(fields: [userId], references: [id])
   userId                   String
@@ -184,6 +184,23 @@ model ActivityLog {
   message   String          @default("Other activity noticed, something is very wrong. The apocalypse is coming. Run.")
 
   activityDays ActivityDay[]
+}
+
+enum TagFontFamily {
+  ARIAL
+  HELVETICA
+  TIMES_NEW_ROMAN
+  VERDANA
+  GEORGIA
+  COURIER_NEW
+  TAHOMA
+  TREBUCHET_MS
+  IMPACT
+  COMIC_SANS_MS
+  LUCIDA
+  MONACO
+  BRADLEY_HAND
+  LUMINARY
 }
 
 enum SettingsSidebarPosition {

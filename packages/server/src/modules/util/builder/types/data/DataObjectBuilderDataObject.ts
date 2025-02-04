@@ -24,6 +24,7 @@ import {
   SettingsCreateDataObject,
   SettingsUpdateDataObject,
 } from 'src/modules/entity/settings/types';
+import { TagCreateDataObject } from 'src/modules/entity/tag/types';
 
 export type DataObjectBuilderDataObject =
   | ResearchActivityCreateDataObject
@@ -38,4 +39,5 @@ export type DataObjectBuilderDataObject =
   | SettingsUpdateDataObject
   | ActivityFeedCreateDataObject
   | ActivityFeedUpdateDataObject
-  | ActivityLogCreateDataObject;
+  | ActivityLogCreateDataObject
+  | TagCreateDataObject;

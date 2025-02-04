@@ -5,7 +5,7 @@ import { ReturnObjectBuilderService } from './returnObjectBuilder.service';
 import { OptionObjectBuilderService } from './optionObjectBuilder.service';
 import { DataObjectBuilderService } from './dataObjectBuilder.service';
 import { QueryObjectBuilderService } from './queryObjectBuilder.service';
-import { OrderByObjectBuilderService } from './orderByObjectBuilder';
+import { OrderByObjectBuilderService } from './orderByObjectBuilder.service';
 // Types
 import {
   DataObjectBuilderDataObject,

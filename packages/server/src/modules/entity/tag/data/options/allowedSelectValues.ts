@@ -1,0 +1,17 @@
+export const tagAllowedSelectValues = [
+  'id',
+  'title',
+  'backgroundColorOrImageSrc',
+  'fontSize',
+  'fontFamily',
+  'userId',
+  'userIdForArchivePurposes',
+  'createdAt',
+  'updatedAt',
+  'researchActivities',
+  'researchPhases',
+  'researchLogs',
+  'researchSessions',
+  'user',
+  'userForArchivePurposes',
+];

@@ -13,6 +13,5 @@ export * from './object/ActivityFeedFindUniqueObject';
 export * from './object/ActivityFeedWhereObject';
 export * from './object/ActivityFeedFindManyObject';
 export * from './object/ActivityFeedOrderByObject';
-export * from './object/ActivityFeedQueryObject';
 export * from './object/ActivityFeedUpdateDataObject';
 export * from './object/ActivityFeedUpdateObject';

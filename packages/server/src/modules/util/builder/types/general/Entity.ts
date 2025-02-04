@@ -8,6 +8,7 @@ import {
   ResearchPhase,
   ResearchSession,
   Settings,
+  Tag,
 } from '@prisma/client';
 
 export type Entity =
@@ -18,4 +19,5 @@ export type Entity =
   | Settings
   | ActivityFeed
   | ActivityDay
-  | ActivityLog;
+  | ActivityLog
+  | Tag;

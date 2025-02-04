@@ -7,6 +7,7 @@ import { ResearchLogOrderByObject } from 'src/modules/entity/research/log/types'
 import { ResearchPhaseOrderByObject } from 'src/modules/entity/research/phase/types';
 import { ResearchSessionOrderByObject } from 'src/modules/entity/research/session/types';
 import { SettingsOrderByObject } from 'src/modules/entity/settings/types';
+import { TagOrderByObject } from 'src/modules/entity/tag/types';
 
 export type OrderByObjectBuilderOrderByObject =
   | ResearchActivityOrderByObject
@@ -16,4 +17,5 @@ export type OrderByObjectBuilderOrderByObject =
   | SettingsOrderByObject
   | ActivityFeedOrderByObject
   | ActivityDayOrderByObject
-  | ActivityLogOrderByObject;
+  | ActivityLogOrderByObject
+  | TagOrderByObject;

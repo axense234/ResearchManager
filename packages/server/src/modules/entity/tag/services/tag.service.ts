@@ -8,6 +8,14 @@ import { GetTagsService } from './getTags.service';
 import { UpdateTagService } from './updateTag.service';
 // Dtos
 import { CreateTagDto, UpdateTagDto } from '../dto';
+// Types
+import {
+  CreateTagQueryParams,
+  DeleteTagQueryParams,
+  GetTagQueryParams,
+  GetTagsQueryParams,
+  UpdateTagQueryParams,
+} from '../types';
 
 @Injectable()
 export class TagService {
@@ -19,23 +27,27 @@ export class TagService {
     private deleteTagService: DeleteTagService,
   ) {}
 
-  async getTags(userId: string, url: string) {
-    return await this.getTagsService.getTags(userId, url);
+  async getTags(queryParams: GetTagsQueryParams, url: string) {
+    return await this.getTagsService.getTags(queryParams, url);
   }
 
-  async getTag(tagId: string, url: string) {
-    return await this.getTagService.getTag(tagId, url);
+  async getTag(queryParams: GetTagQueryParams, tagId: string, url: string) {
+    return await this.getTagService.getTag(queryParams, tagId, url);
   }
 
-  async createTag(dto: CreateTagDto) {
-    return await this.createTagService.createTag(dto);
+  async createTag(queryParams: CreateTagQueryParams, dto: CreateTagDto) {
+    return await this.createTagService.createTag(queryParams, dto);
   }
 
-  async updateTag(dto: UpdateTagDto, tagId: string) {
-    return await this.updateTagService.updateTag(dto, tagId);
+  async updateTag(
+    queryParams: UpdateTagQueryParams,
+    dto: UpdateTagDto,
+    tagId: string,
+  ) {
+    return await this.updateTagService.updateTag(queryParams, dto, tagId);
   }
 
-  async deleteTag(tagId: string) {
-    return await this.deleteTagService.deleteTag(tagId);
+  async deleteTag(queryParams: DeleteTagQueryParams, tagId: string) {
+    return await this.deleteTagService.deleteTag(queryParams, tagId);
   }
 }

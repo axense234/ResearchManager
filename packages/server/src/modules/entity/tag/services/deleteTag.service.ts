@@ -8,18 +8,43 @@ import {
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { DeleteTagQueryParams, TagFindUniqueObject } from '../types';
 
 @Injectable()
 export class DeleteTagService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async deleteTag(tagId: string) {
+  async deleteTag(
+    queryParams: DeleteTagQueryParams,
+    tagId: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       if (!tagId) {
         throw new BadRequestException('No Tag Id provided.');
+      }
+
+      const { includeValues, selectValues, chosenOptionType } = queryParams;
+
+      const deleteObject: TagFindUniqueObject = { where: { id: tagId } };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'tag',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        deleteObject[chosenOptionType] = optionObject;
       }
 
       const foundTagToBeDeleted = await this.prisma.tag.findUnique({
@@ -32,7 +57,7 @@ export class DeleteTagService {
         );
       }
 
-      const deletedTag = await this.prisma.tag.delete({ where: { id: tagId } });
+      const deletedTag = await this.prisma.tag.delete(deleteObject);
 
       if (!deletedTag) {
         throw new BadRequestException(
@@ -51,10 +76,12 @@ export class DeleteTagService {
         type: 'modify',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'DELETE',
+        entity: deletedTag,
         message: `Successfully deleted Tag named ${deletedTag.title}!`,
-        tag: deletedTag,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

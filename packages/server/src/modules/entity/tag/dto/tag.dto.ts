@@ -1,3 +1,4 @@
+import { TagFontFamily } from '@prisma/client';
 import { IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateTagDto {
@@ -15,7 +16,7 @@ export class CreateTagDto {
 
   @IsString()
   @IsOptional()
-  fontFamily: string;
+  fontFamily: TagFontFamily;
 
   @IsUUID()
   userId: string;
@@ -39,7 +40,7 @@ export class UpdateTagDto {
 
   @IsString()
   @IsOptional()
-  fontFamily: string;
+  fontFamily: TagFontFamily;
 
   @IsUUID()
   @IsOptional()

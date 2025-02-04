@@ -87,7 +87,7 @@ export class GetResearchActivitiesService {
         url,
         async () => {
           const researchActivities =
-            await this.prisma.researchActivity.findMany(findManyObject);
+            await this.prisma.researchActivity.findMany();
           return researchActivities;
         },
       );

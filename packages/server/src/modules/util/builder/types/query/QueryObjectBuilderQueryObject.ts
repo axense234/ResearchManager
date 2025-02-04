@@ -7,6 +7,7 @@ import { ResearchLogWhereObject } from 'src/modules/entity/research/log/types';
 import { ResearchPhaseWhereObject } from 'src/modules/entity/research/phase/types';
 import { ResearchSessionWhereObject } from 'src/modules/entity/research/session/types';
 import { SettingsWhereObject } from 'src/modules/entity/settings/types';
+import { TagWhereObject } from 'src/modules/entity/tag/types';
 
 export type QueryObjectBuilderQueryObject = ResearchActivityWhereObject &
   ResearchLogWhereObject &
@@ -15,4 +16,5 @@ export type QueryObjectBuilderQueryObject = ResearchActivityWhereObject &
   SettingsWhereObject &
   ActivityFeedWhereObject &
   ActivityDayWhereObject &
-  ActivityLogWhereObject;
+  ActivityLogWhereObject &
+  TagWhereObject;

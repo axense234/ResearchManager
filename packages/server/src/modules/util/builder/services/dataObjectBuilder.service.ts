@@ -16,6 +16,7 @@ import { settingsAllowedConnectValues } from 'src/modules/entity/settings/data/c
 import { activityFeedAllowedConnectValues } from 'src/modules/entity/activity/feed/data/connect/allowedConnectValues';
 import { activityDayAllowedConnectValues } from 'src/modules/entity/activity/day/data/connect/allowedConnectValues';
 import { activityLogAllowedConnectValues } from 'src/modules/entity/activity/log/data/connect/allowedConnectValues';
+import { tagAllowedConnectValues } from 'src/modules/entity/tag/data/connect/allowedConnectValues';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -41,6 +42,9 @@ export class DataObjectBuilderService {
         break;
       case 'settings':
         allowedConnectValues = settingsAllowedConnectValues;
+        break;
+      case 'tag':
+        allowedConnectValues = tagAllowedConnectValues;
         break;
       case 'activityFeed':
         allowedConnectValues = activityFeedAllowedConnectValues;
