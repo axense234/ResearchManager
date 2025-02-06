@@ -31,10 +31,10 @@ export class CreateActivityFeedService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityFeed',
         dto,
-      }) as ActivityFeedCreateDataObject;
+      })) as ActivityFeedCreateDataObject;
 
       const createObject: ActivityFeedCreateObject = {
         data: dataObject,

@@ -28,6 +28,8 @@ import { activityLogAllowedIncludeValues } from 'src/modules/entity/activity/log
 import { activityLogAllowedSelectValues } from 'src/modules/entity/activity/log/data/options/allowedSelectValues';
 import { tagAllowedIncludeValues } from 'src/modules/entity/tag/data/options/allowedIncludeValues';
 import { tagAllowedSelectValues } from 'src/modules/entity/tag/data/options/allowedSelectValues';
+import { userAllowedIncludeValues } from 'src/modules/entity/user/data/options/allowedIncludeValues';
+import { userAllowedSelectValues } from 'src/modules/entity/user/data/options/allowedSelectValues';
 
 @Injectable()
 export class OptionObjectBuilderService {
@@ -75,6 +77,10 @@ export class OptionObjectBuilderService {
       case 'activityLog':
         allowedIncludeValues = activityLogAllowedIncludeValues;
         allowedSelectValues = activityLogAllowedSelectValues;
+        break;
+      case 'user':
+        allowedIncludeValues = userAllowedIncludeValues;
+        allowedSelectValues = userAllowedSelectValues;
         break;
       default:
         break;

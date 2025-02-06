@@ -40,10 +40,10 @@ export class UpdateActivityFeedService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'activityFeed',
-      }) as ActivityFeedUpdateDataObject;
+      })) as ActivityFeedUpdateDataObject;
 
       const updateObject: ActivityFeedUpdateObject = {
         where: { id: activityFeedId },

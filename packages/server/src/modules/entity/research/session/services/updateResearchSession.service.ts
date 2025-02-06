@@ -40,10 +40,10 @@ export class UpdateResearchSessionService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchSession',
-      }) as ResearchSessionUpdateDataObject;
+      })) as ResearchSessionUpdateDataObject;
 
       const updateObject: ResearchSessionUpdateObject = {
         where: { id: researchSessionId },

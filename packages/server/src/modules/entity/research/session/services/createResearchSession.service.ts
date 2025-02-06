@@ -31,10 +31,10 @@ export class CreateResearchSessionService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'researchSession',
         dto,
-      }) as ResearchSessionCreateDataObject;
+      })) as ResearchSessionCreateDataObject;
 
       const createObject: ResearchSessionCreateObject = {
         data: dataObject,

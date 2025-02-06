@@ -8,4 +8,9 @@ export type EntityTypePlural =
   | 'users'
   | 'activityFeeds'
   | 'activityDays'
-  | 'activityLogs';
+  | 'activityLogs'
+  | 'archivedTags'
+  | 'archivedResearchActivities'
+  | 'archivedResearchPhases'
+  | 'archivedResearchSessions'
+  | 'archivedResearchLogs';

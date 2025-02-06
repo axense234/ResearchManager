@@ -40,10 +40,10 @@ export class UpdateActivityLogService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityLog',
         dto,
-      }) as ActivityLogUpdateDataObject;
+      })) as ActivityLogUpdateDataObject;
 
       const updateObject: ActivityLogUpdateObject = {
         where: { id: activityLogId },

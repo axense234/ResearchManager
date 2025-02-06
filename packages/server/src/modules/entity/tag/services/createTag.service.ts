@@ -31,10 +31,10 @@ export class CreateTagService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'tag',
         dto,
-      }) as TagCreateDataObject;
+      })) as TagCreateDataObject;
 
       const createObject: TagCreateObject = { data: dataObject };
 

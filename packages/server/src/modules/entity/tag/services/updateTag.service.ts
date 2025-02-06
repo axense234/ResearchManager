@@ -40,10 +40,10 @@ export class UpdateTagService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'tag',
         dto,
-      }) as TagUpdateDataObject;
+      })) as TagUpdateDataObject;
 
       const updateObject: TagUpdateObject = {
         where: { id: tagId },

@@ -17,6 +17,7 @@ import { activityFeedsAllowedSearchByKeyValues } from 'src/modules/entity/activi
 import { activityDaysAllowedSearchByKeyValues } from 'src/modules/entity/activity/day/data/options/allowedSearchByKeyValues';
 import { activityLogsAllowedSearchByKeyValues } from 'src/modules/entity/activity/log/data/options/allowedSearchByKeyValues';
 import { tagsAllowedSearchByKeyValues } from 'src/modules/entity/tag/data/options/allowedSearchByKeyValues';
+import { usersAllowedSearchByKeyValues } from 'src/modules/entity/user/data/options/allowedSearchByKeyValues';
 
 @Injectable()
 export class QueryObjectBuilderService {
@@ -51,6 +52,9 @@ export class QueryObjectBuilderService {
         break;
       case 'activityLog':
         allowedSearchByKeyValues = activityLogsAllowedSearchByKeyValues;
+        break;
+      case 'user':
+        allowedSearchByKeyValues = usersAllowedSearchByKeyValues;
         break;
       default:
         break;

@@ -31,10 +31,10 @@ export class CreateActivityDayService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityDay',
         dto,
-      }) as ActivityDayCreateDataObject;
+      })) as ActivityDayCreateDataObject;
 
       const createObject: ActivityDayCreateObject = {
         data: dataObject,

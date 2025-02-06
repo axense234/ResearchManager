@@ -18,7 +18,7 @@ model User {
 
   settings Settings?
 
-  activityFeed       ActivityFeed[]
+  activityFeeds      ActivityFeed[]
   tags               Tag[]
   researchActivities ResearchActivity[]
 

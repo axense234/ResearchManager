@@ -31,10 +31,10 @@ export class CreateResearchPhaseService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'researchPhase',
         dto,
-      }) as ResearchPhaseCreateDataObject;
+      })) as ResearchPhaseCreateDataObject;
 
       const createObject: ResearchPhaseCreateObject = { data: dataObject };
 

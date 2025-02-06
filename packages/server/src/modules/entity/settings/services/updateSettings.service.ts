@@ -40,10 +40,10 @@ export class UpdateSettingsService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'settings',
-      }) as SettingsUpdateDataObject;
+      })) as SettingsUpdateDataObject;
 
       const updateObject: SettingsUpdateObject = {
         where: { id: settingsId },

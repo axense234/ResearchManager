@@ -3,7 +3,10 @@ import {
   ActivityFeedCreateDataObject,
   ActivityFeedUpdateDataObject,
 } from 'src/modules/entity/activity/feed/types';
-import { ActivityLogCreateDataObject } from 'src/modules/entity/activity/log/types';
+import {
+  ActivityLogCreateDataObject,
+  ActivityLogUpdateDataObject,
+} from 'src/modules/entity/activity/log/types';
 import {
   ResearchActivityCreateDataObject,
   ResearchActivityUpdateDataObject,
@@ -24,7 +27,11 @@ import {
   SettingsCreateDataObject,
   SettingsUpdateDataObject,
 } from 'src/modules/entity/settings/types';
-import { TagCreateDataObject } from 'src/modules/entity/tag/types';
+import {
+  TagCreateDataObject,
+  TagUpdateDataObject,
+} from 'src/modules/entity/tag/types';
+import { UserUpdateDataObject } from 'src/modules/entity/user/types';
 
 export type DataObjectBuilderDataObject =
   | ResearchActivityCreateDataObject
@@ -40,4 +47,7 @@ export type DataObjectBuilderDataObject =
   | ActivityFeedCreateDataObject
   | ActivityFeedUpdateDataObject
   | ActivityLogCreateDataObject
-  | TagCreateDataObject;
+  | ActivityLogUpdateDataObject
+  | TagCreateDataObject
+  | TagUpdateDataObject
+  | UserUpdateDataObject;

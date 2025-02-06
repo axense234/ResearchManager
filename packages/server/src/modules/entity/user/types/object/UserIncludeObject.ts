@@ -1,48 +1,40 @@
 // Validators
 import { IsBoolean, IsOptional } from 'class-validator';
 
-export class ResearchActivitySelectObject {
+export class UserIncludeObject {
   @IsBoolean()
   @IsOptional()
-  id?: boolean;
+  activityFeeds?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  name?: boolean;
+  archivedResearchActivities?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  backgroundColorOrImageSrc?: boolean;
+  archivedResearchLogs?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  userId?: boolean;
+  archivedResearchPhases?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  userIdForArchivePurposes?: boolean;
+  archivedResearchSessions?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  createdAt?: boolean;
+  archivedTags?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  updatedAt?: boolean;
+  researchActivities?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  user?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  activityFeed?: boolean;
+  settings?: boolean;
 
   @IsBoolean()
   @IsOptional()
   tags?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  researchPhases?: boolean;
 }

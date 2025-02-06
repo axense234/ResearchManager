@@ -31,10 +31,10 @@ export class CreateSettingsService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'settings',
         dto,
-      }) as SettingsCreateDataObject;
+      })) as SettingsCreateDataObject;
 
       const createObject: SettingsCreateObject = { data: dataObject };
 

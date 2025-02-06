@@ -7,6 +7,8 @@ import {
   DataObjectBuilderParams,
   EntityType,
 } from '../types';
+// Argon
+import * as argon from 'argon2';
 // Data
 import { researchActivityAllowedConnectValues } from 'src/modules/entity/research/activity/data/connect/allowedConnectValues';
 import { researchLogAllowedConnectValues } from 'src/modules/entity/research/log/data/connect/allowedConnectValues';
@@ -17,6 +19,8 @@ import { activityFeedAllowedConnectValues } from 'src/modules/entity/activity/fe
 import { activityDayAllowedConnectValues } from 'src/modules/entity/activity/day/data/connect/allowedConnectValues';
 import { activityLogAllowedConnectValues } from 'src/modules/entity/activity/log/data/connect/allowedConnectValues';
 import { tagAllowedConnectValues } from 'src/modules/entity/tag/data/connect/allowedConnectValues';
+import { userAllowedConnectValues } from 'src/modules/entity/user/data/connect/allowedConnectValues';
+import { UserUpdateDataObject } from 'src/modules/entity/user/types';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -55,6 +59,9 @@ export class DataObjectBuilderService {
       case 'activityLog':
         allowedConnectValues = activityLogAllowedConnectValues;
         break;
+      case 'user':
+        allowedConnectValues = userAllowedConnectValues;
+        break;
       default:
         break;
     }
@@ -62,12 +69,18 @@ export class DataObjectBuilderService {
     return allowedConnectValues;
   }
 
-  buildDataObject({
+  async buildDataObject({
     dto,
     entityType,
-  }: DataObjectBuilderParams): DataObjectBuilderDataObject {
+  }: DataObjectBuilderParams): Promise<DataObjectBuilderDataObject> {
     const dataObject: DataObjectBuilderDataObject = { ...(dto as any) };
     const allowedConnectValues = this.chooseAllowedConnect(entityType);
+
+    if (dto.password && entityType === 'user') {
+      (dataObject as UserUpdateDataObject).hash = await argon.hash(
+        dto.password,
+      );
+    }
 
     allowedConnectValues.forEach((connectValue) => {
       if (dto[connectValue.entityType]) {

@@ -40,10 +40,10 @@ export class UpdateResearchPhaseService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchPhase',
-      }) as ResearchPhaseUpdateDataObject;
+      })) as ResearchPhaseUpdateDataObject;
 
       const foundResearchPhaseToBeUpdated =
         await this.prisma.researchPhase.findUnique({

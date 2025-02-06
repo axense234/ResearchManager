@@ -1,37 +1,102 @@
 // NestJS
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { GetUsersQueryParams, UserFindManyObject } from '../types';
 
 @Injectable()
 export class GetUsersService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getUsers(url: string) {
+  async getUsers(
+    queryParams: GetUsersQueryParams,
+    url: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
+      const {
+        searchByKey,
+        searchByValue,
+        sortByKeys,
+        sortByOrders,
+        includeValues,
+        selectValues,
+        chosenOptionType,
+      } = queryParams;
+
+      const additionalNotes: string[] = [];
+
+      const findManyObject: UserFindManyObject = {};
+
+      const { optionObject, additionalNotes: additionalOptionNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'user',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (additionalOptionNotes) {
+        additionalNotes.push(additionalOptionNotes);
+      }
+
+      if (chosenOptionType && optionObject) {
+        findManyObject[chosenOptionType] = optionObject;
+      }
+
+      const { queryObject, additionalNotes: additionalQueryNotes } =
+        this.objectBuilder.buildQueryObject({
+          entityType: 'user',
+          queryParams: { searchByKey, searchByValue },
+        });
+
+      if (additionalQueryNotes) {
+        additionalNotes.push(additionalQueryNotes);
+      }
+
+      findManyObject.where = queryObject;
+
+      const { orderByObject, additionalNotes: additionalOrderByNotes } =
+        this.objectBuilder.buildOrderByObject({
+          entityType: 'user',
+          queryParams: { sortByKeys, sortByOrders },
+        });
+
+      if (additionalOrderByNotes) {
+        additionalNotes.push(additionalOrderByNotes);
+      }
+
+      if (orderByObject.length > 0) {
+        findManyObject.orderBy = orderByObject;
+      }
+
       const foundUsers = await this.redis.getOrSetCache(url, async () => {
-        const users = await this.prisma.user.findMany({});
+        const users = await this.prisma.user.findMany(findManyObject);
         return users;
       });
 
       if (foundUsers.length < 1) {
-        return {
-          nbHits: 0,
-          message: 'No Users found given the input.',
-          users: [],
-        };
+        throw new NotFoundException(
+          'Could not find any Users given the input.',
+        );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET MULTIPLE',
+        entity: foundUsers,
         nbHits: foundUsers.length,
         message: `Successfully found ${foundUsers.length} Users given the input!`,
-        users: foundUsers,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

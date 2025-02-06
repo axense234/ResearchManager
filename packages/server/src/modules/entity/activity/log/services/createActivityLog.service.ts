@@ -31,10 +31,10 @@ export class CreateActivityLogService {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityLog',
         dto,
-      }) as ActivityLogCreateDataObject;
+      })) as ActivityLogCreateDataObject;
 
       const createObject: ActivityLogCreateObject = { data: dataObject };
 

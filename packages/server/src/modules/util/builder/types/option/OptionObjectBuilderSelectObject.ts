@@ -7,6 +7,7 @@ import { ResearchLogSelectObject } from 'src/modules/entity/research/log/types';
 import { ResearchPhaseSelectObject } from 'src/modules/entity/research/phase/types';
 import { ResearchSessionSelectObject } from 'src/modules/entity/research/session/types';
 import { SettingsSelectObject } from 'src/modules/entity/settings/types';
+import { TagSelectObject } from 'src/modules/entity/tag/types';
 
 export type OptionObjectBuilderSelectObject = ResearchActivitySelectObject &
   ResearchLogSelectObject &
@@ -15,4 +16,5 @@ export type OptionObjectBuilderSelectObject = ResearchActivitySelectObject &
   SettingsSelectObject &
   ActivityFeedSelectObject &
   ActivityDaySelectObject &
-  ActivityLogSelectObject;
+  ActivityLogSelectObject &
+  TagSelectObject;

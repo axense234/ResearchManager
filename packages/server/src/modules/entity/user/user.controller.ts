@@ -6,11 +6,12 @@ import {
   Get,
   Param,
   Patch,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
 // Providers
-import { UserService } from './services/users.service';
+import { UserService } from './services/user.service';
 // Param Decorators
 import { GetUser } from 'src/modules/entity/auth/decorator';
 // Prisma
@@ -19,6 +20,13 @@ import { User } from '@prisma/client';
 import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dto
 import UpdateUserDto from './dto/user.dto';
+// Types
+import {
+  DeleteUserQueryParams,
+  GetUserQueryParams,
+  GetUsersQueryParams,
+  UpdateUserQueryParams,
+} from './types';
 
 @UseGuards(JwtGuard)
 @Controller('users')
@@ -26,8 +34,8 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  getUsers(@Req() req: Request) {
-    return this.userService.getUsers(req.url);
+  getUsers(@Query() queryParams: GetUsersQueryParams, @Req() req: Request) {
+    return this.userService.getUsers(queryParams, req.url);
   }
 
   @Get('profile')
@@ -35,18 +43,29 @@ export class UserController {
     return this.userService.getProfile(user);
   }
 
-  @Get(':userId')
-  getUser(@Param('userId') userId: string, @Req() req: Request) {
-    return this.userService.getUser(userId, req.url);
+  @Get(':uniqueIdentifier')
+  getUser(
+    @Query() queryParams: GetUserQueryParams,
+    @Param('uniqueIdentifier') uniqueIdentifier: string,
+    @Req() req: Request,
+  ) {
+    return this.userService.getUser(queryParams, uniqueIdentifier, req.url);
   }
 
-  @Patch(':userId/update')
-  updateUser(@Param('userId') userId: string, @Body() dto: UpdateUserDto) {
-    return this.userService.updateUser(dto, userId);
+  @Patch(':uniqueIdentifier/update')
+  updateUser(
+    @Query() queryParams: UpdateUserQueryParams,
+    @Param('uniqueIdentifier') uniqueIdentifier: string,
+    @Body() dto: UpdateUserDto,
+  ) {
+    return this.userService.updateUser(queryParams, dto, uniqueIdentifier);
   }
 
-  @Delete(':userId/delete')
-  deleteUser(@Param('userId') userId: string) {
-    return this.userService.deleteUser(userId);
+  @Delete(':uniqueIdentifier/delete')
+  deleteUser(
+    @Query() queryParams: DeleteUserQueryParams,
+    @Param('uniqueIdentifier') uniqueIdentifier: string,
+  ) {
+    return this.userService.deleteUser(queryParams, uniqueIdentifier);
   }
 }

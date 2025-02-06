@@ -10,41 +10,77 @@ import UpdateUserDto from '../dto/user.dto';
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
-// Argon
-import * as argon from 'argon2';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  UpdateUserQueryParams,
+  UserUpdateDataObject,
+  UserUpdateObject,
+  UserWhereUniqueObject,
+} from '../types';
 
 @Injectable()
 export class UpdateUserService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async updateUser(dto: UpdateUserDto, userId: string) {
+  async updateUser(
+    queryParams: UpdateUserQueryParams,
+    dto: UpdateUserDto,
+    uniqueIdentifier: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      if (!userId) {
-        throw new BadRequestException('No userId provided.');
+      if (!uniqueIdentifier) {
+        throw new BadRequestException('No unique identifier provided.');
       }
 
-      const foundUserToBeUpdated = await this.prisma.user.findUnique({
-        where: { id: userId },
+      const {
+        includeValues,
+        selectValues,
+        chosenOptionType,
+        uniqueIdentifierType,
+      } = queryParams;
+
+      const dataObject = (await this.objectBuilder.buildDataObject({
+        dto,
+        entityType: 'user',
+      })) as UserUpdateDataObject;
+
+      const updateObject: UserUpdateObject = {
+        where: {
+          [uniqueIdentifierType]: uniqueIdentifier,
+        } as unknown as UserWhereUniqueObject,
+        data: dataObject,
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          entityType: 'user',
+          chosenOptionType,
+          includeValues,
+          selectValues,
+        });
+
+      if (chosenOptionType && optionObject) {
+        updateObject[chosenOptionType] = optionObject;
+      }
+
+      const foundUserToBeUpdated = await this.prisma.user.findFirst({
+        where: { [uniqueIdentifierType]: uniqueIdentifier },
       });
 
       if (!foundUserToBeUpdated) {
         throw new NotFoundException(
-          'Could not find users with the id / email provided.',
+          'Could not find users with the unique identifier provided.',
         );
       }
 
-      if (dto.password) {
-        dto.hash = await argon.hash(dto.password);
-        delete dto.password;
-      }
-
-      const updatedUser = await this.prisma.user.update({
-        where: { id: userId },
-        data: { ...dto },
-      });
+      const updatedUser = await this.prisma.user.update(updateObject);
 
       if (!updatedUser) {
         throw new BadRequestException(
@@ -55,14 +91,19 @@ export class UpdateUserService {
       delete updatedUser.hash;
       await this.redis.deleteAllCacheThatIncludesGivenKeys({
         base: '',
-        specifiers: [{ label: 'userId', value: updatedUser.id }],
+        specifiers: [
+          { label: 'userId', value: updatedUser.id },
+          { label: 'email', value: updatedUser.email },
+        ],
         type: 'modify',
       });
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'UPDATE',
+        entity: updatedUser,
         message: `Successfully updated user ${updatedUser.username}!`,
-        user: updatedUser,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

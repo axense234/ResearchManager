@@ -5,31 +5,66 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 // Prisma
-import { User } from '@prisma/client';
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
+// Object Builder
+import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
+// Types
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import {
+  GetUserQueryParams,
+  UserFindUniqueObject,
+  UserWhereUniqueObject,
+} from '../types';
 
 @Injectable()
 export class GetUserService {
   constructor(
     private prisma: PrismaService,
     private redis: RedisService,
+    private objectBuilder: ObjectBuilderService,
   ) {}
 
-  async getUser(userId: string, url: string) {
+  async getUser(
+    queryParams: GetUserQueryParams,
+    uniqueIdentifier: string,
+    url: string,
+  ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      if (!userId) {
-        throw new BadRequestException('No User Id provided!');
+      if (!uniqueIdentifier) {
+        throw new BadRequestException('No unique identifier provided!');
       }
 
-      const foundUser = (await this.redis.getOrSetCache(url, async () => {
-        const user = await this.prisma.user.findUnique({
-          where: { id: userId },
+      const {
+        includeValues,
+        selectValues,
+        chosenOptionType,
+        uniqueIdentifierType,
+      } = queryParams;
+
+      const findUniqueObject: UserFindUniqueObject = {
+        where: {
+          [uniqueIdentifierType]: uniqueIdentifier,
+        } as unknown as UserWhereUniqueObject,
+      };
+
+      const { optionObject, additionalNotes } =
+        this.objectBuilder.buildOptionObject({
+          chosenOptionType,
+          entityType: 'user',
+          includeValues,
+          selectValues,
         });
 
+      if (chosenOptionType && optionObject) {
+        findUniqueObject[chosenOptionType] = optionObject;
+      }
+
+      const foundUser = await this.redis.getOrSetCache(url, async () => {
+        const user = await this.prisma.user.findUnique(findUniqueObject);
         return user;
-      })) as User;
+      });
 
       if (!foundUser) {
         throw new NotFoundException(
@@ -37,10 +72,12 @@ export class GetUserService {
         );
       }
 
-      return {
+      return this.objectBuilder.buildReturnObject({
+        actionType: 'GET SINGLE',
+        entity: foundUser,
         message: `Successfully found user: ${foundUser.username}`,
-        user: foundUser,
-      };
+        additionalNotes,
+      });
     } catch (error) {
       throw error;
     }

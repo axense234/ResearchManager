@@ -19,6 +19,7 @@ import { activityDayAllowedSortByKeysValues } from 'src/modules/entity/activity/
 import { activityLogAllowedSortByKeysValues } from 'src/modules/entity/activity/log/data/options/allowedSortByKeysValues';
 import { tagAllowedSortByKeysValues } from 'src/modules/entity/tag/data/options/allowedSortByKeysValues';
 import { entityValues } from '../data/entityValues';
+import { userAllowedSortByKeysValues } from 'src/modules/entity/user/data/options/allowedSortByKeysValues';
 
 @Injectable()
 export class OrderByObjectBuilderService {
@@ -53,6 +54,9 @@ export class OrderByObjectBuilderService {
         break;
       case 'activityLog':
         allowedSortByKeysValues = activityLogAllowedSortByKeysValues;
+        break;
+      case 'user':
+        allowedSortByKeysValues = userAllowedSortByKeysValues;
         break;
       default:
         break;

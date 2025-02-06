@@ -7,6 +7,7 @@ import { ResearchLogIncludeObject } from 'src/modules/entity/research/log/types'
 import { ResearchPhaseIncludeObject } from 'src/modules/entity/research/phase/types';
 import { ResearchSessionIncludeObject } from 'src/modules/entity/research/session/types';
 import { SettingsIncludeObject } from 'src/modules/entity/settings/types';
+import { TagIncludeObject } from 'src/modules/entity/tag/types';
 
 export type OptionObjectBuilderIncludeObject = ResearchActivityIncludeObject &
   ResearchLogIncludeObject &
@@ -15,4 +16,5 @@ export type OptionObjectBuilderIncludeObject = ResearchActivityIncludeObject &
   SettingsIncludeObject &
   ActivityFeedIncludeObject &
   ActivityDayIncludeObject &
-  ActivityLogIncludeObject;
+  ActivityLogIncludeObject &
+  TagIncludeObject;

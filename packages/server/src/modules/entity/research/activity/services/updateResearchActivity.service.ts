@@ -40,10 +40,10 @@ export class UpdateResearchActivityService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchActivity',
-      }) as ResearchActivityUpdateDataObject;
+      })) as ResearchActivityUpdateDataObject;
 
       const updateObject: ResearchActivityUpdateObject = {
         where: { id: researchActivityId },

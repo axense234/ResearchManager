@@ -1,0 +1,16 @@
+export const userAllowedSortByKeysValues = [
+  'activityFeeds',
+  'archivedResearchActivities',
+  'archivedResearchLogs',
+  'archivedResearchPhases',
+  'archivedResearchSessions',
+  'archivedTags',
+  'researchActivities',
+  'tags',
+  'createdAt',
+  'updatedAt',
+  'username',
+  'backgroundImageSrc',
+  'profileImageSrc',
+  'email',
+];

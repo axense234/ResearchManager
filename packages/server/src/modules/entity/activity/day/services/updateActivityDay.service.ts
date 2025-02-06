@@ -39,10 +39,10 @@ export class UpdateActivityDayService {
 
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 
-      const dataObject = this.objectBuilder.buildDataObject({
+      const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'activityDay',
-      }) as ActivityDayUpdateDataObject;
+      })) as ActivityDayUpdateDataObject;
 
       const updateObject: ActivityDayUpdateObject = {
         where: { id: activityDayId },
