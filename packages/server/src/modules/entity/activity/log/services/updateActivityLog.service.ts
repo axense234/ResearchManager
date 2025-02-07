@@ -88,7 +88,7 @@ export class UpdateActivityLogService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedActivityLog,
         message: `Successfully updated Activity Log!`,

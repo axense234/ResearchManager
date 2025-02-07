@@ -68,7 +68,7 @@ export class GetResearchSessionService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundResearchSession,
         message: `Successfully found Research Session named ${foundResearchSession.name}!`,

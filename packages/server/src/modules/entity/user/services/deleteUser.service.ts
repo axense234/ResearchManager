@@ -91,7 +91,7 @@ export class DeleteUserService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedUser,
         message: `Successfully deleted user named ${deletedUser.username}!`,

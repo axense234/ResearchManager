@@ -65,7 +65,7 @@ export class GetActivityLogService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundActivityLog,
         message: `Successfully found Activity Log!`,

@@ -21,6 +21,7 @@ import { activityLogAllowedConnectValues } from 'src/modules/entity/activity/log
 import { tagAllowedConnectValues } from 'src/modules/entity/tag/data/connect/allowedConnectValues';
 import { userAllowedConnectValues } from 'src/modules/entity/user/data/connect/allowedConnectValues';
 import { UserUpdateDataObject } from 'src/modules/entity/user/types';
+import { UserCreateDataObject } from 'src/modules/entity/auth/types/object/UserCreateDataObject';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -77,9 +78,10 @@ export class DataObjectBuilderService {
     const allowedConnectValues = this.chooseAllowedConnect(entityType);
 
     if (dto.password && entityType === 'user') {
-      (dataObject as UserUpdateDataObject).hash = await argon.hash(
-        dto.password,
-      );
+      (dataObject as UserUpdateDataObject | UserCreateDataObject).hash =
+        await argon.hash(dto.password);
+      delete (dataObject as UserUpdateDataObject | UserCreateDataObject)
+        .password;
     }
 
     allowedConnectValues.forEach((connectValue) => {

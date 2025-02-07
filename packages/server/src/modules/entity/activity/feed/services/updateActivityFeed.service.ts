@@ -99,7 +99,7 @@ export class UpdateActivityFeedService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedActivityFeed,
         message: `Succesfully updated ${updatedActivityFeed.type} Activity Feed!`,

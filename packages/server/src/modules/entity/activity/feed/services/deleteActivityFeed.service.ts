@@ -87,7 +87,7 @@ export class DeleteActivityFeedService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedActivityFeed,
         message: `Successfully deleted ${deletedActivityFeed.type} Activity Feed!`,

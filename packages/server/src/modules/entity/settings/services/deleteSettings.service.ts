@@ -77,7 +77,7 @@ export class DeleteSettingsService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedSettings,
         message: `Successfully deleted Settings for the user: ${deletedSettings.userId}!`,

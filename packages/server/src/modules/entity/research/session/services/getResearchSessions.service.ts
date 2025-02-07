@@ -97,7 +97,7 @@ export class GetResearchSessionsService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundResearchSessions,
         nbHits: foundResearchSessions.length,

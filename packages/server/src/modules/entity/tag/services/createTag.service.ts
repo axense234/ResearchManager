@@ -69,7 +69,7 @@ export class CreateTagService {
         type: 'create',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',
         entity: createdTag,
         message: `Successfully created Tag named ${createdTag.title}!`,

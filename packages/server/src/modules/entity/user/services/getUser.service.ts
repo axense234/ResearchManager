@@ -72,7 +72,7 @@ export class GetUserService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundUser,
         message: `Successfully found user: ${foundUser.username}`,

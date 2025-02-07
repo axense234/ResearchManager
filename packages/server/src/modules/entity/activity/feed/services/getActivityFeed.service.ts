@@ -68,7 +68,7 @@ export class GetActivityFeedService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundActivityFeed,
         message: `Successfully found ${foundActivityFeed.type} Activity Feed.`,

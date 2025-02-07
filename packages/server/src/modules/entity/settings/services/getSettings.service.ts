@@ -62,7 +62,7 @@ export class GetSettingsService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundSettings,
         message: `Successfully found Settings for the user: ${foundSettings.userId}!`,

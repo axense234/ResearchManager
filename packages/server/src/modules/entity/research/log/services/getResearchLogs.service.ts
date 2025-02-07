@@ -98,7 +98,7 @@ export class GetResearchLogsService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundResearchLogs,
         message: `Successfully found ${foundResearchLogs.length} Research Logs with the provided params.`,

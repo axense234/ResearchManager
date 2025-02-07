@@ -78,7 +78,7 @@ export class DeleteActivityLogService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedActivityLog,
         message: `Successfully deleted Activity Log!`,

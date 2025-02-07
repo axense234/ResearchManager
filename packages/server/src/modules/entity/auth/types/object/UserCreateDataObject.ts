@@ -1,17 +1,14 @@
 // Validators
-import { IsEmail, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsString, IsOptional, IsEmail, IsObject } from 'class-validator';
 
-export class UserUpdateDataObject {
+export class UserCreateDataObject {
   @IsString()
-  @IsOptional()
   username: string;
 
   @IsEmail()
-  @IsOptional()
   email: string;
 
   @IsString()
-  @IsOptional()
   hash: string;
 
   @IsString()

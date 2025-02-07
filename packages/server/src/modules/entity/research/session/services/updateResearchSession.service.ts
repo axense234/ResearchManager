@@ -97,7 +97,7 @@ export class UpdateResearchSessionService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedResearchSession,
         message: `Successfully updated Research Session named ${updatedResearchSession.name}!`,

@@ -97,7 +97,7 @@ export class UpdateResearchLogService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedResearchLog,
         message: `Successfully updated Research Log named ${updatedResearchLog.name}!`,

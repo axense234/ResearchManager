@@ -80,7 +80,7 @@ export class DeleteResearchActivityService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedResearchActivity,
         message: `Successfully deleted Research Activity named ${deletedResearchActivity.name}!`,

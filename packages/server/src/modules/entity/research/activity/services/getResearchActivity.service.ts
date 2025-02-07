@@ -68,7 +68,7 @@ export class GetResearchActivityService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         message: `Successfully found Research Activity: ${foundResearchActivity.name}!`,
         entity: foundResearchActivity,

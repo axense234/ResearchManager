@@ -65,7 +65,7 @@ export class GetActivityDayService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundActivityDay,
         message: `Successfully found Activity Day!`,

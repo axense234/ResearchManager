@@ -104,7 +104,7 @@ export class GetActivityFeedsService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundActivityFeeds,
         message: `Successfully found ${foundActivityFeeds.length} Activity Feeds given the params.`,

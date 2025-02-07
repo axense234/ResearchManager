@@ -65,7 +65,7 @@ export class CreateActivityLogService {
         type: 'create',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',
         entity: createdActivityLog,
         message: `Successfully created Activity Log!`,

@@ -91,7 +91,7 @@ export class UpdateSettingsService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedSettings,
         message: `Successfully updated Settings for the user: ${updatedSettings.userId}!`,

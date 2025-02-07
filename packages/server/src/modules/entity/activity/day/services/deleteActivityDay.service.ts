@@ -81,7 +81,7 @@ export class DeleteActivityDayService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedActivityDay,
         message: `Successfully deleted Activity Day!`,

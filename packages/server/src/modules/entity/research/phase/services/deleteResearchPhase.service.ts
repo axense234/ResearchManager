@@ -89,7 +89,7 @@ export class DeleteResearchPhaseService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedResearchPhase,
         message: `Successfully deleted Research Phase named ${deletedResearchPhase.name}!`,

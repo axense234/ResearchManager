@@ -76,7 +76,7 @@ export class CreateResearchLogService {
         type: 'create',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',
         entity: createdResearchLog,
         message: `Successfully created Research Log named ${createdResearchLog.name}!`,

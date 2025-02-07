@@ -69,7 +69,7 @@ export class CreateSettingsService {
         type: 'create',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',
         entity: createdSettings,
         message: `Successfully created Settings for user: ${createdSettings.userId}!`,

@@ -1,5 +1,6 @@
 // Validators
 import {
+  IsJWT,
   IsNumber,
   IsOptional,
   IsString,
@@ -23,4 +24,8 @@ export class ReturnObjectBuilderReturnObject {
   @ValidateNested()
   @IsOptional()
   payload?: Entity | Entity[];
+
+  @IsJWT()
+  @IsOptional()
+  access_token?: string;
 }

@@ -74,7 +74,7 @@ export class CreateResearchPhaseService {
         type: 'create',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',
         entity: createdResearchPhase,
         message: `Successfully created Research Phase named ${createdResearchPhase.name}!`,

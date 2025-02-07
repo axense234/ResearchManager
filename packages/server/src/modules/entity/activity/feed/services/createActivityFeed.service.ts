@@ -76,7 +76,7 @@ export class CreateActivityFeedService {
         type: 'create',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',
         entity: createdActivityFeed,
         message: `Successfully created Activity Feed of type ${createdActivityFeed.type}!`,

@@ -92,7 +92,7 @@ export class UpdateActivityDayService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedActivityDay,
         message: `Successfully updated Activity Day!`,

@@ -98,7 +98,7 @@ export class UpdateUserService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedUser,
         message: `Successfully updated user ${updatedUser.username}!`,

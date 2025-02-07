@@ -89,7 +89,7 @@ export class GetTagsService {
         throw new NotFoundException('Could not find any Tags given the input.');
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundTags,
         message: `Successfully found ${foundTags.length} Tags given the input!`,

@@ -15,6 +15,7 @@ import { SignTokenService } from './services/signToken.service';
 @Module({
   imports: [JwtModule.register({})],
   controllers: [AuthController],
+  exports: [AuthService],
   providers: [
     JwtStrategy,
     AuthService,

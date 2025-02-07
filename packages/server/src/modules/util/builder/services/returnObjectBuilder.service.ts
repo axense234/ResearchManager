@@ -3,18 +3,21 @@ import { Injectable } from '@nestjs/common';
 // Types
 import { ReturnObjectBuilderParams } from '../types/return/ReturnObjectBuilderParams';
 import { ReturnObjectBuilderReturnObject } from '../types';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class ReturnObjectBuilderService {
   constructor() {}
 
-  buildReturnObject({
+  async buildReturnObject({
     actionType,
     entity,
     message,
     additionalNotes,
     nbHits,
-  }: ReturnObjectBuilderParams): ReturnObjectBuilderReturnObject {
+    entityType,
+    access_token,
+  }: ReturnObjectBuilderParams): Promise<ReturnObjectBuilderReturnObject> {
     const returnObject: ReturnObjectBuilderReturnObject = {};
 
     if (actionType === 'GET MULTIPLE' && nbHits) {
@@ -31,6 +34,14 @@ export class ReturnObjectBuilderService {
     }
 
     returnObject.payload = entity;
+
+    if (
+      (actionType === 'CREATE' || actionType === 'SIGNIN') &&
+      entityType === 'user'
+    ) {
+      returnObject.access_token = access_token;
+      delete (returnObject.payload as User).hash;
+    }
 
     return returnObject;
   }

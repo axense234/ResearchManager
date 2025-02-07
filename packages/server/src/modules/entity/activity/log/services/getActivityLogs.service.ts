@@ -97,7 +97,7 @@ export class GetActivityLogsService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundActivityLogs,
 

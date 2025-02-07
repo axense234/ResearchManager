@@ -90,7 +90,7 @@ export class GetUsersService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundUsers,
         nbHits: foundUsers.length,

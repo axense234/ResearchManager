@@ -98,7 +98,7 @@ export class GetActivityDaysService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundActivityDays,
         message: `Successfully found ${foundActivityDays.length} Activity Days given the data`,

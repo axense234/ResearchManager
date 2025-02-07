@@ -76,7 +76,7 @@ export class DeleteTagService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'DELETE',
         entity: deletedTag,
         message: `Successfully deleted Tag named ${deletedTag.title}!`,

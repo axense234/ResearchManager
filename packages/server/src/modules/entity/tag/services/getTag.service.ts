@@ -61,7 +61,7 @@ export class GetTagService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundTag,
         message: `Successfully found Tag: ${foundTag.title}!`,

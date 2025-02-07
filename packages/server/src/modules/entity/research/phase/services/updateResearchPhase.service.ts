@@ -97,7 +97,7 @@ export class UpdateResearchPhaseService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedResearchPhase,
         message: `Successfully updated Research Phase named ${updatedResearchPhase.name}!`,

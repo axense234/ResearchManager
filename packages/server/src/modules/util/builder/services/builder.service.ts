@@ -30,19 +30,23 @@ export class ObjectBuilderService {
     private orderByObjectBuilderService: OrderByObjectBuilderService,
   ) {}
 
-  buildReturnObject({
+  async buildReturnObject({
     actionType,
     entity,
     message,
     additionalNotes,
     nbHits,
-  }: ReturnObjectBuilderParams): ReturnObjectBuilderReturnObject {
-    return this.returnObjectBuilderService.buildReturnObject({
+    entityType,
+    access_token,
+  }: ReturnObjectBuilderParams): Promise<ReturnObjectBuilderReturnObject> {
+    return await this.returnObjectBuilderService.buildReturnObject({
       actionType,
       message,
       entity,
       additionalNotes,
       nbHits,
+      access_token,
+      entityType,
     });
   }
 

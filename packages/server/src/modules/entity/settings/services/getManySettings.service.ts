@@ -91,7 +91,7 @@ export class GetManySettingsService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundSettings,
         message: `Successfully found ${foundSettings.length} Settings given the input!`,

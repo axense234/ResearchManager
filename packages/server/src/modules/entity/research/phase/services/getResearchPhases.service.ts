@@ -98,7 +98,7 @@ export class GetResearchPhasesService {
         );
       }
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'GET MULTIPLE',
         entity: foundResearchPhases,
         message: `Successfully found ${foundResearchPhases.length} Research Phases, given the params.`,

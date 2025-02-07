@@ -91,7 +91,7 @@ export class UpdateTagService {
         type: 'modify',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'UPDATE',
         entity: updatedTag,
         message: `Successfully updated Tag named ${updatedTag.title}!`,

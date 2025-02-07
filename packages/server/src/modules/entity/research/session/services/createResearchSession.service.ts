@@ -76,7 +76,7 @@ export class CreateResearchSessionService {
         type: 'create',
       });
 
-      return this.objectBuilder.buildReturnObject({
+      return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',
         entity: createdResearchSession,
         message: `Successfully created Research Session ${createdResearchSession.name}!`,
