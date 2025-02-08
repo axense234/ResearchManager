@@ -1,5 +1,11 @@
 import { TagFontFamily } from '@prisma/client';
-import { IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateTagDto {
   @IsString()
@@ -17,6 +23,22 @@ export class CreateTagDto {
   @IsString()
   @IsOptional()
   fontFamily: TagFontFamily;
+
+  @IsArray()
+  @IsOptional()
+  researchActivities: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchPhases: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchLogs: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchSessions: string[];
 
   @IsUUID()
   userId: string;
@@ -41,6 +63,22 @@ export class UpdateTagDto {
   @IsString()
   @IsOptional()
   fontFamily: TagFontFamily;
+
+  @IsArray()
+  @IsOptional()
+  researchActivities: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchPhases: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchLogs: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchSessions: string[];
 
   @IsUUID()
   @IsOptional()

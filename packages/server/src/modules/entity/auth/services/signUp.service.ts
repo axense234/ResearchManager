@@ -7,7 +7,7 @@ import {
 // Auth
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 // Dtos
-import AuthDto from '../dto/auth.dto';
+import { SignUpDto } from '../dto/signUp.dto';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Services
@@ -30,7 +30,7 @@ export class SignUpService {
 
   async signUp(
     queryParams: SignUpQueryParams,
-    dto: AuthDto,
+    dto: SignUpDto,
   ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;

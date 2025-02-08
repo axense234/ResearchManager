@@ -1,14 +1,12 @@
+// Prisma
+import { ActivityFeedType } from '@prisma/client';
 // Validators
-import { IsObject, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsObject, IsOptional, IsUUID } from 'class-validator';
 
 export class ActivityFeedCreateDataObject {
-  @IsObject()
+  @IsEnum(ActivityFeedType)
   @IsOptional()
-  dayActivities: { connect: { id: string }[] };
-
-  @IsString()
-  @IsOptional()
-  type: 'RESEARCH_ACTIVITY' | 'USER';
+  type: ActivityFeedType;
 
   @IsUUID()
   @IsOptional()
@@ -17,4 +15,8 @@ export class ActivityFeedCreateDataObject {
   @IsUUID()
   @IsOptional()
   researchActivityId: string;
+
+  @IsObject()
+  @IsOptional()
+  dayActivities: { connect: { id: string }[] };
 }

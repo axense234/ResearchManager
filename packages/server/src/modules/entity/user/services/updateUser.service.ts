@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 // Dtos
-import UpdateUserDto from '../dto/user.dto';
+import { UpdateUserDto } from '../dto/user.dto';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis

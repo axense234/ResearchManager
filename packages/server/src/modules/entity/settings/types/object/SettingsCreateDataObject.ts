@@ -1,16 +1,18 @@
+// Prisma
+import { SettingsSidebarPosition } from '@prisma/client';
 // Validators
 import {
-  IsString,
   IsUUID,
   IsBoolean,
   IsNumber,
   IsOptional,
+  IsEnum,
 } from 'class-validator';
 
 export class SettingsCreateDataObject {
-  @IsString()
+  @IsEnum(SettingsSidebarPosition)
   @IsOptional()
-  sidebarPosition: 'LEFT' | 'RIGHT';
+  sidebarPosition: SettingsSidebarPosition;
 
   @IsNumber()
   @IsOptional()

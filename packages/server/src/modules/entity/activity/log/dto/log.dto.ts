@@ -1,11 +1,7 @@
+// Prisma
 import { ActivitySubject } from '@prisma/client';
-import {
-  IsArray,
-  IsDateString,
-  IsEnum,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+// Validators
+import { IsArray, IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class CreateActivityLogDto {
   @IsEnum(ActivitySubject)
@@ -18,11 +14,7 @@ export class CreateActivityLogDto {
 
   @IsArray()
   @IsOptional()
-  messageValues: string[];
-
-  @IsDateString()
-  @IsOptional()
-  createdAt: Date;
+  activityDays: string[];
 }
 
 export class UpdateActivityLogDto {
@@ -36,9 +28,5 @@ export class UpdateActivityLogDto {
 
   @IsArray()
   @IsOptional()
-  messageValues: string[];
-
-  @IsDateString()
-  @IsOptional()
-  createdAt: Date;
+  activityDays: string[];
 }

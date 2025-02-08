@@ -1,25 +1,32 @@
 // Validators
-import { IsArray, IsOptional, IsString } from 'class-validator';
-export class UpdateUserDto {
+import {
+  IsString,
+  IsOptional,
+  IsNotEmpty,
+  IsEmail,
+  IsArray,
+} from 'class-validator';
+
+export class SignUpDto {
   @IsString()
   @IsOptional()
   username: string;
 
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
+  password: string;
+
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
 
   @IsString()
   @IsOptional()
-  password: string;
+  backgroundImageSrc: string;
 
   @IsString()
   @IsOptional()
   profileImageSrc: string;
-
-  @IsString()
-  @IsOptional()
-  backgroundImageSrc: string;
 
   @IsString()
   @IsOptional()

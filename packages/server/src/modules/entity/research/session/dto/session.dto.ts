@@ -1,4 +1,4 @@
-// Prisma Enum
+// Prisma
 import { ResearchSessionStatusType } from '@prisma/client';
 // Class Validator
 import {
@@ -40,6 +40,10 @@ export class CreateResearchSessionDto {
   @IsOptional()
   currentStatusDate: Date;
 
+  @IsArray()
+  @IsOptional()
+  tags: string[];
+
   @IsUUID()
   userIdForArchivePurposes: string;
 
@@ -75,6 +79,10 @@ export class UpdateResearchSessionDto {
   @IsDateString()
   @IsOptional()
   currentStatusDate: Date;
+
+  @IsArray()
+  @IsOptional()
+  tags: string[];
 
   @IsUUID()
   @IsOptional()

@@ -1,23 +1,29 @@
+// Prisma
+import { SettingsSidebarPosition } from '@prisma/client';
 // Validators
 import {
   IsBoolean,
+  IsEnum,
   IsNumber,
   IsOptional,
-  IsString,
   IsUUID,
 } from 'class-validator';
 
 export class CreateSettingsDto {
-  @IsString()
-  sidebarPosition: 'left' | 'right';
+  @IsEnum(SettingsSidebarPosition)
+  @IsOptional()
+  sidebarPosition: SettingsSidebarPosition;
 
   @IsNumber()
+  @IsOptional()
   warningOverlayTimeInSeconds: number;
 
   @IsBoolean()
+  @IsOptional()
   purgeDirectly: boolean;
 
   @IsBoolean()
+  @IsOptional()
   allowNotifications: boolean;
 
   @IsUUID()
@@ -25,9 +31,9 @@ export class CreateSettingsDto {
 }
 
 export class UpdateSettingsDto {
-  @IsString()
+  @IsEnum(SettingsSidebarPosition)
   @IsOptional()
-  sidebarPosition: 'left' | 'right';
+  sidebarPosition: SettingsSidebarPosition;
 
   @IsNumber()
   @IsOptional()

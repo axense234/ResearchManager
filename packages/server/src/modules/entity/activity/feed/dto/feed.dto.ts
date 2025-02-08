@@ -1,7 +1,7 @@
 // Prisma Client
 import { ActivityFeedType } from '@prisma/client';
 // Class Validator
-import { IsEnum, IsOptional, IsUUID } from 'class-validator';
+import { IsArray, IsEnum, IsOptional, IsUUID } from 'class-validator';
 
 export class CreateActivityFeedDto {
   @IsEnum(ActivityFeedType)
@@ -14,6 +14,10 @@ export class CreateActivityFeedDto {
   @IsUUID()
   @IsOptional()
   researchActivityId: string;
+
+  @IsArray()
+  @IsOptional()
+  dayActivities: string[];
 }
 
 export class UpdateActivityFeedDto {
@@ -28,4 +32,8 @@ export class UpdateActivityFeedDto {
   @IsUUID()
   @IsOptional()
   researchActivityId: string;
+
+  @IsArray()
+  @IsOptional()
+  dayActivities: string[];
 }

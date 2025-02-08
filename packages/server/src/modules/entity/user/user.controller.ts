@@ -19,7 +19,7 @@ import { User } from '@prisma/client';
 // Guards
 import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dto
-import UpdateUserDto from './dto/user.dto';
+import { UpdateUserDto } from './dto/user.dto';
 // Types
 import {
   DeleteUserQueryParams,

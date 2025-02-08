@@ -1,4 +1,5 @@
-import { IsOptional, IsString, IsUUID } from 'class-validator';
+// Validators
+import { IsArray, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateResearchPhaseDto {
   @IsString()
@@ -14,6 +15,18 @@ export class CreateResearchPhaseDto {
 
   @IsUUID()
   userIdForArchivePurposes: string;
+
+  @IsArray()
+  @IsOptional()
+  researchLogs: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchSessions: string[];
+
+  @IsArray()
+  @IsOptional()
+  tags: string[];
 }
 
 export class UpdateResearchPhaseDto {
@@ -32,4 +45,16 @@ export class UpdateResearchPhaseDto {
   @IsUUID()
   @IsOptional()
   userIdForArchivePurposes: string;
+
+  @IsArray()
+  @IsOptional()
+  researchLogs: string[];
+
+  @IsArray()
+  @IsOptional()
+  researchSessions: string[];
+
+  @IsArray()
+  @IsOptional()
+  tags: string[];
 }

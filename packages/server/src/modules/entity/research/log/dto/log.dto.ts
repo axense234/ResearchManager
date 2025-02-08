@@ -27,6 +27,10 @@ export class CreateResearchLogDto {
   @IsOptional()
   imagesSrc: string[];
 
+  @IsArray()
+  @IsOptional()
+  tags: string[];
+
   @IsUUID()
   userIdForArchivePurposes: string;
 
@@ -54,6 +58,10 @@ export class UpdateResearchLogDto {
   @IsArray()
   @IsOptional()
   imagesSrc: string[];
+
+  @IsArray()
+  @IsOptional()
+  tags: string[];
 
   @IsUUID()
   @IsOptional()

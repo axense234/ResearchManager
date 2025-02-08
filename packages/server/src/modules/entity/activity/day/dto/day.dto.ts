@@ -1,20 +1,21 @@
-import { IsDateString, IsOptional, IsUUID } from 'class-validator';
+// Validators
+import { IsArray, IsOptional, IsUUID } from 'class-validator';
 
 export class CreateActivityDayDto {
-  @IsDateString()
-  @IsOptional()
-  createdAt: Date;
-
   @IsUUID()
   activityFeedId: string;
+
+  @IsArray()
+  @IsOptional()
+  activityLogs: string[];
 }
 
 export class UpdateActivityDayDto {
-  @IsDateString()
-  @IsOptional()
-  createdAt: Date;
-
   @IsUUID()
   @IsOptional()
   activityFeedId: string;
+
+  @IsArray()
+  @IsOptional()
+  activityLogs: string[];
 }

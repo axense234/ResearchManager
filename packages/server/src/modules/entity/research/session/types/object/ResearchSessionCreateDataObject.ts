@@ -1,7 +1,10 @@
+// Prisma
+import { ResearchSessionStatusType } from '@prisma/client';
 // Validators
 import {
   IsArray,
   IsDateString,
+  IsEnum,
   IsNumber,
   IsObject,
   IsOptional,
@@ -30,9 +33,9 @@ export class ResearchSessionCreateDataObject {
   @IsOptional()
   currentStatusDate?: Date;
 
-  @IsString()
+  @IsEnum(ResearchSessionStatusType)
   @IsOptional()
-  currentStatusType?: 'FINISHED' | 'RESUMED' | 'PAUSED' | 'STARTED';
+  currentStatusType: ResearchSessionStatusType;
 
   @IsArray()
   @IsOptional()

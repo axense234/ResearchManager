@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 // Dtos
-import AuthDto from '../dto/auth.dto';
+import { SignInDto } from '../dto/signIn.dto';
 // Argon
 import * as argon from 'argon2';
 // Prisma
@@ -29,7 +29,7 @@ export class SignInService {
 
   async signIn(
     queryParams: SignInQueryParams,
-    dto: AuthDto,
+    dto: SignInDto,
   ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;

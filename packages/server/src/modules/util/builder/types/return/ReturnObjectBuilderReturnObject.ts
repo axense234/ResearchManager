@@ -28,4 +28,8 @@ export class ReturnObjectBuilderReturnObject {
   @IsJWT()
   @IsOptional()
   access_token?: string;
+
+  @IsNumber()
+  @IsOptional()
+  statusCode?: number;
 }
