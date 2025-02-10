@@ -4,20 +4,18 @@ import { ConfigService } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 // NestJS
 import { Module } from '@nestjs/common';
-// Redis Store
-import * as ioredis from 'cache-manager-ioredis-yet';
+// Keyv with Redis
+import { createKeyv } from '@keyv/redis';
 
 @Module({})
 export class RedisCacheModule {
   static async registerStore() {
     return CacheModule.registerAsync({
-      useFactory: async (configService: ConfigService) => ({
-        store: await ioredis.redisStore({
-          host: configService.get('REDIS_HOST'),
-          port: configService.get('REDIS_PORT'),
-          password: configService.get('REDIS_PASSWORD'),
-        }),
-      }),
+      useFactory: async (configService: ConfigService) => {
+        return {
+          stores: [createKeyv(configService.get('REDIS_INSTANCE_URL'))],
+        };
+      },
       inject: [ConfigService],
     });
   }

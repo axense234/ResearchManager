@@ -18,7 +18,7 @@ import { activityFeedAllowedSortByKeysValues } from 'src/modules/entity/activity
 import { activityDayAllowedSortByKeysValues } from 'src/modules/entity/activity/day/data/options/allowedSortByKeysValues';
 import { activityLogAllowedSortByKeysValues } from 'src/modules/entity/activity/log/data/options/allowedSortByKeysValues';
 import { tagAllowedSortByKeysValues } from 'src/modules/entity/tag/data/options/allowedSortByKeysValues';
-import { entityValues } from '../data/entityValues';
+import { entityValues } from '../data/entity/entityValues';
 import { userAllowedSortByKeysValues } from 'src/modules/entity/user/data/options/allowedSortByKeysValues';
 
 @Injectable()

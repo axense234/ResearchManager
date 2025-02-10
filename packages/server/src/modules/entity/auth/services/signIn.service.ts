@@ -38,6 +38,24 @@ export class SignInService {
         where: { email: dto.email } as unknown as UserWhereUniqueObject,
       };
 
+      const foundUserForAuthentication =
+        await this.prisma.user.findUnique(findUniqueObject);
+
+      if (!foundUserForAuthentication) {
+        throw new NotFoundException(
+          'Could not find an user with such an email.',
+        );
+      }
+
+      const arePasswordsMatching = await argon.verify(
+        foundUserForAuthentication.hash,
+        dto.password,
+      );
+
+      if (!arePasswordsMatching) {
+        throw new UnauthorizedException('Passwords do not match.');
+      }
+
       const { optionObject, additionalNotes } =
         this.objectBuilder.buildOptionObject({
           chosenOptionType,
@@ -54,17 +72,8 @@ export class SignInService {
 
       if (!foundUser) {
         throw new NotFoundException(
-          'Could not find an user with such an email.',
+          'Something went incredibly wrong. The apocalypse is coming. Run while you can.',
         );
-      }
-
-      const arePasswordsMatching = await argon.verify(
-        foundUser.hash,
-        dto.password,
-      );
-
-      if (!arePasswordsMatching) {
-        throw new UnauthorizedException('Passwords do not match.');
       }
 
       const jwtResponse = await this.signTokenService.signToken(

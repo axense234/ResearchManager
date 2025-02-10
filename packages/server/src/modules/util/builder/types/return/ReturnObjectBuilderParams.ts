@@ -12,7 +12,8 @@ export class ReturnObjectBuilderParams {
   @IsString()
   message: string;
 
-  entity: Entity | Entity[];
+  @IsOptional()
+  entity?: Entity | Entity[];
 
   @IsOptional()
   additionalNotes?: string | string[];

@@ -4,4 +4,5 @@ export type ActionType =
   | 'CREATE'
   | 'UPDATE'
   | 'DELETE'
-  | 'SIGNIN';
+  | 'SIGNIN'
+  | 'LOGOUT';

@@ -1,4 +1,4 @@
-import { EntityTypePlural } from '../types';
+import { EntityTypePlural } from '../../types';
 
 export const entityValues: EntityTypePlural[] = [
   'researchActivities',

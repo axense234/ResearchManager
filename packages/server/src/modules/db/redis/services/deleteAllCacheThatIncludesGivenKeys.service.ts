@@ -2,14 +2,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 // Cache
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-// IORedis
-import { RedisCache } from 'cache-manager-ioredis-yet';
 // Types
 import DeleteAllCacheThatIncludesGivenKeysType from '../types/DeleteAllCacheThatIncludesGivenKeys';
+// Typing from the keyv thingie
+import { Keyv } from '@keyv/redis';
 
 @Injectable()
 export class DeleteAllCacheThatIncludesGivenKeysService {
-  constructor(@Inject(CACHE_MANAGER) private redisCacheManager: RedisCache) {}
+  constructor(@Inject(CACHE_MANAGER) private redisCacheManager: Keyv) {}
 
   async deleteAllCacheThatIncludesGivenKeys({
     base,

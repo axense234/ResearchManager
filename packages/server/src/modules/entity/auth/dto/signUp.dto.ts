@@ -6,61 +6,79 @@ import {
   IsEmail,
   IsArray,
 } from 'class-validator';
+// Swagger
+import { ApiProperty } from '@nestjs/swagger';
+// Data
+import { signUpDtoOptions } from '../data/swagger';
 
 export class SignUpDto {
+  @ApiProperty(signUpDtoOptions['username'])
   @IsString()
   @IsOptional()
-  username: string;
+  username?: string;
 
+  @ApiProperty(signUpDtoOptions['password'])
   @IsString()
   @IsNotEmpty()
   password: string;
 
+  @ApiProperty(signUpDtoOptions['email'])
   @IsEmail()
   @IsNotEmpty()
   email: string;
 
+  @ApiProperty(signUpDtoOptions['backgroundImageSrc'])
   @IsString()
   @IsOptional()
-  backgroundImageSrc: string;
+  backgroundImageSrc?: string;
 
+  @ApiProperty(signUpDtoOptions['profileImageSrc'])
   @IsString()
   @IsOptional()
-  profileImageSrc: string;
+  profileImageSrc?: string;
 
+  @ApiProperty(signUpDtoOptions['settings'])
   @IsString()
   @IsOptional()
-  settings: string;
+  settings?: string;
 
+  @ApiProperty(signUpDtoOptions['activityFeeds'])
   @IsArray()
   @IsOptional()
-  activityFeeds: string[];
+  activityFeeds?: string[];
 
+  @ApiProperty(signUpDtoOptions['archivedResearchActivities'])
   @IsArray()
   @IsOptional()
-  archivedResearchActivities: string[];
+  archivedResearchActivities?: string[];
 
+  @ApiProperty(signUpDtoOptions['archivedResearchLogs'])
   @IsArray()
   @IsOptional()
-  archivedResearchLogs: string[];
+  archivedResearchLogs?: string[];
 
+  @ApiProperty(signUpDtoOptions['archivedResearchPhases'])
   @IsArray()
   @IsOptional()
-  archivedResearchPhases: string[];
+  archivedResearchPhases?: string[];
 
+  @ApiProperty(signUpDtoOptions['archivedResearchSessions'])
   @IsArray()
   @IsOptional()
-  archivedResearchSessions: string[];
+  archivedResearchSessions?: string[];
 
+  @ApiProperty(signUpDtoOptions['archivedTags'])
   @IsArray()
   @IsOptional()
-  archivedTags: string[];
+  archivedTags?: string[];
 
+  @ApiProperty(signUpDtoOptions['researchActivities'])
   @IsArray()
   @IsOptional()
-  researchActivities: string[];
+  researchActivities?: string[];
 
+  @ApiProperty(signUpDtoOptions['tags'])
   @IsArray()
   @IsOptional()
-  tags: string[];
+  tags?: string[];
 }
