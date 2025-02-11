@@ -4,12 +4,12 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 // Types
 import DeleteAllCacheThatIncludesGivenKeysType from '../types/DeleteAllCacheThatIncludesGivenKeys';
-// Typing from the keyv thingie
-import { Keyv } from '@keyv/redis';
+// IORedis
+import { RedisCache } from 'cache-manager-ioredis-yet';
 
 @Injectable()
 export class DeleteAllCacheThatIncludesGivenKeysService {
-  constructor(@Inject(CACHE_MANAGER) private redisCacheManager: Keyv) {}
+  constructor(@Inject(CACHE_MANAGER) private redisCacheManager: RedisCache) {}
 
   async deleteAllCacheThatIncludesGivenKeys({
     base,
@@ -31,7 +31,7 @@ export class DeleteAllCacheThatIncludesGivenKeysService {
       console.log(scanResponse[1]);
       keysToDelete = keysToDelete.concat(
         scanResponse[1].filter(
-          (key) =>
+          (key: string) =>
             !specifiers.some(
               (specifier) =>
                 key.includes(specifier.label) && !key.includes(specifier.value),

@@ -16,7 +16,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Research Manager API v1.1.0')
     .setDescription(
-      'The swagger interface for the Research Manager v1.0.0 API. Used mainly for testing purposes',
+      'The swagger interface for the Research Manager v1.1.0 API. Used mainly for testing purposes',
     )
     .setVersion('1.1.0')
     .addBearerAuth()

@@ -2,6 +2,8 @@
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+// Data
+import { signInResponsesExamples } from '../../../examples';
 
 type SignInResponsesOptionsType = {
   '200': ApiResponseOptions;
@@ -14,6 +16,7 @@ export const signInResponsesOptions: SignInResponsesOptionsType = {
     type: ReturnObjectBuilderReturnObject,
     status: 200,
     description: 'Successfully signed in User.',
+    examples: signInResponsesExamples,
   },
   '401': {
     status: 401,

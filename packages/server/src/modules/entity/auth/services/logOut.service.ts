@@ -20,7 +20,7 @@ export class LogOutService {
   ): Promise<ReturnObjectBuilderReturnObject> {
     try {
       await this.redis.deleteAllCacheThatIncludesGivenKeys({
-        base: '/',
+        base: '',
         specifiers: [
           { label: 'userId', value: queryParams.userId },
           { label: 'email', value: queryParams.email },

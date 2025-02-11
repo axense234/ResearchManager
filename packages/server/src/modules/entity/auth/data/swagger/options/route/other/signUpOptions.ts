@@ -3,7 +3,7 @@ import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
 import { SignUpDto } from 'src/modules/entity/auth/dto';
 // Data
-import { signUpExamples } from '../../../examples/body/signUpExamples';
+import { signUpExamples } from '../../../examples';
 
 export const signUpApiOperationOptions: ApiOperationOptions = {
   summary: 'Creates an User then Signs In the respective User.',

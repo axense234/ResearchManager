@@ -1,5 +1,5 @@
 // Dto
-import { SignUpDto } from '../../dto';
+import { SignUpDto } from '../../../dto';
 
 export const signUpMockData: SignUpDto[] = [
   {

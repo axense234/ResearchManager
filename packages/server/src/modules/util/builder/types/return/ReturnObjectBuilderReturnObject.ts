@@ -11,7 +11,7 @@ import { Entity } from '../general/Entity';
 // Swagger
 import { ApiProperty } from '@nestjs/swagger';
 // Data
-import { returnObjectBuilderDtoOptions } from '../../data/swagger/options/decorators/parameter/dto/returnObjectBuilderDtoOptions';
+import { returnObjectBuilderDtoOptions } from '../../data/swagger';
 
 export class ReturnObjectBuilderReturnObject {
   @ApiProperty(returnObjectBuilderDtoOptions['nbHits'])

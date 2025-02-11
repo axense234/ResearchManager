@@ -4,13 +4,13 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 // Config
 import { ConfigService } from '@nestjs/config';
-// Type from the keyv thingie
-import { Keyv } from '@keyv/redis';
+// IORedis
+import { RedisCache } from 'cache-manager-ioredis-yet';
 
 @Injectable()
 export class GetOrSetCacheService {
   constructor(
-    @Inject(CACHE_MANAGER) private redisCacheManager: Keyv,
+    @Inject(CACHE_MANAGER) private redisCacheManager: RedisCache,
     private config: ConfigService,
   ) {}
 
