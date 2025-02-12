@@ -30,3 +30,16 @@ export const signUpResponsesMockData: ReturnObjectBuilderReturnObject[] = [
     statusCode: 201,
   },
 ];
+
+export const signUpResponsesErrorMockData: ReturnObjectBuilderReturnObject[] = [
+  {
+    message: ['password should not be empty', 'password must be a string'],
+    error: 'Bad Request',
+    statusCode: 400,
+  },
+  {
+    message: 'Credentials taken.',
+    error: 'Forbidden',
+    statusCode: 403,
+  },
+];

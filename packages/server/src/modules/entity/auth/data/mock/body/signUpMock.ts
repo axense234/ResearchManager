@@ -24,7 +24,6 @@ export const signUpMockData: SignUpDto[] = [
       'https://res.cloudinary.com/birthdayreminder/image/upload/v1688815596/Highschool%20Site%20App/library_cgocde.jpg',
     profileImageSrc:
       'https://res.cloudinary.com/birthdayreminder/image/upload/v1677753040/Highschool%20Site%20App/t5_bkblwl.jpg',
-    settings: '',
     researchActivities: [],
   },
 ];

@@ -1,5 +1,2 @@
-export * from './body/signInExamples';
-export * from './body/signUpExamples';
-
-export * from './response/signInResponsesExamples';
-export * from './response/signUpResponsesExamples';
+export * from './body';
+export * from './response';

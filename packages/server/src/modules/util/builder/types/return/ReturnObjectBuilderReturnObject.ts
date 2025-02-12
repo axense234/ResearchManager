@@ -22,7 +22,7 @@ export class ReturnObjectBuilderReturnObject {
   @ApiProperty(returnObjectBuilderDtoOptions['message'])
   @IsString()
   @IsOptional()
-  message?: string;
+  message?: string | string[];
 
   @ApiProperty(returnObjectBuilderDtoOptions['notes'])
   @IsString()
@@ -38,6 +38,11 @@ export class ReturnObjectBuilderReturnObject {
   @IsJWT()
   @IsOptional()
   access_token?: string;
+
+  @ApiProperty(returnObjectBuilderDtoOptions['error'])
+  @IsString()
+  @IsOptional()
+  error?: string;
 
   @ApiProperty(returnObjectBuilderDtoOptions['statusCode'])
   @IsNumber()

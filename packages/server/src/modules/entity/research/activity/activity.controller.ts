@@ -23,7 +23,10 @@ import { GetResearchActivityQueryParams } from './types/params/GetResearchActivi
 import { CreateResearchActivityQueryParams } from './types/params/CreateResearchActivityQueryParams';
 import { DeleteResearchActivityQueryParams } from './types/params/DeleteResearchActivityQueryParams';
 import { UpdateResearchActivityQueryParams } from './types/params/UpdateResearchActivityQueryParams';
+// Swagger
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Research Activities')
 @UseGuards(JwtGuard)
 @Controller('researchActivities')
 export class ResearchActivityController {

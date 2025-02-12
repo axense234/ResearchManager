@@ -11,12 +11,12 @@ export class SignInQueryParams {
   @IsOptional()
   includeValues: string;
 
-  @ApiProperty(signInQueryParamsApiPropertyOptions['includeValues'])
+  @ApiProperty(signInQueryParamsApiPropertyOptions['selectValues'])
   @IsString()
   @IsOptional()
   selectValues: string;
 
-  @ApiProperty(signInQueryParamsApiPropertyOptions['includeValues'])
+  @ApiProperty(signInQueryParamsApiPropertyOptions['chosenOptionType'])
   @IsString()
   @IsOptional()
   chosenOptionType: 'include' | 'select';

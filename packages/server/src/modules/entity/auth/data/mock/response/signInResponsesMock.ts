@@ -30,3 +30,21 @@ export const signInResponsesMockData: ReturnObjectBuilderReturnObject[] = [
     statusCode: 200,
   },
 ];
+
+export const signInResponsesErrorMockData: ReturnObjectBuilderReturnObject[] = [
+  {
+    message: ['password should not be empty', 'password must be a string'],
+    error: 'Bad Request',
+    statusCode: 400,
+  },
+  {
+    message: 'Passwords do not match.',
+    error: 'Unauthorized',
+    statusCode: 401,
+  },
+  {
+    message: 'Could not find an user with such an email.',
+    error: 'Not Found',
+    statusCode: 404,
+  },
+];

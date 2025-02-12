@@ -3,7 +3,10 @@ import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 // Data
-import { signUpResponsesExamples } from '../../../examples';
+import {
+  signUpResponsesErrorExamples,
+  signUpResponsesExamples,
+} from '../../../examples';
 
 type SignUpResponsesOptionsType = {
   '201': ApiResponseOptions;
@@ -22,9 +25,11 @@ export const signUpResponsesOptions: SignUpResponsesOptionsType = {
     status: 400,
     description:
       'Could not create user with the data provided or input validation failed.',
+    example: signUpResponsesErrorExamples['400'],
   },
   '403': {
     status: 403,
     description: 'Credentials taken.',
+    example: signUpResponsesErrorExamples['403'],
   },
 };

@@ -27,12 +27,23 @@ import {
   GetUsersQueryParams,
   UpdateUserQueryParams,
 } from './types';
+// Swagger
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+// Data
+import {
+  getUsersApiOperationOptions,
+  getUsersResponsesOptions,
+} from './data/swagger';
 
 @UseGuards(JwtGuard)
+@ApiTags('Users')
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @ApiOperation(getUsersApiOperationOptions)
+  @ApiResponse(getUsersResponsesOptions['200'])
+  @ApiResponse(getUsersResponsesOptions['404'])
   @Get()
   getUsers(@Query() queryParams: GetUsersQueryParams, @Req() req: Request) {
     return this.userService.getUsers(queryParams, req.url);

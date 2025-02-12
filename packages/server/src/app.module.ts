@@ -1,5 +1,7 @@
 // Nest
 import { Module } from '@nestjs/common';
+// Config Module
+import { ConfigModule } from '@nestjs/config';
 // Modules
 import { UserModule } from './modules/entity/user/user.module';
 import { AuthModule } from './modules/entity/auth/auth.module';
@@ -14,8 +16,6 @@ import { ActivityDayModule } from './modules/entity/activity/day/day.module';
 import { ActivityLogModule } from './modules/entity/activity/log/log.module';
 import { ObjectBuilderModule } from './modules/util/builder/builder.module';
 import { HealthModule } from './modules/util/health/health.module';
-// Config Module
-import { ConfigModule } from '@nestjs/config';
 // Db Modules
 import { PrismaModule } from './modules/db/prisma/prisma.module';
 import { RedisModule } from './modules/db/redis/redis.module';
@@ -24,9 +24,9 @@ import { RedisModule } from './modules/db/redis/redis.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     ObjectBuilderModule,
-    PrismaModule,
     AuthModule,
     ResearchActivityModule,
+    PrismaModule,
     TagModule,
     SettingModule,
     ResearchPhaseModule,

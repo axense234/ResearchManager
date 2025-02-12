@@ -1,12 +1,22 @@
 // Types
 import { User } from '@prisma/client';
+import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 // Swagger
 import { ApiResponseExamples } from '@nestjs/swagger';
 // Data
-import { signInResponsesMockData } from '../../../mock';
+import {
+  signInResponsesErrorMockData,
+  signInResponsesMockData,
+} from '../../../mock';
 
 type SignInResponsesExamplesType = {
   [key: string]: ApiResponseExamples;
+};
+
+type SignInResponsesErrorExamplesType = {
+  '400': ReturnObjectBuilderReturnObject;
+  '401': ReturnObjectBuilderReturnObject;
+  '404': ReturnObjectBuilderReturnObject;
 };
 
 export const signInResponsesExamples: SignInResponsesExamplesType = {
@@ -28,4 +38,10 @@ export const signInResponsesExamples: SignInResponsesExamplesType = {
       (mock.payload as User).email.startsWith('lucy'),
     ),
   },
+};
+
+export const signInResponsesErrorExamples: SignInResponsesErrorExamplesType = {
+  '400': signInResponsesErrorMockData.find((mock) => mock.statusCode === 400),
+  '401': signInResponsesErrorMockData.find((mock) => mock.statusCode === 401),
+  '404': signInResponsesErrorMockData.find((mock) => mock.statusCode === 404),
 };

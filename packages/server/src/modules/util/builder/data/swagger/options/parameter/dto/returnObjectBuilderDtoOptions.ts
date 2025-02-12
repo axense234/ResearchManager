@@ -7,6 +7,7 @@ type ReturnObjectBuilderDtoOptionsType = {
   notes: ApiPropertyOptions;
   payload: ApiPropertyOptions;
   access_token: ApiPropertyOptions;
+  error: ApiPropertyOptions;
   statusCode: ApiPropertyOptions;
 };
 
@@ -45,6 +46,12 @@ export const returnObjectBuilderDtoOptions: ReturnObjectBuilderDtoOptionsType =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImkgYW0gaW4geW91ciB3YWxscyIsIndhcm5pbmciOiJydW4iLCJpYXQiOjE1MTYyMzkwMjJ9.YAeybtdSDCBDkApt1UKz6cOq-RujwMvwNqgvNremtR8',
       description:
         'The jwt token sent back by the request. Usually is sent back when an user sign up/in. Also do not decode the example above.',
+      required: false,
+    },
+    error: {
+      example: 'Bad Request',
+      description:
+        'The error type of the request. Usually sent when things get bad.',
       required: false,
     },
     statusCode: {
