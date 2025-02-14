@@ -96,7 +96,10 @@ export class QueryObjectBuilderService {
       additionalNotes = `No searchByValue query parameter provided even tho searchByKey was given.`;
     } else if (searchByKey && searchByValue) {
       if (allowedSearchByKeyValues.includes(searchByKey)) {
-        queryObject[searchByKey] = { contains: searchByValue };
+        queryObject[searchByKey] = {
+          contains: searchByValue,
+          mode: 'insensitive',
+        };
       } else {
         additionalNotes = `Invalid searchByKey given.`;
       }

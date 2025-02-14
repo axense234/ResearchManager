@@ -11,7 +11,7 @@ export class OrderByObjectBuilderParamsQuery {
 
   @IsString()
   @IsOptional()
-  sortByOrders: 'asc' | 'desc';
+  sortByOrders: string;
 }
 
 export class OrderByObjectBuilderParams {

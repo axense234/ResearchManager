@@ -8,7 +8,11 @@ import {
   signInApiOperationOptions,
   signUpApiOperationOptions,
 } from 'src/modules/entity/auth/data/swagger';
-import { getUsersApiOperationOptions } from 'src/modules/entity/user/data/swagger';
+import {
+  getProfileApiOperationOptions,
+  getUserApiOperationOptions,
+  getUsersApiOperationOptions,
+} from 'src/modules/entity/user/data/swagger';
 // Types
 import { EntityType, ActionType } from 'src/modules/util/builder/types';
 
@@ -24,6 +28,10 @@ export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
           return applyDecorators(ApiOperation(logOutApiOperationOptions));
         case 'GET MULTIPLE':
           return applyDecorators(ApiOperation(getUsersApiOperationOptions));
+        case 'GET PROFILE':
+          return applyDecorators(ApiOperation(getProfileApiOperationOptions));
+        case 'GET SINGLE':
+          return applyDecorators(ApiOperation(getUserApiOperationOptions));
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }

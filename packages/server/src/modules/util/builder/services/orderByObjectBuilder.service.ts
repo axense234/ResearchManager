@@ -9,17 +9,17 @@ import {
   OrderByObjectBuilderReturnObject,
 } from '../types';
 // Data
-import { researchActivitiesAllowedSortByKeysValues } from 'src/modules/entity/research/activity/data/options/allowedSortByKeysValues';
-import { researchLogsAllowedSortByKeysValues } from 'src/modules/entity/research/log/data/options/allowedSortByKeysValues';
-import { researchPhaseAllowedSortByKeysValues } from 'src/modules/entity/research/phase/data/options/allowedSortByKeysValues';
-import { researchSessionAllowedSortByKeysValues } from 'src/modules/entity/research/session/data/options/allowedSortByKeysValues';
-import { settingsAllowedSortByKeysValues } from 'src/modules/entity/settings/data/options/allowedSortByKeysValues';
-import { activityFeedAllowedSortByKeysValues } from 'src/modules/entity/activity/feed/data/options/allowedSortByKeysValues';
-import { activityDayAllowedSortByKeysValues } from 'src/modules/entity/activity/day/data/options/allowedSortByKeysValues';
-import { activityLogAllowedSortByKeysValues } from 'src/modules/entity/activity/log/data/options/allowedSortByKeysValues';
-import { tagAllowedSortByKeysValues } from 'src/modules/entity/tag/data/options/allowedSortByKeysValues';
-import { entityValues } from '../data/entity/entityValues';
-import { userAllowedSortByKeysValues } from 'src/modules/entity/user/data/options/allowedSortByKeysValues';
+import { activityDayAllowedSortByKeysValues } from 'src/modules/entity/activity/day/data';
+import { activityFeedAllowedSortByKeysValues } from 'src/modules/entity/activity/feed/data';
+import { activityLogAllowedSortByKeysValues } from 'src/modules/entity/activity/log/data';
+import { researchActivitiesAllowedSortByKeysValues } from 'src/modules/entity/research/activity/data';
+import { researchLogsAllowedSortByKeysValues } from 'src/modules/entity/research/log/data';
+import { researchPhaseAllowedSortByKeysValues } from 'src/modules/entity/research/phase/data';
+import { researchSessionAllowedSortByKeysValues } from 'src/modules/entity/research/session/data';
+import { settingsAllowedSortByKeysValues } from 'src/modules/entity/settings/data';
+import { tagAllowedSortByKeysValues } from 'src/modules/entity/tag/data';
+import { userAllowedSortByKeysValues } from 'src/modules/entity/user/data';
+import { entityValues } from '../data';
 
 @Injectable()
 export class OrderByObjectBuilderService {

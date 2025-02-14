@@ -5,4 +5,5 @@ export type ActionType =
   | 'UPDATE'
   | 'DELETE'
   | 'SIGNIN'
-  | 'LOGOUT';
+  | 'LOGOUT'
+  | 'GET PROFILE';

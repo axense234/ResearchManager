@@ -28,12 +28,13 @@ import {
   UpdateUserQueryParams,
 } from './types';
 // Swagger
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
 
 @UseGuards(JwtGuard)
+@ApiBearerAuth()
 @ApiTags('Users')
 @Controller('users')
 export class UserController {
@@ -46,11 +47,14 @@ export class UserController {
     return this.userService.getUsers(queryParams, req.url);
   }
 
+  @SwaggerHead('user', 'GET PROFILE')
+  @SwaggerResponses('user', 'GET PROFILE')
   @Get('profile')
   getProfile(@GetUser() user: User) {
     return this.userService.getProfile(user);
   }
 
+  @SwaggerHead('user', 'GET SINGLE')
   @Get(':uniqueIdentifier')
   getUser(
     @Query() queryParams: GetUserQueryParams,

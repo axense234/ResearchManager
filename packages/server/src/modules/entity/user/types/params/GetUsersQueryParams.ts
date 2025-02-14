@@ -1,39 +1,42 @@
 // Validators
-import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
+// Swagger
+import { ApiProperty } from '@nestjs/swagger';
+// Data
+import { getUsersQueryParamsApiPropertyOptions } from '../../data';
 
 export class GetUsersQueryParams {
-  @ApiProperty({ required: false, description: 'test' })
+  @ApiProperty(getUsersQueryParamsApiPropertyOptions['searchByKey'])
   @IsOptional()
   @IsString()
   searchByKey: string;
 
-  @ApiProperty({ required: false, description: 'test' })
+  @ApiProperty(getUsersQueryParamsApiPropertyOptions['searchByValue'])
   @IsOptional()
   @IsString()
   searchByValue: string;
 
-  @ApiProperty({ required: false, description: 'test' })
+  @ApiProperty(getUsersQueryParamsApiPropertyOptions['sortByKeys'])
   @IsOptional()
   @IsString()
   sortByKeys: string;
 
-  @ApiProperty({ required: false, description: 'test' })
+  @ApiProperty(getUsersQueryParamsApiPropertyOptions['sortByOrders'])
   @IsString()
   @IsOptional()
-  sortByOrders: 'asc' | 'desc';
+  sortByOrders: string;
 
-  @ApiProperty({ required: false, description: 'test' })
+  @ApiProperty(getUsersQueryParamsApiPropertyOptions['includeValues'])
   @IsString()
   @IsOptional()
   includeValues: string;
 
-  @ApiProperty({ required: false, description: 'test' })
+  @ApiProperty(getUsersQueryParamsApiPropertyOptions['selectValues'])
   @IsString()
   @IsOptional()
   selectValues: string;
 
-  @ApiProperty({ required: false, description: 'test' })
+  @ApiProperty(getUsersQueryParamsApiPropertyOptions['chosenOptionType'])
   @IsString()
   @IsOptional()
   chosenOptionType: 'include' | 'select';

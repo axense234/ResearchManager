@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Data
-import { logOutResponsesExamples } from '../../../examples/response/logOutResponsesExamples';
+import { logOutResponsesExamples } from '../../../examples';
 
 type LogOutResponsesOptionsType = {
   '200': ApiResponseOptions;

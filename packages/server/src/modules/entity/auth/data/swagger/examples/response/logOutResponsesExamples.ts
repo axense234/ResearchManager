@@ -1,6 +1,7 @@
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
-import { logOutResponsesMockData } from '../../../mock/response/logOutResponsesMock';
+import { logOutResponsesMockData } from '../../../mock';
+// Mock
 
 type LogOutResponsesExamplesType = {
   '200': ReturnObjectBuilderReturnObject;

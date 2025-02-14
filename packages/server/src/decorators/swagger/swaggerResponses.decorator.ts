@@ -10,7 +10,10 @@ import {
   signInResponsesOptions,
   signUpResponsesOptions,
 } from 'src/modules/entity/auth/data/swagger';
-import { getUsersResponsesOptions } from 'src/modules/entity/user/data/swagger';
+import {
+  getProfileResponsesOptions,
+  getUsersResponsesOptions,
+} from 'src/modules/entity/user/data/swagger';
 
 export const SwaggerResponses = (
   entityType: EntityType,
@@ -40,7 +43,13 @@ export const SwaggerResponses = (
         case 'GET MULTIPLE':
           return applyDecorators(
             ApiResponse(getUsersResponsesOptions['200']),
+            ApiResponse(getUsersResponsesOptions['401']),
             ApiResponse(getUsersResponsesOptions['404']),
+          );
+        case 'GET PROFILE':
+          return applyDecorators(
+            ApiResponse(getProfileResponsesOptions['200']),
+            ApiResponse(getProfileResponsesOptions['401']),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
