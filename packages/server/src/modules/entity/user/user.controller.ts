@@ -28,12 +28,10 @@ import {
   UpdateUserQueryParams,
 } from './types';
 // Swagger
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// Data
-import {
-  getUsersApiOperationOptions,
-  getUsersResponsesOptions,
-} from './data/swagger';
+import { ApiTags } from '@nestjs/swagger';
+// Custom Decorators
+import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
+import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
 
 @UseGuards(JwtGuard)
 @ApiTags('Users')
@@ -41,9 +39,8 @@ import {
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @ApiOperation(getUsersApiOperationOptions)
-  @ApiResponse(getUsersResponsesOptions['200'])
-  @ApiResponse(getUsersResponsesOptions['404'])
+  @SwaggerHead('user', 'GET MULTIPLE')
+  @SwaggerResponses('user', 'GET MULTIPLE')
   @Get()
   getUsers(@Query() queryParams: GetUsersQueryParams, @Req() req: Request) {
     return this.userService.getUsers(queryParams, req.url);

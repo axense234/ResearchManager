@@ -8,49 +8,36 @@ import { SignInDto, SignUpDto } from './dto';
 import { LogOutQueryParams, SignUpQueryParams } from './types';
 import { SignInQueryParams } from './types/params/SignInQueryParams';
 // Swagger
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// Data
-import {
-  logOutApiOperationOptions,
-  logOutResponsesOptions,
-  signInApiBodyOptions,
-  signInApiOperationOptions,
-  signInResponsesOptions,
-  signUpApiBodyOptions,
-  signUpApiOperationOptions,
-  signUpResponsesOptions,
-} from './data/swagger';
+import { ApiTags } from '@nestjs/swagger';
+// Custom Decorators
+import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
+import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
+import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @ApiOperation(signUpApiOperationOptions)
-  @ApiBody(signUpApiBodyOptions)
-  @ApiResponse(signUpResponsesOptions['201'])
-  @ApiResponse(signUpResponsesOptions['400'])
-  @ApiResponse(signUpResponsesOptions['403'])
+  @SwaggerHead('user', 'CREATE')
+  @SwaggerBody('user', 'CREATE')
+  @SwaggerResponses('user', 'CREATE')
   @Post('signup')
   signUp(@Query() queryParams: SignUpQueryParams, @Body() dto: SignUpDto) {
     return this.authService.signUp(queryParams, dto);
   }
 
-  @ApiOperation(signInApiOperationOptions)
-  @ApiBody(signInApiBodyOptions)
-  @ApiResponse(signInResponsesOptions['200'])
-  @ApiResponse(signInResponsesOptions['400'])
-  @ApiResponse(signInResponsesOptions['401'])
-  @ApiResponse(signInResponsesOptions['404'])
+  @SwaggerHead('user', 'SIGNIN')
+  @SwaggerBody('user', 'SIGNIN')
+  @SwaggerResponses('user', 'SIGNIN')
   @Post('signin')
   @HttpCode(200)
   signIn(@Query() queryParams: SignInQueryParams, @Body() dto: SignInDto) {
     return this.authService.signIn(queryParams, dto);
   }
 
-  @ApiOperation(logOutApiOperationOptions)
-  @ApiResponse(logOutResponsesOptions['200'])
-  @ApiResponse(logOutResponsesOptions['400'])
+  @SwaggerHead('user', 'LOGOUT')
+  @SwaggerResponses('user', 'LOGOUT')
   @Post('logout')
   @HttpCode(200)
   logOut(@Query() queryParams: LogOutQueryParams) {

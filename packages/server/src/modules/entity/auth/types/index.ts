@@ -1,2 +1,2 @@
-export * from './params/LogOutQueryParams';
-export * from './params/SignUpQueryParams';
+export * from './object';
+export * from './params';
