@@ -1,7 +1,7 @@
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 // Mock
-import { usersMockData } from '../body/users';
+import { usersMockData } from '../body';
 
 export const getUsersResponsesMockData: ReturnObjectBuilderReturnObject[] = [
   {

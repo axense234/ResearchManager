@@ -32,6 +32,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
+import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
+import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
 
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
@@ -55,6 +57,8 @@ export class UserController {
   }
 
   @SwaggerHead('user', 'GET SINGLE')
+  @SwaggerResponses('user', 'GET SINGLE')
+  @SwaggerPathParams('user', 'GET SINGLE')
   @Get(':uniqueIdentifier')
   getUser(
     @Query() queryParams: GetUserQueryParams,
@@ -64,6 +68,10 @@ export class UserController {
     return this.userService.getUser(queryParams, uniqueIdentifier, req.url);
   }
 
+  @SwaggerHead('user', 'UPDATE')
+  @SwaggerBody('user', 'UPDATE')
+  @SwaggerResponses('user', 'UPDATE')
+  @SwaggerPathParams('user', 'UPDATE')
   @Patch(':uniqueIdentifier/update')
   updateUser(
     @Query() queryParams: UpdateUserQueryParams,
@@ -73,6 +81,9 @@ export class UserController {
     return this.userService.updateUser(queryParams, dto, uniqueIdentifier);
   }
 
+  @SwaggerHead('user', 'DELETE')
+  @SwaggerResponses('user', 'DELETE')
+  @SwaggerPathParams('user', 'DELETE')
   @Delete(':uniqueIdentifier/delete')
   deleteUser(
     @Query() queryParams: DeleteUserQueryParams,

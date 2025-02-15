@@ -24,14 +24,21 @@ import { CreateResearchActivityQueryParams } from './types/params/CreateResearch
 import { DeleteResearchActivityQueryParams } from './types/params/DeleteResearchActivityQueryParams';
 import { UpdateResearchActivityQueryParams } from './types/params/UpdateResearchActivityQueryParams';
 // Swagger
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+// Custom Decorators
+import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
+import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
+import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
 
-@ApiTags('Research Activities')
 @UseGuards(JwtGuard)
+@ApiBearerAuth()
+@ApiTags('Research Activities')
 @Controller('researchActivities')
 export class ResearchActivityController {
   constructor(private researchActivityService: ResearchActivityService) {}
 
+  @SwaggerHead('researchActivity', 'GET MULTIPLE')
+  @SwaggerResponses('researchActivity', 'GET MULTIPLE')
   @Get()
   getResearchActivities(
     @Query() queryParams: GetResearchActivitiesQueryParams,
@@ -56,6 +63,9 @@ export class ResearchActivityController {
     );
   }
 
+  @SwaggerHead('researchActivity', 'CREATE')
+  @SwaggerBody('researchActivity', 'CREATE')
+  @SwaggerResponses('researchActivity', 'CREATE')
   @Post('create')
   createResearchActivity(
     @Query() queryParams: CreateResearchActivityQueryParams,

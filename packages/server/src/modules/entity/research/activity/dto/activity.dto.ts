@@ -4,23 +4,23 @@ import { IsArray, IsOptional, IsString, IsUUID } from 'class-validator';
 export class CreateResearchActivityDto {
   @IsString()
   @IsOptional()
-  name: string;
+  name?: string;
 
   @IsString()
   @IsOptional()
-  backgroundColorOrImageSrc: string;
+  backgroundColorOrImageSrc?: string;
 
   @IsArray()
   @IsOptional()
-  researchPhases: string[];
+  researchPhases?: string[];
 
   @IsString()
   @IsOptional()
-  activityFeed: string;
+  activityFeed?: string;
 
   @IsArray()
   @IsOptional()
-  tags: string[];
+  tags?: string[];
 
   @IsUUID()
   userId: string;
@@ -32,29 +32,29 @@ export class CreateResearchActivityDto {
 export class UpdateResearchActivityDto {
   @IsString()
   @IsOptional()
-  name: string;
+  name?: string;
 
   @IsString()
   @IsOptional()
-  backgroundColorOrImageSrc: string;
+  backgroundColorOrImageSrc?: string;
 
   @IsArray()
   @IsOptional()
-  researchPhases: string[];
+  researchPhases?: string[];
 
   @IsString()
   @IsOptional()
-  activityFeed: string;
+  activityFeed?: string;
 
   @IsArray()
   @IsOptional()
-  tags: string[];
+  tags?: string[];
 
   @IsUUID()
   @IsOptional()
-  userId: string;
+  userId?: string;
 
   @IsUUID()
   @IsOptional()
-  userIdForArchivePurposes: string;
+  userIdForArchivePurposes?: string;
 }
