@@ -3,7 +3,7 @@ import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
 // Swagger
 import { ApiProperty } from '@nestjs/swagger';
 // Data
-import { signInDtoOptions } from '../data/swagger/options/parameter/dto/signInDtoOptions';
+import { signInDtoOptions } from '../data/swagger/options';
 
 export class SignInDto {
   @ApiProperty(signInDtoOptions['email'])

@@ -19,7 +19,10 @@ import {
 } from 'src/modules/entity/user/data';
 import {
   createResearchActivityResponsesOptions,
+  deleteResearchActivityResponsesOptions,
   getResearchActivitiesResponsesOptions,
+  getResearchActivityResponsesOptions,
+  updateResearchActivityResponsesOptions,
 } from 'src/modules/entity/research/activity/data';
 
 export const SwaggerResponses = (
@@ -95,6 +98,27 @@ export const SwaggerResponses = (
             ApiResponse(createResearchActivityResponsesOptions['201']),
             ApiResponse(createResearchActivityResponsesOptions['400']),
             ApiResponse(createResearchActivityResponsesOptions['401']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getResearchActivityResponsesOptions['200']),
+            ApiResponse(getResearchActivityResponsesOptions['400']),
+            ApiResponse(getResearchActivityResponsesOptions['401']),
+            ApiResponse(getResearchActivityResponsesOptions['404']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiResponse(updateResearchActivityResponsesOptions['200']),
+            ApiResponse(updateResearchActivityResponsesOptions['400']),
+            ApiResponse(updateResearchActivityResponsesOptions['401']),
+            ApiResponse(updateResearchActivityResponsesOptions['404']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteResearchActivityResponsesOptions['200']),
+            ApiResponse(deleteResearchActivityResponsesOptions['400']),
+            ApiResponse(deleteResearchActivityResponsesOptions['401']),
+            ApiResponse(deleteResearchActivityResponsesOptions['404']),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

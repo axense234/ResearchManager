@@ -10,7 +10,10 @@ import {
   signUpApiBodyOptions,
 } from 'src/modules/entity/auth/data';
 import { updateUserApiBodyOptions } from 'src/modules/entity/user/data';
-import { createResearchActivityApiBodyOptions } from 'src/modules/entity/research/activity/data';
+import {
+  createResearchActivityApiBodyOptions,
+  updateResearchActivityApiBodyOptions,
+} from 'src/modules/entity/research/activity/data';
 
 export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
   switch (entityType) {
@@ -29,6 +32,8 @@ export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
       switch (actionType) {
         case 'CREATE':
           return applyDecorators(ApiBody(createResearchActivityApiBodyOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiBody(updateResearchActivityApiBodyOptions));
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }

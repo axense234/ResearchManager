@@ -7,7 +7,7 @@ export const createResearchActivityResponsesMockData: ReturnObjectBuilderReturnO
   [
     {
       message: 'Successfully created Research Activity!',
-      payload: researchActivitiesMockData,
+      payload: researchActivitiesMockData[0],
       statusCode: 201,
     },
     {

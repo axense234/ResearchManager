@@ -29,6 +29,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
 import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
+import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
 
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
@@ -50,6 +51,9 @@ export class ResearchActivityController {
     );
   }
 
+  @SwaggerHead('researchActivity', 'GET SINGLE')
+  @SwaggerResponses('researchActivity', 'GET SINGLE')
+  @SwaggerPathParams('researchActivity', 'GET SINGLE')
   @Get(':researchActivityId')
   getResearchActivity(
     @Query() queryParams: GetResearchActivityQueryParams,
@@ -77,6 +81,10 @@ export class ResearchActivityController {
     );
   }
 
+  @SwaggerHead('researchActivity', 'UPDATE')
+  @SwaggerBody('researchActivity', 'UPDATE')
+  @SwaggerResponses('researchActivity', 'UPDATE')
+  @SwaggerPathParams('researchActivity', 'UPDATE')
   @Patch(':researchActivityId/update')
   updateResearchActivity(
     @Query() queryParams: UpdateResearchActivityQueryParams,
@@ -90,6 +98,9 @@ export class ResearchActivityController {
     );
   }
 
+  @SwaggerHead('researchActivity', 'DELETE')
+  @SwaggerResponses('researchActivity', 'DELETE')
+  @SwaggerPathParams('researchActivity', 'DELETE')
   @Delete(':researchActivityId/delete')
   deleteResearchActivity(
     @Query() queryParams: DeleteResearchActivityQueryParams,

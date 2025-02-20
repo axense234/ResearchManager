@@ -1,7 +1,7 @@
 // Swagger
 import { ApiPropertyOptions } from '@nestjs/swagger';
 
-export type SignInDtoOptionsType = {
+type SignInDtoOptionsType = {
   password: ApiPropertyOptions;
   email: ApiPropertyOptions;
 };

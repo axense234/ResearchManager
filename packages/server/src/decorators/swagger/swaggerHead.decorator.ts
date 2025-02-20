@@ -10,7 +10,10 @@ import {
 } from 'src/modules/entity/auth/data';
 import {
   createResearchActivityApiOperationOptions,
+  deleteResearchActivityApiOperationOptions,
   getResearchActivitiesApiOperationOptions,
+  getResearchActivityApiOperationOptions,
+  updateResearchActivityApiOperationOptions,
 } from 'src/modules/entity/research/activity/data';
 import {
   deleteUserApiOperationOptions,
@@ -54,6 +57,18 @@ export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
         case 'CREATE':
           return applyDecorators(
             ApiOperation(createResearchActivityApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiOperation(getResearchActivityApiOperationOptions),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateResearchActivityApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteResearchActivityApiOperationOptions),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

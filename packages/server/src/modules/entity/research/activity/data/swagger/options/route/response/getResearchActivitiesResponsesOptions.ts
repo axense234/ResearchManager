@@ -2,6 +2,7 @@
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+// Examples
 import { getResearchActivitiesResponsesExamples } from '../../../examples';
 
 type GetResearchActivitiesResponsesOptionsType = {

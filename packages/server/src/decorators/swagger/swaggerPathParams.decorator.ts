@@ -10,6 +10,11 @@ import {
   getUserPathParamsApiParamOptions,
   updateUserPathParamsApiParamOptions,
 } from 'src/modules/entity/user/data';
+import {
+  deleteResearchActivityPathParamsApiOptions,
+  getResearchActivityPathParamsApiParamOptions,
+  updateResearchActivityPathParamsApiOptions,
+} from 'src/modules/entity/research/activity/data';
 
 export const SwaggerPathParams = (
   entityType: EntityType,
@@ -33,6 +38,32 @@ export const SwaggerPathParams = (
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }
+    case 'researchActivity':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiParam(
+              getResearchActivityPathParamsApiParamOptions[
+                'researchActivityId'
+              ],
+            ),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(
+              updateResearchActivityPathParamsApiOptions['researchActivityId'],
+            ),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(
+              deleteResearchActivityPathParamsApiOptions['researchActivityId'],
+            ),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+
     default:
       throw new Error(`Unsupported entityType: ${entityType}`);
   }

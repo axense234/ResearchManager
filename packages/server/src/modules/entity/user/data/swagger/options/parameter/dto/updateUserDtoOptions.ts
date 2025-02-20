@@ -1,7 +1,7 @@
 // Swagger
 import { ApiPropertyOptions } from '@nestjs/swagger';
 
-type SignUpDtoOptionsType = {
+type UpdateUserDtoOptionsType = {
   username: ApiPropertyOptions;
   password: ApiPropertyOptions;
   email: ApiPropertyOptions;
@@ -18,24 +18,25 @@ type SignUpDtoOptionsType = {
   tags: ApiPropertyOptions;
 };
 
-export const signUpDtoOptions: SignUpDtoOptionsType = {
+export const updateUserDtoOptions: UpdateUserDtoOptionsType = {
   username: {
     example: 'John',
-    description: 'The username of the user you want to create.',
+    description: 'The username of the user you want to update.',
   },
   password: {
     example: 'john123',
     description:
-      'The password of the user you want to create. Please DO NOT use the example one for reasons other than testing.',
+      'The password of the user you want to update. Please DO NOT use the example one for reasons other than testing.',
   },
   email: {
     example: 'john123@gmail.com',
-    description: 'The email of the user you want to create.',
+    description: 'The email of the user you want to update.',
   },
   backgroundImageSrc: {
     example:
       'https://res.cloudinary.com/birthdayreminder/image/upload/v1688815596/Highschool%20Site%20App/library_cgocde.jpg',
-    description: "The src of the background image of your user's profile.",
+    description:
+      "The src of the background image or the color of your user's profile.",
   },
   profileImageSrc: {
     example:
@@ -72,7 +73,7 @@ export const signUpDtoOptions: SignUpDtoOptionsType = {
   },
   researchActivities: {
     description:
-      "The Archived Research Activities of your user. Input the respectiveArchived Research Activities UUID/UUID's in the array.",
+      "The Archived Research Activities of your user. Input the respective Archived Research Activities UUID/UUID's in the array.",
   },
   tags: {
     description:
