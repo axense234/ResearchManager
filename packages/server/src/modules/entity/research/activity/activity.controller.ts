@@ -9,10 +9,7 @@ import {
   Post,
   Query,
   Req,
-  UseGuards,
 } from '@nestjs/common';
-// Custom Guard
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dto
 import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
 // Services
@@ -24,15 +21,17 @@ import { CreateResearchActivityQueryParams } from './types/params/CreateResearch
 import { DeleteResearchActivityQueryParams } from './types/params/DeleteResearchActivityQueryParams';
 import { UpdateResearchActivityQueryParams } from './types/params/UpdateResearchActivityQueryParams';
 // Swagger
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
 import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
 import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
-@ApiBearerAuth()
+@JwtAuth()
+@SwaggerAuth()
 @ApiTags('Research Activities')
 @Controller('researchActivities')
 export class ResearchActivityController {

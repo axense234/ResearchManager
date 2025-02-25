@@ -24,6 +24,20 @@ import {
   getResearchActivityResponsesOptions,
   updateResearchActivityResponsesOptions,
 } from 'src/modules/entity/research/activity/data';
+import {
+  createResearchPhaseResponsesOptions,
+  deleteResearchPhaseResponsesOptions,
+  getResearchPhaseResponsesOptions,
+  getResearchPhasesResponsesOptions,
+  updateResearchPhaseResponsesOptions,
+} from 'src/modules/entity/research/phase/data';
+import {
+  createResearchLogResponsesOptions,
+  deleteResearchLogResponsesOptions,
+  getResearchLogResponsesOptions,
+  getResearchLogsResponsesOptions,
+} from 'src/modules/entity/research/log/data';
+import { updateResearchLogResponsesOptions } from 'src/modules/entity/research/log/data/swagger/options/route/response/updateResearchLogResponsesOptions';
 
 export const SwaggerResponses = (
   entityType: EntityType,
@@ -119,6 +133,82 @@ export const SwaggerResponses = (
             ApiResponse(deleteResearchActivityResponsesOptions['400']),
             ApiResponse(deleteResearchActivityResponsesOptions['401']),
             ApiResponse(deleteResearchActivityResponsesOptions['404']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchPhase':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiResponse(getResearchPhasesResponsesOptions['200']),
+            ApiResponse(getResearchPhasesResponsesOptions['401']),
+            ApiResponse(getResearchPhasesResponsesOptions['404']),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiResponse(createResearchPhaseResponsesOptions['201']),
+            ApiResponse(createResearchPhaseResponsesOptions['400']),
+            ApiResponse(createResearchPhaseResponsesOptions['401']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getResearchPhaseResponsesOptions['200']),
+            ApiResponse(getResearchPhaseResponsesOptions['400']),
+            ApiResponse(getResearchPhaseResponsesOptions['401']),
+            ApiResponse(getResearchPhaseResponsesOptions['404']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiResponse(updateResearchPhaseResponsesOptions['200']),
+            ApiResponse(updateResearchPhaseResponsesOptions['400']),
+            ApiResponse(updateResearchPhaseResponsesOptions['401']),
+            ApiResponse(updateResearchPhaseResponsesOptions['404']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteResearchPhaseResponsesOptions['200']),
+            ApiResponse(deleteResearchPhaseResponsesOptions['400']),
+            ApiResponse(deleteResearchPhaseResponsesOptions['401']),
+            ApiResponse(deleteResearchPhaseResponsesOptions['404']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchLog':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiResponse(getResearchLogsResponsesOptions['200']),
+            ApiResponse(getResearchLogsResponsesOptions['401']),
+            ApiResponse(getResearchLogsResponsesOptions['404']),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiResponse(createResearchLogResponsesOptions['201']),
+            ApiResponse(createResearchLogResponsesOptions['400']),
+            ApiResponse(createResearchLogResponsesOptions['401']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getResearchLogResponsesOptions['200']),
+            ApiResponse(getResearchLogResponsesOptions['400']),
+            ApiResponse(getResearchLogResponsesOptions['401']),
+            ApiResponse(getResearchLogResponsesOptions['404']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiResponse(updateResearchLogResponsesOptions['200']),
+            ApiResponse(updateResearchLogResponsesOptions['400']),
+            ApiResponse(updateResearchLogResponsesOptions['401']),
+            ApiResponse(updateResearchLogResponsesOptions['404']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteResearchLogResponsesOptions['200']),
+            ApiResponse(deleteResearchLogResponsesOptions['400']),
+            ApiResponse(deleteResearchLogResponsesOptions['401']),
+            ApiResponse(deleteResearchLogResponsesOptions['404']),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

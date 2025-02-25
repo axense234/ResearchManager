@@ -16,6 +16,20 @@ import {
   updateResearchActivityApiOperationOptions,
 } from 'src/modules/entity/research/activity/data';
 import {
+  createResearchLogApiOperationOptions,
+  deleteResearchLogApiOperationOptions,
+  getResearchLogApiOperationOptions,
+  getResearchLogsApiOperationOptions,
+  updateResearchLogApiOperationOptions,
+} from 'src/modules/entity/research/log/data';
+import {
+  createResearchPhaseApiOperationOptions,
+  deleteResearchPhaseApiOperationOptions,
+  getResearchPhaseApiOperationOptions,
+  getResearchPhasesApiOperationOptions,
+  updateResearchPhaseApiOperationOptions,
+} from 'src/modules/entity/research/phase/data';
+import {
   deleteUserApiOperationOptions,
   getProfileApiOperationOptions,
   getUserApiOperationOptions,
@@ -69,6 +83,56 @@ export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
         case 'DELETE':
           return applyDecorators(
             ApiOperation(deleteResearchActivityApiOperationOptions),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchPhase':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiOperation(getResearchPhasesApiOperationOptions),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiOperation(createResearchPhaseApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiOperation(getResearchPhaseApiOperationOptions),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateResearchPhaseApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteResearchPhaseApiOperationOptions),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchLog':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiOperation(getResearchLogsApiOperationOptions),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiOperation(createResearchLogApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiOperation(getResearchLogApiOperationOptions),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateResearchLogApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteResearchLogApiOperationOptions),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

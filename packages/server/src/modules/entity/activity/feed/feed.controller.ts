@@ -5,14 +5,11 @@ import {
   Get,
   Param,
   Query,
-  UseGuards,
   Post,
   Delete,
   Patch,
   Req,
 } from '@nestjs/common';
-// Custom Guard
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dtos
 import { CreateActivityFeedDto, UpdateActivityFeedDto } from './dto';
 // Services
@@ -25,8 +22,10 @@ import {
   GetActivityFeedsQueryParams,
   UpdateActivityFeedQueryParams,
 } from './types';
+// Custom Decorators
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
+@JwtAuth()
 @Controller('activityFeeds')
 export class ActivityFeedController {
   constructor(private activityFeedService: ActivityFeedService) {}

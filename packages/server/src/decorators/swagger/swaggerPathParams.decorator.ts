@@ -15,6 +15,16 @@ import {
   getResearchActivityPathParamsApiParamOptions,
   updateResearchActivityPathParamsApiOptions,
 } from 'src/modules/entity/research/activity/data';
+import {
+  deleteResearchPhasePathParamsApiOptions,
+  getResearchPhasePathParamsApiOptions,
+  updateResearchPhasePathParamsApiOptions,
+} from 'src/modules/entity/research/phase/data';
+import {
+  deleteResearchLogPathParamsApiOptions,
+  getResearchLogPathParamsApiOptions,
+  updateResearchLogPathParamsApiOptions,
+} from 'src/modules/entity/research/log/data';
 
 export const SwaggerPathParams = (
   entityType: EntityType,
@@ -63,7 +73,45 @@ export const SwaggerPathParams = (
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }
-
+    case 'researchPhase':
+      switch (actionType) {
+        case 'GET SINGLE': {
+          return applyDecorators(
+            ApiParam(getResearchPhasePathParamsApiOptions['researchPhaseId']),
+          );
+        }
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(
+              updateResearchPhasePathParamsApiOptions['researchPhaseId'],
+            ),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(
+              deleteResearchPhasePathParamsApiOptions['researchPhaseId'],
+            ),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchLog':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiParam(getResearchLogPathParamsApiOptions['researchLogId']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(updateResearchLogPathParamsApiOptions['researchLogId']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(deleteResearchLogPathParamsApiOptions['researchLogId']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
     default:
       throw new Error(`Unsupported entityType: ${entityType}`);
   }

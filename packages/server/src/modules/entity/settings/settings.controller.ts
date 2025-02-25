@@ -2,7 +2,6 @@
 import {
   Controller,
   Query,
-  UseGuards,
   Get,
   Param,
   Body,
@@ -11,8 +10,6 @@ import {
   Patch,
   Req,
 } from '@nestjs/common';
-// Custom Guard
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Services
 import { SettingsService } from './services/settings.service';
 // Dtos
@@ -25,8 +22,10 @@ import {
   GetSettingsQueryParams,
   UpdateSettingsQueryParams,
 } from './types';
+// Custom Decorators
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
+@JwtAuth()
 @Controller('settings')
 export class SettingsController {
   constructor(private settingsService: SettingsService) {}

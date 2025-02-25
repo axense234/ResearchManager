@@ -8,13 +8,10 @@ import {
   Query,
   Delete,
   Patch,
-  UseGuards,
   Req,
 } from '@nestjs/common';
 // Dtos
 import { CreateActivityDayDto, UpdateActivityDayDto } from './dto/day.dto';
-// Custom Guard
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Services
 import { ActivityDayService } from './services/day.service';
 // Types
@@ -25,8 +22,10 @@ import {
   GetActivityDaysQueryParams,
   UpdateActivityDayQueryParams,
 } from './types';
+// Custom Decorators
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
+@JwtAuth()
 @Controller('activityDays')
 export class ActivityDayController {
   constructor(private activityDayService: ActivityDayService) {}

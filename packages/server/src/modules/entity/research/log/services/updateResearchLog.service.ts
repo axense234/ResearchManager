@@ -83,7 +83,7 @@ export class UpdateResearchLogService {
       }
 
       await this.redis.deleteAllCacheThatIncludesGivenKeys({
-        base: 'researchPhases',
+        base: 'researchLogs',
         specifiers: [
           {
             label: 'userId',

@@ -5,7 +5,6 @@ import {
   Get,
   Param,
   Post,
-  UseGuards,
   Delete,
   Patch,
   Req,
@@ -13,8 +12,6 @@ import {
 } from '@nestjs/common';
 // Services
 import { ActivityLogService } from './services/log.service';
-// Custom Guard
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dtos
 import { CreateActivityLogDto, UpdateActivityLogDto } from './dto';
 // Types
@@ -25,8 +22,10 @@ import {
   GetActivityLogsQueryParams,
   UpdateActivityLogQueryParams,
 } from './types';
+// Custom Decorators
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
+@JwtAuth()
 @Controller('activityLogs')
 export class ActivityLogController {
   constructor(private activityLogService: ActivityLogService) {}

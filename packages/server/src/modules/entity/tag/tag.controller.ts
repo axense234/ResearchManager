@@ -5,14 +5,11 @@ import {
   Get,
   Param,
   Query,
-  UseGuards,
   Post,
   Delete,
   Patch,
   Req,
 } from '@nestjs/common';
-// Custom Guard
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dtos
 import { CreateTagDto, UpdateTagDto } from './dto';
 // Services
@@ -25,8 +22,10 @@ import {
   GetTagsQueryParams,
   UpdateTagQueryParams,
 } from './types';
+// Custom Decorators
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
+@JwtAuth()
 @Controller('tags')
 export class TagController {
   constructor(private tagService: TagService) {}

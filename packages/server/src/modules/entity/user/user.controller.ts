@@ -8,7 +8,6 @@ import {
   Patch,
   Query,
   Req,
-  UseGuards,
 } from '@nestjs/common';
 // Providers
 import { UserService } from './services/user.service';
@@ -16,8 +15,6 @@ import { UserService } from './services/user.service';
 import { GetUser } from 'src/modules/entity/auth/decorator';
 // Prisma
 import { User } from '@prisma/client';
-// Guards
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dto
 import { UpdateUserDto } from './dto/user.dto';
 // Types
@@ -28,15 +25,17 @@ import {
   UpdateUserQueryParams,
 } from './types';
 // Swagger
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
 import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
 import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
-@ApiBearerAuth()
+@JwtAuth()
+@SwaggerAuth()
 @ApiTags('Users')
 @Controller('users')
 export class UserController {
@@ -49,6 +48,8 @@ export class UserController {
     return this.userService.getUsers(queryParams, req.url);
   }
 
+  @JwtAuth({ profileRoute: true })
+  @SwaggerAuth({ profileRoute: true })
   @SwaggerHead('user', 'GET PROFILE')
   @SwaggerResponses('user', 'GET PROFILE')
   @Get('profile')

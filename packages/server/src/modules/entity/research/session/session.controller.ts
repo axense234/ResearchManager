@@ -9,12 +9,9 @@ import {
   Post,
   Query,
   Req,
-  UseGuards,
 } from '@nestjs/common';
 // Services
 import { ResearchSessionService } from './services/session.service';
-// Custom Guard
-import { JwtGuard } from 'src/modules/entity/auth/guard';
 // Dtos
 import { CreateResearchSessionDto, UpdateResearchSessionDto } from './dto';
 // Types
@@ -25,8 +22,10 @@ import {
   GetResearchSessionsQueryParams,
   UpdateResearchSessionQueryParams,
 } from './types';
+// Custom Decorators
+import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@UseGuards(JwtGuard)
+@JwtAuth()
 @Controller('researchSessions')
 export class ResearchSessionController {
   constructor(private researchSessionService: ResearchSessionService) {}
