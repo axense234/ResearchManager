@@ -155,7 +155,7 @@ model ActivityFeed {
   type ActivityFeedType @default(USER)
 
   user               User              @relation(fields: [userId], references: [id])
-  userId             String            @unique
+  userId             String
   researchActivity   ResearchActivity? @relation(fields: [researchActivityId], references: [id])
   researchActivityId String?           @unique
 

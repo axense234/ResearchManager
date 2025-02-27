@@ -26,6 +26,7 @@ import {
   createResearchSessionApiBodyOptions,
   updateResearchSessionApiBodyOptions,
 } from 'src/modules/entity/research/session/data';
+import { createActivityFeedApiBodyOptions } from 'src/modules/entity/activity/feed/data';
 
 export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
   switch (entityType) {
@@ -73,6 +74,13 @@ export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
           return applyDecorators(ApiBody(createResearchSessionApiBodyOptions));
         case 'UPDATE':
           return applyDecorators(ApiBody(updateResearchSessionApiBodyOptions));
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityFeed':
+      switch (actionType) {
+        case 'CREATE':
+          return applyDecorators(ApiBody(createActivityFeedApiBodyOptions));
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }

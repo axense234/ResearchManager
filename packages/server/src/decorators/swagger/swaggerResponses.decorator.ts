@@ -45,6 +45,11 @@ import {
   getResearchSessionsResponsesOptions,
   updateResearchSessionResponsesOptions,
 } from 'src/modules/entity/research/session/data';
+import {
+  createActivityFeedResponsesOptions,
+  getActivityFeedResponsesOptions,
+  getActivityFeedsResponsesOptions,
+} from 'src/modules/entity/activity/feed/data';
 
 export const SwaggerResponses = (
   entityType: EntityType,
@@ -254,6 +259,31 @@ export const SwaggerResponses = (
             ApiResponse(deleteResearchSessionResponsesOptions['400']),
             ApiResponse(deleteResearchSessionResponsesOptions['401']),
             ApiResponse(deleteResearchSessionResponsesOptions['404']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityFeed':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiResponse(getActivityFeedsResponsesOptions['200']),
+            ApiResponse(getActivityFeedsResponsesOptions['401']),
+            ApiResponse(getActivityFeedsResponsesOptions['404']),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiResponse(createActivityFeedResponsesOptions['201']),
+            ApiResponse(createActivityFeedResponsesOptions['400']),
+            ApiResponse(createActivityFeedResponsesOptions['401']),
+            ApiResponse(createActivityFeedResponsesOptions['403']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getActivityFeedResponsesOptions['200']),
+            ApiResponse(getActivityFeedResponsesOptions['400']),
+            ApiResponse(getActivityFeedResponsesOptions['401']),
+            ApiResponse(getActivityFeedResponsesOptions['404']),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

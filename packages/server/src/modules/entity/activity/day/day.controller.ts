@@ -31,7 +31,7 @@ export class ActivityDayController {
   constructor(private activityDayService: ActivityDayService) {}
 
   @Get()
-  getDayActivities(
+  getActivityDays(
     @Query() queryParams: GetActivityDaysQueryParams,
     @Req() req: Request,
   ) {
@@ -39,7 +39,7 @@ export class ActivityDayController {
   }
 
   @Get(':activityDayId')
-  getDayActivity(
+  getActivityDay(
     @Query() queryParams: GetActivityDayQueryParams,
     @Param('activityDayId') activityDayId: string,
     @Req() req: Request,
@@ -52,7 +52,7 @@ export class ActivityDayController {
   }
 
   @Post('create')
-  createDayActivity(
+  createActivityDay(
     @Query() queryParams: CreateActivityDayQueryParams,
     @Body() dto: CreateActivityDayDto,
   ) {
@@ -60,7 +60,7 @@ export class ActivityDayController {
   }
 
   @Patch(':activityDayId/update')
-  updateDayActivity(
+  updateActivityDay(
     @Query() queryParams: UpdateActivityDayQueryParams,
     @Param('activityDayId') activityDayId: string,
     @Body() dto: UpdateActivityDayDto,
@@ -73,7 +73,7 @@ export class ActivityDayController {
   }
 
   @Delete(':activityDayId/delete')
-  deleteDayActivity(
+  deleteActivityDay(
     @Query() queryParams: DeleteActivityDayQueryParams,
     @Param('activityDayId') activityDayId: string,
   ) {

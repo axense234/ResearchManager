@@ -73,10 +73,8 @@ export class UpdateActivityFeedService {
         );
       }
 
-      const updatedActivityFeed = await this.prisma.activityFeed.update({
-        where: { id: activityFeedId },
-        data: { ...dto },
-      });
+      const updatedActivityFeed =
+        await this.prisma.activityFeed.update(updateObject);
 
       if (!updatedActivityFeed) {
         throw new BadRequestException(

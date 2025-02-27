@@ -1,5 +1,9 @@
 // NestJS
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 // DB Services
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Dtos
@@ -10,6 +14,7 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import {
   ActivityFeedCreateDataObject,
   ActivityFeedCreateObject,
@@ -52,6 +57,17 @@ export class CreateActivityFeedService {
         createObject[chosenOptionType] = optionObject;
       }
 
+      const foundActivityFeedToBeCheckedForType =
+        await this.prisma.activityFeed.findFirst({
+          where: { AND: [{ userId: dto.userId }, { type: 'USER' }] },
+        });
+
+      if (foundActivityFeedToBeCheckedForType && dto.type === 'USER') {
+        throw new BadRequestException(
+          'Could not create Activity Feed with the userId provided AND type USER since one already exists with those properties.',
+        );
+      }
+
       const createdActivityFeed =
         await this.prisma.activityFeed.create(createObject);
 
@@ -83,7 +99,16 @@ export class CreateActivityFeedService {
         additionalNotes,
       });
     } catch (error) {
-      throw error;
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ForbiddenException(
+          'Research Activity with the provided id already has an Activity Feed!.',
+        );
+      } else {
+        throw error;
+      }
     }
   }
 }

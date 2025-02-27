@@ -14,11 +14,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   const config = new DocumentBuilder()
-    .setTitle('Research Manager API v1.6.0')
+    .setTitle('Research Manager API v1.6.3')
     .setDescription(
-      'The swagger interface for the Research Manager v1.6.0 API. Used mainly for testing purposes',
+      'The swagger interface for the Research Manager v1.6.3 API. Used mainly for testing purposes',
     )
-    .setVersion('1.6.0')
+    .setVersion('1.6.3')
     .addBearerAuth()
     .build();
 

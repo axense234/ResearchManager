@@ -4,7 +4,7 @@ import { IsObject, IsOptional, IsString, IsUUID } from 'class-validator';
 export class ActivityFeedUpdateDataObject {
   @IsObject()
   @IsOptional()
-  dayActivities: { connect: { id: string }[] };
+  activityDays: { connect: { id: string }[] };
 
   @IsString()
   @IsOptional()

@@ -22,14 +22,25 @@ import {
   GetActivityFeedsQueryParams,
   UpdateActivityFeedQueryParams,
 } from './types';
+// Swagger
+import { ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
+import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
+import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
+import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
+import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
 
 @JwtAuth()
+@SwaggerAuth()
+@ApiTags('Activity Feeds')
 @Controller('activityFeeds')
 export class ActivityFeedController {
   constructor(private activityFeedService: ActivityFeedService) {}
 
+  @SwaggerHead('activityFeed', 'GET MULTIPLE')
+  @SwaggerResponses('activityFeed', 'GET MULTIPLE')
   @Get()
   getActivityFeeds(
     @Query() queryParams: GetActivityFeedsQueryParams,
@@ -38,6 +49,9 @@ export class ActivityFeedController {
     return this.activityFeedService.getActivityFeeds(queryParams, req.url);
   }
 
+  @SwaggerHead('activityFeed', 'GET SINGLE')
+  @SwaggerResponses('activityFeed', 'GET SINGLE')
+  @SwaggerPathParams('activityFeed', 'GET SINGLE')
   @Get(':activityFeedId')
   getActivityFeed(
     @Query() queryParams: GetActivityFeedQueryParams,
@@ -51,6 +65,9 @@ export class ActivityFeedController {
     );
   }
 
+  @SwaggerHead('activityFeed', 'CREATE')
+  @SwaggerBody('activityFeed', 'CREATE')
+  @SwaggerResponses('activityFeed', 'CREATE')
   @Post('create')
   createActivityFeed(
     @Query() queryParams: CreateActivityFeedQueryParams,

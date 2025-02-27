@@ -30,6 +30,7 @@ import {
   getResearchSessionPathParamsApiOptions,
   updateResearchSessionPathParamsApiOptions,
 } from 'src/modules/entity/research/session/data';
+import { getActivityFeedPathParamsApiOptions } from 'src/modules/entity/activity/feed/data';
 
 export const SwaggerPathParams = (
   entityType: EntityType,
@@ -136,6 +137,15 @@ export const SwaggerPathParams = (
             ApiParam(
               deleteResearchSessionPathParamsApiOptions['researchSessionId'],
             ),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityFeed':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiParam(getActivityFeedPathParamsApiOptions['activityFeedId']),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

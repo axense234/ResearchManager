@@ -7,6 +7,8 @@ import {
   DataObjectBuilderParams,
   EntityType,
 } from '../types';
+import { UserUpdateDataObject } from 'src/modules/entity/user/types';
+import { UserCreateDataObject } from 'src/modules/entity/auth/types/object/UserCreateDataObject';
 // Argon
 import * as argon from 'argon2';
 // Data
@@ -20,8 +22,6 @@ import { activityDayAllowedConnectValues } from 'src/modules/entity/activity/day
 import { activityLogAllowedConnectValues } from 'src/modules/entity/activity/log/data/connect/allowedConnectValues';
 import { tagAllowedConnectValues } from 'src/modules/entity/tag/data/connect/allowedConnectValues';
 import { userAllowedConnectValues } from 'src/modules/entity/user/data/connect/allowedConnectValues';
-import { UserUpdateDataObject } from 'src/modules/entity/user/types';
-import { UserCreateDataObject } from 'src/modules/entity/auth/types/object/UserCreateDataObject';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -77,7 +77,7 @@ export class DataObjectBuilderService {
     const dataObject: DataObjectBuilderDataObject = { ...(dto as any) };
     const allowedConnectValues = this.chooseAllowedConnect(entityType);
 
-    if (dto.password && entityType === 'user') {
+    if ((dto as UserCreateDataObject).password && entityType === 'user') {
       (dataObject as UserUpdateDataObject | UserCreateDataObject).hash =
         await argon.hash(dto.password);
       delete (dataObject as UserUpdateDataObject | UserCreateDataObject)

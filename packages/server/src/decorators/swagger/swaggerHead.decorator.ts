@@ -4,6 +4,11 @@ import { applyDecorators } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 // Data
 import {
+  createActivityFeedApiOperationOptions,
+  getActivityFeedApiOperationOptions,
+  getActivityFeedsApiOperationOptions,
+} from 'src/modules/entity/activity/feed/data';
+import {
   logOutApiOperationOptions,
   signInApiOperationOptions,
   signUpApiOperationOptions,
@@ -165,6 +170,23 @@ export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
         case 'DELETE':
           return applyDecorators(
             ApiOperation(deleteResearchSessionApiOperationOptions),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityFeed':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiOperation(getActivityFeedsApiOperationOptions),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiOperation(createActivityFeedApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiOperation(getActivityFeedApiOperationOptions),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

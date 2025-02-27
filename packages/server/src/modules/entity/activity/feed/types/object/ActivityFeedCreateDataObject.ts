@@ -18,5 +18,5 @@ export class ActivityFeedCreateDataObject {
 
   @IsObject()
   @IsOptional()
-  dayActivities: { connect: { id: string }[] };
+  activityDays: { connect: { id: string }[] };
 }
