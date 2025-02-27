@@ -25,6 +25,11 @@ import {
   getResearchLogPathParamsApiOptions,
   updateResearchLogPathParamsApiOptions,
 } from 'src/modules/entity/research/log/data';
+import {
+  deleteResearchSessionPathParamsApiOptions,
+  getResearchSessionPathParamsApiOptions,
+  updateResearchSessionPathParamsApiOptions,
+} from 'src/modules/entity/research/session/data';
 
 export const SwaggerPathParams = (
   entityType: EntityType,
@@ -108,6 +113,29 @@ export const SwaggerPathParams = (
         case 'DELETE':
           return applyDecorators(
             ApiParam(deleteResearchLogPathParamsApiOptions['researchLogId']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchSession':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiParam(
+              getResearchSessionPathParamsApiOptions['researchSessionId'],
+            ),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(
+              updateResearchSessionPathParamsApiOptions['researchSessionId'],
+            ),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(
+              deleteResearchSessionPathParamsApiOptions['researchSessionId'],
+            ),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

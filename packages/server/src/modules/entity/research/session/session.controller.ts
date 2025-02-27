@@ -22,14 +22,25 @@ import {
   GetResearchSessionsQueryParams,
   UpdateResearchSessionQueryParams,
 } from './types';
+// Swagger
+import { ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
+import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
+import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
+import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
+import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
 
 @JwtAuth()
+@SwaggerAuth()
+@ApiTags('Research Sessions')
 @Controller('researchSessions')
 export class ResearchSessionController {
   constructor(private researchSessionService: ResearchSessionService) {}
 
+  @SwaggerHead('researchSession', 'GET MULTIPLE')
+  @SwaggerResponses('researchSession', 'GET MULTIPLE')
   @Get()
   getResearchSessions(
     @Query() queryParams: GetResearchSessionsQueryParams,
@@ -41,6 +52,9 @@ export class ResearchSessionController {
     );
   }
 
+  @SwaggerHead('researchSession', 'GET SINGLE')
+  @SwaggerResponses('researchSession', 'GET SINGLE')
+  @SwaggerPathParams('researchSession', 'GET SINGLE')
   @Get(':researchSessionId')
   getResearchSession(
     @Query() queryParams: GetResearchSessionQueryParams,
@@ -54,6 +68,9 @@ export class ResearchSessionController {
     );
   }
 
+  @SwaggerHead('researchSession', 'CREATE')
+  @SwaggerBody('researchSession', 'CREATE')
+  @SwaggerResponses('researchSession', 'CREATE')
   @Post('create')
   createResearchSession(
     @Query() queryParams: CreateResearchSessionQueryParams,
@@ -62,6 +79,10 @@ export class ResearchSessionController {
     return this.researchSessionService.createResearchSession(queryParams, dto);
   }
 
+  @SwaggerHead('researchSession', 'UPDATE')
+  @SwaggerBody('researchSession', 'UPDATE')
+  @SwaggerResponses('researchSession', 'UPDATE')
+  @SwaggerPathParams('researchSession', 'UPDATE')
   @Patch(':researchSessionId/update')
   updateResearchSession(
     @Query() queryParams: UpdateResearchSessionQueryParams,
@@ -75,6 +96,9 @@ export class ResearchSessionController {
     );
   }
 
+  @SwaggerHead('researchSession', 'DELETE')
+  @SwaggerResponses('researchSession', 'DELETE')
+  @SwaggerPathParams('researchSession', 'DELETE')
   @Delete(':researchSessionId/delete')
   deleteResearchSession(
     @Query() queryParams: DeleteResearchSessionQueryParams,

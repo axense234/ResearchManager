@@ -22,6 +22,10 @@ import {
   createResearchLogApiBodyOptions,
   updateResearchLogApiBodyOptions,
 } from 'src/modules/entity/research/log/data';
+import {
+  createResearchSessionApiBodyOptions,
+  updateResearchSessionApiBodyOptions,
+} from 'src/modules/entity/research/session/data';
 
 export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
   switch (entityType) {
@@ -60,6 +64,15 @@ export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
           return applyDecorators(ApiBody(createResearchLogApiBodyOptions));
         case 'UPDATE':
           return applyDecorators(ApiBody(updateResearchLogApiBodyOptions));
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchSession':
+      switch (actionType) {
+        case 'CREATE':
+          return applyDecorators(ApiBody(createResearchSessionApiBodyOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiBody(updateResearchSessionApiBodyOptions));
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }

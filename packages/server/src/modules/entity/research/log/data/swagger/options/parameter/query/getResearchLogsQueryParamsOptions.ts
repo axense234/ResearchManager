@@ -26,7 +26,7 @@ export const getResearchLogsQueryParamsApiPropertyOptions: GetResearchLogsQueryP
     researchPhaseId: {
       required: false,
       description:
-        'The researchPhaseId used for matching all the Research Phases that have that researchPhaseId.',
+        'The researchPhaseId used for matching all the Research Logs that have that researchPhaseId.',
     },
     includeValues: {
       required: false,

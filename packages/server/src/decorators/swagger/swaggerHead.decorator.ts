@@ -30,6 +30,13 @@ import {
   updateResearchPhaseApiOperationOptions,
 } from 'src/modules/entity/research/phase/data';
 import {
+  createResearchSessionApiOperationOptions,
+  deleteResearchSessionApiOperationOptions,
+  getResearchSessionApiOperationOptions,
+  getResearchSessionsApiOperationOptions,
+  updateResearchSessionApiOperationOptions,
+} from 'src/modules/entity/research/session/data';
+import {
   deleteUserApiOperationOptions,
   getProfileApiOperationOptions,
   getUserApiOperationOptions,
@@ -133,6 +140,31 @@ export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
         case 'DELETE':
           return applyDecorators(
             ApiOperation(deleteResearchLogApiOperationOptions),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'researchSession':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiOperation(getResearchSessionsApiOperationOptions),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiOperation(createResearchSessionApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiOperation(getResearchSessionApiOperationOptions),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateResearchSessionApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteResearchSessionApiOperationOptions),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
