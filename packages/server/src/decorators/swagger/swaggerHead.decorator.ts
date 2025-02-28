@@ -4,10 +4,26 @@ import { applyDecorators } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 // Data
 import {
+  createActivityDayApiOperationOptions,
+  deleteActivityDayApiOperationOptions,
+  getActivityDayApiOperationOptions,
+  getActivityDaysApiOperationOptions,
+  updateActivityDayApiOperationOptions,
+} from 'src/modules/entity/activity/day/data';
+import {
   createActivityFeedApiOperationOptions,
+  deleteActivityFeedApiOperationOptions,
   getActivityFeedApiOperationOptions,
   getActivityFeedsApiOperationOptions,
+  updateActivityFeedApiOperationOptions,
 } from 'src/modules/entity/activity/feed/data';
+import {
+  createActivityLogApiOperationOptions,
+  deleteActivityLogApiOperationOptions,
+  getActivityLogApiOperationOptions,
+  getActivityLogsApiOperationOptions,
+  updateActivityLogApiOperationOptions,
+} from 'src/modules/entity/activity/log/data';
 import {
   logOutApiOperationOptions,
   signInApiOperationOptions,
@@ -187,6 +203,64 @@ export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
         case 'GET SINGLE':
           return applyDecorators(
             ApiOperation(getActivityFeedApiOperationOptions),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateActivityFeedApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteActivityFeedApiOperationOptions),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityDay':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiOperation(getActivityDaysApiOperationOptions),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiOperation(createActivityDayApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiOperation(getActivityDayApiOperationOptions),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateActivityDayApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteActivityDayApiOperationOptions),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityLog':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiOperation(getActivityLogsApiOperationOptions),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiOperation(createActivityLogApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiOperation(getActivityLogApiOperationOptions),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateActivityLogApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteActivityLogApiOperationOptions),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

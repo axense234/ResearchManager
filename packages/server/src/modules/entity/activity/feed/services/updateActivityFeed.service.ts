@@ -1,11 +1,14 @@
 // NestJS
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 // DB Services
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
+// Prisma
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 // Dtos
 import { UpdateActivityFeedDto } from '../dto';
 // Redis
@@ -104,7 +107,16 @@ export class UpdateActivityFeedService {
         additionalNotes,
       });
     } catch (error) {
-      throw error;
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ForbiddenException(
+          'Research Activity with the provided id already has an Activity Feed!.',
+        );
+      } else {
+        throw error;
+      }
     }
   }
 }

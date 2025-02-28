@@ -22,14 +22,25 @@ import {
   GetActivityLogsQueryParams,
   UpdateActivityLogQueryParams,
 } from './types';
+// Swagger
+import { ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
+import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
+import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
+import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
+import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
 
 @JwtAuth()
+@SwaggerAuth()
+@ApiTags('Activity Logs')
 @Controller('activityLogs')
 export class ActivityLogController {
   constructor(private activityLogService: ActivityLogService) {}
 
+  @SwaggerHead('activityLog', 'GET MULTIPLE')
+  @SwaggerResponses('activityLog', 'GET MULTIPLE')
   @Get()
   getActivityLogs(
     @Query() queryParams: GetActivityLogsQueryParams,
@@ -38,6 +49,9 @@ export class ActivityLogController {
     return this.activityLogService.getActivityLogs(queryParams, req.url);
   }
 
+  @SwaggerHead('activityLog', 'GET SINGLE')
+  @SwaggerResponses('activityLog', 'GET SINGLE')
+  @SwaggerPathParams('activityLog', 'GET SINGLE')
   @Get(':activityLogId')
   getActivityLog(
     @Query() queryParams: GetActivityLogQueryParams,
@@ -51,6 +65,9 @@ export class ActivityLogController {
     );
   }
 
+  @SwaggerHead('activityLog', 'CREATE')
+  @SwaggerBody('activityLog', 'CREATE')
+  @SwaggerResponses('activityLog', 'CREATE')
   @Post('create')
   createActivityLog(
     @Query() queryParams: CreateActivityLogQueryParams,
@@ -59,6 +76,10 @@ export class ActivityLogController {
     return this.activityLogService.createActivityLog(queryParams, dto);
   }
 
+  @SwaggerHead('activityLog', 'UPDATE')
+  @SwaggerBody('activityLog', 'UPDATE')
+  @SwaggerResponses('activityLog', 'UPDATE')
+  @SwaggerPathParams('activityLog', 'UPDATE')
   @Patch(':activityLogId/update')
   updateActivityLog(
     @Query() queryParams: UpdateActivityLogQueryParams,
@@ -72,6 +93,9 @@ export class ActivityLogController {
     );
   }
 
+  @SwaggerHead('activityLog', 'DELETE')
+  @SwaggerResponses('activityLog', 'DELETE')
+  @SwaggerPathParams('activityLog', 'DELETE')
   @Delete(':activityLogId/delete')
   deleteActivityLog(
     @Query() queryParams: DeleteActivityLogQueryParams,

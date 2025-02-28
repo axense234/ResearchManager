@@ -22,14 +22,25 @@ import {
   GetActivityDaysQueryParams,
   UpdateActivityDayQueryParams,
 } from './types';
+// Swagger
+import { ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
+import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
+import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
+import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
+import { SwaggerPathParams } from 'src/decorators/swagger/swaggerPathParams.decorator';
 
 @JwtAuth()
+@SwaggerAuth()
+@ApiTags('Activity Days')
 @Controller('activityDays')
 export class ActivityDayController {
   constructor(private activityDayService: ActivityDayService) {}
 
+  @SwaggerHead('activityDay', 'GET MULTIPLE')
+  @SwaggerResponses('activityDay', 'GET MULTIPLE')
   @Get()
   getActivityDays(
     @Query() queryParams: GetActivityDaysQueryParams,
@@ -38,6 +49,9 @@ export class ActivityDayController {
     return this.activityDayService.getActivityDays(queryParams, req.url);
   }
 
+  @SwaggerHead('activityDay', 'GET SINGLE')
+  @SwaggerResponses('activityDay', 'GET SINGLE')
+  @SwaggerPathParams('activityDay', 'GET SINGLE')
   @Get(':activityDayId')
   getActivityDay(
     @Query() queryParams: GetActivityDayQueryParams,
@@ -51,6 +65,9 @@ export class ActivityDayController {
     );
   }
 
+  @SwaggerHead('activityDay', 'CREATE')
+  @SwaggerBody('activityDay', 'CREATE')
+  @SwaggerResponses('activityDay', 'CREATE')
   @Post('create')
   createActivityDay(
     @Query() queryParams: CreateActivityDayQueryParams,
@@ -59,6 +76,10 @@ export class ActivityDayController {
     return this.activityDayService.createActivityDay(queryParams, dto);
   }
 
+  @SwaggerHead('activityDay', 'UPDATE')
+  @SwaggerBody('activityDay', 'UPDATE')
+  @SwaggerResponses('activityDay', 'UPDATE')
+  @SwaggerPathParams('activityDay', 'UPDATE')
   @Patch(':activityDayId/update')
   updateActivityDay(
     @Query() queryParams: UpdateActivityDayQueryParams,
@@ -72,6 +93,9 @@ export class ActivityDayController {
     );
   }
 
+  @SwaggerHead('activityDay', 'DELETE')
+  @SwaggerResponses('activityDay', 'DELETE')
+  @SwaggerPathParams('activityDay', 'DELETE')
   @Delete(':activityDayId/delete')
   deleteActivityDay(
     @Query() queryParams: DeleteActivityDayQueryParams,

@@ -30,7 +30,21 @@ import {
   getResearchSessionPathParamsApiOptions,
   updateResearchSessionPathParamsApiOptions,
 } from 'src/modules/entity/research/session/data';
-import { getActivityFeedPathParamsApiOptions } from 'src/modules/entity/activity/feed/data';
+import {
+  deleteActivityFeedPathParamsApiOptions,
+  getActivityFeedPathParamsApiOptions,
+  updateActivityFeedPathParamsApiOptions,
+} from 'src/modules/entity/activity/feed/data';
+import {
+  deleteActivityDayPathParamsApiOptions,
+  getActivityDayPathParamsApiOptions,
+  updateActivityDayPathParamsApiOptions,
+} from 'src/modules/entity/activity/day/data';
+import {
+  deleteActivityLogPathParamsApiOptions,
+  getActivityLogPathParamsApiOptions,
+  updateActivityLogPathParamsApiOptions,
+} from 'src/modules/entity/activity/log/data';
 
 export const SwaggerPathParams = (
   entityType: EntityType,
@@ -146,6 +160,48 @@ export const SwaggerPathParams = (
         case 'GET SINGLE':
           return applyDecorators(
             ApiParam(getActivityFeedPathParamsApiOptions['activityFeedId']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(updateActivityFeedPathParamsApiOptions['activityFeedId']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(deleteActivityFeedPathParamsApiOptions['activityFeedId']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityDay':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiParam(getActivityDayPathParamsApiOptions['activityDayId']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(updateActivityDayPathParamsApiOptions['activityDayId']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(deleteActivityDayPathParamsApiOptions['activityDayId']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityLog':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiParam(getActivityLogPathParamsApiOptions['activityLogId']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(updateActivityLogPathParamsApiOptions['activityLogId']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(deleteActivityLogPathParamsApiOptions['activityLogId']),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

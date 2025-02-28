@@ -47,9 +47,25 @@ import {
 } from 'src/modules/entity/research/session/data';
 import {
   createActivityFeedResponsesOptions,
+  deleteActivityFeedResponsesOptions,
   getActivityFeedResponsesOptions,
   getActivityFeedsResponsesOptions,
+  updateActivityFeedResponsesOptions,
 } from 'src/modules/entity/activity/feed/data';
+import {
+  createActivityDayResponsesOptions,
+  deleteActivityDayResponsesOptions,
+  getActivityDayResponsesOptions,
+  getActivityDaysResponsesOptions,
+  updateActivityDayResponsesOptions,
+} from 'src/modules/entity/activity/day/data';
+import {
+  createActivityLogResponsesOptions,
+  deleteActivityLogResponsesOptions,
+  getActivityLogResponsesOptions,
+  getActivityLogsResponsesOptions,
+  updateActivityLogResponsesOptions,
+} from 'src/modules/entity/activity/log/data';
 
 export const SwaggerResponses = (
   entityType: EntityType,
@@ -285,9 +301,102 @@ export const SwaggerResponses = (
             ApiResponse(getActivityFeedResponsesOptions['401']),
             ApiResponse(getActivityFeedResponsesOptions['404']),
           );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiResponse(updateActivityFeedResponsesOptions['200']),
+            ApiResponse(updateActivityFeedResponsesOptions['400']),
+            ApiResponse(updateActivityFeedResponsesOptions['401']),
+            ApiResponse(updateActivityFeedResponsesOptions['403']),
+            ApiResponse(updateActivityFeedResponsesOptions['404']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteActivityFeedResponsesOptions['200']),
+            ApiResponse(deleteActivityFeedResponsesOptions['400']),
+            ApiResponse(deleteActivityFeedResponsesOptions['401']),
+            ApiResponse(deleteActivityFeedResponsesOptions['404']),
+          );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }
+    case 'activityDay':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiResponse(getActivityDaysResponsesOptions['200']),
+            ApiResponse(getActivityDaysResponsesOptions['401']),
+            ApiResponse(getActivityDaysResponsesOptions['404']),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiResponse(createActivityDayResponsesOptions['201']),
+            ApiResponse(createActivityDayResponsesOptions['400']),
+            ApiResponse(createActivityDayResponsesOptions['401']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getActivityDayResponsesOptions['200']),
+            ApiResponse(getActivityDayResponsesOptions['400']),
+            ApiResponse(getActivityDayResponsesOptions['401']),
+            ApiResponse(getActivityDayResponsesOptions['404']),
+          );
+        case 'UPDATE': {
+          return applyDecorators(
+            ApiResponse(updateActivityDayResponsesOptions['200']),
+            ApiResponse(updateActivityDayResponsesOptions['400']),
+            ApiResponse(updateActivityDayResponsesOptions['401']),
+            ApiResponse(updateActivityDayResponsesOptions['404']),
+          );
+        }
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteActivityDayResponsesOptions['200']),
+            ApiResponse(deleteActivityDayResponsesOptions['400']),
+            ApiResponse(deleteActivityDayResponsesOptions['401']),
+            ApiResponse(deleteActivityDayResponsesOptions['404']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityLog':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiResponse(getActivityLogsResponsesOptions['200']),
+            ApiResponse(getActivityLogsResponsesOptions['401']),
+            ApiResponse(getActivityLogsResponsesOptions['404']),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiResponse(createActivityLogResponsesOptions['201']),
+            ApiResponse(createActivityLogResponsesOptions['400']),
+            ApiResponse(createActivityLogResponsesOptions['401']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getActivityLogResponsesOptions['200']),
+            ApiResponse(getActivityLogResponsesOptions['400']),
+            ApiResponse(getActivityLogResponsesOptions['401']),
+            ApiResponse(getActivityLogResponsesOptions['404']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiResponse(updateActivityLogResponsesOptions['200']),
+            ApiResponse(updateActivityLogResponsesOptions['400']),
+            ApiResponse(updateActivityLogResponsesOptions['401']),
+            ApiResponse(updateActivityLogResponsesOptions['404']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteActivityLogResponsesOptions['200']),
+            ApiResponse(deleteActivityLogResponsesOptions['400']),
+            ApiResponse(deleteActivityLogResponsesOptions['401']),
+            ApiResponse(deleteActivityLogResponsesOptions['404']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+
     default:
       throw new Error(`Unsupported entityType: ${entityType}`);
   }

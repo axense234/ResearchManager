@@ -26,7 +26,18 @@ import {
   createResearchSessionApiBodyOptions,
   updateResearchSessionApiBodyOptions,
 } from 'src/modules/entity/research/session/data';
-import { createActivityFeedApiBodyOptions } from 'src/modules/entity/activity/feed/data';
+import {
+  createActivityFeedApiBodyOptions,
+  updateActivityFeedApiBodyOptions,
+} from 'src/modules/entity/activity/feed/data';
+import {
+  createActivityDayApiBodyOptions,
+  updateActivityDayApiBodyOptions,
+} from 'src/modules/entity/activity/day/data';
+import {
+  createActivityLogApiBodyOptions,
+  updateActivityLogApiBodyOptions,
+} from 'src/modules/entity/activity/log/data';
 
 export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
   switch (entityType) {
@@ -81,6 +92,26 @@ export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
       switch (actionType) {
         case 'CREATE':
           return applyDecorators(ApiBody(createActivityFeedApiBodyOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiBody(updateActivityFeedApiBodyOptions));
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityDay':
+      switch (actionType) {
+        case 'CREATE':
+          return applyDecorators(ApiBody(createActivityDayApiBodyOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiBody(updateActivityDayApiBodyOptions));
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'activityLog':
+      switch (actionType) {
+        case 'CREATE':
+          return applyDecorators(ApiBody(createActivityLogApiBodyOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiBody(updateActivityLogApiBodyOptions));
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }

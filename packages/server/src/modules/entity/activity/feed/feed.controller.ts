@@ -76,6 +76,10 @@ export class ActivityFeedController {
     return this.activityFeedService.createActivityFeed(queryParams, dto);
   }
 
+  @SwaggerHead('activityFeed', 'UPDATE')
+  @SwaggerBody('activityFeed', 'UPDATE')
+  @SwaggerResponses('activityFeed', 'UPDATE')
+  @SwaggerPathParams('activityFeed', 'UPDATE')
   @Patch(':activityFeedId/update')
   updateActivityFeed(
     @Query() queryParams: UpdateActivityFeedQueryParams,
@@ -89,6 +93,9 @@ export class ActivityFeedController {
     );
   }
 
+  @SwaggerHead('activityFeed', 'DELETE')
+  @SwaggerResponses('activityFeed', 'DELETE')
+  @SwaggerPathParams('activityFeed', 'DELETE')
   @Delete(':activityFeedId/delete')
   deleteActivityFeed(
     @Query() queryParams: DeleteActivityFeedQueryParams,
