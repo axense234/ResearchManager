@@ -58,6 +58,20 @@ import {
   updateResearchSessionApiOperationOptions,
 } from 'src/modules/entity/research/session/data';
 import {
+  createSettingsApiOperationOptions,
+  deleteSettingsApiOperationOptions,
+  getManySettingsApiOperationOptions,
+  getSettingsApiOperationOptions,
+  updateSettingsApiOperationOptions,
+} from 'src/modules/entity/settings/data';
+import {
+  createTagApiOperationOptions,
+  deleteTagApiOperationOptions,
+  getTagApiOperationOptions,
+  getTagsApiOperationOptions,
+  updateTagApiOperationOptions,
+} from 'src/modules/entity/tag/data';
+import {
   deleteUserApiOperationOptions,
   getProfileApiOperationOptions,
   getUserApiOperationOptions,
@@ -67,7 +81,10 @@ import {
 // Types
 import { EntityType, ActionType } from 'src/modules/util/builder/types';
 
-export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
+export const SwaggerHead = (
+  entityType: EntityType | 'health',
+  actionType: ActionType,
+) => {
   switch (entityType) {
     case 'user':
       switch (actionType) {
@@ -265,6 +282,52 @@ export const SwaggerHead = (entityType: EntityType, actionType: ActionType) => {
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }
+    case 'tag':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(ApiOperation(getTagsApiOperationOptions));
+        case 'CREATE':
+          return applyDecorators(ApiOperation(createTagApiOperationOptions));
+        case 'GET SINGLE':
+          return applyDecorators(ApiOperation(getTagApiOperationOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiOperation(updateTagApiOperationOptions));
+        case 'DELETE':
+          return applyDecorators(ApiOperation(deleteTagApiOperationOptions));
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'settings':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiOperation(getManySettingsApiOperationOptions),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiOperation(createSettingsApiOperationOptions),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(ApiOperation(getSettingsApiOperationOptions));
+        case 'UPDATE':
+          return applyDecorators(
+            ApiOperation(updateSettingsApiOperationOptions),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiOperation(deleteSettingsApiOperationOptions),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'health':
+      return applyDecorators(
+        ApiOperation({
+          summary: 'Checks the server Health.',
+          description:
+            'Route for checking the server Health. Any response other than 200 it means the server is NOT healthy.',
+        }),
+      );
     default:
       throw new Error(`Unsupported entityType: ${entityType}`);
   }

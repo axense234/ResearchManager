@@ -66,9 +66,23 @@ import {
   getActivityLogsResponsesOptions,
   updateActivityLogResponsesOptions,
 } from 'src/modules/entity/activity/log/data';
+import {
+  createTagResponsesOptions,
+  deleteTagResponsesOptions,
+  getTagResponsesOptions,
+  getTagsResponsesOptions,
+  updateTagResponsesOptions,
+} from 'src/modules/entity/tag/data';
+import {
+  createSettingsResponsesOptions,
+  deleteSettingsResponsesOptions,
+  getManySettingsResponsesOptions,
+  getSettingsResponsesOptions,
+  updateSettingsResponsesOptions,
+} from 'src/modules/entity/settings/data';
 
 export const SwaggerResponses = (
-  entityType: EntityType,
+  entityType: EntityType | 'health',
   actionType: ActionType,
 ) => {
   switch (entityType) {
@@ -396,7 +410,91 @@ export const SwaggerResponses = (
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }
-
+    case 'tag':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiResponse(getTagsResponsesOptions['200']),
+            ApiResponse(getTagsResponsesOptions['401']),
+            ApiResponse(getTagsResponsesOptions['404']),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiResponse(createTagResponsesOptions['201']),
+            ApiResponse(createTagResponsesOptions['400']),
+            ApiResponse(createTagResponsesOptions['401']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getTagResponsesOptions['200']),
+            ApiResponse(getTagResponsesOptions['400']),
+            ApiResponse(getTagResponsesOptions['401']),
+            ApiResponse(getTagResponsesOptions['404']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiResponse(updateTagResponsesOptions['200']),
+            ApiResponse(updateTagResponsesOptions['400']),
+            ApiResponse(updateTagResponsesOptions['401']),
+            ApiResponse(updateTagResponsesOptions['404']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteTagResponsesOptions['200']),
+            ApiResponse(deleteTagResponsesOptions['400']),
+            ApiResponse(deleteTagResponsesOptions['401']),
+            ApiResponse(deleteTagResponsesOptions['404']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'settings':
+      switch (actionType) {
+        case 'GET MULTIPLE':
+          return applyDecorators(
+            ApiResponse(getManySettingsResponsesOptions['200']),
+            ApiResponse(getManySettingsResponsesOptions['401']),
+            ApiResponse(getManySettingsResponsesOptions['404']),
+          );
+        case 'CREATE':
+          return applyDecorators(
+            ApiResponse(createSettingsResponsesOptions['201']),
+            ApiResponse(createSettingsResponsesOptions['400']),
+            ApiResponse(createSettingsResponsesOptions['401']),
+            ApiResponse(createSettingsResponsesOptions['403']),
+          );
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiResponse(getSettingsResponsesOptions['200']),
+            ApiResponse(getSettingsResponsesOptions['400']),
+            ApiResponse(getSettingsResponsesOptions['401']),
+            ApiResponse(getSettingsResponsesOptions['404']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiResponse(updateSettingsResponsesOptions['200']),
+            ApiResponse(updateSettingsResponsesOptions['400']),
+            ApiResponse(updateSettingsResponsesOptions['401']),
+            ApiResponse(updateSettingsResponsesOptions['404']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiResponse(deleteSettingsResponsesOptions['200']),
+            ApiResponse(deleteSettingsResponsesOptions['400']),
+            ApiResponse(deleteSettingsResponsesOptions['401']),
+            ApiResponse(deleteSettingsResponsesOptions['404']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'health':
+      return applyDecorators(
+        ApiResponse({
+          status: 200,
+          description: 'Server is Healthy.',
+          example: 'Healthy.',
+        }),
+      );
     default:
       throw new Error(`Unsupported entityType: ${entityType}`);
   }

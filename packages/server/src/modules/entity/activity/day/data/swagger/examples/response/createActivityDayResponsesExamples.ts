@@ -1,6 +1,6 @@
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
-// Mock DATA
+// Mock Data <3
 import { createActivityDayResponsesMockData } from '../../../mock';
 
 type CreateActivityDayResponsesExamplesType = {

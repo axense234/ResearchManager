@@ -1,5 +1,6 @@
 // Swagger
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+// Mock Data
 import { deleteResearchActivityResponsesMockData } from '../../../mock';
 
 type DeleteResearchActivityResponsesExamplesType = {

@@ -38,6 +38,14 @@ import {
   createActivityLogApiBodyOptions,
   updateActivityLogApiBodyOptions,
 } from 'src/modules/entity/activity/log/data';
+import {
+  createTagApiBodyOptions,
+  updateTagApiBodyOptions,
+} from 'src/modules/entity/tag/data';
+import {
+  createSettingsApiBodyOptions,
+  updateSettingsApiBodyOptions,
+} from 'src/modules/entity/settings/data';
 
 export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
   switch (entityType) {
@@ -112,6 +120,24 @@ export const SwaggerBody = (entityType: EntityType, actionType: ActionType) => {
           return applyDecorators(ApiBody(createActivityLogApiBodyOptions));
         case 'UPDATE':
           return applyDecorators(ApiBody(updateActivityLogApiBodyOptions));
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'tag':
+      switch (actionType) {
+        case 'CREATE':
+          return applyDecorators(ApiBody(createTagApiBodyOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiBody(updateTagApiBodyOptions));
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'settings':
+      switch (actionType) {
+        case 'CREATE':
+          return applyDecorators(ApiBody(createSettingsApiBodyOptions));
+        case 'UPDATE':
+          return applyDecorators(ApiBody(updateSettingsApiBodyOptions));
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);
       }

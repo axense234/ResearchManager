@@ -45,6 +45,16 @@ import {
   getActivityLogPathParamsApiOptions,
   updateActivityLogPathParamsApiOptions,
 } from 'src/modules/entity/activity/log/data';
+import {
+  deleteTagPathParamsApiOptions,
+  getTagPathParamsApiOptions,
+  updateTagPathParamsApiOptions,
+} from 'src/modules/entity/tag/data';
+import {
+  deleteSettingsPathParamsApiOptions,
+  getSettingsPathParamsApiOptions,
+  updateSettingsPathParamsApiOptions,
+} from 'src/modules/entity/settings/data';
 
 export const SwaggerPathParams = (
   entityType: EntityType,
@@ -202,6 +212,38 @@ export const SwaggerPathParams = (
         case 'DELETE':
           return applyDecorators(
             ApiParam(deleteActivityLogPathParamsApiOptions['activityLogId']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'tag':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(ApiParam(getTagPathParamsApiOptions['tagId']));
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(updateTagPathParamsApiOptions['tagId']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(deleteTagPathParamsApiOptions['tagId']),
+          );
+        default:
+          throw new Error(`Unsupported actionType: ${actionType}`);
+      }
+    case 'settings':
+      switch (actionType) {
+        case 'GET SINGLE':
+          return applyDecorators(
+            ApiParam(getSettingsPathParamsApiOptions['settingsId']),
+          );
+        case 'UPDATE':
+          return applyDecorators(
+            ApiParam(updateSettingsPathParamsApiOptions['settingsId']),
+          );
+        case 'DELETE':
+          return applyDecorators(
+            ApiParam(deleteSettingsPathParamsApiOptions['settingsId']),
           );
         default:
           throw new Error(`Unsupported actionType: ${actionType}`);

@@ -1,3 +1,5 @@
+// Swagger
+import { ApiProperty } from '@nestjs/swagger';
 // Prisma
 import { TagFontFamily } from '@prisma/client';
 // Validators
@@ -8,85 +10,110 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
+// Options
+import {
+  createTagDtoOptions,
+  updateTagDtoOptions,
+} from '../data/swagger/options/parameter';
 
 export class CreateTagDto {
+  @ApiProperty(createTagDtoOptions['title'])
   @IsString()
   @IsOptional()
-  title: string;
+  title?: string;
 
+  @ApiProperty(createTagDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
   @IsOptional()
-  backgroundColorOrImageSrc: string;
+  backgroundColorOrImageSrc?: string;
 
+  @ApiProperty(createTagDtoOptions['fontSize'])
   @IsNumber()
   @IsOptional()
-  fontSize: number;
+  fontSize?: number;
 
+  @ApiProperty(createTagDtoOptions['fontFamily'])
   @IsString()
   @IsOptional()
-  fontFamily: TagFontFamily;
+  fontFamily?: TagFontFamily;
 
+  @ApiProperty(createTagDtoOptions['researchActivities'])
   @IsArray()
   @IsOptional()
-  researchActivities: string[];
+  researchActivities?: string[];
 
+  @ApiProperty(createTagDtoOptions['researchPhases'])
   @IsArray()
   @IsOptional()
-  researchPhases: string[];
+  researchPhases?: string[];
 
+  @ApiProperty(createTagDtoOptions['researchLogs'])
   @IsArray()
   @IsOptional()
-  researchLogs: string[];
+  researchLogs?: string[];
 
+  @ApiProperty(createTagDtoOptions['researchSessions'])
   @IsArray()
   @IsOptional()
-  researchSessions: string[];
+  researchSessions?: string[];
 
+  @ApiProperty(createTagDtoOptions['userId'])
   @IsUUID()
   userId: string;
 
+  @ApiProperty(createTagDtoOptions['userIdForArchivePurposes'])
   @IsUUID()
   userIdForArchivePurposes: string;
 }
 
 export class UpdateTagDto {
+  @ApiProperty(updateTagDtoOptions['title'])
   @IsString()
   @IsOptional()
-  title: string;
+  title?: string;
 
+  @ApiProperty(updateTagDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
   @IsOptional()
-  backgroundColorOrImageSrc: string;
+  backgroundColorOrImageSrc?: string;
 
+  @ApiProperty(updateTagDtoOptions['fontSize'])
   @IsNumber()
   @IsOptional()
-  fontSize: number;
+  fontSize?: number;
 
+  @ApiProperty(updateTagDtoOptions['fontFamily'])
   @IsString()
   @IsOptional()
-  fontFamily: TagFontFamily;
+  fontFamily?: TagFontFamily;
 
+  @ApiProperty(updateTagDtoOptions['researchActivities'])
   @IsArray()
   @IsOptional()
-  researchActivities: string[];
+  researchActivities?: string[];
 
+  @ApiProperty(updateTagDtoOptions['researchPhases'])
   @IsArray()
   @IsOptional()
-  researchPhases: string[];
+  researchPhases?: string[];
 
+  @ApiProperty(updateTagDtoOptions['researchLogs'])
   @IsArray()
   @IsOptional()
-  researchLogs: string[];
+  researchLogs?: string[];
 
+  @ApiProperty(updateTagDtoOptions['researchSessions'])
   @IsArray()
   @IsOptional()
-  researchSessions: string[];
+  researchSessions?: string[];
 
+  @ApiProperty(updateTagDtoOptions['userId'])
   @IsUUID()
   @IsOptional()
-  userId: string;
+  userId?: string;
 
+  @ApiProperty(updateTagDtoOptions['userIdForArchivePurposes'])
   @IsUUID()
   @IsOptional()
-  userIdForArchivePurposes: string;
+  userIdForArchivePurposes?: string;
 }

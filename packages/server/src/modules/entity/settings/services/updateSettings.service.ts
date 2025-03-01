@@ -1,10 +1,12 @@
 // NestJS
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 // Prisma
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
@@ -98,7 +100,14 @@ export class UpdateSettingsService {
         additionalNotes,
       });
     } catch (error) {
-      throw error;
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ForbiddenException('User already has Settings.');
+      } else {
+        throw error;
+      }
     }
   }
 }
