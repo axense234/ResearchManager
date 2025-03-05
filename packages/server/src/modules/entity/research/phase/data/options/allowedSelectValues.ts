@@ -1,9 +1,8 @@
 export const researchPhaseAllowedSelectValues = [
   'id',
   'name',
+  'archived',
   'backgroundColorOrImageSrc',
-  'userIdForArchivePurposes',
-  'userForArchivePurposes',
   'researchActivityId',
   'researchActivity',
   'researchLogs',

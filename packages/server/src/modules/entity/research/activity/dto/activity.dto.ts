@@ -1,7 +1,13 @@
 // Swagger
 import { ApiProperty } from '@nestjs/swagger';
 // Validators
-import { IsArray, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 // Data
 import {
   createResearchActivityDtoOptions,
@@ -13,6 +19,11 @@ export class CreateResearchActivityDto {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @ApiProperty(createResearchActivityDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @ApiProperty(createResearchActivityDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
@@ -37,10 +48,6 @@ export class CreateResearchActivityDto {
   @ApiProperty(createResearchActivityDtoOptions['userId'])
   @IsUUID()
   userId: string;
-
-  @ApiProperty(createResearchActivityDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  userIdForArchivePurposes: string;
 }
 
 export class UpdateResearchActivityDto {
@@ -48,6 +55,11 @@ export class UpdateResearchActivityDto {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @ApiProperty(updateResearchActivityDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @ApiProperty(updateResearchActivityDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
@@ -73,9 +85,4 @@ export class UpdateResearchActivityDto {
   @IsUUID()
   @IsOptional()
   userId?: string;
-
-  @ApiProperty(updateResearchActivityDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
 }

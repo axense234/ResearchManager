@@ -21,8 +21,4 @@ export class TagIncludeObject {
   @IsBoolean()
   @IsOptional()
   user?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  userForArchivePurposes?: boolean;
 }

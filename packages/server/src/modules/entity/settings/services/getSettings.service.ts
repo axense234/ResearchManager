@@ -65,7 +65,7 @@ export class GetSettingsService {
       return await this.objectBuilder.buildReturnObject({
         actionType: 'GET SINGLE',
         entity: foundSettings,
-        message: `Successfully found Settings for the user: ${foundSettings.userId}!`,
+        message: `Successfully found Settings for the user: ${foundSettings?.userId || 'Unknown'}!`,
         additionalNotes,
       });
     } catch (error) {

@@ -3,7 +3,7 @@ export const researchActivityAllowedSelectValues = [
   'name',
   'backgroundColorOrImageSrc',
   'userId',
-  'userIdForArchivePurposes',
+  'archived',
   'createdAt',
   'updatedAt',
   'user',

@@ -36,10 +36,6 @@ export class TagWhereObject {
   @IsOptional()
   userId?: string;
 
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
-
   @IsDateString()
   @IsOptional()
   createdAt?: Date;

@@ -6,12 +6,17 @@ import {
   IsUUID,
   IsArray,
   IsNumber,
+  IsBoolean,
 } from 'class-validator';
 
 export class ResearchLogCreateDataObject {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @IsString()
   @IsOptional()
@@ -35,7 +40,4 @@ export class ResearchLogCreateDataObject {
 
   @IsUUID()
   researchPhaseId: string;
-
-  @IsUUID()
-  userIdForArchivePurposes: string;
 }

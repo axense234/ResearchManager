@@ -3,12 +3,12 @@ import { ApiPropertyOptions } from '@nestjs/swagger';
 
 type UpdateResearchActivityDtoOptionsType = {
   name: ApiPropertyOptions;
+  archived: ApiPropertyOptions;
   backgroundColorOrImageSrc: ApiPropertyOptions;
   researchPhases: ApiPropertyOptions;
   activityFeed: ApiPropertyOptions;
   tags: ApiPropertyOptions;
   userId: ApiPropertyOptions;
-  userIdForArchivePurposes: ApiPropertyOptions;
 };
 
 export const updateResearchActivityDtoOptions: UpdateResearchActivityDtoOptionsType =
@@ -16,6 +16,11 @@ export const updateResearchActivityDtoOptions: UpdateResearchActivityDtoOptionsT
     name: {
       example: 'Reading',
       description: 'The name of the Research Activity you want to update.',
+    },
+    archived: {
+      example: true,
+      description:
+        'The archive status of your Research Activity. If set to true, the respective Research Activity is marked as archived.',
     },
     backgroundColorOrImageSrc: {
       example:
@@ -38,9 +43,5 @@ export const updateResearchActivityDtoOptions: UpdateResearchActivityDtoOptionsT
     userId: {
       description:
         'The id of the User that will be connected to the newly updated Research Activity. Input the respective User UUID as the value.',
-    },
-    userIdForArchivePurposes: {
-      description:
-        'The id of the User that will be connected to the newly updated Research Activity. Input the respective User UUID as the value. This is done for potential archive purposes.',
     },
   };

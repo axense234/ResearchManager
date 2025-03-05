@@ -10,7 +10,6 @@ export const createResearchSessionMockData: CreateResearchSessionDto[] = [
     imagesSrc: ['image 1 src', 'image 2 src'],
     currentStatusType: 'STARTED',
     currentStatusDate: new Date(),
-    userIdForArchivePurposes: 'put your user id here',
     researchPhaseId: 'put your research phase id here',
   },
   {
@@ -21,7 +20,6 @@ export const createResearchSessionMockData: CreateResearchSessionDto[] = [
     imagesSrc: ['image 1 src'],
     currentStatusType: 'PAUSED',
     currentStatusDate: new Date(),
-    userIdForArchivePurposes: 'put your user id here',
     researchPhaseId: 'put your research phase id here',
   },
   {
@@ -32,7 +30,6 @@ export const createResearchSessionMockData: CreateResearchSessionDto[] = [
     imagesSrc: ['image 1 src', 'image 2 src', 'image 3 src'],
     currentStatusType: 'RESUMED',
     currentStatusDate: new Date(),
-    userIdForArchivePurposes: 'put your user id here',
     researchPhaseId: 'put your research phase id here',
   },
 ];

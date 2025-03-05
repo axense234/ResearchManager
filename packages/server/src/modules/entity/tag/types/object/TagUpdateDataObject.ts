@@ -26,6 +26,10 @@ export class TagUpdateDataObject {
   @IsOptional()
   fontSize: number;
 
+  @IsNumber()
+  @IsOptional()
+  archived: boolean;
+
   @IsObject()
   @IsOptional()
   researchActivities: { connect: { id: string }[] };
@@ -45,8 +49,4 @@ export class TagUpdateDataObject {
   @IsUUID()
   @IsOptional()
   userId: string;
-
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes: string;
 }

@@ -46,6 +46,7 @@ export const getResearchActivitiesQueryParamsApiPropertyOptions: GetResearchActi
       required: false,
       description:
         'The chosen option type you want to use. Available options: include, select. Note: the chosen option type has to match with either includeValues or selectValues.',
+      enum: ['include', 'select'],
     },
     searchByKey: {
       required: false,
@@ -53,6 +54,7 @@ export const getResearchActivitiesQueryParamsApiPropertyOptions: GetResearchActi
         'search by key',
         researchActivitiesAllowedSearchByKeyValues,
       ),
+      enum: researchActivitiesAllowedSearchByKeyValues,
     },
     searchByValue: {
       required: false,
@@ -68,6 +70,6 @@ export const getResearchActivitiesQueryParamsApiPropertyOptions: GetResearchActi
     sortByOrders: {
       required: false,
       description:
-        'The CSV order by values of the coresponding sort by keys. They should be in order(no pun intended) so they can match the order of the sort by keys.',
+        'The CSV order by values of the coresponding sort by keys, composed of "asc" for ascending and "desc" for descending orders. They should be in order(no pun intended) so they can match the order of the sort by keys.',
     },
   };

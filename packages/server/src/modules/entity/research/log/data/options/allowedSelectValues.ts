@@ -1,5 +1,6 @@
 export const researchLogAllowedSelectValues = [
   'backgroundColorOrImageSrc',
+  'archived',
   'content',
   'createdAt',
   'updatedAt',
@@ -10,6 +11,4 @@ export const researchLogAllowedSelectValues = [
   'researchPhase',
   'researchPhaseId',
   'tags',
-  'userIdForArchivePurposes',
-  'userForArchivePurposes',
 ];

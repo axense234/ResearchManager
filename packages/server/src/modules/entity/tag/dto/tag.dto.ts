@@ -5,6 +5,7 @@ import { TagFontFamily } from '@prisma/client';
 // Validators
 import {
   IsArray,
+  IsBoolean,
   IsNumber,
   IsOptional,
   IsString,
@@ -37,6 +38,11 @@ export class CreateTagDto {
   @IsOptional()
   fontFamily?: TagFontFamily;
 
+  @ApiProperty(createTagDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
+
   @ApiProperty(createTagDtoOptions['researchActivities'])
   @IsArray()
   @IsOptional()
@@ -60,10 +66,6 @@ export class CreateTagDto {
   @ApiProperty(createTagDtoOptions['userId'])
   @IsUUID()
   userId: string;
-
-  @ApiProperty(createTagDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  userIdForArchivePurposes: string;
 }
 
 export class UpdateTagDto {
@@ -86,6 +88,11 @@ export class UpdateTagDto {
   @IsString()
   @IsOptional()
   fontFamily?: TagFontFamily;
+
+  @ApiProperty(updateTagDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @ApiProperty(updateTagDtoOptions['researchActivities'])
   @IsArray()
@@ -111,9 +118,4 @@ export class UpdateTagDto {
   @IsUUID()
   @IsOptional()
   userId?: string;
-
-  @ApiProperty(updateTagDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
 }

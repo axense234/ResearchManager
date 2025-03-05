@@ -67,10 +67,14 @@ export class ObjectBuilderService {
   async buildDataObject({
     dto,
     entityType,
+    actionType,
+    options,
   }: DataObjectBuilderParams): Promise<DataObjectBuilderDataObject> {
     return await this.dataObjectBuilderService.buildDataObject({
       dto,
       entityType,
+      actionType,
+      options,
     });
   }
 

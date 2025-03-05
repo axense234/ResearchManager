@@ -49,24 +49,4 @@ export class UserSelectObject {
   @IsBoolean()
   @IsOptional()
   activityFeed?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  archivedResearchActivities?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  archivedResearchLogs?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  archivedResearchPhases?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  archivedResearchSessions?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  archivedTags?: boolean;
 }

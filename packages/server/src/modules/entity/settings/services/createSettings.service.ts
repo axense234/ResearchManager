@@ -39,6 +39,8 @@ export class CreateSettingsService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'settings',
         dto,
+        actionType: 'CREATE',
+        options: {},
       })) as SettingsCreateDataObject;
 
       const createObject: SettingsCreateObject = { data: dataObject };
@@ -71,6 +73,12 @@ export class CreateSettingsService {
             value: createdSettings.userId,
           },
         ],
+        type: 'create',
+      });
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'users',
+        specifiers: [],
         type: 'create',
       });
 

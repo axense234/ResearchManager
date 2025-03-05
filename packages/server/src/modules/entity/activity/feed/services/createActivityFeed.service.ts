@@ -39,6 +39,8 @@ export class CreateActivityFeedService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityFeed',
         dto,
+        actionType: 'CREATE',
+        options: {},
       })) as ActivityFeedCreateDataObject;
 
       const createObject: ActivityFeedCreateObject = {
@@ -55,17 +57,6 @@ export class CreateActivityFeedService {
 
       if (chosenOptionType && optionObject) {
         createObject[chosenOptionType] = optionObject;
-      }
-
-      const foundActivityFeedToBeCheckedForType =
-        await this.prisma.activityFeed.findFirst({
-          where: { AND: [{ userId: dto.userId }, { type: 'USER' }] },
-        });
-
-      if (foundActivityFeedToBeCheckedForType && dto.type === 'USER') {
-        throw new BadRequestException(
-          'Could not create Activity Feed with the userId provided AND type USER since one already exists with those properties.',
-        );
       }
 
       const createdActivityFeed =

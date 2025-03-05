@@ -43,6 +43,8 @@ export class UpdateResearchActivityService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchActivity',
+        actionType: 'UPDATE',
+        options: {},
       })) as ResearchActivityUpdateDataObject;
 
       const updateObject: ResearchActivityUpdateObject = {

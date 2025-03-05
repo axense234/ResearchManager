@@ -1,5 +1,1 @@
-export const researchSessionAllowedIncludeValues = [
-  'researchPhase',
-  'tags',
-  'userForArchivePurposes',
-];
+export const researchSessionAllowedIncludeValues = ['researchPhase', 'tags'];

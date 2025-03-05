@@ -25,31 +25,11 @@ export class UserCreateDataObject {
 
   @IsObject()
   @IsOptional()
-  settings: { connect: { id: string } };
+  settings: { connect: { id: string } } | { create: object };
 
   @IsObject()
   @IsOptional()
-  activityFeeds: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedResearchActivities: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedResearchLogs: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedResearchPhases: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedResearchSessions: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedTags: { connect: { id: string }[] };
+  activityFeed: { connect: { id: string } } | { create: object };
 
   @IsObject()
   @IsOptional()

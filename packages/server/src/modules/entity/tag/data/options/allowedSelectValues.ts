@@ -4,8 +4,8 @@ export const tagAllowedSelectValues = [
   'backgroundColorOrImageSrc',
   'fontSize',
   'fontFamily',
+  'archived',
   'userId',
-  'userIdForArchivePurposes',
   'createdAt',
   'updatedAt',
   'researchActivities',
@@ -13,5 +13,4 @@ export const tagAllowedSelectValues = [
   'researchLogs',
   'researchSessions',
   'user',
-  'userForArchivePurposes',
 ];

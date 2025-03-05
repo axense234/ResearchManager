@@ -3,9 +3,9 @@ import { ApiPropertyOptions } from '@nestjs/swagger';
 
 type UpdateResearchPhaseDtoOptionsType = {
   name: ApiPropertyOptions;
+  archived: ApiPropertyOptions;
   backgroundColorOrImageSrc: ApiPropertyOptions;
   researchActivityId: ApiPropertyOptions;
-  userIdForArchivePurposes: ApiPropertyOptions;
   researchLogs: ApiPropertyOptions;
   researchSessions: ApiPropertyOptions;
   tags: ApiPropertyOptions;
@@ -17,6 +17,11 @@ export const updateResearchPhaseDtoOptions: UpdateResearchPhaseDtoOptionsType =
       example: 'Project1, 2, 3',
       description: 'The name of the Research Phase you want to update.',
     },
+    archived: {
+      example: true,
+      description:
+        'The archive status of your Research Phase. If set to true, the respective Research Phase is marked as archived.',
+    },
     backgroundColorOrImageSrc: {
       example:
         'https://res.cloudinary.com/birthdayreminder/image/upload/v1688815596/Highschool%20Site%20App/library_cgocde.jpg',
@@ -26,10 +31,6 @@ export const updateResearchPhaseDtoOptions: UpdateResearchPhaseDtoOptionsType =
     researchActivityId: {
       description:
         'The id of the Research Activity that will be connected to the newly updated Research Phase. Input the respective Research Activity UUID as the value.',
-    },
-    userIdForArchivePurposes: {
-      description:
-        'The id of the User that will be connected to the newly updated Research Phase. Input the respective User UUID as the value. This is done for potential archive purposes.',
     },
     tags: {
       description:

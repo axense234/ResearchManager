@@ -6,11 +6,11 @@ type UpdateTagDtoOptionsType = {
   backgroundColorOrImageSrc: ApiPropertyOptions;
   fontSize: ApiPropertyOptions;
   fontFamily: ApiPropertyOptions;
+  archived: ApiPropertyOptions;
   researchActivities: ApiPropertyOptions;
   researchPhases: ApiPropertyOptions;
   researchLogs: ApiPropertyOptions;
   researchSessions: ApiPropertyOptions;
-  userIdForArchivePurposes: ApiPropertyOptions;
   userId: ApiPropertyOptions;
 };
 
@@ -33,6 +33,11 @@ export const updateTagDtoOptions: UpdateTagDtoOptionsType = {
     description:
       'The font family of your Tag title. Available families: ARIAL, HELVETICA, TIMES_NEW_ROMAN, VERDANA, GEORGIA, COURIER_NEW, TAHOMA, TREBUCHET_MS, IMPACT, COMIC_SANS_MS, LUCIDA, MONACO, BRADLEY_HAND, LUMINARY.',
   },
+  archived: {
+    example: true,
+    description:
+      'The archive status of your Tag. If set to true, the respective Tag is marked as archived.',
+  },
   researchActivities: {
     description:
       "The Research Activities of your Tag. Input the respective Research Activities UUID/UUID's in the array.",
@@ -52,9 +57,5 @@ export const updateTagDtoOptions: UpdateTagDtoOptionsType = {
   userId: {
     description:
       'The id of the User that will be connected to the newly updated Tag. Input the respective User UUID as the value.',
-  },
-  userIdForArchivePurposes: {
-    description:
-      'The id of the User that will be connected to the newly updated Tag. Input the respective User UUID as the value. This is done for potential archive purposes.',
   },
 };

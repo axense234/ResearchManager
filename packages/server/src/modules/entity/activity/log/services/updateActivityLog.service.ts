@@ -43,6 +43,8 @@ export class UpdateActivityLogService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityLog',
         dto,
+        actionType: 'UPDATE',
+        options: {},
       })) as ActivityLogUpdateDataObject;
 
       const updateObject: ActivityLogUpdateObject = {

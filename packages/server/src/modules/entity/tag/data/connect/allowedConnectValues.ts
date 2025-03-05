@@ -5,5 +5,4 @@ export const tagAllowedConnectValues: DataObjectBuilderAllowedConnectValue[] = [
   { entityType: 'researchPhases', rel: 'MTM' },
   { entityType: 'researchLogs', rel: 'MTM' },
   { entityType: 'researchSessions', rel: 'MTM' },
-  { entityType: 'userForArchivePurposes', rel: 'OTM' },
 ];

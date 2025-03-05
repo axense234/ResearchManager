@@ -3,6 +3,7 @@ import { ApiPropertyOptions } from '@nestjs/swagger';
 
 type UpdateResearchSessionDtoOptionsType = {
   name: ApiPropertyOptions;
+  archived: ApiPropertyOptions;
   backgroundColorOrImageSrc: ApiPropertyOptions;
   researchPoints: ApiPropertyOptions;
   content: ApiPropertyOptions;
@@ -10,7 +11,6 @@ type UpdateResearchSessionDtoOptionsType = {
   currentStatusType: ApiPropertyOptions;
   currentStatusDate: ApiPropertyOptions;
   tags: ApiPropertyOptions;
-  userIdForArchivePurposes: ApiPropertyOptions;
   researchPhaseId: ApiPropertyOptions;
 };
 
@@ -19,6 +19,11 @@ export const updateResearchSessionDtoOptions: UpdateResearchSessionDtoOptionsTyp
     name: {
       example: 'Log1',
       description: 'The name of the Research Session you want to update.',
+    },
+    archived: {
+      example: true,
+      description:
+        'The archive status of your Research Session. If set to true, the respective Research Session is marked as archived.',
     },
     backgroundColorOrImageSrc: {
       example:
@@ -60,9 +65,5 @@ export const updateResearchSessionDtoOptions: UpdateResearchSessionDtoOptionsTyp
     researchPhaseId: {
       description:
         'The id of the Research Phase that will be connected to the newly updated Research Session. Input the respective Research Phase UUID as the value.',
-    },
-    userIdForArchivePurposes: {
-      description:
-        'The id of the User that will be connected to the newly updated Research Session. Input the respective User UUID as the value. This is done for potential archive purposes.',
     },
   };

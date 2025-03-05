@@ -1,5 +1,6 @@
 // Validators
 import {
+  IsBoolean,
   IsNumber,
   IsObject,
   IsOptional,
@@ -26,6 +27,10 @@ export class TagCreateDataObject {
   @IsOptional()
   fontSize: number;
 
+  @IsBoolean()
+  @IsOptional()
+  archived: boolean;
+
   @IsObject()
   @IsOptional()
   researchActivities: { connect: { id: string }[] };
@@ -44,7 +49,4 @@ export class TagCreateDataObject {
 
   @IsUUID()
   userId: string;
-
-  @IsUUID()
-  userIdForArchivePurposes: string;
 }

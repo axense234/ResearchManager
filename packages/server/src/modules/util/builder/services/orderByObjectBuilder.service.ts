@@ -106,6 +106,7 @@ export class OrderByObjectBuilderService {
             });
           }
         });
+        console.log(orderByObject);
       }
     } else if (sortByKeys && !sortByOrders) {
       additionalNotes = `No sortByOrders query parameter provided even tho sortByKeys were given`;

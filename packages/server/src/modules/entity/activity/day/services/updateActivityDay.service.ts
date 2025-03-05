@@ -42,6 +42,8 @@ export class UpdateActivityDayService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'activityDay',
+        actionType: 'UPDATE',
+        options: {},
       })) as ActivityDayUpdateDataObject;
 
       const updateObject: ActivityDayUpdateObject = {

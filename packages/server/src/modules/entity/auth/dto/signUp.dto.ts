@@ -47,31 +47,6 @@ export class SignUpDto {
   @IsOptional()
   activityFeeds?: string[];
 
-  @ApiProperty(signUpDtoOptions['archivedResearchActivities'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchActivities?: string[];
-
-  @ApiProperty(signUpDtoOptions['archivedResearchLogs'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchLogs?: string[];
-
-  @ApiProperty(signUpDtoOptions['archivedResearchPhases'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchPhases?: string[];
-
-  @ApiProperty(signUpDtoOptions['archivedResearchSessions'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchSessions?: string[];
-
-  @ApiProperty(signUpDtoOptions['archivedTags'])
-  @IsArray()
-  @IsOptional()
-  archivedTags?: string[];
-
   @ApiProperty(signUpDtoOptions['researchActivities'])
   @IsArray()
   @IsOptional()

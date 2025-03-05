@@ -4,5 +4,4 @@ export const tagAllowedIncludeValues = [
   'researchLogs',
   'researchSessions',
   'user',
-  'userForArchivePurposes',
 ];

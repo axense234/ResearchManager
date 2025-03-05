@@ -78,10 +78,6 @@ export class DeleteResearchPhaseService {
         base: 'researchPhases',
         specifiers: [
           {
-            label: 'userId',
-            value: deletedResearchPhase.userIdForArchivePurposes,
-          },
-          {
             label: 'researchActivityId',
             value: deletedResearchPhase.researchActivityId,
           },

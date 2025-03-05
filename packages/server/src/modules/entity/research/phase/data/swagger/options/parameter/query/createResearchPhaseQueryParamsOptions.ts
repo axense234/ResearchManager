@@ -34,5 +34,6 @@ export const createResearchPhaseQueryParamsApiPropertyOptions: CreateResearchPha
       required: false,
       description:
         'The chosen option type you want to use. Available options: include, select. Note: the chosen option type has to match with either includeValues or selectValues.',
+      enum: ['include', 'select'],
     },
   };

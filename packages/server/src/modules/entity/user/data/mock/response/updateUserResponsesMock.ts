@@ -19,6 +19,10 @@ export const updateUserResponsesMockData: ReturnObjectBuilderReturnObject[] = [
     statusCode: 401,
   },
   {
+    message: 'Email taken by another User.',
+    statusCode: 403,
+  },
+  {
     message: 'Could not find any User to update given the input.',
     error: 'Not Found',
     statusCode: 404,

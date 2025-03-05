@@ -34,6 +34,8 @@ export class CreateActivityLogService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityLog',
         dto,
+        actionType: 'CREATE',
+        options: {},
       })) as ActivityLogCreateDataObject;
 
       const createObject: ActivityLogCreateObject = { data: dataObject };

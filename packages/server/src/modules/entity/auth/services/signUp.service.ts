@@ -8,6 +8,8 @@ import {
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 // Dtos
 import { SignUpDto } from '../dto/signUp.dto';
+// Redis
+import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Services
@@ -24,6 +26,7 @@ import { UserCreateObject } from '../types/object/UserCreateObject';
 export class SignUpService {
   constructor(
     private prisma: PrismaService,
+    private redis: RedisService,
     private signTokenService: SignTokenService,
     private objectBuilder: ObjectBuilderService,
   ) {}
@@ -33,11 +36,19 @@ export class SignUpService {
     dto: SignUpDto,
   ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      const { includeValues, selectValues, chosenOptionType } = queryParams;
+      const {
+        includeValues,
+        selectValues,
+        chosenOptionType,
+        createSettings,
+        createActivityFeed,
+      } = queryParams;
 
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'user',
+        actionType: 'CREATE',
+        options: { createActivityFeed, createSettings },
       })) as UserCreateDataObject;
 
       const createObject: UserCreateObject = { data: dataObject };
@@ -66,6 +77,23 @@ export class SignUpService {
         createdUser.id,
         createdUser.email,
       );
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'users',
+        specifiers: [],
+        type: 'create',
+      });
+
+      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+        base: 'settings',
+        specifiers: [
+          {
+            label: 'userId',
+            value: createdUser.id,
+          },
+        ],
+        type: 'create',
+      });
 
       return await this.objectBuilder.buildReturnObject({
         actionType: 'CREATE',

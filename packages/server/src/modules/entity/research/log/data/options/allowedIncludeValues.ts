@@ -1,5 +1,1 @@
-export const researchLogAllowedIncludeValues = [
-  'researchPhase',
-  'tags',
-  'userForArchivePurposes',
-];
+export const researchLogAllowedIncludeValues = ['researchPhase', 'tags'];

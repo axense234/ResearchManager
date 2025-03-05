@@ -43,6 +43,8 @@ export class UpdateTagService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'tag',
         dto,
+        actionType: 'UPDATE',
+        options: {},
       })) as TagUpdateDataObject;
 
       const updateObject: TagUpdateObject = {

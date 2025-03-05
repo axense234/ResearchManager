@@ -16,9 +16,5 @@ export class ResearchPhaseIncludeObject {
 
   @IsBoolean()
   @IsOptional()
-  userForArchivePurposes?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
   tags?: boolean;
 }

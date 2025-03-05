@@ -1,6 +1,7 @@
 // NestJS
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -8,6 +9,7 @@ import {
 import { UpdateUserDto } from '../dto/user.dto';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
@@ -49,6 +51,8 @@ export class UpdateUserService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'user',
+        actionType: 'UPDATE',
+        options: {},
       })) as UserUpdateDataObject;
 
       const updateObject: UserUpdateObject = {
@@ -105,7 +109,14 @@ export class UpdateUserService {
         additionalNotes,
       });
     } catch (error) {
-      throw error;
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ForbiddenException('Email taken by another User.');
+      } else {
+        throw error;
+      }
     }
   }
 }

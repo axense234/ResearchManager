@@ -46,6 +46,7 @@ export const getResearchPhasesQueryParamsApiPropertyOptions: GetResearchPhasesQu
       required: false,
       description:
         'The chosen option type you want to use. Available options: include, select. Note: the chosen option type has to match with either includeValues or selectValues.',
+      enum: ['include', 'select'],
     },
     searchByKey: {
       required: false,
@@ -53,6 +54,7 @@ export const getResearchPhasesQueryParamsApiPropertyOptions: GetResearchPhasesQu
         'search by key',
         researchPhasesAllowedSearchByKeyValues,
       ),
+      enum: researchPhasesAllowedSearchByKeyValues,
     },
     searchByValue: {
       required: false,

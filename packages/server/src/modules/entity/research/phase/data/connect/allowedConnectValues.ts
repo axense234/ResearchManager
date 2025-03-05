@@ -5,5 +5,4 @@ export const researchPhaseAllowedConnectValues: DataObjectBuilderAllowedConnectV
     { entityType: 'researchLogs', rel: 'OTM' },
     { entityType: 'researchSessions', rel: 'OTM' },
     { entityType: 'tags', rel: 'MTM' },
-    { entityType: 'userForArchivePurposes', rel: 'OTM' },
   ];

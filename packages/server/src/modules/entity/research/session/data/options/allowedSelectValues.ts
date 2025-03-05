@@ -3,6 +3,7 @@ export const researchSessionAllowedSelectValues = [
   'content',
   'createdAt',
   'updatedAt',
+  'archived',
   'name',
   'researchPoints',
   'id',
@@ -10,8 +11,6 @@ export const researchSessionAllowedSelectValues = [
   'researchPhase',
   'researchPhaseId',
   'tags',
-  'userIdForArchivePurposes',
-  'userForArchivePurposes',
   'currentStatusDate',
   'currentStatusType',
 ];

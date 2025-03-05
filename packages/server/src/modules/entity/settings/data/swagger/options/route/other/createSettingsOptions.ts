@@ -6,7 +6,7 @@ import { CreateSettingsDto } from 'src/modules/entity/settings/dto';
 import { createSettingsExamples } from '../../../examples';
 
 export const createSettingsApiOperationOptions: ApiOperationOptions = {
-  summary: 'Creates a Tag with the given data.',
+  summary: 'Creates Settings with the given data.',
   description:
     'Route for creating Settings with the given data inside the request body. Available query params: includeValues, selectValues, chosenOptionType. Available Settings examples: 1. Available return responses: 3(201, 400, 401)',
 };

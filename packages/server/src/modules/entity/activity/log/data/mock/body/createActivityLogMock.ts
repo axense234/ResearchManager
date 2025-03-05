@@ -5,6 +5,7 @@ export const createActivityLogMockData: CreateActivityLogDto[] = [
   {
     subject: 'CREATE',
     message: 'Created a Research Activity, cool.',
+    activityDays: ['activity day id 1', 'activity day id 2'],
   },
   {
     subject: 'UPDATE',

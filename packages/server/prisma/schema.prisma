@@ -16,17 +16,11 @@ model User {
   profileImageSrc    String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365178/Research%20Manager/users/profileImages/abstract-user-flat-4_fimqzi.png")
   backgroundImageSrc String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365146/Research%20Manager/users/backgroundImages/signupwallpaper_der2zw.jpg")
 
-  settings Settings?
+  settings     Settings?
+  activityFeed ActivityFeed?
 
-  activityFeeds      ActivityFeed[]
   tags               Tag[]
   researchActivities ResearchActivity[]
-
-  archivedTags               Tag[]              @relation("archived")
-  archivedResearchActivities ResearchActivity[] @relation("archived")
-  archivedResearchPhases     ResearchPhase[]    @relation("archived")
-  archivedResearchSessions   ResearchSession[]  @relation("archived")
-  archivedResearchLogs       ResearchLog[]      @relation("archived")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -40,7 +34,7 @@ model Settings {
   purgeDirectly               Boolean                 @default(false)
   allowNotifications          Boolean                 @default(false)
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
 
   updatedAt DateTime @updatedAt
@@ -54,10 +48,10 @@ model Tag {
   fontSize                  Int           @default(16)
   fontFamily                TagFontFamily @default(ARIAL)
 
-  user                     User   @relation(fields: [userId], references: [id])
-  userId                   String
-  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
-  userIdForArchivePurposes String
+  archived Boolean @default(false)
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
   researchActivities ResearchActivity[]
   researchPhases     ResearchPhase[]
@@ -73,11 +67,10 @@ model ResearchActivity {
   name                      String @default("Research Activity")
   backgroundColorOrImageSrc String @default("#D8E5E4") // Whiteish Hex Code
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  archived Boolean @default(false)
 
-  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
-  userIdForArchivePurposes String
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
   activityFeed ActivityFeed?
 
@@ -93,11 +86,10 @@ model ResearchPhase {
   name                      String @default("Research Phase")
   backgroundColorOrImageSrc String @default("#D8E5E4") // Whiteish Hex Code
 
-  researchActivity   ResearchActivity @relation(fields: [researchActivityId], references: [id])
-  researchActivityId String
+  archived Boolean @default(false)
 
-  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
-  userIdForArchivePurposes String
+  researchActivity   ResearchActivity? @relation(fields: [researchActivityId], references: [id])
+  researchActivityId String?
 
   tags             Tag[]
   researchSessions ResearchSession[]
@@ -115,11 +107,10 @@ model ResearchLog {
   content                   String   @default("No content written.")
   imagesSrc                 String[] @default([])
 
-  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
-  userIdForArchivePurposes String
+  archived Boolean @default(false)
 
-  researchPhase   ResearchPhase @relation(fields: [researchPhaseId], references: [id])
-  researchPhaseId String
+  researchPhase   ResearchPhase? @relation(fields: [researchPhaseId], references: [id])
+  researchPhaseId String?
 
   tags Tag[]
 
@@ -135,14 +126,13 @@ model ResearchSession {
   content                   String   @default("No content written.")
   imagesSrc                 String[] @default([])
 
+  archived Boolean @default(false)
+
   currentStatusType ResearchSessionStatusType @default(STARTED)
   currentStatusDate DateTime                  @default(now())
 
-  userForArchivePurposes   User   @relation("archived", fields: [userIdForArchivePurposes], references: [id])
-  userIdForArchivePurposes String
-
-  researchPhase   ResearchPhase @relation(fields: [researchPhaseId], references: [id])
-  researchPhaseId String
+  researchPhase   ResearchPhase? @relation(fields: [researchPhaseId], references: [id])
+  researchPhaseId String?
 
   tags Tag[]
 
@@ -154,9 +144,9 @@ model ActivityFeed {
   id   String           @id @default(uuid())
   type ActivityFeedType @default(USER)
 
-  user               User              @relation(fields: [userId], references: [id])
-  userId             String
-  researchActivity   ResearchActivity? @relation(fields: [researchActivityId], references: [id])
+  user               User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             String?           @unique
+  researchActivity   ResearchActivity? @relation(fields: [researchActivityId], references: [id], onDelete: Cascade)
   researchActivityId String?           @unique
 
   activityDays ActivityDay[]
@@ -168,8 +158,8 @@ model ActivityFeed {
 model ActivityDay {
   id String @id @default(uuid())
 
-  activityFeed   ActivityFeed @relation(fields: [activityFeedId], references: [id])
-  activityFeedId String
+  activityFeed   ActivityFeed? @relation(fields: [activityFeedId], references: [id])
+  activityFeedId String?
 
   activityLogs ActivityLog[]
 

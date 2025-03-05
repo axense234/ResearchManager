@@ -34,6 +34,8 @@ export class CreateActivityDayService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityDay',
         dto,
+        actionType: 'CREATE',
+        options: {},
       })) as ActivityDayCreateDataObject;
 
       const createObject: ActivityDayCreateObject = {

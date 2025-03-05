@@ -1,10 +1,20 @@
 // Validators
-import { IsString, IsOptional, IsUUID, IsObject } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsUUID,
+  IsObject,
+  IsBoolean,
+} from 'class-validator';
 
 export class ResearchPhaseCreateDataObject {
   @IsString()
   @IsOptional()
   name: string;
+
+  @IsBoolean()
+  @IsOptional()
+  archived: boolean;
 
   @IsString()
   @IsOptional()
@@ -24,7 +34,4 @@ export class ResearchPhaseCreateDataObject {
 
   @IsUUID()
   researchActivityId: string;
-
-  @IsUUID()
-  userIdForArchivePurposes: string;
 }

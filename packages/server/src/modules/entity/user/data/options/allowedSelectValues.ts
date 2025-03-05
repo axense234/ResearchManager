@@ -11,9 +11,4 @@ export const userAllowedSelectValues = [
   'researchActivities',
   'settings',
   'activityFeed',
-  'archivedResearchActivities',
-  'archivedResearchLogs',
-  'archivedResearchPhases',
-  'archivedResearchSessions',
-  'archivedTags',
 ];

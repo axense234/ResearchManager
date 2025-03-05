@@ -12,6 +12,10 @@ export class ResearchLogSelectObject {
 
   @IsBoolean()
   @IsOptional()
+  archived?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
   content?: boolean;
 
   @IsBoolean()
@@ -37,14 +41,6 @@ export class ResearchLogSelectObject {
   @IsBoolean()
   @IsOptional()
   researchPhaseId?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  userIdForArchivePurposes?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  userForArchivePurposes?: boolean;
 
   @IsBoolean()
   @IsOptional()

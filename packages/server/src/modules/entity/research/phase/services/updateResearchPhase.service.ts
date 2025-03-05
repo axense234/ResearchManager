@@ -43,6 +43,8 @@ export class UpdateResearchPhaseService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchPhase',
+        actionType: 'UPDATE',
+        options: {},
       })) as ResearchPhaseUpdateDataObject;
 
       const foundResearchPhaseToBeUpdated =
@@ -85,10 +87,6 @@ export class UpdateResearchPhaseService {
       await this.redis.deleteAllCacheThatIncludesGivenKeys({
         base: 'researchPhases',
         specifiers: [
-          {
-            label: 'userId',
-            value: updatedResearchPhase.userIdForArchivePurposes,
-          },
           {
             label: 'researchActivityId',
             value: updatedResearchPhase.researchActivityId,

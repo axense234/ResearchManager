@@ -25,10 +25,6 @@ export class ResearchPhaseWhereObject {
   @IsOptional()
   researchActivityId?: string;
 
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
-
   @IsDateString()
   @IsOptional()
   createdAt?: Date;

@@ -3,9 +3,9 @@ import { ApiPropertyOptions } from '@nestjs/swagger';
 
 type CreateResearchPhaseDtoOptionsType = {
   name: ApiPropertyOptions;
+  archived: ApiPropertyOptions;
   backgroundColorOrImageSrc: ApiPropertyOptions;
   researchActivityId: ApiPropertyOptions;
-  userIdForArchivePurposes: ApiPropertyOptions;
   researchLogs: ApiPropertyOptions;
   researchSessions: ApiPropertyOptions;
   tags: ApiPropertyOptions;
@@ -17,6 +17,11 @@ export const createResearchPhaseDtoOptions: CreateResearchPhaseDtoOptionsType =
       example: 'Algebra',
       description: 'The name of the Research Phase you want to create.',
     },
+    archived: {
+      example: true,
+      description:
+        'The archive status of your Research Phase. If set to true, the respective Research Phase is marked as archived.',
+    },
     backgroundColorOrImageSrc: {
       example:
         'https://res.cloudinary.com/birthdayreminder/image/upload/v1688815596/Highschool%20Site%20App/library_cgocde.jpg',
@@ -26,10 +31,6 @@ export const createResearchPhaseDtoOptions: CreateResearchPhaseDtoOptionsType =
     researchActivityId: {
       description:
         'The id of the Research Activity that will be connected to the newly created Research Phase. Input the respective Research Activity UUID as the value.',
-    },
-    userIdForArchivePurposes: {
-      description:
-        'The id of the User that will be connected to the newly created Research Phase. Input the respective User UUID as the value. This is done for potential archive purposes.',
     },
     tags: {
       description:

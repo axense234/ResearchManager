@@ -9,11 +9,6 @@ type UpdateUserDtoOptionsType = {
   profileImageSrc: ApiPropertyOptions;
   settings: ApiPropertyOptions;
   activityFeeds: ApiPropertyOptions;
-  archivedResearchActivities: ApiPropertyOptions;
-  archivedResearchLogs: ApiPropertyOptions;
-  archivedResearchPhases: ApiPropertyOptions;
-  archivedResearchSessions: ApiPropertyOptions;
-  archivedTags: ApiPropertyOptions;
   researchActivities: ApiPropertyOptions;
   tags: ApiPropertyOptions;
 };
@@ -51,29 +46,9 @@ export const updateUserDtoOptions: UpdateUserDtoOptionsType = {
     description:
       "The Activity Feeds of your user. Input the respective Activity Feeds UUID/UUID's in the array.",
   },
-  archivedResearchActivities: {
-    description:
-      "The Archived Research Activities of your user. Input the respective Archived Research Activities UUID/UUID's in the array.",
-  },
-  archivedResearchLogs: {
-    description:
-      "The Archived Research Logs of your user. Input the respective Archived Research Logs UUID/UUID's in the array.",
-  },
-  archivedResearchPhases: {
-    description:
-      "The Archived Research Phases of your user. Input the respective Archived Research Phases UUID/UUID's in the array.",
-  },
-  archivedResearchSessions: {
-    description:
-      "The Archived Research Sessions of your user. Input the respective Archived Research Sessions UUID/UUID's in the array.",
-  },
-  archivedTags: {
-    description:
-      "The Archived Tags of your user. Input the respective Archived Tags UUID/UUID's in the array.",
-  },
   researchActivities: {
     description:
-      "The Archived Research Activities of your user. Input the respective Archived Research Activities UUID/UUID's in the array.",
+      "The Research Activities of your user. Input the respective Research Activities UUID/UUID's in the array.",
   },
   tags: {
     description:

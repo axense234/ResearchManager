@@ -8,7 +8,6 @@ export const createTagMockData: CreateTagDto[] = [
     fontSize: 36,
     fontFamily: 'COMIC_SANS_MS',
     userId: 'put your user id here',
-    userIdForArchivePurposes: 'put your user id here',
   },
   {
     title: 'Serious',
@@ -16,7 +15,6 @@ export const createTagMockData: CreateTagDto[] = [
     fontSize: 16,
     fontFamily: 'ARIAL',
     userId: 'put your user id here',
-    userIdForArchivePurposes: 'put your user id here',
   },
   {
     title: 'Mischievious',
@@ -24,6 +22,5 @@ export const createTagMockData: CreateTagDto[] = [
     fontSize: 24,
     fontFamily: 'MONACO',
     userId: 'put your user id here',
-    userIdForArchivePurposes: 'put your user id here',
   },
 ];

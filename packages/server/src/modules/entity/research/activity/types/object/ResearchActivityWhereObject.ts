@@ -25,10 +25,6 @@ export class ResearchActivityWhereObject {
   @IsOptional()
   userId?: string;
 
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
-
   @IsDateString()
   @IsOptional()
   createdAt?: Date;

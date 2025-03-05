@@ -8,7 +8,7 @@ import { updateUserExamples } from '../../../examples';
 export const updateUserApiOperationOptions: ApiOperationOptions = {
   summary: 'Updates a single User by an Unique Identifier(path param).',
   description:
-    "Route for updating a single User by an Unique Identifier. This Unique Identifier can either be the user's UUID or the user's email. Available query params: uniqueIdentifierType, includeValues, selectValues, chosenOptionType. Available return responses: 4(200, 400, 401, 404).",
+    "Route for updating a single User by an Unique Identifier. This Unique Identifier can either be the user's UUID or the user's email. Available query params: uniqueIdentifierType, includeValues, selectValues, chosenOptionType. Available return responses: 5(200, 400, 401, 403, 404).",
 };
 
 export const updateUserApiBodyOptions: ApiBodyOptions = {

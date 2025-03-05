@@ -1,7 +1,13 @@
 // Swagger
 import { ApiProperty } from '@nestjs/swagger';
 // Validators
-import { IsArray, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 // Data
 import {
   createResearchPhaseDtoOptions,
@@ -14,6 +20,11 @@ export class CreateResearchPhaseDto {
   @IsOptional()
   name?: string;
 
+  @ApiProperty(createResearchPhaseDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
+
   @ApiProperty(createResearchPhaseDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
   @IsOptional()
@@ -22,10 +33,6 @@ export class CreateResearchPhaseDto {
   @ApiProperty(createResearchPhaseDtoOptions['researchActivityId'])
   @IsUUID()
   researchActivityId: string;
-
-  @ApiProperty(createResearchPhaseDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  userIdForArchivePurposes: string;
 
   @ApiProperty(createResearchPhaseDtoOptions['researchLogs'])
   @IsArray()
@@ -49,6 +56,11 @@ export class UpdateResearchPhaseDto {
   @IsOptional()
   name?: string;
 
+  @ApiProperty(updateResearchPhaseDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
+
   @ApiProperty(updateResearchPhaseDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
   @IsOptional()
@@ -58,11 +70,6 @@ export class UpdateResearchPhaseDto {
   @IsUUID()
   @IsOptional()
   researchActivityId?: string;
-
-  @ApiProperty(updateResearchPhaseDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
 
   @ApiProperty(updateResearchPhaseDtoOptions['researchLogs'])
   @IsArray()

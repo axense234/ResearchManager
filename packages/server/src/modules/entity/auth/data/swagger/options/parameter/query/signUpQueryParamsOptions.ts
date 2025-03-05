@@ -10,6 +10,8 @@ type SignUpQueryParamsApiPropertyOptionsType = {
   includeValues: ApiPropertyOptions;
   selectValues: ApiPropertyOptions;
   chosenOptionType: ApiPropertyOptions;
+  createSettings: ApiPropertyOptions;
+  createActivityFeed: ApiPropertyOptions;
 };
 
 export const signUpQueryParamsApiPropertyOptions: SignUpQueryParamsApiPropertyOptionsType =
@@ -26,5 +28,18 @@ export const signUpQueryParamsApiPropertyOptions: SignUpQueryParamsApiPropertyOp
       required: false,
       description:
         'The chosen option type you want to use. Available options: include, select. Note: the chosen option type has to match with either includeValues or selectValues.',
+      enum: ['include', 'select'],
+    },
+    createSettings: {
+      required: false,
+      description:
+        'The query param capable of controlling the behaviour of automatically creating default Settings when an User is created. By default its set to true, thus creating and connecting Settings when an User is created. If the desired behaviour is to NOT create Settings and connect them to an User, set this query param to false.',
+      enum: ['false', 'true'],
+    },
+    createActivityFeed: {
+      required: false,
+      description:
+        'The query param capable of controlling the behaviour of automatically creating an default Activity Feed when an User is created. By default its set to true, thus creating and connecting an Activity Feed to an User when created. If the desired behaviour is to NOT create an Activity Feed and connect them to an User, set this query param to false.',
+      enum: ['false', 'true'],
     },
   };

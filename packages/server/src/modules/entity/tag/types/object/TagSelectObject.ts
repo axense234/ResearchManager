@@ -24,11 +24,11 @@ export class TagSelectObject {
 
   @IsBoolean()
   @IsOptional()
-  userId?: boolean;
+  archived?: boolean;
 
   @IsBoolean()
   @IsOptional()
-  userIdForArchivePurposes?: boolean;
+  userId?: boolean;
 
   @IsBoolean()
   @IsOptional()
@@ -57,8 +57,4 @@ export class TagSelectObject {
   @IsBoolean()
   @IsOptional()
   user?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  userForArchivePurposes?: boolean;
 }

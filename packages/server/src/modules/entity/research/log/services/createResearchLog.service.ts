@@ -34,6 +34,8 @@ export class CreateResearchLogService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchLog',
+        actionType: 'CREATE',
+        options: {},
       })) as ResearchLogCreateDataObject;
 
       const createObject: ResearchLogCreateObject = {
@@ -64,10 +66,6 @@ export class CreateResearchLogService {
       await this.redis.deleteAllCacheThatIncludesGivenKeys({
         base: 'researchLogs',
         specifiers: [
-          {
-            label: 'userId',
-            value: createdResearchLog.userIdForArchivePurposes,
-          },
           {
             label: 'researchPhaseId',
             value: createdResearchLog.researchPhaseId,

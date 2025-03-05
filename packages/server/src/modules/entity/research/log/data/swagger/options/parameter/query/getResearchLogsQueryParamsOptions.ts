@@ -46,6 +46,7 @@ export const getResearchLogsQueryParamsApiPropertyOptions: GetResearchLogsQueryP
       required: false,
       description:
         'The chosen option type you want to use. Available options: include, select. Note: the chosen option type has to match with either includeValues or selectValues.',
+      enum: ['include', 'select'],
     },
     searchByKey: {
       required: false,
@@ -53,6 +54,7 @@ export const getResearchLogsQueryParamsApiPropertyOptions: GetResearchLogsQueryP
         'search by key',
         researchLogsAllowedSearchByKeyValues,
       ),
+      enum: researchLogsAllowedSearchByKeyValues,
     },
     searchByValue: {
       required: false,

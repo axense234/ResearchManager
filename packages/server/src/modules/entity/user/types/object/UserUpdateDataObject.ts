@@ -36,26 +36,6 @@ export class UserUpdateDataObject {
 
   @IsObject()
   @IsOptional()
-  archivedResearchActivities: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedResearchLogs: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedResearchPhases: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedResearchSessions: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
-  archivedTags: { connect: { id: string }[] };
-
-  @IsObject()
-  @IsOptional()
   researchActivities: { connect: { id: string }[] };
 
   @IsObject()

@@ -3,6 +3,7 @@ import { ResearchSessionStatusType } from '@prisma/client';
 // Validators
 import {
   IsArray,
+  IsBoolean,
   IsDateString,
   IsEnum,
   IsNumber,
@@ -16,6 +17,10 @@ export class ResearchSessionCreateDataObject {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @IsString()
   @IsOptional()
@@ -47,7 +52,4 @@ export class ResearchSessionCreateDataObject {
 
   @IsUUID()
   researchPhaseId: string;
-
-  @IsUUID()
-  userIdForArchivePurposes: string;
 }

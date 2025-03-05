@@ -34,6 +34,8 @@ export class CreateTagService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'tag',
         dto,
+        actionType: 'CREATE',
+        options: {},
       })) as TagCreateDataObject;
 
       const createObject: TagCreateObject = { data: dataObject };

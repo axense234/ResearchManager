@@ -9,6 +9,7 @@ type UpdateUserResponsesOptionsType = {
   '200': ApiResponseOptions;
   '400': ApiResponseOptions;
   '401': ApiResponseOptions;
+  '403': ApiResponseOptions;
   '404': ApiResponseOptions;
 };
 
@@ -28,6 +29,11 @@ export const updateUserResponsesOptions: UpdateUserResponsesOptionsType = {
     status: 401,
     description: 'Unauthorized access.',
     example: updateUserResponsesExamples['401'],
+  },
+  '403': {
+    status: 403,
+    description: 'Email taken by another User.',
+    example: updateUserResponsesExamples['403'],
   },
   '404': {
     status: 404,

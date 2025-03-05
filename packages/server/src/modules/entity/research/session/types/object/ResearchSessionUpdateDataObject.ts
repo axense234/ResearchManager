@@ -7,12 +7,17 @@ import {
   IsArray,
   IsObject,
   IsUUID,
+  IsBoolean,
 } from 'class-validator';
 
 export class ResearchSessionUpdateDataObject {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @IsString()
   @IsOptional()
@@ -45,8 +50,4 @@ export class ResearchSessionUpdateDataObject {
   @IsUUID()
   @IsOptional()
   researchPhaseId?: string;
-
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
 }

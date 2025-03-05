@@ -34,6 +34,8 @@ export class CreateResearchSessionService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'researchSession',
         dto,
+        actionType: 'CREATE',
+        options: {},
       })) as ResearchSessionCreateDataObject;
 
       const createObject: ResearchSessionCreateObject = {
@@ -64,10 +66,6 @@ export class CreateResearchSessionService {
       await this.redis.deleteAllCacheThatIncludesGivenKeys({
         base: 'researchSessions',
         specifiers: [
-          {
-            label: 'userId',
-            value: createdResearchSession.userIdForArchivePurposes,
-          },
           {
             label: 'researchPhaseId',
             value: createdResearchSession.researchPhaseId,

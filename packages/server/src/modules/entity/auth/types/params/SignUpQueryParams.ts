@@ -20,4 +20,14 @@ export class SignUpQueryParams {
   @IsString()
   @IsOptional()
   chosenOptionType: 'include' | 'select';
+
+  @ApiProperty(signUpQueryParamsApiPropertyOptions['createSettings'])
+  @IsString()
+  @IsOptional()
+  createSettings: 'false' | 'true';
+
+  @ApiProperty(signUpQueryParamsApiPropertyOptions['createActivityFeed'])
+  @IsString()
+  @IsOptional()
+  createActivityFeed: 'false' | 'true';
 }

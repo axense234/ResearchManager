@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 // Validators
 import {
   IsArray,
+  IsBoolean,
   IsNumber,
   IsOptional,
   IsString,
@@ -19,6 +20,11 @@ export class CreateResearchLogDto {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @ApiProperty(createResearchLogDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @ApiProperty(createResearchLogDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
@@ -45,10 +51,6 @@ export class CreateResearchLogDto {
   @IsOptional()
   tags?: string[];
 
-  @ApiProperty(createResearchLogDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  userIdForArchivePurposes: string;
-
   @ApiProperty(createResearchLogDtoOptions['researchPhaseId'])
   @IsUUID()
   researchPhaseId: string;
@@ -59,6 +61,11 @@ export class UpdateResearchLogDto {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @ApiProperty(updateResearchLogDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @ApiProperty(updateResearchLogDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
@@ -84,11 +91,6 @@ export class UpdateResearchLogDto {
   @IsArray()
   @IsOptional()
   tags?: string[];
-
-  @ApiProperty(updateResearchLogDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
 
   @ApiProperty(updateResearchLogDtoOptions['researchPhaseId'])
   @IsUUID()

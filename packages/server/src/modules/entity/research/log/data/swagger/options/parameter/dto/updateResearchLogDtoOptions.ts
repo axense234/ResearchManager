@@ -3,12 +3,12 @@ import { ApiPropertyOptions } from '@nestjs/swagger';
 
 type UpdateResearchLogDtoOptionsType = {
   name: ApiPropertyOptions;
+  archived: ApiPropertyOptions;
   backgroundColorOrImageSrc: ApiPropertyOptions;
   researchPoints: ApiPropertyOptions;
   content: ApiPropertyOptions;
   imagesSrc: ApiPropertyOptions;
   tags: ApiPropertyOptions;
-  userIdForArchivePurposes: ApiPropertyOptions;
   researchPhaseId: ApiPropertyOptions;
 };
 
@@ -16,6 +16,11 @@ export const updateResearchLogDtoOptions: UpdateResearchLogDtoOptionsType = {
   name: {
     example: 'Log1',
     description: 'The name of the Research Log you want to update.',
+  },
+  archived: {
+    example: true,
+    description:
+      'The archive status of your Research Log. If set to true, the respective Research Log is marked as archived.',
   },
   backgroundColorOrImageSrc: {
     example:
@@ -48,9 +53,5 @@ export const updateResearchLogDtoOptions: UpdateResearchLogDtoOptionsType = {
   researchPhaseId: {
     description:
       'The id of the Research Phase that will be connected to the newly updated Research Log. Input the respective Research Phase UUID as the value.',
-  },
-  userIdForArchivePurposes: {
-    description:
-      'The id of the User that will be connected to the newly updated Research Log. Input the respective User UUID as the value. This is done for potential archive purposes.',
   },
 };

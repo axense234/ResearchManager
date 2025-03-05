@@ -8,9 +8,5 @@ export class ResearchSessionIncludeObject {
 
   @IsBoolean()
   @IsOptional()
-  userForArchivePurposes?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
   tags?: boolean;
 }

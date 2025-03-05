@@ -46,6 +46,8 @@ export class UpdateActivityFeedService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'activityFeed',
+        actionType: 'UPDATE',
+        options: {},
       })) as ActivityFeedUpdateDataObject;
 
       const updateObject: ActivityFeedUpdateObject = {

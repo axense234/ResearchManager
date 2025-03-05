@@ -17,8 +17,9 @@ export class CreateActivityFeedDto {
   type?: ActivityFeedType;
 
   @ApiProperty(createActivityFeedDtoOptions['userId'])
+  @IsOptional()
   @IsUUID()
-  userId: string;
+  userId?: string;
 
   @ApiProperty(createActivityFeedDtoOptions['researchActivityId'])
   @IsUUID()

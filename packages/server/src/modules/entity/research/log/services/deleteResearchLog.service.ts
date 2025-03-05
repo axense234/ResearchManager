@@ -76,10 +76,6 @@ export class DeleteResearchLogService {
         base: 'researchLogs',
         specifiers: [
           {
-            label: 'userId',
-            value: deletedResearchLog.userIdForArchivePurposes,
-          },
-          {
             label: 'researchPhaseId',
             value: deletedResearchLog.researchPhaseId,
           },

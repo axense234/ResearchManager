@@ -29,11 +29,18 @@ export class CreateResearchActivityService {
     dto: CreateResearchActivityDto,
   ): Promise<ReturnObjectBuilderReturnObject> {
     try {
-      const { includeValues, selectValues, chosenOptionType } = queryParams;
+      const {
+        includeValues,
+        selectValues,
+        chosenOptionType,
+        createActivityFeed,
+      } = queryParams;
 
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchActivity',
+        actionType: 'CREATE',
+        options: { createActivityFeed },
       })) as ResearchActivityCreateDataObject;
 
       const createObject: ResearchActivityCreateObject = { data: dataObject };

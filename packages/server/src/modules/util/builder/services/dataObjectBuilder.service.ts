@@ -22,6 +22,7 @@ import { activityDayAllowedConnectValues } from 'src/modules/entity/activity/day
 import { activityLogAllowedConnectValues } from 'src/modules/entity/activity/log/data/connect/allowedConnectValues';
 import { tagAllowedConnectValues } from 'src/modules/entity/tag/data/connect/allowedConnectValues';
 import { userAllowedConnectValues } from 'src/modules/entity/user/data/connect/allowedConnectValues';
+import { ResearchActivityCreateDataObject } from 'src/modules/entity/research/activity/types';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -73,15 +74,40 @@ export class DataObjectBuilderService {
   async buildDataObject({
     dto,
     entityType,
+    actionType,
+    options,
   }: DataObjectBuilderParams): Promise<DataObjectBuilderDataObject> {
     const dataObject: DataObjectBuilderDataObject = { ...(dto as any) };
     const allowedConnectValues = this.chooseAllowedConnect(entityType);
+
+    const { createActivityFeed = 'true', createSettings = 'true' } = options;
 
     if ((dto as UserCreateDataObject).password && entityType === 'user') {
       (dataObject as UserUpdateDataObject | UserCreateDataObject).hash =
         await argon.hash(dto.password);
       delete (dataObject as UserUpdateDataObject | UserCreateDataObject)
         .password;
+    }
+
+    if (entityType === 'user' && actionType === 'CREATE') {
+      if (createSettings === 'true') {
+        (dataObject as UserCreateDataObject).settings = { create: {} };
+      }
+      if (createActivityFeed === 'true') {
+        (dataObject as UserCreateDataObject).activityFeed = {
+          create: { type: 'USER' },
+        };
+      }
+    }
+
+    if (
+      entityType === 'researchActivity' &&
+      actionType === 'CREATE' &&
+      createActivityFeed === 'true'
+    ) {
+      (dataObject as ResearchActivityCreateDataObject).activityFeed = {
+        create: { type: 'RESEARCH_ACTIVITY' },
+      };
     }
 
     allowedConnectValues.forEach((connectValue) => {

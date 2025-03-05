@@ -5,6 +5,7 @@ import { ResearchSessionStatusType } from '@prisma/client';
 // Class Validators
 import {
   IsArray,
+  IsBoolean,
   IsDateString,
   IsEnum,
   IsNumber,
@@ -23,6 +24,11 @@ export class CreateResearchSessionDto {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @ApiProperty(createResearchSessionDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @ApiProperty(createResearchSessionDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
@@ -59,10 +65,6 @@ export class CreateResearchSessionDto {
   @IsOptional()
   tags?: string[];
 
-  @ApiProperty(createResearchSessionDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  userIdForArchivePurposes: string;
-
   @ApiProperty(createResearchSessionDtoOptions['researchPhaseId'])
   @IsUUID()
   researchPhaseId: string;
@@ -73,6 +75,11 @@ export class UpdateResearchSessionDto {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @ApiProperty(updateResearchSessionDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
 
   @ApiProperty(updateResearchSessionDtoOptions['backgroundColorOrImageSrc'])
   @IsString()
@@ -108,11 +115,6 @@ export class UpdateResearchSessionDto {
   @IsArray()
   @IsOptional()
   tags?: string[];
-
-  @ApiProperty(updateResearchSessionDtoOptions['userIdForArchivePurposes'])
-  @IsUUID()
-  @IsOptional()
-  userIdForArchivePurposes?: string;
 
   @ApiProperty(updateResearchSessionDtoOptions['researchPhaseId'])
   @IsUUID()

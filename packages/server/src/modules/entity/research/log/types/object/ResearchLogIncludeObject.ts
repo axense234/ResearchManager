@@ -8,9 +8,5 @@ export class ResearchLogIncludeObject {
 
   @IsBoolean()
   @IsOptional()
-  userForArchivePurposes?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
   tags?: boolean;
 }

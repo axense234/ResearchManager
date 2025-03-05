@@ -75,10 +75,6 @@ export class DeleteResearchSessionService {
         base: 'researchSessions',
         specifiers: [
           {
-            label: 'userId',
-            value: deletedResearchSession.userIdForArchivePurposes,
-          },
-          {
             label: 'researchPhaseId',
             value: deletedResearchSession.researchPhaseId,
           },

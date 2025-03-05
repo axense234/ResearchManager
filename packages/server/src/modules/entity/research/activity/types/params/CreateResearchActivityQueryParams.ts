@@ -26,4 +26,11 @@ export class CreateResearchActivityQueryParams {
   @IsString()
   @IsOptional()
   chosenOptionType: 'include' | 'select';
+
+  @ApiProperty(
+    createResearchActivityQueryParamsApiPropertyOptions['createActivityFeed'],
+  )
+  @IsString()
+  @IsOptional()
+  createActivityFeed: 'false' | 'true';
 }

@@ -45,6 +45,8 @@ export class UpdateSettingsService {
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'settings',
+        actionType: 'UPDATE',
+        options: {},
       })) as SettingsUpdateDataObject;
 
       const updateObject: SettingsUpdateObject = {

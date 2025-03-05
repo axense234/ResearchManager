@@ -40,31 +40,6 @@ export class UpdateUserDto {
   @IsOptional()
   activityFeeds?: string[];
 
-  @ApiProperty(updateUserDtoOptions['archivedResearchActivities'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchActivities?: string[];
-
-  @ApiProperty(updateUserDtoOptions['archivedResearchLogs'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchLogs?: string[];
-
-  @ApiProperty(updateUserDtoOptions['archivedResearchPhases'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchPhases?: string[];
-
-  @ApiProperty(updateUserDtoOptions['archivedResearchSessions'])
-  @IsArray()
-  @IsOptional()
-  archivedResearchSessions?: string[];
-
-  @ApiProperty(updateUserDtoOptions['archivedTags'])
-  @IsArray()
-  @IsOptional()
-  archivedTags?: string[];
-
   @ApiProperty(updateUserDtoOptions['researchActivities'])
   @IsArray()
   @IsOptional()

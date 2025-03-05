@@ -12,15 +12,11 @@ export class ResearchPhaseSelectObject {
 
   @IsBoolean()
   @IsOptional()
+  archived?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
   backgroundColorOrImageSrc?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  userIdForArchivePurposes?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  userForArchivePurposes?: boolean;
 
   @IsBoolean()
   @IsOptional()
