@@ -3,91 +3,19 @@ import { Injectable } from '@nestjs/common';
 // Types
 import {
   EntityType,
-  OptionObjectBuilderAllowedOptionValuesReturnObject,
   OptionObjectBuilderIncludeObject,
   OptionObjectBuilderParams,
   OptionObjectBuilderReturnObject,
   OptionObjectBuilderSelectObject,
 } from '../types';
-// Allowed Option Values
-import { researchActivityAllowedIncludeValues } from 'src/modules/entity/research/activity/data/options/allowedIncludeValues';
-import { researchActivityAllowedSelectValues } from 'src/modules/entity/research/activity/data/options/allowedSelectValues';
-import { researchLogAllowedIncludeValues } from 'src/modules/entity/research/log/data/options/allowedIncludeValues';
-import { researchLogAllowedSelectValues } from 'src/modules/entity/research/log/data/options/allowedSelectValues';
-import { researchPhaseAllowedIncludeValues } from 'src/modules/entity/research/phase/data/options/allowedIncludeValues';
-import { researchPhaseAllowedSelectValues } from 'src/modules/entity/research/phase/data/options/allowedSelectValues';
-import { researchSessionAllowedIncludeValues } from 'src/modules/entity/research/session/data/options/allowedIncludeValues';
-import { researchSessionAllowedSelectValues } from 'src/modules/entity/research/session/data/options/allowedSelectValues';
-import { settingsAllowedIncludeValues } from 'src/modules/entity/settings/data/options/allowedIncludeValues';
-import { settingsAllowedSelectValues } from 'src/modules/entity/settings/data/options/allowedSelectValues';
-import { activityFeedAllowedIncludeValues } from 'src/modules/entity/activity/feed/data/options/allowedIncludeValues';
-import { activityFeedAllowedSelectValues } from 'src/modules/entity/activity/feed/data/options/allowedSelectValues';
-import { activityDayAllowedIncludeValues } from 'src/modules/entity/activity/day/data/options/allowedIncludeValues';
-import { activityDayAllowedSelectValues } from 'src/modules/entity/activity/day/data/options/allowedSelectValues';
-import { activityLogAllowedIncludeValues } from 'src/modules/entity/activity/log/data/options/allowedIncludeValues';
-import { activityLogAllowedSelectValues } from 'src/modules/entity/activity/log/data/options/allowedSelectValues';
-import { tagAllowedIncludeValues } from 'src/modules/entity/tag/data/options/allowedIncludeValues';
-import { tagAllowedSelectValues } from 'src/modules/entity/tag/data/options/allowedSelectValues';
-import { userAllowedIncludeValues } from 'src/modules/entity/user/data/options/allowedIncludeValues';
-import { userAllowedSelectValues } from 'src/modules/entity/user/data/options/allowedSelectValues';
+// Util Service
+import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
 
 @Injectable()
 export class OptionObjectBuilderService {
-  constructor() {}
-
-  chooseAllowedOptionValues(
-    entityType: EntityType,
-  ): OptionObjectBuilderAllowedOptionValuesReturnObject {
-    let allowedIncludeValues: string[] = [];
-    let allowedSelectValues: string[] = [];
-
-    switch (entityType) {
-      case 'researchActivity':
-        allowedIncludeValues = researchActivityAllowedIncludeValues;
-        allowedSelectValues = researchActivityAllowedSelectValues;
-        break;
-      case 'researchPhase':
-        allowedIncludeValues = researchPhaseAllowedIncludeValues;
-        allowedSelectValues = researchPhaseAllowedSelectValues;
-        break;
-      case 'researchSession':
-        allowedIncludeValues = researchSessionAllowedIncludeValues;
-        allowedSelectValues = researchSessionAllowedSelectValues;
-        break;
-      case 'researchLog':
-        allowedIncludeValues = researchLogAllowedIncludeValues;
-        allowedSelectValues = researchLogAllowedSelectValues;
-        break;
-      case 'settings':
-        allowedIncludeValues = settingsAllowedIncludeValues;
-        allowedSelectValues = settingsAllowedSelectValues;
-        break;
-      case 'tag':
-        allowedIncludeValues = tagAllowedIncludeValues;
-        allowedSelectValues = tagAllowedSelectValues;
-        break;
-      case 'activityFeed':
-        allowedIncludeValues = activityFeedAllowedIncludeValues;
-        allowedSelectValues = activityFeedAllowedSelectValues;
-        break;
-      case 'activityDay':
-        allowedIncludeValues = activityDayAllowedIncludeValues;
-        allowedSelectValues = activityDayAllowedSelectValues;
-        break;
-      case 'activityLog':
-        allowedIncludeValues = activityLogAllowedIncludeValues;
-        allowedSelectValues = activityLogAllowedSelectValues;
-        break;
-      case 'user':
-        allowedIncludeValues = userAllowedIncludeValues;
-        allowedSelectValues = userAllowedSelectValues;
-        break;
-      default:
-        break;
-    }
-
-    return { allowedIncludeValues, allowedSelectValues };
-  }
+  constructor(
+    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
+  ) {}
 
   buildOptionObject({
     entityType,
@@ -100,14 +28,16 @@ export class OptionObjectBuilderService {
     const builtOptionObjectReturnObject: OptionObjectBuilderReturnObject = {};
 
     const { allowedIncludeValues, allowedSelectValues } =
-      this.chooseAllowedOptionValues(entityType);
+      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
+        entityType,
+      );
 
     switch (chosenOptionType) {
       case 'include':
         if (includeValues) {
           const includeValuesArray = includeValues
             .replace(/\s+/g, '')
-            .split(',');
+            .split(',') as (EntityType | EntityType)[];
 
           const filteredIncludeValuesArray = includeValuesArray.filter(
             (includeValue) => allowedIncludeValues.includes(includeValue),

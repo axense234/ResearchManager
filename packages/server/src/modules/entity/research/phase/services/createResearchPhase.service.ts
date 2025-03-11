@@ -61,15 +61,17 @@ export class CreateResearchPhaseService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'researchPhase',
         base: 'researchPhases',
+        actionType: 'CREATE',
         specifiers: [
           {
             label: 'researchActivityId',
             value: createdResearchPhase.researchActivityId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'create',
       });
 
       return await this.objectBuilder.buildReturnObject({

@@ -5,7 +5,7 @@ import { AuthService } from './services/auth.service';
 // Dtos
 import { SignInDto, SignUpDto } from './dto';
 // Types
-import { LogOutQueryParams, SignUpQueryParams } from './types';
+import { SignUpQueryParams } from './types';
 import { SignInQueryParams } from './types/params/SignInQueryParams';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
@@ -40,7 +40,7 @@ export class AuthController {
   @SwaggerResponses('user', 'LOGOUT')
   @Post('logout')
   @HttpCode(200)
-  logOut(@Query() queryParams: LogOutQueryParams) {
-    return this.authService.logOut(queryParams);
+  logOut() {
+    return this.authService.logOut();
   }
 }

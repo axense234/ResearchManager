@@ -66,15 +66,17 @@ export class DeleteSettingsService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'settings',
         base: 'settings',
+        actionType: 'DELETE',
         specifiers: [
           {
             label: 'userId',
             value: deletedSettings.userId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

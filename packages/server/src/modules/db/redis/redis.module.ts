@@ -4,8 +4,11 @@ import { Global, Module } from '@nestjs/common';
 import { RedisCacheModule } from './cache.module';
 // Services
 import { RedisService } from './services/redis.service';
-import { DeleteAllCacheThatIncludesGivenKeysService } from './services/deleteAllCacheThatIncludesGivenKeys.service';
 import { GetOrSetCacheService } from './services/getOrSetCache.service';
+import { DeleteCacheShallowService } from './services/deleteCacheShallow.service';
+import { DeleteCacheDeepService } from './services/deleteCacheDeep.service';
+// Util Service
+import { ChooseAllowedBuilderValuesService } from 'src/modules/util/builder/services/chooseAllowedBuilderValues.service';
 
 @Global()
 @Module({
@@ -13,8 +16,10 @@ import { GetOrSetCacheService } from './services/getOrSetCache.service';
   exports: [RedisService],
   providers: [
     RedisService,
-    DeleteAllCacheThatIncludesGivenKeysService,
+    DeleteCacheShallowService,
+    DeleteCacheDeepService,
     GetOrSetCacheService,
+    ChooseAllowedBuilderValuesService,
   ],
 })
 export class RedisModule {}

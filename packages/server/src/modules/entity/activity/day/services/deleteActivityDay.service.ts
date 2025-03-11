@@ -70,15 +70,17 @@ export class DeleteActivityDayService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'activityDay',
         base: 'activityDays',
+        actionType: 'DELETE',
         specifiers: [
           {
             label: 'activityFeedId',
             value: deletedActivityDay.activityFeedId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

@@ -1,2 +1,3 @@
 export * from './DeleteCacheSpecifiers';
-export * from './DeleteAllCacheThatIncludesGivenKeys';
+export * from './DeleteCacheShallow';
+export * from './DeleteCacheDeep';

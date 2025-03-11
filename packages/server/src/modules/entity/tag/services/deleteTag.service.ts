@@ -65,15 +65,13 @@ export class DeleteTagService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'tag',
         base: 'tags',
+        actionType: 'DELETE',
         specifiers: [
-          {
-            label: 'userId',
-            value: deletedTag.userId,
-          },
+          { label: 'userId', value: deletedTag.userId, ignoreIfFalse: true },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

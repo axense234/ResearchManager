@@ -1,1 +1,7 @@
-export const activityDayAllowedIncludeValues = ['activityFeed', 'activityLogs'];
+// Types
+import { EntityType, EntityTypePlural } from 'src/modules/util/builder/types';
+
+export const activityDayAllowedIncludeValues: (
+  | EntityType
+  | EntityTypePlural
+)[] = ['activityFeed', 'activityLogs'];

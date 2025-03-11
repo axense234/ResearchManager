@@ -1,0 +1,22 @@
+// Validators
+import { IsArray } from 'class-validator';
+// Types
+import { DataObjectBuilderAllowedConnectValue } from '../data';
+import { EntityType, EntityTypePlural } from '../general';
+
+export class ChooseAllowedBuilderValuesReturnObject {
+  @IsArray()
+  allowedIncludeValues: (EntityType | EntityTypePlural)[];
+
+  @IsArray()
+  allowedSelectValues: string[];
+
+  @IsArray()
+  allowedSortByKeysValues: string[];
+
+  @IsArray()
+  allowedSearchByKeyValues: string[];
+
+  @IsArray()
+  allowedConnectValues: DataObjectBuilderAllowedConnectValue[];
+}

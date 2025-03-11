@@ -72,10 +72,11 @@ export class DeleteActivityLogService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'activityLog',
         base: 'activityLogs',
+        actionType: 'DELETE',
         specifiers: [],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

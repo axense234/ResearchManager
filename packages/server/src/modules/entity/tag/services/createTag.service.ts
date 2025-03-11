@@ -60,15 +60,13 @@ export class CreateTagService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'tag',
         base: 'tags',
+        actionType: 'CREATE',
         specifiers: [
-          {
-            label: 'userId',
-            value: createdTag.userId,
-          },
+          { label: 'userId', value: createdTag.userId, ignoreIfFalse: true },
         ],
-        type: 'create',
       });
 
       return await this.objectBuilder.buildReturnObject({

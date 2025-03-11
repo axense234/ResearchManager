@@ -72,19 +72,22 @@ export class DeleteActivityFeedService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'activityFeed',
         base: 'activityFeeds',
+        actionType: 'DELETE',
         specifiers: [
           {
             label: 'userId',
             value: deletedActivityFeed.userId,
+            ignoreIfFalse: true,
           },
           {
             label: 'researchActivityId',
             value: deletedActivityFeed.researchActivityId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

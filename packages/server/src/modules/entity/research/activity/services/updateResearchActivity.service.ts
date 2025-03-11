@@ -84,12 +84,17 @@ export class UpdateResearchActivityService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'researchActivity',
         base: 'researchActivities',
+        actionType: 'UPDATE',
         specifiers: [
-          { label: 'userId', value: updatedResearchActivity.userId },
+          {
+            label: 'userId',
+            value: updatedResearchActivity.userId,
+            ignoreIfFalse: true,
+          },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

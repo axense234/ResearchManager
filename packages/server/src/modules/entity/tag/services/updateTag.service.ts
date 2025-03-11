@@ -82,15 +82,13 @@ export class UpdateTagService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'tag',
         base: 'tags',
+        actionType: 'UPDATE',
         specifiers: [
-          {
-            label: 'userId',
-            value: updatedTag.userId,
-          },
+          { label: 'userId', value: updatedTag.userId, ignoreIfFalse: true },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

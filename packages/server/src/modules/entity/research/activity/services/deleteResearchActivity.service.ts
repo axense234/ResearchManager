@@ -72,12 +72,17 @@ export class DeleteResearchActivityService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'researchActivity',
         base: 'researchActivities',
+        actionType: 'DELETE',
         specifiers: [
-          { label: 'userId', value: deletedResearchActivity.userId },
+          {
+            label: 'userId',
+            value: deletedResearchActivity.userId,
+            ignoreIfFalse: true,
+          },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

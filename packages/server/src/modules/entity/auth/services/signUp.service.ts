@@ -78,21 +78,11 @@ export class SignUpService {
         createdUser.email,
       );
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'user',
         base: 'users',
+        actionType: 'CREATE',
         specifiers: [],
-        type: 'create',
-      });
-
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
-        base: 'settings',
-        specifiers: [
-          {
-            label: 'userId',
-            value: createdUser.id,
-          },
-        ],
-        type: 'create',
       });
 
       return await this.objectBuilder.buildReturnObject({

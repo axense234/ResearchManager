@@ -93,13 +93,11 @@ export class UpdateUserService {
       }
 
       delete updatedUser.hash;
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
-        base: '',
-        specifiers: [
-          { label: 'userId', value: updatedUser.id },
-          { label: 'email', value: updatedUser.email },
-        ],
-        type: 'modify',
+      await this.redis.deleteCacheDeep({
+        entityType: 'user',
+        base: 'users',
+        actionType: 'UPDATE',
+        specifiers: [],
       });
 
       return await this.objectBuilder.buildReturnObject({

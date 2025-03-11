@@ -65,21 +65,17 @@ export class CreateSettingsService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'settings',
         base: 'settings',
+        actionType: 'CREATE',
         specifiers: [
           {
             label: 'userId',
             value: createdSettings.userId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'create',
-      });
-
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
-        base: 'users',
-        specifiers: [],
-        type: 'create',
       });
 
       return await this.objectBuilder.buildReturnObject({

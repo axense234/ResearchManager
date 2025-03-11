@@ -8,7 +8,7 @@ import { LogOutService } from './logOut.service';
 // Dtos
 import { SignInDto, SignUpDto } from '../dto';
 // Types
-import { LogOutQueryParams, SignUpQueryParams } from '../types';
+import { SignUpQueryParams } from '../types';
 import { SignInQueryParams } from '../types/params/SignInQueryParams';
 
 @Injectable()
@@ -32,7 +32,7 @@ export class AuthService {
     return await this.signInService.signIn(queryParams, dto);
   }
 
-  async logOut(queryParams: LogOutQueryParams) {
-    return await this.logOutService.logOut(queryParams);
+  async logOut() {
+    return await this.logOutService.logOut();
   }
 }

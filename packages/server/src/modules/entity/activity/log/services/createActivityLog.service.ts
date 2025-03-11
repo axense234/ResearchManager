@@ -60,11 +60,11 @@ export class CreateActivityLogService {
           'Could not create Activity Log with the provided information.',
         );
       }
-
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'activityLog',
         base: 'activityLogs',
+        actionType: 'CREATE',
         specifiers: [],
-        type: 'create',
       });
 
       return await this.objectBuilder.buildReturnObject({

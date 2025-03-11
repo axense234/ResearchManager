@@ -72,15 +72,17 @@ export class DeleteResearchLogService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'researchLog',
         base: 'researchLogs',
+        actionType: 'DELETE',
         specifiers: [
           {
             label: 'researchPhaseId',
             value: deletedResearchLog.researchPhaseId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

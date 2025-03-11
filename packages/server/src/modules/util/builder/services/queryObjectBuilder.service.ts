@@ -2,65 +2,18 @@
 import { Injectable } from '@nestjs/common';
 // Types
 import {
-  EntityType,
   QueryObjectBuilderParams,
   QueryObjectBuilderQueryObject,
   QueryObjectBuilderReturnObject,
 } from '../types';
 // Data
-import { researchActivitiesAllowedSearchByKeyValues } from 'src/modules/entity/research/activity/data/options/allowedSearchByKeyValues';
-import { researchLogsAllowedSearchByKeyValues } from 'src/modules/entity/research/log/data/options/allowedSearchByKeyValues';
-import { researchPhasesAllowedSearchByKeyValues } from 'src/modules/entity/research/phase/data/options/allowedSearchByKeyValues';
-import { researchSessionsAllowedSearchByKeyValues } from 'src/modules/entity/research/session/data/options/allowedSearchByKeyValues';
-import { settingsAllowedSearchByKeyValues } from 'src/modules/entity/settings/data/options/allowedSearchByKeyValues';
-import { activityFeedsAllowedSearchByKeyValues } from 'src/modules/entity/activity/feed/data/options/allowedSearchByKeyValues';
-import { activityDaysAllowedSearchByKeyValues } from 'src/modules/entity/activity/day/data/options/allowedSearchByKeyValues';
-import { activityLogsAllowedSearchByKeyValues } from 'src/modules/entity/activity/log/data/options/allowedSearchByKeyValues';
-import { tagsAllowedSearchByKeyValues } from 'src/modules/entity/tag/data/options/allowedSearchByKeyValues';
-import { usersAllowedSearchByKeyValues } from 'src/modules/entity/user/data/options/allowedSearchByKeyValues';
+import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
 
 @Injectable()
 export class QueryObjectBuilderService {
-  constructor() {}
-
-  chooseAllowedSearchByKeyValues(entityType: EntityType) {
-    let allowedSearchByKeyValues: string[] = [];
-    switch (entityType) {
-      case 'researchActivity':
-        allowedSearchByKeyValues = researchActivitiesAllowedSearchByKeyValues;
-        break;
-      case 'researchPhase':
-        allowedSearchByKeyValues = researchPhasesAllowedSearchByKeyValues;
-        break;
-      case 'researchSession':
-        allowedSearchByKeyValues = researchSessionsAllowedSearchByKeyValues;
-        break;
-      case 'researchLog':
-        allowedSearchByKeyValues = researchLogsAllowedSearchByKeyValues;
-        break;
-      case 'settings':
-        allowedSearchByKeyValues = settingsAllowedSearchByKeyValues;
-        break;
-      case 'tag':
-        allowedSearchByKeyValues = tagsAllowedSearchByKeyValues;
-        break;
-      case 'activityFeed':
-        allowedSearchByKeyValues = activityFeedsAllowedSearchByKeyValues;
-        break;
-      case 'activityDay':
-        allowedSearchByKeyValues = activityDaysAllowedSearchByKeyValues;
-        break;
-      case 'activityLog':
-        allowedSearchByKeyValues = activityLogsAllowedSearchByKeyValues;
-        break;
-      case 'user':
-        allowedSearchByKeyValues = usersAllowedSearchByKeyValues;
-        break;
-      default:
-        break;
-    }
-    return allowedSearchByKeyValues;
-  }
+  constructor(
+    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
+  ) {}
 
   buildQueryObject({
     entityType,
@@ -74,8 +27,10 @@ export class QueryObjectBuilderService {
       researchPhaseId,
       researchActivityId,
     } = queryParams;
-    const allowedSearchByKeyValues =
-      this.chooseAllowedSearchByKeyValues(entityType);
+    const { allowedSearchByKeyValues } =
+      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
+        entityType,
+      );
     const queryObject: QueryObjectBuilderQueryObject = {};
 
     if (userId) {

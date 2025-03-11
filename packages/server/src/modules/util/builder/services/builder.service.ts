@@ -6,10 +6,13 @@ import { OptionObjectBuilderService } from './optionObjectBuilder.service';
 import { DataObjectBuilderService } from './dataObjectBuilder.service';
 import { QueryObjectBuilderService } from './queryObjectBuilder.service';
 import { OrderByObjectBuilderService } from './orderByObjectBuilder.service';
+import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
 // Types
 import {
+  ChooseAllowedBuilderValuesReturnObject,
   DataObjectBuilderDataObject,
   DataObjectBuilderParams,
+  EntityType,
   OptionObjectBuilderParams,
   OptionObjectBuilderReturnObject,
   OrderByObjectBuilderParams,
@@ -28,7 +31,16 @@ export class ObjectBuilderService {
     private dataObjectBuilderService: DataObjectBuilderService,
     private queryObjectBuilderService: QueryObjectBuilderService,
     private orderByObjectBuilderService: OrderByObjectBuilderService,
+    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
   ) {}
+
+  chooseAllowedBuilderValues(
+    entityType: EntityType,
+  ): ChooseAllowedBuilderValuesReturnObject {
+    return this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
+      entityType,
+    );
+  }
 
   async buildReturnObject({
     actionType,

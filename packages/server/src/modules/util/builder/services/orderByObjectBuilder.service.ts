@@ -2,67 +2,21 @@
 import { Injectable } from '@nestjs/common';
 // Types
 import {
-  EntityType,
   EntityTypePlural,
   OrderByObjectBuilderOrderByObject,
   OrderByObjectBuilderParams,
   OrderByObjectBuilderReturnObject,
 } from '../types';
 // Data
-import { activityDayAllowedSortByKeysValues } from 'src/modules/entity/activity/day/data';
-import { activityFeedAllowedSortByKeysValues } from 'src/modules/entity/activity/feed/data';
-import { activityLogAllowedSortByKeysValues } from 'src/modules/entity/activity/log/data';
-import { researchActivitiesAllowedSortByKeysValues } from 'src/modules/entity/research/activity/data';
-import { researchLogsAllowedSortByKeysValues } from 'src/modules/entity/research/log/data';
-import { researchPhaseAllowedSortByKeysValues } from 'src/modules/entity/research/phase/data';
-import { researchSessionAllowedSortByKeysValues } from 'src/modules/entity/research/session/data';
-import { settingsAllowedSortByKeysValues } from 'src/modules/entity/settings/data';
-import { tagAllowedSortByKeysValues } from 'src/modules/entity/tag/data';
-import { userAllowedSortByKeysValues } from 'src/modules/entity/user/data';
 import { entityValues } from '../data';
+// Util Service
+import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
 
 @Injectable()
 export class OrderByObjectBuilderService {
-  constructor() {}
-
-  chooseAllowedSortByKeysValues(entityType: EntityType) {
-    let allowedSortByKeysValues: string[] = [];
-    switch (entityType) {
-      case 'researchActivity':
-        allowedSortByKeysValues = researchActivitiesAllowedSortByKeysValues;
-        break;
-      case 'researchPhase':
-        allowedSortByKeysValues = researchPhaseAllowedSortByKeysValues;
-        break;
-      case 'researchSession':
-        allowedSortByKeysValues = researchSessionAllowedSortByKeysValues;
-        break;
-      case 'researchLog':
-        allowedSortByKeysValues = researchLogsAllowedSortByKeysValues;
-        break;
-      case 'settings':
-        allowedSortByKeysValues = settingsAllowedSortByKeysValues;
-        break;
-      case 'tag':
-        allowedSortByKeysValues = tagAllowedSortByKeysValues;
-        break;
-      case 'activityFeed':
-        allowedSortByKeysValues = activityFeedAllowedSortByKeysValues;
-        break;
-      case 'activityDay':
-        allowedSortByKeysValues = activityDayAllowedSortByKeysValues;
-        break;
-      case 'activityLog':
-        allowedSortByKeysValues = activityLogAllowedSortByKeysValues;
-        break;
-      case 'user':
-        allowedSortByKeysValues = userAllowedSortByKeysValues;
-        break;
-      default:
-        break;
-    }
-    return allowedSortByKeysValues;
-  }
+  constructor(
+    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
+  ) {}
 
   buildOrderByObject({
     entityType,
@@ -71,8 +25,10 @@ export class OrderByObjectBuilderService {
     let additionalNotes: string = '';
     const { sortByKeys, sortByOrders } = queryParams;
     const orderByObject: OrderByObjectBuilderOrderByObject[] = [];
-    const allowedSortByKeysValues =
-      this.chooseAllowedSortByKeysValues(entityType);
+    const { allowedSortByKeysValues } =
+      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
+        entityType,
+      );
 
     if (sortByKeys && sortByOrders) {
       const sortByKeysArray = sortByKeys.replace(/\s+/g, '').split(',');

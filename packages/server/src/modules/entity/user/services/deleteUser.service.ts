@@ -82,13 +82,11 @@ export class DeleteUserService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
-        base: '',
-        specifiers: [
-          { label: 'userId', value: deletedUser.id },
-          { label: 'email', value: deletedUser.email },
-        ],
-        type: 'modify',
+      await this.redis.deleteCacheDeep({
+        entityType: 'user',
+        base: 'users',
+        actionType: 'DELETE',
+        specifiers: [],
       });
 
       return await this.objectBuilder.buildReturnObject({

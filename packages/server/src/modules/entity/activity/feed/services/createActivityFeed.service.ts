@@ -68,19 +68,23 @@ export class CreateActivityFeedService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'activityFeed',
         base: 'activityFeeds',
+        actionType: 'CREATE',
+        specifiersType: 'either',
         specifiers: [
           {
             label: 'userId',
             value: createdActivityFeed.userId,
+            ignoreIfFalse: true,
           },
           {
             label: 'researchActivityId',
             value: createdActivityFeed.researchActivityId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'create',
       });
 
       return await this.objectBuilder.buildReturnObject({

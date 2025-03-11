@@ -84,10 +84,11 @@ export class UpdateActivityLogService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'activityLog',
         base: 'activityLogs',
+        actionType: 'UPDATE',
         specifiers: [],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({

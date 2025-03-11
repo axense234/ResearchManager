@@ -1,30 +1,53 @@
 // NestJS
 import { Injectable } from '@nestjs/common';
-// Services
-import { DeleteAllCacheThatIncludesGivenKeysService } from './deleteAllCacheThatIncludesGivenKeys.service';
-import { GetOrSetCacheService } from './getOrSetCache.service';
 // Types
-import DeleteAllCacheThatIncludesGivenKeysType from '../types/DeleteAllCacheThatIncludesGivenKeys';
+import DeleteCacheType from '../types/DeleteCacheShallow';
+import DeleteRelatedCacheType from '../types/DeleteCacheDeep';
+// Services
+import { GetOrSetCacheService } from './getOrSetCache.service';
+import { DeleteCacheDeepService } from './deleteCacheDeep.service';
+import { DeleteCacheShallowService } from './deleteCacheShallow.service';
 
 @Injectable()
 export class RedisService {
   constructor(
-    private deleteAllCacheThatIncludesGivenKeysService: DeleteAllCacheThatIncludesGivenKeysService,
+    private deleteCacheShallowService: DeleteCacheShallowService,
     private getOrSetCacheService: GetOrSetCacheService,
+    private deleteCacheDeepService: DeleteCacheDeepService,
   ) {}
 
-  async deleteAllCacheThatIncludesGivenKeys({
+  async deleteCacheShallow({
     base,
-    type,
+    actionType,
     specifiers,
-  }: DeleteAllCacheThatIncludesGivenKeysType) {
-    return await this.deleteAllCacheThatIncludesGivenKeysService.deleteAllCacheThatIncludesGivenKeys(
-      {
-        base,
-        type,
-        specifiers,
-      },
-    );
+    specifiersType,
+    deepCall,
+  }: DeleteCacheType) {
+    return await this.deleteCacheShallowService.deleteCacheShallow({
+      base,
+      actionType,
+      specifiers,
+      specifiersType,
+      deepCall,
+    });
+  }
+
+  async deleteCacheDeep({
+    entityType,
+    base,
+    actionType,
+    specifiers,
+    specifiersType,
+    deepCall,
+  }: DeleteRelatedCacheType) {
+    return await this.deleteCacheDeepService.deleteCacheDeep({
+      entityType,
+      base,
+      actionType,
+      specifiers,
+      specifiersType,
+      deepCall,
+    });
   }
 
   async getOrSetCache(key: any, cb: any) {

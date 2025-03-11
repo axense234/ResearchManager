@@ -83,15 +83,17 @@ export class UpdateActivityDayService {
         );
       }
 
-      await this.redis.deleteAllCacheThatIncludesGivenKeys({
+      await this.redis.deleteCacheDeep({
+        entityType: 'activityDay',
         base: 'activityDays',
+        actionType: 'UPDATE',
         specifiers: [
           {
             label: 'activityFeedId',
             value: updatedActivityDay.activityFeedId,
+            ignoreIfFalse: true,
           },
         ],
-        type: 'modify',
       });
 
       return await this.objectBuilder.buildReturnObject({
