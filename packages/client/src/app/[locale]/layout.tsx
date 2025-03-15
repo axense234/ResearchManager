@@ -1,24 +1,32 @@
 // Global SCSS
 import "@/scss/abstracts/globals.scss";
 // Next Intl stuff
-import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
+import { getMessages } from "next-intl/server";
+// Redux Provider
+import ReduxProvider from "@/components/others/ReduxProvider";
 
 const RootLayout = async ({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) => {
   const messages = await getMessages();
+  const { locale } = await params;
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
 
   return (
     <html lang={locale}>
       <body>
         <div className="app-container">
           <NextIntlClientProvider messages={messages}>
-            {children}
+            <ReduxProvider>{children}</ReduxProvider>
           </NextIntlClientProvider>
         </div>
       </body>

@@ -1,7 +1,5 @@
 // Nest
 import { Injectable } from '@nestjs/common';
-// Redis
-import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
@@ -9,10 +7,7 @@ import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types'
 
 @Injectable()
 export class LogOutService {
-  constructor(
-    private redis: RedisService,
-    private objectBuilder: ObjectBuilderService,
-  ) {}
+  constructor(private objectBuilder: ObjectBuilderService) {}
 
   async logOut(): Promise<ReturnObjectBuilderReturnObject> {
     try {

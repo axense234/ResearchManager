@@ -1,0 +1,21 @@
+@use "./variables" as *;
+
+@function getColor($color) {
+  @return map-get($map: $colors, $key: $color);
+}
+
+@function getColorWithOpacity($color, $opacity) {
+  $colorValue: map-get(
+    $map: $colors,
+    $key: $color,
+  );
+  @return rgba($colorValue, $opacity);
+}
+
+@function getFontSize($fontSize) {
+  @return map-get($map: $fontSizes, $key: $fontSize);
+}
+
+@function getScreenSize($size) {
+  @return map-get($map: $screenSizes, $key: $size);
+}
