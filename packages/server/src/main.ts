@@ -6,13 +6,21 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 // Swagger
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+// Helmet
+import helmet from 'helmet';
 
 const PORT = process.env.PORT || 4000;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
+
+  // Security
+  app.use(helmet());
+
+  // Pipes
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
+  // Swagger Stuff
   const config = new DocumentBuilder()
     .setTitle('Research Manager API v1.6.3')
     .setDescription(

@@ -2,6 +2,8 @@
 import { Module } from '@nestjs/common';
 // Config Module
 import { ConfigModule } from '@nestjs/config';
+// Rate Limiter
+import { ThrottlerModule } from '@nestjs/throttler';
 // Modules
 import { UserModule } from './modules/entity/user/user.module';
 import { AuthModule } from './modules/entity/auth/auth.module';
@@ -23,6 +25,14 @@ import { RedisModule } from './modules/db/redis/redis.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: Number(process.env.RATE_TTL),
+          limit: Number(process.env.RATE_LIMIT),
+        },
+      ],
+    }),
     ObjectBuilderModule,
     AuthModule,
     ResearchActivityModule,
