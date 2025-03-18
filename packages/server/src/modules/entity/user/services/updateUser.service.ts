@@ -6,7 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 // Dtos
-import { UpdateUserDto } from '../dto/user.dto';
+import type { UpdateUserDto } from '@researchmanager/shared/types';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';

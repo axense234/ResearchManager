@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateActivityDayDto } from 'src/modules/entity/activity/day/dto';
+import { UpdateActivityDayDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { updateActivityDayExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const updateActivityDayApiOperationOptions: ApiOperationOptions = {
 };
 
 export const updateActivityDayApiBodyOptions: ApiBodyOptions = {
-  type: UpdateActivityDayDto,
+  type: UpdateActivityDayDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Activity Day you want to update.',
   examples: updateActivityDayExamples,

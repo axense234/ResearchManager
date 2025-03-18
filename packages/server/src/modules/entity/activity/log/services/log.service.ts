@@ -7,7 +7,10 @@ import { CreateActivityLogService } from './createActivityLog.service';
 import { UpdateActivityLogService } from './updateActivityLog.service';
 import { DeleteActivityLogService } from './deleteActivityLog.service';
 // Dtos
-import { CreateActivityLogDto, UpdateActivityLogDto } from '../dto';
+import type {
+  CreateActivityLogDto,
+  UpdateActivityLogDto,
+} from '@researchmanager/shared/types';
 // Types
 import {
   CreateActivityLogQueryParams,

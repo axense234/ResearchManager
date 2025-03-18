@@ -6,7 +6,7 @@ import { SignUpService } from './signUp.service';
 import { SignInService } from './signIn.service';
 import { LogOutService } from './logOut.service';
 // Dtos
-import { SignInDto, SignUpDto } from '../dto';
+import type { SignInDto, SignUpDto } from '@researchmanager/shared/types';
 // Types
 import { SignUpQueryParams } from '../types';
 import { SignInQueryParams } from '../types/params/SignInQueryParams';

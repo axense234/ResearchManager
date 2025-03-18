@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateTagDto } from 'src/modules/entity/tag/dto';
+import { UpdateTagDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { updateTagExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const updateTagApiOperationOptions: ApiOperationOptions = {
 };
 
 export const updateTagApiBodyOptions: ApiBodyOptions = {
-  type: UpdateTagDto,
+  type: UpdateTagDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Tag you want to update.',
   examples: updateTagExamples,

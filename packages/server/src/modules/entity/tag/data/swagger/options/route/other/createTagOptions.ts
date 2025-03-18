@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { CreateTagDto } from 'src/modules/entity/tag/dto';
+import { CreateTagDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { createTagExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const createTagApiOperationOptions: ApiOperationOptions = {
 };
 
 export const createTagApiBodyOptions: ApiBodyOptions = {
-  type: CreateTagDto,
+  type: CreateTagDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Tag you want to create.',
   examples: createTagExamples,

@@ -9,7 +9,7 @@ import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Dtos
-import { UpdateTagDto } from '../dto';
+import type { UpdateTagDto } from '@researchmanager/shared/types';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types

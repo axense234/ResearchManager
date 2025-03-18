@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dto
-import { CreateSettingsDto } from 'src/modules/entity/settings/dto';
+import { CreateSettingsDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { createSettingsExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const createSettingsApiOperationOptions: ApiOperationOptions = {
 };
 
 export const createSettingsApiBodyOptions: ApiBodyOptions = {
-  type: CreateSettingsDto,
+  type: CreateSettingsDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Settings you want to create.',
   examples: createSettingsExamples,

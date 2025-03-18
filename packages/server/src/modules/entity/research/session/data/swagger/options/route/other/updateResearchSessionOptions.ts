@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateResearchSessionDto } from 'src/modules/entity/research/session/dto';
+import { UpdateResearchSessionDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { updateResearchSessionExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const updateResearchSessionApiOperationOptions: ApiOperationOptions = {
 };
 
 export const updateResearchSessionApiBodyOptions: ApiBodyOptions = {
-  type: UpdateResearchSessionDto,
+  type: UpdateResearchSessionDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Research Session you want to update.',
   examples: updateResearchSessionExamples,

@@ -7,7 +7,7 @@ import {
 // Auth
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 // Dtos
-import { SignUpDto } from '../dto/signUp.dto';
+import type { SignUpDto } from '@researchmanager/shared/types';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Prisma

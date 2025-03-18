@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { CreateResearchPhaseDto } from 'src/modules/entity/research/phase/dto';
+import { CreateResearchPhaseDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { createResearchPhaseExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const createResearchPhaseApiOperationOptions: ApiOperationOptions = {
 };
 
 export const createResearchPhaseApiBodyOptions: ApiBodyOptions = {
-  type: CreateResearchPhaseDto,
+  type: CreateResearchPhaseDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Research Phase you want to create.',
   examples: createResearchPhaseExamples,

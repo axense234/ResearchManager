@@ -3,7 +3,7 @@ import { Body, Controller, HttpCode, Post, Query } from '@nestjs/common';
 // Providers
 import { AuthService } from './services/auth.service';
 // Dtos
-import { SignInDto, SignUpDto } from './dto';
+import type { SignInDto, SignUpDto } from '@researchmanager/shared/types';
 // Types
 import { SignUpQueryParams } from './types';
 import { SignInQueryParams } from './types/params/SignInQueryParams';

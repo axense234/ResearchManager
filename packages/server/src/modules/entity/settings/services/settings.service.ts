@@ -15,7 +15,10 @@ import {
   UpdateSettingsQueryParams,
 } from '../types';
 // Dtos
-import { CreateSettingsDto, UpdateSettingsDto } from '../dto';
+import type {
+  CreateSettingsDto,
+  UpdateSettingsDto,
+} from '@researchmanager/shared/types';
 
 @Injectable()
 export class SettingsService {

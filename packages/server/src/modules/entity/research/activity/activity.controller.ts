@@ -11,7 +11,10 @@ import {
   Req,
 } from '@nestjs/common';
 // Dto
-import { CreateResearchActivityDto, UpdateResearchActivityDto } from './dto';
+import type {
+  CreateResearchActivityDto,
+  UpdateResearchActivityDto,
+} from '@researchmanager/shared/types';
 // Services
 import { ResearchActivityService } from './services/activity.service';
 // Types

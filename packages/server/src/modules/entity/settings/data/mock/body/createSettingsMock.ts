@@ -1,5 +1,5 @@
 // Dtos
-import { CreateSettingsDto } from '../../../dto';
+import type { CreateSettingsDto } from '@researchmanager/shared/types';
 
 export const createSettingsMockData: CreateSettingsDto[] = [
   {

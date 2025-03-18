@@ -1,0 +1,12 @@
+{
+  "name": "@researchmanager/shared",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/types/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
+}

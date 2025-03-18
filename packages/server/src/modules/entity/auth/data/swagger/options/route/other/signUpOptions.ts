@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { SignUpDto } from 'src/modules/entity/auth/dto';
+import { SignUpDtoSwaggerWrapper } from '../../../dto';
 // Data
 import { signUpExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const signUpApiOperationOptions: ApiOperationOptions = {
 };
 
 export const signUpApiBodyOptions: ApiBodyOptions = {
-  type: SignUpDto,
+  type: SignUpDtoSwaggerWrapper,
   description:
     'The request body containing the properties of the User you want to Create.',
   examples: signUpExamples,

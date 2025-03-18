@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateActivityFeedDto } from 'src/modules/entity/activity/feed/dto';
+import { UpdateActivityFeedDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { updateActivityFeedExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const updateActivityFeedApiOperationOptions: ApiOperationOptions = {
 };
 
 export const updateActivityFeedApiBodyOptions: ApiBodyOptions = {
-  type: UpdateActivityFeedDto,
+  type: UpdateActivityFeedDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Activity Feed you want to update.',
   examples: updateActivityFeedExamples,

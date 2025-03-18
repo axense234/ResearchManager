@@ -7,7 +7,7 @@ import {
 // DB Services
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Dtos
-import { CreateActivityFeedDto } from '../dto';
+import type { CreateActivityFeedDto } from '@researchmanager/shared/types';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder

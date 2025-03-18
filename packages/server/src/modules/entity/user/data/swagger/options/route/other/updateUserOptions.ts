@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateUserDto } from 'src/modules/entity/user/dto';
+import { UpdateUserDtoSwaggerWrapper } from '../../../dto';
 // Data
 import { updateUserExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const updateUserApiOperationOptions: ApiOperationOptions = {
 };
 
 export const updateUserApiBodyOptions: ApiBodyOptions = {
-  type: UpdateUserDto,
+  type: UpdateUserDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the User you want to update.',
   examples: updateUserExamples,

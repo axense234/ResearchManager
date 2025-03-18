@@ -11,7 +11,7 @@ import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Dto
-import { UpdateSettingsDto } from '../dto';
+import type { UpdateSettingsDto } from '@researchmanager/shared/types';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types

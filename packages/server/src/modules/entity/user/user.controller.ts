@@ -16,7 +16,7 @@ import { GetUser } from 'src/modules/entity/auth/decorator';
 // Prisma
 import { User } from '@prisma/client';
 // Dto
-import { UpdateUserDto } from './dto/user.dto';
+import type { UpdateUserDto } from '@researchmanager/shared/types';
 // Types
 import {
   DeleteUserQueryParams,

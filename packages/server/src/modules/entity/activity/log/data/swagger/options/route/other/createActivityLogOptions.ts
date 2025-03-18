@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dto
-import { CreateActivityLogDto } from 'src/modules/entity/activity/log/dto';
+import { CreateActivityLogDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { createActivityLogExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const createActivityLogApiOperationOptions: ApiOperationOptions = {
 };
 
 export const createActivityLogApiBodyOptions: ApiBodyOptions = {
-  type: CreateActivityLogDto,
+  type: CreateActivityLogDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Activity Log you want to create.',
   examples: createActivityLogExamples,

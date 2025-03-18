@@ -10,7 +10,7 @@ import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Prisma
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 // Dtos
-import { UpdateActivityFeedDto } from '../dto';
+import type { UpdateActivityFeedDto } from '@researchmanager/shared/types';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder

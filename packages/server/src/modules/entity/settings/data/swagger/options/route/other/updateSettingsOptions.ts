@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateSettingsDto } from 'src/modules/entity/settings/dto';
+import { UpdateSettingsDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { updateSettingsExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const updateSettingsApiOperationOptions: ApiOperationOptions = {
 };
 
 export const updateSettingsApiBodyOptions: ApiBodyOptions = {
-  type: UpdateSettingsDto,
+  type: UpdateSettingsDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Settings you want to update.',
   examples: updateSettingsExamples,

@@ -7,7 +7,10 @@ import { CreateResearchPhaseService } from './createResearchPhase.service';
 import { UpdateResearchPhaseService } from './updateResearchPhase.service';
 import { DeleteResearchPhaseService } from './deleteResearchPhase.service';
 // Dtos
-import { CreateResearchPhaseDto, UpdateResearchPhaseDto } from '../dto';
+import type {
+  CreateResearchPhaseDto,
+  UpdateResearchPhaseDto,
+} from '@researchmanager/shared/types';
 // Types
 import {
   CreateResearchPhaseQueryParams,

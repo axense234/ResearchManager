@@ -13,7 +13,10 @@ import {
 // Services
 import { ResearchLogService } from './services/log.service';
 // Dtos
-import { CreateResearchLogDto, UpdateResearchLogDto } from './dto';
+import type {
+  CreateResearchLogDto,
+  UpdateResearchLogDto,
+} from '@researchmanager/shared/types';
 // Types
 import {
   CreateResearchLogQueryParams,

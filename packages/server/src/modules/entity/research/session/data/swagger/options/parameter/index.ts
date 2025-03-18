@@ -1,3 +1,3 @@
 export * from './query';
-export * from './query';
+export * from './dto';
 export * from './path';

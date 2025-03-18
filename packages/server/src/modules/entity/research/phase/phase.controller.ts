@@ -13,7 +13,10 @@ import {
 // Services
 import { ResearchPhaseService } from './services/phase.service';
 // Dto
-import { CreateResearchPhaseDto, UpdateResearchPhaseDto } from './dto';
+import type {
+  CreateResearchPhaseDto,
+  UpdateResearchPhaseDto,
+} from '@researchmanager/shared/types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
 // Types

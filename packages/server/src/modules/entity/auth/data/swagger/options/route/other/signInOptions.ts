@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { SignInDto } from 'src/modules/entity/auth/dto';
+import { SignInDtoSwaggerWrapper } from '../../../dto';
 // Data
 import { signInExamples } from '../../../examples/body/signInExamples';
 
@@ -12,7 +12,7 @@ export const signInApiOperationOptions: ApiOperationOptions = {
 };
 
 export const signInApiBodyOptions: ApiBodyOptions = {
-  type: SignInDto,
+  type: SignInDtoSwaggerWrapper,
   description:
     'The request body containing the credentials necessary for a User to Sign In.',
   examples: signInExamples,

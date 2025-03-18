@@ -1,5 +1,5 @@
 // Dtos
-import { UpdateActivityDayDto } from '../../../dto';
+import type { UpdateActivityDayDto } from '@researchmanager/shared/types';
 
 export const updateActivityDayMockData: UpdateActivityDayDto[] = [
   {

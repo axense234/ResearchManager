@@ -1,5 +1,5 @@
 // Dtos
-import { UpdateTagDto } from '../../../dto';
+import type { UpdateTagDto } from '@researchmanager/shared/types';
 
 export const updateTagMockData: UpdateTagDto[] = [
   {

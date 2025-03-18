@@ -7,7 +7,10 @@ import { CreateResearchActivityService } from './createResearchActivity.service'
 import { UpdateResearchActivityService } from './updateResearchActivity.service';
 import { DeleteResearchActivityService } from './deleteResearchActivity.service';
 // Dtos
-import { CreateResearchActivityDto, UpdateResearchActivityDto } from '../dto';
+import type {
+  CreateResearchActivityDto,
+  UpdateResearchActivityDto,
+} from '@researchmanager/shared/types';
 // Types
 import { GetResearchActivitiesQueryParams } from '../types/params/GetResearchActivitiesQueryParams';
 import { GetResearchActivityQueryParams } from '../types/params/GetResearchActivityQueryParams';

@@ -1,5 +1,5 @@
 // Dto
-import { CreateActivityFeedDto } from '../../../dto';
+import type { CreateActivityFeedDto } from '@researchmanager/shared/types';
 
 export const createActivityFeedMockData: CreateActivityFeedDto[] = [
   {

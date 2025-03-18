@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dto
-import { CreateResearchLogDto } from 'src/modules/entity/research/log/dto';
+import { CreateResearchLogDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { createResearchLogExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const createResearchLogApiOperationOptions: ApiOperationOptions = {
 };
 
 export const createResearchLogApiBodyOptions: ApiBodyOptions = {
-  type: CreateResearchLogDto,
+  type: CreateResearchLogDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Research Log you want to create.',
   examples: createResearchLogExamples,

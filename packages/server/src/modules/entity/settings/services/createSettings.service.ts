@@ -12,7 +12,7 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Dto
-import { CreateSettingsDto } from '../dto';
+import type { CreateSettingsDto } from '@researchmanager/shared/types';
 // Types
 import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {

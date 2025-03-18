@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { CreateResearchSessionDto } from 'src/modules/entity/research/session/dto';
+import { CreateResearchSessionDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { createResearchSessionExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const createResearchSessionApiOperationOptions: ApiOperationOptions = {
 };
 
 export const createResearchSessionApiBodyOptions: ApiBodyOptions = {
-  type: CreateResearchSessionDto,
+  type: CreateResearchSessionDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Research Session you want to create.',
   examples: createResearchSessionExamples,

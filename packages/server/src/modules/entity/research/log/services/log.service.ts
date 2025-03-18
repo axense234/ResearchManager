@@ -15,7 +15,10 @@ import {
   UpdateResearchLogQueryParams,
 } from '../types';
 // Dtos
-import { CreateResearchLogDto, UpdateResearchLogDto } from '../dto';
+import type {
+  CreateResearchLogDto,
+  UpdateResearchLogDto,
+} from '@researchmanager/shared/types';
 
 @Injectable()
 export class ResearchLogService {

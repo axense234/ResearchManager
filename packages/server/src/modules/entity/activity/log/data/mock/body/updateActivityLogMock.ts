@@ -1,5 +1,5 @@
 // Dtos
-import { UpdateActivityLogDto } from '../../../dto';
+import type { UpdateActivityLogDto } from '@researchmanager/shared/types';
 
 export const updateActivityLogMockData: UpdateActivityLogDto[] = [
   {

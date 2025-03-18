@@ -13,7 +13,10 @@ import {
 // Services
 import { ResearchSessionService } from './services/session.service';
 // Dtos
-import { CreateResearchSessionDto, UpdateResearchSessionDto } from './dto';
+import type {
+  CreateResearchSessionDto,
+  UpdateResearchSessionDto,
+} from '@researchmanager/shared/types';
 // Types
 import {
   CreateResearchSessionQueryParams,

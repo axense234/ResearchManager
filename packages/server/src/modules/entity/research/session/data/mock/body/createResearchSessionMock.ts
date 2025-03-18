@@ -1,5 +1,5 @@
 // Dtos
-import { CreateResearchSessionDto } from '../../../dto';
+import type { CreateResearchSessionDto } from '@researchmanager/shared/types';
 
 export const createResearchSessionMockData: CreateResearchSessionDto[] = [
   {

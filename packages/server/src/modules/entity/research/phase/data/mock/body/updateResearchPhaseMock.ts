@@ -1,5 +1,5 @@
 // Dtos
-import { UpdateResearchPhaseDto } from '../../../dto';
+import type { UpdateResearchPhaseDto } from '@researchmanager/shared/types';
 
 export const updateResearchPhaseMockData: UpdateResearchPhaseDto[] = [
   {

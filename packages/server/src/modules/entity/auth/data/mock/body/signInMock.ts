@@ -1,5 +1,5 @@
 // Dto
-import { SignInDto } from '../../../dto';
+import type { SignInDto } from '@researchmanager/shared/types';
 
 export const signInMockData: SignInDto[] = [
   {

@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dto
-import { UpdateResearchLogDto } from 'src/modules/entity/research/log/dto';
+import { UpdateResearchLogDtoSwaggerWrapper } from '../../../dto';
 // Examples
 import { updateResearchLogExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ export const updateResearchLogApiOperationOptions: ApiOperationOptions = {
 };
 
 export const updateResearchLogApiBodyOptions: ApiBodyOptions = {
-  type: UpdateResearchLogDto,
+  type: UpdateResearchLogDtoSwaggerWrapper,
   description:
     'The request body containing the wanted updated properties of the Research Phase you want to update.',
   examples: updateResearchLogExamples,

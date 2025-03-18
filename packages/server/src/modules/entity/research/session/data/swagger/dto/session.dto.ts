@@ -1,0 +1,122 @@
+// Swagger
+import { ApiProperty } from '@nestjs/swagger';
+// Prisma
+import { ResearchSessionStatusType } from '@prisma/client';
+// Class Validators
+import {
+  IsArray,
+  IsBoolean,
+  IsDateString,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
+import {
+  createResearchSessionDtoOptions,
+  updateResearchSessionDtoOptions,
+} from '../options/parameter';
+// Dtos
+export class CreateResearchSessionDtoSwaggerWrapper {
+  @ApiProperty(createResearchSessionDtoOptions['name'])
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @ApiProperty(createResearchSessionDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
+
+  @ApiProperty(createResearchSessionDtoOptions['backgroundColorOrImageSrc'])
+  @IsString()
+  @IsOptional()
+  backgroundColorOrImageSrc?: string;
+
+  @ApiProperty(createResearchSessionDtoOptions['researchPoints'])
+  @IsNumber()
+  @IsOptional()
+  researchPoints?: number;
+
+  @ApiProperty(createResearchSessionDtoOptions['content'])
+  @IsString()
+  @IsOptional()
+  content?: string;
+
+  @ApiProperty(createResearchSessionDtoOptions['imagesSrc'])
+  @IsArray()
+  @IsOptional()
+  imagesSrc?: string[];
+
+  @ApiProperty(createResearchSessionDtoOptions['currentStatusType'])
+  @IsEnum(ResearchSessionStatusType)
+  @IsOptional()
+  currentStatusType?: ResearchSessionStatusType;
+
+  @ApiProperty(createResearchSessionDtoOptions['currentStatusDate'])
+  @IsDateString()
+  @IsOptional()
+  currentStatusDate?: Date;
+
+  @ApiProperty(createResearchSessionDtoOptions['tags'])
+  @IsArray()
+  @IsOptional()
+  tags?: string[];
+
+  @ApiProperty(createResearchSessionDtoOptions['researchPhaseId'])
+  @IsUUID()
+  researchPhaseId: string;
+}
+
+export class UpdateResearchSessionDtoSwaggerWrapper {
+  @ApiProperty(updateResearchSessionDtoOptions['name'])
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @ApiProperty(updateResearchSessionDtoOptions['archived'])
+  @IsBoolean()
+  @IsOptional()
+  archived?: boolean;
+
+  @ApiProperty(updateResearchSessionDtoOptions['backgroundColorOrImageSrc'])
+  @IsString()
+  @IsOptional()
+  backgroundColorOrImageSrc?: string;
+
+  @ApiProperty(updateResearchSessionDtoOptions['researchPoints'])
+  @IsNumber()
+  @IsOptional()
+  researchPoints?: number;
+
+  @ApiProperty(updateResearchSessionDtoOptions['content'])
+  @IsString()
+  @IsOptional()
+  content?: string;
+
+  @ApiProperty(updateResearchSessionDtoOptions['imagesSrc'])
+  @IsArray()
+  @IsOptional()
+  imagesSrc?: string[];
+
+  @ApiProperty(updateResearchSessionDtoOptions['currentStatusType'])
+  @IsEnum(ResearchSessionStatusType)
+  @IsOptional()
+  currentStatusType?: ResearchSessionStatusType;
+
+  @ApiProperty(updateResearchSessionDtoOptions['currentStatusDate'])
+  @IsDateString()
+  @IsOptional()
+  currentStatusDate?: Date;
+
+  @ApiProperty(updateResearchSessionDtoOptions['tags'])
+  @IsArray()
+  @IsOptional()
+  tags?: string[];
+
+  @ApiProperty(updateResearchSessionDtoOptions['researchPhaseId'])
+  @IsUUID()
+  @IsOptional()
+  researchPhaseId?: string;
+}

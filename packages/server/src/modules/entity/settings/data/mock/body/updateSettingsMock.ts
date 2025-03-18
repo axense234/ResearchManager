@@ -1,5 +1,5 @@
 // Dtos
-import { UpdateSettingsDto } from '../../../dto';
+import type { UpdateSettingsDto } from '@researchmanager/shared/types';
 
 export const updateSettingsMockData: UpdateSettingsDto[] = [
   {
