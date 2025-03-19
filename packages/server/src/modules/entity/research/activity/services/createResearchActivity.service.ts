@@ -14,7 +14,7 @@ import {
   ResearchActivityCreateDataObject,
   ResearchActivityCreateObject,
 } from '../types';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class CreateResearchActivityService {
@@ -27,7 +27,7 @@ export class CreateResearchActivityService {
   async createResearchActivity(
     queryParams: CreateResearchActivityQueryParams,
     dto: CreateResearchActivityDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const {
         includeValues,

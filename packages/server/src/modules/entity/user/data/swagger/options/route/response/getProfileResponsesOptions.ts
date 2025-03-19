@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Data
 import { getProfileResponsesExamples } from '../../../examples';
 
@@ -12,7 +12,7 @@ type GetProfileResponsesOptionsType = {
 
 export const getProfileResponsesOptions: GetProfileResponsesOptionsType = {
   '200': {
-    type: ReturnObjectBuilderReturnObject,
+    type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
     status: 200,
     description: 'Successfully found user through JWT.',
     example: getProfileResponsesExamples['200'],

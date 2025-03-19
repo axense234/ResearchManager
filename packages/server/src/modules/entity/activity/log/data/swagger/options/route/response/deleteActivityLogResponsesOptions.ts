@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { deleteActivityLogResponsesExamples } from '../../../examples';
 
@@ -15,7 +15,7 @@ type DeleteActivityLogResponsesOptionsType = {
 export const deleteActivityLogResponsesOptions: DeleteActivityLogResponsesOptionsType =
   {
     '200': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 200,
       description: 'Successfully deleted Activity Log by ID.',
       example: deleteActivityLogResponsesExamples['200'],

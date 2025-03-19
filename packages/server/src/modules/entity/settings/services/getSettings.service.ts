@@ -11,8 +11,8 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import { GetSettingsQueryParams, SettingsFindUniqueObject } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class GetSettingsService {
@@ -26,7 +26,7 @@ export class GetSettingsService {
     queryParams: GetSettingsQueryParams,
     settingsId: string,
     url: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!settingsId) {
         throw new BadRequestException('No Settings Id provided.');

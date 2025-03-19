@@ -13,12 +13,12 @@ import type { UpdateTagDto } from '@researchmanager/shared/types';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   TagUpdateDataObject,
   TagUpdateObject,
   UpdateTagQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class UpdateTagService {
@@ -32,7 +32,7 @@ export class UpdateTagService {
     queryParams: UpdateTagQueryParams,
     dto: UpdateTagDto,
     tagId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!tagId) {
         throw new BadRequestException('No Tag Id provided.');

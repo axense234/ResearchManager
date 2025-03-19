@@ -9,12 +9,12 @@ import type { CreateTagDto } from '@researchmanager/shared/types';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   CreateTagQueryParams,
   TagCreateDataObject,
   TagCreateObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class CreateTagService {
@@ -27,7 +27,7 @@ export class CreateTagService {
   async createTag(
     queryParams: CreateTagQueryParams,
     dto: CreateTagDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 

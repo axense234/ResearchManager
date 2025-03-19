@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { createActivityLogResponsesExamples } from '../../../examples';
 
@@ -14,7 +14,7 @@ type CreateActivityLogResponsesOptionsType = {
 export const createActivityLogResponsesOptions: CreateActivityLogResponsesOptionsType =
   {
     '201': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 201,
       description: 'Successfully created Activity Log.',
       example: createActivityLogResponsesExamples['201'],

@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@researchmanager/shared": "^1.0.0",
     "@netlify/plugin-nextjs": "^5.8.1",
     "@prisma/client": "^5.22.0",
     "@reduxjs/toolkit": "^2.3.0",

@@ -9,12 +9,12 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Dtos
 import type { CreateResearchPhaseDto } from '@researchmanager/shared/types';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   CreateResearchPhaseQueryParams,
   ResearchPhaseCreateDataObject,
   ResearchPhaseCreateObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class CreateResearchPhaseService {
@@ -27,7 +27,7 @@ export class CreateResearchPhaseService {
   async createResearchPhase(
     queryParams: CreateResearchPhaseQueryParams,
     dto: CreateResearchPhaseDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 

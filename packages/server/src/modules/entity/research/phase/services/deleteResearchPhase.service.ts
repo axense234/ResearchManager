@@ -11,11 +11,11 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   DeleteResearchPhaseQueryParams,
   ResearchPhaseFindUniqueObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class DeleteResearchPhaseService {
@@ -28,7 +28,7 @@ export class DeleteResearchPhaseService {
   async deleteResearchPhase(
     queryParams: DeleteResearchPhaseQueryParams,
     researchPhaseId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchPhaseId) {
         throw new BadRequestException('No Research Activity Id provided.');

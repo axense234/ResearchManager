@@ -8,12 +8,15 @@ import type { SignInDto, SignUpDto } from '@researchmanager/shared/types';
 import { SignUpQueryParams } from './types';
 import { SignInQueryParams } from './types/params/SignInQueryParams';
 // Swagger
-import { ApiTags } from '@nestjs/swagger';
+import { ApiDefaultResponse, ApiTags } from '@nestjs/swagger';
 // Custom Decorators
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
 
+@ApiDefaultResponse({
+  description: 'Default response.',
+})
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {

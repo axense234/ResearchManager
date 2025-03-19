@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { deleteTagResponsesExamples } from '../../../examples';
 
@@ -14,7 +14,7 @@ type DeleteTagResponsesOptionsType = {
 
 export const deleteTagResponsesOptions: DeleteTagResponsesOptionsType = {
   '200': {
-    type: ReturnObjectBuilderReturnObject,
+    type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
     status: 200,
     description: 'Successfully deleted Tag by ID.',
     example: deleteTagResponsesExamples['200'],

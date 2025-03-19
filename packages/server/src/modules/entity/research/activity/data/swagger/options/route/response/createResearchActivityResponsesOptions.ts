@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Data
 import { createResearchActivityResponsesExamples } from '../../../examples';
 
@@ -14,7 +14,7 @@ type CreateResearchActivityResponsesOptionsType = {
 export const createResearchActivityResponsesOptions: CreateResearchActivityResponsesOptionsType =
   {
     '201': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 201,
       description: 'Successfully created Research Activity.',
       example: createResearchActivityResponsesExamples['201'],

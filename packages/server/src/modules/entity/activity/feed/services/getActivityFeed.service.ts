@@ -11,11 +11,11 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   ActivityFeedFindUniqueObject,
   GetActivityFeedQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class GetActivityFeedService {
@@ -29,7 +29,7 @@ export class GetActivityFeedService {
     queryParams: GetActivityFeedQueryParams,
     activityFeedId: string,
     url: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!activityFeedId) {
         throw new BadRequestException('No Activity Feed Id provided.');

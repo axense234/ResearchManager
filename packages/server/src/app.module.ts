@@ -45,8 +45,8 @@ import { RedisModule } from './modules/db/redis/redis.module';
     ActivityFeedModule,
     ActivityDayModule,
     ActivityLogModule,
-    RedisModule,
     UserModule,
+    RedisModule,
     HealthModule,
   ],
 })

@@ -7,13 +7,13 @@ import {
   IsString,
 } from 'class-validator';
 // Types
-import { Entity } from '../general/Entity';
+import type { Entity } from '@researchmanager/shared/types';
 // Swagger
 import { ApiProperty } from '@nestjs/swagger';
 // Data
-import { returnObjectBuilderDtoOptions } from '../../data/swagger';
+import { returnObjectBuilderDtoOptions } from '../options/parameter/dto';
 
-export class ReturnObjectBuilderReturnObject {
+export class ReturnObjectBuilderReturnObjectSwaggerWrapper {
   @ApiProperty(returnObjectBuilderDtoOptions['nbHits'])
   @IsNumber()
   @IsOptional()

@@ -11,7 +11,7 @@ import {
   ActivityFeedFindManyObject,
   GetActivityFeedsQueryParams,
 } from '../types';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class GetActivityFeedsService {
@@ -24,7 +24,7 @@ export class GetActivityFeedsService {
   async getActivityFeeds(
     queryParams: GetActivityFeedsQueryParams,
     url: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const {
         userId,

@@ -1,7 +1,7 @@
 // Mock Data
 import { researchLogsMockData } from '../body';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 
 export const createResearchLogResponsesMockData: ReturnObjectBuilderReturnObject[] =
   [

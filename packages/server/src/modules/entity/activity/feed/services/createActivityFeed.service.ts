@@ -13,13 +13,13 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import {
   ActivityFeedCreateDataObject,
   ActivityFeedCreateObject,
   CreateActivityFeedQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class CreateActivityFeedService {
@@ -32,7 +32,7 @@ export class CreateActivityFeedService {
   async createActivityFeed(
     queryParams: CreateActivityFeedQueryParams,
     dto: CreateActivityFeedDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 

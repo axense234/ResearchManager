@@ -11,7 +11,7 @@ import {
   GetResearchActivitiesQueryParams,
   ResearchActivityFindManyObject,
 } from '../types';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class GetResearchActivitiesService {
@@ -24,7 +24,7 @@ export class GetResearchActivitiesService {
   async getResearchActivities(
     queryParams: GetResearchActivitiesQueryParams,
     url: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const {
         userId,

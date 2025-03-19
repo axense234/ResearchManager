@@ -11,11 +11,11 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   DeleteResearchLogQueryParams,
   ResearchLogFindUniqueObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class DeleteResearchLogService {
@@ -28,7 +28,7 @@ export class DeleteResearchLogService {
   async deleteResearchLog(
     queryParams: DeleteResearchLogQueryParams,
     researchLogId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchLogId) {
         throw new BadRequestException('Please provide a Research Log Id!');

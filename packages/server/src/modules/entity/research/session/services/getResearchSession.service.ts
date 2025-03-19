@@ -11,11 +11,11 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   GetResearchSessionQueryParams,
   ResearchSessionFindUniqueObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class GetResearchSessionService {
@@ -29,7 +29,7 @@ export class GetResearchSessionService {
     queryParams: GetResearchSessionQueryParams,
     researchSessionId: string,
     url: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchSessionId) {
         throw new BadRequestException('Please provide a Research Session Id!');

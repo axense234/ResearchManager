@@ -13,12 +13,12 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Dtos
 import type { UpdateResearchPhaseDto } from '@researchmanager/shared/types';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   ResearchPhaseUpdateDataObject,
   ResearchPhaseUpdateObject,
   UpdateResearchPhaseQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class UpdateResearchPhaseService {
@@ -32,7 +32,7 @@ export class UpdateResearchPhaseService {
     queryParams: UpdateResearchPhaseQueryParams,
     dto: UpdateResearchPhaseDto,
     researchPhaseId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchPhaseId) {
         throw new BadRequestException('No Research Activity Id provided.');

@@ -1,11 +1,11 @@
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
-import { logOutResponsesMockData } from '../../../mock';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Mock
+import { logOutResponsesMockData } from '../../../mock';
 
 type LogOutResponsesExamplesType = {
-  '200': ReturnObjectBuilderReturnObject;
-  '400': ReturnObjectBuilderReturnObject;
+  '200': ReturnObjectBuilderReturnObjectSwaggerWrapper;
+  '400': ReturnObjectBuilderReturnObjectSwaggerWrapper;
 };
 
 export const logOutResponsesExamples: LogOutResponsesExamplesType = {

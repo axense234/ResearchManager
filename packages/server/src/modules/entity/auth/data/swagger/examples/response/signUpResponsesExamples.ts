@@ -1,6 +1,6 @@
 // Types
 import { User } from '@prisma/client';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Data
 import {
   signUpResponsesErrorMockData,
@@ -14,8 +14,8 @@ type SignUpResponsesExamplesType = {
 };
 
 type SignUpResponsesErrorExamplesType = {
-  '400': ReturnObjectBuilderReturnObject;
-  '403': ReturnObjectBuilderReturnObject;
+  '400': ReturnObjectBuilderReturnObjectSwaggerWrapper;
+  '403': ReturnObjectBuilderReturnObjectSwaggerWrapper;
 };
 
 export const signUpResponsesExamples: SignUpResponsesExamplesType = {

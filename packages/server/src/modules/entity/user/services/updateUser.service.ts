@@ -5,8 +5,6 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-// Dtos
-import type { UpdateUserDto } from '@researchmanager/shared/types';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
@@ -15,13 +13,14 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import type { UpdateUserDto } from '@researchmanager/shared/types';
 import {
   UpdateUserQueryParams,
   UserUpdateDataObject,
   UserUpdateObject,
   UserWhereUniqueObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class UpdateUserService {
@@ -35,7 +34,7 @@ export class UpdateUserService {
     queryParams: UpdateUserQueryParams,
     dto: UpdateUserDto,
     uniqueIdentifier: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!uniqueIdentifier) {
         throw new BadRequestException('No unique identifier provided.');

@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 // Types
 import { ReturnObjectBuilderParams } from '../types/return/ReturnObjectBuilderParams';
-import { ReturnObjectBuilderReturnObject } from '../types';
+import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 // Prisma
 import { User } from '@prisma/client';
 // Status Codes

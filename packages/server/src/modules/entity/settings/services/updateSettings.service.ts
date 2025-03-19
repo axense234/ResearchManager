@@ -15,12 +15,12 @@ import type { UpdateSettingsDto } from '@researchmanager/shared/types';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   SettingsUpdateDataObject,
   SettingsUpdateObject,
   UpdateSettingsQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class UpdateSettingsService {
@@ -34,7 +34,7 @@ export class UpdateSettingsService {
     queryParams: UpdateSettingsQueryParams,
     dto: UpdateSettingsDto,
     settingsId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!settingsId) {
         throw new BadRequestException('No Settings Id provided.');

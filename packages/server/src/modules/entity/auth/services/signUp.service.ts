@@ -17,10 +17,10 @@ import { SignTokenService } from './signToken.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import { SignUpQueryParams } from '../types';
 import { UserCreateDataObject } from '../types/object/UserCreateDataObject';
 import { UserCreateObject } from '../types/object/UserCreateObject';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class SignUpService {
@@ -34,7 +34,7 @@ export class SignUpService {
   async signUp(
     queryParams: SignUpQueryParams,
     dto: SignUpDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const {
         includeValues,

@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { deleteResearchSessionResponsesExamples } from '../../../examples';
 
@@ -15,7 +15,7 @@ type DeleteResearchSessionResponsesOptionsType = {
 export const deleteResearchSessionResponsesOptions: DeleteResearchSessionResponsesOptionsType =
   {
     '200': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 200,
       description: 'Successfully deleted Research Session by ID.',
       example: deleteResearchSessionResponsesExamples['200'],

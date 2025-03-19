@@ -9,12 +9,12 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Dtos
 import type { CreateResearchSessionDto } from '@researchmanager/shared/types';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   CreateResearchSessionQueryParams,
   ResearchSessionCreateDataObject,
   ResearchSessionCreateObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class CreateResearchSessionService {
@@ -27,7 +27,7 @@ export class CreateResearchSessionService {
   async createResearchSession(
     queryParams: CreateResearchSessionQueryParams,
     dto: CreateResearchSessionDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 

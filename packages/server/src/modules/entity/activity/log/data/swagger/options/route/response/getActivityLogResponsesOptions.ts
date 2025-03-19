@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { getActivityLogResponsesExamples } from '../../../examples';
 
@@ -15,7 +15,7 @@ type GetActivityLogResponsesOptionsType = {
 export const getActivityLogResponsesOptions: GetActivityLogResponsesOptionsType =
   {
     '200': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 200,
       description: 'Successfully fetched Activity Log by ID.',
       example: getActivityLogResponsesExamples['200'],

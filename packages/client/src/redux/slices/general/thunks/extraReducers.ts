@@ -15,6 +15,12 @@ import {
   getProfileJWTPending,
   getProfileJWTRejected,
 } from "./getProfileJWT";
+import {
+  signUpUser,
+  signUpUserFulfilled,
+  signUpUserPending,
+  signUpUserRejected,
+} from "./signUpUser";
 
 export const generalSliceExtraReducers: (
   builder: ActionReducerMapBuilder<GeneralSliceInitialStateType>,
@@ -25,5 +31,8 @@ export const generalSliceExtraReducers: (
     .addCase(logOutUser.rejected, logOutUserRejected)
     .addCase(getProfileJWT.pending, getProfileJWTPending)
     .addCase(getProfileJWT.fulfilled, getProfileJWTFulfilled)
-    .addCase(getProfileJWT.rejected, getProfileJWTRejected);
+    .addCase(getProfileJWT.rejected, getProfileJWTRejected)
+    .addCase(signUpUser.pending, signUpUserPending)
+    .addCase(signUpUser.fulfilled, signUpUserFulfilled)
+    .addCase(signUpUser.rejected, signUpUserRejected);
 };

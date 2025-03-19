@@ -14,12 +14,12 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Dto
 import type { CreateSettingsDto } from '@researchmanager/shared/types';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   CreateSettingsQueryParams,
   SettingsCreateDataObject,
   SettingsCreateObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class CreateSettingsService {
@@ -32,7 +32,7 @@ export class CreateSettingsService {
   async createSettings(
     queryParams: CreateSettingsQueryParams,
     dto: CreateSettingsDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 

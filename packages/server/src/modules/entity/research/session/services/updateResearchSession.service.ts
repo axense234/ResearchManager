@@ -13,12 +13,12 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Dtos
 import type { UpdateResearchSessionDto } from '@researchmanager/shared/types';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   ResearchSessionUpdateDataObject,
   ResearchSessionUpdateObject,
   UpdateResearchSessionQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class UpdateResearchSessionService {
@@ -32,7 +32,7 @@ export class UpdateResearchSessionService {
     queryParams: UpdateResearchSessionQueryParams,
     dto: UpdateResearchSessionDto,
     researchSessionId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchSessionId) {
         throw new BadRequestException('No Research Session Id provided.');

@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { deleteSettingsResponsesExamples } from '../../../examples';
 
@@ -15,7 +15,7 @@ type DeleteSettingsResponsesOptionsType = {
 export const deleteSettingsResponsesOptions: DeleteSettingsResponsesOptionsType =
   {
     '200': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 200,
       description: 'Successfully deleted Settings by ID.',
       example: deleteSettingsResponsesExamples['200'],

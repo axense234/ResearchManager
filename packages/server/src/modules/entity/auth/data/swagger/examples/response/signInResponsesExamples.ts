@@ -1,6 +1,6 @@
 // Types
 import { User } from '@prisma/client';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Swagger
 import { ApiResponseExamples } from '@nestjs/swagger';
 // Data
@@ -14,9 +14,9 @@ type SignInResponsesExamplesType = {
 };
 
 type SignInResponsesErrorExamplesType = {
-  '400': ReturnObjectBuilderReturnObject;
-  '401': ReturnObjectBuilderReturnObject;
-  '404': ReturnObjectBuilderReturnObject;
+  '400': ReturnObjectBuilderReturnObjectSwaggerWrapper;
+  '401': ReturnObjectBuilderReturnObjectSwaggerWrapper;
+  '404': ReturnObjectBuilderReturnObjectSwaggerWrapper;
 };
 
 export const signInResponsesExamples: SignInResponsesExamplesType = {

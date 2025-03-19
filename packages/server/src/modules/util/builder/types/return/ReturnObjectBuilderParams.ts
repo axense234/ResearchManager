@@ -1,7 +1,7 @@
 // Prisma
 import { IsJWT, IsNumber, IsOptional, IsString } from 'class-validator';
 // Types
-import { Entity } from '../general/Entity';
+import type { Entity } from '@researchmanager/shared/types';
 import { ActionType } from '../general/ActionType';
 import { EntityType } from '../general/EntityType';
 

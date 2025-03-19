@@ -11,11 +11,11 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   ActivityLogFindUniqueObject,
   DeleteActivityLogQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class DeleteActivityLogService {
@@ -28,7 +28,7 @@ export class DeleteActivityLogService {
   async deleteActivityLog(
     queryParams: DeleteActivityLogQueryParams,
     activityLogId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!activityLogId) {
         throw new BadRequestException('No Activity Log Id provided.');

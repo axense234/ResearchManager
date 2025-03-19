@@ -11,11 +11,11 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   DeleteResearchSessionQueryParams,
   ResearchSessionFindUniqueObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class DeleteResearchSessionService {
@@ -28,7 +28,7 @@ export class DeleteResearchSessionService {
   async deleteResearchSession(
     queryParams: DeleteResearchSessionQueryParams,
     researchSessionId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchSessionId) {
         throw new BadRequestException('No Research Session Id provided.');

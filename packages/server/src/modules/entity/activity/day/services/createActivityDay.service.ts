@@ -9,12 +9,12 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   ActivityDayCreateDataObject,
   ActivityDayCreateObject,
   CreateActivityDayQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class CreateActivityDayService {
@@ -27,7 +27,7 @@ export class CreateActivityDayService {
   async createActivityDay(
     queryParams: CreateActivityDayQueryParams,
     dto: CreateActivityDayDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 

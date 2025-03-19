@@ -18,6 +18,7 @@ import {
   ActivityDayUpdateObject,
   UpdateActivityDayQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class UpdateActivityDayService {
@@ -31,7 +32,7 @@ export class UpdateActivityDayService {
     queryParams: UpdateActivityDayQueryParams,
     dto: UpdateActivityDayDto,
     activityDayId: string,
-  ) {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!activityDayId) {
         throw new BadRequestException('No Activity Day Id provided.');

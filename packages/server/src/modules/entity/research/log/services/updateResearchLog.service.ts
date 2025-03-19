@@ -13,12 +13,12 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Dtos
 import type { UpdateResearchLogDto } from '@researchmanager/shared/types';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   ResearchLogUpdateDataObject,
   ResearchLogUpdateObject,
   UpdateResearchLogQueryParams,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class UpdateResearchLogService {
@@ -32,7 +32,7 @@ export class UpdateResearchLogService {
     queryParams: UpdateResearchLogQueryParams,
     dto: UpdateResearchLogDto,
     researchLogId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchLogId) {
         throw new BadRequestException('Please provide a Research Log Id!');

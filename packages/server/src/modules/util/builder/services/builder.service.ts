@@ -20,8 +20,8 @@ import {
   QueryObjectBuilderParams,
   QueryObjectBuilderReturnObject,
   ReturnObjectBuilderParams,
-  ReturnObjectBuilderReturnObject,
 } from '../types';
+import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 
 @Injectable()
 export class ObjectBuilderService {

@@ -11,6 +11,7 @@ import {
   GetResearchSessionsQueryParams,
   ResearchSessionFindManyObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class GetResearchSessionsService {
@@ -23,7 +24,7 @@ export class GetResearchSessionsService {
   async getResearchSessions(
     queryParams: GetResearchSessionsQueryParams,
     url: string,
-  ) {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const {
         researchPhaseId,

@@ -11,11 +11,11 @@ import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import {
   GetResearchLogQueryParams,
   ResearchLogFindUniqueObject,
 } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class GetResearchLogService {
@@ -29,7 +29,7 @@ export class GetResearchLogService {
     queryParams: GetResearchLogQueryParams,
     researchLogId: string,
     url: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!researchLogId) {
         throw new BadRequestException('No Research Log Id provided!');

@@ -16,8 +16,8 @@ import { SignTokenService } from './signToken.service';
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
 import { SignInQueryParams } from '../types/params/SignInQueryParams';
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import { UserFindUniqueObject, UserWhereUniqueObject } from '../../user/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class SignInService {
@@ -30,7 +30,7 @@ export class SignInService {
   async signIn(
     queryParams: SignInQueryParams,
     dto: SignInDto,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       const { includeValues, selectValues, chosenOptionType } = queryParams;
 

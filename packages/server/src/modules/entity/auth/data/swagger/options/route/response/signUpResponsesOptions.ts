@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Data
 import {
   signUpResponsesErrorExamples,
@@ -16,7 +16,7 @@ type SignUpResponsesOptionsType = {
 
 export const signUpResponsesOptions: SignUpResponsesOptionsType = {
   '201': {
-    type: ReturnObjectBuilderReturnObject,
+    type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
     status: 201,
     description: 'Successfully created an User.',
     examples: signUpResponsesExamples,

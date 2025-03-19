@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { getManySettingsResponsesExamples } from '../../../examples';
 
@@ -14,7 +14,7 @@ type GetManySettingsResponsesOptionsType = {
 export const getManySettingsResponsesOptions: GetManySettingsResponsesOptionsType =
   {
     '200': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 200,
       description: 'Successfully fetched many Settings.',
       example: getManySettingsResponsesExamples['200'],

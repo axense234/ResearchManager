@@ -11,8 +11,8 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import { DeleteTagQueryParams, TagFindUniqueObject } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class DeleteTagService {
@@ -25,7 +25,7 @@ export class DeleteTagService {
   async deleteTag(
     queryParams: DeleteTagQueryParams,
     tagId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!tagId) {
         throw new BadRequestException('No Tag Id provided.');

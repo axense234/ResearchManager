@@ -1,5 +1,5 @@
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 import { User } from '@prisma/client';
 // Data
 import { signUpMockData } from '../body/signUpMock';

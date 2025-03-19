@@ -12,6 +12,7 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
 import { DeleteSettingsQueryParams, SettingsFindUniqueObject } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class DeleteSettingsService {
@@ -24,7 +25,7 @@ export class DeleteSettingsService {
   async deleteSettings(
     queryParams: DeleteSettingsQueryParams,
     settingsId: string,
-  ) {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!settingsId) {
         throw new BadRequestException('No Settings Id provided.');

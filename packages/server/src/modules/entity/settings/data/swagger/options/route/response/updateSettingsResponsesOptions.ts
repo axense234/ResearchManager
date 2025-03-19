@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseOptions } from '@nestjs/swagger';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Examples
 import { updateSettingsResponsesExamples } from '../../../examples';
 
@@ -15,7 +15,7 @@ type UpdateSettingsResponsesOptionsType = {
 export const updateSettingsResponsesOptions: UpdateSettingsResponsesOptionsType =
   {
     '200': {
-      type: ReturnObjectBuilderReturnObject,
+      type: ReturnObjectBuilderReturnObjectSwaggerWrapper,
       status: 200,
       description: 'Successfully updated Settings by ID.',
       example: updateSettingsResponsesExamples['200'],

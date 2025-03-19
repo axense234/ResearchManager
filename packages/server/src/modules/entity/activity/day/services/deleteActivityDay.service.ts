@@ -11,9 +11,9 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
 import { DeleteActivityDayQueryParams } from '../types/params/DeleteActivityDayQueryParams';
 import { ActivityDayFindUniqueObject } from '../types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 
 @Injectable()
 export class DeleteActivityDayService {
@@ -26,7 +26,7 @@ export class DeleteActivityDayService {
   async deleteActivityDay(
     queryParams: DeleteActivityDayQueryParams,
     activityDayId: string,
-  ): Promise<ReturnObjectBuilderReturnObject> {
+  ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
       if (!activityDayId) {
         throw new BadRequestException('No Activity Day Id provided.');

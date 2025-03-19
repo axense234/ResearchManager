@@ -1,11 +1,11 @@
 // Types
-import { ReturnObjectBuilderReturnObject } from 'src/modules/util/builder/types';
+import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
 // Mock Data
 import { getProfileResponsesMockData } from '../../../mock';
 
 type GetProfileResponsesExamplesType = {
-  '200': ReturnObjectBuilderReturnObject;
-  '401': ReturnObjectBuilderReturnObject;
+  '200': ReturnObjectBuilderReturnObjectSwaggerWrapper;
+  '401': ReturnObjectBuilderReturnObjectSwaggerWrapper;
 };
 
 export const getProfileResponsesExamples: GetProfileResponsesExamplesType = {
