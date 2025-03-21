@@ -1,4 +1,5 @@
-import { EntityTypePlural } from '../../types';
+// Types
+import type { EntityTypePlural } from '@researchmanager/shared/types';
 
 export const entityValues: EntityTypePlural[] = [
   'researchActivities',

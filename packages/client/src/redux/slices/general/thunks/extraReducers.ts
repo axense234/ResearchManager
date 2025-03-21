@@ -21,6 +21,12 @@ import {
   signUpUserPending,
   signUpUserRejected,
 } from "./signUpUser";
+import {
+  uploadImageToCloudinary,
+  uploadImageToCloudinaryFulfilled,
+  uploadImageToCloudinaryPending,
+  uploadImageToCloudinaryRejected,
+} from "./uploadImageToCloudinary";
 
 export const generalSliceExtraReducers: (
   builder: ActionReducerMapBuilder<GeneralSliceInitialStateType>,
@@ -34,5 +40,11 @@ export const generalSliceExtraReducers: (
     .addCase(getProfileJWT.rejected, getProfileJWTRejected)
     .addCase(signUpUser.pending, signUpUserPending)
     .addCase(signUpUser.fulfilled, signUpUserFulfilled)
-    .addCase(signUpUser.rejected, signUpUserRejected);
+    .addCase(signUpUser.rejected, signUpUserRejected)
+    .addCase(uploadImageToCloudinary.pending, uploadImageToCloudinaryPending)
+    .addCase(
+      uploadImageToCloudinary.fulfilled,
+      uploadImageToCloudinaryFulfilled,
+    )
+    .addCase(uploadImageToCloudinary.rejected, uploadImageToCloudinaryRejected);
 };

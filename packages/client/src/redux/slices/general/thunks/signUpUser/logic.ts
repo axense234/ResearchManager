@@ -5,15 +5,27 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // Axios
 import { AxiosError } from "axios";
 import { axiosInstance } from "@/utils";
-// Dtos
-import { SignUpDto } from "@researchmanager/shared/types";
+// Types
+import type {
+  ReturnObjectBuilderReturnObject,
+  SignUpDto,
+} from "@researchmanager/shared/types";
 
 export const signUpUser = createAsyncThunk<User | AxiosError, SignUpDto>(
   "general/signUpUser",
   async (signUpUserDto) => {
     try {
-      const { data } = await axiosInstance.post("/auth/signup", signUpUserDto);
-      return user;
+      const res = (await axiosInstance.post(
+        "/auth/signup",
+        signUpUserDto,
+      )) as ReturnObjectBuilderReturnObject;
+
+      localStorage.setItem(
+        process.env.JWT_KEY_LABEL || "rm-jwt",
+        res.access_token as string,
+      );
+
+      return res.payload as User;
     } catch (error) {
       console.log(error);
       return error as AxiosError;

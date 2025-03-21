@@ -1,0 +1,7 @@
+@use "../../../abstracts" as *;
+
+.logoContainer {
+  @include flexCenter(row);
+  gap: 0.5rem;
+  background-color: none;
+}

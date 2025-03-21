@@ -10,10 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@researchmanager/shared": "^1.0.0",
     "@netlify/plugin-nextjs": "^5.8.1",
     "@prisma/client": "^5.22.0",
     "@reduxjs/toolkit": "^2.3.0",
+    "@researchmanager/shared": "^1.0.0",
     "axios": "^1.7.7",
     "i18next": "^23.16.7",
     "next": "^15.2.2",
@@ -30,7 +30,8 @@
     "react-intersection-observer": "^9.13.1",
     "react-onesignal": "^3.0.1",
     "react-redux": "^9.1.2",
-    "react-spinners": "^0.14.1"
+    "react-spinners": "^0.14.1",
+    "sass-migrator": "^2.3.1"
   },
   "devDependencies": {
     "@types/node": "^22.9.1",

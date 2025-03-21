@@ -2,7 +2,8 @@
 import { IsArray } from 'class-validator';
 // Types
 import { DataObjectBuilderAllowedConnectValue } from '../data';
-import { EntityType, EntityTypePlural } from '../general';
+import { EntityType } from '../general';
+import type { EntityTypePlural } from '@researchmanager/shared/types';
 
 export class ChooseAllowedBuilderValuesReturnObject {
   @IsArray()

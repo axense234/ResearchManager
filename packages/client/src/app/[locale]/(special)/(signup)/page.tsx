@@ -1,9 +1,8 @@
+// Components
+import AuthPageTemplate from "@/components/shared/template/auth/AuthPageTemplate";
+
 const Signup = () => {
-  return (
-    <section className="authContainer">
-      <h1>Signup</h1>
-    </section>
-  );
+  return <AuthPageTemplate type="signup" />;
 };
 
 export default Signup;

@@ -1,6 +1,7 @@
 // Types
-import { ActionType, EntityTypePlural } from 'src/modules/util/builder/types';
+import { ActionType } from 'src/modules/util/builder/types';
 import DeleteCacheSpecifiers from './DeleteCacheSpecifiers';
+import type { EntityTypePlural } from '@researchmanager/shared/types';
 
 type DeleteCacheShallowType = {
   base: EntityTypePlural;

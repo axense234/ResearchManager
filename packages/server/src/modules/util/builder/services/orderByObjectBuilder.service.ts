@@ -2,11 +2,11 @@
 import { Injectable } from '@nestjs/common';
 // Types
 import {
-  EntityTypePlural,
   OrderByObjectBuilderOrderByObject,
   OrderByObjectBuilderParams,
   OrderByObjectBuilderReturnObject,
 } from '../types';
+import type { EntityTypePlural } from '@researchmanager/shared/types';
 // Data
 import { entityValues } from '../data';
 // Util Service

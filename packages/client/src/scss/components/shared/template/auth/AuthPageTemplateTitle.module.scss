@@ -1,0 +1,9 @@
+@use "../../../../abstracts" as *;
+
+.authPageTitle {
+  @include flexCenter(row);
+  border: 2px solid white;
+  justify-content: space-between;
+
+  width: 100%;
+}

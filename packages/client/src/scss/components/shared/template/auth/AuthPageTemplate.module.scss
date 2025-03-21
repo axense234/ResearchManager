@@ -1,0 +1,30 @@
+@use "../../../../abstracts" as *;
+
+.authPageContainer {
+  @include flexCenter(row);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  background-image: url("https://res.cloudinary.com/birthdayreminder/image/upload/v1732365146/Research%20Manager/users/backgroundImages/signupwallpaper_der2zw.jpg");
+  object-fit: cover;
+  background-size: cover;
+}
+
+.authPageForm {
+  @include flexCenter(column);
+  justify-content: flex-start;
+
+  border-radius: 0.5rem;
+
+  background-color: getColorWithOpacity("main-dark-blue", 0.8);
+
+  min-width: 30%;
+  width: 30rem;
+  height: 80%;
+
+  padding: 3rem;
+  padding-top: 1.5rem;
+}
