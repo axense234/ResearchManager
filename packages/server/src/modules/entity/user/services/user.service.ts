@@ -9,7 +9,7 @@ import { GetUsersService } from './getUsers.service';
 // Prisma
 import { User } from '@prisma/client';
 // Dtos
-import type { UpdateUserDto } from '@researchmanager/shared/types';
+import { UpdateUserDto } from '@researchmanager/shared/types';
 // Types
 import {
   DeleteUserQueryParams,

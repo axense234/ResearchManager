@@ -11,7 +11,7 @@ import {
   Req,
 } from '@nestjs/common';
 // Dtos
-import type {
+import {
   CreateActivityFeedDto,
   UpdateActivityFeedDto,
 } from '@researchmanager/shared/types';

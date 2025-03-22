@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
   reactStrictMode: false,
+  devIndicators: false,
   distDir: "build",
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development",

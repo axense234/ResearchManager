@@ -7,7 +7,7 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Dtos
-import type { CreateResearchLogDto } from '@researchmanager/shared/types';
+import { CreateResearchLogDto } from '@researchmanager/shared/types';
 // Types
 import {
   CreateResearchLogQueryParams,

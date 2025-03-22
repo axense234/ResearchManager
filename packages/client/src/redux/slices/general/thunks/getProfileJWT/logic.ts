@@ -6,7 +6,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "@/utils";
 // Types
 import { User } from "@prisma/client";
-import type { ReturnObjectBuilderReturnObject } from "@researchmanager/shared/types";
+import { ReturnObjectBuilderReturnObject } from "@researchmanager/shared/types";
 
 export const getProfileJWT = createAsyncThunk<User | AxiosError>(
   "general/getProfileJWT",

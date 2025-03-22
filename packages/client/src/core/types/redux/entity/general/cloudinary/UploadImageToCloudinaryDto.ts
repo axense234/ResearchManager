@@ -1,5 +1,5 @@
 // Types
-import type { EntityTypePlural } from "@researchmanager/shared/types";
+import { EntityTypePlural } from "@researchmanager/shared/types";
 import { UploadImageToCloudinaryType } from "./UploadImageToCloudinaryType";
 
 export type UploadImageToCloudinaryDto = {

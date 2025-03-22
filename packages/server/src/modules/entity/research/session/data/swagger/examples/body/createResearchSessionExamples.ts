@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseExamples } from '@nestjs/swagger';
 // Mock Data
-import { createResearchSessionMockData } from '../../../mock/body/createResearchSessionMock';
+import { createResearchSessionMockData } from '@researchmanager/shared/mock';
 
 type CreateResearchSessionResponsesExamplesType = {
   [key: string]: ApiResponseExamples;

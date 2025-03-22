@@ -13,7 +13,7 @@ import {
 // Services
 import { ResearchPhaseService } from './services/phase.service';
 // Dto
-import type {
+import {
   CreateResearchPhaseDto,
   UpdateResearchPhaseDto,
 } from '@researchmanager/shared/types';

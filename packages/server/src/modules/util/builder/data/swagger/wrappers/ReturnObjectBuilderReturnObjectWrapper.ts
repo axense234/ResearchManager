@@ -7,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 // Types
-import type { Entity } from '@researchmanager/shared/types';
+import { Entity } from '@researchmanager/shared/types';
 // Swagger
 import { ApiProperty } from '@nestjs/swagger';
 // Data

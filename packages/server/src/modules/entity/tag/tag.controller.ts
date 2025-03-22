@@ -11,7 +11,7 @@ import {
   Req,
 } from '@nestjs/common';
 // Dtos
-import type { CreateTagDto, UpdateTagDto } from '@researchmanager/shared/types';
+import { CreateTagDto, UpdateTagDto } from '@researchmanager/shared/types';
 // Services
 import { TagService } from './services/tag.service';
 // Types

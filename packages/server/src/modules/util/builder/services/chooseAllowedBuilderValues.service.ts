@@ -6,7 +6,7 @@ import {
   DataObjectBuilderAllowedConnectValue,
   EntityType,
 } from '../types';
-import type { EntityTypePlural } from '@researchmanager/shared/types';
+import { EntityTypePlural } from '@researchmanager/shared/types';
 // Data
 import {
   researchActivitiesAllowedSearchByKeyValues,

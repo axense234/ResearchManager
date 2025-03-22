@@ -1,0 +1,17 @@
+@use "../../../../../abstracts" as *;
+
+.formContainer {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  position: absolute;
+  left: 0;
+  gap: 3rem;
+
+  background-color: getColorWithOpacity("main-dark-blue", 0.9);
+
+  min-width: 35%;
+  height: 100%;
+
+  padding: 3rem;
+  padding-top: 1.5rem;
+}

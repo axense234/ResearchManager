@@ -7,7 +7,7 @@ import { CreateResearchActivityService } from './createResearchActivity.service'
 import { UpdateResearchActivityService } from './updateResearchActivity.service';
 import { DeleteResearchActivityService } from './deleteResearchActivity.service';
 // Dtos
-import type {
+import {
   CreateResearchActivityDto,
   UpdateResearchActivityDto,
 } from '@researchmanager/shared/types';

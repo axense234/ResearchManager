@@ -13,7 +13,7 @@ import {
 // Services
 import { ResearchLogService } from './services/log.service';
 // Dtos
-import type {
+import {
   CreateResearchLogDto,
   UpdateResearchLogDto,
 } from '@researchmanager/shared/types';

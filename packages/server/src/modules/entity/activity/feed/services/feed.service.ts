@@ -7,7 +7,7 @@ import { CreateActivityFeedService } from './createActivityFeed.service';
 import { UpdateActivityFeedService } from './updateActivityFeed.service';
 import { DeleteActivityFeedService } from './deleteActivityFeed.service';
 // Dtos
-import type {
+import {
   CreateActivityFeedDto,
   UpdateActivityFeedDto,
 } from '@researchmanager/shared/types';

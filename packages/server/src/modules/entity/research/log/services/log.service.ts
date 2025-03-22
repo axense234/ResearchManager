@@ -15,7 +15,7 @@ import {
   UpdateResearchLogQueryParams,
 } from '../types';
 // Dtos
-import type {
+import {
   CreateResearchLogDto,
   UpdateResearchLogDto,
 } from '@researchmanager/shared/types';

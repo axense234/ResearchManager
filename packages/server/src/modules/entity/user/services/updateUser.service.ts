@@ -13,7 +13,7 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import type { UpdateUserDto } from '@researchmanager/shared/types';
+import { UpdateUserDto } from '@researchmanager/shared/types';
 import {
   UpdateUserQueryParams,
   UserUpdateDataObject,

@@ -4,4 +4,11 @@
   @include flexCenter(row);
   gap: 0.5rem;
   background-color: none;
+  border-radius: 0.5rem;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+  }
 }

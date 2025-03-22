@@ -1,7 +1,7 @@
 // Swagger
 import { ExamplesObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 // Mock Data
-import { signUpMockData } from '../../../mock';
+import { signUpMockData } from '@researchmanager/shared/mock';
 
 export const signUpExamples: ExamplesObject = {
   John: {

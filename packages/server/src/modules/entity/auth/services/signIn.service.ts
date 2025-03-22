@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 // Dtos
-import type { SignInDto } from '@researchmanager/shared/types';
+import { SignInDto } from '@researchmanager/shared/types';
 // Argon
 import * as argon from 'argon2';
 // Prisma

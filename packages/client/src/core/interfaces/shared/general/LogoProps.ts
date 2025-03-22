@@ -1,4 +1,5 @@
 export interface LogoProps {
   clickable: boolean;
-  dimensions: number;
+  width: number;
+  type: "light" | "dark";
 }

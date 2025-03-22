@@ -6,7 +6,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { axiosInstance } from "@/utils";
 // Types
-import type {
+import {
   ReturnObjectBuilderReturnObject,
   SignInDto,
 } from "@researchmanager/shared/types";

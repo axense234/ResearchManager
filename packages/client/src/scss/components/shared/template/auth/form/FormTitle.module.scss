@@ -1,0 +1,20 @@
+@use "../../../../../abstracts" as *;
+
+.formTitleContainer {
+  @include flexCenter(column);
+  align-items: flex-end;
+
+  width: 100%;
+}
+
+.formTitleLogo {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1rem;
+
+  h6 {
+    @include heading("h6", "laptop", "white");
+    letter-spacing: 1.5px;
+  }
+}

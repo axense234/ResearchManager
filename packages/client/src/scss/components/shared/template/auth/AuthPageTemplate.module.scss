@@ -12,19 +12,3 @@
   object-fit: cover;
   background-size: cover;
 }
-
-.authPageForm {
-  @include flexCenter(column);
-  justify-content: flex-start;
-
-  border-radius: 0.5rem;
-
-  background-color: getColorWithOpacity("main-dark-blue", 0.8);
-
-  min-width: 30%;
-  width: 30rem;
-  height: 80%;
-
-  padding: 3rem;
-  padding-top: 1.5rem;
-}

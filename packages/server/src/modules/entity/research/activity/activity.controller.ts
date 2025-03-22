@@ -11,7 +11,7 @@ import {
   Req,
 } from '@nestjs/common';
 // Dto
-import type {
+import {
   CreateResearchActivityDto,
   UpdateResearchActivityDto,
 } from '@researchmanager/shared/types';

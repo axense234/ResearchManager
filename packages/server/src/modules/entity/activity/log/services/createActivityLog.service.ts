@@ -3,7 +3,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 // DB Services
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Dtos
-import type { CreateActivityLogDto } from '@researchmanager/shared/types';
+import { CreateActivityLogDto } from '@researchmanager/shared/types';
 // Redis
 import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder

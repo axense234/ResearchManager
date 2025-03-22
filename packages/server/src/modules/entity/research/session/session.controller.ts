@@ -13,7 +13,7 @@ import {
 // Services
 import { ResearchSessionService } from './services/session.service';
 // Dtos
-import type {
+import {
   CreateResearchSessionDto,
   UpdateResearchSessionDto,
 } from '@researchmanager/shared/types';

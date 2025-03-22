@@ -1,7 +1,7 @@
 // Types
-import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
+import { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 // Examples
-import { activityDaysMockData } from '../body';
+import { activityDaysMockData } from '@researchmanager/shared/mock';
 
 export const deleteActivityDayResponsesMockData: ReturnObjectBuilderReturnObject[] =
   [

@@ -7,7 +7,7 @@ import { GetActivityDayService } from './getActivityDay.service';
 import { GetActivityDaysService } from './getActivityDays.service';
 import { UpdateActivityDayService } from './updateActivityDay.service';
 // Dtos
-import type {
+import {
   CreateActivityDayDto,
   UpdateActivityDayDto,
 } from '@researchmanager/shared/types';

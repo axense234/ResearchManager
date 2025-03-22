@@ -15,7 +15,7 @@ import {
   UpdateSettingsQueryParams,
 } from '../types';
 // Dtos
-import type {
+import {
   CreateSettingsDto,
   UpdateSettingsDto,
 } from '@researchmanager/shared/types';

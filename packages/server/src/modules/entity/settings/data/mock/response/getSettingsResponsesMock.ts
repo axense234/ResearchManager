@@ -1,7 +1,7 @@
 // Types
-import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
+import { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 // Mock Data
-import { settingsMockData } from '../body';
+import { settingsMockData } from '@researchmanager/shared/mock';
 
 export const getSettingsResponsesMockData: ReturnObjectBuilderReturnObject[] = [
   {

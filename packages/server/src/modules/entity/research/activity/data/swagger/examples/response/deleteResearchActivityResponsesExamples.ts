@@ -1,5 +1,5 @@
 // Swagger
-import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
+import { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 // Mock Data
 import { deleteResearchActivityResponsesMockData } from '../../../mock';
 

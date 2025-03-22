@@ -1,7 +1,7 @@
 // Types
 import { ExamplesObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 // Mock Data
-import { updateUserMockData } from '../../../mock';
+import { updateUserMockData } from '@researchmanager/shared/mock';
 
 export const updateUserExamples: ExamplesObject = {
   John: {

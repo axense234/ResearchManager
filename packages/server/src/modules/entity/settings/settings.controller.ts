@@ -13,7 +13,7 @@ import {
 // Services
 import { SettingsService } from './services/settings.service';
 // Dtos
-import type {
+import {
   CreateSettingsDto,
   UpdateSettingsDto,
 } from '@researchmanager/shared/types';

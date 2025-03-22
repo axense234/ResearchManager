@@ -1,0 +1,24 @@
+@use "../functions" as *;
+@use "../variables" as *;
+
+@mixin paragraph($device, $color) {
+  font-family: "Roboto", sans-serif;
+  font-size: getFontSize("p-#{$device}");
+
+  @if $color == "black" {
+    color: getColor("main-black-100");
+  } @else if $color == "white" {
+    color: getColor("main-white");
+  }
+}
+
+@mixin heading($headingType, $device, $color) {
+  font-family: "Roboto", sans-serif;
+  font-size: getFontSize("#{$headingType}-#{$device}");
+
+  @if $color == "black" {
+    color: getColor("main-black-100");
+  } @else if $color == "white" {
+    color: getColor("main-white");
+  }
+}

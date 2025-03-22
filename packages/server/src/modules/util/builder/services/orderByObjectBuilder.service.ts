@@ -6,7 +6,7 @@ import {
   OrderByObjectBuilderParams,
   OrderByObjectBuilderReturnObject,
 } from '../types';
-import type { EntityTypePlural } from '@researchmanager/shared/types';
+import { EntityTypePlural } from '@researchmanager/shared/types';
 // Data
 import { entityValues } from '../data';
 // Util Service

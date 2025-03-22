@@ -1,8 +1,8 @@
 // Types
-import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
+import { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 import { User } from '@prisma/client';
 // Data
-import { signUpMockData } from '../body/signUpMock';
+import { signUpMockData } from '@researchmanager/shared/mock';
 
 export const signInResponsesMockData: ReturnObjectBuilderReturnObject[] = [
   {

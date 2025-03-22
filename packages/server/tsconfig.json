@@ -19,7 +19,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@shared/*": ["../shared/*"]
+      "@researchmanager/shared/*": ["../shared/*"]
     }
   },
   "include": ["src/**/*"],

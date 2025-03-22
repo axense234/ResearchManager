@@ -1,6 +1,6 @@
 // Types
 import { EntityType } from '../general/EntityType';
-import type { EntityTypePlural } from '@researchmanager/shared/types';
+import { EntityTypePlural } from '@researchmanager/shared/types';
 
 export class DataObjectBuilderAllowedConnectValue {
   entityType: EntityType | EntityTypePlural;

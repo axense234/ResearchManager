@@ -11,7 +11,7 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Dtos
-import type { UpdateResearchSessionDto } from '@researchmanager/shared/types';
+import { UpdateResearchSessionDto } from '@researchmanager/shared/types';
 // Types
 import {
   ResearchSessionUpdateDataObject,

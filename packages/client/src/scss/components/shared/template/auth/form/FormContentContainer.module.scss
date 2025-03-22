@@ -1,0 +1,11 @@
+@use "../../../../../abstracts" as *;
+
+.formContentContainer {
+  @include flexCenter(column);
+  width: 100%;
+
+  h4 {
+    @include heading("h4", "laptop", "white");
+    letter-spacing: 2.4px;
+  }
+}

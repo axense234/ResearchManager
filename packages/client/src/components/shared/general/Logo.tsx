@@ -10,20 +10,18 @@ import Image from "next/image";
 // Data
 import { homePageUrl, logoImageUrl } from "@/data/static";
 
-const Logo: FC<LogoProps> = ({ clickable, dimensions }) => {
+const Logo: FC<LogoProps> = ({ clickable, width, type }) => {
   return (
     <Link
       href={clickable ? (homePageUrl as any) : "/"}
       className={logoStyles.logoContainer}
-      style={{ width: dimensions, height: dimensions }}
     >
       <Image
-        src={logoImageUrl}
+        src={logoImageUrl[type]}
         alt="Logo"
-        width={dimensions || 40}
-        height={dimensions || 40}
+        width={width}
+        height={width - width / 4}
       />
-      <p>Research Manager</p>
     </Link>
   );
 };

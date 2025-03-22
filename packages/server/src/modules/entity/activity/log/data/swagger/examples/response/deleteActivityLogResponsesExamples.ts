@@ -1,5 +1,5 @@
 // Types
-import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
+import { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 // Examples
 import { deleteActivityLogResponsesMockData } from '../../../mock';
 

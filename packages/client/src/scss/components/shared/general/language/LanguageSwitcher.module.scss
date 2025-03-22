@@ -1,0 +1,29 @@
+@use "../../../../abstracts" as *;
+
+.languageSwitcherSelectContainer {
+  @include flexCenter(row);
+  position: relative;
+  width: max-content;
+  height: max-content;
+
+  > img {
+    border: 1.75px solid getColor("main-black-100");
+    border-radius: 0.25rem;
+  }
+}
+
+.languageSwitcherSelectFormControl {
+  @include flexCenter(column);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  > select {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    option {
+    }
+  }
+}

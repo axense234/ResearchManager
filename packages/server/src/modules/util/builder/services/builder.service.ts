@@ -21,7 +21,7 @@ import {
   QueryObjectBuilderReturnObject,
   ReturnObjectBuilderParams,
 } from '../types';
-import type { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
+import { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
 
 @Injectable()
 export class ObjectBuilderService {

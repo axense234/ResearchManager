@@ -1,7 +1,7 @@
 // Swagger
 import { ApiResponseExamples } from '@nestjs/swagger';
 // Mock Data
-import { updateResearchLogMockData } from '../../../mock';
+import { updateResearchLogMockData } from '@researchmanager/shared/mock';
 
 type UpdateResearchLogResponsesExamplesType = {
   [key: string]: ApiResponseExamples;
