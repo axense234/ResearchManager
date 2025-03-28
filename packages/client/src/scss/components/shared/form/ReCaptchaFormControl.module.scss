@@ -1,0 +1,7 @@
+@use "../../../abstracts" as *;
+
+.reCaptchaFormControlContainer {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  margin: 1rem 0;
+}

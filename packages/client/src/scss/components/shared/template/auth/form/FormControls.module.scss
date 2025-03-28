@@ -1,0 +1,9 @@
+@use "../../../../../abstracts" as *;
+
+.formControlsContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  align-items: flex-start;
+}

@@ -5,13 +5,13 @@ import { AuthPageTemplateProps } from "@/core/interfaces";
 import authPageTemplateStyles from "@/scss/components/shared/template/auth/AuthPageTemplate.module.scss";
 // Components
 import FormContainer from "./form/FormContainer";
-import AuthPageTemplateCarousel from "./carousel/Carousel";
+import Carousel from "./carousel/Carousel";
 
 const AuthPageTemplate: FC<AuthPageTemplateProps> = ({ type }) => {
   return (
     <section className={authPageTemplateStyles.authPageContainer}>
       <FormContainer type={type} />
-      <AuthPageTemplateCarousel />
+      <Carousel />
     </section>
   );
 };

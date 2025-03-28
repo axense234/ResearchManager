@@ -2,17 +2,17 @@
 import { FC } from "react";
 // Components
 import Logo from "@/components/shared/general/Logo";
-import AuthPageTemplateCarouselContent from "./CarouselContent";
-import AuthPageTemplateCarouselNavigation from "./CarouselNavigation";
+import CarouselContent from "./CarouselContent";
+import CarouselNavigation from "./CarouselNavigation";
 
-const AuthPageTemplateCarousel: FC = () => {
+const Carousel: FC = () => {
   return (
     <div className="authPageCarousel">
       <Logo clickable={false} type="light" width={256} />
-      <AuthPageTemplateCarouselContent />
-      <AuthPageTemplateCarouselNavigation />
+      <CarouselContent />
+      <CarouselNavigation />
     </div>
   );
 };
 
-export default AuthPageTemplateCarousel;
+export default Carousel;

@@ -1,19 +1,50 @@
 @use "./variables" as *;
+@use "sass:color";
 
 @function getColor($color) {
-  @return map-get($map: $colors, $key: $color);
+  $found: null;
+  @each $name, $value in $colors {
+    @if $name == $color {
+      $found: $value;
+    }
+  }
+
+  @if $found == null {
+    @error "Color '#{$color}' not found in $colors map";
+  }
+
+  @return $found;
 }
 
 @function getColorWithOpacity($color, $opacity) {
-  $colorValue: map-get(
-    $map: $colors,
-    $key: $color,
-  );
-  @return rgba($colorValue, $opacity);
+  $found: null;
+  @each $name, $value in $colors {
+    @if $name == $color {
+      $found: $value;
+    }
+  }
+
+  @if $found == null {
+    @error "Color '#{$color}' not found in $colors map";
+  }
+
+  @return color.change($found, $alpha: $opacity);
 }
 
 @function getFontSize($fontSize) {
-  @return map-get($map: $fontSizes, $key: $fontSize);
+  $found: null;
+
+  @each $name, $value in $fontSizes {
+    @if $name == $fontSize {
+      $found: $value;
+    }
+  }
+
+  @if $found == null {
+    @error "Font size '#{$fontSize}' not found in $fontSizes map";
+  }
+
+  @return $found;
 }
 
 @function getScreenSize($size) {

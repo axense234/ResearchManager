@@ -14,7 +14,7 @@ const generalSlice = createSlice({
   extraReducers: generalSliceExtraReducers,
 });
 
-export const { updateSignInUserDto, updateSignUpUserDto } =
+export const { updateSignInUserDto, updateSignUpUserDto, changeIsUserABot } =
   generalSlice.actions;
 
 export default generalSlice.reducer;

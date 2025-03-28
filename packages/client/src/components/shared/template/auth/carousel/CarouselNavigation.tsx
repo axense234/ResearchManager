@@ -1,8 +1,8 @@
 // Interfaces
 import { FC } from "react";
 
-const AuthPageTemplateCarouselNavigation: FC = () => {
+const CarouselNavigation: FC = () => {
   return <div>AuthPageTemplateCarouselNavigation</div>;
 };
 
-export default AuthPageTemplateCarouselNavigation;
+export default CarouselNavigation;

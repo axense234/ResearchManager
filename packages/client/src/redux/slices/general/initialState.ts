@@ -12,4 +12,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   userProfile: usersMockData[0],
   signInUserDto: signInMockData[0],
   signUpUserDto: signUpMockData[0],
+  isUserABot: true,
+  loadingSignInUser: "IDLE",
+  loadingSignUpUser: "IDLE",
 };

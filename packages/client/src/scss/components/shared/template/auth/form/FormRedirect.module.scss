@@ -1,0 +1,22 @@
+@use "../../../../../abstracts" as *;
+
+.formRedirectContainer {
+  @include flexCenter(column);
+  gap: 0.5rem;
+  margin-top: auto;
+
+  > p {
+    font-size: getFontSize("button-heading");
+    letter-spacing: 1px;
+    font-weight: 550;
+    color: getColor("main-white");
+  }
+
+  > a {
+    font-size: getFontSize("button-heading");
+    letter-spacing: 1px;
+    font-weight: 550;
+    color: getColor("main-pastel-red");
+    text-decoration: none;
+  }
+}

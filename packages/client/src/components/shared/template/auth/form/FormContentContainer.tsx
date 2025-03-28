@@ -7,9 +7,11 @@ import FormContent from "./FormContent";
 import formContentContainerStyles from "@/scss/components/shared/template/auth/form/FormContentContainer.module.scss";
 
 const FormContentContainer: FC<FormContentContainerProps> = ({ type }) => {
+  const formContentContainerTitle = type === "signup" ? "Sign Up" : "Sign In";
+
   return (
     <div className={formContentContainerStyles.formContentContainer}>
-      <h4>Sign Up</h4>
+      <h4>{formContentContainerTitle}</h4>
       <FormContent type={type} />
     </div>
   );

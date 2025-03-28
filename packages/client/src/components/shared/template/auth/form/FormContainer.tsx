@@ -13,7 +13,7 @@ const FormContainer: FC<FormContainerProps> = ({ type }) => {
     <div className={formContainerStyles.formContainer}>
       <FormTitle />
       <FormContentContainer type={type} />
-      <FormRedirect />
+      <FormRedirect type={type} />
     </div>
   );
 };

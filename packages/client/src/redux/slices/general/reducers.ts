@@ -11,6 +11,7 @@ export const generalSliceReducers = {
       ...state.signInUserDto,
       [action.payload.key]: action.payload.value,
     };
+    console.log(state.signInUserDto);
   },
   updateSignUpUserDto(
     state: GeneralSliceInitialStateType,
@@ -20,5 +21,12 @@ export const generalSliceReducers = {
       ...state.signUpUserDto,
       [action.payload.key]: action.payload.value,
     };
+    console.log(state.signUpUserDto);
+  },
+  changeIsUserABot(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<boolean>,
+  ) {
+    state.isUserABot = action.payload;
   },
 };

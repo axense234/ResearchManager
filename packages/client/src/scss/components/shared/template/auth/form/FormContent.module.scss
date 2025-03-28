@@ -3,11 +3,9 @@
 .formContentContainer {
   @include flexCenter(column);
   width: 100%;
+  gap: 4rem;
 
-  gap: 3rem;
-
-  h4 {
-    @include heading("h4", "laptop", "white");
-    letter-spacing: 2.4px;
+  > hr {
+    width: 100%;
   }
 }

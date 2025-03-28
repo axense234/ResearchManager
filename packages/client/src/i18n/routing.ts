@@ -7,6 +7,13 @@ export const routing = defineRouting({
   defaultLocale: "en",
   localePrefix: "always",
   pathnames: {
+    "/": { ro: "/", en: "/", fr: "/", de: "/" },
+    "/signin": {
+      ro: "/conectare",
+      en: "/signin",
+      fr: "/connecter",
+      de: "/anmeldung",
+    },
     "/home": {
       ro: "/acasa",
       en: "/home",
