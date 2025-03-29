@@ -1,0 +1,16 @@
+@use "../../../../../abstracts" as *;
+
+.carouselContainer {
+  @include flexCenter(column);
+  position: absolute;
+  top: 10rem;
+  background-color: getColorWithOpacity("main-dark-blue", 0.9);
+  gap: 3rem;
+
+  padding: 3rem;
+
+  border: none;
+  border-radius: 0.5rem;
+
+  width: 40rem;
+}

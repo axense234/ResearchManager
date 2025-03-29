@@ -15,13 +15,11 @@ export const signInUser = createAsyncThunk<User | AxiosError, SignInDto>(
   "general/signInUser",
   async (signInUserDto) => {
     try {
-      const res = (await axiosInstance.post(
-        "/auth/signin",
-        signInUserDto,
-      )) as ReturnObjectBuilderReturnObject;
+      const res = (await axiosInstance.post("/auth/signin", signInUserDto))
+        .data as ReturnObjectBuilderReturnObject;
 
       localStorage.setItem(
-        process.env.JWT_KEY_LABEL || "rm-jwt",
+        process.env.NEXT_PUBLIC_JWT_KEY_LABEL || "rm-jwt",
         res.access_token as string,
       );
 

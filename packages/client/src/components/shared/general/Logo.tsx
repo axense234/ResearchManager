@@ -15,6 +15,7 @@ const Logo: FC<LogoProps> = ({ clickable, width, type }) => {
     <Link
       href={clickable ? (homePageUrl as any) : "/"}
       className={logoStyles.logoContainer}
+      style={{ cursor: clickable ? "pointer" : "default" }}
     >
       <Image
         src={logoImageUrl[type]}

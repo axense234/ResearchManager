@@ -3,7 +3,7 @@
 .formRedirectContainer {
   @include flexCenter(column);
   gap: 0.5rem;
-  margin-top: auto;
+  margin-top: 5rem;
 
   > p {
     font-size: getFontSize("button-heading");

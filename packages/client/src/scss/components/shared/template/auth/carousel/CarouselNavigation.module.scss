@@ -1,0 +1,23 @@
+@use "../../../../../abstracts" as *;
+
+.carouselNavigationContainer {
+  @include flexCenter(row);
+  justify-content: space-between;
+  width: 80%;
+  margin-top: auto;
+
+  > svg {
+    @include heading("h6", "laptop", "white");
+  }
+}
+
+.carouselNavigationButtons {
+  @include flexCenter(row);
+  list-style: none;
+  gap: 2rem;
+
+  > li {
+    @include heading("h6", "laptop", "white");
+    font-weight: 550;
+  }
+}

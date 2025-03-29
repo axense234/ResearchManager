@@ -12,7 +12,7 @@ const FormContent: FC<FormContentProps> = ({ type }) => {
     <div className={formContentStyles.formContentContainer}>
       <FormControls type={type} />
       <hr />
-      <FormOAuthButtons />
+      <FormOAuthButtons type={type} />
     </div>
   );
 };

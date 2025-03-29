@@ -9,6 +9,7 @@
   label {
     @include paragraph("laptop", "black");
     font-weight: 550;
+    letter-spacing: 1px;
   }
 
   input {

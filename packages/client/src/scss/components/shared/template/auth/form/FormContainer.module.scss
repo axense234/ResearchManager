@@ -3,8 +3,6 @@
 .formContainer {
   @include flexCenter(column);
   justify-content: flex-start;
-  position: absolute;
-  left: 0;
   gap: 3rem;
   overflow-y: scroll;
 

@@ -27,6 +27,24 @@ import {
   uploadImageToCloudinaryPending,
   uploadImageToCloudinaryRejected,
 } from "./uploadImageToCloudinary";
+import {
+  signUpUserOAuth,
+  signUpUserOAuthFulfilled,
+  signUpUserOAuthPending,
+  signUpUserOAuthRejected,
+} from "./signUpUserOAuth";
+import {
+  signInUserOAuth,
+  signInUserOAuthFulfilled,
+  signInUserOAuthPending,
+  signInUserOAuthRejected,
+} from "./signInUserOAuth";
+import {
+  getProfileOAuth,
+  getProfileOAuthFulfilled,
+  getProfileOAuthPending,
+  getProfileOAuthRejected,
+} from "./getProfileOAuth";
 
 export const generalSliceExtraReducers: (
   builder: ActionReducerMapBuilder<GeneralSliceInitialStateType>,
@@ -46,5 +64,14 @@ export const generalSliceExtraReducers: (
       uploadImageToCloudinary.fulfilled,
       uploadImageToCloudinaryFulfilled,
     )
-    .addCase(uploadImageToCloudinary.rejected, uploadImageToCloudinaryRejected);
+    .addCase(uploadImageToCloudinary.rejected, uploadImageToCloudinaryRejected)
+    .addCase(signUpUserOAuth.pending, signUpUserOAuthPending)
+    .addCase(signUpUserOAuth.fulfilled, signUpUserOAuthFulfilled)
+    .addCase(signUpUserOAuth.rejected, signUpUserOAuthRejected)
+    .addCase(signInUserOAuth.pending, signInUserOAuthPending)
+    .addCase(signInUserOAuth.fulfilled, signInUserOAuthFulfilled)
+    .addCase(signInUserOAuth.rejected, signInUserOAuthRejected)
+    .addCase(getProfileOAuth.pending, getProfileOAuthPending)
+    .addCase(getProfileOAuth.fulfilled, getProfileOAuthFulfilled)
+    .addCase(getProfileOAuth.rejected, getProfileOAuthRejected);
 };

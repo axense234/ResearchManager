@@ -1,0 +1,27 @@
+@use "../../../abstracts" as *;
+
+.oAuthButtonContainer {
+  @include flexCenter(row);
+  width: 25rem;
+  height: auto;
+
+  cursor: pointer;
+
+  border: none;
+  border-radius: 0.25rem;
+  background-color: getColor("main-light-blue");
+
+  gap: 1rem;
+
+  padding: 0.5rem 1rem;
+
+  > svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  > span {
+    font-size: getFontSize("button-heading");
+    font-weight: 550;
+  }
+}

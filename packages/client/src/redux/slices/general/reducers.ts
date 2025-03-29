@@ -1,5 +1,6 @@
 // Types
 import { GeneralSliceInitialStateType, ObjectKeyValueType } from "@/core/types";
+import { authCarouselContent } from "@/data/static";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export const generalSliceReducers = {
@@ -28,5 +29,33 @@ export const generalSliceReducers = {
     action: PayloadAction<boolean>,
   ) {
     state.isUserABot = action.payload;
+  },
+  setCurrentAuthCarouselId(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<number>,
+  ) {
+    state.currentAuthCarouselId = action.payload;
+  },
+  handleAuthCarouselStepDirection(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<{ direction: "left" | "right" }>,
+  ) {
+    if (action.payload.direction === "left") {
+      state.currentAuthCarouselId =
+        state.currentAuthCarouselId - 1 < 1
+          ? authCarouselContent.length
+          : state.currentAuthCarouselId - 1;
+    } else if (action.payload.direction === "right") {
+      state.currentAuthCarouselId =
+        state.currentAuthCarouselId + 1 > 4
+          ? 1
+          : state.currentAuthCarouselId + 1;
+    }
+  },
+  changeCanTryFetchingProfile(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<boolean>,
+  ) {
+    state.canTryFetchingProfile = action.payload;
   },
 };

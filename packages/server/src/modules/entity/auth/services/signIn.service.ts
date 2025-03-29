@@ -1,5 +1,6 @@
 // Nest
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -11,6 +12,7 @@ import * as argon from 'argon2';
 // Prisma
 import { PrismaService } from 'src/modules/db/prisma/prisma.service';
 // Services
+import { ConfigService } from '@nestjs/config';
 import { SignTokenService } from './signToken.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
@@ -25,6 +27,7 @@ export class SignInService {
     private prisma: PrismaService,
     private signTokenService: SignTokenService,
     private objectBuilder: ObjectBuilderService,
+    private configService: ConfigService,
   ) {}
 
   async signIn(
@@ -44,6 +47,15 @@ export class SignInService {
       if (!foundUserForAuthentication) {
         throw new NotFoundException(
           'Could not find an user with such an email.',
+        );
+      }
+
+      if (
+        foundUserForAuthentication.hash ===
+        this.configService.get('OAUTH_PASSWORD_LABEL')
+      ) {
+        throw new BadRequestException(
+          'Cannot sign in your account using the Sign In Service. Please sign in your account through an OAuth provider.',
         );
       }
 

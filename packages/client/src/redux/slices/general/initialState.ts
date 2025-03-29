@@ -13,6 +13,13 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   signInUserDto: signInMockData[0],
   signUpUserDto: signUpMockData[0],
   isUserABot: true,
+
+  canTryFetchingProfile: false,
   loadingSignInUser: "IDLE",
   loadingSignUpUser: "IDLE",
+  loadingGetProfileJWT: "IDLE",
+  loadingGetProfileOAuth: "IDLE",
+
+  // Auth Carousel
+  currentAuthCarouselId: 1,
 };

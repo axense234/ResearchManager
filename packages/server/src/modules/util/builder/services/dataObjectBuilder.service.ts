@@ -7,13 +7,15 @@ import { UserCreateDataObject } from 'src/modules/entity/auth/types/object/UserC
 import { ResearchActivityCreateDataObject } from 'src/modules/entity/research/activity/types';
 // Argon
 import * as argon from 'argon2';
-// Util Service
+// Services
 import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class DataObjectBuilderService {
   constructor(
     private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
+    private configService: ConfigService,
   ) {}
 
   async buildDataObject({
@@ -30,9 +32,16 @@ export class DataObjectBuilderService {
 
     const { createActivityFeed = 'true', createSettings = 'true' } = options;
 
-    if ((dto as UserCreateDataObject).password && entityType === 'user') {
-      (dataObject as UserUpdateDataObject | UserCreateDataObject).hash =
-        await argon.hash(dto.password);
+    const dtoPassword = (dto as UserCreateDataObject).password;
+
+    if (dtoPassword && entityType === 'user') {
+      if (dtoPassword === this.configService.get('OAUTH_PASSWORD_LABEL')) {
+        (dataObject as UserUpdateDataObject | UserCreateDataObject).hash =
+          this.configService.get('OAUTH_PASSWORD_LABEL');
+      } else {
+        (dataObject as UserUpdateDataObject | UserCreateDataObject).hash =
+          await argon.hash(dto.password);
+      }
       delete (dataObject as UserUpdateDataObject | UserCreateDataObject)
         .password;
     }

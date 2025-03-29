@@ -14,7 +14,13 @@ const generalSlice = createSlice({
   extraReducers: generalSliceExtraReducers,
 });
 
-export const { updateSignInUserDto, updateSignUpUserDto, changeIsUserABot } =
-  generalSlice.actions;
+export const {
+  updateSignInUserDto,
+  updateSignUpUserDto,
+  changeIsUserABot,
+  handleAuthCarouselStepDirection,
+  setCurrentAuthCarouselId,
+  changeCanTryFetchingProfile,
+} = generalSlice.actions;
 
 export default generalSlice.reducer;

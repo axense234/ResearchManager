@@ -12,4 +12,12 @@ export type GeneralSliceInitialStateType = {
 
   loadingSignUpUser: LoadingStateType;
   loadingSignInUser: LoadingStateType;
+
+  loadingGetProfileJWT: LoadingStateType;
+  loadingGetProfileOAuth: LoadingStateType;
+
+  canTryFetchingProfile: boolean;
+
+  // Auth Carousel
+  currentAuthCarouselId: number;
 };

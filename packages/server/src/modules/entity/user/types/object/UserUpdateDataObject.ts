@@ -32,7 +32,7 @@ export class UserUpdateDataObject {
 
   @IsObject()
   @IsOptional()
-  activityFeeds: { connect: { id: string }[] };
+  activityFeed: { connect: { id: string } };
 
   @IsObject()
   @IsOptional()

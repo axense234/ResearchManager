@@ -1,0 +1,7 @@
+@use "../../../../../abstracts" as *;
+
+.formOAuthButtonsContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1.5rem;
+}
