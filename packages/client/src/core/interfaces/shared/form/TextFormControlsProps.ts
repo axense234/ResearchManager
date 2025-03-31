@@ -12,6 +12,10 @@ export interface TextFormControlProps {
 
   inputHeight?: number;
 
+  border?: string;
+
+  placeholderContent?: string;
+
   labelContent: string;
   type:
     | "email"

@@ -18,5 +18,11 @@
     font-weight: 550;
     color: getColor("main-pastel-red");
     text-decoration: none;
+
+    transition: transform 0.2s ease-in;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 }

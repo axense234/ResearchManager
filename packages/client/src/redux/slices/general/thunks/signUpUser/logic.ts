@@ -15,13 +15,21 @@ export const signUpUser = createAsyncThunk<User | AxiosError, SignUpDto>(
   "general/signUpUser",
   async (signUpUserDto) => {
     try {
-      const res = (await axiosInstance.post("/auth/signup", signUpUserDto))
-        .data as ReturnObjectBuilderReturnObject;
+      const res = (
+        await axiosInstance.post("/auth/signup", signUpUserDto, {
+          params: {
+            includeValues: "createdAt, updatedAt",
+            chosenOptionType: "include",
+          },
+        })
+      ).data as ReturnObjectBuilderReturnObject;
 
       localStorage.setItem(
         process.env.NEXT_PUBLIC_JWT_KEY_LABEL || "rm-jwt",
         res.access_token as string,
       );
+
+      localStorage.setItem("rm-user-prev-created-account", "true");
 
       return res.payload as User;
     } catch (error) {

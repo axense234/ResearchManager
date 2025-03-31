@@ -9,13 +9,14 @@ const FormSubmitButton: FC<FormSubmitButtonProps> = ({
   disabled,
   onClickFunction,
   onHoverContent,
+  onHoverContentDisabled,
 }) => {
   return (
     <button
       className={formSubmitButtonStyles.formSubmitButtonContainer}
       disabled={disabled}
-      title={onHoverContent || content}
-      aria-label={onHoverContent || content}
+      title={disabled ? onHoverContentDisabled : onHoverContent}
+      aria-label={disabled ? onHoverContentDisabled : onHoverContent}
       type="submit"
       onClick={onClickFunction}
     >

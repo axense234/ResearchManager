@@ -9,9 +9,9 @@ import { FC } from "react";
 import { FormOAuthButtonsProps } from "@/core/interfaces";
 // Redux
 import { useAppDispatch } from "@/hooks";
+import { signInUserOAuth } from "@/redux/slices/general/thunks/signInUserOAuth";
 // i18n
 import { useLocale } from "next-intl";
-import { signInUserOAuth } from "@/redux/slices/general/thunks/signInUserOAuth";
 
 const FormOAuthButtons: FC<FormOAuthButtonsProps> = ({ type }) => {
   const dispatch = useAppDispatch();

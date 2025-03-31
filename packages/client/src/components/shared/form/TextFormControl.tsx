@@ -18,6 +18,8 @@ const TextFormControl: FC<TextFormControlProps> = ({
   minInputLength,
   maxInputLength,
   inputHeight,
+  border,
+  placeholderContent,
 }) => {
   const labelColor =
     labelColorType === "dark" ? mainBlackColor : mainWhiteColor;
@@ -38,8 +40,9 @@ const TextFormControl: FC<TextFormControlProps> = ({
         minLength={minInputLength}
         maxLength={maxInputLength}
         value={entityProperty as string | number}
+        placeholder={placeholderContent}
         onChange={onEntityPropertyValueChange}
-        style={{ height: inputHeight }}
+        style={{ height: inputHeight, border }}
       />
     </div>
   );

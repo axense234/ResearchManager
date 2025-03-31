@@ -1,0 +1,15 @@
+@use "../../../abstracts" as *;
+
+.sidebarContainer {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  position: fixed;
+  left: 0;
+  height: 100%;
+  border: none;
+  width: 20%;
+  padding: 2rem;
+
+  background-color: getColor("main-light-blue");
+  gap: 3rem;
+}

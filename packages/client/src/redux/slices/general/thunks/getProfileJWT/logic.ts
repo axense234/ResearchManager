@@ -11,9 +11,6 @@ export const getProfileJWT = createAsyncThunk<User | AxiosError>(
   "general/getProfileJWT",
   async () => {
     try {
-      console.log(
-        `Bearer ${localStorage.getItem(process.env.NEXT_PUBLIC_JWT_KEY_LABEL as string)}`,
-      );
       const res = (
         await axiosInstance.get(`/users/profile`, {
           headers: {

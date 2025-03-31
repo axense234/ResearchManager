@@ -3,21 +3,75 @@ import {
   ExtraReducerFuncType,
   GeneralSliceInitialStateType,
 } from "@/core/types";
+import { User } from "@prisma/client";
+import { AxiosError } from "axios";
+// Helpers
+import { handleFormErrorInputsAndModalMessage } from "@/helpers";
 
 export const signInUserPending: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
   state.loadingSignInUser = "PENDING";
+  state.modal = {
+    isClosed: false,
+    message: "Trying to sign in your Account.",
+    type: "general",
+    isLoading: true,
+  };
 };
 
 export const signInUserFulfilled: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
-  state.loadingSignInUser = "SUCCEDED";
+  const user = action.payload as User;
+  const axiosError = action.payload as AxiosError;
+
+  if (axiosError !== undefined && !axiosError.response) {
+    state.userProfile = {
+      ...user,
+      createdAt: new Date(user.createdAt).toISOString(),
+      updatedAt: new Date(user.updatedAt).toISOString(),
+    };
+    state.loadingSignInUser = "SUCCEDED";
+
+    state.modal = {
+      isClosed: false,
+      message: `Successfully signed in user: ${user.username}.`,
+      type: "general",
+      isLoading: false,
+    };
+  } else {
+    const errorData = axiosError?.response?.data as {
+      message: string[] | string;
+    };
+
+    const { message } = handleFormErrorInputsAndModalMessage(
+      errorData.message,
+      state.errorFields,
+      (errorMessage: string) => {
+        state.errorFields.push(errorMessage.split(" ")[0]);
+      },
+    );
+
+    state.loadingSignInUser = "FAILED";
+
+    state.modal = {
+      isClosed: false,
+      message,
+      type: "form",
+      isLoading: false,
+    };
+  }
 };
 
 export const signInUserRejected: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
   state.loadingSignUpUser = "FAILED";
+  state.modal = {
+    isClosed: false,
+    message: "Could not sign in your Account.",
+    type: "general",
+    isLoading: true,
+  };
 };

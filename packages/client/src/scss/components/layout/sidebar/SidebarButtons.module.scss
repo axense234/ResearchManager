@@ -1,0 +1,17 @@
+@use "../../../abstracts" as *;
+
+.sidebarButtonsContainer {
+  @include flexCenter(column);
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  list-style: none;
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    visibility: hidden;
+  }
+}

@@ -55,7 +55,7 @@ export class SignInService {
         this.configService.get('OAUTH_PASSWORD_LABEL')
       ) {
         throw new BadRequestException(
-          'Cannot sign in your account using the Sign In Service. Please sign in your account through an OAuth provider.',
+          'Please sign in through Google or Github!',
         );
       }
 

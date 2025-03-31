@@ -1,13 +1,21 @@
 // Types
-import { OAuthOptionContent } from "@/core/types";
+import { OAuthOptionContent, SidebarButtonContentType } from "@/core/types";
 // React Icons
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaHome, FaUser } from "react-icons/fa";
+import { MdDashboard, MdContactPhone, MdContactSupport } from "react-icons/md";
+import { FaRankingStar, FaBookOpenReader } from "react-icons/fa6";
+import { IoMdCreate, IoMdSettings } from "react-icons/io";
+import { RiShutDownLine } from "react-icons/ri";
 
 export const homePageUrl = "/home";
 
 export const mainBlackColor = "#110608";
 export const mainWhiteColor = "#d8e5e4";
+export const mainLightBlueColor = "#83cec8";
+export const mainPastelRedColor = "#d54e5d";
+
+export const formErrorInputBorder = `3px solid ${mainPastelRedColor}`;
 
 export const logoImageUrl = {
   light:
@@ -85,3 +93,78 @@ export const OAuthOptionsContent: OAuthOptionContent[] = [
     optionType: "github",
   },
 ];
+
+export const sidebarButtonsContent: SidebarButtonContentType[] = [
+  {
+    id: 1,
+    buttonLabel: "Home",
+    buttonType: "link",
+    buttonDest: "/home",
+    icon: FaHome({}),
+  },
+  {
+    id: 2,
+    buttonLabel: "Dashboard",
+    buttonType: "link",
+    buttonDest: "/dashboard",
+    icon: MdDashboard({}),
+  },
+  {
+    id: 3,
+    buttonLabel: "Profile",
+    buttonType: "link",
+    buttonDest: "/profile",
+    icon: FaUser({}),
+  },
+  {
+    id: 4,
+    buttonLabel: "Rankins",
+    buttonType: "link",
+    buttonDest: "/home#rankings",
+    icon: FaRankingStar({}),
+  },
+  {
+    id: 5,
+    buttonLabel: "Contact Us",
+    buttonType: "link",
+    buttonDest: "/home#contact",
+    icon: MdContactPhone({}),
+  },
+  {
+    id: 6,
+    buttonLabel: "About",
+    buttonType: "link",
+    buttonDest: "/home#about",
+    icon: MdContactSupport({}),
+  },
+  {
+    id: 7,
+    buttonLabel: "Research",
+    buttonType: "functional",
+    icon: FaBookOpenReader({}),
+  },
+  {
+    id: 8,
+    buttonLabel: "Create",
+    buttonType: "functional",
+    icon: IoMdCreate({}),
+  },
+  {
+    id: 9,
+    buttonLabel: "Settings",
+    buttonType: "functional",
+    icon: IoMdSettings({}),
+  },
+  {
+    id: 10,
+    buttonLabel: "Logout",
+    buttonType: "functional",
+    icon: RiShutDownLine({}),
+  },
+];
+
+export const AUTO_CLOSE_MODAL = 5000;
+
+export const AUTO_SLIDER_DELAY = 4000;
+export const AUTO_SLIDER_RESTART = 6000;
+export const AUTO_SLIDER_FREQUENCY = 8000;

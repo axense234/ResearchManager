@@ -4,6 +4,7 @@
   @include flexCenter(row);
   justify-content: space-between;
   width: 100%;
+  height: auto;
   gap: 0.5rem;
 
   label {
@@ -17,10 +18,21 @@
     border-radius: 0.25rem;
     border: none;
 
-    min-width: 20%;
-    height: 2rem;
-    padding: 1rem;
+    &::placeholder {
+      color: getColor("main-black-100");
+    }
 
-    font-size: 1.5rem;
+    min-width: 20%;
+    padding: 0.5rem;
+
+    font-size: 1.25rem;
+
+    transition:
+      transform 0.15s ease-in,
+      border 0.05s ease-in;
+
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 }

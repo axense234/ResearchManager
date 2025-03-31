@@ -2,10 +2,12 @@
 import { User } from "@prisma/client";
 import { SignInDto, SignUpDto } from "@researchmanager/shared/types";
 import { LoadingStateType } from "../../other";
+import { ReduxEntityWrapper } from "../../wrapper";
+import { ModalType } from "./ModalType";
 
 export type GeneralSliceInitialStateType = {
   // Auth
-  userProfile: User;
+  userProfile: ReduxEntityWrapper<User>;
   signInUserDto: SignInDto;
   signUpUserDto: SignUpDto;
   isUserABot: boolean;
@@ -20,4 +22,9 @@ export type GeneralSliceInitialStateType = {
 
   // Auth Carousel
   currentAuthCarouselId: number;
+  allowAutoCarousel: boolean;
+
+  // Modals
+  modal: ModalType;
+  errorFields: string[];
 };

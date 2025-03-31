@@ -31,8 +31,6 @@ export class DeleteCacheShallowService {
 
       cursor = Number(scanResponse[0]);
 
-      console.log(scanResponse[1]);
-
       // I think im losing my mind; this code was written using pure trial and error
       // This shit is a horror beyond my comprehension i should of became a farmer not a web developer
       keysToDelete = keysToDelete.concat(
@@ -66,7 +64,6 @@ export class DeleteCacheShallowService {
     if (!deepCall) {
       keysToDelete = keysToDelete.concat([`/${base}`]);
     }
-    console.log(keysToDelete);
 
     if (keysToDelete.length > 0) {
       await Promise.all(

@@ -22,3 +22,9 @@ export const selectCanTryFetchingProfile = (state: State) =>
 // Auth Carousel
 export const selectCurrentAuthCarouselId = (state: State) =>
   state.general.currentAuthCarouselId;
+export const selectAllowAutoCarousel = (state: State) =>
+  state.general.allowAutoCarousel;
+
+// Modals
+export const selectModal = (state: State) => state.general.modal;
+export const selectErrorFields = (state: State) => state.general.errorFields;

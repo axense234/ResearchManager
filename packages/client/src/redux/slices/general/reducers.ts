@@ -1,5 +1,9 @@
 // Types
-import { GeneralSliceInitialStateType, ObjectKeyValueType } from "@/core/types";
+import {
+  GeneralSliceInitialStateType,
+  ModalType,
+  ObjectKeyValueType,
+} from "@/core/types";
 import { authCarouselContent } from "@/data/static";
 import { PayloadAction } from "@reduxjs/toolkit";
 
@@ -12,7 +16,6 @@ export const generalSliceReducers = {
       ...state.signInUserDto,
       [action.payload.key]: action.payload.value,
     };
-    console.log(state.signInUserDto);
   },
   updateSignUpUserDto(
     state: GeneralSliceInitialStateType,
@@ -22,7 +25,6 @@ export const generalSliceReducers = {
       ...state.signUpUserDto,
       [action.payload.key]: action.payload.value,
     };
-    console.log(state.signUpUserDto);
   },
   changeIsUserABot(
     state: GeneralSliceInitialStateType,
@@ -57,5 +59,26 @@ export const generalSliceReducers = {
     action: PayloadAction<boolean>,
   ) {
     state.canTryFetchingProfile = action.payload;
+  },
+  changeAllowAutoCarousel(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<boolean>,
+  ) {
+    state.allowAutoCarousel = action.payload;
+  },
+  setModal(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<ModalType>,
+  ) {
+    state.modal = { ...action.payload };
+  },
+  addErrorField(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<string>,
+  ) {
+    state.errorFields.push(action.payload);
+  },
+  resetErrorFields(state: GeneralSliceInitialStateType) {
+    state.errorFields = [];
   },
 };

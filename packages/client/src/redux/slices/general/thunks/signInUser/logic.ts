@@ -25,6 +25,7 @@ export const signInUser = createAsyncThunk<User | AxiosError, SignInDto>(
 
       return res.payload as User;
     } catch (error) {
+      console.log(error);
       return error as AxiosError;
     }
   },

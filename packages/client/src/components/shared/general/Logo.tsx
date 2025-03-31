@@ -16,6 +16,8 @@ const Logo: FC<LogoProps> = ({ clickable, width, type }) => {
       href={clickable ? (homePageUrl as any) : "/"}
       className={logoStyles.logoContainer}
       style={{ cursor: clickable ? "pointer" : "default" }}
+      title="Research Manager"
+      aria-label="Research Manager"
     >
       <Image
         src={logoImageUrl[type]}

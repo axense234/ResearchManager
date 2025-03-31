@@ -45,6 +45,12 @@ import {
   getProfileOAuthPending,
   getProfileOAuthRejected,
 } from "./getProfileOAuth";
+import {
+  signInUser,
+  signInUserFulfilled,
+  signInUserPending,
+  signInUserRejected,
+} from "./signInUser";
 
 export const generalSliceExtraReducers: (
   builder: ActionReducerMapBuilder<GeneralSliceInitialStateType>,
@@ -71,6 +77,9 @@ export const generalSliceExtraReducers: (
     .addCase(signInUserOAuth.pending, signInUserOAuthPending)
     .addCase(signInUserOAuth.fulfilled, signInUserOAuthFulfilled)
     .addCase(signInUserOAuth.rejected, signInUserOAuthRejected)
+    .addCase(signInUser.pending, signInUserPending)
+    .addCase(signInUser.fulfilled, signInUserFulfilled)
+    .addCase(signInUser.rejected, signInUserRejected)
     .addCase(getProfileOAuth.pending, getProfileOAuthPending)
     .addCase(getProfileOAuth.fulfilled, getProfileOAuthFulfilled)
     .addCase(getProfileOAuth.rejected, getProfileOAuthRejected);

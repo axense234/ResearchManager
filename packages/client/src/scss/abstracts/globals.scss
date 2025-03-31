@@ -26,3 +26,19 @@ body {
   width: 100%;
   min-height: 100vh;
 }
+
+button:focus-visible {
+  outline: 2.5px solid #ff0000;
+}
+
+input:focus-visible {
+  outline: 2.5px solid #ff0000;
+}
+
+textarea:focus-visible {
+  outline: 2.5px solid #ff0000;
+}
+
+select:focus-visible {
+  outline: 2.5px solid #ff0000;
+}

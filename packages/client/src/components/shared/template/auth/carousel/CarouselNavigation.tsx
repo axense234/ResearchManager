@@ -6,24 +6,34 @@ import carouselNavigationStyles from "@/scss/components/shared/template/auth/car
 // React Icons
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // Data
-import { authCarouselContent } from "@/data/static";
+import {
+  authCarouselContent,
+  mainLightBlueColor,
+  mainPastelRedColor,
+  mainWhiteColor,
+} from "@/data/static";
 // Redux
 import {
+  changeAllowAutoCarousel,
   handleAuthCarouselStepDirection,
   setCurrentAuthCarouselId,
 } from "@/redux/slices/general/slice";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { selectCurrentAuthCarouselId } from "@/redux/slices/general";
 
 const CarouselNavigation: FC = () => {
   const dispatch = useAppDispatch();
+  const currentAuthCarouselId = useAppSelector(selectCurrentAuthCarouselId);
+
   return (
     <div className={carouselNavigationStyles.carouselNavigationContainer}>
       <FaChevronLeft
         title="Previous"
         aria-label="Previous"
-        onClick={() =>
-          dispatch(handleAuthCarouselStepDirection({ direction: "left" }))
-        }
+        onClick={() => {
+          dispatch(changeAllowAutoCarousel(false));
+          dispatch(handleAuthCarouselStepDirection({ direction: "left" }));
+        }}
       />
       <ul className={carouselNavigationStyles.carouselNavigationButtons}>
         {authCarouselContent.map((content) => {
@@ -32,7 +42,16 @@ const CarouselNavigation: FC = () => {
               key={content.title}
               title={content.title}
               aria-label={content.title}
-              onClick={() => dispatch(setCurrentAuthCarouselId(content.id))}
+              style={{
+                color:
+                  content.id === currentAuthCarouselId
+                    ? mainPastelRedColor
+                    : mainWhiteColor,
+              }}
+              onClick={() => {
+                dispatch(changeAllowAutoCarousel(false));
+                dispatch(setCurrentAuthCarouselId(content.id));
+              }}
             >
               {content.id}
             </li>
@@ -42,9 +61,10 @@ const CarouselNavigation: FC = () => {
       <FaChevronRight
         title="Next"
         aria-label="Next"
-        onClick={() =>
-          dispatch(handleAuthCarouselStepDirection({ direction: "right" }))
-        }
+        onClick={() => {
+          dispatch(changeAllowAutoCarousel(false));
+          dispatch(handleAuthCarouselStepDirection({ direction: "right" }));
+        }}
       />
     </div>
   );

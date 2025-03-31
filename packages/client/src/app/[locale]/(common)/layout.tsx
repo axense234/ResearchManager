@@ -1,11 +1,17 @@
 "use client";
+import Sidebar from "@/components/layout/sidebar/Sidebar";
 // Redux and Custom Hooks
-import { useAppDispatch, useCreateUserOAuthTrigger } from "@/hooks";
+import { useCreateUserOAuthTrigger } from "@/hooks";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   useCreateUserOAuthTrigger();
 
-  return <div>{children}</div>;
+  return (
+    <>
+      <Sidebar />
+      {children}
+    </>
+  );
 };
 
 export default SpecialLayout;

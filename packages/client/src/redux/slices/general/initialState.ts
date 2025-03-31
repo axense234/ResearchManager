@@ -1,18 +1,18 @@
 // Types
 import { GeneralSliceInitialStateType } from "@/core/types";
-// Mock Data
+// Data
 import {
-  signInMockData,
-  signUpMockData,
-  usersMockData,
-} from "@researchmanager/shared/mock";
+  signInMockDataRedux,
+  signUpMockDataRedux,
+  userProfileMockDataRedux,
+} from "@/data/redux";
 
 export const generalSliceInitialState: GeneralSliceInitialStateType = {
   // Auth
-  userProfile: usersMockData[0],
-  signInUserDto: signInMockData[0],
-  signUpUserDto: signUpMockData[0],
-  isUserABot: true,
+  userProfile: userProfileMockDataRedux,
+  signInUserDto: signInMockDataRedux,
+  signUpUserDto: signUpMockDataRedux,
+  isUserABot: false,
 
   canTryFetchingProfile: false,
   loadingSignInUser: "IDLE",
@@ -22,4 +22,14 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
 
   // Auth Carousel
   currentAuthCarouselId: 1,
+  allowAutoCarousel: true,
+
+  // Modals
+  modal: {
+    isClosed: true,
+    message: "Default message.",
+    type: "general",
+    isLoading: false,
+  },
+  errorFields: [],
 };

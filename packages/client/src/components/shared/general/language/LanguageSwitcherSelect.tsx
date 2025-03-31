@@ -24,7 +24,11 @@ const LanguageSwitcherSelect: FC<LanguageSwitcherSelectProps> = ({
   const navigateToPathname = useNavigateToPathname();
 
   return (
-    <div className={languageSwitcherStyles.languageSwitcherSelectContainer}>
+    <div
+      className={languageSwitcherStyles.languageSwitcherSelectContainer}
+      title={imageLabel}
+      aria-label={imageLabel}
+    >
       <Image
         src={imageSrc}
         title={imageLabel}

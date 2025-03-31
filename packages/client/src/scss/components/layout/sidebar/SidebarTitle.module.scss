@@ -1,0 +1,35 @@
+@use "../../../abstracts" as *;
+
+.sidebarTitleContainer {
+  @include flexCenter(column);
+  align-items: flex-end;
+  gap: 1rem;
+
+  width: 100%;
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 100%;
+    background-color: getColor("main-black-100");
+  }
+}
+
+.sidebarTitleLogo {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1rem;
+
+  > h6 {
+    @include heading("h6", "phone", "black");
+    letter-spacing: 0.5px;
+
+    transition: font-style 0.1s ease-in;
+
+    &:hover {
+      font-style: italic;
+    }
+  }
+}

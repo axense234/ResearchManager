@@ -168,12 +168,14 @@ model ActivityDay {
 }
 
 model ActivityLog {
-  id        String          @id @default(uuid())
-  createdAt DateTime        @default(now())
-  subject   ActivitySubject @default(OTHER)
-  message   String          @default("Other activity noticed, something is very wrong. The apocalypse is coming. Run.")
+  id      String          @id @default(uuid())
+  subject ActivitySubject @default(OTHER)
+  message String          @default("Other activity noticed, something is very wrong. The apocalypse is coming. Run.")
 
   activityDays ActivityDay[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum TagFontFamily {

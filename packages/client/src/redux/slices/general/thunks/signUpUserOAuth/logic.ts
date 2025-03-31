@@ -18,7 +18,6 @@ export const signUpUserOAuth = createAsyncThunk<User | AxiosError>(
   "general/signupUserOAuth",
   async () => {
     try {
-      console.log("sign up oauth");
       const session = await getSession();
       const signUpUserDto = { ...signUpMockData[0] } as SignUpDto;
 
@@ -32,12 +31,12 @@ export const signUpUserOAuth = createAsyncThunk<User | AxiosError>(
       const res = (await axiosInstance.post("/auth/signup", signUpUserDto))
         .data as ReturnObjectBuilderReturnObject;
 
-      console.log(res);
-
       localStorage.setItem(
         process.env.NEXT_PUBLIC_JWT_KEY_LABEL || "rm-jwt",
         res.access_token as string,
       );
+
+      localStorage.setItem("rm-user-prev-created-account", "true");
 
       return res.payload as User;
     } catch (error) {

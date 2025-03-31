@@ -4,16 +4,16 @@ import {
   selectCanTryFetchingProfile,
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
+  selectUserProfile,
 } from "@/redux/slices/general";
 import { useAppDispatch, useAppSelector } from "./redux";
-// Redux
 import { useRedirect } from "./useRedirect";
 import { changeCanTryFetchingProfile } from "@/redux/slices/general/slice";
+import { getProfileOAuth } from "@/redux/slices/general/thunks/getProfileOAuth";
 // i18n
 import { usePathname, useRouter } from "@/i18n/routing";
 // React
 import { useEffect } from "react";
-import { getProfileOAuth } from "@/redux/slices/general/thunks/getProfileOAuth";
 
 export const useAuthorization = () => {
   const dispatch = useAppDispatch();
@@ -25,8 +25,11 @@ export const useAuthorization = () => {
 
   const canTryFetchingProfile = useAppSelector(selectCanTryFetchingProfile);
 
+  const profile = useAppSelector(selectUserProfile);
+
   const canRedirect =
     loadingGetProfileJWT === "SUCCEDED" ||
+    loadingGetProfileOAuth === "FAILED" ||
     loadingGetProfileOAuth === "SUCCEDED";
 
   useEffect(() => {
@@ -36,13 +39,13 @@ export const useAuthorization = () => {
     dispatch(
       changeCanTryFetchingProfile(createResearchManagerAccount !== "create"),
     );
-  }, [loadingGetProfileJWT, loadingGetProfileOAuth]);
+  }, []);
 
   useEffect(() => {
     if (loadingGetProfileJWT === "IDLE" && canTryFetchingProfile) {
       dispatch(getProfileJWT());
     }
-  }, [loadingGetProfileJWT, canTryFetchingProfile]);
+  }, [loadingGetProfileJWT, canTryFetchingProfile, dispatch]);
 
   useEffect(() => {
     if (
@@ -52,9 +55,14 @@ export const useAuthorization = () => {
     ) {
       dispatch(getProfileOAuth());
     }
-  }, [loadingGetProfileJWT, loadingGetProfileOAuth, canTryFetchingProfile]);
+  }, [
+    loadingGetProfileJWT,
+    loadingGetProfileOAuth,
+    canTryFetchingProfile,
+    dispatch,
+  ]);
 
-  console.log(loadingGetProfileJWT, loadingGetProfileOAuth);
+  console.log(loadingGetProfileJWT, loadingGetProfileOAuth, canRedirect);
 
-  useRedirect(pathname, router, canRedirect);
+  useRedirect(pathname, router, canRedirect, profile.email.length > 0);
 };

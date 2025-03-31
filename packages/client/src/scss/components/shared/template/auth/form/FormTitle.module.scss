@@ -16,5 +16,11 @@
   h6 {
     @include heading("h6", "laptop", "white");
     letter-spacing: 1.5px;
+
+    transition: font-style 0.1s ease-in;
+
+    &:hover {
+      font-style: italic;
+    }
   }
 }

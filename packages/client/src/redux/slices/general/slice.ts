@@ -2,16 +2,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 // Initial State
 import { generalSliceInitialState } from "./initialState";
-// Reducers
-import { generalSliceReducers } from "./reducers";
 // Extra Reducers
 import { generalSliceExtraReducers } from "./thunks/extraReducers";
+// Reducers
+import { generalSliceReducers } from "./reducers";
 
 const generalSlice = createSlice({
   name: "general",
   initialState: generalSliceInitialState,
   reducers: generalSliceReducers,
-  extraReducers: generalSliceExtraReducers,
+  extraReducers(builder) {
+    generalSliceExtraReducers(builder);
+  },
 });
 
 export const {
@@ -21,6 +23,10 @@ export const {
   handleAuthCarouselStepDirection,
   setCurrentAuthCarouselId,
   changeCanTryFetchingProfile,
+  changeAllowAutoCarousel,
+  setModal,
+  addErrorField,
+  resetErrorFields,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

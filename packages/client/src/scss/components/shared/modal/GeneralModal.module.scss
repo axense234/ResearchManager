@@ -1,0 +1,48 @@
+@use "../../../abstracts" as *;
+
+.generalModalContainer {
+  @include flexCenter(column);
+  position: absolute;
+  top: 0;
+  gap: 1rem;
+
+  width: 50%;
+  max-width: 25rem;
+  min-height: 3rem;
+
+  background-color: getColorWithOpacity("main-pastel-red", 0.9);
+
+  border: none;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+
+  transition:
+    transform 0.2s ease-in,
+    opacity 0.2s ease-in;
+
+  opacity: 0;
+  display: none;
+  transform: translateY(-100%);
+
+  padding: 0.5rem 1rem;
+  padding-bottom: 1rem;
+  z-index: 12;
+
+  > svg {
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 2rem;
+    transition: transform 0.2s ease-in;
+
+    &:hover {
+      transform: rotate(5deg) scale(1.1);
+    }
+  }
+
+  > p {
+    @include paragraph("laptop", "white");
+    align-self: center;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+}

@@ -9,6 +9,7 @@ import FormSubmitButton from "./FormSubmitButton";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
+  selectErrorFields,
   selectIsUserABot,
   selectLoadingSignInUser,
   selectLoadingSignUpUser,
@@ -23,6 +24,8 @@ import { signUpUser } from "@/redux/slices/general/thunks/signUpUser";
 import { signInUser } from "@/redux/slices/general/thunks/signInUser";
 // SCSS
 import formControlsStyles from "@/scss/components/shared/template/auth/form/FormControls.module.scss";
+// Data
+import { formErrorInputBorder } from "@/data/static";
 
 const FormControls: FC<FormControlsProps> = ({ type }) => {
   const dispatch = useAppDispatch();
@@ -35,6 +38,8 @@ const FormControls: FC<FormControlsProps> = ({ type }) => {
 
   const isUserABot = useAppSelector(selectIsUserABot);
 
+  const errorFields = useAppSelector(selectErrorFields);
+
   const isRequestPending =
     type === "signup"
       ? loadingSignUpUser === "PENDING"
@@ -43,9 +48,19 @@ const FormControls: FC<FormControlsProps> = ({ type }) => {
   const submitButtonOnHoverContent =
     type === "signup" ? "Create Account" : "Login Account";
 
+  const submitButtonOnHoverContentDisabled = isUserABot
+    ? "Please verify that you are not a bot!"
+    : "Request pending, please wait.";
+
   if (type === "signup") {
     return (
-      <div className={formControlsStyles.formControlsContainer}>
+      <form
+        className={formControlsStyles.formControlsContainer}
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(signUpUser(signUpUserDto));
+        }}
+      >
         <TextFormControl
           labelContent="Username:"
           type="text"
@@ -55,6 +70,7 @@ const FormControls: FC<FormControlsProps> = ({ type }) => {
               updateSignUpUserDto({ key: "username", value: e.target.value }),
             )
           }
+          placeholderContent="ex: John"
         />
         <TextFormControl
           labelContent="Email:"
@@ -65,6 +81,8 @@ const FormControls: FC<FormControlsProps> = ({ type }) => {
               updateSignUpUserDto({ key: "email", value: e.target.value }),
             )
           }
+          border={errorFields.includes("email") ? formErrorInputBorder : "none"}
+          placeholderContent="ex: john@gmail.com"
         />
         <TextFormControl
           labelContent="Password:"
@@ -75,22 +93,33 @@ const FormControls: FC<FormControlsProps> = ({ type }) => {
               updateSignUpUserDto({ key: "password", value: e.target.value }),
             )
           }
+          border={
+            errorFields.includes("password") ? formErrorInputBorder : "none"
+          }
+          placeholderContent="ex: john123"
         />
         <ReCaptchaFormControl />
         <FormSubmitButton
           content="Submit"
           onHoverContent={submitButtonOnHoverContent}
+          onHoverContentDisabled={submitButtonOnHoverContentDisabled}
           disabled={isUserABot || isRequestPending}
           onClickFunction={(e) => {
             e.preventDefault();
             dispatch(signUpUser(signUpUserDto));
           }}
         />
-      </div>
+      </form>
     );
   } else if (type === "signin") {
     return (
-      <div className={formControlsStyles.formControlsContainer}>
+      <form
+        className={formControlsStyles.formControlsContainer}
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(signInUser(signInUserDto));
+        }}
+      >
         <TextFormControl
           labelContent="Email:"
           type="email"
@@ -100,6 +129,8 @@ const FormControls: FC<FormControlsProps> = ({ type }) => {
               updateSignInUserDto({ key: "email", value: e.target.value }),
             )
           }
+          border={errorFields.includes("email") ? formErrorInputBorder : "none"}
+          placeholderContent="ex: john@gmail.com"
         />
         <TextFormControl
           labelContent="Password:"
@@ -110,17 +141,22 @@ const FormControls: FC<FormControlsProps> = ({ type }) => {
               updateSignInUserDto({ key: "password", value: e.target.value }),
             )
           }
+          border={
+            errorFields.includes("password") ? formErrorInputBorder : "none"
+          }
+          placeholderContent="ex: john123"
         />
         <FormSubmitButton
           content="Submit"
           onHoverContent={submitButtonOnHoverContent}
+          onHoverContentDisabled={submitButtonOnHoverContentDisabled}
           disabled={isRequestPending}
           onClickFunction={(e) => {
             e.preventDefault();
             dispatch(signInUser(signInUserDto));
           }}
         />
-      </div>
+      </form>
     );
   }
 };
