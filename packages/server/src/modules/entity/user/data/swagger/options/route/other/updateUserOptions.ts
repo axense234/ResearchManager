@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateUserDtoSwaggerWrapper } from '../../../dto';
+import { UpdateUserDtoSwaggerWrapper } from '../../../wrappers';
 // Data
 import { updateUserExamples } from '../../../examples';
 

@@ -1,0 +1,11 @@
+@use "../../../../abstracts" as *;
+
+.entityContainer {
+  @include flexCenter(column);
+  width: 100%;
+  border-radius: 0.5rem;
+  background-color: getColor("main-white");
+
+  padding: 2rem;
+  padding-top: 1rem;
+}

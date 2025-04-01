@@ -19,12 +19,12 @@ import {
 } from '@researchmanager/shared/types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetResearchPhasesQueryParamsSwaggerWrapper } from './data';
 // Types
 import {
   CreateResearchPhaseQueryParams,
   DeleteResearchPhaseQueryParams,
   GetResearchPhaseQueryParams,
-  GetResearchPhasesQueryParams,
   UpdateResearchPhaseQueryParams,
 } from './types';
 // Custom Decorators
@@ -46,7 +46,7 @@ export class ResearchPhaseController {
   @SwaggerResponses('researchPhase', 'GET MULTIPLE')
   @Get()
   getResearchPhases(
-    @Query() queryParams: GetResearchPhasesQueryParams,
+    @Query() queryParams: GetResearchPhasesQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.researchPhaseService.getResearchPhases(queryParams, req.url);

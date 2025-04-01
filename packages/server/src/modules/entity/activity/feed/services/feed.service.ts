@@ -9,6 +9,7 @@ import { DeleteActivityFeedService } from './deleteActivityFeed.service';
 // Dtos
 import {
   CreateActivityFeedDto,
+  GetActivityFeedsQueryParams,
   UpdateActivityFeedDto,
 } from '@researchmanager/shared/types';
 // Types
@@ -16,7 +17,6 @@ import {
   CreateActivityFeedQueryParams,
   DeleteActivityFeedQueryParams,
   GetActivityFeedQueryParams,
-  GetActivityFeedsQueryParams,
   UpdateActivityFeedQueryParams,
 } from '../types';
 

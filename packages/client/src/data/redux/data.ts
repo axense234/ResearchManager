@@ -1,6 +1,5 @@
 // Types
-import { ReduxEntityWrapper } from "@/core/types";
-import { User } from "@prisma/client";
+import { UserRedux } from "@/core/types";
 import { SignInDto, SignUpDto } from "@researchmanager/shared/types";
 
 export const signInMockDataRedux: SignInDto = { email: "", password: "" };
@@ -9,7 +8,7 @@ export const signUpMockDataRedux: SignUpDto = {
   email: "",
   password: "",
 };
-export const userProfileMockDataRedux: ReduxEntityWrapper<User> = {
+export const userProfileMockDataRedux: UserRedux = {
   id: "",
   email: "",
   hash: "",

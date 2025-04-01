@@ -11,12 +11,12 @@ import {
   CreateResearchLogQueryParams,
   DeleteResearchLogQueryParams,
   GetResearchLogQueryParams,
-  GetResearchLogsQueryParams,
   UpdateResearchLogQueryParams,
 } from '../types';
 // Dtos
 import {
   CreateResearchLogDto,
+  GetResearchLogsQueryParams,
   UpdateResearchLogDto,
 } from '@researchmanager/shared/types';
 

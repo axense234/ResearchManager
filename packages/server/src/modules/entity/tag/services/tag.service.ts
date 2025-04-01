@@ -7,13 +7,16 @@ import { GetTagService } from './getTag.service';
 import { GetTagsService } from './getTags.service';
 import { UpdateTagService } from './updateTag.service';
 // Dtos
-import { CreateTagDto, UpdateTagDto } from '@researchmanager/shared/types';
+import {
+  CreateTagDto,
+  GetTagsQueryParams,
+  UpdateTagDto,
+} from '@researchmanager/shared/types';
 // Types
 import {
   CreateTagQueryParams,
   DeleteTagQueryParams,
   GetTagQueryParams,
-  GetTagsQueryParams,
   UpdateTagQueryParams,
 } from '../types';
 

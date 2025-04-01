@@ -22,11 +22,11 @@ import {
   CreateResearchSessionQueryParams,
   DeleteResearchSessionQueryParams,
   GetResearchSessionQueryParams,
-  GetResearchSessionsQueryParams,
   UpdateResearchSessionQueryParams,
 } from './types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetResearchSessionsQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
@@ -46,7 +46,7 @@ export class ResearchSessionController {
   @SwaggerResponses('researchSession', 'GET MULTIPLE')
   @Get()
   getResearchSessions(
-    @Query() queryParams: GetResearchSessionsQueryParams,
+    @Query() queryParams: GetResearchSessionsQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.researchSessionService.getResearchSessions(

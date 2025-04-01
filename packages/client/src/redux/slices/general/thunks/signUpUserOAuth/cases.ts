@@ -2,11 +2,12 @@
 import {
   ExtraReducerFuncType,
   GeneralSliceInitialStateType,
+  UserRedux,
 } from "@/core/types";
 import { AxiosError } from "axios";
 import { User } from "@prisma/client";
 // Helpers
-import { handleFormErrorInputsAndModalMessage } from "@/helpers";
+import { transformEntityIntoEntityRedux } from "@/helpers";
 
 export const signUpUserOAuthPending: ExtraReducerFuncType<
   GeneralSliceInitialStateType
@@ -30,11 +31,10 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     console.log(user);
-    state.userProfile = {
-      ...user,
-      createdAt: new Date(user.createdAt).toISOString(),
-      updatedAt: new Date(user.updatedAt).toISOString(),
-    };
+
+    state.userProfile = transformEntityIntoEntityRedux(user) as UserRedux;
+    state.loadingSignUpUser = "SUCCEDED";
+
     state.loadingSignUpUser = "SUCCEDED";
 
     state.modal = {
@@ -46,24 +46,29 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
   } else {
     const errorData = axiosError?.response?.data as {
       message: string[] | string;
+      error: string;
     };
 
-    const { message } = handleFormErrorInputsAndModalMessage(
-      errorData.message,
-      state.errorFields,
-      (errorMessage: string) => {
-        state.errorFields.push(errorMessage.split(" ")[0]);
-      },
-    );
+    if (errorData.error === "Forbidden") {
+      state.loadingSignUpUser = "FAILED";
+      state.loadingSignInUser = "SUCCEDED";
 
-    state.loadingSignUpUser = "FAILED";
+      state.modal = {
+        isClosed: false,
+        message: `Successfully signed in your Account.`,
+        type: "general",
+        isLoading: false,
+      };
+    } else {
+      state.loadingSignUpUser = "FAILED";
 
-    state.modal = {
-      isClosed: false,
-      message,
-      type: "form",
-      isLoading: false,
-    };
+      state.modal = {
+        isClosed: false,
+        message: "Could not create your Account.",
+        type: "form",
+        isLoading: false,
+      };
+    }
   }
 };
 
@@ -71,6 +76,8 @@ export const signUpUserOAuthRejected: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
   localStorage.removeItem("createResearchManagerAccount");
+
+  state.loadingSignUpUser = "FAILED";
 
   state.modal = {
     isClosed: false,

@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dto
-import { UpdateResearchLogDtoSwaggerWrapper } from '../../../dto';
+import { UpdateResearchLogDtoSwaggerWrapper } from '../../../wrappers';
 // Examples
 import { updateResearchLogExamples } from '../../../examples';
 

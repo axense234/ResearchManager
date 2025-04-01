@@ -22,9 +22,9 @@ import {
   CreateActivityDayQueryParams,
   DeleteActivityDayQueryParams,
   GetActivityDayQueryParams,
-  GetActivityDaysQueryParams,
   UpdateActivityDayQueryParams,
 } from './types';
+import { GetActivityDaysQueryParamsSwaggerWrapper } from './data';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
 // Custom Decorators
@@ -46,7 +46,7 @@ export class ActivityDayController {
   @SwaggerResponses('activityDay', 'GET MULTIPLE')
   @Get()
   getActivityDays(
-    @Query() queryParams: GetActivityDaysQueryParams,
+    @Query() queryParams: GetActivityDaysQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.activityDayService.getActivityDays(queryParams, req.url);

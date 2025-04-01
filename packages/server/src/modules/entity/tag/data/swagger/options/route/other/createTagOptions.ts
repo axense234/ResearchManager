@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { CreateTagDtoSwaggerWrapper } from '../../../dto';
+import { CreateTagDtoSwaggerWrapper } from '../../../wrappers';
 // Examples
 import { createTagExamples } from '../../../examples';
 

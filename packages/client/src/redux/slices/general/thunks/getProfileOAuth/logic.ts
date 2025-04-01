@@ -20,7 +20,7 @@ export const getProfileOAuth = createAsyncThunk<User | AxiosError>(
           params: { uniqueIdentifierType: "email" },
         })
       ).data as ReturnObjectBuilderReturnObject;
-      console.log(res);
+
       return res.payload as User;
     } catch (error) {
       return error as AxiosError;

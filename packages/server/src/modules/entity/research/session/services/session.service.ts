@@ -9,6 +9,7 @@ import { DeleteResearchSessionService } from './deleteResearchSession.service';
 // Dtos
 import {
   CreateResearchSessionDto,
+  GetResearchSessionsQueryParams,
   UpdateResearchSessionDto,
 } from '@researchmanager/shared/types';
 // Types
@@ -16,7 +17,6 @@ import {
   CreateResearchSessionQueryParams,
   DeleteResearchSessionQueryParams,
   GetResearchSessionQueryParams,
-  GetResearchSessionsQueryParams,
   UpdateResearchSessionQueryParams,
 } from '../types';
 

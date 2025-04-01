@@ -2,9 +2,12 @@
 import {
   ExtraReducerFuncType,
   GeneralSliceInitialStateType,
+  UserRedux,
 } from "@/core/types";
-import { User } from "@prisma/client";
 import { AxiosError } from "axios";
+import { User } from "@prisma/client";
+// Helpers
+import { transformEntityIntoEntityRedux } from "@/helpers";
 
 export const getProfileJWTPending: ExtraReducerFuncType<
   GeneralSliceInitialStateType
@@ -33,11 +36,8 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
   const axiosError = action.payload as AxiosError;
 
   if (!axiosError?.response) {
-    state.userProfile = {
-      ...user,
-      createdAt: new Date(user.createdAt).toISOString(),
-      updatedAt: new Date(user.updatedAt).toISOString(),
-    };
+    state.userProfile = transformEntityIntoEntityRedux(user) as UserRedux;
+
     state.loadingGetProfileJWT = "SUCCEDED";
     state.modal = {
       isClosed: hasUserCreatedAccountBefore === "true",

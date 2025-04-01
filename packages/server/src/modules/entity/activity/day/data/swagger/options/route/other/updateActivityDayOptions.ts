@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateActivityDayDtoSwaggerWrapper } from '../../../dto';
+import { UpdateActivityDayDtoSwaggerWrapper } from '../../../wrappers';
 // Examples
 import { updateActivityDayExamples } from '../../../examples';
 

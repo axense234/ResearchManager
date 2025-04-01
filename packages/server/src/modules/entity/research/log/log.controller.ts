@@ -22,11 +22,11 @@ import {
   CreateResearchLogQueryParams,
   DeleteResearchLogQueryParams,
   GetResearchLogQueryParams,
-  GetResearchLogsQueryParams,
   UpdateResearchLogQueryParams,
 } from './types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetResearchLogsQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
@@ -46,7 +46,7 @@ export class ResearchLogController {
   @SwaggerResponses('researchLog', 'GET MULTIPLE')
   @Get()
   getResearchLogs(
-    @Query() queryParams: GetResearchLogsQueryParams,
+    @Query() queryParams: GetResearchLogsQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.researchLogService.getResearchLogs(queryParams, req.url);

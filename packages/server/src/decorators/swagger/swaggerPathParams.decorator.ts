@@ -3,7 +3,8 @@ import { applyDecorators } from '@nestjs/common';
 // Swagger
 import { ApiParam } from '@nestjs/swagger';
 // Types
-import { EntityType, ActionType } from 'src/modules/util/builder/types';
+import { EntityType } from 'src/modules/util/builder/types';
+import { ActionType } from '@researchmanager/shared/types';
 // Data
 import {
   deleteUserPathParamsApiParamOptions,

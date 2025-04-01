@@ -1,7 +1,7 @@
 // Swagger
 import { ApiBodyOptions, ApiOperationOptions } from '@nestjs/swagger';
 // Dtos
-import { UpdateResearchPhaseDtoSwaggerWrapper } from 'src/modules/entity/research/phase/data/swagger/dto';
+import { UpdateResearchPhaseDtoSwaggerWrapper } from 'src/modules/entity/research/phase/data/swagger/wrappers';
 // Examples
 import { updateResearchPhaseExamples } from '../../../examples';
 

@@ -7,8 +7,9 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { GetTagsQueryParams, TagFindManyObject } from '../types';
+import { TagFindManyObject } from '../types';
 import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
+import { GetTagsQueryParams } from '@researchmanager/shared/types';
 
 @Injectable()
 export class GetTagsService {

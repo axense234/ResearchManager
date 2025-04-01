@@ -1,13 +1,12 @@
 // Types
-import { User } from "@prisma/client";
 import { SignInDto, SignUpDto } from "@researchmanager/shared/types";
 import { LoadingStateType } from "../../other";
-import { ReduxEntityWrapper } from "../../wrapper";
 import { ModalType } from "./ModalType";
+import { UserRedux } from "./UserRedux";
 
 export type GeneralSliceInitialStateType = {
   // Auth
-  userProfile: ReduxEntityWrapper<User>;
+  userProfile: UserRedux;
   signInUserDto: SignInDto;
   signUpUserDto: SignUpDto;
   isUserABot: boolean;

@@ -21,11 +21,11 @@ import { UpdateUserDto } from '@researchmanager/shared/types';
 import {
   DeleteUserQueryParams,
   GetUserQueryParams,
-  GetUsersQueryParams,
   UpdateUserQueryParams,
 } from './types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetUsersQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
@@ -44,7 +44,10 @@ export class UserController {
   @SwaggerHead('user', 'GET MULTIPLE')
   @SwaggerResponses('user', 'GET MULTIPLE')
   @Get()
-  getUsers(@Query() queryParams: GetUsersQueryParams, @Req() req: Request) {
+  getUsers(
+    @Query() queryParams: GetUsersQueryParamsSwaggerWrapper,
+    @Req() req: Request,
+  ) {
     return this.userService.getUsers(queryParams, req.url);
   }
 

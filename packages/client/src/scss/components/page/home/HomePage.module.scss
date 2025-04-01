@@ -1,0 +1,19 @@
+@use "../../../abstracts" as *;
+
+.homePageContainer {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  align-self: flex-end;
+  width: 80%;
+  height: 100%;
+  background-color: getColor("main-light-blue");
+  gap: 13.5rem;
+  padding: 4rem 2rem;
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    visibility: hidden;
+  }
+}

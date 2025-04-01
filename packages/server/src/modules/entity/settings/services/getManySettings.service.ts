@@ -7,8 +7,9 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import { GetManySettingsQueryParams, SettingsFindManyObject } from '../types';
+import { SettingsFindManyObject } from '../types';
 import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
+import { GetManySettingsQueryParams } from '@researchmanager/shared/types';
 
 @Injectable()
 export class GetManySettingsService {

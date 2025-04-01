@@ -22,11 +22,11 @@ import {
   CreateActivityLogQueryParams,
   DeleteActivityLogQueryParams,
   GetActivityLogQueryParams,
-  GetActivityLogsQueryParams,
   UpdateActivityLogQueryParams,
 } from './types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetActivityLogsQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
@@ -46,7 +46,7 @@ export class ActivityLogController {
   @SwaggerResponses('activityLog', 'GET MULTIPLE')
   @Get()
   getActivityLogs(
-    @Query() queryParams: GetActivityLogsQueryParams,
+    @Query() queryParams: GetActivityLogsQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.activityLogService.getActivityLogs(queryParams, req.url);

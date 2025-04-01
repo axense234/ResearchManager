@@ -4,6 +4,7 @@ import {
   selectCanTryFetchingProfile,
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
+  selectLoadingSignInUser,
   selectUserProfile,
 } from "@/redux/slices/general";
 import { useAppDispatch, useAppSelector } from "./redux";
@@ -23,6 +24,8 @@ export const useAuthorization = () => {
   const loadingGetProfileJWT = useAppSelector(selectLoadingGetProfileJWT);
   const loadingGetProfileOAuth = useAppSelector(selectLoadingGetProfileOAuth);
 
+  const loadingSignInUser = useAppSelector(selectLoadingSignInUser);
+
   const canTryFetchingProfile = useAppSelector(selectCanTryFetchingProfile);
 
   const profile = useAppSelector(selectUserProfile);
@@ -39,7 +42,7 @@ export const useAuthorization = () => {
     dispatch(
       changeCanTryFetchingProfile(createResearchManagerAccount !== "create"),
     );
-  }, []);
+  }, [loadingSignInUser]);
 
   useEffect(() => {
     if (loadingGetProfileJWT === "IDLE" && canTryFetchingProfile) {

@@ -1,0 +1,30 @@
+@use "../../../abstracts" as *;
+
+.homeIntroContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 3rem;
+
+  padding: 6rem 10rem;
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-dark-blue");
+}
+
+.homeIntroDetails {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+
+  > h3 {
+    @include heading("h3", "laptop", "white");
+    letter-spacing: 1.5px;
+  }
+
+  > p {
+    @include paragraph("laptop", "white");
+    width: 80%;
+    text-align: center;
+  }
+}

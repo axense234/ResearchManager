@@ -21,12 +21,12 @@ import {
 import {
   CreateSettingsQueryParams,
   DeleteSettingsQueryParams,
-  GetManySettingsQueryParams,
   GetSettingsQueryParams,
   UpdateSettingsQueryParams,
 } from './types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetManySettingsQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
@@ -46,7 +46,7 @@ export class SettingsController {
   @SwaggerResponses('settings', 'GET MULTIPLE')
   @Get()
   getManySettings(
-    @Query() queryParams: GetManySettingsQueryParams,
+    @Query() queryParams: GetManySettingsQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.settingsService.getManySettings(queryParams, req.url);

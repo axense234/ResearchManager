@@ -9,6 +9,7 @@
 
   &:hover {
     transform: translateX(2rem);
+    font-style: italic;
   }
 
   > a,
@@ -36,7 +37,7 @@
     }
 
     > svg {
-      color: getColor("main-black-100");
+      color: getColor("main-dark-blue");
       font-size: 1.75rem;
     }
   }

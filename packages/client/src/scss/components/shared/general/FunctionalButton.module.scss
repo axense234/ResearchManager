@@ -1,0 +1,27 @@
+@use "../../../abstracts" as *;
+
+.functionalButtonContainer {
+  @include flexCenter(column);
+
+  font-size: getFontSize("button-heading");
+  letter-spacing: 1px;
+  font-weight: 550;
+  background-color: getColor("secondary-white");
+
+  cursor: pointer;
+
+  align-self: center;
+
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.25rem;
+  border: 3px solid getColor("create-green");
+  color: getColor("create-green");
+
+  transition: transform 0.2s ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

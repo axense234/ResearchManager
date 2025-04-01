@@ -10,13 +10,13 @@ import { DeleteSettingsService } from './deleteSettings.service';
 import {
   CreateSettingsQueryParams,
   DeleteSettingsQueryParams,
-  GetManySettingsQueryParams,
   GetSettingsQueryParams,
   UpdateSettingsQueryParams,
 } from '../types';
 // Dtos
 import {
   CreateSettingsDto,
+  GetManySettingsQueryParams,
   UpdateSettingsDto,
 } from '@researchmanager/shared/types';
 

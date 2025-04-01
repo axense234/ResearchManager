@@ -19,11 +19,11 @@ import {
   CreateTagQueryParams,
   DeleteTagQueryParams,
   GetTagQueryParams,
-  GetTagsQueryParams,
   UpdateTagQueryParams,
 } from './types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetTagsQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
@@ -42,7 +42,10 @@ export class TagController {
   @SwaggerHead('tag', 'GET MULTIPLE')
   @SwaggerResponses('tag', 'GET MULTIPLE')
   @Get()
-  getTags(@Query() queryParams: GetTagsQueryParams, @Req() req: Request) {
+  getTags(
+    @Query() queryParams: GetTagsQueryParamsSwaggerWrapper,
+    @Req() req: Request,
+  ) {
     return this.tagService.getTags(queryParams, req.url);
   }
 

@@ -9,6 +9,7 @@ import { UpdateActivityDayService } from './updateActivityDay.service';
 // Dtos
 import {
   CreateActivityDayDto,
+  GetActivityDaysQueryParams,
   UpdateActivityDayDto,
 } from '@researchmanager/shared/types';
 // Types
@@ -16,7 +17,6 @@ import {
   CreateActivityDayQueryParams,
   DeleteActivityDayQueryParams,
   GetActivityDayQueryParams,
-  GetActivityDaysQueryParams,
   UpdateActivityDayQueryParams,
 } from '../types';
 

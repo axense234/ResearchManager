@@ -7,11 +7,9 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Type
-import {
-  GetResearchSessionsQueryParams,
-  ResearchSessionFindManyObject,
-} from '../types';
+import { ResearchSessionFindManyObject } from '../types';
 import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
+import { GetResearchSessionsQueryParams } from '@researchmanager/shared/types';
 
 @Injectable()
 export class GetResearchSessionsService {

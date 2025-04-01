@@ -22,11 +22,11 @@ import {
   CreateActivityFeedQueryParams,
   DeleteActivityFeedQueryParams,
   GetActivityFeedQueryParams,
-  GetActivityFeedsQueryParams,
   UpdateActivityFeedQueryParams,
 } from './types';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetActivityFeedsQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
@@ -46,7 +46,7 @@ export class ActivityFeedController {
   @SwaggerResponses('activityFeed', 'GET MULTIPLE')
   @Get()
   getActivityFeeds(
-    @Query() queryParams: GetActivityFeedsQueryParams,
+    @Query() queryParams: GetActivityFeedsQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.activityFeedService.getActivityFeeds(queryParams, req.url);

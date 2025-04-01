@@ -2,11 +2,15 @@
 import {
   ExtraReducerFuncType,
   GeneralSliceInitialStateType,
+  UserRedux,
 } from "@/core/types";
 import { User } from "@prisma/client";
 import { AxiosError } from "axios";
 // Helpers
-import { handleFormErrorInputsAndModalMessage } from "@/helpers";
+import {
+  handleFormErrorInputsAndModalMessage,
+  transformEntityIntoEntityRedux,
+} from "@/helpers";
 
 export const signUpUserPending: ExtraReducerFuncType<
   GeneralSliceInitialStateType
@@ -28,11 +32,8 @@ export const signUpUserFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     console.log(user);
-    state.userProfile = {
-      ...user,
-      createdAt: new Date(user.createdAt).toISOString(),
-      updatedAt: new Date(user.updatedAt).toISOString(),
-    };
+
+    state.userProfile = transformEntityIntoEntityRedux(user) as UserRedux;
     state.loadingSignUpUser = "SUCCEDED";
 
     state.modal = {

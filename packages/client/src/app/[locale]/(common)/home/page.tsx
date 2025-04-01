@@ -3,15 +3,13 @@
 import { FC } from "react";
 // Hooks
 import { useAuthorization } from "@/hooks/useAuthorization";
+// Page Component
+import HomePage from "@/components/page/home/HomePage";
 
 const Home: FC = () => {
   useAuthorization();
 
-  return (
-    <div>
-      <h1>Hello Home Page 2</h1>
-    </div>
-  );
+  return <HomePage />;
 };
 
 export default Home;

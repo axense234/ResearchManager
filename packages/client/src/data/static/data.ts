@@ -163,6 +163,14 @@ export const sidebarButtonsContent: SidebarButtonContentType[] = [
   },
 ];
 
+export const homeIntroDescription =
+  "Research Manager is an app focused around creating and managing Research Activities. Research Activities could be hobbies, or other activities, each one of them having Research Points and Logs. Research Points equal to the time spent in minutes on an and Logs are frequent journals that describe in detail a Session.";
+
+export const homeExamplesDescriptions = [
+  "A Research Activity mainly consists of Research Points and Research Logs, tho for viewing purposes some Tags, Images and other cosmetic stuff can be assigned to a Research Activity, like on the examples shown.",
+  "Research Activities are also split in Research Phases. By default, when creating a Research Activity a base Research Phase is created with the name of the Research Activity. Research Phases help with organizing the whole researching purposes, like having different phases for different projects.",
+];
+
 export const AUTO_CLOSE_MODAL = 5000;
 
 export const AUTO_SLIDER_DELAY = 4000;

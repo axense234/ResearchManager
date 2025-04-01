@@ -3,7 +3,8 @@ import { applyDecorators } from '@nestjs/common';
 // Swagger
 import { ApiResponse } from '@nestjs/swagger';
 // Types
-import { ActionType, EntityType } from 'src/modules/util/builder/types';
+import { EntityType } from 'src/modules/util/builder/types';
+import { ActionType } from '@researchmanager/shared/types';
 // Data
 import {
   logOutResponsesOptions,

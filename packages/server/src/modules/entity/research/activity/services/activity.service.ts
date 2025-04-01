@@ -9,10 +9,10 @@ import { DeleteResearchActivityService } from './deleteResearchActivity.service'
 // Dtos
 import {
   CreateResearchActivityDto,
+  GetResearchActivitiesQueryParams,
   UpdateResearchActivityDto,
 } from '@researchmanager/shared/types';
 // Types
-import { GetResearchActivitiesQueryParams } from '../types/params/GetResearchActivitiesQueryParams';
 import { GetResearchActivityQueryParams } from '../types/params/GetResearchActivityQueryParams';
 import { CreateResearchActivityQueryParams } from '../types/params/CreateResearchActivityQueryParams';
 import { DeleteResearchActivityQueryParams } from '../types/params/DeleteResearchActivityQueryParams';

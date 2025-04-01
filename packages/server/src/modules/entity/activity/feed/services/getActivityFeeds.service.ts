@@ -7,11 +7,9 @@ import { RedisService } from 'src/modules/db/redis/services/redis.service';
 // Object Builder
 import { ObjectBuilderService } from 'src/modules/util/builder/services/builder.service';
 // Types
-import {
-  ActivityFeedFindManyObject,
-  GetActivityFeedsQueryParams,
-} from '../types';
+import { ActivityFeedFindManyObject } from '../types';
 import { ReturnObjectBuilderReturnObjectSwaggerWrapper } from 'src/modules/util/builder/data';
+import { GetActivityFeedsQueryParams } from '@researchmanager/shared/types';
 
 @Injectable()
 export class GetActivityFeedsService {

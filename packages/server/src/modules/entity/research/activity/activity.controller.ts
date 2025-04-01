@@ -18,13 +18,13 @@ import {
 // Services
 import { ResearchActivityService } from './services/activity.service';
 // Types
-import { GetResearchActivitiesQueryParams } from './types/params/GetResearchActivitiesQueryParams';
 import { GetResearchActivityQueryParams } from './types/params/GetResearchActivityQueryParams';
 import { CreateResearchActivityQueryParams } from './types/params/CreateResearchActivityQueryParams';
 import { DeleteResearchActivityQueryParams } from './types/params/DeleteResearchActivityQueryParams';
 import { UpdateResearchActivityQueryParams } from './types/params/UpdateResearchActivityQueryParams';
 // Swagger
 import { ApiTags } from '@nestjs/swagger';
+import { GetResearchActivitiesQueryParamsSwaggerWrapper } from './data';
 // Custom Decorators
 import { SwaggerHead } from 'src/decorators/swagger/swaggerHead.decorator';
 import { SwaggerResponses } from 'src/decorators/swagger/swaggerResponses.decorator';
@@ -44,7 +44,7 @@ export class ResearchActivityController {
   @SwaggerResponses('researchActivity', 'GET MULTIPLE')
   @Get()
   getResearchActivities(
-    @Query() queryParams: GetResearchActivitiesQueryParams,
+    @Query() queryParams: GetResearchActivitiesQueryParamsSwaggerWrapper,
     @Req() req: Request,
   ) {
     return this.researchActivityService.getResearchActivities(
