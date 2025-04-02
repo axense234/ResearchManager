@@ -1,16 +1,27 @@
 // Adapter
 import { researchActivitiesAdapter } from "./adapter";
 // Types
-import { ResearchActivitiesSliceStateType } from "@/core/types";
+import {
+  ResearchActivitiesSliceInitialStateType,
+  ResearchActivitiesSliceStateType,
+  ResearchActivityRedux,
+} from "@/core/types";
+import { transformEntityIntoEntityRedux } from "@/helpers";
 // Mock Data
-import { createResearchActivityMockData } from "@researchmanager/shared/mock";
+import {
+  createResearchActivityMockData,
+  researchActivitiesMockData,
+} from "@researchmanager/shared/mock";
 
 export const researchActivitiesSliceInitialState =
   researchActivitiesAdapter.getInitialState({
     createResearchActivityDto: createResearchActivityMockData[0],
+    researchActivitiesExamples: researchActivitiesMockData.map((ra) => {
+      return transformEntityIntoEntityRedux(ra) as ResearchActivityRedux;
+    }),
     loadingCreateResearchActivity: "IDLE",
     loadingDeleteResearchActivity: "IDLE",
     loadingUpdateResearchActivity: "IDLE",
     loadingGetUserResearchActivities: "IDLE",
     loadingGetUserResearchActivity: "IDLE",
-  }) as ResearchActivitiesSliceStateType;
+  } as ResearchActivitiesSliceInitialStateType) as ResearchActivitiesSliceStateType;

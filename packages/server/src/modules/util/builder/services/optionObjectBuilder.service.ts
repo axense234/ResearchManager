@@ -2,7 +2,6 @@
 import { Injectable } from '@nestjs/common';
 // Types
 import {
-  EntityType,
   OptionObjectBuilderIncludeObject,
   OptionObjectBuilderParams,
   OptionObjectBuilderReturnObject,
@@ -10,6 +9,7 @@ import {
 } from '../types';
 // Util Service
 import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
+import { EntityType } from '@researchmanager/shared/types';
 
 @Injectable()
 export class OptionObjectBuilderService {
@@ -37,7 +37,7 @@ export class OptionObjectBuilderService {
         if (includeValues) {
           const includeValuesArray = includeValues
             .replace(/\s+/g, '')
-            .split(',') as (EntityType | EntityType)[];
+            .split(',') as EntityType[];
 
           const filteredIncludeValuesArray = includeValuesArray.filter(
             (includeValue) => allowedIncludeValues.includes(includeValue),

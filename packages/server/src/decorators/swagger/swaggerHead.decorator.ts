@@ -79,8 +79,7 @@ import {
   updateUserApiOperationOptions,
 } from 'src/modules/entity/user/data';
 // Types
-import { EntityType } from 'src/modules/util/builder/types';
-import { ActionType } from '@researchmanager/shared/types';
+import { ActionType, EntityType } from '@researchmanager/shared/types';
 
 export const SwaggerHead = (
   entityType: EntityType | 'health',

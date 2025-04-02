@@ -1,8 +1,8 @@
 // Validators
 import { Type } from 'class-transformer';
 import { IsOptional, IsString, IsUUID } from 'class-validator';
-// General
-import { EntityType } from '../general/EntityType';
+// Types
+import { EntityType } from '@researchmanager/shared/types';
 
 export class QueryObjectBuilderParamsQuery {
   @IsUUID()

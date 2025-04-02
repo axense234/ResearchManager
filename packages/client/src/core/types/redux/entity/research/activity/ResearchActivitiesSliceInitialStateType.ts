@@ -1,9 +1,12 @@
 // Types
 import { CreateResearchActivityDto } from "@researchmanager/shared/types";
 import { LoadingStateType } from "../../../other";
+import { ResearchActivityRedux } from "./ResearchActivityRedux";
 
-export type ResearchActivitiesInitialStateType = {
+export type ResearchActivitiesSliceInitialStateType = {
   createResearchActivityDto: CreateResearchActivityDto;
+
+  researchActivitiesExamples: ResearchActivityRedux[];
 
   loadingCreateResearchActivity: LoadingStateType;
   loadingDeleteResearchActivity: LoadingStateType;

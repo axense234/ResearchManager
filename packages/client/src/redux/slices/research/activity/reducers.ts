@@ -27,7 +27,6 @@ export const researchActivitiesSliceReducers = {
         break;
       case "UPDATE":
         state.loadingUpdateResearchActivity = actionValue;
-
         break;
       case "DELETE":
         state.loadingDeleteResearchActivity = actionValue;

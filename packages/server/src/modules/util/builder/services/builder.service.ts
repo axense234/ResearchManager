@@ -12,7 +12,6 @@ import {
   ChooseAllowedBuilderValuesReturnObject,
   DataObjectBuilderDataObject,
   DataObjectBuilderParams,
-  EntityType,
   OptionObjectBuilderParams,
   OptionObjectBuilderReturnObject,
   OrderByObjectBuilderParams,
@@ -21,7 +20,10 @@ import {
   QueryObjectBuilderReturnObject,
   ReturnObjectBuilderParams,
 } from '../types';
-import { ReturnObjectBuilderReturnObject } from '@researchmanager/shared/types';
+import {
+  EntityType,
+  ReturnObjectBuilderReturnObject,
+} from '@researchmanager/shared/types';
 
 @Injectable()
 export class ObjectBuilderService {

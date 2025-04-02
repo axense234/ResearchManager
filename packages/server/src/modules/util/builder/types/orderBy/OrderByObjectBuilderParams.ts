@@ -2,7 +2,7 @@
 import { IsOptional, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 // Types
-import { EntityType } from '../general/EntityType';
+import { EntityType } from '@researchmanager/shared/types';
 
 export class OrderByObjectBuilderParamsQuery {
   @IsOptional()

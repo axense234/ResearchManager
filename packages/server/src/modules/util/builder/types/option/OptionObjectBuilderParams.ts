@@ -1,7 +1,7 @@
 // Validators
 import { IsString, IsOptional } from 'class-validator';
 // Types
-import { EntityType } from '../general/EntityType';
+import { EntityType } from '@researchmanager/shared/types';
 
 export class OptionObjectBuilderParams {
   @IsString()

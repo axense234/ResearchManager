@@ -9,7 +9,7 @@ export const createResearchSessionMockData: CreateResearchSessionDto[] = [
     content: "There was once a red mist...",
     imagesSrc: ["image 1 src", "image 2 src"],
     currentStatusType: "STARTED",
-    currentStatusDate: new Date("2025-02-27T08:38:42.609Z"),
+    currentStatusDate: new Date(),
     researchPhaseId: "put your research phase id here",
   },
   {
@@ -19,7 +19,7 @@ export const createResearchSessionMockData: CreateResearchSessionDto[] = [
     content: "Did some polynomial equations today, idk...",
     imagesSrc: ["image 1 src"],
     currentStatusType: "PAUSED",
-    currentStatusDate: new Date("2025-02-27T08:38:42.609Z"),
+    currentStatusDate: new Date(),
     researchPhaseId: "put your research phase id here",
   },
   {
@@ -29,7 +29,7 @@ export const createResearchSessionMockData: CreateResearchSessionDto[] = [
     content: "This book is pretty good, too bad im not going to read it.",
     imagesSrc: ["image 1 src", "image 2 src", "image 3 src"],
     currentStatusType: "RESUMED",
-    currentStatusDate: new Date("2025-02-27T08:38:42.609Z"),
+    currentStatusDate: new Date(),
     researchPhaseId: "put your research phase id here",
   },
 ];

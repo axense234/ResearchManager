@@ -1,4 +1,17 @@
 // Types
-import { ResearchActivityRedux, UserRedux } from "../entity";
+import {
+  ResearchActivityRedux,
+  ResearchLogRedux,
+  ResearchPhaseRedux,
+  ResearchSessionRedux,
+  TagRedux,
+  UserRedux,
+} from "../entity";
 
-export type EntityRedux = UserRedux | ResearchActivityRedux;
+export type EntityRedux =
+  | UserRedux
+  | TagRedux
+  | ResearchActivityRedux
+  | ResearchPhaseRedux
+  | ResearchLogRedux
+  | ResearchSessionRedux;

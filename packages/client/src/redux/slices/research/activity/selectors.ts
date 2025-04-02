@@ -1,6 +1,6 @@
 // Redux
 import { State } from "@/redux/api/store";
-// Adapater
+// Adapter
 import { researchActivitiesAdapter } from "./adapter";
 
 export const {
@@ -10,6 +10,9 @@ export const {
 } = researchActivitiesAdapter.getSelectors<State>(
   (state) => state.researchActivities,
 );
+
+export const selectResearchActivitiesExamples = (state: State) =>
+  state.researchActivities.researchActivitiesExamples;
 
 export const selectCreateResearchActivityDto = (state: State) =>
   state.researchActivities.createResearchActivityDto;

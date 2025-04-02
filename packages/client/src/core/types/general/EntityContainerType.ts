@@ -1,6 +1,1 @@
-export type EntityContainerType =
-  | "researchActivity"
-  | "researchPhase"
-  | "researchLog"
-  | "researchSession"
-  | "tag";
+export type EntityContainerType = "example" | "entity" | "archived";

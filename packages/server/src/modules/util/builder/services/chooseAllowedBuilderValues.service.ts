@@ -4,9 +4,8 @@ import { Injectable } from '@nestjs/common';
 import {
   ChooseAllowedBuilderValuesReturnObject,
   DataObjectBuilderAllowedConnectValue,
-  EntityType,
 } from '../types';
-import { EntityTypePlural } from '@researchmanager/shared/types';
+import { EntityType, EntityTypePlural } from '@researchmanager/shared/types';
 // Data
 import {
   researchActivitiesAllowedSearchByKeyValues,

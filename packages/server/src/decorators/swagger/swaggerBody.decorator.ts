@@ -3,8 +3,7 @@ import { applyDecorators } from '@nestjs/common';
 // Swagger
 import { ApiBody } from '@nestjs/swagger';
 // Types
-import { EntityType } from 'src/modules/util/builder/types';
-import { ActionType } from '@researchmanager/shared/types';
+import { ActionType, EntityType } from '@researchmanager/shared/types';
 // Data
 import {
   signInApiBodyOptions,

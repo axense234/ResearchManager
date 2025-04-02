@@ -1,5 +1,5 @@
 // Types
-import { EntityType } from 'src/modules/util/builder/types';
+import { EntityType } from '@researchmanager/shared/types';
 import DeleteCacheShallowType from './DeleteCacheShallow';
 
 type DeleteCacheDeepType = {

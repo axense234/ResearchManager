@@ -1,6 +1,5 @@
 // Types
-import { ActionType } from '@researchmanager/shared/types';
-import { EntityType } from '../general';
+import { ActionType, EntityType } from '@researchmanager/shared/types';
 import { DataObjectBuilderParamsOptions } from './DataObjectBuilderParamsOptions';
 
 export class DataObjectBuilderParams {
