@@ -26,6 +26,7 @@ export const createResearchSessionFulfilled: ExtraReducerFuncType<
   if (axiosError !== undefined && !axiosError.response) {
     const researchSessionRedux = transformEntityIntoEntityRedux(
       researchSession,
+      "researchSession",
     ) as ResearchSessionRedux;
 
     researchSessionsAdapter.addOne(state, researchSessionRedux);

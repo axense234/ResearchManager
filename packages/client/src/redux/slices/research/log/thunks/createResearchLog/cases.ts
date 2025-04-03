@@ -26,6 +26,7 @@ export const createResearchLogFulfilled: ExtraReducerFuncType<
   if (axiosError !== undefined && !axiosError.response) {
     const researchLogRedux = transformEntityIntoEntityRedux(
       researchLog,
+      "researchLog",
     ) as ResearchLogRedux;
 
     researchLogsAdapter.addOne(state, researchLogRedux);

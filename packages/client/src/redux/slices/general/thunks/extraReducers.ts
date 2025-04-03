@@ -1,7 +1,10 @@
 // Redux Toolkit
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 // Types
-import { GeneralSliceInitialStateType } from "@/core/types";
+import {
+  EntitiesSliceInitialStateType,
+  GeneralSliceInitialStateType,
+} from "@/core/types";
 // Extra Reducers
 import {
   logOutUser,

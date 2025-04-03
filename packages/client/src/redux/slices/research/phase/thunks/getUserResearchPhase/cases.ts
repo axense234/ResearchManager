@@ -26,6 +26,7 @@ export const getUserResearchPhaseFulfilled: ExtraReducerFuncType<
   if (axiosError !== undefined && !axiosError.response) {
     const researchPhaseRedux = transformEntityIntoEntityRedux(
       researchPhase,
+      "researchPhase",
     ) as ResearchPhaseRedux;
 
     researchPhasesAdapter.upsertOne(state, researchPhaseRedux);

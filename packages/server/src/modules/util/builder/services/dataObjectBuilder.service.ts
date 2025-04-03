@@ -8,15 +8,13 @@ import { ResearchActivityCreateDataObject } from 'src/modules/entity/research/ac
 // Argon
 import * as argon from 'argon2';
 // Services
-import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
 import { ConfigService } from '@nestjs/config';
+// Util
+import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
 
 @Injectable()
 export class DataObjectBuilderService {
-  constructor(
-    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
-    private configService: ConfigService,
-  ) {}
+  constructor(private configService: ConfigService) {}
 
   async buildDataObject({
     dto,
@@ -25,10 +23,7 @@ export class DataObjectBuilderService {
     options,
   }: DataObjectBuilderParams): Promise<DataObjectBuilderDataObject> {
     const dataObject: DataObjectBuilderDataObject = { ...(dto as any) };
-    const { allowedConnectValues } =
-      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
-        entityType,
-      );
+    const { allowedConnectValues } = chooseAllowedBuilderValues(entityType);
 
     const { createActivityFeed = 'true', createSettings = 'true' } = options;
 

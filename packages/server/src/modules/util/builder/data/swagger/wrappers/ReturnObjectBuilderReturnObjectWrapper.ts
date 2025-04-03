@@ -7,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 // Types
-import { Entity } from '@researchmanager/shared/types';
+import { EntityPayload } from '@researchmanager/shared/types';
 // Swagger
 import { ApiProperty } from '@nestjs/swagger';
 // Data
@@ -32,7 +32,7 @@ export class ReturnObjectBuilderReturnObjectSwaggerWrapper {
   @ApiProperty(returnObjectBuilderDtoOptions['payload'])
   @IsObject()
   @IsOptional()
-  payload?: Entity | Entity[];
+  payload?: EntityPayload | EntityPayload[];
 
   @ApiProperty(returnObjectBuilderDtoOptions['access_token'])
   @IsJWT()

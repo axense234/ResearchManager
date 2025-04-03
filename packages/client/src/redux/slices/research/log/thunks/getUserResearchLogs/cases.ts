@@ -25,7 +25,10 @@ export const getUserResearchLogsFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     const researchLogsRedux = researchLogs.map((log) => {
-      return transformEntityIntoEntityRedux(log) as ResearchLogRedux;
+      return transformEntityIntoEntityRedux(
+        log,
+        "researchLog",
+      ) as ResearchLogRedux;
     });
 
     researchLogsAdapter.removeAll(state);

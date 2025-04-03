@@ -1,14 +1,14 @@
 // Redux
 import { createSlice } from "@reduxjs/toolkit";
 // Initial State
-import { researchLogsSliceInitialState } from "./initialState";
+import { researchLogsSliceState } from "./initialState";
 // Reducers
 import { researchLogsSliceReducers } from "./reducers";
 import { researchLogsSliceExtraReducers } from "./thunks";
 
 const researchLogsSlice = createSlice({
   name: "researchLogs",
-  initialState: researchLogsSliceInitialState,
+  initialState: researchLogsSliceState,
   reducers: researchLogsSliceReducers,
   extraReducers(builder) {
     researchLogsSliceExtraReducers(builder);

@@ -8,7 +8,6 @@ import { GetOrSetCacheService } from './services/getOrSetCache.service';
 import { DeleteCacheShallowService } from './services/deleteCacheShallow.service';
 import { DeleteCacheDeepService } from './services/deleteCacheDeep.service';
 // Util Service
-import { ChooseAllowedBuilderValuesService } from 'src/modules/util/builder/services/chooseAllowedBuilderValues.service';
 
 @Global()
 @Module({
@@ -19,7 +18,6 @@ import { ChooseAllowedBuilderValuesService } from 'src/modules/util/builder/serv
     DeleteCacheShallowService,
     DeleteCacheDeepService,
     GetOrSetCacheService,
-    ChooseAllowedBuilderValuesService,
   ],
 })
 export class RedisModule {}

@@ -8,6 +8,7 @@ import { buildOptionDescription } from 'src/util/func/buildOptionDescription';
 
 type SignInQueryParamsApiPropertyOptionsType = {
   includeValues: ApiPropertyOptions;
+  includeDepth: ApiPropertyOptions;
   selectValues: ApiPropertyOptions;
   chosenOptionType: ApiPropertyOptions;
 };
@@ -17,6 +18,11 @@ export const signInQueryParamsApiPropertyOptions: SignInQueryParamsApiPropertyOp
     includeValues: {
       required: false,
       description: buildOptionDescription('include', userAllowedIncludeValues),
+    },
+    includeDepth: {
+      required: false,
+      description:
+        'The depth of the include object. Experimental. Available options: between 1-4, 1 being the default.',
     },
     selectValues: {
       required: false,

@@ -4,33 +4,33 @@ import { IsOptional, IsString } from "class-validator";
 export class GetResearchActivitiesQueryParams {
   @IsOptional()
   @IsString()
-  userId: string;
+  userId?: string;
 
   @IsOptional()
   @IsString()
-  searchByKey: string;
+  searchByKey?: string;
 
   @IsOptional()
   @IsString()
-  searchByValue: string;
+  searchByValue?: string;
 
   @IsOptional()
   @IsString()
-  sortByKeys: string;
+  sortByKeys?: string;
 
   @IsString()
   @IsOptional()
-  sortByOrders: "asc" | "desc";
+  sortByOrders?: "asc" | "desc";
 
   @IsString()
   @IsOptional()
-  includeValues: string;
+  includeValues?: string;
 
   @IsString()
   @IsOptional()
-  selectValues: string;
+  selectValues?: string;
 
   @IsString()
   @IsOptional()
-  chosenOptionType: "include" | "select";
+  chosenOptionType?: "include" | "select";
 }

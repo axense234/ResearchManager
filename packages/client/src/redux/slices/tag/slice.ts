@@ -1,7 +1,7 @@
 // Redux
 import { createSlice } from "@reduxjs/toolkit";
 // Initial State
-import { tagsSliceInitialState } from "./initialState";
+import { tagsSliceState } from "./initialState";
 // Reducers
 import { tagsSliceReducers } from "./reducers";
 // Extra Reducers
@@ -9,7 +9,7 @@ import { tagsSliceExtraReducers } from "./thunks";
 
 const tagsSlice = createSlice({
   name: "tags",
-  initialState: tagsSliceInitialState,
+  initialState: tagsSliceState,
   reducers: tagsSliceReducers,
   extraReducers(builder) {
     tagsSliceExtraReducers(builder);

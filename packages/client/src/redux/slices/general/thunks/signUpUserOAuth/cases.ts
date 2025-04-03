@@ -32,7 +32,10 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
   if (axiosError !== undefined && !axiosError.response) {
     console.log(user);
 
-    state.userProfile = transformEntityIntoEntityRedux(user) as UserRedux;
+    state.userProfile = transformEntityIntoEntityRedux(
+      user,
+      "user",
+    ) as UserRedux;
     state.loadingSignUpUser = "SUCCEDED";
 
     state.loadingSignUpUser = "SUCCEDED";

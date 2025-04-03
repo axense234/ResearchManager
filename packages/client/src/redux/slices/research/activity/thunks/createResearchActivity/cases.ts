@@ -10,13 +10,11 @@ import { ResearchActivity } from "@prisma/client";
 import { researchActivitiesAdapter } from "../../adapter";
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
-import { testAdapter } from "../../../phase";
 
 export const createResearchActivityPending: ExtraReducerFuncType<
   ResearchActivitiesSliceStateType
 > = (state, action) => {
   state.loadingCreateResearchActivity = "PENDING";
-  testAdapter(true);
 };
 
 export const createResearchActivityFulfilled: ExtraReducerFuncType<
@@ -28,6 +26,7 @@ export const createResearchActivityFulfilled: ExtraReducerFuncType<
   if (axiosError !== undefined && !axiosError.response) {
     const researchActivityRedux = transformEntityIntoEntityRedux(
       researchActivity,
+      "researchActivity",
     ) as ResearchActivityRedux;
 
     researchActivitiesAdapter.addOne(state, researchActivityRedux);

@@ -23,7 +23,7 @@ export const createTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
   const axiosError = action.payload as AxiosError;
 
   if (axiosError !== undefined && !axiosError.response) {
-    const tagRedux = transformEntityIntoEntityRedux(tag) as TagRedux;
+    const tagRedux = transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
 
     tagsAdapter.addOne(state, tagRedux);
     state.loadingCreateTag = "SUCCEDED";

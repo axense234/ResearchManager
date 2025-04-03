@@ -19,7 +19,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@researchmanager/shared": "^1.0.0",
     "@nestjs/cache-manager": "^2.3.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.3.0",
@@ -30,6 +29,7 @@
     "@nestjs/swagger": "^8.1.1",
     "@nestjs/throttler": "^6.4.0",
     "@prisma/client": "^5.22.0",
+    "@researchmanager/shared": "^1.0.0",
     "argon2": "^0.41.1",
     "cache-manager": "^5.7.6",
     "cache-manager-ioredis-yet": "^2.1.2",
@@ -37,6 +37,7 @@
     "class-validator": "^0.14.1",
     "helmet": "^8.0.0",
     "http-status-codes": "^2.3.0",
+    "nestjs-pino": "^0.3.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "redis": "^4.7.0",

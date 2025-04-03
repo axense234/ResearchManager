@@ -1,7 +1,7 @@
 // Redux
 import { createSlice } from "@reduxjs/toolkit";
 // Initial State
-import { researchActivitiesSliceInitialState } from "./initialState";
+import { researchActivitiesSliceState } from "./initialState";
 // Reducers
 import { researchActivitiesSliceReducers } from "./reducers";
 // Extra Reducers
@@ -9,7 +9,7 @@ import { researchActivitiesSliceExtraReducers } from "./thunks";
 
 const researchActivitiesSlice = createSlice({
   name: "researchActivities",
-  initialState: researchActivitiesSliceInitialState,
+  initialState: researchActivitiesSliceState,
   reducers: researchActivitiesSliceReducers,
   extraReducers(builder) {
     researchActivitiesSliceExtraReducers(builder);
@@ -19,6 +19,7 @@ const researchActivitiesSlice = createSlice({
 export const {
   updateCreateResearchActivityDto,
   updateLoadingResearchActivityState,
+  setAllResearchActivities,
 } = researchActivitiesSlice.actions;
 
 export default researchActivitiesSlice.reducer;

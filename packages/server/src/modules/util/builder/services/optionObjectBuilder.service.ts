@@ -7,47 +7,50 @@ import {
   OptionObjectBuilderReturnObject,
   OptionObjectBuilderSelectObject,
 } from '../types';
-// Util Service
-import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
-import { EntityType } from '@researchmanager/shared/types';
-
+import { EntityType, EntityTypePlural } from '@researchmanager/shared/types';
+// Util Func
+import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
+import { buildAllowedIncludeValuesObject } from 'src/util/func/BuildAllowedIncludeValuesObject';
+import { filterAllowedValues } from 'src/util/func/FilterAllowedValues';
 @Injectable()
 export class OptionObjectBuilderService {
-  constructor(
-    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
-  ) {}
+  constructor() {}
 
   buildOptionObject({
     entityType,
     chosenOptionType,
-    includeValues,
     selectValues,
+    includeDepth,
+    includeValues,
   }: OptionObjectBuilderParams) {
     const includeObject: OptionObjectBuilderIncludeObject = {};
     const selectObject: OptionObjectBuilderSelectObject = {};
     const builtOptionObjectReturnObject: OptionObjectBuilderReturnObject = {};
 
     const { allowedIncludeValues, allowedSelectValues } =
-      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
-        entityType,
-      );
+      chooseAllowedBuilderValues(entityType);
 
     switch (chosenOptionType) {
       case 'include':
         if (includeValues) {
           const includeValuesArray = includeValues
             .replace(/\s+/g, '')
-            .split(',') as EntityType[];
+            .split(',') as (EntityType | EntityTypePlural)[];
 
-          const filteredIncludeValuesArray = includeValuesArray.filter(
-            (includeValue) => allowedIncludeValues.includes(includeValue),
+          // Filter
+          const filteredIncludeValuesArray = filterAllowedValues(
+            includeValuesArray,
+            allowedIncludeValues,
           );
 
-          filteredIncludeValuesArray.forEach((includeValue) => {
-            includeObject[includeValue] = true;
-          });
+          // Im losing it
+          const nestedIncludeObject = buildAllowedIncludeValuesObject(
+            filteredIncludeValuesArray as (EntityType | EntityTypePlural)[],
+            includeObject,
+            includeDepth,
+          );
 
-          builtOptionObjectReturnObject.optionObject = includeObject;
+          builtOptionObjectReturnObject.optionObject = nestedIncludeObject;
         } else {
           builtOptionObjectReturnObject.additionalNotes = `No includeValues were provided even tho chosenOptionType is given and equal to 'include'.`;
         }
@@ -56,8 +59,9 @@ export class OptionObjectBuilderService {
         if (selectValues) {
           const selectValuesArray = selectValues.replace(/\s+/g, '').split(',');
 
-          const filteredSelectValuesArray = selectValuesArray.filter(
-            (selectValue) => allowedSelectValues.includes(selectValue),
+          const filteredSelectValuesArray = filterAllowedValues(
+            selectValuesArray,
+            allowedSelectValues,
           );
 
           filteredSelectValuesArray.forEach((selectValue) => {

@@ -1,11 +1,11 @@
 // Types
+import { User } from "@prisma/client";
+import { AxiosError } from "axios";
 import {
   ExtraReducerFuncType,
   GeneralSliceInitialStateType,
   UserRedux,
 } from "@/core/types";
-import { User } from "@prisma/client";
-import { AxiosError } from "axios";
 // Helpers
 import {
   handleFormErrorInputsAndModalMessage,
@@ -31,7 +31,10 @@ export const signInUserFulfilled: ExtraReducerFuncType<
   const axiosError = action.payload as AxiosError;
 
   if (axiosError !== undefined && !axiosError.response) {
-    state.userProfile = transformEntityIntoEntityRedux(user) as UserRedux;
+    state.userProfile = transformEntityIntoEntityRedux(
+      user,
+      "user",
+    ) as UserRedux;
 
     state.loadingSignInUser = "SUCCEDED";
 

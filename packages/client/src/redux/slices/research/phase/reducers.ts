@@ -2,29 +2,12 @@
 import {
   LoadingStateType,
   ObjectKeyValueType,
-  ResearchPhaseRedux,
   ResearchPhasesSliceStateType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
-import { researchPhasesAdapter } from "./adapter";
-import { researchPhasesMockData } from "@researchmanager/shared/mock";
-import { transformEntityIntoEntityRedux } from "@/helpers";
 
 export const researchPhasesSliceReducers = {
-  testAdapter(
-    state: ResearchPhasesSliceStateType,
-    action: PayloadAction<boolean>,
-  ) {
-    console.log("did something?");
-
-    researchPhasesAdapter.upsertOne(
-      state,
-      transformEntityIntoEntityRedux(
-        researchPhasesMockData[0],
-      ) as ResearchPhaseRedux,
-    );
-  },
   updateLoadingResearchPhaseState(
     state: ResearchPhasesSliceStateType,
     action: PayloadAction<{ actionType: ActionType; value: LoadingStateType }>,

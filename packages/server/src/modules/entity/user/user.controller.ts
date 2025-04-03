@@ -13,8 +13,6 @@ import {
 import { UserService } from './services/user.service';
 // Param Decorators
 import { GetUser } from 'src/modules/entity/auth/decorator';
-// Prisma
-import { User } from '@prisma/client';
 // Dto
 import { UpdateUserDto } from '@researchmanager/shared/types';
 // Types
@@ -56,8 +54,12 @@ export class UserController {
   @SwaggerHead('user', 'GET PROFILE')
   @SwaggerResponses('user', 'GET PROFILE')
   @Get('profile')
-  getProfile(@GetUser() user: User) {
-    return this.userService.getProfile(user);
+  getProfile(
+    @GetUser('id') userId: string,
+    @Query() queryParams: GetUserQueryParams,
+    @Req() req: Request,
+  ) {
+    return this.userService.getProfile(userId, queryParams, req.url);
   }
 
   @SwaggerHead('user', 'GET SINGLE')

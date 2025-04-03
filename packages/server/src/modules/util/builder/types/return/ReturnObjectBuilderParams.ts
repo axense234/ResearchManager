@@ -1,7 +1,11 @@
 // Prisma
 import { IsJWT, IsNumber, IsOptional, IsString } from 'class-validator';
 // Types
-import { ActionType, Entity, EntityType } from '@researchmanager/shared/types';
+import {
+  ActionType,
+  EntityPayload,
+  EntityType,
+} from '@researchmanager/shared/types';
 
 export class ReturnObjectBuilderParams {
   @IsString()
@@ -11,7 +15,7 @@ export class ReturnObjectBuilderParams {
   message: string;
 
   @IsOptional()
-  entity?: Entity | Entity[];
+  entity?: EntityPayload | EntityPayload[];
 
   @IsOptional()
   additionalNotes?: string | string[];

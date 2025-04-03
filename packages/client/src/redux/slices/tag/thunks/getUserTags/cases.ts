@@ -27,7 +27,7 @@ export const getUserTagsFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
 
   if (axiosError !== undefined && !axiosError.response) {
     const tagsRedux = tags.map((tag) => {
-      return transformEntityIntoEntityRedux(tag) as TagRedux;
+      return transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
     });
 
     tagsAdapter.removeAll(state);

@@ -35,7 +35,8 @@ export class SignInService {
     dto: SignInDto,
   ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
-      const { includeValues, selectValues, chosenOptionType } = queryParams;
+      const { includeValues, selectValues, chosenOptionType, includeDepth } =
+        queryParams;
 
       const findUniqueObject: UserFindUniqueObject = {
         where: { email: dto.email } as unknown as UserWhereUniqueObject,
@@ -74,6 +75,7 @@ export class SignInService {
           entityType: 'user',
           includeValues,
           selectValues,
+          includeDepth: Number(includeDepth),
         });
 
       if (chosenOptionType && optionObject) {

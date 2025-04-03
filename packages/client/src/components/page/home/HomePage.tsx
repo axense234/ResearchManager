@@ -1,4 +1,5 @@
 "use client";
+
 // Interfaces
 import { FC, useEffect } from "react";
 // SCSS
@@ -9,27 +10,19 @@ import HomeExamples from "./HomeExamples";
 import HomeRankings from "./HomeRankings";
 import HomeContact from "./HomeContact";
 import HomeAbout from "./about/HomeAbout";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppSelector } from "@/hooks";
 import {
-  selectCreateResearchActivityDto,
-  selectLoadingCreateResearchActivity,
-} from "@/redux/slices/research/activity";
-import { createResearchActivity } from "@/redux/slices/research/activity/thunks";
+  selectLoadingGetProfileOAuth,
+  selectUserProfile,
+} from "@/redux/slices/general";
 
 const HomePage: FC = () => {
-  const dispatch = useAppDispatch();
-  const loadingCreateResearchActivity = useAppSelector(
-    selectLoadingCreateResearchActivity,
-  );
-  const createResearchActivityDto = useAppSelector(
-    selectCreateResearchActivityDto,
-  );
+  const profile = useAppSelector(selectUserProfile);
+  const loadingGetProfileOAuth = useAppSelector(selectLoadingGetProfileOAuth);
 
   useEffect(() => {
-    if (loadingCreateResearchActivity === "IDLE") {
-      dispatch(createResearchActivity(createResearchActivityDto));
-    }
-  }, []);
+    console.log("profile full", JSON.parse(JSON.stringify(profile)));
+  }, [profile, loadingGetProfileOAuth]);
 
   return (
     <section className={homePageStyles.homePageContainer}>

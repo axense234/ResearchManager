@@ -3,11 +3,20 @@ import {
   LoadingStateType,
   ObjectKeyValueType,
   ResearchActivitiesSliceStateType,
+  ResearchActivityRedux,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
+// Adapter
+import { researchActivitiesAdapter } from "./adapter";
 
 export const researchActivitiesSliceReducers = {
+  setAllResearchActivities(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<ResearchActivityRedux[]>,
+  ) {
+    researchActivitiesAdapter.setAll(state, action.payload);
+  },
   updateLoadingResearchActivityState(
     state: ResearchActivitiesSliceStateType,
     action: PayloadAction<{ actionType: ActionType; value: LoadingStateType }>,

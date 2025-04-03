@@ -11,6 +11,7 @@ import {
 type GetUserQueryParamsApiPropertyOptionsType = {
   uniqueIdentifierType: ApiPropertyOptions;
   includeValues: ApiPropertyOptions;
+  includeDepth: ApiPropertyOptions;
   selectValues: ApiPropertyOptions;
   chosenOptionType: ApiPropertyOptions;
 };
@@ -20,6 +21,11 @@ export const getUserQueryParamsApiPropertyOptions: GetUserQueryParamsApiProperty
     includeValues: {
       required: false,
       description: buildOptionDescription('include', userAllowedIncludeValues),
+    },
+    includeDepth: {
+      required: false,
+      description:
+        'The depth of the include object. Experimental. Available options: between 1-4, 1 being the default.',
     },
     selectValues: {
       required: false,

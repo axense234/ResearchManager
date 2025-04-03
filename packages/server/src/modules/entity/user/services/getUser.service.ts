@@ -41,6 +41,7 @@ export class GetUserService {
         selectValues,
         chosenOptionType,
         uniqueIdentifierType,
+        includeDepth,
       } = queryParams;
 
       const findUniqueObject: UserFindUniqueObject = {
@@ -55,6 +56,7 @@ export class GetUserService {
           entityType: 'user',
           includeValues,
           selectValues,
+          includeDepth: Number(includeDepth),
         });
 
       if (chosenOptionType && optionObject) {

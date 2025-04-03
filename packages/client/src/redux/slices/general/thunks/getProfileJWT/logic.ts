@@ -5,24 +5,28 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // Utils
 import { axiosInstance } from "@/utils";
 // Types
-import { User } from "@prisma/client";
+import {
+  ReturnObjectBuilderReturnObject,
+  UserPayload,
+} from "@researchmanager/shared/types";
 
-export const getProfileJWT = createAsyncThunk<User | AxiosError>(
+export const getProfileJWT = createAsyncThunk<UserPayload | AxiosError>(
   "general/getProfileJWT",
   async () => {
     try {
-      const res =
-        // type should be the return type but i havent done stuff to the getProfile service on the backend yet
-        (
-          await axiosInstance.get(`/users/profile`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem(process.env.NEXT_PUBLIC_JWT_KEY_LABEL as string)}`,
-            },
-          })
-        ).data as any;
+      const res = (
+        await axiosInstance.get(`/users/profile`, {
+          params: {
+            uniqueIdentifierType: "id",
+            includeValues: "researchActivities, settings, activityFeed, tags",
+            includeDepth: 4,
+            chosenOptionType: "include",
+          },
+        })
+      ).data as ReturnObjectBuilderReturnObject;
 
-      console.log(res);
-      return res.user as User;
+      console.log(res.payload);
+      return res.payload as UserPayload;
     } catch (error) {
       console.log(error);
       return error as AxiosError;

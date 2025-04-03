@@ -1,5 +1,8 @@
 // Types
-import { TagsSliceStateType } from "@/core/types";
+import {
+  EntitiesSliceInitialStateType,
+  TagsSliceStateType,
+} from "@/core/types";
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 // Extra Reducers
 import {

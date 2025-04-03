@@ -6,32 +6,8 @@ import {
   IsOptional,
   IsString,
 } from "class-validator";
-
 // Entity Types
-import {
-  ActivityDay,
-  ActivityFeed,
-  ActivityLog,
-  ResearchActivity,
-  ResearchLog,
-  ResearchPhase,
-  ResearchSession,
-  Settings,
-  Tag,
-  User,
-} from "@prisma/client";
-
-export type Entity =
-  | ResearchActivity
-  | ResearchPhase
-  | ResearchLog
-  | ResearchSession
-  | Settings
-  | ActivityFeed
-  | ActivityDay
-  | ActivityLog
-  | Tag
-  | User;
+import { EntityPayload } from "./EntityPayload";
 
 export class ReturnObjectBuilderReturnObject {
   @IsNumber()
@@ -48,7 +24,7 @@ export class ReturnObjectBuilderReturnObject {
 
   @IsObject()
   @IsOptional()
-  payload?: Entity | Entity[];
+  payload?: EntityPayload | EntityPayload[];
 
   @IsJWT()
   @IsOptional()

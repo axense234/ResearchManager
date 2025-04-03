@@ -7,7 +7,6 @@ import { OptionObjectBuilderService } from './services/optionObjectBuilder.servi
 import { DataObjectBuilderService } from './services/dataObjectBuilder.service';
 import { QueryObjectBuilderService } from './services/queryObjectBuilder.service';
 import { OrderByObjectBuilderService } from './services/orderByObjectBuilder.service';
-import { ChooseAllowedBuilderValuesService } from './services/chooseAllowedBuilderValues.service';
 
 @Global()
 @Module({
@@ -19,7 +18,6 @@ import { ChooseAllowedBuilderValuesService } from './services/chooseAllowedBuild
     QueryObjectBuilderService,
     OrderByObjectBuilderService,
     ObjectBuilderService,
-    ChooseAllowedBuilderValuesService,
   ],
 })
 export class ObjectBuilderModule {}

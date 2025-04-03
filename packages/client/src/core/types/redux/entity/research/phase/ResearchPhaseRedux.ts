@@ -1,16 +1,11 @@
 // Types
-import {
-  ResearchLog,
-  ResearchPhase,
-  ResearchSession,
-  Tag,
-} from "@prisma/client";
+import { ResearchPhase } from "@prisma/client";
 import { ReduxEntityWrapper } from "../../../wrapper";
 
 export type ResearchPhaseRedux = ReduxEntityWrapper<
   ResearchPhase & {
-    researchLogs: ResearchLog[];
-    researchSessions: ResearchSession[];
-    tags: Tag[];
+    researchLogsIds: string[];
+    researchSessionsIds: string[];
+    tagsIds: string[];
   }
 >;

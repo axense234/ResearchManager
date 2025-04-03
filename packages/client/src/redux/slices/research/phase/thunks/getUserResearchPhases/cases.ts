@@ -25,7 +25,10 @@ export const getUserResearchPhasesFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     const researchPhasesRedux = researchPhases.map((rp) => {
-      return transformEntityIntoEntityRedux(rp) as ResearchPhaseRedux;
+      return transformEntityIntoEntityRedux(
+        rp,
+        "researchPhase",
+      ) as ResearchPhaseRedux;
     });
 
     researchPhasesAdapter.removeAll(state);

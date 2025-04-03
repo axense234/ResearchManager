@@ -45,6 +45,7 @@ export class UpdateUserService {
         selectValues,
         chosenOptionType,
         uniqueIdentifierType,
+        includeDepth,
       } = queryParams;
 
       const dataObject = (await this.objectBuilder.buildDataObject({
@@ -67,6 +68,7 @@ export class UpdateUserService {
           chosenOptionType,
           includeValues,
           selectValues,
+          includeDepth: Number(includeDepth),
         });
 
       if (chosenOptionType && optionObject) {

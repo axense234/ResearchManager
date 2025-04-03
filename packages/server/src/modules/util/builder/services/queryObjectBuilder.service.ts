@@ -6,14 +6,12 @@ import {
   QueryObjectBuilderQueryObject,
   QueryObjectBuilderReturnObject,
 } from '../types';
-// Data
-import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
+// Util
+import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
 
 @Injectable()
 export class QueryObjectBuilderService {
-  constructor(
-    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
-  ) {}
+  constructor() {}
 
   buildQueryObject({
     entityType,
@@ -27,10 +25,7 @@ export class QueryObjectBuilderService {
       researchPhaseId,
       researchActivityId,
     } = queryParams;
-    const { allowedSearchByKeyValues } =
-      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
-        entityType,
-      );
+    const { allowedSearchByKeyValues } = chooseAllowedBuilderValues(entityType);
     const queryObject: QueryObjectBuilderQueryObject = {};
 
     if (userId) {

@@ -15,6 +15,11 @@ export class UpdateUserQueryParams {
   @IsOptional()
   includeValues: string;
 
+  @ApiProperty(updateUserQueryParamsApiPropertyOptions['includeDepth'])
+  @IsString()
+  @IsOptional()
+  includeDepth: string;
+
   @ApiProperty(updateUserQueryParamsApiPropertyOptions['selectValues'])
   @IsString()
   @IsOptional()

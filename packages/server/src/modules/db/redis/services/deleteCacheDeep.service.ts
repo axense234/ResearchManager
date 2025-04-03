@@ -1,20 +1,18 @@
 // NestJS
 import { Injectable } from '@nestjs/common';
 // Util Service
-import { ChooseAllowedBuilderValuesService } from 'src/modules/util/builder/services/chooseAllowedBuilderValues.service';
 // Util Func
 import { entityTypeToPlural } from 'src/util/func/entityTypeToPlural';
 // Types
 import DeleteCacheDeepType from '../types/DeleteCacheDeep';
 // Services
 import { DeleteCacheShallowService } from './deleteCacheShallow.service';
+// Util
+import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
 
 @Injectable()
 export class DeleteCacheDeepService {
-  constructor(
-    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
-    private deleteCacheShallowService: DeleteCacheShallowService,
-  ) {}
+  constructor(private deleteCacheShallowService: DeleteCacheShallowService) {}
 
   async deleteCacheDeep({
     entityType,
@@ -34,10 +32,7 @@ export class DeleteCacheDeepService {
     });
 
     // Deep
-    const { allowedIncludeValues } =
-      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
-        entityType,
-      );
+    const { allowedIncludeValues } = chooseAllowedBuilderValues(entityType);
 
     allowedIncludeValues.map((allowedIncludeValue) => {
       return this.deleteCacheShallowService.deleteCacheShallow({

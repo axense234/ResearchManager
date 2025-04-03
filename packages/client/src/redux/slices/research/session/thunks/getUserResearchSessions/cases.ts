@@ -25,11 +25,13 @@ export const getUserResearchSessionsFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     const researchSessionsRedux = researchSessions.map((session) => {
-      return transformEntityIntoEntityRedux(session) as ResearchSessionRedux;
+      return transformEntityIntoEntityRedux(
+        session,
+        "researchSession",
+      ) as ResearchSessionRedux;
     });
 
-    researchSessionsAdapter.removeAll(state);
-    researchSessionsAdapter.addMany(state, researchSessionsRedux);
+    researchSessionsAdapter.setAll(state, researchSessionsRedux);
     state.loadingGetUserResearchSessions = "SUCCEDED";
   } else {
     state.loadingGetUserResearchSessions = "FAILED";

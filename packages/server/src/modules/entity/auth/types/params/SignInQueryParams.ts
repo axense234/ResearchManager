@@ -11,6 +11,11 @@ export class SignInQueryParams {
   @IsOptional()
   includeValues: string;
 
+  @ApiProperty(signInQueryParamsApiPropertyOptions['includeDepth'])
+  @IsString()
+  @IsOptional()
+  includeDepth: string;
+
   @ApiProperty(signInQueryParamsApiPropertyOptions['selectValues'])
   @IsString()
   @IsOptional()

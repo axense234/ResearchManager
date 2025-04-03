@@ -9,14 +9,12 @@ import {
 import { EntityTypePlural } from '@researchmanager/shared/types';
 // Data
 import { entityValues } from '../data';
-// Util Service
-import { ChooseAllowedBuilderValuesService } from './chooseAllowedBuilderValues.service';
+// Util
+import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
 
 @Injectable()
 export class OrderByObjectBuilderService {
-  constructor(
-    private chooseAllowedBuilderValuesService: ChooseAllowedBuilderValuesService,
-  ) {}
+  constructor() {}
 
   buildOrderByObject({
     entityType,
@@ -25,10 +23,7 @@ export class OrderByObjectBuilderService {
     let additionalNotes: string = '';
     const { sortByKeys, sortByOrders } = queryParams;
     const orderByObject: OrderByObjectBuilderOrderByObject[] = [];
-    const { allowedSortByKeysValues } =
-      this.chooseAllowedBuilderValuesService.chooseAllowedBuilderValues(
-        entityType,
-      );
+    const { allowedSortByKeysValues } = chooseAllowedBuilderValues(entityType);
 
     if (sortByKeys && sortByOrders) {
       const sortByKeysArray = sortByKeys.replace(/\s+/g, '').split(',');

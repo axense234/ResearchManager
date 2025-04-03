@@ -12,7 +12,6 @@ export const signInUserOAuth = createAsyncThunk<
   SignInOAuthDto
 >("general/signInUserOAuth", async ({ provider, locale, pageType }) => {
   try {
-    console.log("sign in oauth");
     await signIn(provider, {
       redirect: true,
       callbackUrl: `${baseSiteUrl}/${locale}/home`,

@@ -26,6 +26,7 @@ export const getUserResearchActivityFulfilled: ExtraReducerFuncType<
   if (axiosError !== undefined && !axiosError.response) {
     const researchActivityRedux = transformEntityIntoEntityRedux(
       researchActivity,
+      "researchActivity",
     ) as ResearchActivityRedux;
 
     researchActivitiesAdapter.upsertOne(state, researchActivityRedux);

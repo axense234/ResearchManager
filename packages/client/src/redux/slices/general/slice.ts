@@ -2,10 +2,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 // Initial State
 import { generalSliceInitialState } from "./initialState";
-// Extra Reducers
-import { generalSliceExtraReducers } from "./thunks/extraReducers";
 // Reducers
 import { generalSliceReducers } from "./reducers";
+// Extra Reducers
+import { generalSliceExtraReducers } from "./thunks";
 
 const generalSlice = createSlice({
   name: "general",

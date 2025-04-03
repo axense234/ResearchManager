@@ -13,9 +13,9 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
 }) => {
   return (
     <div className={entityContainerStyles.entityContainer}>
-      <EntityContainerTags />
-      <EntityContainerLabel />
-      <EntityContainerOptions />
+      <EntityContainerTags containerType={containerType} />
+      <EntityContainerLabel containerType={containerType} />
+      <EntityContainerOptions containerType={containerType} />
     </div>
   );
 };

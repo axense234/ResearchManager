@@ -1,11 +1,11 @@
 // Types
+import { AxiosError } from "axios";
+import { UserPayload } from "@researchmanager/shared/types";
 import {
   ExtraReducerFuncType,
   GeneralSliceInitialStateType,
   UserRedux,
 } from "@/core/types";
-import { AxiosError } from "axios";
-import { User } from "@prisma/client";
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
 
@@ -32,17 +32,22 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
     "rm-user-prev-created-account",
   );
 
-  const user = action.payload as User;
   const axiosError = action.payload as AxiosError;
 
   if (!axiosError?.response) {
-    state.userProfile = transformEntityIntoEntityRedux(user) as UserRedux;
+    const userPayload = action.payload as UserPayload;
+    const userRedux = transformEntityIntoEntityRedux(
+      userPayload,
+      "user",
+    ) as UserRedux;
+
+    state.userProfile = userRedux;
 
     state.loadingGetProfileJWT = "SUCCEDED";
     state.modal = {
       isClosed: hasUserCreatedAccountBefore === "true",
       isLoading: false,
-      message: `Welcome back ${user.username}.`,
+      message: `Welcome back ${userPayload.username}.`,
       type: "general",
     };
   } else {

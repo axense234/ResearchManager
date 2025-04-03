@@ -15,12 +15,23 @@ export const getUserResearchActivities = createAsyncThunk<
   GetResearchActivitiesQueryParams
 >("researchActivities/getUserResearchActivities", async (queryParams) => {
   try {
-    const { searchByKey, searchByValue, sortByKeys, sortByOrders, userId } =
-      queryParams;
+    const {
+      includeValues,
+      chosenOptionType,
+      selectValues,
+      searchByKey,
+      searchByValue,
+      sortByKeys,
+      sortByOrders,
+      userId,
+    } = queryParams;
 
     const res = (
       await axiosInstance.get(`/researchActivities`, {
         params: {
+          includeValues,
+          selectValues,
+          chosenOptionType,
           searchByKey,
           searchByValue,
           sortByKeys,

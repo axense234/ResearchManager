@@ -14,15 +14,21 @@ import {
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
 
-export const researchLogsSliceInitialState =
-  researchLogsAdapter.getInitialState({
-    createResearchLogDto: createResearchLogMockData[0],
-    researchLogsExamples: researchLogsMockData.map((log) => {
-      return transformEntityIntoEntityRedux(log) as ResearchLogRedux;
-    }),
-    loadingCreateResearchLog: "IDLE",
-    loadingDeleteResearchLog: "IDLE",
-    loadingUpdateResearchLog: "IDLE",
-    loadingGetUserResearchLog: "IDLE",
-    loadingGetUserResearchLogs: "IDLE",
-  } as ResearchLogsSliceInitialStateType) as ResearchLogsSliceStateType;
+export const researchLogsSliceInitialState = {
+  createResearchLogDto: createResearchLogMockData[0],
+  researchLogsExamples: researchLogsMockData.map((log) => {
+    return transformEntityIntoEntityRedux(
+      log,
+      "researchLog",
+    ) as ResearchLogRedux;
+  }),
+  loadingCreateResearchLog: "IDLE",
+  loadingDeleteResearchLog: "IDLE",
+  loadingUpdateResearchLog: "IDLE",
+  loadingGetUserResearchLog: "IDLE",
+  loadingGetUserResearchLogs: "IDLE",
+} as ResearchLogsSliceInitialStateType;
+
+export const researchLogsSliceState = researchLogsAdapter.getInitialState(
+  researchLogsSliceInitialState,
+) as ResearchLogsSliceStateType;

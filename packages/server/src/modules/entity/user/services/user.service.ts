@@ -6,8 +6,6 @@ import { UpdateUserService } from './updateUser.service';
 import { DeleteUserService } from './deleteUser.service';
 import { GetUserService } from './getUser.service';
 import { GetUsersService } from './getUsers.service';
-// Prisma
-import { User } from '@prisma/client';
 // Dtos
 import {
   GetUsersQueryParams,
@@ -46,8 +44,12 @@ export class UserService {
     );
   }
 
-  async getProfile(user: User) {
-    return await this.getProfileService.getProfile(user);
+  async getProfile(
+    userId: string,
+    queryParams: GetUserQueryParams,
+    url: string,
+  ) {
+    return await this.getProfileService.getProfile(userId, queryParams, url);
   }
 
   async updateUser(

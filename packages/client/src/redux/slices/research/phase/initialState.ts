@@ -14,15 +14,21 @@ import {
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
 
-export const researchPhasesSliceInitialState =
-  researchPhasesAdapter.getInitialState({
-    createResearchPhaseDto: createResearchPhaseMockData[0],
-    researchPhasesExamples: researchPhasesMockData.map((rp) => {
-      return transformEntityIntoEntityRedux(rp) as ResearchPhaseRedux;
-    }),
-    loadingCreateResearchPhase: "IDLE",
-    loadingDeleteResearchPhase: "IDLE",
-    loadingUpdateResearchPhase: "IDLE",
-    loadingGetUserResearchPhases: "IDLE",
-    loadingGetUserResearchPhase: "IDLE",
-  } as ResearchPhasesSliceInitialStateType) as ResearchPhasesSliceStateType;
+export const researchPhasesSliceInitialState = {
+  createResearchPhaseDto: createResearchPhaseMockData[0],
+  researchPhasesExamples: researchPhasesMockData.map((rp) => {
+    return transformEntityIntoEntityRedux(
+      rp,
+      "researchPhase",
+    ) as ResearchPhaseRedux;
+  }),
+  loadingCreateResearchPhase: "IDLE",
+  loadingDeleteResearchPhase: "IDLE",
+  loadingUpdateResearchPhase: "IDLE",
+  loadingGetUserResearchPhases: "IDLE",
+  loadingGetUserResearchPhase: "IDLE",
+} as ResearchPhasesSliceInitialStateType;
+
+export const researchPhasesSliceState = researchPhasesAdapter.getInitialState(
+  researchPhasesSliceInitialState,
+) as ResearchPhasesSliceStateType;

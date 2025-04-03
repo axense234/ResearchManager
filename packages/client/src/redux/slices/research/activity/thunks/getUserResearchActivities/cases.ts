@@ -25,11 +25,13 @@ export const getUserResearchActivitiesFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     const researchActivitiesRedux = researchActivities.map((activity) => {
-      return transformEntityIntoEntityRedux(activity) as ResearchActivityRedux;
+      return transformEntityIntoEntityRedux(
+        activity,
+        "researchActivity",
+      ) as ResearchActivityRedux;
     });
 
-    researchActivitiesAdapter.removeAll(state);
-    researchActivitiesAdapter.addMany(state, researchActivitiesRedux);
+    researchActivitiesAdapter.setAll(state, researchActivitiesRedux);
     state.loadingGetUserResearchActivities = "SUCCEDED";
   } else {
     state.loadingGetUserResearchActivities = "FAILED";

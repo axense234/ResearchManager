@@ -1,7 +1,7 @@
 // Types
-import { TagRedux } from "@/core/types";
+import { EntityContainerType } from "@/core/types";
 
 export interface TagComponentProps {
-  tag?: TagRedux;
   tagId: string;
+  containerType: EntityContainerType;
 }
