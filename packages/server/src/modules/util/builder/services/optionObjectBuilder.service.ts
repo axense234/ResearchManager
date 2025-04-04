@@ -10,8 +10,8 @@ import {
 import { EntityType, EntityTypePlural } from '@researchmanager/shared/types';
 // Util Func
 import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
-import { buildAllowedIncludeValuesObject } from 'src/util/func/BuildAllowedIncludeValuesObject';
-import { filterAllowedValues } from 'src/util/func/FilterAllowedValues';
+import { buildAllowedIncludeValuesObject } from 'src/util/func/buildAllowedIncludeValuesObject';
+import { filterAllowedValues } from 'src/util/func/filterAllowedValues';
 @Injectable()
 export class OptionObjectBuilderService {
   constructor() {}
