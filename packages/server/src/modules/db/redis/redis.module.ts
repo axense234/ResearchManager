@@ -7,7 +7,6 @@ import { RedisService } from './services/redis.service';
 import { GetOrSetCacheService } from './services/getOrSetCache.service';
 import { DeleteCacheShallowService } from './services/deleteCacheShallow.service';
 import { DeleteCacheDeepService } from './services/deleteCacheDeep.service';
-// Util Service
 
 @Global()
 @Module({

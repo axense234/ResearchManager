@@ -13,6 +13,7 @@ export class RedisCacheModule {
     return CacheModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
         store: await ioredis.redisStore({
+          username: configService.get('REDIS_USERNAME'),
           host: configService.get('REDIS_HOST'),
           port: configService.get('REDIS_PORT'),
           password: configService.get('REDIS_PASSWORD'),
