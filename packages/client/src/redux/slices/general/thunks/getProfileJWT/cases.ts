@@ -34,7 +34,7 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
 
   const axiosError = action.payload as AxiosError;
 
-  if (!axiosError?.response) {
+  if (axiosError !== undefined && !axiosError.response) {
     const userPayload = action.payload as UserPayload;
     const userRedux = transformEntityIntoEntityRedux(
       userPayload,
