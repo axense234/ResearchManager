@@ -1,5 +1,4 @@
 "use client";
-
 // Interfaces
 import { LanguageSwitcherSelectProps } from "@/core/interfaces";
 import { FC } from "react";
@@ -16,6 +15,7 @@ const LanguageSwitcherSelect: FC<LanguageSwitcherSelectProps> = ({
   locale,
   defaultSelectValue,
   children,
+  position,
 }) => {
   const { imageLabel, imageSrc } =
     langFlagsImages.find((flagImage) => flagImage.value === locale) ||
@@ -28,14 +28,15 @@ const LanguageSwitcherSelect: FC<LanguageSwitcherSelectProps> = ({
       className={languageSwitcherStyles.languageSwitcherSelectContainer}
       title={imageLabel}
       aria-label={imageLabel}
+      style={{ position }}
     >
       <Image
         src={imageSrc}
         title={imageLabel}
         aria-label={imageLabel}
         alt=""
-        width={64}
-        height={48}
+        width={80}
+        height={60}
       />
       <div className={languageSwitcherStyles.languageSwitcherSelectFormControl}>
         <select

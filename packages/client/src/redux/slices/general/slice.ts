@@ -26,7 +26,9 @@ export const {
   changeAllowAutoCarousel,
   setModal,
   addErrorField,
+  changeShowEntityContainerWrapper,
   resetErrorFields,
+  updateContactUsDto,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

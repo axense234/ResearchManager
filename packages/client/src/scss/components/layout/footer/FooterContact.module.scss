@@ -1,0 +1,20 @@
+@use "../../../abstracts" as *;
+
+.footerContactContainer {
+  @include flexCenter(row);
+  width: 100%;
+  justify-content: space-evenly;
+
+  > p {
+    color: getColor("main-white");
+
+    font-size: getFontSize("button-heading-2");
+    letter-spacing: 0.5px;
+
+    transition: color 0.15s ease-in;
+
+    &:hover {
+      color: getColor("main-pastel-red");
+    }
+  }
+}

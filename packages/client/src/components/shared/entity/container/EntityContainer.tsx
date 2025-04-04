@@ -1,31 +1,66 @@
 // Interfaces
 import { FC } from "react";
 import { EntityContainerProps } from "@/core/interfaces";
-// Entity Interfaces
+// Components
 import ResearchActivityInterface from "./interfaces/ResearchActivityInterface";
 import ResearchPhaseInterface from "./interfaces/ResearchPhaseInterface";
 import ResearchLogInterface from "./interfaces/ResearchLogInterface";
 import ResearchSessionInterface from "./interfaces/ResearchSessionInterface";
 import TagInterface from "./interfaces/TagInterface";
 
-const EntityContainer: FC<EntityContainerProps> = ({
+export const EntityContainer: FC<EntityContainerProps> = ({
   entityType,
   containerType,
+  entityId,
 }) => {
+  let chosenEntityInterface = (
+    <ResearchActivityInterface
+      containerType={containerType}
+      entityId={entityId}
+    />
+  );
+
   switch (entityType) {
     case "researchActivity":
-      return <ResearchActivityInterface containerType={containerType} />;
+      chosenEntityInterface = (
+        <ResearchActivityInterface
+          containerType={containerType}
+          entityId={entityId}
+        />
+      );
+      break;
     case "researchPhase":
-      return <ResearchPhaseInterface containerType={containerType} />;
+      chosenEntityInterface = (
+        <ResearchPhaseInterface
+          containerType={containerType}
+          entityId={entityId}
+        />
+      );
+      break;
     case "researchLog":
-      return <ResearchLogInterface containerType={containerType} />;
+      chosenEntityInterface = (
+        <ResearchLogInterface
+          containerType={containerType}
+          entityId={entityId}
+        />
+      );
+      break;
     case "researchSession":
-      return <ResearchSessionInterface containerType={containerType} />;
+      chosenEntityInterface = (
+        <ResearchSessionInterface
+          containerType={containerType}
+          entityId={entityId}
+        />
+      );
+      break;
     case "tag":
-      return <TagInterface containerType={containerType} />;
+      chosenEntityInterface = (
+        <TagInterface containerType={containerType} entityId={entityId} />
+      );
+      break;
     default:
       throw new Error("Invalid entity type.");
   }
-};
 
-export default EntityContainer;
+  return chosenEntityInterface;
+};

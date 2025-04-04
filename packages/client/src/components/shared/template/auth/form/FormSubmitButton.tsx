@@ -3,6 +3,8 @@ import { FormSubmitButtonProps } from "@/core/interfaces";
 import { FC } from "react";
 // SCSS
 import formSubmitButtonStyles from "@/scss/components/shared/template/auth/form/FormSubmitButton.module.scss";
+// Data
+import { mainLightBlueColor, mainWhiteColor } from "@/data/static";
 
 const FormSubmitButton: FC<FormSubmitButtonProps> = ({
   content,
@@ -10,7 +12,11 @@ const FormSubmitButton: FC<FormSubmitButtonProps> = ({
   onClickFunction,
   onHoverContent,
   onHoverContentDisabled,
+  backgroundColorType = "dark",
 }) => {
+  const backgroundColor =
+    backgroundColorType === "dark" ? mainLightBlueColor : mainWhiteColor;
+
   return (
     <button
       className={formSubmitButtonStyles.formSubmitButtonContainer}
@@ -19,6 +25,7 @@ const FormSubmitButton: FC<FormSubmitButtonProps> = ({
       aria-label={disabled ? onHoverContentDisabled : onHoverContent}
       type="submit"
       onClick={onClickFunction}
+      style={{ backgroundColor }}
     >
       {content}
     </button>

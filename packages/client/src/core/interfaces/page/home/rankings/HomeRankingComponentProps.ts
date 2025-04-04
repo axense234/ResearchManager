@@ -1,6 +1,7 @@
 // Types
 import { EntityContainerType } from "@/core/types";
 
-export interface EntityContainerFragmentInterfaceProps {
+export type HomeRankingComponentProps = {
+  researchActivityId: string;
   containerType: EntityContainerType;
-}
+};

@@ -3,6 +3,7 @@ import { ChangeEventHandler } from "react";
 
 export interface TextFormControlProps {
   labelColorType?: "dark" | "light";
+  inputColorType?: "dark" | "light";
   labelFontSize?: number;
 
   minInputSize?: number;

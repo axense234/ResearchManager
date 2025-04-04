@@ -20,7 +20,7 @@ const HomeIntro: FC = () => {
   const isFunctionalButtonDisabled = profile.email.length <= 0;
 
   return (
-    <div className={homeIntroStyles.homeIntroContainer}>
+    <section className={homeIntroStyles.homeIntroContainer}>
       <Logo clickable={false} type="light" width={256} />
       <div className={homeIntroStyles.homeIntroDetails}>
         <h3>Research Manager</h3>
@@ -33,7 +33,7 @@ const HomeIntro: FC = () => {
         onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
         onClickFunction={() => dispatch(() => {})}
       />
-    </div>
+    </section>
   );
 };
 

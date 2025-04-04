@@ -1,29 +1,17 @@
 "use client";
-
 // Interfaces
-import { FC, useEffect } from "react";
+import { FC } from "react";
 // SCSS
 import homePageStyles from "@/scss/components/page/home/HomePage.module.scss";
 // Components
 import HomeIntro from "./HomeIntro";
 import HomeExamples from "./HomeExamples";
-import HomeRankings from "./HomeRankings";
-import HomeContact from "./HomeContact";
+import HomeRankings from "./rankings/HomeRankings";
+import HomeContact from "./contact/HomeContact";
 import HomeAbout from "./about/HomeAbout";
-import { useAppSelector } from "@/hooks";
-import {
-  selectLoadingGetProfileOAuth,
-  selectUserProfile,
-} from "@/redux/slices/general";
+import Footer from "@/components/layout/footer/Footer";
 
 const HomePage: FC = () => {
-  const profile = useAppSelector(selectUserProfile);
-  const loadingGetProfileOAuth = useAppSelector(selectLoadingGetProfileOAuth);
-
-  useEffect(() => {
-    console.log("profile full", JSON.parse(JSON.stringify(profile)));
-  }, [profile, loadingGetProfileOAuth]);
-
   return (
     <section className={homePageStyles.homePageContainer}>
       <HomeIntro />
@@ -31,6 +19,7 @@ const HomePage: FC = () => {
       <HomeRankings />
       <HomeContact />
       <HomeAbout />
+      <Footer />
     </section>
   );
 };

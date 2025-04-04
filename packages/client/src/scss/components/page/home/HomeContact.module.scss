@@ -1,0 +1,39 @@
+@use "../../../abstracts" as *;
+
+.homeContactContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 8rem;
+
+  padding: 4rem;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-dark-blue");
+}
+
+.homeContactDetails {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+
+  > h3 {
+    @include heading("h3", "laptop", "white");
+    letter-spacing: 1.5px;
+  }
+
+  > p {
+    @include paragraph("laptop", "white");
+    width: 80%;
+    text-align: center;
+  }
+}
+
+.homeContactContent {
+  @include flexCenter(row);
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}

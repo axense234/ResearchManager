@@ -32,4 +32,10 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
     isLoading: false,
   },
   errorFields: [],
+
+  // Util
+  showEntityContainerWrapper: false,
+
+  // Contact
+  contactUsDto: { title: "", message: "" },
 };

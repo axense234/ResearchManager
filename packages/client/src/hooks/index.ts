@@ -4,3 +4,4 @@ export * from "./useCreateUserOAuthTrigger";
 export * from "./useRedirect";
 export * from "./useAutoCarousel";
 export * from "./modal";
+export * from "./useEntityContainerInterfaceWrapperTransition";

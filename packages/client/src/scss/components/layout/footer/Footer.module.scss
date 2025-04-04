@@ -1,0 +1,12 @@
+@use "../../../abstracts" as *;
+
+.footerContainer {
+  @include flexCenter(column);
+  width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-color: getColor("main-dark-blue");
+  padding: 4rem;
+  padding-top: 8rem;
+  gap: 8rem;
+}

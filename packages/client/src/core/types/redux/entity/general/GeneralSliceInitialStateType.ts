@@ -26,4 +26,13 @@ export type GeneralSliceInitialStateType = {
   // Modals
   modal: ModalType;
   errorFields: string[];
+
+  // Util
+  showEntityContainerWrapper: boolean;
+
+  // Contact
+  contactUsDto: {
+    title: string;
+    message: string;
+  };
 };

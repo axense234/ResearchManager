@@ -3,19 +3,33 @@ import {
   LoadingStateType,
   ObjectKeyValueType,
   ResearchActivitiesSliceStateType,
-  ResearchActivityRedux,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
-// Adapter
-import { researchActivitiesAdapter } from "./adapter";
+// Helpers
+import { handleCarouselStepDirection } from "@/helpers";
 
 export const researchActivitiesSliceReducers = {
-  setAllResearchActivities(
+  handleResearchActivityExampleCarouselStepDirection(
     state: ResearchActivitiesSliceStateType,
-    action: PayloadAction<ResearchActivityRedux[]>,
+    action: PayloadAction<{ direction: "left" | "right" }>,
   ) {
-    researchActivitiesAdapter.setAll(state, action.payload);
+    console.log("hit");
+    state.currentResearchActivityExampleIndex = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentResearchActivityExampleIndex,
+      state.researchActivitiesExamples.length,
+    );
+  },
+  handleResearchActivityCarouselStepDirection(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<{ direction: "left" | "right" }>,
+  ) {
+    state.currentResearchActivityIndex = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentResearchActivityIndex,
+      state.ids.length,
+    );
   },
   updateLoadingResearchActivityState(
     state: ResearchActivitiesSliceStateType,

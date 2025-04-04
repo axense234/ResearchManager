@@ -3,6 +3,7 @@
 .formTitleContainer {
   @include flexCenter(column);
   align-items: flex-end;
+  position: relative;
 
   width: 100%;
 }

@@ -2,15 +2,8 @@
 
 .sidebarButtonContainer {
   @include flexCenter(row);
-  width: 80%;
+  width: 100%;
   border-radius: 1.25rem;
-
-  transition: transform 0.15s ease-in;
-
-  &:hover {
-    transform: translateX(2rem);
-    font-style: italic;
-  }
 
   > a,
   button {
@@ -31,6 +24,13 @@
     letter-spacing: 1px;
 
     justify-content: flex-start;
+
+    transition: background-color 0.15s ease-in;
+
+    &:hover {
+      background-color: getColor("main-pastel-red");
+      font-style: italic;
+    }
 
     > span {
       color: getColor("secondary-white");

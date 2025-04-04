@@ -1,0 +1,7 @@
+@use "../../../../../abstracts" as *;
+
+.entityContainerOptionsContainer {
+  @include flexCenter(row);
+  width: 100%;
+  gap: 3rem;
+}

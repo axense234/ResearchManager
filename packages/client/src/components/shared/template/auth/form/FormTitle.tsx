@@ -7,7 +7,7 @@ import formTitleStyles from "@/scss/components/shared/template/auth/form/FormTit
 const FormTitle = () => {
   return (
     <div className={formTitleStyles.formTitleContainer}>
-      <LanguageSwitcher />
+      <LanguageSwitcher position="initial" />
       <div className={formTitleStyles.formTitleLogo}>
         <Logo clickable={false} type="light" width={64} />
         <h6>Research Manager</h6>

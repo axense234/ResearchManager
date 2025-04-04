@@ -1,0 +1,31 @@
+@use "../../../../abstracts" as *;
+
+.homeContactFeedbackContainer {
+  @include flexCenter(row);
+  max-width: 50%;
+  min-width: 37.5rem;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  background-color: getColor("main-white");
+}
+
+.homeContactFeedbackForm {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 3rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: getColor("secondary-pastel-cyan");
+
+  > h5 {
+    @include heading("h5", "laptop", "black");
+    font-weight: 550;
+    letter-spacing: 1px;
+  }
+}
+
+.homeContactFeedbackFormControls {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 3rem;
+}

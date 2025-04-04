@@ -3,4 +3,5 @@ import { EntityContainerType } from "@/core/types";
 
 export interface EntityContainerInterfaceProps {
   containerType: EntityContainerType;
+  entityId: string;
 }

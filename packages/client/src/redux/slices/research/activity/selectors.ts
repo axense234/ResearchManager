@@ -11,6 +11,12 @@ export const {
   (state) => state.researchActivities,
 );
 
+export const selectCurrentResearchActivityExampleIndex = (state: State) =>
+  state.researchActivities.currentResearchActivityExampleIndex;
+
+export const selectCurrentResearchActivityIndex = (state: State) =>
+  state.researchActivities.currentResearchActivityIndex;
+
 export const selectResearchActivitiesExamples = (state: State) =>
   state.researchActivities.researchActivitiesExamples;
 

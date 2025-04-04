@@ -1,7 +1,18 @@
+// Interfaces
 import { FC } from "react";
+// Components
+import HomeAboutInfo from "./HomeAboutInfo";
+import HomeAboutTechnologies from "./HomeAboutTechnologies";
+// SCSS
+import homeAboutStyles from "@/scss/components/page/home/about/HomeAbout.module.scss";
 
 const HomeAbout: FC = () => {
-  return <div>HomeAbout</div>;
+  return (
+    <section className={homeAboutStyles.homeAboutContainer}>
+      <HomeAboutInfo />
+      <HomeAboutTechnologies />
+    </section>
+  );
 };
 
 export default HomeAbout;

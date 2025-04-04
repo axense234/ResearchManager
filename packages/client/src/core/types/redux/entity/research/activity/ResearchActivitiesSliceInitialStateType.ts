@@ -8,6 +8,9 @@ export type ResearchActivitiesSliceInitialStateType = {
 
   researchActivitiesExamples: ResearchActivityRedux[];
 
+  currentResearchActivityExampleIndex: number;
+  currentResearchActivityIndex: number;
+
   loadingCreateResearchActivity: LoadingStateType;
   loadingDeleteResearchActivity: LoadingStateType;
   loadingUpdateResearchActivity: LoadingStateType;

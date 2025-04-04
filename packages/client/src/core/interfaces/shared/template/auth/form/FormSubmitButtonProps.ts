@@ -7,4 +7,5 @@ export interface FormSubmitButtonProps {
   onHoverContent: string;
   onHoverContentDisabled: string;
   onClickFunction: MouseEventHandler<HTMLButtonElement> | undefined;
+  backgroundColorType?: "dark" | "light";
 }

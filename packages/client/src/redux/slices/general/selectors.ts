@@ -28,3 +28,10 @@ export const selectAllowAutoCarousel = (state: State) =>
 // Modals
 export const selectModal = (state: State) => state.general.modal;
 export const selectErrorFields = (state: State) => state.general.errorFields;
+
+// Util
+export const selectShowEntityContainerWrapper = (state: State) =>
+  state.general.showEntityContainerWrapper;
+
+// Contact
+export const selectContactUsDto = (state: State) => state.general.contactUsDto;

@@ -26,6 +26,8 @@ export const researchActivitiesSliceInitialState = {
   loadingUpdateResearchActivity: "IDLE",
   loadingGetUserResearchActivities: "IDLE",
   loadingGetUserResearchActivity: "IDLE",
+  currentResearchActivityExampleIndex: 1,
+  currentResearchActivityIndex: 1,
 } as ResearchActivitiesSliceInitialStateType;
 
 export const researchActivitiesSliceState =

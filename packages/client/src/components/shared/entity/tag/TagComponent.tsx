@@ -9,11 +9,11 @@ import { selectTagById, selectTagsExamples } from "@/redux/slices/tag";
 
 const TagComponent: FC<TagComponentProps> = ({ tagId, containerType }) => {
   const tag = useAppSelector((state) => selectTagById(state, tagId));
-  const tagFromTagExamples = useAppSelector(selectTagsExamples).find(
+  const tagExample = useAppSelector(selectTagsExamples).find(
     (tag) => tag.id === tagId,
   );
 
-  const usedTag = containerType === "example" ? tagFromTagExamples : tag;
+  const usedTag = containerType === "example" ? tagExample : tag;
 
   return (
     <div

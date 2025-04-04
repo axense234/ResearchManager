@@ -1,0 +1,37 @@
+@use "../../../abstracts" as *;
+
+.entityGraphsContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  max-width: 50%;
+  min-width: 37.5rem;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: getColor("main-white");
+
+  > p {
+    @include paragraph("laptop", "black");
+  }
+}
+
+.entityGraphsTitle {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+  align-items: flex-start;
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 50%;
+    background-color: getColor("main-black-100");
+  }
+
+  > h6 {
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
+    letter-spacing: 1px;
+  }
+}

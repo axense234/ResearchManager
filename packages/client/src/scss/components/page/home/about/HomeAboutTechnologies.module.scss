@@ -1,0 +1,123 @@
+@use "../../../../abstracts" as *;
+
+.homeAboutTechnologiesContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 8rem;
+
+  padding: 4rem;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-dark-blue");
+}
+
+.homeAboutTechnologiesDetails {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+
+  > h3 {
+    @include heading("h3", "laptop", "white");
+    letter-spacing: 1.5px;
+  }
+
+  > p {
+    @include paragraph("laptop", "white");
+    width: 80%;
+    text-align: center;
+  }
+}
+
+.homeAboutTechnologiesCategory {
+  @include flexCenter(column);
+  width: 100%;
+  padding: 4rem 2rem;
+  gap: 2rem;
+  border-radius: 0.5rem;
+  background-color: getColor("main-white");
+}
+
+.homeAboutTechnologiesCategoryTitle {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  > h5 {
+    @include heading("h5", "laptop", "black");
+    letter-spacing: 1.5px;
+  }
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 50%;
+    background-color: getColor("main-black-100");
+  }
+}
+
+.homeAboutTechnologiesCategoryTechnologies {
+  @include flexCenter(column);
+  width: 80%;
+  gap: 2rem;
+  list-style: none;
+}
+
+.homeAboutTechnologyContainer {
+  @include flexCenter(row);
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: getColor("secondary-pastel-cyan");
+  border-radius: 0.3rem;
+
+  transition:
+    transform 0.15s ease-in,
+    background-color 0.15s ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: getColor("main-pastel-red");
+  }
+}
+
+.homeAboutTechnologyDetails {
+  @include flexCenter(column);
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.5rem;
+
+  > a {
+    text-decoration: none;
+    color: getColor("link-blue");
+
+    transition: transform 0.1s ease-in;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+}
+
+.homeAboutTechnologyDetailsTitle {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+
+  > h6 {
+    @include heading("h6", "tablet", "black");
+    letter-spacing: 0.5px;
+  }
+
+  > p {
+    font-size: getFontSize("button-heading-2");
+    width: 100%;
+  }
+}

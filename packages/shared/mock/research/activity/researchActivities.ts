@@ -12,8 +12,8 @@ export const researchActivitiesMockData: ResearchActivity[] = [
     updatedAt: new Date(),
   },
   {
-    id: "1d3378cd-7253-4f2c-9519-ebe80b743fea",
-    name: "Gardening",
+    id: "5aba8fa5-a2a7-4481-a092-05bb3cd0ebbc",
+    name: "Singing",
     archived: false,
     backgroundColorOrImageSrc: "#D8E5E4",
     userId: "",
@@ -21,8 +21,8 @@ export const researchActivitiesMockData: ResearchActivity[] = [
     updatedAt: new Date(),
   },
   {
-    id: "8c535916-a373-4c03-b72e-1cac95ea3649",
-    name: "Weightlifting",
+    id: "1d3378cd-7253-4f2c-9519-ebe80b743fea",
+    name: "Gardening",
     archived: false,
     backgroundColorOrImageSrc: "#D8E5E4",
     userId: "",
@@ -39,8 +39,8 @@ export const researchActivitiesMockData: ResearchActivity[] = [
     updatedAt: new Date(),
   },
   {
-    id: "5aba8fa5-a2a7-4481-a092-05bb3cd0ebbc",
-    name: "Singing",
+    id: "8c535916-a373-4c03-b72e-1cac95ea3649",
+    name: "Weightlifting",
     archived: false,
     backgroundColorOrImageSrc: "#D8E5E4",
     userId: "",

@@ -4,14 +4,18 @@ import { FC } from "react";
 // SCSS
 import textFormControlStyles from "@/scss/components/shared/form/TextFormControl.module.scss";
 // Data
-import { mainBlackColor, mainWhiteColor } from "@/data/static";
+import {
+  mainBlackColor,
+  mainLightBlueColor,
+  mainWhiteColor,
+} from "@/data/static";
 
 const TextFormControl: FC<TextFormControlProps> = ({
   entityProperty,
   onEntityPropertyValueChange,
   type,
   labelContent,
-  labelColorType,
+  labelColorType = "light",
   labelFontSize,
   minInputSize,
   maxInputSize,
@@ -20,9 +24,13 @@ const TextFormControl: FC<TextFormControlProps> = ({
   inputHeight,
   border,
   placeholderContent,
+  inputColorType = "dark",
 }) => {
   const labelColor =
     labelColorType === "dark" ? mainBlackColor : mainWhiteColor;
+
+  const inputColor =
+    inputColorType === "dark" ? mainLightBlueColor : mainWhiteColor;
 
   return (
     <div className={textFormControlStyles.textFormControlContainer}>
@@ -42,7 +50,7 @@ const TextFormControl: FC<TextFormControlProps> = ({
         value={entityProperty as string | number}
         placeholder={placeholderContent}
         onChange={onEntityPropertyValueChange}
-        style={{ height: inputHeight, border }}
+        style={{ height: inputHeight, border, backgroundColor: inputColor }}
       />
     </div>
   );

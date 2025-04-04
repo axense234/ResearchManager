@@ -2,9 +2,13 @@
 
 .languageSwitcherSelectContainer {
   @include flexCenter(row);
-  position: relative;
+  position: absolute;
   width: max-content;
   height: max-content;
+  top: 2rem;
+  right: 3rem;
+
+  z-index: 20;
 
   transition: transform 0.2s ease-in;
 

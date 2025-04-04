@@ -6,8 +6,25 @@ import {
 } from "@/core/types";
 import { authCarouselContent } from "@/data/static";
 import { PayloadAction } from "@reduxjs/toolkit";
+// Helpers
+import { handleCarouselStepDirection } from "@/helpers";
 
 export const generalSliceReducers = {
+  updateContactUsDto(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<ObjectKeyValueType>,
+  ) {
+    state.contactUsDto = {
+      ...state.contactUsDto,
+      [action.payload.key]: action.payload.value,
+    };
+  },
+  changeShowEntityContainerWrapper(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<boolean>,
+  ) {
+    state.showEntityContainerWrapper = action.payload;
+  },
   updateSignInUserDto(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<ObjectKeyValueType>,
@@ -42,17 +59,11 @@ export const generalSliceReducers = {
     state: GeneralSliceInitialStateType,
     action: PayloadAction<{ direction: "left" | "right" }>,
   ) {
-    if (action.payload.direction === "left") {
-      state.currentAuthCarouselId =
-        state.currentAuthCarouselId - 1 < 1
-          ? authCarouselContent.length
-          : state.currentAuthCarouselId - 1;
-    } else if (action.payload.direction === "right") {
-      state.currentAuthCarouselId =
-        state.currentAuthCarouselId + 1 > 4
-          ? 1
-          : state.currentAuthCarouselId + 1;
-    }
+    state.currentAuthCarouselId = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentAuthCarouselId,
+      authCarouselContent.length,
+    );
   },
   changeCanTryFetchingProfile(
     state: GeneralSliceInitialStateType,

@@ -3,7 +3,6 @@
 .entityContainerTagsContainer {
   @include flexCenter(row);
   width: 100%;
-  gap: 1rem;
 }
 
 .entityContainerTagsList {
@@ -15,4 +14,15 @@
   gap: 2rem;
   row-gap: 1rem;
   list-style: none;
+}
+
+.entityContainerTagsShowButton {
+  @include flexCenter(row);
+  align-self: center;
+  background-color: inherit;
+  border: none;
+  color: getColor("main-pastel-red");
+  font-size: 14px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
 }

@@ -5,4 +5,5 @@ export interface LanguageSwitcherSelectProps {
   locale: string;
   defaultSelectValue: string;
   children: ReactNode;
+  position: "absolute" | "initial";
 }

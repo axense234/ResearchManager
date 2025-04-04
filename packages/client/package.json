@@ -22,7 +22,7 @@
     "next-intl": "^3.25.1",
     "next-pwa": "^5.6.0",
     "react": "18.3.1",
-    "react-chartjs2": "^1.2.1",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "18.3.1",
     "react-google-recaptcha": "^3.1.0",
     "react-i18next": "^15.1.1",
@@ -30,8 +30,7 @@
     "react-intersection-observer": "^9.13.1",
     "react-onesignal": "^3.0.1",
     "react-redux": "^9.1.2",
-    "react-spinners": "^0.14.1",
-    "sass-migrator": "^2.3.1"
+    "react-spinners": "^0.14.1"
   },
   "devDependencies": {
     "@types/node": "^22.9.1",

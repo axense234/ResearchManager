@@ -1,0 +1,44 @@
+@use "../../../../../abstracts" as *;
+
+.entityContainerLabelContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+  align-items: flex-start;
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 50%;
+    background-color: getColor("main-black-100");
+  }
+
+  > p {
+    @include paragraph("tablet", "black");
+    letter-spacing: 1px;
+  }
+}
+
+.entityContainerLabelTitle {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%;
+
+  > span {
+    @include flexCenter(row);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    font-size: getFontSize("button-heading-2");
+    letter-spacing: 1px;
+    background-color: getColor("secondary-white");
+    font-weight: 550;
+  }
+
+  > h5 {
+    @include heading("h5", "laptop", "black");
+    letter-spacing: 1px;
+  }
+}

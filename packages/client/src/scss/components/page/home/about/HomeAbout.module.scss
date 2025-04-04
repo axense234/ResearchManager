@@ -1,0 +1,7 @@
+@use "../../../../abstracts" as *;
+
+.homeAboutContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 13.5rem;
+}

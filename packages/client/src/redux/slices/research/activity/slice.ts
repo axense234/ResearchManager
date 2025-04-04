@@ -19,7 +19,8 @@ const researchActivitiesSlice = createSlice({
 export const {
   updateCreateResearchActivityDto,
   updateLoadingResearchActivityState,
-  setAllResearchActivities,
+  handleResearchActivityCarouselStepDirection,
+  handleResearchActivityExampleCarouselStepDirection,
 } = researchActivitiesSlice.actions;
 
 export default researchActivitiesSlice.reducer;
