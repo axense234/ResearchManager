@@ -19,4 +19,8 @@ export const userProfileMockDataRedux: UserRedux = {
     "https://res.cloudinary.com/birthdayreminder/image/upload/v1732365146/Research%20Manager/users/backgroundImages/signupwallpaper_der2zw.jpg",
   createdAt: "",
   updatedAt: "",
+  activityFeedId: "",
+  researchActivitiesIds: [],
+  settingsId: "",
+  tagsIds: [],
 };
