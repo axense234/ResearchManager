@@ -17,6 +17,7 @@ export class RedisCacheModule {
           host: configService.get('REDIS_HOST'),
           port: configService.get('REDIS_PORT'),
           password: configService.get('REDIS_PASSWORD'),
+          tls: configService.get('NODE_ENV') === 'development' ? undefined : {},
         }),
       }),
       inject: [ConfigService],
