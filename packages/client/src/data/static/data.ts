@@ -10,8 +10,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaHome, FaUser } from "react-icons/fa";
 import { MdDashboard, MdContactPhone, MdContactSupport } from "react-icons/md";
 import { FaRankingStar, FaBookOpenReader } from "react-icons/fa6";
-import { IoMdCreate, IoMdSettings } from "react-icons/io";
-import { RiShutDownLine } from "react-icons/ri";
+import { IoMdCreate, IoMdSettings, IoMdLogOut } from "react-icons/io";
 
 export const homePageUrl = "/home";
 
@@ -340,7 +339,7 @@ export const sidebarButtonsContent: SidebarButtonContentType[] = [
     id: 10,
     buttonLabel: "Logout",
     buttonType: "functional",
-    icon: RiShutDownLine({}),
+    icon: IoMdLogOut({}),
   },
 ];
 

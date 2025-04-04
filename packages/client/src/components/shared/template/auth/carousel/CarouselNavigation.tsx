@@ -8,7 +8,6 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // Data
 import {
   authCarouselContent,
-  mainLightBlueColor,
   mainPastelRedColor,
   mainWhiteColor,
 } from "@/data/static";
