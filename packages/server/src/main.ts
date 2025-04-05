@@ -14,10 +14,7 @@ const PORT = process.env.PORT || 4000;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
-      origin: [
-        process.env.CORS_TESTING_CLIENT_ORIGIN as string,
-        process.env.CORS_PRODUCTION_CLIENT_ORIGIN as string,
-      ],
+      origin: [process.env.CORS_PRODUCTION_CLIENT_ORIGIN as string],
       credentials: true,
     },
   });

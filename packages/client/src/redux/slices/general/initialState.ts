@@ -12,7 +12,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   userProfile: userProfileMockDataRedux,
   signInUserDto: signInMockDataRedux,
   signUpUserDto: signUpMockDataRedux,
-  isUserABot: false,
+  isUserABot: true,
 
   canTryFetchingProfile: false,
   loadingSignInUser: "IDLE",
