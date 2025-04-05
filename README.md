@@ -1,8 +1,8 @@
 # Research Manager
 
-Research Manager este o aplicație web fullstack care oferă utilizatorilor posibilitatea de a-si crea <br>
+Research Manager este o aplicație web fullstack care oferă utilizatorilor posibilitatea de a-și sistematiza și organiza activitățile practicate de aceștia, ducând astfel la o imbunatarile a activităților respective din punct de vedere claritate, înțelegere, eficientă, productivitate, scalabilitate. Acest proces influențează utilizatorul în luarea de decizii mai bune referitor la activitățile respective.
 
-# Website(in testing incepand cu 04.04.2025):
+# Website(în testing începând cu 04.04.2025):
 
 https://researchmanager-ca.netlify.app
 
