@@ -12,7 +12,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   userProfile: userProfileMockDataRedux,
   signInUserDto: signInMockDataRedux,
   signUpUserDto: signUpMockDataRedux,
-  isUserABot: true,
+  isUserABot: process.env.NODE_ENV === "production",
 
   canTryFetchingProfile: false,
   loadingSignInUser: "IDLE",

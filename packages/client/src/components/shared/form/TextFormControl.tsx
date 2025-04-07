@@ -8,7 +8,7 @@ import {
   mainBlackColor,
   mainLightBlueColor,
   mainWhiteColor,
-} from "@/data/static";
+} from "@/data/general";
 
 const TextFormControl: FC<TextFormControlProps> = ({
   entityProperty,

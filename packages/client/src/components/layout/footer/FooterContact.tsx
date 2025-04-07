@@ -1,7 +1,7 @@
 // Interfaces
 import { FC } from "react";
 // Data
-import { homeContactEmail, homeContactPhoneNumber } from "@/data/static";
+import { homeContactEmail, homeContactPhoneNumber } from "@/data/general";
 // SCSS
 import footerContactStyles from "@/scss/components/layout/footer/FooterContact.module.scss";
 

@@ -5,7 +5,7 @@ import {
   AUTO_SLIDER_FREQUENCY,
   AUTO_SLIDER_DELAY,
   AUTO_SLIDER_RESTART,
-} from "@/data/static";
+} from "@/data/general";
 
 export const useAutoCarousel = (
   allowAutoCarousel: boolean,

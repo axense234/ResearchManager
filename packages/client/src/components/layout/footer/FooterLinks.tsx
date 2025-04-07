@@ -1,45 +1,33 @@
 // Interfaces
 import { FC } from "react";
 // Data
-import { sidebarButtonsContent } from "@/data/static";
-// i18n
-import { Link } from "@/i18n/routing";
+import { navigationButtonsContent } from "@/data/general/components";
 // SCSS
 import footerLinksStyles from "@/scss/components/layout/footer/FooterLinks.module.scss";
+// Components
+import FooterLink from "./FooterLink";
+// Helper
+import { selectOnButtonClickFunction } from "@/helpers";
+// Redux
+import { useAppDispatch } from "@/hooks";
 
 const FooterLinks: FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <ul className={footerLinksStyles.footerLinksContainer}>
-      {sidebarButtonsContent.map(({ buttonLabel, buttonType, buttonDest }) => {
-        if (buttonType === "link") {
-          return (
-            <li className={footerLinksStyles.footerLinkContainer}>
-              <Link
-                href={buttonDest as string as any}
-                title={buttonLabel}
-                aria-label={buttonLabel}
-                key={buttonDest}
-              >
-                {buttonLabel}
-              </Link>
-            </li>
-          );
-        } else if (buttonType === "functional") {
-          return (
-            <li
-              className={footerLinksStyles.footerLinkContainer}
-              key={buttonLabel}
-            >
-              <button
-                type="button"
-                title={buttonLabel}
-                aria-label={buttonLabel}
-              >
-                {buttonLabel}
-              </button>
-            </li>
-          );
-        }
+      {navigationButtonsContent.map((navButtonContent) => {
+        return (
+          <li key={navButtonContent.id}>
+            <FooterLink
+              link={navButtonContent}
+              onClickFunction={selectOnButtonClickFunction(
+                dispatch,
+                navButtonContent.buttonLabel,
+              )}
+            />
+          </li>
+        );
       })}
     </ul>
   );

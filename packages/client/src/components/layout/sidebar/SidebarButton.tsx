@@ -1,38 +1,38 @@
 // Interfaces
 import { FC } from "react";
-import { SidebarButtonContentType } from "@/core/types";
+import { SidebarButtonProps } from "@/core/interfaces/layout";
 // i18n
 import { Link } from "@/i18n/routing";
 // SCSS
 import sidebarButtonStyles from "@/scss/components/layout/sidebar/SidebarButton.module.scss";
 
-const SidebarButton: FC<SidebarButtonContentType> = ({
-  buttonLabel,
-  buttonType,
-  icon,
-  buttonDest,
-}) => {
+const SidebarButton: FC<SidebarButtonProps> = ({ button, onClickFunction }) => {
+  const { buttonType, buttonLabel, icon, buttonDest } = button;
+
   if (buttonType === "link") {
     return (
-      <li className={sidebarButtonStyles.sidebarButtonContainer}>
-        <Link
-          href={buttonDest as string as any}
-          title={buttonLabel}
-          aria-label={buttonLabel}
-        >
-          {icon}
-          <span>{buttonLabel}</span>
-        </Link>
-      </li>
+      <Link
+        href={buttonDest as string as any}
+        title={buttonLabel}
+        aria-label={buttonLabel}
+        className={sidebarButtonStyles.sidebarButtonContainer}
+      >
+        {icon}
+        <span>{buttonLabel}</span>
+      </Link>
     );
   } else if (buttonType === "functional") {
     return (
-      <li className={sidebarButtonStyles.sidebarButtonContainer}>
-        <button type="button" title={buttonLabel} aria-label={buttonLabel}>
-          {icon}
-          <span>{buttonLabel}</span>
-        </button>
-      </li>
+      <button
+        type="button"
+        title={buttonLabel}
+        aria-label={buttonLabel}
+        className={sidebarButtonStyles.sidebarButtonContainer}
+        onClick={onClickFunction}
+      >
+        {icon}
+        <span>{buttonLabel}</span>
+      </button>
     );
   }
 };

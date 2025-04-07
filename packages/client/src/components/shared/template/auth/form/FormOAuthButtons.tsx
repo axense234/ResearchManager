@@ -1,7 +1,8 @@
 "use client";
 // Components
-import { OAuthOptionsContent } from "@/data/static";
 import OAuthButton from "../../../general/OAuthButton";
+// Data
+import { OAuthOptionsContent } from "@/data/general/components";
 // SCSS
 import formOAuthButtonsStyles from "@/scss/components/shared/template/auth/form/FormOAuthButtons.module.scss";
 // Interfaces

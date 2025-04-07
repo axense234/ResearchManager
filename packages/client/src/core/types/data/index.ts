@@ -1,3 +1,3 @@
 export * from "./OAuthOptionContentType";
-export * from "./SidebarButtonContentType";
+export * from "./NavigationButtonContentType";
 export * from "./AboutTechnologyType";

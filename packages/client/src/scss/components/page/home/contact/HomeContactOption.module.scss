@@ -1,17 +1,6 @@
 @use "../../../../abstracts" as *;
 
-.homeContactDirectOptionsContainer {
-  @include flexCenter(column);
-  max-width: 50%;
-  min-width: 37.5rem;
-  padding: 3rem;
-  border-radius: 0.5rem;
-  gap: 4rem;
-  background-color: getColor("main-white");
-}
-
-.homeContactDirectOptionsEmail,
-.homeContactDirectOptionsPhoneNumber {
+.homeContactOptionContainer {
   @include flexCenter(column);
   width: 100%;
   gap: 3rem;

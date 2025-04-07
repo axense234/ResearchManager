@@ -17,7 +17,7 @@ import {
   APP_DEFAULT_TITLE,
   APP_TITLE_TEMPLATE,
   APP_DESCRIPTION,
-} from "@/data/static";
+} from "@/data/general";
 
 export const metadata: Metadata = {
   icons: APP_ICON,

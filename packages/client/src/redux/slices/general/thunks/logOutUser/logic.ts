@@ -15,6 +15,9 @@ export const logOutUser = createAsyncThunk<void | AxiosError>(
         redirect: true,
         callbackUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_SITE_URL}/`,
       });
+      localStorage.removeItem(
+        process.env.NEXT_PUBLIC_JWT_KEY_LABEL || "rm-jwt",
+      );
     } catch (error) {
       console.log(error);
       return error as AxiosError;

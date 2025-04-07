@@ -1,0 +1,36 @@
+@use "../../../../../abstracts" as *;
+
+.homeAboutTechnologiesSection {
+  @include flexCenter(column);
+  width: 100%;
+  padding: 4rem 2rem;
+  gap: 2rem;
+  border-radius: 0.5rem;
+  background-color: getColor("main-white");
+}
+
+.homeAboutTechnologiesSectionTitle {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  > h5 {
+    @include heading("h5", "laptop", "black");
+    letter-spacing: 1.5px;
+  }
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 50%;
+    background-color: getColor("main-black-100");
+  }
+}
+
+.homeAboutTechnologiesSectionTechnologies {
+  @include flexCenter(column);
+  width: 80%;
+  gap: 2rem;
+  list-style: none;
+}

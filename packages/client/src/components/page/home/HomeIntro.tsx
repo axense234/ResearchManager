@@ -6,8 +6,9 @@ import homeIntroStyles from "@/scss/components/page/home/HomeIntro.module.scss";
 // Components
 import Logo from "@/components/shared/general/Logo";
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
+import HomeSectionTitle from "./shared/HomeSectionTitle";
 // Data
-import { homeIntroDescription } from "@/data/static";
+import { homeIntroData } from "@/data/general/home";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { selectUserProfile } from "@/redux/slices/general";
@@ -22,10 +23,10 @@ const HomeIntro: FC = () => {
   return (
     <section className={homeIntroStyles.homeIntroContainer}>
       <Logo clickable={false} type="light" width={256} />
-      <div className={homeIntroStyles.homeIntroDetails}>
-        <h3>Research Manager</h3>
-        <p>{homeIntroDescription}</p>
-      </div>
+      <HomeSectionTitle
+        title={homeIntroData.title}
+        description={homeIntroData.description}
+      />
       <FunctionalButton
         content="Create Research Activity"
         disabled={isFunctionalButtonDisabled}

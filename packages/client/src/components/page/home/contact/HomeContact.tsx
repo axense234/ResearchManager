@@ -1,23 +1,24 @@
 // Interfaces
 import { FC } from "react";
 // SCSS
-import homeContactStyles from "@/scss/components/page/home/HomeContact.module.scss";
+import homeContactStyles from "@/scss/components/page/home/contact/HomeContact.module.scss";
 // Data
-import { homeContactDescription } from "@/data/static";
+import { homeContactData } from "@/data/general/home";
 // Components
 import HomeContactFeedback from "./HomeContactFeedback";
-import HomeContactDirectOptions from "./HomeContactDirectOptions";
+import HomeContactOptions from "./HomeContactOptions";
+import HomeSectionTitle from "../shared/HomeSectionTitle";
 
 const HomeContact: FC = () => {
   return (
     <section className={homeContactStyles.homeContactContainer}>
-      <div className={homeContactStyles.homeContactDetails}>
-        <h3>Contact Us</h3>
-        <p>{homeContactDescription}</p>
-      </div>
+      <HomeSectionTitle
+        title={homeContactData.title}
+        description={homeContactData.description}
+      />
       <div className={homeContactStyles.homeContactContent}>
         <HomeContactFeedback />
-        <HomeContactDirectOptions />
+        <HomeContactOptions />
       </div>
     </section>
   );

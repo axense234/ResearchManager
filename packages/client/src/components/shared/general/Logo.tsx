@@ -8,7 +8,8 @@ import logoStyles from "@/scss/components/shared/general/Logo.module.scss";
 // NextJS
 import Image from "next/image";
 // Data
-import { homePageUrl, logoImageUrl } from "@/data/static";
+import { homePageUrl } from "@/data/general";
+import { logoImageUrl } from "@/data/general/components";
 
 const Logo: FC<LogoProps> = ({ clickable, width, type }) => {
   return (

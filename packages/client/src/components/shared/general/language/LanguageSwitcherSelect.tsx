@@ -5,7 +5,7 @@ import { FC } from "react";
 // NextJS
 import Image from "next/image";
 // Data
-import { langFlagsImages } from "@/data/static";
+import { langFlagsImages } from "@/data/general/components";
 // Hooks
 import { useNavigateToPathname } from "@/hooks";
 // SCSS

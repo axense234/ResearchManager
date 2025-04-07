@@ -1,0 +1,57 @@
+@use "../../../../../abstracts" as *;
+
+.homeAboutTechnologyContainer {
+  @include flexCenter(row);
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: getColor("secondary-pastel-cyan");
+  border-radius: 0.3rem;
+
+  transition:
+    transform 0.15s ease-in,
+    background-color 0.15s ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: getColor("main-pastel-red");
+  }
+}
+
+.homeAboutTechnologyDetails {
+  @include flexCenter(column);
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.5rem;
+
+  > a {
+    text-decoration: none;
+    color: getColor("link-blue");
+
+    transition: transform 0.1s ease-in;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+}
+
+.homeAboutTechnologyDetailsTitle {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+
+  > h6 {
+    @include heading("h6", "tablet", "black");
+    letter-spacing: 0.5px;
+  }
+
+  > p {
+    font-size: getFontSize("button-heading-2");
+    width: 100%;
+  }
+}

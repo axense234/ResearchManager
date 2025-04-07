@@ -12,7 +12,7 @@ import { useCloseModal } from "@/hooks/modal/useCloseModal";
 // React Spinners (cool package)
 import { BarLoader } from "react-spinners";
 // Data
-import { mainLightBlueColor } from "@/data/static";
+import { mainLightBlueColor } from "@/data/general";
 // Helpers
 import { closeModal } from "@/helpers";
 

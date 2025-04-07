@@ -1,21 +1,33 @@
+"use client";
 // Interfaces
 import { FC } from "react";
 // SCSS
 import sidebarButtonsStyles from "@/scss/components/layout/sidebar/SidebarButtons.module.scss";
 // Data
-import { sidebarButtonsContent } from "@/data/static";
+import { navigationButtonsContent } from "@/data/general/components";
 // Components
 import SidebarButton from "./SidebarButton";
+// Redux
+import { useAppDispatch } from "@/hooks";
+// Helpers
+import { selectOnButtonClickFunction } from "@/helpers";
 
 const SidebarButtons: FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <ul className={sidebarButtonsStyles.sidebarButtonsContainer}>
-      {sidebarButtonsContent.map((sidebarButtonContent) => {
+      {navigationButtonsContent.map((sidebarButtonContent) => {
         return (
-          <SidebarButton
-            {...sidebarButtonContent}
-            key={sidebarButtonContent.buttonLabel}
-          />
+          <li key={sidebarButtonContent.buttonLabel}>
+            <SidebarButton
+              button={sidebarButtonContent}
+              onClickFunction={selectOnButtonClickFunction(
+                dispatch,
+                sidebarButtonContent.buttonLabel,
+              )}
+            />
+          </li>
         );
       })}
     </ul>

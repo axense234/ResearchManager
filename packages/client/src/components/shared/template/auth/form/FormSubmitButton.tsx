@@ -4,7 +4,7 @@ import { FC } from "react";
 // SCSS
 import formSubmitButtonStyles from "@/scss/components/shared/template/auth/form/FormSubmitButton.module.scss";
 // Data
-import { mainLightBlueColor, mainWhiteColor } from "@/data/static";
+import { mainLightBlueColor, mainWhiteColor } from "@/data/general";
 
 const FormSubmitButton: FC<FormSubmitButtonProps> = ({
   content,

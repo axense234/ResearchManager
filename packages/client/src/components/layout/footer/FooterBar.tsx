@@ -1,7 +1,7 @@
 // Interfaces
 import { FC } from "react";
 // Components
-import SocialMediaIcons from "@/components/shared/general/SocialMediaIcons";
+import SocialMediaIcons from "@/components/shared/general/social/SocialMediaIcons";
 // SCSS
 import footerBarStyles from "@/scss/components/layout/footer/FooterBar.module.scss";
 // Components

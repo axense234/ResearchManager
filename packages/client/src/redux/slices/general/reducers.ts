@@ -4,8 +4,9 @@ import {
   ModalType,
   ObjectKeyValueType,
 } from "@/core/types";
-import { authCarouselContent } from "@/data/static";
 import { PayloadAction } from "@reduxjs/toolkit";
+// Data
+import { authCarouselContent } from "@/data/general/components";
 // Helpers
 import { handleCarouselStepDirection } from "@/helpers";
 

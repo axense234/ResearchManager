@@ -1,0 +1,15 @@
+@use "../../../../../abstracts" as *;
+
+.homeAboutTechnologiesContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 8rem;
+
+  padding: 4rem;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-dark-blue");
+}

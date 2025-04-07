@@ -6,11 +6,8 @@ import carouselNavigationStyles from "@/scss/components/shared/template/auth/car
 // React Icons
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // Data
-import {
-  authCarouselContent,
-  mainPastelRedColor,
-  mainWhiteColor,
-} from "@/data/static";
+import { mainPastelRedColor, mainWhiteColor } from "@/data/general";
+import { authCarouselContent } from "@/data/general/components";
 // Redux
 import {
   changeAllowAutoCarousel,

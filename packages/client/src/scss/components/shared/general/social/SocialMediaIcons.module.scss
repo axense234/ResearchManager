@@ -1,0 +1,10 @@
+@use "../../../../abstracts" as *;
+
+.socialMediaIconsContainer {
+  @include flexCenter(row);
+  max-width: 14.75rem;
+  gap: 3rem;
+  list-style: none;
+
+  margin-top: auto;
+}

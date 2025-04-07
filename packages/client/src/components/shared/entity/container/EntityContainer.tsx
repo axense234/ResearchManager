@@ -8,7 +8,7 @@ import ResearchLogInterface from "./interfaces/ResearchLogInterface";
 import ResearchSessionInterface from "./interfaces/ResearchSessionInterface";
 import TagInterface from "./interfaces/TagInterface";
 
-export const EntityContainer: FC<EntityContainerProps> = ({
+const EntityContainer: FC<EntityContainerProps> = ({
   entityType,
   containerType,
   entityId,
@@ -64,3 +64,5 @@ export const EntityContainer: FC<EntityContainerProps> = ({
 
   return chosenEntityInterface;
 };
+
+export default EntityContainer;

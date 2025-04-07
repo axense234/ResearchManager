@@ -5,7 +5,7 @@ import { FC } from "react";
 import homePageStyles from "@/scss/components/page/home/HomePage.module.scss";
 // Components
 import HomeIntro from "./HomeIntro";
-import HomeExamples from "./HomeExamples";
+import HomeExamples from "./examples/HomeExamples";
 import HomeRankings from "./rankings/HomeRankings";
 import HomeContact from "./contact/HomeContact";
 import HomeAbout from "./about/HomeAbout";

@@ -5,7 +5,7 @@ import sidebarStyles from "@/scss/components/layout/sidebar/Sidebar.module.scss"
 // Components
 import SidebarButtons from "./SidebarButtons";
 import SidebarTitle from "./SidebarTitle";
-import SocialMediaIcons from "@/components/shared/general/SocialMediaIcons";
+import SocialMediaIcons from "@/components/shared/general/social/SocialMediaIcons";
 
 const Sidebar: FC = () => {
   return (

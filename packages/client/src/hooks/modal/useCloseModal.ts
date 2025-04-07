@@ -1,7 +1,7 @@
 // React
 import { useEffect } from "react";
 // Data
-import { AUTO_CLOSE_MODAL } from "@/data/static";
+import { AUTO_CLOSE_MODAL } from "@/data/general";
 // Helpers
 import { closeModal } from "@/helpers";
 // Redux

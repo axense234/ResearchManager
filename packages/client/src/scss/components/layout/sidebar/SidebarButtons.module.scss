@@ -14,4 +14,9 @@
     width: 0px;
     visibility: hidden;
   }
+
+  > li {
+    @include flexCenter(row);
+    width: 100%;
+  }
 }

@@ -25,7 +25,7 @@ import { signInUser } from "@/redux/slices/general/thunks/signInUser";
 // SCSS
 import formControlsStyles from "@/scss/components/shared/template/auth/form/FormControls.module.scss";
 // Data
-import { formErrorInputBorder } from "@/data/static";
+import { formErrorInputBorder } from "@/data/general";
 
 const FormControls: FC<FormControlsProps> = ({ type }) => {
   const dispatch = useAppDispatch();

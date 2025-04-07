@@ -9,7 +9,7 @@ import TagComponent from "../../tag/TagComponent";
 import {
   DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN,
   MAX_ENTITY_CONTAINER_TAGS_SHOWN,
-} from "@/data/static";
+} from "@/data/general";
 
 const EntityContainerTags: FC<EntityContainerTagsProps> = ({
   tagsIds,

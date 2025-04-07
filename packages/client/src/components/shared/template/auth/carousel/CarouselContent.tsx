@@ -7,7 +7,7 @@ import carouselContentStyles from "@/scss/components/shared/template/auth/carous
 import { useAppSelector } from "@/hooks";
 import { selectCurrentAuthCarouselId } from "@/redux/slices/general";
 // Data
-import { authCarouselContent } from "@/data/static";
+import { authCarouselContent } from "@/data/general/components";
 
 const CarouselContent: FC = () => {
   const currentAuthCarouselId = useAppSelector(selectCurrentAuthCarouselId);

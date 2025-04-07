@@ -1,14 +1,5 @@
 // Types
 import {
-  ResearchActivityRedux,
-  ResearchLogRedux,
-  ResearchPhaseRedux,
-  ResearchSessionRedux,
-  TagRedux,
-  UserRedux,
-} from "@/core/types";
-import { EntityRedux } from "@/core/types/redux/other/EntityRedux";
-import {
   EntityPayload,
   EntityType,
   ResearchActivityPayload,
@@ -18,6 +9,15 @@ import {
   TagPayload,
   UserPayload,
 } from "@researchmanager/shared/types";
+import {
+  ResearchActivityRedux,
+  ResearchLogRedux,
+  ResearchPhaseRedux,
+  ResearchSessionRedux,
+  TagRedux,
+  UserRedux,
+} from "@/core/types";
+import { EntityRedux } from "@/core/types/redux/other/EntityRedux";
 
 export const transformEntityIntoEntityRedux = (
   entity: EntityPayload,
@@ -44,8 +44,8 @@ export const transformEntityIntoEntityRedux = (
           (activity) => activity.id,
         ),
         tagsIds: entityAsUser.tags?.map((tag) => tag.id),
-        createdAt: new Date(entityAsUser.createdAt).toISOString(),
-        updatedAt: new Date(entityAsUser.updatedAt).toISOString(),
+        createdAt: new Date(entityAsUser?.createdAt).toISOString(),
+        updatedAt: new Date(entityAsUser?.updatedAt).toISOString(),
       } as UserRedux;
     case "researchActivity":
       const entityAsResearchActivity = { ...entity } as ResearchActivityPayload;

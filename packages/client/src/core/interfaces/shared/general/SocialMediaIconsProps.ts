@@ -1,4 +1,4 @@
-export default interface SocialMediaIconProps {
+export interface SocialMediaIconProps {
   linkDest: string;
   linkIconUrl: string;
   linkTitle: string;

@@ -1,0 +1,11 @@
+@use "../../../../abstracts" as *;
+
+.homeContactOptionsContainer {
+  @include flexCenter(column);
+  max-width: 50%;
+  min-width: 37.5rem;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  gap: 4rem;
+  background-color: getColor("main-white");
+}
