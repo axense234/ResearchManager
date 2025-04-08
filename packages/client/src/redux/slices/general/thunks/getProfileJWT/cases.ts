@@ -43,7 +43,7 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
 
     state.userProfile = userRedux;
 
-    state.loadingGetProfileJWT = "SUCCEDED";
+    state.loadingGetProfileJWT = "REJECTED";
     state.modal = {
       isClosed: hasUserCreatedAccountBefore === "true",
       isLoading: false,

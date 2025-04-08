@@ -32,7 +32,7 @@ export const getUserTagsFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
 
     tagsAdapter.removeAll(state);
     tagsAdapter.addMany(state, tagsRedux);
-    state.loadingGetUserTags = "SUCCEDED";
+    state.loadingGetUserTags = "REJECTED";
   } else {
     state.loadingGetUserTags = "FAILED";
   }

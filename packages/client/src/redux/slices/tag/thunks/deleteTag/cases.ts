@@ -22,7 +22,7 @@ export const deleteTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
 
   if (axiosError !== undefined && !axiosError.response) {
     tagsAdapter.removeOne(state, tag.id);
-    state.loadingDeleteTag = "SUCCEDED";
+    state.loadingDeleteTag = "REJECTED";
   } else {
     state.loadingDeleteTag = "FAILED";
   }

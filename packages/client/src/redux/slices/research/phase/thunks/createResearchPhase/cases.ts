@@ -30,7 +30,7 @@ export const createResearchPhaseFulfilled: ExtraReducerFuncType<
     ) as ResearchPhaseRedux;
 
     researchPhasesAdapter.addOne(state, researchPhaseRedux);
-    state.loadingCreateResearchPhase = "SUCCEDED";
+    state.loadingCreateResearchPhase = "REJECTED";
   } else {
     state.loadingCreateResearchPhase = "FAILED";
   }

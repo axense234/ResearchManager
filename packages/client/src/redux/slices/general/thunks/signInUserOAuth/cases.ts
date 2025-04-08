@@ -25,7 +25,7 @@ export const signInUserOAuthFulfilled: ExtraReducerFuncType<
     localStorage.setItem("createResearchManagerAccount", "create");
   }
 
-  state.loadingSignInUser = "SUCCEDED";
+  state.loadingSignInUser = "REJECTED";
 };
 
 export const signInUserOAuthRejected: ExtraReducerFuncType<

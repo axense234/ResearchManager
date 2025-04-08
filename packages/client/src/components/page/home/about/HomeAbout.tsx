@@ -8,7 +8,7 @@ import homeAboutStyles from "@/scss/components/page/home/about/HomeAbout.module.
 
 const HomeAbout: FC = () => {
   return (
-    <section className={homeAboutStyles.homeAboutContainer}>
+    <section className={homeAboutStyles.homeAboutContainer} id="about">
       <HomeAboutInfo />
       <HomeAboutTechnologies />
     </section>

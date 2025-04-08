@@ -33,7 +33,7 @@ export const getUserResearchPhasesFulfilled: ExtraReducerFuncType<
 
     researchPhasesAdapter.removeAll(state);
     researchPhasesAdapter.addMany(state, researchPhasesRedux);
-    state.loadingGetUserResearchPhases = "SUCCEDED";
+    state.loadingGetUserResearchPhases = "REJECTED";
   } else {
     state.loadingGetUserResearchPhases = "FAILED";
   }

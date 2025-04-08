@@ -5,3 +5,4 @@ export * from "./useRedirect";
 export * from "./useAutoCarousel";
 export * from "./modal";
 export * from "./useEntityContainerInterfaceWrapperTransition";
+export * from "./useOverlayTransition";

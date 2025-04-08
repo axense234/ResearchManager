@@ -17,6 +17,8 @@ export type GeneralSliceInitialStateType = {
   loadingGetProfileJWT: LoadingStateType;
   loadingGetProfileOAuth: LoadingStateType;
 
+  loadingLogOutUser: LoadingStateType;
+
   canTryFetchingProfile: boolean;
 
   // Auth Carousel

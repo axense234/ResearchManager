@@ -9,20 +9,17 @@ import HomeExample from "./HomeExample";
 // Data
 import { homeExamplesData } from "@/data/general/home";
 // Redux
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppSelector } from "@/hooks";
 import {
   selectCurrentResearchActivityExampleIndex,
   selectResearchActivitiesExamples,
 } from "@/redux/slices/research/activity";
-import { changeShowEntityContainerWrapper } from "@/redux/slices/general/slice";
 import { selectResearchPhasesExamples } from "@/redux/slices/research/phase";
 import { selectResearchLogsExamples } from "@/redux/slices/research/log";
 // Helper
 import { getResearchActivityExampleImages } from "@/helpers";
 
 const HomeExamples: FC = () => {
-  const dispatch = useAppDispatch();
-
   const researchLogsExamples = useAppSelector(selectResearchLogsExamples);
 
   const researchPhasesExamples = useAppSelector(selectResearchPhasesExamples);
@@ -44,11 +41,7 @@ const HomeExamples: FC = () => {
   );
 
   return (
-    <section
-      className={homeExamplesStyles.homeExamplesContainer}
-      onMouseEnter={() => dispatch(changeShowEntityContainerWrapper(true))}
-      onMouseLeave={() => dispatch(changeShowEntityContainerWrapper(false))}
-    >
+    <section className={homeExamplesStyles.homeExamplesContainer}>
       <HomeSectionTitle
         title={homeExamplesData.title}
         description={homeExamplesData.description}

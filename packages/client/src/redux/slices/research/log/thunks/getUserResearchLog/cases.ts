@@ -30,7 +30,7 @@ export const getUserResearchLogFulfilled: ExtraReducerFuncType<
     ) as ResearchLogRedux;
 
     researchLogsAdapter.upsertOne(state, researchLogRedux);
-    state.loadingGetUserResearchLog = "SUCCEDED";
+    state.loadingGetUserResearchLog = "REJECTED";
   } else {
     state.loadingGetUserResearchLog = "FAILED";
   }

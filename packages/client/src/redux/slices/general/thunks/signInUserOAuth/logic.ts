@@ -16,6 +16,7 @@ export const signInUserOAuth = createAsyncThunk<
       redirect: true,
       callbackUrl: `${baseSiteUrl}/${locale}/home`,
     });
+    localStorage.setItem("rm-user-prev-created-account", "true");
     return pageType;
   } catch (error) {
     return error;

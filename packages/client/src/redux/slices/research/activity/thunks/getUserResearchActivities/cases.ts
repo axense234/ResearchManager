@@ -32,7 +32,7 @@ export const getUserResearchActivitiesFulfilled: ExtraReducerFuncType<
     });
 
     researchActivitiesAdapter.setAll(state, researchActivitiesRedux);
-    state.loadingGetUserResearchActivities = "SUCCEDED";
+    state.loadingGetUserResearchActivities = "REJECTED";
   } else {
     state.loadingGetUserResearchActivities = "FAILED";
   }

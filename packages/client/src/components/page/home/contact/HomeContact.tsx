@@ -11,7 +11,7 @@ import HomeSectionTitle from "../shared/HomeSectionTitle";
 
 const HomeContact: FC = () => {
   return (
-    <section className={homeContactStyles.homeContactContainer}>
+    <section className={homeContactStyles.homeContactContainer} id="contact">
       <HomeSectionTitle
         title={homeContactData.title}
         description={homeContactData.description}

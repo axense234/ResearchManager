@@ -26,7 +26,7 @@ export const createTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
     const tagRedux = transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
 
     tagsAdapter.addOne(state, tagRedux);
-    state.loadingCreateTag = "SUCCEDED";
+    state.loadingCreateTag = "REJECTED";
   } else {
     state.loadingCreateTag = "FAILED";
   }

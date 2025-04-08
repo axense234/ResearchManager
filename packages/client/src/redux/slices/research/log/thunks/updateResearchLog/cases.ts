@@ -33,7 +33,7 @@ export const updateResearchLogFulfilled: ExtraReducerFuncType<
       changes: { ...researchLogRedux },
       id: researchLogRedux.id,
     });
-    state.loadingUpdateResearchLog = "SUCCEDED";
+    state.loadingUpdateResearchLog = "REJECTED";
   } else {
     state.loadingUpdateResearchLog = "FAILED";
   }

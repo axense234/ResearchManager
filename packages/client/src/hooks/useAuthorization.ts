@@ -31,7 +31,7 @@ export const useAuthorization = () => {
   const profile = useAppSelector(selectUserProfile);
 
   const canRedirect =
-    loadingGetProfileJWT === "SUCCEDED" ||
+    loadingGetProfileJWT === "REJECTED" ||
     loadingGetProfileOAuth === "FAILED" ||
     loadingGetProfileOAuth === "SUCCEDED";
 

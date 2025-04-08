@@ -33,7 +33,7 @@ export const updateResearchSessionFulfilled: ExtraReducerFuncType<
       changes: { ...researchSessionRedux },
       id: researchSessionRedux.id,
     });
-    state.loadingUpdateResearchSession = "SUCCEDED";
+    state.loadingUpdateResearchSession = "REJECTED";
   } else {
     state.loadingUpdateResearchSession = "FAILED";
   }

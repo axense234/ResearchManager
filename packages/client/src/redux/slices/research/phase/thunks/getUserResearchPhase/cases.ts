@@ -30,7 +30,7 @@ export const getUserResearchPhaseFulfilled: ExtraReducerFuncType<
     ) as ResearchPhaseRedux;
 
     researchPhasesAdapter.upsertOne(state, researchPhaseRedux);
-    state.loadingGetUserResearchPhase = "SUCCEDED";
+    state.loadingGetUserResearchPhase = "REJECTED";
   } else {
     state.loadingGetUserResearchPhase = "FAILED";
   }

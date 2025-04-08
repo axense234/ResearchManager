@@ -1,3 +1,3 @@
-export interface EntityImageProps {
+export interface EntityImagesProps {
   images: string[];
 }

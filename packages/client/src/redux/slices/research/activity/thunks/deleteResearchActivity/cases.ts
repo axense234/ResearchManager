@@ -22,7 +22,7 @@ export const deleteResearchActivityFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     researchActivitiesAdapter.removeOne(state, researchActivity.id);
-    state.loadingDeleteResearchActivity = "SUCCEDED";
+    state.loadingDeleteResearchActivity = "REJECTED";
   } else {
     state.loadingDeleteResearchActivity = "FAILED";
   }

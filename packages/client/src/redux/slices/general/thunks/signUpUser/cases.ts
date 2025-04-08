@@ -37,7 +37,7 @@ export const signUpUserFulfilled: ExtraReducerFuncType<
       user,
       "user",
     ) as UserRedux;
-    state.loadingSignUpUser = "SUCCEDED";
+    state.loadingSignUpUser = "REJECTED";
 
     state.modal = {
       isClosed: false,

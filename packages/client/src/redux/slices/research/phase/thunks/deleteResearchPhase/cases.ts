@@ -22,7 +22,7 @@ export const deleteResearchPhaseFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     researchPhasesAdapter.removeOne(state, researchPhase.id);
-    state.loadingDeleteResearchPhase = "SUCCEDED";
+    state.loadingDeleteResearchPhase = "REJECTED";
   } else {
     state.loadingDeleteResearchPhase = "FAILED";
   }

@@ -1,0 +1,17 @@
+@use "../../../../abstracts" as *;
+
+.entityImageContainer {
+  @include flexCenter(row);
+
+  > img {
+    transition: transform 0.15s ease-in;
+
+    &:hover {
+      transform: scale(1.035);
+    }
+  }
+
+  > p {
+    @include paragraph("laptop", "black");
+  }
+}

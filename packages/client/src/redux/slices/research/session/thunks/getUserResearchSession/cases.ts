@@ -30,7 +30,7 @@ export const getUserResearchSessionFulfilled: ExtraReducerFuncType<
     ) as ResearchSessionRedux;
 
     researchSessionsAdapter.upsertOne(state, researchSessionRedux);
-    state.loadingGetUserResearchSession = "SUCCEDED";
+    state.loadingGetUserResearchSession = "REJECTED";
   } else {
     state.loadingGetUserResearchSession = "FAILED";
   }

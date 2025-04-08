@@ -19,6 +19,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   loadingSignUpUser: "IDLE",
   loadingGetProfileJWT: "IDLE",
   loadingGetProfileOAuth: "IDLE",
+  loadingLogOutUser: "IDLE",
 
   // Auth Carousel
   currentAuthCarouselId: 1,

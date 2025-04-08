@@ -19,7 +19,7 @@ export const deleteResearchLogFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     researchLogsAdapter.removeOne(state, researchLog.id);
-    state.loadingDeleteResearchLog = "SUCCEDED";
+    state.loadingDeleteResearchLog = "REJECTED";
   } else {
     state.loadingDeleteResearchLog = "FAILED";
   }

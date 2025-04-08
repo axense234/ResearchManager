@@ -33,7 +33,7 @@ export const updateResearchActivityFulfilled: ExtraReducerFuncType<
       changes: { ...researchActivityRedux },
       id: researchActivityRedux.id,
     });
-    state.loadingUpdateResearchActivity = "SUCCEDED";
+    state.loadingUpdateResearchActivity = "REJECTED";
   } else {
     state.loadingUpdateResearchActivity = "FAILED";
   }

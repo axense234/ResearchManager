@@ -10,7 +10,7 @@ import HomeSectionTitle from "../shared/HomeSectionTitle";
 
 const HomeRankings: FC = () => {
   return (
-    <section className={homeRankingsStyles.homeRankingsContainer}>
+    <section className={homeRankingsStyles.homeRankingsContainer} id="rankings">
       <HomeSectionTitle
         title={homeRankingsData.title}
         description={homeRankingsData.description}

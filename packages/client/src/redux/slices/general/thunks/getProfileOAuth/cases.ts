@@ -44,7 +44,7 @@ export const getProfileOAuthFulfilled: ExtraReducerFuncType<
 
     state.userProfile = userRedux;
 
-    state.loadingGetProfileOAuth = "SUCCEDED";
+    state.loadingGetProfileOAuth = "REJECTED";
     state.modal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,

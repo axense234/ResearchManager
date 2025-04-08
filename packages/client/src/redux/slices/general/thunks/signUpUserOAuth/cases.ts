@@ -36,9 +36,9 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
       user,
       "user",
     ) as UserRedux;
-    state.loadingSignUpUser = "SUCCEDED";
+    state.loadingSignUpUser = "REJECTED";
 
-    state.loadingSignUpUser = "SUCCEDED";
+    state.loadingSignUpUser = "REJECTED";
 
     state.modal = {
       isClosed: false,
@@ -54,7 +54,7 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
 
     if (errorData.error === "Forbidden") {
       state.loadingSignUpUser = "FAILED";
-      state.loadingSignInUser = "SUCCEDED";
+      state.loadingSignInUser = "REJECTED";
 
       state.modal = {
         isClosed: false,

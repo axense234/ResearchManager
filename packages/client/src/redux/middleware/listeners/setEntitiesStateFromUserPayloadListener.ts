@@ -3,9 +3,13 @@ import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 // Helpers
 import { setEntitiesStateFromUserPayload } from "@/helpers";
 // Thunks
-import { getProfileJWT, getProfileOAuth, signInUser } from "../slices/general";
+import {
+  getProfileJWT,
+  getProfileOAuth,
+  signInUser,
+} from "../../slices/general";
 // Types
-import { State } from "../api/store";
+import { State } from "../../api/store";
 import { UserPayload } from "@researchmanager/shared/types";
 import { AxiosError } from "axios";
 

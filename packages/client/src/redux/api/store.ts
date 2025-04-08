@@ -8,10 +8,7 @@ import researchPhasesSliceReducer from "../slices/research/phase/slice";
 import researchLogsSliceReducer from "../slices/research/log/slice";
 import researchSessionsSliceReducer from "../slices/research/session/slice";
 // Middleware
-import {
-  setEntitiesStateFromUserPayloadListener,
-  triggerGeneralModalListener,
-} from "../middleware";
+import { setEntitiesStateFromUserPayloadListener } from "../middleware";
 
 const store = configureStore({
   reducer: {
@@ -25,7 +22,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(
       setEntitiesStateFromUserPayloadListener.middleware,
-      triggerGeneralModalListener.middleware,
     ),
 });
 

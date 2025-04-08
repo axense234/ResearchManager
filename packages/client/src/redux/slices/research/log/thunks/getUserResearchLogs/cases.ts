@@ -33,7 +33,7 @@ export const getUserResearchLogsFulfilled: ExtraReducerFuncType<
 
     researchLogsAdapter.removeAll(state);
     researchLogsAdapter.addMany(state, researchLogsRedux);
-    state.loadingGetUserResearchLogs = "SUCCEDED";
+    state.loadingGetUserResearchLogs = "REJECTED";
   } else {
     state.loadingGetUserResearchLogs = "FAILED";
   }

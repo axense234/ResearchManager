@@ -22,7 +22,7 @@ export const deleteResearchSessionFulfilled: ExtraReducerFuncType<
 
   if (axiosError !== undefined && !axiosError.response) {
     researchSessionsAdapter.removeOne(state, researchSession.id);
-    state.loadingDeleteResearchSession = "SUCCEDED";
+    state.loadingDeleteResearchSession = "REJECTED";
   } else {
     state.loadingDeleteResearchSession = "FAILED";
   }

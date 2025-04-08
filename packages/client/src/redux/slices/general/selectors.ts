@@ -19,6 +19,9 @@ export const selectLoadingGetProfileOAuth = (state: State) =>
 export const selectCanTryFetchingProfile = (state: State) =>
   state.general.canTryFetchingProfile;
 
+export const selectLoadingLogOutUser = (state: State) =>
+  state.general.loadingLogOutUser;
+
 // Auth Carousel
 export const selectCurrentAuthCarouselId = (state: State) =>
   state.general.currentAuthCarouselId;

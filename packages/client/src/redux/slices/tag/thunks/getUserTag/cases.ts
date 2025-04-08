@@ -29,7 +29,7 @@ export const getUserTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
     const tagRedux = transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
 
     tagsAdapter.upsertOne(state, tagRedux);
-    state.loadingGetUserTag = "SUCCEDED";
+    state.loadingGetUserTag = "REJECTED";
   } else {
     state.loadingGetUserTag = "FAILED";
   }

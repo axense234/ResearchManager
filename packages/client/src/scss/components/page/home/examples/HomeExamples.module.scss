@@ -2,6 +2,7 @@
 
 .homeExamplesContainer {
   @include flexCenter(column);
+  position: relative;
   width: 100%;
   gap: 8rem;
 

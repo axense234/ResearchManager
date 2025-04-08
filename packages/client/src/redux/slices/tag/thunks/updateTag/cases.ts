@@ -32,7 +32,7 @@ export const updateTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
       changes: { ...tagRedux },
       id: tagRedux.id,
     });
-    state.loadingUpdateTag = "SUCCEDED";
+    state.loadingUpdateTag = "REJECTED";
   } else {
     state.loadingUpdateTag = "FAILED";
   }

@@ -5,7 +5,7 @@ import { EntityContainerInterfaceWrapperProps } from "@/core/interfaces";
 // SCSS
 import entityContainerInterfaceWrapperStyles from "@/scss/components/shared/entity/container/EntityContainerInterfaceWrapper.module.scss";
 // React Icons
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 // Redux
 import {
   useAppSelector,
@@ -42,26 +42,26 @@ const EntityContainerInterfaceWrapper: FC<
         className={
           entityContainerInterfaceWrapperStyles.entityContainerInterfaceWrapperDirection
         }
-        style={{ left: "-3.25rem" }}
+        style={{ left: "0.25rem" }}
         ref={leftButtonRef}
         title="Previous"
         aria-label="Previous"
         onClick={onPreviousButtonClick}
       >
-        <FaChevronLeft />
+        <FaArrowLeft />
       </div>
       {children}
       <div
         className={
           entityContainerInterfaceWrapperStyles.entityContainerInterfaceWrapperDirection
         }
-        style={{ right: "-3.25rem" }}
+        style={{ right: "0.25rem" }}
         ref={rightButtonRef}
         title="Next"
         aria-label="Next"
         onClick={onNextButtonClick}
       >
-        <FaChevronRight />
+        <FaArrowRight />
       </div>
     </div>
   );

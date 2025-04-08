@@ -31,7 +31,7 @@ export const createResearchActivityFulfilled: ExtraReducerFuncType<
 
     researchActivitiesAdapter.addOne(state, researchActivityRedux);
 
-    state.loadingCreateResearchActivity = "SUCCEDED";
+    state.loadingCreateResearchActivity = "REJECTED";
   } else {
     state.loadingCreateResearchActivity = "FAILED";
   }

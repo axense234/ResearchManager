@@ -18,7 +18,7 @@ export const useEntityContainerInterfaceWrapperTransition = (
       modal.style.opacity = "0";
       timeout = setTimeout(() => {
         modal.style.display = "none";
-      }, 100);
+      }, 2000);
     }
     return () => {
       clearTimeout(timeout);

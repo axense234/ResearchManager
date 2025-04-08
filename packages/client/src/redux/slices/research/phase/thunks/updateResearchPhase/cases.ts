@@ -33,7 +33,7 @@ export const updateResearchPhaseFulfilled: ExtraReducerFuncType<
       changes: { ...researchPhaseRedux },
       id: researchPhaseRedux.id,
     });
-    state.loadingUpdateResearchPhase = "SUCCEDED";
+    state.loadingUpdateResearchPhase = "REJECTED";
   } else {
     state.loadingUpdateResearchPhase = "FAILED";
   }
