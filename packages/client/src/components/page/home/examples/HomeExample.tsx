@@ -2,9 +2,9 @@
 import { FC } from "react";
 import { HomeExampleProps } from "@/core/interfaces";
 // Components
-import EntityGraphs from "@/components/shared/entity/EntityGraphs";
-import EntityImages from "@/components/shared/entity/images/EntityImages";
+import EntityGraphs from "@/components/shared/entity/view/graphs/EntityGraphs";
 import EntityContainer from "@/components/shared/entity/container/EntityContainer";
+import EntityImages from "@/components/shared/entity/view/images/EntityImages";
 // SCSS
 import homeExampleStyles from "@/scss/components/page/home/examples/HomeExample.module.scss";
 // Redux
@@ -26,11 +26,7 @@ const HomeExample: FC<HomeExampleProps> = ({ images }) => {
   );
 
   return (
-    <div
-      className={homeExampleStyles.homeExamplesExampleContainer}
-      onMouseEnter={() => dispatch(changeShowEntityContainerWrapper(true))}
-      onMouseLeave={() => dispatch(changeShowEntityContainerWrapper(false))}
-    >
+    <div className={homeExampleStyles.homeExamplesExampleContainer}>
       <EntityContainer
         containerType="example"
         entityId={

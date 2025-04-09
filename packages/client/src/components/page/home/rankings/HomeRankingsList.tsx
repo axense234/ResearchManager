@@ -5,30 +5,23 @@ import { Bar } from "react-chartjs-2";
 import { ChartData } from "chart.js";
 // Data
 import { mainLightBlueColor, mainWhiteColor } from "@/data/general";
-// Helpers
-import { calculateResearchActivityExampleResearchPoints } from "@/helpers";
 // Redux
-import { useAppSelector } from "@/hooks";
+import { useAppSelector, useCalculateEntityResearchPoints } from "@/hooks";
 import { selectResearchActivitiesExamples } from "@/redux/slices/research/activity";
-import { selectResearchPhasesExamples } from "@/redux/slices/research/phase";
-import { selectResearchLogsExamples } from "@/redux/slices/research/log";
 
 const HomeRankingsList: FC = () => {
   const researchActivitiesExamples = useAppSelector(
     selectResearchActivitiesExamples,
   );
 
-  const researchPhasesExamples = useAppSelector(selectResearchPhasesExamples);
-  const researchLogsExamples = useAppSelector(selectResearchLogsExamples);
-
   const horizontalBarGraphDataValues = researchActivitiesExamples.map(
     (activity) => {
       return {
         label: activity.name,
-        rp: calculateResearchActivityExampleResearchPoints(
+        rp: useCalculateEntityResearchPoints(
           activity,
-          researchPhasesExamples,
-          researchLogsExamples,
+          "researchActivity",
+          "example",
         ),
       };
     },

@@ -2,7 +2,7 @@
 // Components
 import AuthPageTemplate from "@/components/shared/template/auth/AuthPageTemplate";
 // Hooks
-import { useAuthorization } from "@/hooks/useAuthorization";
+import { useAuthorization } from "@/hooks/general/useAuthorization";
 
 const Signin = () => {
   useAuthorization();

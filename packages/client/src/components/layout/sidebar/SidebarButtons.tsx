@@ -2,29 +2,29 @@
 // Interfaces
 import { FC } from "react";
 // SCSS
-import sidebarButtonsStyles from "@/scss/components/layout/sidebar/SidebarButtons.module.scss";
+import sideBarButtonsStyles from "@/scss/components/layout/sidebar/SideBarButtons.module.scss";
 // Data
 import { navigationButtonsContent } from "@/data/general/components";
 // Components
-import SidebarButton from "./SidebarButton";
+import SideBarButton from "./SideBarButton";
 // Redux
 import { useAppDispatch } from "@/hooks";
 // Helpers
 import { selectOnButtonClickFunction } from "@/helpers";
 
-const SidebarButtons: FC = () => {
+const SideBarButtons: FC = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <ul className={sidebarButtonsStyles.sidebarButtonsContainer}>
-      {navigationButtonsContent.map((sidebarButtonContent) => {
+    <ul className={sideBarButtonsStyles.sideBarButtonsContainer}>
+      {navigationButtonsContent.map((sideBarButtonContent) => {
         return (
-          <li key={sidebarButtonContent.buttonLabel}>
-            <SidebarButton
-              button={sidebarButtonContent}
+          <li key={sideBarButtonContent.buttonLabel}>
+            <SideBarButton
+              button={sideBarButtonContent}
               onClickFunction={selectOnButtonClickFunction(
                 dispatch,
-                sidebarButtonContent.buttonLabel,
+                sideBarButtonContent.buttonLabel,
               )}
             />
           </li>
@@ -34,4 +34,4 @@ const SidebarButtons: FC = () => {
   );
 };
 
-export default SidebarButtons;
+export default SideBarButtons;

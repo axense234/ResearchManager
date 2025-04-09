@@ -1,6 +1,6 @@
 // Redux
 import { signUpUserOAuth } from "@/redux/slices/general/thunks/signUpUserOAuth";
-import { useAppDispatch } from "./redux";
+import { useAppDispatch } from "../redux";
 // React
 import { useEffect, useRef } from "react";
 

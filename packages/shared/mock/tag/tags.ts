@@ -1,7 +1,7 @@
 // Types
-import { Tag } from "@prisma/client";
+import { TagPayload } from "../../types";
 
-export const tagsMockData: Tag[] = [
+export const tagsMockData: TagPayload[] = [
   {
     id: "7a861a1f-acb7-4786-87d0-259d266d0c7a",
     title: "Programming",

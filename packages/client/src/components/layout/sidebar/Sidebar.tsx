@@ -1,20 +1,20 @@
 // Interfaces
 import { FC } from "react";
 // SCSS
-import sidebarStyles from "@/scss/components/layout/sidebar/Sidebar.module.scss";
+import sideBarStyles from "@/scss/components/layout/sidebar/SideBar.module.scss";
 // Components
-import SidebarButtons from "./SidebarButtons";
-import SidebarTitle from "./SidebarTitle";
 import SocialMediaIcons from "@/components/shared/general/social/SocialMediaIcons";
+import SideBarButtons from "./SideBarButtons";
+import SideBarTitle from "./SideBarTitle";
 
-const Sidebar: FC = () => {
+const SideBar: FC = () => {
   return (
-    <aside className={sidebarStyles.sidebarContainer}>
-      <SidebarTitle />
-      <SidebarButtons />
+    <aside className={sideBarStyles.sideBarContainer}>
+      <SideBarTitle />
+      <SideBarButtons />
       <SocialMediaIcons />
     </aside>
   );
 };
 
-export default Sidebar;
+export default SideBar;

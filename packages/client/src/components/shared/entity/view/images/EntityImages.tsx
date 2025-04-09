@@ -2,16 +2,16 @@
 import { FC, useState } from "react";
 import { EntityImagesProps } from "@/core/interfaces";
 // SCSS
-import entityImagesStyles from "@/scss/components/shared/entity/EntityImages.module.scss";
+import entityImagesStyles from "@/scss/components/shared/entity/view/images/EntityImages.module.scss";
 // Components
 import EntityImage from "./EntityImage";
-import EntityImagesOverlay from "../../overlay/entity/EntityImagesOverlay";
+import EntityImagesOverlay from "@/components/shared/overlay/entity/images/EntityImagesOverlay";
 
 const EntityImages: FC<EntityImagesProps> = ({ images }) => {
   const [showImagesOverlay, setShowImagesOverlay] = useState<boolean>(false);
 
   return (
-    <div className={entityImagesStyles.entityImagesContainer}>
+    <article className={entityImagesStyles.entityImagesContainer}>
       <EntityImagesOverlay
         imagesSrc={images.map((image) => image)}
         showOverlay={showImagesOverlay}
@@ -25,7 +25,7 @@ const EntityImages: FC<EntityImagesProps> = ({ images }) => {
         imageSrc={images[0]}
         onClickFunction={() => setShowImagesOverlay(true)}
       />
-    </div>
+    </article>
   );
 };
 

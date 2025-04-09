@@ -1,4 +1,3 @@
 export * from "./container";
 export * from "./tag";
-export * from "./EntityGraphs";
-export * from "./images";
+export * from "./view";

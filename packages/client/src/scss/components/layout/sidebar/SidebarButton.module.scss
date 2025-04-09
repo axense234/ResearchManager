@@ -1,6 +1,6 @@
 @use "../../../abstracts" as *;
 
-.sidebarButtonContainer {
+.sideBarButtonContainer {
   @include flexCenter(row);
   border-radius: 1.25rem;
   border: none;

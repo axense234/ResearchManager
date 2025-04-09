@@ -1,6 +1,6 @@
 @use "../../../abstracts" as *;
 
-.sidebarContainer {
+.sideBarContainer {
   @include flexCenter(column);
   justify-content: flex-start;
   position: fixed;

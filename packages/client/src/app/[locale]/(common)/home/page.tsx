@@ -2,7 +2,7 @@
 // Interfaces
 import { FC } from "react";
 // Hooks
-import { useAuthorization } from "@/hooks/useAuthorization";
+import { useAuthorization } from "@/hooks/general/useAuthorization";
 // Page Component
 import HomePage from "@/components/page/home/HomePage";
 

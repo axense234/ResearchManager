@@ -1,5 +1,6 @@
 // Redux
 import { State } from "@/redux/api/store";
+import { createSelector } from "@reduxjs/toolkit";
 // Adapter
 import { researchActivitiesAdapter } from "./adapter";
 
@@ -11,14 +12,32 @@ export const {
   (state) => state.researchActivities,
 );
 
+// Examples
+export const selectResearchActivitiesExamples = (state: State) =>
+  state.researchActivities.researchActivitiesExamples;
+
+export const selectResearchActivityExampleById = createSelector(
+  [selectResearchActivitiesExamples, (state, activityId) => activityId],
+  (researchActivities, researchActivityId) =>
+    researchActivities.find(
+      (researchActivity) => researchActivity.id === researchActivityId,
+    ),
+);
+
+export const selectResearchActivitiesExamplesByIds = createSelector(
+  [selectResearchActivitiesExamples, (state, ids) => ids],
+  (researchActivities, ids) =>
+    researchActivities.filter((researchActivity) =>
+      ids.includes(researchActivity.id),
+    ),
+);
+
+// General
 export const selectCurrentResearchActivityExampleIndex = (state: State) =>
   state.researchActivities.currentResearchActivityExampleIndex;
 
 export const selectCurrentResearchActivityIndex = (state: State) =>
   state.researchActivities.currentResearchActivityIndex;
-
-export const selectResearchActivitiesExamples = (state: State) =>
-  state.researchActivities.researchActivitiesExamples;
 
 export const selectCreateResearchActivityDto = (state: State) =>
   state.researchActivities.createResearchActivityDto;

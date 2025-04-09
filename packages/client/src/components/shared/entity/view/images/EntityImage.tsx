@@ -2,7 +2,7 @@
 import { FC } from "react";
 import { EntityImageProps } from "@/core/interfaces";
 // SCSS
-import entityImageStyles from "@/scss/components/shared/entity/images/EntityImage.module.scss";
+import entityImageStyles from "@/scss/components/shared/entity/view/images/EntityImage.module.scss";
 // Next
 import Image from "next/image";
 

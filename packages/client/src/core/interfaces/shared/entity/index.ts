@@ -1,4 +1,3 @@
 export * from "./container";
 export * from "./tag";
-export * from "./EntityImagesProps";
-export * from "./images";
+export * from "./view";

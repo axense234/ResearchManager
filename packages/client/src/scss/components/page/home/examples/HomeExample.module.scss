@@ -1,15 +1,4 @@
 @use "../../../../abstracts" as *;
 
 .homeExamplesExampleContainer {
-  @include flexCenter(column);
-  width: 100%;
-  gap: 4rem;
-}
-
-.homeExamplesExampleDetails {
-  @include flexCenter(row);
-  position: relative;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
 }

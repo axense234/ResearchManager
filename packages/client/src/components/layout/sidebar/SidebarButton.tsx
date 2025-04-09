@@ -1,12 +1,12 @@
 // Interfaces
 import { FC } from "react";
-import { SidebarButtonProps } from "@/core/interfaces/layout";
+import { SideBarButtonProps } from "@/core/interfaces/layout";
 // i18n
 import { Link } from "@/i18n/routing";
 // SCSS
-import sidebarButtonStyles from "@/scss/components/layout/sidebar/SidebarButton.module.scss";
+import sideBarButtonStyles from "@/scss/components/layout/sidebar/SideBarButton.module.scss";
 
-const SidebarButton: FC<SidebarButtonProps> = ({ button, onClickFunction }) => {
+const SideBarButton: FC<SideBarButtonProps> = ({ button, onClickFunction }) => {
   const { buttonType, buttonLabel, icon, buttonDest } = button;
 
   if (buttonType === "link") {
@@ -15,7 +15,7 @@ const SidebarButton: FC<SidebarButtonProps> = ({ button, onClickFunction }) => {
         href={buttonDest as string as any}
         title={buttonLabel}
         aria-label={buttonLabel}
-        className={sidebarButtonStyles.sidebarButtonContainer}
+        className={sideBarButtonStyles.sideBarButtonContainer}
       >
         {icon}
         <span>{buttonLabel}</span>
@@ -27,7 +27,7 @@ const SidebarButton: FC<SidebarButtonProps> = ({ button, onClickFunction }) => {
         type="button"
         title={buttonLabel}
         aria-label={buttonLabel}
-        className={sidebarButtonStyles.sidebarButtonContainer}
+        className={sideBarButtonStyles.sideBarButtonContainer}
         onClick={onClickFunction}
       >
         {icon}
@@ -37,4 +37,4 @@ const SidebarButton: FC<SidebarButtonProps> = ({ button, onClickFunction }) => {
   }
 };
 
-export default SidebarButton;
+export default SideBarButton;

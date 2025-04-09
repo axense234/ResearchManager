@@ -5,3 +5,4 @@ export * from "./EntityType";
 export * from "./Entity";
 export * from "./payload";
 export * from "./EntityPayload";
+export * from "./ArchiveableEntityType";

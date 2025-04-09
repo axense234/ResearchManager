@@ -5,7 +5,7 @@ import { FC } from "react";
 import homeExamplesStyles from "@/scss/components/page/home/examples/HomeExamples.module.scss";
 // Components
 import HomeSectionTitle from "../shared/HomeSectionTitle";
-import HomeExample from "./HomeExample";
+import EntityView from "@/components/shared/entity/view/EntityView";
 // Data
 import { homeExamplesData } from "@/data/general/home";
 // Redux
@@ -14,31 +14,16 @@ import {
   selectCurrentResearchActivityExampleIndex,
   selectResearchActivitiesExamples,
 } from "@/redux/slices/research/activity";
-import { selectResearchPhasesExamples } from "@/redux/slices/research/phase";
-import { selectResearchLogsExamples } from "@/redux/slices/research/log";
-// Helper
-import { getResearchActivityExampleImages } from "@/helpers";
 
 const HomeExamples: FC = () => {
-  const researchLogsExamples = useAppSelector(selectResearchLogsExamples);
-
-  const researchPhasesExamples = useAppSelector(selectResearchPhasesExamples);
-
   const currentResearchActivityExampleIndex = useAppSelector(
     selectCurrentResearchActivityExampleIndex,
   );
   const researchActivitiesExamples = useAppSelector(
     selectResearchActivitiesExamples,
   );
-
   const researchActivityExample =
     researchActivitiesExamples[currentResearchActivityExampleIndex - 1];
-
-  const researchActivityExampleImages = getResearchActivityExampleImages(
-    researchActivityExample,
-    researchPhasesExamples,
-    researchLogsExamples,
-  );
 
   return (
     <section className={homeExamplesStyles.homeExamplesContainer}>
@@ -46,7 +31,11 @@ const HomeExamples: FC = () => {
         title={homeExamplesData.title}
         description={homeExamplesData.description}
       />
-      <HomeExample images={researchActivityExampleImages} />
+      <EntityView
+        entityType="researchActivity"
+        viewType="example"
+        entityId={researchActivityExample.id}
+      />
     </section>
   );
 };

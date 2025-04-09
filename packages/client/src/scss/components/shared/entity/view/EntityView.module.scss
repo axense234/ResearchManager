@@ -1,0 +1,7 @@
+@use "../../../../abstracts" as *;
+
+.entityViewContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 4rem;
+}

@@ -1,6 +1,6 @@
 @use "../../../abstracts" as *;
 
-.sidebarButtonsContainer {
+.sideBarButtonsContainer {
   @include flexCenter(column);
   width: 100%;
   justify-content: flex-start;

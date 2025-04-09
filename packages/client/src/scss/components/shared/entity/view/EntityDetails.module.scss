@@ -1,0 +1,9 @@
+@use "../../../../abstracts" as *;
+
+.entityDetailsContainer {
+  @include flexCenter(row);
+  position: relative;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}

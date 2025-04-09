@@ -7,7 +7,7 @@ import {
   selectLoadingSignInUser,
   selectUserProfile,
 } from "@/redux/slices/general";
-import { useAppDispatch, useAppSelector } from "./redux";
+import { useAppDispatch, useAppSelector } from "../redux";
 import { useRedirect } from "./useRedirect";
 import { changeCanTryFetchingProfile } from "@/redux/slices/general/slice";
 import { getProfileOAuth } from "@/redux/slices/general/thunks/getProfileOAuth";

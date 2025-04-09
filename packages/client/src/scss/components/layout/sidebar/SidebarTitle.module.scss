@@ -1,6 +1,6 @@
 @use "../../../abstracts" as *;
 
-.sidebarTitleContainer {
+.sideBarTitleContainer {
   @include flexCenter(column);
   align-items: flex-end;
   gap: 1rem;
@@ -16,7 +16,7 @@
   }
 }
 
-.sidebarTitleLogo {
+.sideBarTitleLogo {
   @include flexCenter(row);
   justify-content: flex-start;
   width: 100%;
