@@ -6,23 +6,39 @@ import entityImagesStyles from "@/scss/components/shared/entity/view/images/Enti
 // Components
 import EntityImage from "./EntityImage";
 import EntityImagesOverlay from "@/components/shared/overlay/entity/images/EntityImagesOverlay";
+// Hooks
+import { useSelectEntityImages } from "@/hooks/redux/selector";
 
-const EntityImages: FC<EntityImagesProps> = ({ images }) => {
+const EntityImages: FC<EntityImagesProps> = ({
+  specialEntity,
+  specialEntityType,
+  viewType,
+}) => {
   const [showImagesOverlay, setShowImagesOverlay] = useState<boolean>(false);
+
+  const entityImages = useSelectEntityImages(
+    specialEntity,
+    specialEntityType,
+    viewType,
+  );
+
+  const entityName = specialEntity.name;
 
   return (
     <article className={entityImagesStyles.entityImagesContainer}>
       <EntityImagesOverlay
-        imagesSrc={images.map((image) => image)}
+        entityImages={entityImages}
+        entityName={entityName}
         showOverlay={showImagesOverlay}
         closeOverlayFunction={() => setShowImagesOverlay(false)}
+        specialEntityType={specialEntityType}
       />
       <div className={entityImagesStyles.entityImagesTitle}>
         <h6>Images</h6>
         <hr />
       </div>
       <EntityImage
-        imageSrc={images[0]}
+        imageSrc={entityImages[0].src}
         onClickFunction={() => setShowImagesOverlay(true)}
       />
     </article>

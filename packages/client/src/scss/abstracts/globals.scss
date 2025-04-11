@@ -15,6 +15,18 @@ body {
   height: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d54e5d;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #83cec8;
+}
+
 .app-container {
   display: flex;
   align-items: center;

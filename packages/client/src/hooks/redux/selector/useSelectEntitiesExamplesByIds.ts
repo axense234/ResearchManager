@@ -2,7 +2,7 @@
 import { EntityRedux } from "@/core/types";
 import { EntityType } from "@researchmanager/shared/types";
 // Redux
-import { useAppSelector } from "./redux";
+import { useAppSelector } from "../redux";
 // Very Special Selectors
 import { selectResearchActivitiesExamplesByIds } from "@/redux/slices/research/activity";
 import { selectResearchPhasesExamplesByIds } from "@/redux/slices/research/phase";

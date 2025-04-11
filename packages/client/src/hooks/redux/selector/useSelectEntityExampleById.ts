@@ -2,8 +2,9 @@
 import { EntityType } from "@researchmanager/shared/types";
 import { EntityRedux } from "@/core/types";
 // Redux
+import { useAppSelector } from "../redux";
+// Hooks
 import { selectResearchActivityExampleById } from "@/redux/slices/research/activity";
-import { useAppSelector } from "./redux";
 
 const selectors = {
   researchActivity: selectResearchActivityExampleById,

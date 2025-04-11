@@ -1,4 +1,3 @@
-"use client";
 // Interfaces
 import { FC, useRef } from "react";
 import { EntityImagesOverlayProps } from "@/core/interfaces";
@@ -7,13 +6,15 @@ import entityImagesOverlayStyles from "@/scss/components/shared/overlay/entity/i
 // Hooks
 import { useOverlayTransition } from "@/hooks";
 // Components
-import EntityImagesOverlayList from "./EntityImagesOverlayList";
-import EntityImagesOverlayOptions from "./EntityImagesOverlayOptions";
+import ExitOverlayButton from "../../ExitOverlayButton";
+import EntityImagesOverlayContent from "./EntityImagesOverlayContent";
 
 const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
-  imagesSrc,
+  entityImages,
   closeOverlayFunction,
   showOverlay,
+  specialEntityType,
+  entityName,
 }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -23,10 +24,19 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
     <div
       className={entityImagesOverlayStyles.entityImagesOverlayContainer}
       ref={overlayRef}
-      onClick={closeOverlayFunction}
     >
-      <EntityImagesOverlayList imagesSrc={imagesSrc} />
-      <EntityImagesOverlayOptions />
+      <ExitOverlayButton closeOverlayFunction={closeOverlayFunction} />
+      <h4
+        style={{
+          marginTop: specialEntityType === "researchPhase" ? "3rem" : "0",
+        }}
+      >
+        {entityName}
+      </h4>
+      <EntityImagesOverlayContent
+        specialEntityType={specialEntityType}
+        entityImages={entityImages}
+      />
     </div>
   );
 };

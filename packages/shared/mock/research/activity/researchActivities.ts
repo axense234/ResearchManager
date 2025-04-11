@@ -13,7 +13,7 @@ export const researchActivitiesMockData: ResearchActivityPayload[] = [
     userId: "",
     createdAt: new Date(),
     updatedAt: new Date(),
-    tags: tagsMockData.slice(0, 5),
+    tags: tagsMockData.slice(0, 7),
     researchPhases: researchPhasesMockData.filter(
       (phase) =>
         phase.researchActivityId === "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d"

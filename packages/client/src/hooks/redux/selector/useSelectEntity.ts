@@ -3,8 +3,8 @@ import { EntityContainerType, EntityRedux } from "@/core/types";
 import { EntityType } from "@researchmanager/shared/types";
 import { ArchiveableEntityRedux } from "@/core/types/redux/other/ArchiveableEntityRedux";
 // Hooks
-import { useSelectEntityExampleById } from "./useSelectEntityExampleById";
 import { useSelectEntityRedux } from "./useSelectEntityRedux";
+import { useSelectEntityExampleById } from "./useSelectEntityExampleById";
 
 export const useSelectEntity = (
   viewType: EntityContainerType,

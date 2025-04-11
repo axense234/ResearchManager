@@ -6,21 +6,17 @@ import {
   ResearchPhaseRedux,
 } from "@/core/types";
 // Hooks
-import { useSelectEntitiesByIds } from "./useSelectEntitiesByIds";
+import { useSelectEntitiesByIds } from "./selector";
 
 export const useCalculateResearchActivityResearchPoints = (
   researchActivity: ResearchActivityRedux,
   viewType: EntityContainerType,
 ) => {
-  console.log("full ra:", JSON.parse(JSON.stringify(researchActivity)));
-
   const researchActivityPhases = useSelectEntitiesByIds(
     viewType,
     "researchPhase",
     researchActivity.researchPhasesIds,
   ) as ResearchPhaseRedux[];
-
-  console.log("full rap:", JSON.parse(JSON.stringify(researchActivityPhases)));
 
   const researchPhasesLogsIds = researchActivityPhases
     .map((phase) => phase.researchLogsIds)

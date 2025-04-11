@@ -8,7 +8,10 @@
   width: 100%;
   height: 100%;
   z-index: 99;
-  background-color: getColorWithOpacity("main-dark-blue", 0.9);
+  background-color: getColorWithOpacity("main-dark-blue", 0.95);
+
+  padding: 4rem 8rem;
+  padding-bottom: 6rem;
 
   transition:
     transform 0.2s ease-in,
@@ -16,4 +19,9 @@
 
   opacity: 0;
   transform: scale(0);
+
+  > h4 {
+    @include heading("h4", "laptop", "white");
+    letter-spacing: 2px;
+  }
 }

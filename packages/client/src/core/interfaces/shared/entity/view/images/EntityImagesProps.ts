@@ -1,3 +1,12 @@
+// Types
+import {
+  EntityViewType,
+  ResearchActivityRedux,
+  ResearchPhaseRedux,
+} from "@/core/types";
+
 export interface EntityImagesProps {
-  images: string[];
+  specialEntity: ResearchActivityRedux | ResearchPhaseRedux;
+  specialEntityType: "researchActivity" | "researchPhase";
+  viewType: EntityViewType;
 }

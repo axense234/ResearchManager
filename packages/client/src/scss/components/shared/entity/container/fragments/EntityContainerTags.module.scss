@@ -14,6 +14,11 @@
   gap: 2rem;
   row-gap: 1rem;
   list-style: none;
+
+  > p {
+    @include paragraph("laptop", "black");
+    letter-spacing: 1px;
+  }
 }
 
 .entityContainerTagsShowButton {
@@ -25,4 +30,16 @@
   font-size: 14px;
   font-weight: 550;
   letter-spacing: 0.5px;
+
+  transition: transform 0.15s ease-in;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.entityContainerTagsOptions {
+  @include flexCenter(row);
+  align-self: center;
+  gap: 1rem;
 }

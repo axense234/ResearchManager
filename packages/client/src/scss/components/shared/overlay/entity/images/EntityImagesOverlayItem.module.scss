@@ -1,0 +1,39 @@
+@use "../../../../../abstracts" as *;
+
+.itemContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 2rem;
+
+  > h6 {
+    @include heading("h6", "laptop", "white");
+    letter-spacing: 0.5px;
+  }
+}
+
+.itemImages {
+  @include flexCenter(row);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 5rem;
+  list-style: none;
+
+  > li {
+    @include flexCenter(row);
+
+    > img {
+      width: 16rem;
+      height: auto;
+
+      transition: transform 0.15s ease-in;
+
+      &:hover {
+        transform: rotate(-5deg) scale(1.03);
+      }
+    }
+  }
+}

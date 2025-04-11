@@ -1,3 +1,4 @@
 export * from "./EntityImagesOverlay";
-export * from "./EntityImagesOverlayList";
 export * from "./EntityImagesOverlayOptions";
+export * from "./EntityImagesOverlayContent";
+export * from "./EntityImagesOverlayItem";

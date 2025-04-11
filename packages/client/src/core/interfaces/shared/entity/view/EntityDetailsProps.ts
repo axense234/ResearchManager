@@ -1,7 +1,12 @@
 // Types
-import { EntityContainerType, EntityRedux } from "@/core/types";
+import {
+  EntityViewType,
+  ResearchActivityRedux,
+  ResearchPhaseRedux,
+} from "@/core/types";
 
 export interface EntityDetailsProps {
-  entity: EntityRedux;
-  viewType: EntityContainerType;
+  specialEntity: ResearchActivityRedux | ResearchPhaseRedux;
+  specialEntityType: "researchActivity" | "researchPhase";
+  viewType: EntityViewType;
 }

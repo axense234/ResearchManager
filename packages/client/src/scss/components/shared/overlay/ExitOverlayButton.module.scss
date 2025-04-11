@@ -1,0 +1,21 @@
+@use "../../../abstracts" as *;
+
+.exitOverlayButtonContainer {
+  @include flexCenter(row);
+  > svg {
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 4rem;
+    transition: transform 0.2s ease-in;
+
+    color: getColor("main-pastel-red");
+
+    &:hover {
+      transform: rotate(5deg) scale(1.1);
+    }
+  }
+}

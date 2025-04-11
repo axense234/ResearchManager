@@ -5,7 +5,7 @@ import {
   ResearchPhaseRedux,
 } from "@/core/types";
 // Hooks
-import { useSelectEntitiesByIds } from "./useSelectEntitiesByIds";
+import { useSelectEntitiesByIds } from "./selector";
 
 export const useCalculateResearchPhaseResearchPoints = (
   researchPhase: ResearchPhaseRedux,

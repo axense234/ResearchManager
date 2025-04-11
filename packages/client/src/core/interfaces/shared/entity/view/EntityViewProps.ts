@@ -1,8 +1,8 @@
 // Types
-import { EntityContainerEntityType, EntityContainerType } from "@/core/types";
+import { EntityViewEntityType, EntityViewType } from "@/core/types";
 
 export interface EntityViewProps {
-  viewType: EntityContainerType;
-  entityType: EntityContainerEntityType;
+  viewType: EntityViewType;
+  entityType: EntityViewEntityType;
   entityId: string;
 }

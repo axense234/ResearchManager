@@ -1,6 +1,7 @@
-// Interfaces
+// Interfaces and Types
 import { FC } from "react";
 import { EntityViewProps } from "@/core/interfaces";
+import { ResearchActivityRedux, ResearchPhaseRedux } from "@/core/types";
 // Components
 import EntityContainer from "../container/EntityContainer";
 import EntityDetails from "./EntityDetails";
@@ -16,11 +17,13 @@ const EntityView: FC<EntityViewProps> = ({
   entityId,
 }) => {
   const dispatch = useAppDispatch();
-  const entity = useSelectEntity(viewType, entityType, entityId);
+  const entity = useSelectEntity(viewType, entityType, entityId) as
+    | ResearchActivityRedux
+    | ResearchPhaseRedux;
 
   return (
     <section
-      className={entityViewStyles.homeExamplesExampleContainer}
+      className={entityViewStyles.entityViewContainer}
       onMouseEnter={() => dispatch(changeShowEntityContainerWrapper(true))}
       onMouseLeave={() => dispatch(changeShowEntityContainerWrapper(false))}
     >
@@ -29,7 +32,11 @@ const EntityView: FC<EntityViewProps> = ({
         entityType={entityType}
         entityId={entityId}
       />
-      <EntityDetails entity={entity} viewType={viewType} />
+      <EntityDetails
+        specialEntity={entity}
+        specialEntityType={entityType}
+        viewType={viewType}
+      />
     </section>
   );
 };
