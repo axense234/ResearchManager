@@ -1,12 +1,9 @@
 // Types
-import {
-  EntityViewType,
-  ResearchActivityRedux,
-  ResearchPhaseRedux,
-} from "@/core/types";
+import { EntityViewType, SpecialEntityRedux } from "@/core/types";
+import { SpecialEntityType } from "@researchmanager/shared/types";
 
 export interface EntityImagesProps {
-  specialEntity: ResearchActivityRedux | ResearchPhaseRedux;
-  specialEntityType: "researchActivity" | "researchPhase";
+  specialEntity: SpecialEntityRedux;
+  specialEntityType: SpecialEntityType;
   viewType: EntityViewType;
 }

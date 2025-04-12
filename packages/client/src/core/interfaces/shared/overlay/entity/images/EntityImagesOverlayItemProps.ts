@@ -7,4 +7,5 @@ export interface EntityImagesOverlayItemProps {
   itemImages: string[];
   itemEntityType: "researchPhase" | "researchLog";
   onItemClickFunction?: MouseEventHandler<HTMLHeadingElement> | undefined;
+  onImageClickFunction?: (imageSrc?: string) => void;
 }

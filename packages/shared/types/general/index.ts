@@ -6,3 +6,4 @@ export * from "./Entity";
 export * from "./payload";
 export * from "./EntityPayload";
 export * from "./ArchiveableEntityType";
+export * from "./SpecialEntityType";

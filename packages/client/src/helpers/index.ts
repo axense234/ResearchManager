@@ -6,3 +6,4 @@ export * from "./handleCarouselStepDirection";
 export * from "../hooks/redux/useCalculateEntityResearchPoints";
 export * from "./getResearchActivityExampleImages";
 export * from "./selectOnButtonClickFunction";
+export * from "./organizeEntityImagesByEntityName";

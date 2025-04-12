@@ -4,7 +4,7 @@
   @include flexCenter(column);
   justify-content: flex-start;
   gap: 3rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   &::-webkit-scrollbar {
     width: 0px;

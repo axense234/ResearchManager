@@ -8,13 +8,13 @@ import entityImagesOverlayItemStyles from "@/scss/components/shared/overlay/enti
 
 const EntityImagesOverlayItem: FC<EntityImagesOverlayItemProps> = ({
   itemName,
-  itemId,
   itemImages,
   itemEntityType,
   onItemClickFunction,
+  onImageClickFunction,
 }) => {
   return (
-    <li key={itemId} className={entityImagesOverlayItemStyles.itemContainer}>
+    <div className={entityImagesOverlayItemStyles.itemContainer}>
       <h6
         onClick={onItemClickFunction}
         style={{
@@ -30,9 +30,9 @@ const EntityImagesOverlayItem: FC<EntityImagesOverlayItemProps> = ({
         {itemName}
       </h6>
       <ul className={entityImagesOverlayItemStyles.itemImages}>
-        {itemImages?.map((entityImage) => {
+        {itemImages?.map((entityImage, index) => {
           return (
-            <li key={entityImage + itemId}>
+            <li key={index} onClick={() => onImageClickFunction(entityImage)}>
               <Image
                 width={256}
                 height={256}
@@ -45,7 +45,7 @@ const EntityImagesOverlayItem: FC<EntityImagesOverlayItemProps> = ({
           );
         })}
       </ul>
-    </li>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 @use "../../../../../abstracts" as *;
 
-.entityImagesOverlayContainer {
+.entityImageOverlayContainer {
   @include flexCenter(column);
   position: fixed;
   top: 0;

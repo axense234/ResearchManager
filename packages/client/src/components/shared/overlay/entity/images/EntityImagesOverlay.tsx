@@ -7,7 +7,8 @@ import entityImagesOverlayStyles from "@/scss/components/shared/overlay/entity/i
 import { useOverlayTransition } from "@/hooks";
 // Components
 import ExitOverlayButton from "../../ExitOverlayButton";
-import EntityImagesOverlayContent from "./EntityImagesOverlayContent";
+import EntityImagesOverlayContent from "./content/EntityImagesOverlayContent";
+import EntityImagesOverlayTitle from "./EntityImagesOverlayTitle";
 
 const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
   entityImages,
@@ -26,16 +27,13 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
       ref={overlayRef}
     >
       <ExitOverlayButton closeOverlayFunction={closeOverlayFunction} />
-      <h4
-        style={{
-          marginTop: specialEntityType === "researchPhase" ? "3rem" : "0",
-        }}
-      >
-        {entityName}
-      </h4>
+      <EntityImagesOverlayTitle
+        entityName={entityName}
+        specialEntityType={specialEntityType}
+      />
       <EntityImagesOverlayContent
         specialEntityType={specialEntityType}
-        entityImages={entityImages}
+        entityImages={entityImages || []}
       />
     </div>
   );
