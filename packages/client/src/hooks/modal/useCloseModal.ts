@@ -2,11 +2,10 @@
 import { useEffect } from "react";
 // Data
 import { AUTO_CLOSE_MODAL } from "@/data/general";
-// Helpers
-import { closeModal } from "@/helpers";
 // Redux
 import { useAppDispatch, useAppSelector } from "../redux";
 import { selectModal } from "@/redux/slices/general";
+import { setModal, resetErrorFields } from "@/redux/slices/general/slice";
 
 export const useCloseModal = (showModal: boolean) => {
   const dispatch = useAppDispatch();
@@ -16,7 +15,8 @@ export const useCloseModal = (showModal: boolean) => {
     let timeout: NodeJS.Timeout;
     if (showModal) {
       timeout = setTimeout(() => {
-        closeModal(dispatch, modal);
+        dispatch(setModal({ ...modal, isClosed: true }));
+        dispatch(resetErrorFields());
       }, AUTO_CLOSE_MODAL);
     }
     return () => {

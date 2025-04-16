@@ -1,0 +1,14 @@
+@use "../../../../abstracts" as *;
+
+.toggleContaienr {
+  @include flexCenter(row);
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-white");
+}

@@ -6,27 +6,18 @@ import {
   UserPayload,
 } from "@researchmanager/shared/types";
 import {
-  EntitiesSliceInitialStateType,
   ResearchActivityRedux,
   ResearchLogRedux,
   ResearchPhaseRedux,
   ResearchSessionRedux,
   TagRedux,
 } from "@/core/types";
-// Adapters
-import { researchActivitiesAdapter } from "@/redux/slices/research/activity";
-import { researchLogsAdapter } from "@/redux/slices/research/log";
-import { researchPhasesAdapter } from "@/redux/slices/research/phase";
-import { researchSessionsAdapter } from "@/redux/slices/research/session";
-import { tagsAdapter } from "@/redux/slices/tag";
 // Helpers
 import { transformEntityIntoEntityRedux } from "./transformEntityIntoEntityRedux";
 
-export const setEntitiesStateFromUserPayload = (
-  state: EntitiesSliceInitialStateType,
+export const transformEntitiesFromUserPayloadToEntitiesRedux = (
   userPayload: UserPayload,
 ) => {
-  console.log("setEntitiesStateFromUserPayload hit");
   const userTags = userPayload.tags;
 
   const userResearchActivities = userPayload.researchActivities;
@@ -79,25 +70,11 @@ export const setEntitiesStateFromUserPayload = (
       ) as ResearchLogRedux,
   );
 
-  if (userTagsRedux) {
-    tagsAdapter.setAll(state.tags, userTagsRedux);
-  }
-  if (userResearchActivitiesRedux) {
-    researchActivitiesAdapter.setAll(
-      state.researchActivities,
-      userResearchActivitiesRedux,
-    );
-  }
-  if (userResearchPhasesRedux) {
-    researchPhasesAdapter.setAll(state.researchPhases, userResearchPhasesRedux);
-  }
-  if (userResearchSessionsRedux) {
-    researchSessionsAdapter.setAll(
-      state.researchSessions,
-      userResearchSessionsRedux,
-    );
-  }
-  if (userResearchLogsRedux) {
-    researchLogsAdapter.setAll(state.researchLogs, userResearchLogsRedux);
-  }
+  return {
+    tags: userTagsRedux,
+    researchActivities: userResearchActivitiesRedux,
+    researchPhases: userResearchPhasesRedux,
+    researchSessions: userResearchSessionsRedux,
+    researchLogs: userResearchLogsRedux,
+  };
 };

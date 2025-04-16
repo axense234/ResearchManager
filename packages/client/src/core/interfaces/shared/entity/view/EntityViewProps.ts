@@ -5,4 +5,5 @@ export interface EntityViewProps {
   viewType: EntityViewType;
   entityType: EntityViewEntityType;
   entityId: string;
+  isLoading: boolean;
 }

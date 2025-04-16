@@ -12,7 +12,6 @@ export const {
   (state) => state.researchActivities,
 );
 
-// Examples
 export const selectResearchActivitiesExamples = (state: State) =>
   state.researchActivities.researchActivitiesExamples;
 
@@ -32,7 +31,18 @@ export const selectResearchActivitiesExamplesByIds = createSelector(
     ),
 );
 
-// General
+export const selectResearchActivityIdByIndex = createSelector(
+  [selectResearchActivitiesIds, (state, index) => index],
+  (researchActivitiesIds, index) => {
+    return researchActivitiesIds[index - 1];
+  },
+);
+
+export const selectResearchActivityExampleIdByIndex = createSelector(
+  [selectResearchActivitiesExamples, (state, index) => index],
+  (researchActivities, index) => researchActivities[index - 1].id,
+);
+
 export const selectCurrentResearchActivityExampleIndex = (state: State) =>
   state.researchActivities.currentResearchActivityExampleIndex;
 

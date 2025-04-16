@@ -20,12 +20,12 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
       entityImages.map((entityImage) => {
         return entityImage.researchLogName;
       }),
-    ) || new Set();
+    ) || new Set([]);
 
   const entityImagesLogsImages =
     organizeEntityImagesByEntityNames(
       entityImages,
-      entityImagesLogsNames,
+      entityImagesLogsNames || new Set([]),
       "researchLog",
     ) || [];
 
@@ -34,12 +34,12 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
       entityImages.map((entityImage) => {
         return entityImage.researchPhaseName;
       }),
-    ) || new Set();
+    ) || new Set([]);
 
   const entityImagesResearchPhasesImages =
     organizeEntityImagesByEntityNames(
       entityImages,
-      entityImagesResearchPhasesNames,
+      entityImagesResearchPhasesNames || new Set([]),
       "researchPhase",
     ) || [];
 
@@ -51,8 +51,6 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
   const currentEntityImage =
     entityImages.find((entityImage) => entityImage.src === currentImageSrc) ||
     entityImages[0];
-
-  console.log(currentEntityImage);
 
   if (specialEntityType === "researchPhase") {
     return (

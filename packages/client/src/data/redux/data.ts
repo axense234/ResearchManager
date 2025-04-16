@@ -10,12 +10,12 @@ export const signUpMockDataRedux: SignUpDto = {
 };
 export const userProfileMockDataRedux: UserRedux = {
   id: "",
-  email: "",
+  email: "defaultemail@provider.com",
   hash: "",
-  username: "",
-  backgroundImageSrc:
-    "https://res.cloudinary.com/birthdayreminder/image/upload/v1732365178/Research%20Manager/users/profileImages/abstract-user-flat-4_fimqzi.png",
+  username: "Default User",
   profileImageSrc:
+    "https://res.cloudinary.com/birthdayreminder/image/upload/v1742654706/Research%20Manager/defaultprofileimage_tzrh3w_mqkmrr.jpg",
+  backgroundImageSrc:
     "https://res.cloudinary.com/birthdayreminder/image/upload/v1732365146/Research%20Manager/users/backgroundImages/signupwallpaper_der2zw.jpg",
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),

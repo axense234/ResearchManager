@@ -25,16 +25,16 @@ export const getUserTagsFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
   const tags = action.payload as Tag[];
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const tagsRedux = tags.map((tag) => {
       return transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
     });
 
     tagsAdapter.removeAll(state);
     tagsAdapter.addMany(state, tagsRedux);
-    state.loadingGetUserTags = "REJECTED";
+    state.loadingGetUserTags = "SUCCEEDED";
   } else {
-    state.loadingGetUserTags = "FAILED";
+    state.loadingGetUserTags = "REJECTED";
   }
 };
 
@@ -42,5 +42,5 @@ export const getUserTagsRejected: ExtraReducerFuncType<TagsSliceStateType> = (
   state,
   action,
 ) => {
-  state.loadingGetUserTags = "FAILED";
+  state.loadingGetUserTags = "REJECTED";
 };

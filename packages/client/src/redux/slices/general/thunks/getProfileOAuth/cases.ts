@@ -34,7 +34,7 @@ export const getProfileOAuthFulfilled: ExtraReducerFuncType<
 
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const userPayload = action.payload as UserPayload;
 
     const userRedux = transformEntityIntoEntityRedux(
@@ -44,7 +44,7 @@ export const getProfileOAuthFulfilled: ExtraReducerFuncType<
 
     state.userProfile = userRedux;
 
-    state.loadingGetProfileOAuth = "REJECTED";
+    state.loadingGetProfileOAuth = "SUCCEEDED";
     state.modal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
@@ -58,7 +58,7 @@ export const getProfileOAuthFulfilled: ExtraReducerFuncType<
       message: `Could not fetch your Account :(`,
       type: "general",
     };
-    state.loadingGetProfileOAuth = "FAILED";
+    state.loadingGetProfileOAuth = "REJECTED";
   }
 };
 
@@ -69,7 +69,7 @@ export const getProfileOAuthRejected: ExtraReducerFuncType<
     "rm-user-prev-created-account",
   );
 
-  state.loadingGetProfileOAuth = "FAILED";
+  state.loadingGetProfileOAuth = "REJECTED";
   state.modal = {
     isClosed: hasUserCreatedAccountBefore !== "true",
     isLoading: false,

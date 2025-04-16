@@ -29,16 +29,14 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
   const user = action.payload as User;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     console.log(user);
 
     state.userProfile = transformEntityIntoEntityRedux(
       user,
       "user",
     ) as UserRedux;
-    state.loadingSignUpUser = "REJECTED";
-
-    state.loadingSignUpUser = "REJECTED";
+    state.loadingSignUpUser = "SUCCEEDED";
 
     state.modal = {
       isClosed: false,
@@ -53,8 +51,8 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
     };
 
     if (errorData.error === "Forbidden") {
-      state.loadingSignUpUser = "FAILED";
-      state.loadingSignInUser = "REJECTED";
+      state.loadingSignUpUser = "REJECTED";
+      state.loadingSignInUser = "SUCCEEDED";
 
       state.modal = {
         isClosed: false,
@@ -63,7 +61,7 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
         isLoading: false,
       };
     } else {
-      state.loadingSignUpUser = "FAILED";
+      state.loadingSignUpUser = "REJECTED";
 
       state.modal = {
         isClosed: false,
@@ -80,7 +78,7 @@ export const signUpUserOAuthRejected: ExtraReducerFuncType<
 > = (state, action) => {
   localStorage.removeItem("createResearchManagerAccount");
 
-  state.loadingSignUpUser = "FAILED";
+  state.loadingSignUpUser = "REJECTED";
 
   state.modal = {
     isClosed: false,

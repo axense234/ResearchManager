@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { researchSessionsSliceState } from "./initialState";
 // Reducers
 import { researchSessionsSliceReducers } from "./reducers";
+// Thunks
 import { researchSessionsSliceExtraReducers } from "./thunks";
 
 const researchSessionsSlice = createSlice({
@@ -18,6 +19,7 @@ const researchSessionsSlice = createSlice({
 export const {
   updateCreateResearchSessionDto,
   updateLoadingResearchSessionState,
+  setResearchSessions,
 } = researchSessionsSlice.actions;
 
 export default researchSessionsSlice.reducer;

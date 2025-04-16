@@ -8,6 +8,9 @@ export type ResearchPhasesSliceInitialStateType = {
 
   researchPhasesExamples: ResearchPhaseRedux[];
 
+  currentResearchPhaseExampleIndex: number;
+  currentResearchPhaseIndex: number;
+
   loadingCreateResearchPhase: LoadingStateType;
   loadingDeleteResearchPhase: LoadingStateType;
   loadingUpdateResearchPhase: LoadingStateType;

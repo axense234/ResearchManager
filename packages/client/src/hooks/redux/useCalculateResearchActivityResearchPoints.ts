@@ -15,7 +15,7 @@ export const useCalculateResearchActivityResearchPoints = (
   const researchActivityPhases = useSelectEntitiesByIds(
     viewType,
     "researchPhase",
-    researchActivity.researchPhasesIds,
+    researchActivity?.researchPhasesIds || [],
   ) as ResearchPhaseRedux[];
 
   const researchPhasesLogsIds = researchActivityPhases

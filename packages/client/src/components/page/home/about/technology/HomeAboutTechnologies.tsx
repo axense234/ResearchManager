@@ -11,15 +11,15 @@ import {
 // SCSS
 import homeAboutTechnologiesStyles from "@/scss/components/page/home/about/technology/HomeAboutTechnologies.module.scss";
 // Components
-import HomeSectionTitle from "../../shared/HomeSectionTitle";
 import HomeAboutTechnologySection from "./HomeAboutTechnologySection";
+import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 
 const HomeAboutTechnologies: FC = () => {
   return (
     <section
       className={homeAboutTechnologiesStyles.homeAboutTechnologiesContainer}
     >
-      <HomeSectionTitle
+      <PageSectionTitle
         title={homeAboutTechnologiesData.title}
         description={homeAboutTechnologiesData.description}
       />

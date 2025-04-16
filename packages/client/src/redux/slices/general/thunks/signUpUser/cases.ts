@@ -30,14 +30,12 @@ export const signUpUserFulfilled: ExtraReducerFuncType<
   const user = action.payload as User;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
-    console.log(user);
-
+  if (!axiosError?.isAxiosError) {
     state.userProfile = transformEntityIntoEntityRedux(
       user,
       "user",
     ) as UserRedux;
-    state.loadingSignUpUser = "REJECTED";
+    state.loadingSignUpUser = "SUCCEEDED";
 
     state.modal = {
       isClosed: false,
@@ -58,7 +56,7 @@ export const signUpUserFulfilled: ExtraReducerFuncType<
       },
     );
 
-    state.loadingSignUpUser = "FAILED";
+    state.loadingSignUpUser = "REJECTED";
 
     state.modal = {
       isClosed: false,
@@ -72,7 +70,7 @@ export const signUpUserFulfilled: ExtraReducerFuncType<
 export const signUpUserRejected: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
-  state.loadingSignUpUser = "FAILED";
+  state.loadingSignUpUser = "REJECTED";
 
   state.modal = {
     isClosed: false,

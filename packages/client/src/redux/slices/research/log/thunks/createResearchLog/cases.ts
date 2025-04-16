@@ -23,21 +23,21 @@ export const createResearchLogFulfilled: ExtraReducerFuncType<
   const researchLog = action.payload as ResearchLog;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const researchLogRedux = transformEntityIntoEntityRedux(
       researchLog,
       "researchLog",
     ) as ResearchLogRedux;
 
     researchLogsAdapter.addOne(state, researchLogRedux);
-    state.loadingCreateResearchLog = "REJECTED";
+    state.loadingCreateResearchLog = "SUCCEEDED";
   } else {
-    state.loadingCreateResearchLog = "FAILED";
+    state.loadingCreateResearchLog = "REJECTED";
   }
 };
 
 export const createResearchLogRejected: ExtraReducerFuncType<
   ResearchLogsSliceStateType
 > = (state, action) => {
-  state.loadingCreateResearchLog = "FAILED";
+  state.loadingCreateResearchLog = "REJECTED";
 };

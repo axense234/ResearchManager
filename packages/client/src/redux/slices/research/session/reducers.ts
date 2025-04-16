@@ -2,10 +2,12 @@
 import {
   LoadingStateType,
   ObjectKeyValueType,
+  ResearchSessionRedux,
   ResearchSessionsSliceStateType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
+import { researchSessionsAdapter } from "./adapter";
 
 export const researchSessionsSliceReducers = {
   updateLoadingResearchSessionState(
@@ -46,5 +48,11 @@ export const researchSessionsSliceReducers = {
       ...state.createResearchSessionDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  setResearchSessions(
+    state: ResearchSessionsSliceStateType,
+    action: PayloadAction<ResearchSessionRedux[]>,
+  ) {
+    researchSessionsAdapter.setAll(state, action.payload);
   },
 };

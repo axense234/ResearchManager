@@ -16,7 +16,10 @@ const researchPhasesSlice = createSlice({
   },
 });
 
-export const { updateCreateResearchPhaseDto, updateLoadingResearchPhaseState } =
-  researchPhasesSlice.actions;
+export const {
+  updateCreateResearchPhaseDto,
+  updateLoadingResearchPhaseState,
+  setResearchPhases,
+} = researchPhasesSlice.actions;
 
 export default researchPhasesSlice.reducer;

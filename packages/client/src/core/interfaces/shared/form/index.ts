@@ -1,1 +1,2 @@
-export * from "./TextFormControlsProps";
+export * from "./TextFormControlProps";
+export * from "./CheckboxFormControlProps";

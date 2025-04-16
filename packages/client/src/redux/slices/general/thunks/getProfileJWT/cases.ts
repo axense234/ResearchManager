@@ -34,7 +34,7 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
 
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const userPayload = action.payload as UserPayload;
     const userRedux = transformEntityIntoEntityRedux(
       userPayload,
@@ -43,21 +43,21 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
 
     state.userProfile = userRedux;
 
-    state.loadingGetProfileJWT = "REJECTED";
+    state.loadingGetProfileJWT = "SUCCEEDED";
     state.modal = {
-      isClosed: hasUserCreatedAccountBefore === "true",
+      isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
       message: `Welcome back ${userPayload.username}.`,
       type: "general",
     };
   } else {
+    state.loadingGetProfileJWT = "REJECTED";
     state.modal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
       message: `Could not fetch your Account :(`,
       type: "general",
     };
-    state.loadingGetProfileJWT = "FAILED";
   }
 };
 
@@ -68,7 +68,7 @@ export const getProfileJWTRejected: ExtraReducerFuncType<
     "rm-user-prev-created-account",
   );
 
-  state.loadingGetProfileJWT = "FAILED";
+  state.loadingGetProfileJWT = "REJECTED";
   state.modal = {
     isClosed: hasUserCreatedAccountBefore !== "true",
     isLoading: false,

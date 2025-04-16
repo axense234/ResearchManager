@@ -25,16 +25,16 @@ export const updateTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
   const tag = action.payload as Tag;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const tagRedux = transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
 
     tagsAdapter.updateOne(state, {
       changes: { ...tagRedux },
       id: tagRedux.id,
     });
-    state.loadingUpdateTag = "REJECTED";
+    state.loadingUpdateTag = "SUCCEEDED";
   } else {
-    state.loadingUpdateTag = "FAILED";
+    state.loadingUpdateTag = "REJECTED";
   }
 };
 
@@ -42,5 +42,5 @@ export const updateTagRejected: ExtraReducerFuncType<TagsSliceStateType> = (
   state,
   action,
 ) => {
-  state.loadingUpdateTag = "FAILED";
+  state.loadingUpdateTag = "REJECTED";
 };

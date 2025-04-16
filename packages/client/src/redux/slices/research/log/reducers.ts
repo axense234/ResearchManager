@@ -2,10 +2,13 @@
 import {
   LoadingStateType,
   ObjectKeyValueType,
+  ResearchLogRedux,
   ResearchLogsSliceStateType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
+// Adapter
+import { researchLogsAdapter } from "./adapter";
 
 export const researchLogsSliceReducers = {
   updateLoadingResearchLogState(
@@ -46,5 +49,11 @@ export const researchLogsSliceReducers = {
       ...state.createResearchLogDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  setResearchLogs(
+    state: ResearchLogsSliceStateType,
+    action: PayloadAction<ResearchLogRedux[]>,
+  ) {
+    researchLogsAdapter.setAll(state, action.payload);
   },
 };

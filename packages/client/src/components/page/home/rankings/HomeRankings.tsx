@@ -6,12 +6,12 @@ import homeRankingsStyles from "@/scss/components/page/home/rankings/HomeRanking
 import { homeRankingsData } from "@/data/general/home";
 // Components
 import HomeRankingsList from "./HomeRankingsList";
-import HomeSectionTitle from "../shared/HomeSectionTitle";
+import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 
 const HomeRankings: FC = () => {
   return (
     <section className={homeRankingsStyles.homeRankingsContainer} id="rankings">
-      <HomeSectionTitle
+      <PageSectionTitle
         title={homeRankingsData.title}
         description={homeRankingsData.description}
       />

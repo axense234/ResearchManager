@@ -30,13 +30,13 @@ export const signInUserFulfilled: ExtraReducerFuncType<
   const user = action.payload as User;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     state.userProfile = transformEntityIntoEntityRedux(
       user,
       "user",
     ) as UserRedux;
 
-    state.loadingSignInUser = "REJECTED";
+    state.loadingSignInUser = "SUCCEEDED";
 
     state.modal = {
       isClosed: false,
@@ -57,7 +57,7 @@ export const signInUserFulfilled: ExtraReducerFuncType<
       },
     );
 
-    state.loadingSignInUser = "FAILED";
+    state.loadingSignInUser = "REJECTED";
 
     state.modal = {
       isClosed: false,
@@ -71,7 +71,7 @@ export const signInUserFulfilled: ExtraReducerFuncType<
 export const signInUserRejected: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
-  state.loadingSignUpUser = "FAILED";
+  state.loadingSignUpUser = "REJECTED";
   state.modal = {
     isClosed: false,
     message: "Could not sign in your Account.",

@@ -23,7 +23,7 @@ export const updateResearchActivityFulfilled: ExtraReducerFuncType<
   const researchActivity = action.payload as ResearchActivity;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const researchActivityRedux = transformEntityIntoEntityRedux(
       researchActivity,
       "researchActivity",
@@ -33,14 +33,14 @@ export const updateResearchActivityFulfilled: ExtraReducerFuncType<
       changes: { ...researchActivityRedux },
       id: researchActivityRedux.id,
     });
-    state.loadingUpdateResearchActivity = "REJECTED";
+    state.loadingUpdateResearchActivity = "SUCCEEDED";
   } else {
-    state.loadingUpdateResearchActivity = "FAILED";
+    state.loadingUpdateResearchActivity = "REJECTED";
   }
 };
 
 export const updateResearchActivityRejected: ExtraReducerFuncType<
   ResearchActivitiesSliceStateType
 > = (state, action) => {
-  state.loadingUpdateResearchActivity = "FAILED";
+  state.loadingUpdateResearchActivity = "REJECTED";
 };

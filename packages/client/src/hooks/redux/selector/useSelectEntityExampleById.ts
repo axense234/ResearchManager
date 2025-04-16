@@ -5,10 +5,11 @@ import { EntityRedux } from "@/core/types";
 import { useAppSelector } from "../redux";
 // Hooks
 import { selectResearchActivityExampleById } from "@/redux/slices/research/activity";
+import { selectResearchPhaseExampleById } from "@/redux/slices/research/phase";
 
 const selectors = {
   researchActivity: selectResearchActivityExampleById,
-  researchPhase: selectResearchActivityExampleById,
+  researchPhase: selectResearchPhaseExampleById,
 };
 
 export const useSelectEntityExampleById = (

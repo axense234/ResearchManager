@@ -24,7 +24,7 @@ export const signUpResponsesOptions: SignUpResponsesOptionsType = {
   '400': {
     status: 400,
     description:
-      'Could not create user with the data provided or input validation failed.',
+      'Could not create user with the data provided or input validation REJECTED.',
     example: signUpResponsesErrorExamples['400'],
   },
   '403': {

@@ -17,7 +17,7 @@
 
   > p {
     @include paragraph("laptop", "black");
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 }
 

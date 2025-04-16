@@ -5,12 +5,12 @@ import homeAboutInfoStyles from "@/scss/components/page/home/about/HomeAboutInfo
 // Data
 import { homeAboutInfoData } from "@/data/general/home";
 // Components
-import HomeSectionTitle from "../shared/HomeSectionTitle";
+import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 
 const HomeAboutInfo: FC = () => {
   return (
     <section className={homeAboutInfoStyles.homeAboutInfoContainer}>
-      <HomeSectionTitle
+      <PageSectionTitle
         title={homeAboutInfoData.title}
         description={homeAboutInfoData.description}
       />

@@ -20,16 +20,16 @@ export const deleteResearchActivityFulfilled: ExtraReducerFuncType<
   const researchActivity = action.payload as ResearchActivity;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     researchActivitiesAdapter.removeOne(state, researchActivity.id);
-    state.loadingDeleteResearchActivity = "REJECTED";
+    state.loadingDeleteResearchActivity = "SUCCEEDED";
   } else {
-    state.loadingDeleteResearchActivity = "FAILED";
+    state.loadingDeleteResearchActivity = "REJECTED";
   }
 };
 
 export const deleteResearchActivityRejected: ExtraReducerFuncType<
   ResearchActivitiesSliceStateType
 > = (state, action) => {
-  state.loadingDeleteResearchActivity = "FAILED";
+  state.loadingDeleteResearchActivity = "REJECTED";
 };

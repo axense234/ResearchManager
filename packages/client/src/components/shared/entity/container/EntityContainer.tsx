@@ -13,56 +13,40 @@ const EntityContainer: FC<EntityContainerProps> = ({
   containerType,
   entityId,
 }) => {
-  let chosenEntityInterface = (
-    <ResearchActivityInterface
-      containerType={containerType}
-      entityId={entityId}
-    />
-  );
-
   switch (entityType) {
     case "researchActivity":
-      chosenEntityInterface = (
+      return (
         <ResearchActivityInterface
           containerType={containerType}
           entityId={entityId}
         />
       );
-      break;
     case "researchPhase":
-      chosenEntityInterface = (
+      return (
         <ResearchPhaseInterface
           containerType={containerType}
           entityId={entityId}
         />
       );
-      break;
     case "researchLog":
-      chosenEntityInterface = (
+      return (
         <ResearchLogInterface
           containerType={containerType}
           entityId={entityId}
         />
       );
-      break;
     case "researchSession":
-      chosenEntityInterface = (
+      return (
         <ResearchSessionInterface
           containerType={containerType}
           entityId={entityId}
         />
       );
-      break;
     case "tag":
-      chosenEntityInterface = (
-        <TagInterface containerType={containerType} entityId={entityId} />
-      );
-      break;
+      return <TagInterface containerType={containerType} entityId={entityId} />;
     default:
       throw new Error("Invalid entity type.");
   }
-
-  return chosenEntityInterface;
 };
 
 export default EntityContainer;

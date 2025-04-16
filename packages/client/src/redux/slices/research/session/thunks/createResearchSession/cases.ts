@@ -23,21 +23,21 @@ export const createResearchSessionFulfilled: ExtraReducerFuncType<
   const researchSession = action.payload as ResearchSession;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const researchSessionRedux = transformEntityIntoEntityRedux(
       researchSession,
       "researchSession",
     ) as ResearchSessionRedux;
 
     researchSessionsAdapter.addOne(state, researchSessionRedux);
-    state.loadingCreateResearchSession = "REJECTED";
+    state.loadingCreateResearchSession = "SUCCEEDED";
   } else {
-    state.loadingCreateResearchSession = "FAILED";
+    state.loadingCreateResearchSession = "REJECTED";
   }
 };
 
 export const createResearchSessionRejected: ExtraReducerFuncType<
   ResearchSessionsSliceStateType
 > = (state, action) => {
-  state.loadingCreateResearchSession = "FAILED";
+  state.loadingCreateResearchSession = "REJECTED";
 };

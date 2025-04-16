@@ -10,3 +10,4 @@ export * from "./useSelectEntityImages";
 export * from "./useSelectEntityRedux";
 export * from "./useSelectResearchActivityImages";
 export * from "./useSelectResearchPhaseImages";
+export * from "./useSelectEntityRedux";

@@ -12,26 +12,23 @@ export const organizeEntityImagesByEntityNames = (
   const specialEntityNameSelector = `${specialEntityType}Name`;
   const specialEntityIdSelector = `${specialEntityType}Id`;
 
-  console.log(entityNames);
+  const organizedEntityNames =
+    entityNames.size > 0 ? [...entityNames.values()] : [];
 
-  const organizedEntityImages = entityNames
-    .values()
-    .toArray()
-    .map((entityName) => {
-      return {
-        imagesSrc: entityImages
-          .filter(
-            (entityImage) =>
-              entityImage[specialEntityNameSelector] === entityName,
-          )
-          .map((entityImageFiltered) => entityImageFiltered.src),
-        entityName: entityName,
-        entityId: entityImages.find(
+  const organizedEntityImages = organizedEntityNames.map((entityName) => {
+    return {
+      imagesSrc: entityImages
+        .filter(
           (entityImage) =>
             entityImage[specialEntityNameSelector] === entityName,
-        )[specialEntityIdSelector],
-      };
-    }) as SpecialEntityImagesPayloadType;
+        )
+        .map((entityImageFiltered) => entityImageFiltered.src),
+      entityName: entityName,
+      entityId: entityImages.find(
+        (entityImage) => entityImage[specialEntityNameSelector] === entityName,
+      )[specialEntityIdSelector],
+    };
+  }) as SpecialEntityImagesPayloadType;
 
   return organizedEntityImages;
 };

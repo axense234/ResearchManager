@@ -9,7 +9,7 @@ export const buildAllowedIncludeValuesObject = (
   filteredValues: (EntityType | EntityTypePlural)[],
   optionObject: OptionObjectBuilderIncludeObject = {},
   includeDepth: number = 1,
-  visitedEntities: Set<EntityType> = new Set(),
+  visitedEntities: Set<EntityType> = new Set([]),
   currentPath: EntityType[] = [],
   rootEntity: EntityType = 'user',
 ): OptionObjectBuilderIncludeObject => {

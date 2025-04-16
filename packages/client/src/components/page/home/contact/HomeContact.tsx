@@ -7,12 +7,12 @@ import { homeContactData } from "@/data/general/home";
 // Components
 import HomeContactFeedback from "./HomeContactFeedback";
 import HomeContactOptions from "./HomeContactOptions";
-import HomeSectionTitle from "../shared/HomeSectionTitle";
+import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 
 const HomeContact: FC = () => {
   return (
     <section className={homeContactStyles.homeContactContainer} id="contact">
-      <HomeSectionTitle
+      <PageSectionTitle
         title={homeContactData.title}
         description={homeContactData.description}
       />

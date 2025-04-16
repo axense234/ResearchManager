@@ -14,7 +14,7 @@ import { BarLoader } from "react-spinners";
 // Data
 import { mainLightBlueColor } from "@/data/general";
 // Helpers
-import { closeModal } from "@/helpers";
+import { setModal, resetErrorFields } from "@/redux/slices/general/slice";
 
 const GeneralModal: FC<GeneralModalProps> = ({ type }) => {
   const dispatch = useAppDispatch();
@@ -31,7 +31,8 @@ const GeneralModal: FC<GeneralModalProps> = ({ type }) => {
         title="Close Modal"
         aria-label="Close Modal"
         onClick={() => {
-          closeModal(dispatch, modal);
+          dispatch(setModal({ ...modal, isClosed: true }));
+          dispatch(resetErrorFields());
         }}
       />
       <p>{modal.message}</p>

@@ -20,16 +20,16 @@ export const deleteResearchPhaseFulfilled: ExtraReducerFuncType<
   const researchPhase = action.payload as ResearchPhase;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     researchPhasesAdapter.removeOne(state, researchPhase.id);
-    state.loadingDeleteResearchPhase = "REJECTED";
+    state.loadingDeleteResearchPhase = "SUCCEEDED";
   } else {
-    state.loadingDeleteResearchPhase = "FAILED";
+    state.loadingDeleteResearchPhase = "REJECTED";
   }
 };
 
 export const deleteResearchPhaseRejected: ExtraReducerFuncType<
   ResearchPhasesSliceStateType
 > = (state, action) => {
-  state.loadingDeleteResearchPhase = "FAILED";
+  state.loadingDeleteResearchPhase = "REJECTED";
 };

@@ -17,16 +17,16 @@ export const deleteResearchLogFulfilled: ExtraReducerFuncType<
   const researchLog = action.payload as ResearchLog;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     researchLogsAdapter.removeOne(state, researchLog.id);
-    state.loadingDeleteResearchLog = "REJECTED";
+    state.loadingDeleteResearchLog = "SUCCEEDED";
   } else {
-    state.loadingDeleteResearchLog = "FAILED";
+    state.loadingDeleteResearchLog = "REJECTED";
   }
 };
 
 export const deleteResearchLogRejected: ExtraReducerFuncType<
   ResearchLogsSliceStateType
 > = (state, action) => {
-  state.loadingDeleteResearchLog = "FAILED";
+  state.loadingDeleteResearchLog = "REJECTED";
 };

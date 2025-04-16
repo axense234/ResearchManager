@@ -29,6 +29,8 @@ export const signInUser = createAsyncThunk<UserPayload | AxiosError, SignInDto>(
         res.access_token as string,
       );
 
+      localStorage.setItem("rm-user-prev-created-account", "true");
+
       return res.payload as UserPayload;
     } catch (error) {
       console.log(error);

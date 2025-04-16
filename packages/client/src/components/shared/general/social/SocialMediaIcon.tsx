@@ -24,8 +24,8 @@ const SocialMediaIcon: FC<SocialMediaIconProps> = ({
       <Image
         src={linkIconUrl}
         alt={linkTitle}
-        width={socialMediaIconReservedDimensions}
-        height={socialMediaIconReservedDimensions}
+        width={socialMediaIconReservedDimensions || 40}
+        height={socialMediaIconReservedDimensions || 40}
       />
     </Link>
   );

@@ -23,21 +23,21 @@ export const getUserResearchPhaseFulfilled: ExtraReducerFuncType<
   const researchPhase = action.payload as ResearchPhase;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const researchPhaseRedux = transformEntityIntoEntityRedux(
       researchPhase,
       "researchPhase",
     ) as ResearchPhaseRedux;
 
     researchPhasesAdapter.upsertOne(state, researchPhaseRedux);
-    state.loadingGetUserResearchPhase = "REJECTED";
+    state.loadingGetUserResearchPhase = "SUCCEEDED";
   } else {
-    state.loadingGetUserResearchPhase = "FAILED";
+    state.loadingGetUserResearchPhase = "REJECTED";
   }
 };
 
 export const getUserResearchPhaseRejected: ExtraReducerFuncType<
   ResearchPhasesSliceStateType
 > = (state, action) => {
-  state.loadingGetUserResearchPhase = "FAILED";
+  state.loadingGetUserResearchPhase = "REJECTED";
 };

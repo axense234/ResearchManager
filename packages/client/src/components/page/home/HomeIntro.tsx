@@ -6,7 +6,7 @@ import homeIntroStyles from "@/scss/components/page/home/HomeIntro.module.scss";
 // Components
 import Logo from "@/components/shared/general/Logo";
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
-import HomeSectionTitle from "./shared/HomeSectionTitle";
+import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 // Data
 import { homeIntroData } from "@/data/general/home";
 // Redux
@@ -18,12 +18,12 @@ const HomeIntro: FC = () => {
 
   const profile = useAppSelector(selectUserProfile);
 
-  const isFunctionalButtonDisabled = profile.email.length <= 0;
+  const isFunctionalButtonDisabled = profile.id.length <= 0;
 
   return (
     <section className={homeIntroStyles.homeIntroContainer}>
       <Logo clickable={false} type="light" width={256} />
-      <HomeSectionTitle
+      <PageSectionTitle
         title={homeIntroData.title}
         description={homeIntroData.description}
       />

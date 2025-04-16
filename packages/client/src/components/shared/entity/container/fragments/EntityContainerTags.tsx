@@ -32,7 +32,7 @@ const EntityContainerTags: FC<EntityContainerTagsProps> = ({
             );
           })
         ) : (
-          <p>No Tags.</p>
+          <p>Untagged</p>
         )}
         <div className={entityContainerTagsStyles.entityContainerTagsOptions}>
           {tagsIds?.length > DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN ? (

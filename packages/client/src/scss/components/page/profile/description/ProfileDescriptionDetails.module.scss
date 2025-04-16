@@ -1,0 +1,18 @@
+@use "../../../../abstracts" as *;
+
+.profileDescriptionDetailsContainer {
+  @include flexCenter(column);
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-dark-blue");
+
+  min-width: 25rem;
+
+  > img {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    width: 100%;
+    height: auto;
+  }
+}

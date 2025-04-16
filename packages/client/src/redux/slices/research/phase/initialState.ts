@@ -27,6 +27,8 @@ export const researchPhasesSliceInitialState = {
   loadingUpdateResearchPhase: "IDLE",
   loadingGetUserResearchPhases: "IDLE",
   loadingGetUserResearchPhase: "IDLE",
+  currentResearchPhaseExampleIndex: 1,
+  currentResearchPhaseIndex: 1,
 } as ResearchPhasesSliceInitialStateType;
 
 export const researchPhasesSliceState = researchPhasesAdapter.getInitialState(

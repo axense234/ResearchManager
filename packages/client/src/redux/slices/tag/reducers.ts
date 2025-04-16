@@ -1,8 +1,9 @@
 // Types
-import { LoadingStateType, ObjectKeyValueType } from "@/core/types";
+import { LoadingStateType, ObjectKeyValueType, TagRedux } from "@/core/types";
 import { TagsSliceStateType } from "@/core/types/redux/entity/tag/TagsSliceStateType";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
+import { tagsAdapter } from "./adapter";
 
 export const tagsSliceReducers = {
   updateLoadingTagState(
@@ -44,5 +45,9 @@ export const tagsSliceReducers = {
       ...state.createTagDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+
+  setTags(state: TagsSliceStateType, action: PayloadAction<TagRedux[]>) {
+    tagsAdapter.setAll(state, action.payload);
   },
 };

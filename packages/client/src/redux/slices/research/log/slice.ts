@@ -15,7 +15,10 @@ const researchLogsSlice = createSlice({
   },
 });
 
-export const { updateCreateResearchLogDto, updateLoadingResearchLogState } =
-  researchLogsSlice.actions;
+export const {
+  updateCreateResearchLogDto,
+  updateLoadingResearchLogState,
+  setResearchLogs,
+} = researchLogsSlice.actions;
 
 export default researchLogsSlice.reducer;

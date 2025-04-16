@@ -1,0 +1,33 @@
+@use "../../../abstracts" as *;
+
+.checkboxFormControlContainer {
+  @include flexCenter(row);
+  gap: 2rem;
+
+  label {
+    font-size: getFontSize("button-heading");
+    color: getColor("main-black-100");
+    font-weight: 550;
+    letter-spacing: 0.5px;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    max-width: 40rem;
+
+    border-radius: 0.5rem;
+
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: getColor("main-light-blue");
+    cursor: pointer;
+
+    transition: background-color 0.135s linear;
+  }
+
+  input[type="checkbox"]:checked {
+    appearance: auto;
+  }
+}

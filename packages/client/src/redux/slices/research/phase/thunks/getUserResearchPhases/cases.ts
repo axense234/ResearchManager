@@ -23,7 +23,7 @@ export const getUserResearchPhasesFulfilled: ExtraReducerFuncType<
   const researchPhases = action.payload as ResearchPhase[];
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const researchPhasesRedux = researchPhases.map((rp) => {
       return transformEntityIntoEntityRedux(
         rp,
@@ -33,14 +33,14 @@ export const getUserResearchPhasesFulfilled: ExtraReducerFuncType<
 
     researchPhasesAdapter.removeAll(state);
     researchPhasesAdapter.addMany(state, researchPhasesRedux);
-    state.loadingGetUserResearchPhases = "REJECTED";
+    state.loadingGetUserResearchPhases = "SUCCEEDED";
   } else {
-    state.loadingGetUserResearchPhases = "FAILED";
+    state.loadingGetUserResearchPhases = "REJECTED";
   }
 };
 
 export const getUserResearchPhasesRejected: ExtraReducerFuncType<
   ResearchPhasesSliceStateType
 > = (state, action) => {
-  state.loadingGetUserResearchPhases = "FAILED";
+  state.loadingGetUserResearchPhases = "REJECTED";
 };

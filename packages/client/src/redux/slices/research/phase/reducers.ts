@@ -2,10 +2,13 @@
 import {
   LoadingStateType,
   ObjectKeyValueType,
+  ResearchPhaseRedux,
   ResearchPhasesSliceStateType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
+// Adapter
+import { researchPhasesAdapter } from "./adapter";
 
 export const researchPhasesSliceReducers = {
   updateLoadingResearchPhaseState(
@@ -46,5 +49,11 @@ export const researchPhasesSliceReducers = {
       ...state.createResearchPhaseDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  setResearchPhases(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<ResearchPhaseRedux[]>,
+  ) {
+    researchPhasesAdapter.setAll(state, action.payload);
   },
 };

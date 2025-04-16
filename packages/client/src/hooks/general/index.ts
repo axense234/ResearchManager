@@ -5,3 +5,4 @@ export * from "./useEntityContainerInterfaceWrapperTransition";
 export * from "./useNavigateToPathname";
 export * from "./useOverlayTransition";
 export * from "./useRedirect";
+export * from "./useGetEntityIdByCurrentIndex";

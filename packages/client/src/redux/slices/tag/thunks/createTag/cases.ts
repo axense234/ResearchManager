@@ -22,13 +22,13 @@ export const createTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
   const tag = action.payload as Tag;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const tagRedux = transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
 
     tagsAdapter.addOne(state, tagRedux);
-    state.loadingCreateTag = "REJECTED";
+    state.loadingCreateTag = "SUCCEEDED";
   } else {
-    state.loadingCreateTag = "FAILED";
+    state.loadingCreateTag = "REJECTED";
   }
 };
 
@@ -36,5 +36,5 @@ export const createTagRejected: ExtraReducerFuncType<TagsSliceStateType> = (
   state,
   action,
 ) => {
-  state.loadingCreateTag = "FAILED";
+  state.loadingCreateTag = "REJECTED";
 };

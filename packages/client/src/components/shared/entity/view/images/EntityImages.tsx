@@ -23,7 +23,7 @@ const EntityImages: FC<EntityImagesProps> = ({
     viewType,
   );
 
-  const entityName = specialEntity.name;
+  const entityName = specialEntity?.name;
 
   return (
     <article className={entityImagesStyles.entityImagesContainer}>
@@ -36,7 +36,7 @@ const EntityImages: FC<EntityImagesProps> = ({
       />
       <EntityImagesTitle title="Images" />
       <EntityImage
-        imageSrc={entityImages[0].src}
+        imageSrc={entityImages[0]?.src}
         onClickFunction={() => setShowImagesOverlay(true)}
       />
     </article>

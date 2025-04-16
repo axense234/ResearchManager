@@ -15,7 +15,7 @@ export const useSelectResearchPhaseImages = (
   const researchPhaseLogs = useSelectEntitiesByIds(
     viewType,
     "researchLog",
-    researchPhase.researchLogsIds || [],
+    researchPhase?.researchLogsIds || [],
   ) as ResearchLogRedux[];
 
   const researchPhaseLogsImages = researchPhaseLogs

@@ -10,7 +10,6 @@ export const {
   selectIds: selectResearchPhasesIds,
 } = researchPhasesAdapter.getSelectors<State>((state) => state.researchPhases);
 
-// Example
 export const selectResearchPhasesExamples = (state: State) =>
   state.researchPhases.researchPhasesExamples;
 
@@ -28,7 +27,24 @@ export const selectResearchPhasesExamplesByIds = createSelector(
     researchPhases.filter((researchPhase) => ids.includes(researchPhase.id)),
 );
 
-// General
+export const selectResearchPhaseIdByIndex = createSelector(
+  [selectResearchPhasesIds, (state, index) => index],
+  (researchPhasesIds, index) => {
+    return researchPhasesIds[index - 1];
+  },
+);
+
+export const selectResearchPhaseExampleIdByIndex = createSelector(
+  [selectResearchPhasesExamples, (state, index) => index],
+  (researchPhases, index) => researchPhases[index - 1].id,
+);
+
+export const selectCurrentResearchPhaseExampleIndex = (state: State) =>
+  state.researchPhases.currentResearchPhaseExampleIndex;
+
+export const selectCurrentResearchPhaseIndex = (state: State) =>
+  state.researchPhases.currentResearchPhaseIndex;
+
 export const selectCreateResearchPhaseDto = (state: State) =>
   state.researchPhases.createResearchPhaseDto;
 

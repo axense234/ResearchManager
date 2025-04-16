@@ -20,11 +20,11 @@ export const deleteTagFulfilled: ExtraReducerFuncType<TagsSliceStateType> = (
   const tag = action.payload as Tag;
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     tagsAdapter.removeOne(state, tag.id);
-    state.loadingDeleteTag = "REJECTED";
+    state.loadingDeleteTag = "SUCCEEDED";
   } else {
-    state.loadingDeleteTag = "FAILED";
+    state.loadingDeleteTag = "REJECTED";
   }
 };
 
@@ -32,5 +32,5 @@ export const deleteTagRejected: ExtraReducerFuncType<TagsSliceStateType> = (
   state,
   action,
 ) => {
-  state.loadingDeleteTag = "FAILED";
+  state.loadingDeleteTag = "REJECTED";
 };

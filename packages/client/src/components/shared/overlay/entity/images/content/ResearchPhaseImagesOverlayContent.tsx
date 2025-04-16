@@ -1,3 +1,4 @@
+"use client";
 // Interfaces
 import { FC } from "react";
 import { ResearchPhaseImagesOverlayContentProps } from "@/core/interfaces";

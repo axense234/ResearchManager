@@ -31,9 +31,9 @@ export const useAuthorization = () => {
   const profile = useAppSelector(selectUserProfile);
 
   const canRedirect =
-    loadingGetProfileJWT === "REJECTED" ||
-    loadingGetProfileOAuth === "FAILED" ||
-    loadingGetProfileOAuth === "SUCCEDED";
+    loadingGetProfileJWT === "SUCCEEDED" ||
+    loadingGetProfileOAuth === "REJECTED" ||
+    loadingGetProfileOAuth === "SUCCEEDED";
 
   useEffect(() => {
     const createResearchManagerAccount = localStorage.getItem(
@@ -44,6 +44,8 @@ export const useAuthorization = () => {
     );
   }, [loadingSignInUser]);
 
+  console.log(canTryFetchingProfile);
+
   useEffect(() => {
     if (loadingGetProfileJWT === "IDLE" && canTryFetchingProfile) {
       dispatch(getProfileJWT());
@@ -52,7 +54,7 @@ export const useAuthorization = () => {
 
   useEffect(() => {
     if (
-      loadingGetProfileJWT === "FAILED" &&
+      loadingGetProfileJWT === "REJECTED" &&
       loadingGetProfileOAuth === "IDLE" &&
       canTryFetchingProfile
     ) {
@@ -67,5 +69,5 @@ export const useAuthorization = () => {
 
   console.log(loadingGetProfileJWT, loadingGetProfileOAuth, canRedirect);
 
-  useRedirect(pathname, router, canRedirect, profile.email.length > 0);
+  useRedirect(pathname, router, canRedirect, profile.id.length > 0);
 };

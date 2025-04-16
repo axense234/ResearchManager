@@ -3,11 +3,13 @@ import {
   LoadingStateType,
   ObjectKeyValueType,
   ResearchActivitiesSliceStateType,
+  ResearchActivityRedux,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
 // Helpers
 import { handleCarouselStepDirection } from "@/helpers";
+import { researchActivitiesAdapter } from "./adapter";
 
 export const researchActivitiesSliceReducers = {
   handleResearchActivityExampleCarouselStepDirection(
@@ -69,5 +71,11 @@ export const researchActivitiesSliceReducers = {
       ...state.createResearchActivityDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  setResearchActivities(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<ResearchActivityRedux[]>,
+  ) {
+    researchActivitiesAdapter.setAll(state, action.payload);
   },
 };

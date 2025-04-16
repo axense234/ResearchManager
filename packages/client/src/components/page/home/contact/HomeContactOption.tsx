@@ -1,10 +1,10 @@
 // Interfaces
 import { FC } from "react";
-import { HomeSectionTitleProps } from "@/core/interfaces";
+import { PageSectionTitleProps } from "@/core/interfaces";
 // SCSS
 import homeContactOptionStyles from "@/scss/components/page/home/contact/HomeContactOption.module.scss";
 
-const HomeContactOption: FC<HomeSectionTitleProps> = ({
+const HomeContactOption: FC<PageSectionTitleProps> = ({
   title,
   description,
 }) => {

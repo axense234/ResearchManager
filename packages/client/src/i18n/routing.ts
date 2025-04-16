@@ -20,6 +20,12 @@ export const routing = defineRouting({
       fr: "/maison",
       de: "/heim",
     },
+    "/profile": {
+      ro: "/profil",
+      en: "/profile",
+      fr: "/profil",
+      de: "/profil",
+    },
   },
 });
 

@@ -5,6 +5,7 @@
   justify-content: flex-start;
   gap: 3rem;
   overflow-y: auto;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 0px;

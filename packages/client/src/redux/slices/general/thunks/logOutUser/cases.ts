@@ -23,7 +23,7 @@ export const logOutUserFulfilled: ExtraReducerFuncType<
 > = (state, action) => {
   const axiosError = action.payload as AxiosError;
 
-  if (axiosError !== undefined && !axiosError.response) {
+  if (!axiosError?.isAxiosError) {
     const message = action.payload as string;
 
     state.modal = {
@@ -34,7 +34,7 @@ export const logOutUserFulfilled: ExtraReducerFuncType<
     };
   }
 
-  state.loadingLogOutUser = "REJECTED";
+  state.loadingLogOutUser = "SUCCEEDED";
 };
 
 export const logOutUserRejected: ExtraReducerFuncType<

@@ -1,9 +1,9 @@
-@use "../../../../abstracts" as *;
+@use "../../../abstracts" as *;
 
-.homeSectionTitleContainer {
+.pageSectionTitleContainer {
   @include flexCenter(column);
   width: 100%;
-  gap: 2rem;
+  gap: 3rem;
 
   > h3 {
     @include heading("h3", "laptop", "white");
@@ -11,7 +11,7 @@
   }
 }
 
-.homeSectionTitleDescription {
+.pageSectionTitleDescription {
   @include flexCenter(column);
   width: 100%;
   gap: 2rem;

@@ -1,0 +1,22 @@
+@use "../../../abstracts" as *;
+
+.sectionContainer {
+  @include flexCenter(column);
+  position: relative;
+  width: 100%;
+  gap: 8rem;
+
+  padding: 4rem;
+  padding-top: 10rem;
+  padding-bottom: 8rem;
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-dark-blue");
+}
+
+.sectionTitle {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 4rem;
+}

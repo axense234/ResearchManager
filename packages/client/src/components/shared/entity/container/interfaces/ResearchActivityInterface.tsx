@@ -1,5 +1,4 @@
-"use client";
-// Types
+// Types and Interfaces
 import { FC } from "react";
 import { EntityContainerInterfaceProps } from "@/core/interfaces";
 import { ResearchActivityRedux } from "@/core/types";
@@ -15,6 +14,7 @@ import {
   handleResearchActivityCarouselStepDirection,
   handleResearchActivityExampleCarouselStepDirection,
   selectCurrentResearchActivityExampleIndex,
+  selectCurrentResearchActivityIndex,
 } from "@/redux/slices/research/activity";
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
@@ -30,6 +30,19 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   const currentResearchActivityExampleIndex = useAppSelector(
     selectCurrentResearchActivityExampleIndex,
   );
+  const currentResearchActivityIndex = useAppSelector(
+    selectCurrentResearchActivityIndex,
+  );
+
+  const usedOnDirectionButtonClick =
+    containerType === "example"
+      ? handleResearchActivityExampleCarouselStepDirection
+      : handleResearchActivityCarouselStepDirection;
+
+  const usedEntityRanking =
+    containerType === "example"
+      ? currentResearchActivityExampleIndex
+      : currentResearchActivityIndex;
 
   const entity = useSelectEntity(
     containerType,
@@ -42,11 +55,6 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     "researchActivity",
     containerType,
   );
-
-  const usedOnDirectionButtonClick =
-    containerType === "example"
-      ? handleResearchActivityExampleCarouselStepDirection
-      : handleResearchActivityCarouselStepDirection;
 
   return (
     <EntityContainerInterfaceWrapper
@@ -63,7 +71,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
           containerType={containerType}
         />
         <EntityContainerLabel
-          entityRanking={currentResearchActivityExampleIndex}
+          entityRanking={usedEntityRanking}
           entityResearchPoints={entityResearchPoints}
           entityTitle={entity.name}
         />

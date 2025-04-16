@@ -36,6 +36,8 @@ export const transformEntityIntoEntityRedux = (
       delete entityAsUserWithoutRelationships?.researchActivities;
       delete entityAsUserWithoutRelationships?.tags;
 
+      console.log(entityAsUser);
+
       return {
         ...entityAsUserWithoutRelationships,
         settingsId: entityAsUser.settings?.id,
@@ -44,8 +46,8 @@ export const transformEntityIntoEntityRedux = (
           (activity) => activity.id,
         ),
         tagsIds: entityAsUser.tags?.map((tag) => tag.id),
-        createdAt: new Date(entityAsUser?.createdAt).toISOString(),
-        updatedAt: new Date(entityAsUser?.updatedAt).toISOString(),
+        createdAt: new Date(entityAsUser.createdAt).toISOString(),
+        updatedAt: new Date(entityAsUser.updatedAt).toISOString(),
       } as UserRedux;
     case "researchActivity":
       const entityAsResearchActivity = { ...entity } as ResearchActivityPayload;
