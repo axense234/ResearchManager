@@ -12,11 +12,16 @@ import { handleCarouselStepDirection } from "@/helpers";
 import { researchActivitiesAdapter } from "./adapter";
 
 export const researchActivitiesSliceReducers = {
+  setResearchActivityExamples(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<ResearchActivityRedux[]>,
+  ) {
+    state.researchActivitiesExamples = action.payload;
+  },
   handleResearchActivityExampleCarouselStepDirection(
     state: ResearchActivitiesSliceStateType,
     action: PayloadAction<{ direction: "left" | "right" }>,
   ) {
-    console.log("hit");
     state.currentResearchActivityExampleIndex = handleCarouselStepDirection(
       action.payload.direction,
       state.currentResearchActivityExampleIndex,

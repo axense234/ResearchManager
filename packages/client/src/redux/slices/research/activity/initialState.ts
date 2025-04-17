@@ -4,23 +4,16 @@ import { researchActivitiesAdapter } from "./adapter";
 import {
   ResearchActivitiesSliceInitialStateType,
   ResearchActivitiesSliceStateType,
-  ResearchActivityRedux,
 } from "@/core/types";
-import { transformEntityIntoEntityRedux } from "@/helpers";
+// Helpers
+import { transformAndSortSpecialEntityExamplesByRP } from "@/helpers";
 // Mock Data
-import {
-  createResearchActivityMockData,
-  researchActivitiesMockData,
-} from "@researchmanager/shared/mock";
+import { createResearchActivityMockData } from "@researchmanager/shared/mock";
 
 export const researchActivitiesSliceInitialState = {
   createResearchActivityDto: createResearchActivityMockData[0],
-  researchActivitiesExamples: researchActivitiesMockData.map((ra) => {
-    return transformEntityIntoEntityRedux(
-      ra,
-      "researchActivity",
-    ) as ResearchActivityRedux;
-  }),
+  researchActivitiesExamples:
+    transformAndSortSpecialEntityExamplesByRP("researchActivity"),
   loadingCreateResearchActivity: "IDLE",
   loadingDeleteResearchActivity: "IDLE",
   loadingUpdateResearchActivity: "IDLE",

@@ -9,7 +9,12 @@ import EntityContainerTags from "../fragments/EntityContainerTags";
 import EntityContainerLabel from "../fragments/EntityContainerLabel";
 import EntityContainerOptions from "../fragments/EntityContainerOptions";
 // Redux
-import { useAppDispatch, useAppSelector, useSelectEntity } from "@/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCalculateEntityResearchPoints,
+  useSelectEntity,
+} from "@/hooks";
 import {
   handleResearchActivityCarouselStepDirection,
   handleResearchActivityExampleCarouselStepDirection,
@@ -19,7 +24,6 @@ import {
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
 // Helper
-import { useCalculateEntityResearchPoints } from "@/helpers";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,

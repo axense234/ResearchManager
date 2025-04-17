@@ -1,27 +1,28 @@
 // Types and Interfaces
 import { FC } from "react";
 import { EntityContainerInterfaceProps } from "@/core/interfaces";
-import { ResearchPhaseRedux } from "@/core/types";
+import { ResearchLogRedux, ResearchPhaseRedux } from "@/core/types";
 // SCSS
 import entityContainerStyles from "@/scss/components/shared/entity/container/EntityContainer.module.scss";
 // Fragments
 import EntityContainerTags from "../fragments/EntityContainerTags";
 import EntityContainerLabel from "../fragments/EntityContainerLabel";
 import EntityContainerOptions from "../fragments/EntityContainerOptions";
-// Redux
-import { useAppDispatch, useAppSelector, useSelectEntity } from "@/hooks";
-import {
-  handleResearchActivityCarouselStepDirection,
-  handleResearchActivityExampleCarouselStepDirection,
-} from "@/redux/slices/research/activity";
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
 // Helper
-import { useCalculateEntityResearchPoints } from "@/helpers";
+import { useCalculateEntityResearchPoints } from "@/hooks";
+// Redux and Hooks
+import { useAppDispatch, useAppSelector, useSelectEntity } from "@/hooks";
+// Redux
 import {
+  handleResearchPhaseCarouselStepDirection,
+  handleResearchPhaseExampleCarouselStepDirection,
   selectCurrentResearchPhaseExampleIndex,
   selectCurrentResearchPhaseIndex,
 } from "@/redux/slices/research/phase";
+import { useSelectEntitiesByIds } from "@/hooks/redux/selector";
+import { calculateSpecialEntityRP } from "@/helpers";
 
 const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -36,22 +37,24 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
     selectCurrentResearchPhaseIndex,
   );
 
-  const entity = useSelectEntity(
+  const researchPhase = useSelectEntity(
     containerType,
     "researchPhase",
     entityId,
   ) as ResearchPhaseRedux;
 
-  const entityResearchPoints = useCalculateEntityResearchPoints(
-    entity,
-    "researchPhase",
+  const researchPhaseLogs = useSelectEntitiesByIds(
     containerType,
-  );
+    "researchLog",
+    researchPhase?.researchLogsIds || [],
+  ) as ResearchLogRedux[];
+
+  const entityResearchPoints = calculateSpecialEntityRP(researchPhaseLogs);
 
   const usedOnDirectionButtonClick =
     containerType === "example"
-      ? handleResearchActivityExampleCarouselStepDirection
-      : handleResearchActivityCarouselStepDirection;
+      ? handleResearchPhaseExampleCarouselStepDirection
+      : handleResearchPhaseCarouselStepDirection;
 
   const usedEntityRanking =
     containerType === "example"
@@ -69,13 +72,13 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
     >
       <div className={entityContainerStyles.entityContainer}>
         <EntityContainerTags
-          tagsIds={entity.tagsIds || []}
+          tagsIds={researchPhase.tagsIds || []}
           containerType={containerType}
         />
         <EntityContainerLabel
           entityRanking={usedEntityRanking}
           entityResearchPoints={entityResearchPoints}
-          entityTitle={entity.name}
+          entityTitle={researchPhase.name}
         />
         <EntityContainerOptions
           entityId={entityId}

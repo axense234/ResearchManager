@@ -38,7 +38,7 @@ const ResearchActivityImagesOverlayContent: FC<
         entityImages={currentImagesPayload}
       />
       <ul className={overlayContentStyles.contentContainerItems}>
-        {researchPhasesImages.map((phaseImages, index) => {
+        {researchPhasesImages.map((phaseImages) => {
           return (
             <li key={phaseImages.entityName}>
               <EntityImagesOverlayItem

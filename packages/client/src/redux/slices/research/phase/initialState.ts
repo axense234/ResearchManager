@@ -1,27 +1,19 @@
 // Types
 import {
-  ResearchPhaseRedux,
   ResearchPhasesSliceInitialStateType,
   ResearchPhasesSliceStateType,
 } from "@/core/types";
 // Adapter
 import { researchPhasesAdapter } from "./adapter";
 // Mock Data
-import {
-  createResearchPhaseMockData,
-  researchPhasesMockData,
-} from "@researchmanager/shared/mock";
+import { createResearchPhaseMockData } from "@researchmanager/shared/mock";
 // Helpers
-import { transformEntityIntoEntityRedux } from "@/helpers";
+import { transformAndSortSpecialEntityExamplesByRP } from "@/helpers";
 
 export const researchPhasesSliceInitialState = {
   createResearchPhaseDto: createResearchPhaseMockData[0],
-  researchPhasesExamples: researchPhasesMockData.map((rp) => {
-    return transformEntityIntoEntityRedux(
-      rp,
-      "researchPhase",
-    ) as ResearchPhaseRedux;
-  }),
+  researchPhasesExamples:
+    transformAndSortSpecialEntityExamplesByRP("researchPhase"),
   loadingCreateResearchPhase: "IDLE",
   loadingDeleteResearchPhase: "IDLE",
   loadingUpdateResearchPhase: "IDLE",

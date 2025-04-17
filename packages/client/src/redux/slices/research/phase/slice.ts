@@ -20,6 +20,8 @@ export const {
   updateCreateResearchPhaseDto,
   updateLoadingResearchPhaseState,
   setResearchPhases,
+  handleResearchPhaseCarouselStepDirection,
+  handleResearchPhaseExampleCarouselStepDirection,
 } = researchPhasesSlice.actions;
 
 export default researchPhasesSlice.reducer;

@@ -9,8 +9,31 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
 // Adapter
 import { researchPhasesAdapter } from "./adapter";
+// Helpers
+import { handleCarouselStepDirection } from "@/helpers";
 
 export const researchPhasesSliceReducers = {
+  handleResearchPhaseExampleCarouselStepDirection(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<{ direction: "left" | "right" }>,
+  ) {
+    console.log("hit");
+    state.currentResearchPhaseExampleIndex = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentResearchPhaseExampleIndex,
+      state.researchPhasesExamples.length,
+    );
+  },
+  handleResearchPhaseCarouselStepDirection(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<{ direction: "left" | "right" }>,
+  ) {
+    state.currentResearchPhaseExampleIndex = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentResearchPhaseIndex,
+      state.ids.length,
+    );
+  },
   updateLoadingResearchPhaseState(
     state: ResearchPhasesSliceStateType,
     action: PayloadAction<{ actionType: ActionType; value: LoadingStateType }>,

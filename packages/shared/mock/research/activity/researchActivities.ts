@@ -6,20 +6,6 @@ import { researchPhasesMockData } from "../phase";
 
 export const researchActivitiesMockData: ResearchActivityPayload[] = [
   {
-    id: "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d",
-    name: "Web Development",
-    archived: false,
-    backgroundColorOrImageSrc: "#D8E5E4",
-    userId: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    tags: tagsMockData.slice(0, 7),
-    researchPhases: researchPhasesMockData.filter(
-      (phase) =>
-        phase.researchActivityId === "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d"
-    ),
-  },
-  {
     id: "5aba8fa5-a2a7-4481-a092-05bb3cd0ebbc",
     name: "Singing",
     archived: false,
@@ -31,6 +17,20 @@ export const researchActivitiesMockData: ResearchActivityPayload[] = [
     researchPhases: researchPhasesMockData.filter(
       (phase) =>
         phase.researchActivityId === "5aba8fa5-a2a7-4481-a092-05bb3cd0ebbc"
+    ),
+  },
+  {
+    id: "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d",
+    name: "Web Development",
+    archived: false,
+    backgroundColorOrImageSrc: "#D8E5E4",
+    userId: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    tags: tagsMockData.slice(0, 7),
+    researchPhases: researchPhasesMockData.filter(
+      (phase) =>
+        phase.researchActivityId === "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d"
     ),
   },
   {

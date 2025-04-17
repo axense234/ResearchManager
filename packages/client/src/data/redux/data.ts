@@ -8,6 +8,7 @@ export const signUpMockDataRedux: SignUpDto = {
   email: "",
   password: "",
 };
+
 export const userProfileMockDataRedux: UserRedux = {
   id: "",
   email: "defaultemail@provider.com",

@@ -30,8 +30,7 @@ const ProfileResearchPhases: FC = () => {
   const entityViewIsLoading =
     loadingGetProfileJWT === "PENDING" ||
     laodingGetProfileOAuth === "PENDING" ||
-    loadingGetProfileJWT === "IDLE" ||
-    laodingGetProfileOAuth === "IDLE";
+    loadingGetProfileJWT === "IDLE";
 
   const usedViewType = showExamples ? "example" : "entity";
 

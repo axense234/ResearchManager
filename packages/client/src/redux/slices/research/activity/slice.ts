@@ -22,6 +22,7 @@ export const {
   handleResearchActivityCarouselStepDirection,
   handleResearchActivityExampleCarouselStepDirection,
   setResearchActivities,
+  setResearchActivityExamples,
 } = researchActivitiesSlice.actions;
 
 export default researchActivitiesSlice.reducer;
