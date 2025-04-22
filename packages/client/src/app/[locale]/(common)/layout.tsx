@@ -1,8 +1,8 @@
 "use client";
 // Components
-import Sidebar from "@/components/layout/sidebar/SideBar";
 import LanguageSwitcher from "@/components/shared/general/language/LanguageSwitcher";
 import GeneralModal from "@/components/shared/modal/GeneralModal";
+import SideBar from "@/components/layout/sidebar/SideBar";
 // Redux and Custom Hooks
 import { useCreateUserOAuthTrigger } from "@/hooks";
 // ChartTS
@@ -16,7 +16,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <Sidebar />
+      <SideBar />
       <GeneralModal type="general" />
       <LanguageSwitcher position="absolute" />
       {children}
