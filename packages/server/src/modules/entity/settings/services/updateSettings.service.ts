@@ -91,7 +91,7 @@ export class UpdateSettingsService {
         specifiers: [
           {
             label: 'userId',
-            value: updatedSettings.userId,
+            possibleValues: [updatedSettings.userId],
             ignoreIfFalse: true,
           },
         ],

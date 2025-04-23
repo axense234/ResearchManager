@@ -9,9 +9,22 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { ActionType } from "@researchmanager/shared/types";
 // Helpers
 import { handleCarouselStepDirection } from "@/helpers";
+// Adapter
 import { researchActivitiesAdapter } from "./adapter";
 
 export const researchActivitiesSliceReducers = {
+  setCreateDefaultResearchPhase(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<boolean>,
+  ) {
+    state.createDefaultResearchPhase = action.payload;
+  },
+  setShowProfileResearchActivitiesExamples(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<boolean>,
+  ) {
+    state.showProfileResearchActivitiesExamples = action.payload;
+  },
   setResearchActivityExamples(
     state: ResearchActivitiesSliceStateType,
     action: PayloadAction<ResearchActivityRedux[]>,

@@ -79,7 +79,7 @@ export class DeleteResearchActivityService {
         specifiers: [
           {
             label: 'userId',
-            value: deletedResearchActivity.userId,
+            possibleValues: [deletedResearchActivity.userId],
             ignoreIfFalse: true,
           },
         ],

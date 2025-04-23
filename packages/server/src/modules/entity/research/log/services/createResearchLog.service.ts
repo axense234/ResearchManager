@@ -70,7 +70,7 @@ export class CreateResearchLogService {
         specifiers: [
           {
             label: 'researchPhaseId',
-            value: createdResearchLog.researchPhaseId,
+            possibleValues: [createdResearchLog.researchPhaseId],
             ignoreIfFalse: true,
           },
         ],

@@ -17,6 +17,8 @@ export interface TextFormControlProps {
 
   placeholderContent?: string;
 
+  flexDirection?: "column" | "row";
+
   labelContent: string;
   type:
     | "email"
@@ -26,7 +28,8 @@ export interface TextFormControlProps {
     | "url"
     | "datetime-local"
     | "date"
-    | "time";
+    | "time"
+    | "color";
 
   entityProperty: string | number | undefined | Date;
   onEntityPropertyValueChange: ChangeEventHandler<HTMLInputElement>;

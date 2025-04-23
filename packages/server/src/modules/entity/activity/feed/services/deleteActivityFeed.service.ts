@@ -79,12 +79,12 @@ export class DeleteActivityFeedService {
         specifiers: [
           {
             label: 'userId',
-            value: deletedActivityFeed.userId,
+            possibleValues: [deletedActivityFeed.userId],
             ignoreIfFalse: true,
           },
           {
             label: 'researchActivityId',
-            value: deletedActivityFeed.researchActivityId,
+            possibleValues: [deletedActivityFeed.researchActivityId],
             ignoreIfFalse: true,
           },
         ],

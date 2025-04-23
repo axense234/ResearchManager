@@ -73,7 +73,7 @@ export class CreateResearchActivityService {
         specifiers: [
           {
             label: 'userId',
-            value: createdResearchActivity.userId,
+            possibleValues: [createdResearchActivity.userId],
             ignoreIfFalse: true,
           },
         ],

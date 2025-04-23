@@ -1,5 +1,5 @@
 // React
-import { FC, useState } from "react";
+import { FC } from "react";
 // Components
 import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
@@ -19,10 +19,18 @@ import {
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
 } from "@/redux/slices/general";
+import {
+  selectShowProfileResearchActivitiesExamples,
+  setShowProfileResearchActivitiesExamples,
+} from "@/redux/slices/research/activity";
+import { setEntityOverlay } from "@/redux/slices/general/slice";
 
 const ProfileResearchActivities: FC = () => {
   const dispatch = useAppDispatch();
-  const [showExamples, setShowExamples] = useState<boolean>(false);
+
+  const showExamples = useAppSelector(
+    selectShowProfileResearchActivitiesExamples,
+  );
 
   const loadingGetProfileJWT = useAppSelector(selectLoadingGetProfileJWT);
   const laodingGetProfileOAuth = useAppSelector(selectLoadingGetProfileOAuth);
@@ -43,7 +51,12 @@ const ProfileResearchActivities: FC = () => {
     <section className={profileResearchActivitiesStyles.sectionContainer}>
       <ShowEntityExamplesToggle
         showExamples={showExamples}
-        onShowExamplesChange={(e) => setShowExamples(e.target.value !== "true")}
+        onShowExamplesChange={(e) =>
+          dispatch(
+            setShowProfileResearchActivitiesExamples(e.target.value !== "true"),
+          )
+        }
+        id="profileResearchActivities"
       />
       <div className={profileResearchActivitiesStyles.sectionTitle}>
         <PageSectionTitle {...profileResearchActivitiesData} />
@@ -52,7 +65,14 @@ const ProfileResearchActivities: FC = () => {
           disabled={false}
           onHoverContent="Create Research Activity"
           onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-          onClickFunction={() => dispatch(() => {})}
+          onClickFunction={() =>
+            dispatch(
+              setEntityOverlay({
+                entityType: "researchActivity",
+                showOverlay: true,
+              }),
+            )
+          }
         />
       </div>
       <EntityView

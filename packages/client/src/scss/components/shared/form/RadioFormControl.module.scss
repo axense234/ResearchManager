@@ -1,0 +1,38 @@
+@use "../../../abstracts" as *;
+
+.radioFormControlContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+
+  label {
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
+  }
+}
+
+.radioFormControlContent {
+  @include flexCenter(row);
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 1.5rem;
+
+  li {
+    @include flexCenter(row);
+    gap: 0.5rem;
+
+    input[type="radio"] {
+      appearance: none;
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      background-color: getColor("main-light-blue");
+      border-radius: 100%;
+
+      &:checked {
+        background-color: getColor("main-light-blue");
+      }
+    }
+  }
+}

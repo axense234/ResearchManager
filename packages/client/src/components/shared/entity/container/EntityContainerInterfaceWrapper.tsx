@@ -1,4 +1,3 @@
-"use client";
 // Interfaces
 import { FC, useRef } from "react";
 import { EntityContainerInterfaceWrapperProps } from "@/core/interfaces";
@@ -15,7 +14,12 @@ import { selectShowEntityContainerWrapper } from "@/redux/slices/general";
 
 const EntityContainerInterfaceWrapper: FC<
   EntityContainerInterfaceWrapperProps
-> = ({ children, onNextButtonClick, onPreviousButtonClick }) => {
+> = ({
+  children,
+  onNextButtonClick,
+  onPreviousButtonClick,
+  showWrapperControls,
+}) => {
   const leftButtonRef = useRef<HTMLDivElement>(null);
   const rightButtonRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +46,10 @@ const EntityContainerInterfaceWrapper: FC<
         className={
           entityContainerInterfaceWrapperStyles.entityContainerInterfaceWrapperDirection
         }
-        style={{ left: "0.25rem" }}
+        style={{
+          left: "0.25rem",
+          visibility: showWrapperControls ? "visible" : "hidden",
+        }}
         ref={leftButtonRef}
         title="Previous"
         aria-label="Previous"
@@ -55,7 +62,10 @@ const EntityContainerInterfaceWrapper: FC<
         className={
           entityContainerInterfaceWrapperStyles.entityContainerInterfaceWrapperDirection
         }
-        style={{ right: "0.25rem" }}
+        style={{
+          right: "0.25rem",
+          visibility: showWrapperControls ? "visible" : "hidden",
+        }}
         ref={rightButtonRef}
         title="Next"
         aria-label="Next"

@@ -5,11 +5,18 @@ export const mainBlackColor = "#110608";
 export const mainWhiteColor = "#d8e5e4";
 export const mainLightBlueColor = "#83cec8";
 export const mainPastelRedColor = "#d54e5d";
-export const createGreenColor = "#008000";
 export const formErrorInputBorder = `3px solid ${mainPastelRedColor}`;
+
+export const createGreenColor = "#008000";
+export const resumeYellowColor = "#adad00";
+export const mockBrownColor = "#6f4e37";
+export const deleteRedColor = "#ff0000";
 
 export const DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN = 6;
 export const MAX_ENTITY_CONTAINER_TAGS_SHOWN = 20;
+
+export const DEFAULT_ENTITY_OVERLAY_TAGS_SHOWN = 13;
+export const MAX_ENTITY_OVERLAY_TAGS_SHOWN = 26;
 
 export const AUTO_CLOSE_MODAL = 5000;
 

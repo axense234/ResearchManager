@@ -1,0 +1,18 @@
+@use "../../../../abstracts" as *;
+
+.viewContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+
+  > h6 {
+    @include heading("h6", "laptop", "white");
+    letter-spacing: 1px;
+  }
+}
+
+.viewOptionsContainer {
+  @include flexCenter(row);
+  gap: 2rem;
+  width: 100%;
+}

@@ -72,7 +72,7 @@ export class CreateSettingsService {
         specifiers: [
           {
             label: 'userId',
-            value: createdSettings.userId,
+            possibleValues: [createdSettings.userId],
             ignoreIfFalse: true,
           },
         ],

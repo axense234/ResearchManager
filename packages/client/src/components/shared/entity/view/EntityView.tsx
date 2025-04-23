@@ -29,7 +29,7 @@ const EntityView: FC<EntityViewProps> = ({
   }
 
   if (!entity) {
-    return <EntityViewNoEntities />;
+    return <EntityViewNoEntities entityType={entityType} />;
   }
 
   return (

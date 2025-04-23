@@ -12,6 +12,7 @@ import { homeIntroData } from "@/data/general/home";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { selectUserProfile } from "@/redux/slices/general";
+import { setEntityOverlay } from "@/redux/slices/general/slice";
 
 const HomeIntro: FC = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +33,14 @@ const HomeIntro: FC = () => {
         disabled={isFunctionalButtonDisabled}
         onHoverContent="Create Research Activity"
         onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-        onClickFunction={() => dispatch(() => {})}
+        onClickFunction={() =>
+          dispatch(
+            setEntityOverlay({
+              entityType: "researchActivity",
+              showOverlay: true,
+            }),
+          )
+        }
       />
     </section>
   );

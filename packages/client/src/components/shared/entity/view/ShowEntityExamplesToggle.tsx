@@ -9,6 +9,7 @@ import showEntityExamplesToggleStyles from "@/scss/components/shared/entity/view
 const ShowEntityExamplesToggle: FC<ShowEntityExamplesToggleProps> = ({
   showExamples,
   onShowExamplesChange,
+  id,
 }) => {
   return (
     <div className={showEntityExamplesToggleStyles.toggleContaienr}>
@@ -16,6 +17,7 @@ const ShowEntityExamplesToggle: FC<ShowEntityExamplesToggleProps> = ({
         labelContent="Examples:"
         entityProperty={showExamples}
         onEntityPropertyValueChange={onShowExamplesChange}
+        id={id}
       />
     </div>
   );

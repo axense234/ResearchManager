@@ -3,6 +3,7 @@ import {
   GeneralSliceInitialStateType,
   ModalType,
   ObjectKeyValueType,
+  OverlayType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 // Data
@@ -11,6 +12,12 @@ import { authCarouselContent } from "@/data/general/components";
 import { handleCarouselStepDirection } from "@/helpers";
 
 export const generalSliceReducers = {
+  setEntityOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<OverlayType>,
+  ) {
+    state.entityOverlay = { ...action.payload };
+  },
   updateContactUsDto(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<ObjectKeyValueType>,

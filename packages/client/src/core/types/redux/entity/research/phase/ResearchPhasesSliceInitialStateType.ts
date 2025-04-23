@@ -11,6 +11,8 @@ export type ResearchPhasesSliceInitialStateType = {
   currentResearchPhaseExampleIndex: number;
   currentResearchPhaseIndex: number;
 
+  showProfileResearchPhasesExamples: boolean;
+
   loadingCreateResearchPhase: LoadingStateType;
   loadingDeleteResearchPhase: LoadingStateType;
   loadingUpdateResearchPhase: LoadingStateType;

@@ -81,7 +81,7 @@ export class DeleteResearchPhaseService {
         specifiers: [
           {
             label: 'researchActivityId',
-            value: deletedResearchPhase.researchActivityId,
+            possibleValues: [deletedResearchPhase.researchActivityId],
             ignoreIfFalse: true,
           },
         ],

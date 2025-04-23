@@ -1,5 +1,5 @@
 // React
-import { FC, useState } from "react";
+import { FC } from "react";
 // Components
 import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
@@ -19,10 +19,15 @@ import {
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
 } from "@/redux/slices/general";
+import {
+  selectShowProfileResearchPhasesExamples,
+  setShowProfileResearchPhasesExamples,
+} from "@/redux/slices/research/phase";
 
 const ProfileResearchPhases: FC = () => {
   const dispatch = useAppDispatch();
-  const [showExamples, setShowExamples] = useState<boolean>(false);
+
+  const showExamples = useAppSelector(selectShowProfileResearchPhasesExamples);
 
   const loadingGetProfileJWT = useAppSelector(selectLoadingGetProfileJWT);
   const laodingGetProfileOAuth = useAppSelector(selectLoadingGetProfileOAuth);
@@ -40,7 +45,12 @@ const ProfileResearchPhases: FC = () => {
     <section className={profileResearchPhasesStyles.sectionContainer}>
       <ShowEntityExamplesToggle
         showExamples={showExamples}
-        onShowExamplesChange={(e) => setShowExamples(e.target.value !== "true")}
+        onShowExamplesChange={(e) =>
+          dispatch(
+            setShowProfileResearchPhasesExamples(e.target.value !== "true"),
+          )
+        }
+        id="profileResearchPhases"
       />
       <div className={profileResearchPhasesStyles.sectionTitle}>
         <PageSectionTitle {...profileResearchPhasesData} />

@@ -20,10 +20,10 @@ import {
   handleResearchActivityExampleCarouselStepDirection,
   selectCurrentResearchActivityExampleIndex,
   selectCurrentResearchActivityIndex,
+  selectNumberOfResearchActivities,
 } from "@/redux/slices/research/activity";
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
-// Helper
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -54,6 +54,10 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     entityId,
   ) as ResearchActivityRedux;
 
+  const numberOfResearchActivities = useAppSelector(
+    selectNumberOfResearchActivities,
+  );
+
   const entityResearchPoints = useCalculateEntityResearchPoints(
     entity,
     "researchActivity",
@@ -67,6 +71,9 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
       }
       onNextButtonClick={() =>
         dispatch(usedOnDirectionButtonClick({ direction: "right" }))
+      }
+      showWrapperControls={
+        numberOfResearchActivities > 1 || containerType === "example"
       }
     >
       <div className={entityContainerStyles.entityContainer}>

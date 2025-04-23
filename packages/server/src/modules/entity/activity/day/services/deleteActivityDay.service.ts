@@ -77,7 +77,7 @@ export class DeleteActivityDayService {
         specifiers: [
           {
             label: 'activityFeedId',
-            value: deletedActivityDay.activityFeedId,
+            possibleValues: [deletedActivityDay.activityFeedId],
             ignoreIfFalse: true,
           },
         ],

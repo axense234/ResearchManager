@@ -21,6 +21,8 @@ export const researchActivitiesSliceInitialState = {
   loadingGetUserResearchActivity: "IDLE",
   currentResearchActivityExampleIndex: 1,
   currentResearchActivityIndex: 1,
+  showProfileResearchActivitiesExamples: false,
+  createDefaultResearchPhase: true,
 } as ResearchActivitiesSliceInitialStateType;
 
 export const researchActivitiesSliceState =

@@ -87,7 +87,11 @@ export class UpdateTagService {
         base: 'tags',
         actionType: 'UPDATE',
         specifiers: [
-          { label: 'userId', value: updatedTag.userId, ignoreIfFalse: true },
+          {
+            label: 'userId',
+            possibleValues: [updatedTag.userId],
+            ignoreIfFalse: true,
+          },
         ],
       });
 

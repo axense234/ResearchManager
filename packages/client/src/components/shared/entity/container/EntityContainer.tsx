@@ -10,8 +10,8 @@ import TagInterface from "./interfaces/TagInterface";
 
 const EntityContainer: FC<EntityContainerProps> = ({
   entityType,
-  containerType,
   entityId,
+  containerType,
 }) => {
   switch (entityType) {
     case "researchActivity":

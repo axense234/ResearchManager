@@ -41,8 +41,11 @@ export class DeleteCacheDeepService {
         specifiersType: 'combined',
         deepCall: true,
         specifiers: [
-          { label: 'includeValues', value: entityType },
-          { label: 'chosenOptionType', value: 'include' },
+          {
+            label: 'includeValues',
+            possibleValues: [entityType, entityTypeToPlural(entityType)],
+          },
+          { label: 'chosenOptionType', possibleValues: ['include'] },
         ],
       });
     });

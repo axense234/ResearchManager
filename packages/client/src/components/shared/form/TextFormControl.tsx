@@ -25,6 +25,7 @@ const TextFormControl: FC<TextFormControlProps> = ({
   border,
   placeholderContent,
   inputColorType = "dark",
+  flexDirection = "row",
 }) => {
   const labelColor =
     labelColorType === "dark" ? mainBlackColor : mainWhiteColor;
@@ -33,7 +34,13 @@ const TextFormControl: FC<TextFormControlProps> = ({
     inputColorType === "dark" ? mainLightBlueColor : mainWhiteColor;
 
   return (
-    <div className={textFormControlStyles.textFormControlContainer}>
+    <div
+      className={textFormControlStyles.textFormControlContainer}
+      style={{
+        flexDirection,
+        alignItems: type === "color" ? "flex-start" : "center",
+      }}
+    >
       <label
         htmlFor={labelContent}
         style={{ color: labelColor, fontSize: labelFontSize }}
@@ -50,7 +57,11 @@ const TextFormControl: FC<TextFormControlProps> = ({
         value={entityProperty as string | number}
         placeholder={placeholderContent}
         onChange={onEntityPropertyValueChange}
-        style={{ height: inputHeight, border, backgroundColor: inputColor }}
+        style={{
+          height: inputHeight,
+          border,
+          backgroundColor: inputColor,
+        }}
       />
     </div>
   );

@@ -94,12 +94,12 @@ export class UpdateActivityFeedService {
         specifiers: [
           {
             label: 'userId',
-            value: updatedActivityFeed.userId,
+            possibleValues: [updatedActivityFeed.userId],
             ignoreIfFalse: true,
           },
           {
             label: 'researchActivityId',
-            value: updatedActivityFeed.researchActivityId,
+            possibleValues: [updatedActivityFeed.researchActivityId],
             ignoreIfFalse: true,
           },
         ],

@@ -74,7 +74,7 @@ export const signUpUserRejected: ExtraReducerFuncType<
 
   state.modal = {
     isClosed: false,
-    message: "Could not create your Account.",
+    message: "Could not create your Account. Something went wrong.",
     type: "general",
     isLoading: false,
   };

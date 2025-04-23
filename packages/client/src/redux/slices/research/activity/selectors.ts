@@ -8,6 +8,7 @@ export const {
   selectAll: selectAllResearchActivities,
   selectById: selectResearchActivityById,
   selectIds: selectResearchActivitiesIds,
+  selectTotal: selectNumberOfResearchActivities,
 } = researchActivitiesAdapter.getSelectors<State>(
   (state) => state.researchActivities,
 );
@@ -66,3 +67,9 @@ export const selectLoadingUpdateResearchActivity = (state: State) =>
 
 export const selectLoadingDeleteResearchActivity = (state: State) =>
   state.researchActivities.loadingDeleteResearchActivity;
+
+export const selectShowProfileResearchActivitiesExamples = (state: State) =>
+  state.researchActivities.showProfileResearchActivitiesExamples;
+
+export const selectCreateDefaultResearchPhase = (state: State) =>
+  state.researchActivities.createDefaultResearchPhase;

@@ -70,7 +70,7 @@ export class CreateResearchSessionService {
         specifiers: [
           {
             label: 'researchPhaseId',
-            value: createdResearchSession.researchPhaseId,
+            possibleValues: [createdResearchSession.researchPhaseId],
             ignoreIfFalse: true,
           },
         ],

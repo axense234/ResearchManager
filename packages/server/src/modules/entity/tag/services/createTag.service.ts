@@ -65,7 +65,11 @@ export class CreateTagService {
         base: 'tags',
         actionType: 'CREATE',
         specifiers: [
-          { label: 'userId', value: createdTag.userId, ignoreIfFalse: true },
+          {
+            label: 'userId',
+            possibleValues: [createdTag.userId],
+            ignoreIfFalse: true,
+          },
         ],
       });
 

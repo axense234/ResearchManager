@@ -10,8 +10,6 @@ import EntityContainerLabel from "../fragments/EntityContainerLabel";
 import EntityContainerOptions from "../fragments/EntityContainerOptions";
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
-// Helper
-import { useCalculateEntityResearchPoints } from "@/hooks";
 // Redux and Hooks
 import { useAppDispatch, useAppSelector, useSelectEntity } from "@/hooks";
 // Redux
@@ -20,8 +18,10 @@ import {
   handleResearchPhaseExampleCarouselStepDirection,
   selectCurrentResearchPhaseExampleIndex,
   selectCurrentResearchPhaseIndex,
+  selectNumberOfResearchPhases,
 } from "@/redux/slices/research/phase";
 import { useSelectEntitiesByIds } from "@/hooks/redux/selector";
+// Helpers
 import { calculateSpecialEntityRP } from "@/helpers";
 
 const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
@@ -49,6 +49,8 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
     researchPhase?.researchLogsIds || [],
   ) as ResearchLogRedux[];
 
+  const numberOfResearchPhases = useAppSelector(selectNumberOfResearchPhases);
+
   const entityResearchPoints = calculateSpecialEntityRP(researchPhaseLogs);
 
   const usedOnDirectionButtonClick =
@@ -68,6 +70,9 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
       }
       onNextButtonClick={() =>
         dispatch(usedOnDirectionButtonClick({ direction: "right" }))
+      }
+      showWrapperControls={
+        numberOfResearchPhases > 1 || containerType === "example"
       }
     >
       <div className={entityContainerStyles.entityContainer}>

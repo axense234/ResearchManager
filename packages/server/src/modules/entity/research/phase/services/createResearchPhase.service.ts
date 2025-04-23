@@ -68,7 +68,7 @@ export class CreateResearchPhaseService {
         specifiers: [
           {
             label: 'researchActivityId',
-            value: createdResearchPhase.researchActivityId,
+            possibleValues: [createdResearchPhase.researchActivityId],
             ignoreIfFalse: true,
           },
         ],

@@ -39,12 +39,16 @@ export class DeleteCacheShallowService {
             if (specifier.ignoreIfFalse) {
               return !(
                 keyToDelete.includes(specifier.label) &&
-                !keyToDelete.includes(specifier.value)
+                !specifier.possibleValues.some((value) =>
+                  keyToDelete.includes(value),
+                )
               );
             } else {
               return (
                 keyToDelete.includes(specifier.label) &&
-                keyToDelete.includes(specifier.value)
+                specifier.possibleValues.some((value) =>
+                  keyToDelete.includes(value),
+                )
               );
             }
           });

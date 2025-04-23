@@ -1,6 +1,6 @@
 type DeleteCacheSpecifier = {
   label: string;
-  value: string;
+  possibleValues: string[];
   ignoreIfFalse?: boolean;
 };
 

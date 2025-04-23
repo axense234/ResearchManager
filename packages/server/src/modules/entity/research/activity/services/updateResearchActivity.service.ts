@@ -91,7 +91,7 @@ export class UpdateResearchActivityService {
         specifiers: [
           {
             label: 'userId',
-            value: updatedResearchActivity.userId,
+            possibleValues: [updatedResearchActivity.userId],
             ignoreIfFalse: true,
           },
         ],

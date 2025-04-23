@@ -25,6 +25,12 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   currentAuthCarouselId: 1,
   allowAutoCarousel: true,
 
+  // Overlays
+  entityOverlay: {
+    showOverlay: false,
+    entityType: "researchActivity",
+  },
+
   // Modals
   modal: {
     isClosed: true,

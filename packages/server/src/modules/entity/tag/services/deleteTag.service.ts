@@ -70,7 +70,11 @@ export class DeleteTagService {
         base: 'tags',
         actionType: 'DELETE',
         specifiers: [
-          { label: 'userId', value: deletedTag.userId, ignoreIfFalse: true },
+          {
+            label: 'userId',
+            possibleValues: [deletedTag.userId],
+            ignoreIfFalse: true,
+          },
         ],
       });
 

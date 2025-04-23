@@ -91,7 +91,7 @@ export class UpdateActivityDayService {
         specifiers: [
           {
             label: 'activityFeedId',
-            value: updatedActivityDay.activityFeedId,
+            possibleValues: [updatedActivityDay.activityFeedId],
             ignoreIfFalse: true,
           },
         ],

@@ -22,6 +22,7 @@ export const {
   setResearchPhases,
   handleResearchPhaseCarouselStepDirection,
   handleResearchPhaseExampleCarouselStepDirection,
+  setShowProfileResearchPhasesExamples,
 } = researchPhasesSlice.actions;
 
 export default researchPhasesSlice.reducer;

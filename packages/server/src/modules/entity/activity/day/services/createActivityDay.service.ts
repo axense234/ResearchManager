@@ -70,7 +70,7 @@ export class CreateActivityDayService {
         specifiers: [
           {
             label: 'activityFeedId',
-            value: createdActivityDay.activityFeedId,
+            possibleValues: [createdActivityDay.activityFeedId],
             ignoreIfFalse: true,
           },
         ],

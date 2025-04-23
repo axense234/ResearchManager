@@ -74,7 +74,7 @@ export class DeleteSettingsService {
         specifiers: [
           {
             label: 'userId',
-            value: deletedSettings.userId,
+            possibleValues: [deletedSettings.userId],
             ignoreIfFalse: true,
           },
         ],

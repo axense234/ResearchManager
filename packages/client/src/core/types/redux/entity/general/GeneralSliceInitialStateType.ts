@@ -3,6 +3,7 @@ import { SignInDto, SignUpDto } from "@researchmanager/shared/types";
 import { LoadingStateType } from "../../other";
 import { ModalType } from "./ModalType";
 import { UserRedux } from "./UserRedux";
+import { OverlayType } from "./OverlayType";
 
 export type GeneralSliceInitialStateType = {
   // Auth
@@ -24,6 +25,9 @@ export type GeneralSliceInitialStateType = {
   // Auth Carousel
   currentAuthCarouselId: number;
   allowAutoCarousel: boolean;
+
+  // Overlays
+  entityOverlay: OverlayType;
 
   // Modals
   modal: ModalType;

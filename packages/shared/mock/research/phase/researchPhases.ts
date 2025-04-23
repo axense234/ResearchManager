@@ -1,6 +1,7 @@
 // Types
 import { ResearchPhasePayload } from "../../../types";
 // Mock Data
+import { tagsMockData } from "../../tag";
 import { researchLogsMockData } from "../log";
 
 export const researchPhasesMockData: ResearchPhasePayload[] = [
@@ -12,6 +13,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(4, 8),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "20113511-8522-4be2-aebb-261bf1c1191f"
     ),
@@ -24,6 +26,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(2, 10),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "f4fc9f0b-2a88-4636-987a-59bd2c168f1e"
     ),
@@ -36,6 +39,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "1e9f0cd9-ec92-43a7-84ba-3e52ab9a974d",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(6, 7),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "93c4e466-dccc-40dc-a0cb-18451aeae64f"
     ),
@@ -48,6 +52,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "1d3378cd-7253-4f2c-9519-ebe80b743fea",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(3, 9),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "c556c46b-8ad0-47fe-b561-7d27865f8861"
     ),
@@ -60,6 +65,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "1d3378cd-7253-4f2c-9519-ebe80b743fea",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(4, 10),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "9cc62d8a-2cdd-458a-8d4d-5b8ec457ed5c"
     ),
@@ -72,6 +78,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "1d3378cd-7253-4f2c-9519-ebe80b743fea",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(1, 5),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "bdb16338-b4f9-45d1-bd05-ce0be67ec396"
     ),
@@ -84,6 +91,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "8c535916-a373-4c03-b72e-1cac95ea3649",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(4, 5),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "fb4817b3-d79e-4b2c-8f0e-8daa15680445"
     ),
@@ -96,6 +104,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "8c535916-a373-4c03-b72e-1cac95ea3649",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(2, 7),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "a22ba389-c19a-4e3e-a0c9-b507e4576821"
     ),
@@ -108,6 +117,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "8c535916-a373-4c03-b72e-1cac95ea3649",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(4, 9),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "453edd23-5b99-4c1d-9cc6-dbb7dd8249c9"
     ),
@@ -120,6 +130,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "5ec0fb06-4070-4759-bc32-c6b44607f5d1",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(1, 9),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "06431158-1914-49e2-9f7d-39f6e4c37662"
     ),
@@ -132,6 +143,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "5ec0fb06-4070-4759-bc32-c6b44607f5d1",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(5, 9),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "9ba700af-5533-4a4a-8690-a0ba1ed05676"
     ),
@@ -144,6 +156,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "5ec0fb06-4070-4759-bc32-c6b44607f5d1",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(2, 9),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "3ffb620a-3d5c-4aa0-b845-c828511beb99"
     ),
@@ -156,6 +169,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "5aba8fa5-a2a7-4481-a092-05bb3cd0ebbc",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(8, 10),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "588db4e9-eacb-440b-ac40-a2570cb3bdc7"
     ),
@@ -168,6 +182,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "5aba8fa5-a2a7-4481-a092-05bb3cd0ebbc",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: tagsMockData.slice(6, 10),
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "88188b99-d55e-4b3f-8bf6-c70eb5a8e648"
     ),
@@ -180,6 +195,7 @@ export const researchPhasesMockData: ResearchPhasePayload[] = [
     researchActivityId: "5aba8fa5-a2a7-4481-a092-05bb3cd0ebbc",
     createdAt: new Date(),
     updatedAt: new Date(),
+    tags: [],
     researchLogs: researchLogsMockData.filter(
       (log) => log.researchPhaseId === "d018274f-efa8-422c-841c-f14be9126f50"
     ),

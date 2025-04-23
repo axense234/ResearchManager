@@ -8,6 +8,7 @@ const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
   labelContent,
   entityProperty,
   onEntityPropertyValueChange,
+  id,
 }) => {
   return (
     <div
@@ -17,11 +18,11 @@ const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
         entityProperty ? "Stop displaying Examples." : "Show Examples"
       }
     >
-      <label htmlFor={labelContent}>{labelContent}</label>
+      <label htmlFor={id}>{labelContent}</label>
       <input
         type="checkbox"
-        name={labelContent}
-        id={labelContent}
+        name={id}
+        id={id}
         value={entityProperty ? "true" : "false"}
         onChange={onEntityPropertyValueChange}
         checked={entityProperty}

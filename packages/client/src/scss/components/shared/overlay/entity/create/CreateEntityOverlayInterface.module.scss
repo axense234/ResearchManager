@@ -1,0 +1,53 @@
+@use "../../../../../abstracts" as *;
+
+.overlayContainerWrapper {
+  @include flexCenter(column);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: getColorWithOpacity("main-dark-blue", 0.98);
+
+  padding: 2.5rem 0;
+
+  transition:
+    transform 0.2s ease-in,
+    opacity 0.2s ease-in;
+
+  opacity: 0;
+  transform: scale(0);
+}
+
+.overlayContainer {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  height: 100%;
+  width: 42.5rem;
+  border-radius: 0.3rem;
+  background-color: getColor("main-white");
+  padding: 3rem;
+  gap: 4rem;
+
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    visibility: hidden;
+  }
+
+  > h5 {
+    @include heading("h5", "laptop", "black");
+    letter-spacing: 0.75px;
+    margin-bottom: 2rem;
+  }
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 100%;
+    background-color: getColor("main-black-100");
+  }
+}

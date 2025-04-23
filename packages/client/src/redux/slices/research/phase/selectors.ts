@@ -8,6 +8,7 @@ export const {
   selectAll: selectAllResearchPhases,
   selectById: selectResearchPhaseById,
   selectIds: selectResearchPhasesIds,
+  selectTotal: selectNumberOfResearchPhases,
 } = researchPhasesAdapter.getSelectors<State>((state) => state.researchPhases);
 
 export const selectResearchPhasesExamples = (state: State) =>
@@ -62,3 +63,6 @@ export const selectLoadingUpdateResearchPhase = (state: State) =>
 
 export const selectLoadingDeleteResearchPhase = (state: State) =>
   state.researchPhases.loadingDeleteResearchPhase;
+
+export const selectShowProfileResearchPhasesExamples = (state: State) =>
+  state.researchPhases.showProfileResearchPhasesExamples;

@@ -1,4 +1,3 @@
-"use client";
 // Interfaces
 import { FC } from "react";
 import { FormControlsProps } from "@/core/interfaces";

@@ -1,0 +1,12 @@
+@use "../../../../abstracts" as *;
+
+.entityViewLoadingContainer {
+  @include flexCenter(column);
+  gap: 2rem;
+  width: 100%;
+
+  > h6 {
+    @include heading("h6", "laptop", "white");
+    letter-spacing: 1.5px;
+  }
+}

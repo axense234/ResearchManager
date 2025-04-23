@@ -76,12 +76,12 @@ export class CreateActivityFeedService {
         specifiers: [
           {
             label: 'userId',
-            value: createdActivityFeed.userId,
+            possibleValues: [createdActivityFeed.userId],
             ignoreIfFalse: true,
           },
           {
             label: 'researchActivityId',
-            value: createdActivityFeed.researchActivityId,
+            possibleValues: [createdActivityFeed.researchActivityId],
             ignoreIfFalse: true,
           },
         ],
