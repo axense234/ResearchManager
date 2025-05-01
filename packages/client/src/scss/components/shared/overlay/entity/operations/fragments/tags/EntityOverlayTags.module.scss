@@ -1,0 +1,20 @@
+@use "../../../../../../../abstracts" as *;
+
+.tagsContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 1.5rem;
+
+  > h6 {
+    @include heading("h6", "tablet", "black");
+    letter-spacing: 0.5px;
+  }
+}
+
+.tagsContent {
+  @include flexCenter(column);
+  width: 100%;
+  align-items: flex-start;
+  gap: 2rem;
+}

@@ -27,12 +27,6 @@ export const generalSliceReducers = {
       [action.payload.key]: action.payload.value,
     };
   },
-  changeShowEntityContainerWrapper(
-    state: GeneralSliceInitialStateType,
-    action: PayloadAction<boolean>,
-  ) {
-    state.showEntityContainerWrapper = action.payload;
-  },
   updateSignInUserDto(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<ObjectKeyValueType>,
@@ -85,11 +79,11 @@ export const generalSliceReducers = {
   ) {
     state.allowAutoCarousel = action.payload;
   },
-  setModal(
+  setGeneralModal(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<ModalType>,
   ) {
-    state.modal = { ...action.payload };
+    state.generalModal = { ...action.payload };
   },
   addErrorField(
     state: GeneralSliceInitialStateType,

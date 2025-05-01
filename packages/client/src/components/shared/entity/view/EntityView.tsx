@@ -11,7 +11,6 @@ import EntityViewNoEntities from "./EntityViewNoEntities";
 import entityViewStyles from "@/scss/components/shared/entity/view/EntityView.module.scss";
 // Redux and Hooks
 import { useAppDispatch, useSelectEntity } from "@/hooks";
-import { changeShowEntityContainerWrapper } from "@/redux/slices/general/slice";
 
 const EntityView: FC<EntityViewProps> = ({
   viewType,
@@ -33,11 +32,7 @@ const EntityView: FC<EntityViewProps> = ({
   }
 
   return (
-    <section
-      className={entityViewStyles.entityViewContainer}
-      onMouseEnter={() => dispatch(changeShowEntityContainerWrapper(true))}
-      onMouseLeave={() => dispatch(changeShowEntityContainerWrapper(false))}
-    >
+    <section className={entityViewStyles.entityViewContainer}>
       <EntityContainer
         containerType={viewType}
         entityType={entityType}

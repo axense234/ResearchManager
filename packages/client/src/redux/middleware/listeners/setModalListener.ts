@@ -1,5 +1,5 @@
 // Redux
-import { setModal } from "@/redux/slices/general/slice";
+import { addErrorField, setGeneralModal } from "@/redux/slices/general/slice";
 import { createResearchActivity } from "@/redux/slices/research/activity/thunks";
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { State } from "@/redux/api/store";
@@ -23,7 +23,7 @@ setModalListener.startListening({
 
     if (createResearchActivity.pending.match(action)) {
       dispatch(
-        setModal({
+        setGeneralModal({
           isClosed: false,
           message: "Trying to create your Research Activity.",
           type: "general",
@@ -35,7 +35,7 @@ setModalListener.startListening({
 
       if (!axiosError.isAxiosError) {
         dispatch(
-          setModal({
+          setGeneralModal({
             isClosed: false,
             message: "Successfully created Research Activity.",
             type: "general",
@@ -46,17 +46,16 @@ setModalListener.startListening({
         const errorData = axiosError?.response?.data as {
           message: string[] | string;
         };
+        console.log(errorData);
+        console.log(state.general.errorFields);
 
-        const { message } = handleFormErrorInputsAndModalMessage(
+        const { message, errorFields } = handleFormErrorInputsAndModalMessage(
           errorData.message,
-          state.general.errorFields,
-          (errorMessage: string) => {
-            state.general.errorFields.push(errorMessage.split(" ")[0]);
-          },
         );
+        errorFields.forEach((field) => dispatch(addErrorField(field)));
 
         dispatch(
-          setModal({
+          setGeneralModal({
             isClosed: false,
             message,
             type: "form",
@@ -66,7 +65,7 @@ setModalListener.startListening({
       }
     } else if (createResearchActivity.rejected.match(action)) {
       dispatch(
-        setModal({
+        setGeneralModal({
           isClosed: false,
           message:
             "Could not create your Research Activity. Something went wrong.",

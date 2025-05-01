@@ -24,6 +24,8 @@ import {
 } from "@/redux/slices/research/activity";
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
+// Data
+import { mainWhiteColor } from "@/data/general";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -48,7 +50,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
       ? currentResearchActivityExampleIndex
       : currentResearchActivityIndex;
 
-  const entity = useSelectEntity(
+  const researchActivity = useSelectEntity(
     containerType,
     "researchActivity",
     entityId,
@@ -59,7 +61,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   );
 
   const entityResearchPoints = useCalculateEntityResearchPoints(
-    entity,
+    researchActivity,
     "researchActivity",
     containerType,
   );
@@ -76,15 +78,22 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
         numberOfResearchActivities > 1 || containerType === "example"
       }
     >
-      <div className={entityContainerStyles.entityContainer}>
+      <div
+        className={entityContainerStyles.entityContainer}
+        style={{
+          backgroundColor:
+            researchActivity.backgroundColorOrImageSrc || mainWhiteColor,
+        }}
+      >
         <EntityContainerTags
-          tagsIds={entity.tagsIds || []}
+          tagsIds={researchActivity.tagsIds || []}
           containerType={containerType}
+          dtoUpdateFunction={() => {}}
         />
         <EntityContainerLabel
           entityRanking={usedEntityRanking}
           entityResearchPoints={entityResearchPoints}
-          entityTitle={entity.name}
+          entityTitle={researchActivity.name}
         />
         <EntityContainerOptions
           entityId={entityId}

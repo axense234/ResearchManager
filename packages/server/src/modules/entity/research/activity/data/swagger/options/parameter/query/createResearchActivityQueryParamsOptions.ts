@@ -13,6 +13,7 @@ type CreateResearchActivityQueryParamsApiPropertyOptionsType = {
   selectValues: ApiPropertyOptions;
   chosenOptionType: ApiPropertyOptions;
   createActivityFeed: ApiPropertyOptions;
+  createDefaultResearchPhase: ApiPropertyOptions;
 };
 
 export const createResearchActivityQueryParamsApiPropertyOptions: CreateResearchActivityQueryParamsApiPropertyOptionsType =
@@ -40,7 +41,13 @@ export const createResearchActivityQueryParamsApiPropertyOptions: CreateResearch
     createActivityFeed: {
       required: false,
       description:
-        'The query param capable of controlling the behaviour of automatically creating an default Activity Feed when a Research Activity is created. By default its set to true, thus creating and connecting an Activity Feed to a Research Activity when created. If the desired behaviour is to NOT create an Activity Feed and connect it to a Research Activity, set this query param to false.',
+        'The query param capable of controlling the behaviour of automatically creating a default Activity Feed when a Research Activity is created. By default its set to true, thus creating and connecting an Activity Feed to a Research Activity when created. If the desired behaviour is to NOT create an Activity Feed and connect it to a Research Activity, set this query param to false.',
+      enum: ['false', 'true'],
+    },
+    createDefaultResearchPhase: {
+      required: false,
+      description:
+        'The query param capable of controlling the behaviour of automatically creating a default Research Phase for the created Research Activity, with the same name. By default its set to true, thus creating and connecting a Research Phase to a Research Activity when created. If the desired behaviour is to NOT create a Research Phase and connect it to a Research Activity, set this query param to false.',
       enum: ['false', 'true'],
     },
   };

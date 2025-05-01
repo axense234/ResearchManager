@@ -34,13 +34,14 @@ export class CreateResearchActivityService {
         selectValues,
         chosenOptionType,
         createActivityFeed,
+        createDefaultResearchPhase,
       } = queryParams;
 
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'researchActivity',
         actionType: 'CREATE',
-        options: { createActivityFeed },
+        options: { createActivityFeed, createDefaultResearchPhase },
       })) as ResearchActivityCreateDataObject;
 
       const createObject: ResearchActivityCreateObject = { data: dataObject };

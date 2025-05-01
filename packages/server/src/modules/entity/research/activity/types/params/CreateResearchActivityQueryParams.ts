@@ -33,4 +33,13 @@ export class CreateResearchActivityQueryParams {
   @IsString()
   @IsOptional()
   createActivityFeed: 'false' | 'true';
+
+  @ApiProperty(
+    createResearchActivityQueryParamsApiPropertyOptions[
+      'createDefaultResearchPhase'
+    ],
+  )
+  @IsString()
+  @IsOptional()
+  createDefaultResearchPhase: 'false' | 'true';
 }

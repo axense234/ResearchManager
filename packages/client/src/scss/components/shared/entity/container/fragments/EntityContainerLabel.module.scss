@@ -39,6 +39,7 @@
 
   > h5 {
     @include heading("h5", "laptop", "black");
+    @include handlePossibleLongWord(2);
     letter-spacing: 1px;
   }
 }

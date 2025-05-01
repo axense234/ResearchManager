@@ -1,15 +1,13 @@
 @use "../../../abstracts" as *;
 
-.exitOverlayButtonContainer {
-  @include flexCenter(row);
-  > svg {
-    position: absolute;
-    top: 2rem;
-    right: 3rem;
+.closeInterfaceButtonContainer {
+  @include flexCenter(column);
+  width: 100%;
 
+  > svg {
     cursor: pointer;
     align-self: flex-end;
-    font-size: 4rem;
+    font-size: 2rem;
     transition: transform 0.2s ease-in;
 
     color: getColor("main-pastel-red");

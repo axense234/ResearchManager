@@ -17,7 +17,7 @@ export const getProfileJWTPending: ExtraReducerFuncType<
   );
 
   state.loadingGetProfileJWT = "PENDING";
-  state.modal = {
+  state.generalModal = {
     isClosed: hasUserCreatedAccountBefore !== "true",
     isLoading: true,
     message: "Trying to fetch your Account :)",
@@ -44,7 +44,7 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
     state.userProfile = userRedux;
 
     state.loadingGetProfileJWT = "SUCCEEDED";
-    state.modal = {
+    state.generalModal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
       message: `Welcome back ${userPayload.username}.`,
@@ -52,7 +52,7 @@ export const getProfileJWTFulfilled: ExtraReducerFuncType<
     };
   } else {
     state.loadingGetProfileJWT = "REJECTED";
-    state.modal = {
+    state.generalModal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
       message: `Could not fetch your Account :(`,
@@ -69,7 +69,7 @@ export const getProfileJWTRejected: ExtraReducerFuncType<
   );
 
   state.loadingGetProfileJWT = "REJECTED";
-  state.modal = {
+  state.generalModal = {
     isClosed: hasUserCreatedAccountBefore !== "true",
     isLoading: false,
     message: `Could not fetch your Account :(`,

@@ -29,16 +29,12 @@ export const selectAllowAutoCarousel = (state: State) =>
   state.general.allowAutoCarousel;
 
 // Modals
-export const selectModal = (state: State) => state.general.modal;
+export const selectGeneralModal = (state: State) => state.general.generalModal;
 export const selectErrorFields = (state: State) => state.general.errorFields;
 
 // Overlays
 export const selectEntityOverlay = (state: State) =>
   state.general.entityOverlay;
-
-// Util
-export const selectShowEntityContainerWrapper = (state: State) =>
-  state.general.showEntityContainerWrapper;
 
 // Contact
 export const selectContactUsDto = (state: State) => state.general.contactUsDto;

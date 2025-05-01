@@ -1,16 +1,15 @@
 export const handleFormErrorInputsAndModalMessage = (
   message: string[] | string,
-  currentErrorFields: string[],
-  errorFieldsUpdater: (errorMessage: string) => void,
 ) => {
   let returnMessage = message as string;
+  let errorFields = [];
 
   if (typeof message !== "string") {
     (message as string[]).forEach((errorMessage) => {
-      errorFieldsUpdater(errorMessage.split(" ")[0]);
+      errorFields.push(errorMessage.split(" ")[0]);
     });
 
-    const fields = new Set(currentErrorFields);
+    const fields = new Set(errorFields);
 
     if (fields.size > 1) {
       returnMessage = "Invalid values provided.";
@@ -23,5 +22,5 @@ export const handleFormErrorInputsAndModalMessage = (
     }
   }
 
-  return { message: returnMessage };
+  return { message: returnMessage, errorFields };
 };

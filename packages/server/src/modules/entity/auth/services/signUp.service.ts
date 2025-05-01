@@ -42,13 +42,14 @@ export class SignUpService {
         chosenOptionType,
         createSettings,
         createActivityFeed,
+        createDefaultTags,
       } = queryParams;
 
       const dataObject = (await this.objectBuilder.buildDataObject({
         dto,
         entityType: 'user',
         actionType: 'CREATE',
-        options: { createActivityFeed, createSettings },
+        options: { createActivityFeed, createSettings, createDefaultTags },
       })) as UserCreateDataObject;
 
       const createObject: UserCreateObject = { data: dataObject };

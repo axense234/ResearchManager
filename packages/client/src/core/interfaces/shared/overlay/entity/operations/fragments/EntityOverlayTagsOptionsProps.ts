@@ -1,17 +1,14 @@
 // Types
 import {
   CreateResearchActivityDto,
-  CreateResearchLogDto,
-  CreateResearchPhaseDto,
-  EntityType,
   UpdateResearchActivityDto,
-  UpdateResearchLogDto,
+  CreateResearchPhaseDto,
   UpdateResearchPhaseDto,
+  CreateResearchLogDto,
+  UpdateResearchLogDto,
 } from "@researchmanager/shared/types";
 
-export interface EntityOverlayTagsProps {
-  method: "create" | "update" | "view";
-  entityType: EntityType;
+export interface EntityOverlayTagsOptionsProps {
   dto:
     | CreateResearchActivityDto
     | UpdateResearchActivityDto
@@ -19,4 +16,7 @@ export interface EntityOverlayTagsProps {
     | UpdateResearchPhaseDto
     | CreateResearchLogDto
     | UpdateResearchLogDto;
+  dtoUpdateFunction: () => void;
+  showAllTags: boolean;
+  setShowAllTags: (show: boolean) => void;
 }

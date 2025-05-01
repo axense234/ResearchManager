@@ -1,13 +1,13 @@
 // React
 import { RefObject, useEffect } from "react";
 
-export const useEntityContainerInterfaceWrapperTransition = (
+export const useNavButtonTransition = (
   show: boolean,
-  modalRef: RefObject<HTMLDivElement>,
+  buttonRef: RefObject<HTMLDivElement>,
 ) => {
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    const modal = modalRef.current as HTMLDivElement;
+    const modal = buttonRef.current as HTMLDivElement;
 
     if (show) {
       modal.style.display = "flex";

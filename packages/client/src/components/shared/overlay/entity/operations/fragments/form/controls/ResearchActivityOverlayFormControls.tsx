@@ -1,27 +1,33 @@
 // Interfaces
 import { FC } from "react";
 import { EntityOverlayFormControlsProps } from "@/core/interfaces";
+// Types
+import {
+  CreateResearchActivityDto,
+  UpdateResearchActivityDto,
+} from "@researchmanager/shared/types";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 // SCSS
 import entityOverlayFormControlsStyles from "@/scss/components/shared/overlay/entity/operations/fragments/form/controls/EntityOverlayFormControls.module.scss";
-// Redux
+// Redux and Hoooks
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import {
-  CreateResearchActivityDto,
-  UpdateResearchActivityDto,
-} from "@researchmanager/shared/types";
 import {
   selectCreateDefaultResearchPhase,
   setCreateDefaultResearchPhase,
   updateCreateResearchActivityDto,
 } from "@/redux/slices/research/activity";
+import { selectErrorFields } from "@/redux/slices/general";
+// Data
+import { formErrorInputBorder } from "@/data/general";
 
 const ResearchActivityOverlayFormControls: FC<
   EntityOverlayFormControlsProps
 > = ({ dto, method }) => {
   const dispatch = useAppDispatch();
+
+  const errorFields = useAppSelector(selectErrorFields);
 
   const createDefaultResearchPhase = useAppSelector(
     selectCreateDefaultResearchPhase,
@@ -49,6 +55,7 @@ const ResearchActivityOverlayFormControls: FC<
           inputColorType="dark"
           labelColorType="dark"
           placeholderContent="ex: Gardening"
+          border={errorFields.includes("name") ? formErrorInputBorder : "none"}
         />
         <TextFormControl
           labelContent="Background Color:"

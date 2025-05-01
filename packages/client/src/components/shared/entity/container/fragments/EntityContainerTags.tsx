@@ -11,10 +11,12 @@ import {
   DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN,
   MAX_ENTITY_CONTAINER_TAGS_SHOWN,
 } from "@/data/general";
+import TagsOptions from "../../tag/options/TagsOptions";
 
 const EntityContainerTags: FC<EntityContainerTagsProps> = ({
   tagsIds,
   containerType,
+  dtoUpdateFunction,
 }) => {
   const [showAllTags, setShowAllTags] = useState<boolean>(false);
 
@@ -61,6 +63,12 @@ const EntityContainerTags: FC<EntityContainerTagsProps> = ({
             </button>
           ) : null}
         </div>
+        <TagsOptions
+          tags={tagsIds}
+          onRemoveTagFunction={dtoUpdateFunction}
+          showAllTags={showAllTags}
+          setShowAllTags={setShowAllTags}
+        />
       </ul>
     </div>
   );

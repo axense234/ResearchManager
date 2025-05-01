@@ -28,17 +28,6 @@
   padding-bottom: 1rem;
   z-index: 100;
 
-  > svg {
-    cursor: pointer;
-    align-self: flex-end;
-    font-size: 2rem;
-    transition: transform 0.2s ease-in;
-
-    &:hover {
-      transform: rotate(5deg) scale(1.1);
-    }
-  }
-
   > p {
     @include paragraph("laptop", "white");
     align-self: center;

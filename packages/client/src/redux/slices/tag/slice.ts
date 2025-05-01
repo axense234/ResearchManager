@@ -16,7 +16,12 @@ const tagsSlice = createSlice({
   },
 });
 
-export const { updateCreateTagDto, updateLoadingTagState, setTags } =
-  tagsSlice.actions;
+export const {
+  updateCreateTagDto,
+  updateLoadingTagState,
+  setTags,
+  setAddTagModal,
+  setSelectedTagId,
+} = tagsSlice.actions;
 
 export default tagsSlice.reducer;

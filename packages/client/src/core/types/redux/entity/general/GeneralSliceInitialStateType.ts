@@ -30,11 +30,8 @@ export type GeneralSliceInitialStateType = {
   entityOverlay: OverlayType;
 
   // Modals
-  modal: ModalType;
+  generalModal: ModalType;
   errorFields: string[];
-
-  // Util
-  showEntityContainerWrapper: boolean;
 
   // Contact
   contactUsDto: {

@@ -7,3 +7,4 @@ export * from "./selectOnButtonClickFunction";
 export * from "./organizeEntityImagesByEntityName";
 export * from "./calculateSpecialEntityRP";
 export * from "./transformAndSortSpecialEntityExamplesByRP";
+export * from "./onTagComponentClick";

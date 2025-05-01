@@ -1,34 +1,29 @@
 // Types
-import {
-  CreateResearchActivityDto,
-  ReturnObjectBuilderReturnObject,
-} from "@researchmanager/shared/types";
+import { ReturnObjectBuilderReturnObject } from "@researchmanager/shared/types";
 import { ResearchActivity } from "@prisma/client";
 // Axios
 import { axiosInstance } from "@/utils";
 import { AxiosError } from "axios";
 // Redux
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { CreateResearchActivityDtoRedux } from "@/core/types";
 
 export const createResearchActivity = createAsyncThunk<
   ResearchActivity | AxiosError,
-  CreateResearchActivityDto
+  CreateResearchActivityDtoRedux
 >(
   "researchActivities/createResearchActivity",
-  async (createResearchActivityDto) => {
+  async ({ dto, createDefaultResearchPhase }) => {
     try {
-      console.log(createResearchActivityDto);
+      console.log(dto);
       const res = (
-        await axiosInstance.post(
-          "/researchActivities/create",
-          createResearchActivityDto,
-          {
-            params: {
-              includeValues: "researchPhases, tags",
-              chosenOptionType: "include",
-            },
+        await axiosInstance.post("/researchActivities/create", dto, {
+          params: {
+            createDefaultResearchPhase,
+            includeValues: "researchPhases, tags",
+            chosenOptionType: "include",
           },
-        )
+        })
       ).data as ReturnObjectBuilderReturnObject;
 
       return res.payload as ResearchActivity;

@@ -8,7 +8,7 @@ export const signInUserOAuthPending: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
   state.loadingSignInUser = "PENDING";
-  state.modal = {
+  state.generalModal = {
     isClosed: false,
     message: "Trying to sign in your Account.",
     type: "general",
@@ -35,7 +35,7 @@ export const signInUserOAuthRejected: ExtraReducerFuncType<
 
   localStorage.removeItem("createResearchManagerAccount");
 
-  state.modal = {
+  state.generalModal = {
     isClosed: false,
     message: "Could not sign in your Account.",
     type: "general",

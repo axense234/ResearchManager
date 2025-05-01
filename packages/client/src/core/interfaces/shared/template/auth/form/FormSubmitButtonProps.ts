@@ -7,6 +7,4 @@ export interface FormSubmitButtonProps {
   onHoverContent: string;
   onHoverContentDisabled: string;
   onClickFunction: MouseEventHandler<HTMLButtonElement> | undefined;
-
-  colorScheme?: "green" | "brown" | "red" | "yellow";
 }

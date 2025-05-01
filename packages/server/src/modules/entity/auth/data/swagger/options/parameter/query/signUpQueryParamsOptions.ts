@@ -12,6 +12,7 @@ type SignUpQueryParamsApiPropertyOptionsType = {
   chosenOptionType: ApiPropertyOptions;
   createSettings: ApiPropertyOptions;
   createActivityFeed: ApiPropertyOptions;
+  createDefaultTags: ApiPropertyOptions;
 };
 
 export const signUpQueryParamsApiPropertyOptions: SignUpQueryParamsApiPropertyOptionsType =
@@ -40,6 +41,12 @@ export const signUpQueryParamsApiPropertyOptions: SignUpQueryParamsApiPropertyOp
       required: false,
       description:
         'The query param capable of controlling the behaviour of automatically creating an default Activity Feed when an User is created. By default its set to true, thus creating and connecting an Activity Feed to an User when created. If the desired behaviour is to NOT create an Activity Feed and connect them to an User, set this query param to false.',
+      enum: ['false', 'true'],
+    },
+    createDefaultTags: {
+      required: false,
+      description:
+        'The query param capable of controlling the behaviour of automatically creating some default Tags when an User is created. By default its set to true, thus creating and connecting some default Tags to an User when created. If the desired behaviour is to NOT create said default Tags and connect them to an User, set this query param to false.',
       enum: ['false', 'true'],
     },
   };

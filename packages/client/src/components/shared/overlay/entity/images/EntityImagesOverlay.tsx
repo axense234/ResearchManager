@@ -6,7 +6,7 @@ import entityImagesOverlayStyles from "@/scss/components/shared/overlay/entity/i
 // Hooks
 import { useOverlayTransition } from "@/hooks";
 // Components
-import ExitOverlayButton from "../../ExitOverlayButton";
+import CloseInterfaceButton from "../../../general/CloseInterfaceButton";
 import EntityImagesOverlayContent from "./content/EntityImagesOverlayContent";
 import EntityImagesOverlayTitle from "./EntityImagesOverlayTitle";
 
@@ -26,7 +26,12 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
       className={entityImagesOverlayStyles.entityImagesOverlayContainer}
       ref={overlayRef}
     >
-      <ExitOverlayButton closeOverlayFunction={closeOverlayFunction} />
+      <CloseInterfaceButton
+        closeInterfaceFunction={closeOverlayFunction}
+        color="pastelRed"
+        title="Close Overlay"
+        size="large"
+      />
       <EntityImagesOverlayTitle
         entityName={entityName}
         specialEntityType={specialEntityType}

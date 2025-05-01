@@ -2,7 +2,7 @@
 import { FC, useRef } from "react";
 import { EntityImageOverlayProps } from "@/core/interfaces";
 // Components
-import ExitOverlayButton from "../../ExitOverlayButton";
+import CloseInterfaceButton from "../../../general/CloseInterfaceButton";
 import EntityImageOverlayOptions from "./EntityImageOverlayOptions";
 // SCSS
 import entityImageOverlayStyles from "@/scss/components/shared/overlay/entity/images/EntityImageOverlay.module.scss";
@@ -25,7 +25,12 @@ const EntityImageOverlay: FC<EntityImageOverlayProps> = ({
       className={entityImageOverlayStyles.entityImageOverlayContainer}
       ref={overlayRef}
     >
-      <ExitOverlayButton closeOverlayFunction={closeOverlayFunction} />
+      <CloseInterfaceButton
+        closeInterfaceFunction={closeOverlayFunction}
+        color="pastelRed"
+        title="Close Overlay"
+        size="large"
+      />
       {showOverlay && (
         <Image alt="Image" src={imagePayload.src} width={1520} height={780} />
       )}

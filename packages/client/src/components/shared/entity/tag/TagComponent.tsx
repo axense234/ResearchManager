@@ -6,8 +6,14 @@ import tagComponentStyles from "@/scss/components/shared/entity/tag/TagComponent
 // Redux
 import { useAppSelector } from "@/hooks";
 import { selectTagById, selectTagsExamples } from "@/redux/slices/tag";
+import { selectedTagBorder } from "@/data/general";
 
-const TagComponent: FC<TagComponentProps> = ({ tagId, containerType }) => {
+const TagComponent: FC<TagComponentProps> = ({
+  tagId,
+  containerType,
+  onClickFunction,
+  selectedTagToAdd = false,
+}) => {
   const tag = useAppSelector((state) => selectTagById(state, tagId));
   const tagExample = useAppSelector(selectTagsExamples).find(
     (tag) => tag.id === tagId,
@@ -22,7 +28,9 @@ const TagComponent: FC<TagComponentProps> = ({ tagId, containerType }) => {
         backgroundColor: usedTag?.backgroundColorOrImageSrc,
         fontSize: usedTag?.fontSize,
         fontFamily: usedTag?.fontFamily,
+        border: selectedTagToAdd ? selectedTagBorder : "initial",
       }}
+      onClick={onClickFunction}
       title={usedTag?.title}
       aria-label={usedTag?.title}
     >

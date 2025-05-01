@@ -1,2 +1,4 @@
 export * from "./EntityOverlayFormControlsProps";
-export * from "./EntityOverlayTags";
+export * from "./EntityOverlayTagsProps";
+export * from "./EntityOverlayTagsOptionsProps";
+export * from "./EntityOverlayTagsListProps";

@@ -19,6 +19,11 @@ export const tagsSliceInitialState = {
   loadingUpdateTag: "IDLE",
   loadingGetUserTags: "IDLE",
   loadingGetUserTag: "IDLE",
+  addTagModal: {
+    isClosed: true,
+    entityType: "researchActivity",
+  },
+  selectedTagId: undefined,
 } as TagsSliceInitialStateType;
 
 export const tagsSliceState = tagsAdapter.getInitialState(

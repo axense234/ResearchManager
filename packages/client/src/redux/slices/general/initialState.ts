@@ -32,16 +32,13 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   },
 
   // Modals
-  modal: {
+  generalModal: {
     isClosed: true,
     message: "Default message.",
     type: "general",
     isLoading: false,
   },
   errorFields: [],
-
-  // Util
-  showEntityContainerWrapper: false,
 
   // Contact
   contactUsDto: { title: "", message: "" },

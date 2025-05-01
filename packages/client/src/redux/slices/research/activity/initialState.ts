@@ -11,7 +11,7 @@ import { transformAndSortSpecialEntityExamplesByRP } from "@/helpers";
 import { createResearchActivityMockData } from "@researchmanager/shared/mock";
 
 export const researchActivitiesSliceInitialState = {
-  createResearchActivityDto: createResearchActivityMockData[0],
+  createResearchActivityDto: { ...createResearchActivityMockData[0], tags: [] },
   researchActivitiesExamples:
     transformAndSortSpecialEntityExamplesByRP("researchActivity"),
   loadingCreateResearchActivity: "IDLE",

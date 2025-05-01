@@ -56,7 +56,6 @@ const HomeContactFeedback: FC = () => {
               e.preventDefault();
               // do something
             }}
-            backgroundColorType="light"
           />
         </div>
       </form>

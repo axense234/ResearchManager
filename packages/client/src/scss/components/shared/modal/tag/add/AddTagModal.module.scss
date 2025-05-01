@@ -1,0 +1,37 @@
+@use "../../../../../abstracts" as *;
+
+.modalContainer {
+  @include flexCenter(column);
+  position: absolute;
+  bottom: 2rem;
+  gap: 2.5rem;
+
+  min-width: 25rem;
+
+  border-radius: 0.25rem;
+
+  background-color: getColorWithOpacity("main-light-blue", 0.95);
+
+  transition:
+    transform 0.175s linear,
+    opacity 0.2s ease-in;
+
+  opacity: 0;
+  display: none;
+  transform: translateY(-100%);
+
+  padding: 1rem;
+  z-index: 121;
+
+  > svg {
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 2rem;
+    transition: transform 0.2s ease-in;
+    color: getColor("main-black-100");
+
+    &:hover {
+      transform: rotate(5deg) scale(1.1);
+    }
+  }
+}

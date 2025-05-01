@@ -11,6 +11,7 @@ import * as argon from 'argon2';
 import { ConfigService } from '@nestjs/config';
 // Util
 import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
+import { tagsMockData } from '@researchmanager/shared/mock';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -25,7 +26,12 @@ export class DataObjectBuilderService {
     const dataObject: DataObjectBuilderDataObject = { ...(dto as any) };
     const { allowedConnectValues } = chooseAllowedBuilderValues(entityType);
 
-    const { createActivityFeed = 'true', createSettings = 'true' } = options;
+    const {
+      createActivityFeed = 'true',
+      createSettings = 'true',
+      createDefaultResearchPhase = 'true',
+      createDefaultTags = 'true',
+    } = options;
 
     const dtoPassword = (dto as UserCreateDataObject).password;
 
@@ -50,16 +56,33 @@ export class DataObjectBuilderService {
           create: { type: 'USER' },
         };
       }
+      if (createDefaultTags === 'true') {
+        (dataObject as UserCreateDataObject).tags = {
+          createMany: {
+            data: tagsMockData.map((tag) => {
+              const pureTag = { ...tag };
+              delete pureTag.id;
+              delete pureTag.userId;
+              return { ...pureTag };
+            }),
+          },
+        };
+      }
     }
 
-    if (
-      entityType === 'researchActivity' &&
-      actionType === 'CREATE' &&
-      createActivityFeed === 'true'
-    ) {
-      (dataObject as ResearchActivityCreateDataObject).activityFeed = {
-        create: { type: 'RESEARCH_ACTIVITY' },
-      };
+    if (entityType === 'researchActivity' && actionType === 'CREATE') {
+      if (createActivityFeed === 'true') {
+        (dataObject as ResearchActivityCreateDataObject).activityFeed = {
+          create: { type: 'RESEARCH_ACTIVITY' },
+        };
+      }
+      if (createDefaultResearchPhase === 'true') {
+        (dataObject as ResearchActivityCreateDataObject).researchPhases = {
+          create: {
+            name: (dataObject as ResearchActivityCreateDataObject).name,
+          },
+        };
+      }
     }
 
     allowedConnectValues.forEach((connectValue) => {
@@ -67,6 +90,7 @@ export class DataObjectBuilderService {
         switch (connectValue.rel) {
           case 'OTO':
             dataObject[connectValue.entityType] = {
+              ...dataObject[connectValue.entityType],
               connect: { id: dto[connectValue.entityType] },
             };
             break;
@@ -79,6 +103,7 @@ export class DataObjectBuilderService {
             break;
           case 'OTM':
             dataObject[connectValue.entityType] = {
+              ...dataObject[connectValue.entityType],
               connect: dto[connectValue.entityType].map((id: string) => {
                 return { id };
               }),

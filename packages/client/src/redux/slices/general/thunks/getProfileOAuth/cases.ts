@@ -17,7 +17,7 @@ export const getProfileOAuthPending: ExtraReducerFuncType<
   );
 
   state.loadingGetProfileOAuth = "PENDING";
-  state.modal = {
+  state.generalModal = {
     isClosed: hasUserCreatedAccountBefore !== "true",
     isLoading: true,
     message: "Trying to fetch your Account :)",
@@ -45,14 +45,14 @@ export const getProfileOAuthFulfilled: ExtraReducerFuncType<
     state.userProfile = userRedux;
 
     state.loadingGetProfileOAuth = "SUCCEEDED";
-    state.modal = {
+    state.generalModal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
       message: `Welcome back ${userPayload.username}.`,
       type: "general",
     };
   } else {
-    state.modal = {
+    state.generalModal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
       message: `Could not fetch your Account :(`,
@@ -70,7 +70,7 @@ export const getProfileOAuthRejected: ExtraReducerFuncType<
   );
 
   state.loadingGetProfileOAuth = "REJECTED";
-  state.modal = {
+  state.generalModal = {
     isClosed: hasUserCreatedAccountBefore !== "true",
     isLoading: false,
     message: `Could not fetch your Account :(`,

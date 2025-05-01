@@ -30,4 +30,9 @@ export class SignUpQueryParams {
   @IsString()
   @IsOptional()
   createActivityFeed: 'false' | 'true';
+
+  @ApiProperty(signUpQueryParamsApiPropertyOptions['createDefaultTags'])
+  @IsString()
+  @IsOptional()
+  createDefaultTags: 'false' | 'true';
 }

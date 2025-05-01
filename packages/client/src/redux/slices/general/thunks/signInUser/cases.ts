@@ -16,7 +16,7 @@ export const signInUserPending: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
   state.loadingSignInUser = "PENDING";
-  state.modal = {
+  state.generalModal = {
     isClosed: false,
     message: "Trying to sign in your Account.",
     type: "general",
@@ -38,7 +38,7 @@ export const signInUserFulfilled: ExtraReducerFuncType<
 
     state.loadingSignInUser = "SUCCEEDED";
 
-    state.modal = {
+    state.generalModal = {
       isClosed: false,
       message: `Successfully signed in user: ${user.username}.`,
       type: "general",
@@ -49,17 +49,14 @@ export const signInUserFulfilled: ExtraReducerFuncType<
       message: string[] | string;
     };
 
-    const { message } = handleFormErrorInputsAndModalMessage(
+    const { message, errorFields } = handleFormErrorInputsAndModalMessage(
       errorData.message,
-      state.errorFields,
-      (errorMessage: string) => {
-        state.errorFields.push(errorMessage.split(" ")[0]);
-      },
     );
+    state.errorFields = errorFields;
 
     state.loadingSignInUser = "REJECTED";
 
-    state.modal = {
+    state.generalModal = {
       isClosed: false,
       message,
       type: "form",
@@ -72,7 +69,7 @@ export const signInUserRejected: ExtraReducerFuncType<
   GeneralSliceInitialStateType
 > = (state, action) => {
   state.loadingSignUpUser = "REJECTED";
-  state.modal = {
+  state.generalModal = {
     isClosed: false,
     message: "Could not sign in your Account.",
     type: "general",

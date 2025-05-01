@@ -5,7 +5,7 @@ export const createResearchActivityMockData: CreateResearchActivityDto[] = [
   {
     userId: "put your user id here",
     name: "Coding",
-    backgroundColorOrImageSrc: "cyan",
+    backgroundColorOrImageSrc: "#d8e5e4",
   },
   {
     userId: "put your user id here",

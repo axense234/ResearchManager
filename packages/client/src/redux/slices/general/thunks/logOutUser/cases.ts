@@ -10,7 +10,7 @@ export const logOutUserPending: ExtraReducerFuncType<
 > = (state, action) => {
   state.loadingLogOutUser = "PENDING";
 
-  state.modal = {
+  state.generalModal = {
     isClosed: false,
     isLoading: false,
     message: "Trying to log out of your Account.",
@@ -26,7 +26,7 @@ export const logOutUserFulfilled: ExtraReducerFuncType<
   if (!axiosError?.isAxiosError) {
     const message = action.payload as string;
 
-    state.modal = {
+    state.generalModal = {
       isClosed: false,
       isLoading: false,
       message,
@@ -42,7 +42,7 @@ export const logOutUserRejected: ExtraReducerFuncType<
 > = (state, action) => {
   state.loadingLogOutUser = "REJECTED";
 
-  state.modal = {
+  state.generalModal = {
     isClosed: false,
     isLoading: false,
     message: "Could not log out of your Account!",

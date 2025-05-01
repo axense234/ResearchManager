@@ -22,11 +22,14 @@ export class ResearchActivityCreateDataObject {
 
   @IsObject()
   @IsOptional()
-  researchPhases: { connect: { id: string }[] };
+  researchPhases: {
+    connect?: { id: string }[];
+    create?: object;
+  };
 
   @IsObject()
   @IsOptional()
-  activityFeed: { connect: { id: string } } | { create: object };
+  activityFeed: { connect?: { id: string }; create?: object };
 
   @IsObject()
   @IsOptional()

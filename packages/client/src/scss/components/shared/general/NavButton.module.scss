@@ -1,0 +1,25 @@
+@use "../../../abstracts" as *;
+
+.navButtonContainer {
+  @include flexCenter(row);
+  padding: 1rem;
+  border-radius: 50%;
+
+  transition:
+    transform 0.2s ease-in,
+    opacity 0.25s ease-in,
+    background-color 0.2s ease-in;
+
+  opacity: 0;
+  display: none;
+
+  > svg {
+    border-radius: 50%;
+    font-size: 4rem;
+    color: getColor("main-black-100");
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

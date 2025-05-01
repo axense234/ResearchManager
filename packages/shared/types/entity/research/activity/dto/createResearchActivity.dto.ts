@@ -2,6 +2,7 @@
 import {
   IsArray,
   IsBoolean,
+  IsNotEmpty,
   IsOptional,
   IsString,
   IsUUID,
@@ -9,6 +10,7 @@ import {
 
 export class CreateResearchActivityDto {
   @IsString()
+  @IsNotEmpty()
   @IsOptional()
   name?: string;
 

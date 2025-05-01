@@ -1,3 +1,3 @@
 export * from "./EntityOverlayImages";
-export * from "./EntityOverlayTags";
+export * from "./tags";
 export * from "./form";

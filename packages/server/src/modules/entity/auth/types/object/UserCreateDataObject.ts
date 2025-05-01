@@ -37,5 +37,5 @@ export class UserCreateDataObject {
 
   @IsObject()
   @IsOptional()
-  tags: { connect: { id: string }[] };
+  tags: { connect?: { id: string }[]; createMany?: { data: object[] } };
 }
