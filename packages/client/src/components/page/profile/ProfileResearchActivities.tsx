@@ -1,10 +1,10 @@
 // React
-import { FC } from "react";
+import { FC, useState } from "react";
 // Components
 import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
 import EntityView from "@/components/shared/entity/view/EntityView";
-import ShowEntityExamplesToggle from "@/components/shared/entity/view/ShowEntityExamplesToggle";
+import EntityViewSetting from "@/components/shared/entity/view/EntityViewSetting";
 // SCSS
 import profileResearchActivitiesStyles from "@/scss/components/page/profile/ProfileResearchActivities.module.scss";
 // Data
@@ -19,18 +19,13 @@ import {
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
 } from "@/redux/slices/general";
-import {
-  selectShowProfileResearchActivitiesExamples,
-  setShowProfileResearchActivitiesExamples,
-} from "@/redux/slices/research/activity";
 import { setEntityOverlay } from "@/redux/slices/general/slice";
 
 const ProfileResearchActivities: FC = () => {
   const dispatch = useAppDispatch();
 
-  const showExamples = useAppSelector(
-    selectShowProfileResearchActivitiesExamples,
-  );
+  const [showExamples, setShowExamples] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   const loadingGetProfileJWT = useAppSelector(selectLoadingGetProfileJWT);
   const laodingGetProfileOAuth = useAppSelector(selectLoadingGetProfileOAuth);
@@ -49,38 +44,46 @@ const ProfileResearchActivities: FC = () => {
 
   return (
     <section className={profileResearchActivitiesStyles.sectionContainer}>
-      <ShowEntityExamplesToggle
-        showExamples={showExamples}
-        onShowExamplesChange={(e) =>
-          dispatch(
-            setShowProfileResearchActivitiesExamples(e.target.value !== "true"),
-          )
-        }
-        id="profileResearchActivities"
-      />
-      <div className={profileResearchActivitiesStyles.sectionTitle}>
-        <PageSectionTitle {...profileResearchActivitiesData} />
-        <FunctionalButton
-          content="Create Research Activity"
-          disabled={false}
-          onHoverContent="Create Research Activity"
-          onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-          onClickFunction={() =>
-            dispatch(
-              setEntityOverlay({
-                entityType: "researchActivity",
-                showOverlay: true,
-              }),
-            )
-          }
+      <div className={profileResearchActivitiesStyles.sectionSettings}>
+        <EntityViewSetting
+          value={darkMode}
+          onValueChange={(e) => setDarkMode(e.target.value !== "true")}
+          labelContent="Dark Mode:"
+          id="profileResearchActivitiesDarkMode"
+        />
+        <EntityViewSetting
+          value={showExamples}
+          onValueChange={(e) => setShowExamples(e.target.value !== "true")}
+          labelContent="Examples:"
+          id="profileResearchActivitiesExamples"
         />
       </div>
-      <EntityView
-        entityType="researchActivity"
-        viewType={usedViewType}
-        entityId={entityId}
-        isLoading={entityViewIsLoading}
-      />
+      <div className={profileResearchActivitiesStyles.sectionContent}>
+        <div className={profileResearchActivitiesStyles.sectionTitle}>
+          <PageSectionTitle {...profileResearchActivitiesData} />
+          <FunctionalButton
+            content="Create Research Activity"
+            disabled={false}
+            onHoverContent="Create Research Activity"
+            onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
+            onClickFunction={() =>
+              dispatch(
+                setEntityOverlay({
+                  entityType: "researchActivity",
+                  showOverlay: true,
+                }),
+              )
+            }
+          />
+        </div>
+        <EntityView
+          entityType="researchActivity"
+          viewType={usedViewType}
+          entityId={entityId}
+          isLoading={entityViewIsLoading}
+          darkMode={darkMode}
+        />
+      </div>
     </section>
   );
 };

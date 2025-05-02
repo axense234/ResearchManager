@@ -13,12 +13,6 @@ import { researchPhasesAdapter } from "./adapter";
 import { handleCarouselStepDirection } from "@/helpers";
 
 export const researchPhasesSliceReducers = {
-  setShowProfileResearchPhasesExamples(
-    state: ResearchPhasesSliceStateType,
-    action: PayloadAction<boolean>,
-  ) {
-    state.showProfileResearchPhasesExamples = action.payload;
-  },
   handleResearchPhaseExampleCarouselStepDirection(
     state: ResearchPhasesSliceStateType,
     action: PayloadAction<{ direction: "left" | "right" }>,
@@ -34,7 +28,7 @@ export const researchPhasesSliceReducers = {
     state: ResearchPhasesSliceStateType,
     action: PayloadAction<{ direction: "left" | "right" }>,
   ) {
-    state.currentResearchPhaseExampleIndex = handleCarouselStepDirection(
+    state.currentResearchPhaseIndex = handleCarouselStepDirection(
       action.payload.direction,
       state.currentResearchPhaseIndex,
       state.ids.length,

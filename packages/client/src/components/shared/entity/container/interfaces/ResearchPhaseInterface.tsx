@@ -8,6 +8,8 @@ import entityContainerStyles from "@/scss/components/shared/entity/container/Ent
 import EntityContainerTags from "../fragments/EntityContainerTags";
 import EntityContainerLabel from "../fragments/EntityContainerLabel";
 import EntityContainerOptions from "../fragments/EntityContainerOptions";
+// Helpers
+import { calculateSpecialEntityRP, onEditTagFunction } from "@/helpers";
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
 // Redux and Hooks
@@ -19,16 +21,22 @@ import {
   selectCurrentResearchPhaseExampleIndex,
   selectCurrentResearchPhaseIndex,
   selectNumberOfResearchPhases,
+  updateResearchPhase,
 } from "@/redux/slices/research/phase";
 import { useSelectEntitiesByIds } from "@/hooks/redux/selector";
-// Helpers
-import { calculateSpecialEntityRP } from "@/helpers";
+import { selectSelectedTagsIds } from "@/redux/slices/tag";
+import { setEntityOverlay } from "@/redux/slices/general/slice";
+// Data
+import { mainWhiteColor } from "@/data/general";
 
 const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
   entityId,
+  darkMode,
 }) => {
   const dispatch = useAppDispatch();
+
+  const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
 
   const currentResearchPhaseExampleIndex = useAppSelector(
     selectCurrentResearchPhaseExampleIndex,
@@ -36,6 +44,16 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
   const currentResearchPhaseIndex = useAppSelector(
     selectCurrentResearchPhaseIndex,
   );
+
+  const usedOnDirectionButtonClick =
+    containerType === "example"
+      ? handleResearchPhaseExampleCarouselStepDirection
+      : handleResearchPhaseCarouselStepDirection;
+
+  const usedEntityRanking =
+    containerType === "example"
+      ? currentResearchPhaseExampleIndex
+      : currentResearchPhaseIndex;
 
   const researchPhase = useSelectEntity(
     containerType,
@@ -53,15 +71,22 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
 
   const entityResearchPoints = calculateSpecialEntityRP(researchPhaseLogs);
 
-  const usedOnDirectionButtonClick =
-    containerType === "example"
-      ? handleResearchPhaseExampleCarouselStepDirection
-      : handleResearchPhaseCarouselStepDirection;
-
-  const usedEntityRanking =
-    containerType === "example"
-      ? currentResearchPhaseExampleIndex
-      : currentResearchPhaseIndex;
+  const onEditTagFunctionUsed = (type: "remove" | "add") => {
+    onEditTagFunction(
+      type,
+      researchPhase.tagsIds,
+      selectedTagsIds,
+      (editedTags: string[]) =>
+        updateResearchPhase({
+          dto: {
+            ...researchPhase,
+            tags: editedTags,
+          },
+          researchPhaseId: researchPhase.id,
+        }),
+      dispatch,
+    );
+  };
 
   return (
     <EntityContainerInterfaceWrapper
@@ -75,20 +100,37 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
         numberOfResearchPhases > 1 || containerType === "example"
       }
     >
-      <div className={entityContainerStyles.entityContainer}>
+      <div
+        className={entityContainerStyles.entityContainer}
+        style={{
+          backgroundColor:
+            researchPhase.backgroundColorOrImageSrc || mainWhiteColor,
+        }}
+      >
         <EntityContainerTags
-          tagsIds={researchPhase.tagsIds || []}
+          sourceTagsIds={researchPhase.tagsIds}
           containerType={containerType}
+          onAddTagFunction={() => onEditTagFunctionUsed("add")}
+          onRemoveTagFunction={() => onEditTagFunctionUsed("remove")}
         />
         <EntityContainerLabel
           entityRanking={usedEntityRanking}
           entityResearchPoints={entityResearchPoints}
           entityTitle={researchPhase.name}
+          darkMode={darkMode}
         />
         <EntityContainerOptions
-          entityId={entityId}
           entityType="researchPhase"
           containerType={containerType}
+          onEntityUpdateFunction={() =>
+            dispatch(
+              setEntityOverlay({
+                entityType: "researchPhase",
+                showOverlay: true,
+              }),
+            )
+          }
+          onEntityDeleteFunction={() => {}}
         />
       </div>
     </EntityContainerInterfaceWrapper>

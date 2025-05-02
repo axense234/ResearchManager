@@ -12,11 +12,15 @@
     border-radius: 0.5rem;
     width: 50%;
     background-color: getColor("main-black-100");
+
+    transition: background-color 0.2s ease-in;
   }
 
   > p {
     @include paragraph("tablet", "black");
     letter-spacing: 1px;
+
+    transition: color 0.2s ease-in;
   }
 }
 
@@ -35,11 +39,19 @@
     letter-spacing: 1px;
     background-color: getColor("secondary-white");
     font-weight: 550;
+
+    border: 0.5px solid getColor("main-black-100");
+
+    transition:
+      color 0.2s ease-in,
+      background-color 0.2s ease-in;
   }
 
   > h5 {
     @include heading("h5", "laptop", "black");
     @include handlePossibleLongWord(2);
     letter-spacing: 1px;
+
+    transition: color 0.2s ease-in;
   }
 }

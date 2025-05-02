@@ -18,6 +18,9 @@ export const tagsSliceReducers = {
   ) {
     state.addTagModal = action.payload;
   },
+  closeAddTagModal(state: TagsSliceStateType, action: PayloadAction) {
+    state.addTagModal = { ...state.addTagModal, isClosed: true };
+  },
   updateLoadingTagState(
     state: TagsSliceStateType,
     action: PayloadAction<{ actionType: ActionType; value: LoadingStateType }>,
@@ -62,7 +65,10 @@ export const tagsSliceReducers = {
   setTags(state: TagsSliceStateType, action: PayloadAction<TagRedux[]>) {
     tagsAdapter.setAll(state, action.payload);
   },
-  setSelectedTagId(state: TagsSliceStateType, action: PayloadAction<string>) {
-    state.selectedTagId = action.payload;
+  setSelectedTagsIds(
+    state: TagsSliceStateType,
+    action: PayloadAction<string[]>,
+  ) {
+    state.selectedTagsIds = action.payload;
   },
 };

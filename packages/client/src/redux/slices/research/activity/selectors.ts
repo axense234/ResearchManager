@@ -53,6 +53,9 @@ export const selectCurrentResearchActivityIndex = (state: State) =>
 export const selectCreateResearchActivityDto = (state: State) =>
   state.researchActivities.createResearchActivityDto;
 
+export const selectUpdateResearchActivityDto = (state: State) =>
+  state.researchActivities.updateResearchActivityDto;
+
 export const selectLoadingGetUserResearchActivities = (state: State) =>
   state.researchActivities.loadingGetUserResearchActivities;
 
@@ -67,9 +70,6 @@ export const selectLoadingUpdateResearchActivity = (state: State) =>
 
 export const selectLoadingDeleteResearchActivity = (state: State) =>
   state.researchActivities.loadingDeleteResearchActivity;
-
-export const selectShowProfileResearchActivitiesExamples = (state: State) =>
-  state.researchActivities.showProfileResearchActivitiesExamples;
 
 export const selectCreateDefaultResearchPhase = (state: State) =>
   state.researchActivities.createDefaultResearchPhase;

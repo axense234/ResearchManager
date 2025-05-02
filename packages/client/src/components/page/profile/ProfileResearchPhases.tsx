@@ -1,10 +1,10 @@
 // React
-import { FC } from "react";
+import { FC, useState } from "react";
 // Components
 import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
 import EntityView from "@/components/shared/entity/view/EntityView";
-import ShowEntityExamplesToggle from "@/components/shared/entity/view/ShowEntityExamplesToggle";
+import EntityViewSetting from "@/components/shared/entity/view/EntityViewSetting";
 // SCSS
 import profileResearchPhasesStyles from "@/scss/components/page/profile/ProfileResearchPhases.module.scss";
 // Data
@@ -19,15 +19,12 @@ import {
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
 } from "@/redux/slices/general";
-import {
-  selectShowProfileResearchPhasesExamples,
-  setShowProfileResearchPhasesExamples,
-} from "@/redux/slices/research/phase";
 
 const ProfileResearchPhases: FC = () => {
   const dispatch = useAppDispatch();
 
-  const showExamples = useAppSelector(selectShowProfileResearchPhasesExamples);
+  const [showExamples, setShowExamples] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   const loadingGetProfileJWT = useAppSelector(selectLoadingGetProfileJWT);
   const laodingGetProfileOAuth = useAppSelector(selectLoadingGetProfileOAuth);
@@ -43,31 +40,39 @@ const ProfileResearchPhases: FC = () => {
 
   return (
     <section className={profileResearchPhasesStyles.sectionContainer}>
-      <ShowEntityExamplesToggle
-        showExamples={showExamples}
-        onShowExamplesChange={(e) =>
-          dispatch(
-            setShowProfileResearchPhasesExamples(e.target.value !== "true"),
-          )
-        }
-        id="profileResearchPhases"
-      />
-      <div className={profileResearchPhasesStyles.sectionTitle}>
-        <PageSectionTitle {...profileResearchPhasesData} />
-        <FunctionalButton
-          content="Create Research Phase"
-          disabled={false}
-          onHoverContent="Create Research Phase"
-          onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-          onClickFunction={() => dispatch(() => {})}
+      <div className={profileResearchPhasesStyles.sectionSettings}>
+        <EntityViewSetting
+          value={darkMode}
+          onValueChange={(e) => setDarkMode(e.target.value !== "true")}
+          labelContent="Dark Mode:"
+          id="profileResearchPhasesDarkMode"
+        />
+        <EntityViewSetting
+          value={showExamples}
+          onValueChange={(e) => setShowExamples(e.target.value !== "true")}
+          labelContent="Examples:"
+          id="profileResearchPhasesExamples"
         />
       </div>
-      <EntityView
-        entityType="researchPhase"
-        viewType={usedViewType}
-        entityId={entityId}
-        isLoading={entityViewIsLoading}
-      />
+      <div className={profileResearchPhasesStyles.sectionContent}>
+        <div className={profileResearchPhasesStyles.sectionTitle}>
+          <PageSectionTitle {...profileResearchPhasesData} />
+          <FunctionalButton
+            content="Create Research Phase"
+            disabled={false}
+            onHoverContent="Create Research Phase"
+            onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
+            onClickFunction={() => dispatch(() => {})}
+          />
+        </div>
+        <EntityView
+          entityType="researchPhase"
+          viewType={usedViewType}
+          entityId={entityId}
+          isLoading={entityViewIsLoading}
+          darkMode={darkMode}
+        />
+      </div>
     </section>
   );
 };

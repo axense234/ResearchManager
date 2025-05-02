@@ -1,0 +1,18 @@
+@use "../../../../../abstracts" as *;
+
+.tagsOptionsButtonContainer {
+  @include flexCenter(row);
+  background-color: inherit;
+  border: none;
+  color: getColor("main-pastel-red");
+  font-size: 14px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
+
+  transition: transform 0.15s ease-in;
+  width: max-content;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

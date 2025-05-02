@@ -19,12 +19,7 @@ export const researchActivitiesSliceReducers = {
   ) {
     state.createDefaultResearchPhase = action.payload;
   },
-  setShowProfileResearchActivitiesExamples(
-    state: ResearchActivitiesSliceStateType,
-    action: PayloadAction<boolean>,
-  ) {
-    state.showProfileResearchActivitiesExamples = action.payload;
-  },
+
   setResearchActivityExamples(
     state: ResearchActivitiesSliceStateType,
     action: PayloadAction<ResearchActivityRedux[]>,

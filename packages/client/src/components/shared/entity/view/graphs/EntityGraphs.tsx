@@ -1,16 +1,25 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
+import { EntityGraphsProps } from "@/core/interfaces";
 // SCSS
 import entityGraphsStyles from "@/scss/components/shared/entity/view/graphs/EntityGraphs.module.scss";
 // Graphs
 import { Line } from "react-chartjs-2";
+// Data
+import { mainBlackColor, secondaryWhiteColor } from "@/data/general";
 
-const EntityGraphs: FC = () => {
+const EntityGraphs: FC<EntityGraphsProps> = ({ specialEntity, darkMode }) => {
+  const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
+
   return (
-    <article className={entityGraphsStyles.entityGraphsContainer}>
+    <article
+      className={entityGraphsStyles.entityGraphsContainer}
+      style={{ backgroundColor: specialEntity.backgroundColorOrImageSrc }}
+    >
       <div className={entityGraphsStyles.entityGraphsTitle}>
-        <h6>Graphs</h6>
-        <hr />
+        <h6 style={{ color: textColor }}>Graphs</h6>
+        <hr style={{ backgroundColor: textColor }} />
       </div>
       <Line
         data={{

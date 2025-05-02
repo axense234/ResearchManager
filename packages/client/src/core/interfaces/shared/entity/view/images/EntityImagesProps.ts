@@ -6,4 +6,5 @@ export interface EntityImagesProps {
   specialEntity: SpecialEntityRedux;
   specialEntityType: SpecialEntityType;
   viewType: EntityViewType;
+  darkMode: boolean;
 }

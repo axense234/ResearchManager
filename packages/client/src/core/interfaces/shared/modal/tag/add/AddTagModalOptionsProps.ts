@@ -1,6 +1,8 @@
 export interface AddTagModalOptionsProps {
-  currentDtoUpdateFunction: () => void;
-  currentTagId: string;
-  selectedTags: string[];
-  totalTags: string[];
+  selectedTagsIds: string[];
+  sourceTagsIds: string[];
+  totalTagsIds: string[];
+
+  onAddTagButtonClickFunction: () => void;
+  onCreateTagButtonClickFunction?: () => void;
 }

@@ -12,6 +12,7 @@ const EntityContainer: FC<EntityContainerProps> = ({
   entityType,
   entityId,
   containerType,
+  darkMode,
 }) => {
   switch (entityType) {
     case "researchActivity":
@@ -19,6 +20,7 @@ const EntityContainer: FC<EntityContainerProps> = ({
         <ResearchActivityInterface
           containerType={containerType}
           entityId={entityId}
+          darkMode={darkMode}
         />
       );
     case "researchPhase":
@@ -26,6 +28,7 @@ const EntityContainer: FC<EntityContainerProps> = ({
         <ResearchPhaseInterface
           containerType={containerType}
           entityId={entityId}
+          darkMode={darkMode}
         />
       );
     case "researchLog":
@@ -33,6 +36,7 @@ const EntityContainer: FC<EntityContainerProps> = ({
         <ResearchLogInterface
           containerType={containerType}
           entityId={entityId}
+          darkMode={darkMode}
         />
       );
     case "researchSession":
@@ -40,10 +44,17 @@ const EntityContainer: FC<EntityContainerProps> = ({
         <ResearchSessionInterface
           containerType={containerType}
           entityId={entityId}
+          darkMode={darkMode}
         />
       );
     case "tag":
-      return <TagInterface containerType={containerType} entityId={entityId} />;
+      return (
+        <TagInterface
+          containerType={containerType}
+          entityId={entityId}
+          darkMode={darkMode}
+        />
+      );
     default:
       throw new Error("Invalid entity type.");
   }

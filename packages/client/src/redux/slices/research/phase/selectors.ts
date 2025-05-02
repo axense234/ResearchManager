@@ -63,6 +63,3 @@ export const selectLoadingUpdateResearchPhase = (state: State) =>
 
 export const selectLoadingDeleteResearchPhase = (state: State) =>
   state.researchPhases.loadingDeleteResearchPhase;
-
-export const selectShowProfileResearchPhasesExamples = (state: State) =>
-  state.researchPhases.showProfileResearchPhasesExamples;

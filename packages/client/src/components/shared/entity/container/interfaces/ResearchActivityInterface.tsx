@@ -8,6 +8,10 @@ import entityContainerStyles from "@/scss/components/shared/entity/container/Ent
 import EntityContainerTags from "../fragments/EntityContainerTags";
 import EntityContainerLabel from "../fragments/EntityContainerLabel";
 import EntityContainerOptions from "../fragments/EntityContainerOptions";
+// Wrapper
+import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
+// Data
+import { mainWhiteColor } from "@/data/general";
 // Redux
 import {
   useAppDispatch,
@@ -22,16 +26,26 @@ import {
   selectCurrentResearchActivityIndex,
   selectNumberOfResearchActivities,
 } from "@/redux/slices/research/activity";
-// Wrapper
-import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
-// Data
-import { mainWhiteColor } from "@/data/general";
+import { updateResearchActivity } from "@/redux/slices/research/activity/thunks";
+import {
+  selectAddTagModal,
+  selectSelectedTagsIds,
+  setAddTagModal,
+  setSelectedTagsIds,
+} from "@/redux/slices/tag";
+import { setEntityOverlay } from "@/redux/slices/general/slice";
+import { onEditTagFunction } from "@/helpers";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
   entityId,
+  darkMode,
 }) => {
   const dispatch = useAppDispatch();
+
+  const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
+
+  const addTagModal = useAppSelector(selectAddTagModal);
 
   const currentResearchActivityExampleIndex = useAppSelector(
     selectCurrentResearchActivityExampleIndex,
@@ -66,6 +80,23 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     containerType,
   );
 
+  const onEditTagFunctionUsed = (type: "remove" | "add") => {
+    onEditTagFunction(
+      type,
+      researchActivity.tagsIds,
+      selectedTagsIds,
+      (editedTags: string[]) =>
+        updateResearchActivity({
+          dto: {
+            ...researchActivity,
+            tags: editedTags,
+          },
+          researchActivityId: researchActivity.id,
+        }),
+      dispatch,
+    );
+  };
+
   return (
     <EntityContainerInterfaceWrapper
       onPreviousButtonClick={() =>
@@ -86,19 +117,29 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
         }}
       >
         <EntityContainerTags
-          tagsIds={researchActivity.tagsIds || []}
+          sourceTagsIds={researchActivity.tagsIds}
           containerType={containerType}
-          dtoUpdateFunction={() => {}}
+          onRemoveTagFunction={() => onEditTagFunctionUsed("remove")}
+          onAddTagFunction={() => onEditTagFunctionUsed("add")}
         />
         <EntityContainerLabel
           entityRanking={usedEntityRanking}
           entityResearchPoints={entityResearchPoints}
           entityTitle={researchActivity.name}
+          darkMode={darkMode}
         />
         <EntityContainerOptions
-          entityId={entityId}
           entityType="researchActivity"
           containerType={containerType}
+          onEntityUpdateFunction={() =>
+            dispatch(
+              setEntityOverlay({
+                entityType: "researchActivity",
+                showOverlay: true,
+              }),
+            )
+          }
+          onEntityDeleteFunction={() => {}}
         />
       </div>
     </EntityContainerInterfaceWrapper>

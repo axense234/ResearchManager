@@ -1,11 +1,13 @@
 export const onTagComponentClick = (
   tagId: string,
-  currentTagId: string,
-  setCurrentTagId: (tagId: string) => void,
+  selectedTagsIds: string[],
+  setSelectedTagsIds: (tagsIds: string[]) => void,
 ) => {
-  if (tagId === currentTagId) {
-    setCurrentTagId(undefined);
+  if (selectedTagsIds.includes(tagId)) {
+    setSelectedTagsIds(
+      selectedTagsIds.filter((selectedTagId) => selectedTagId !== tagId),
+    );
   } else {
-    setCurrentTagId(tagId);
+    setSelectedTagsIds([...selectedTagsIds, tagId]);
   }
 };

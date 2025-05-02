@@ -9,6 +9,7 @@ import {
   buttonHeading2,
   createGreenColor,
   deleteRedColor,
+  mainDarkBlueColor,
   mockBrownColor,
   resumeYellowColor,
 } from "@/data/general";
@@ -36,6 +37,11 @@ const FunctionalButton: FC<FunctionalButtonProps> = ({
     case "brown":
       colorSchemeShown = mockBrownColor;
       break;
+    case "darkBlue":
+      colorSchemeShown = mainDarkBlueColor;
+      break;
+    default:
+      throw new Error("Invalid colorScheme on FunctionalButton.");
   }
 
   const buttonFontSize = size === "small" ? buttonHeading2 : buttonHeading1;

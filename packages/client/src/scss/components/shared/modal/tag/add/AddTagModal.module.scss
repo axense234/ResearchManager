@@ -3,14 +3,15 @@
 .modalContainer {
   @include flexCenter(column);
   position: absolute;
-  bottom: 2rem;
   gap: 2.5rem;
+  bottom: 2rem;
 
-  min-width: 25rem;
+  min-width: 30rem;
 
   border-radius: 0.25rem;
 
-  background-color: getColorWithOpacity("main-light-blue", 0.95);
+  background-color: getColorWithOpacity("main-light-blue", 0.9);
+  backdrop-filter: blur(2px);
 
   transition:
     transform 0.175s linear,
@@ -21,7 +22,7 @@
   transform: translateY(-100%);
 
   padding: 1rem;
-  z-index: 121;
+  z-index: 102;
 
   > svg {
     cursor: pointer;

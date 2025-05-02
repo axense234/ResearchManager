@@ -30,4 +30,5 @@ export const selectLoadingDeleteTag = (state: State) =>
 
 export const selectAddTagModal = (state: State) => state.tags.addTagModal;
 
-export const selectSelectedTagId = (state: State) => state.tags.selectedTagId;
+export const selectSelectedTagsIds = (state: State) =>
+  state.tags.selectedTagsIds;

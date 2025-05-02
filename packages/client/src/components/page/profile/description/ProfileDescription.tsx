@@ -11,8 +11,6 @@ import ProfileDescriptionDetails from "./ProfileDescriptionDetails";
 const ProfileDescription: FC = () => {
   const profile = useAppSelector(selectUserProfile);
 
-  console.log("profile full:", JSON.parse(JSON.stringify(profile)));
-
   return (
     <section className={profileDescriptionStyles.profileDescriptionContainer}>
       <ProfileDescriptionDetails profile={profile} />

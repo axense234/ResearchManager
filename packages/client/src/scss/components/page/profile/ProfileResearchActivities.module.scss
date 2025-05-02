@@ -4,15 +4,26 @@
   @include flexCenter(column);
   position: relative;
   width: 100%;
-  gap: 8rem;
+  gap: 4rem;
 
   padding: 4rem;
-  padding-top: 10rem;
-  padding-bottom: 8rem;
+  padding-bottom: 6rem;
 
   border-radius: 0.5rem;
 
   background-color: getColor("main-dark-blue");
+}
+
+.sectionContent {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 8rem;
+}
+
+.sectionSettings {
+  @include flexCenter(row);
+  justify-content: space-between;
+  width: 100%;
 }
 
 .sectionTitle {

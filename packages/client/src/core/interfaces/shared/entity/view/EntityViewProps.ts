@@ -6,4 +6,5 @@ export interface EntityViewProps {
   entityType: EntityViewEntityType;
   entityId: string;
   isLoading: boolean;
+  darkMode: boolean;
 }

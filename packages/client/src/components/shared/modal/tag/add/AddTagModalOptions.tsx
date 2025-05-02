@@ -8,20 +8,27 @@ import addTagModalOptionsStyles from "@/scss/components/shared/modal/tag/add/Add
 import { AddTagModalOptionsProps } from "@/core/interfaces";
 
 const AddTagModalOptions: FC<AddTagModalOptionsProps> = ({
-  currentDtoUpdateFunction,
-  currentTagId,
-  selectedTags,
-  totalTags,
+  selectedTagsIds,
+  sourceTagsIds,
+  totalTagsIds,
+  onAddTagButtonClickFunction,
+  onCreateTagButtonClickFunction,
 }) => {
   const isAddTagButtonDisabled =
-    currentTagId === undefined ||
-    selectedTags.includes(currentTagId) ||
-    selectedTags.length === totalTags.length;
+    selectedTagsIds.length < 1 ||
+    selectedTagsIds.some((selectedTagId) =>
+      sourceTagsIds?.includes(selectedTagId),
+    ) ||
+    selectedTagsIds.length === totalTagsIds.length;
 
-  let addTagButtonDisabledMessage = "Please select a Tag!";
-  if (selectedTags.includes(currentTagId)) {
-    addTagButtonDisabledMessage = "Please select another Tag!";
-  } else if (selectedTags.length === totalTags.length) {
+  let addTagButtonDisabledMessage = "Please select some Tag!";
+  if (
+    selectedTagsIds.some((selectedTagId) =>
+      sourceTagsIds?.includes(selectedTagId),
+    )
+  ) {
+    addTagButtonDisabledMessage = "Please select other Tags!";
+  } else if (selectedTagsIds.length === totalTagsIds.length) {
     addTagButtonDisabledMessage = "No Tags to select from!";
   }
 
@@ -32,17 +39,18 @@ const AddTagModalOptions: FC<AddTagModalOptionsProps> = ({
         disabled={isAddTagButtonDisabled}
         onHoverContent="Add Selected Tag"
         onHoverContentDisabled={addTagButtonDisabledMessage}
-        onClickFunction={currentDtoUpdateFunction}
+        onClickFunction={onAddTagButtonClickFunction}
         size="small"
-        colorScheme="yellow"
+        colorScheme="green"
       />
       <FunctionalButton
         content="Create Tag"
         disabled={false}
         onHoverContent="Create Tag"
         onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-        onClickFunction={() => {}}
+        onClickFunction={onCreateTagButtonClickFunction}
         size="small"
+        colorScheme="darkBlue"
       />
     </div>
   );

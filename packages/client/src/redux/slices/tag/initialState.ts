@@ -22,8 +22,9 @@ export const tagsSliceInitialState = {
   addTagModal: {
     isClosed: true,
     entityType: "researchActivity",
+    method: "create",
   },
-  selectedTagId: undefined,
+  selectedTagsIds: [],
 } as TagsSliceInitialStateType;
 
 export const tagsSliceState = tagsAdapter.getInitialState(

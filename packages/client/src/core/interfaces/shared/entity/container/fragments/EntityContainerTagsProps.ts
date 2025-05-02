@@ -2,7 +2,9 @@
 import { EntityContainerType } from "@/core/types";
 
 export type EntityContainerTagsProps = {
-  tagsIds: string[];
+  sourceTagsIds: string[];
   containerType: EntityContainerType;
-  dtoUpdateFunction: () => void;
+
+  onRemoveTagFunction: () => void;
+  onAddTagFunction: () => void;
 };

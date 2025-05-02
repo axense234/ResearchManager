@@ -21,7 +21,8 @@ export const {
   updateLoadingTagState,
   setTags,
   setAddTagModal,
-  setSelectedTagId,
+  setSelectedTagsIds,
+  closeAddTagModal,
 } = tagsSlice.actions;
 
 export default tagsSlice.reducer;

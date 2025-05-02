@@ -11,6 +11,7 @@ const EntityDetails: FC<EntityDetailsProps> = ({
   specialEntity,
   specialEntityType,
   viewType,
+  darkMode,
 }) => {
   return (
     <section className={entityDetailsStyles.entityDetailsContainer}>
@@ -18,8 +19,9 @@ const EntityDetails: FC<EntityDetailsProps> = ({
         specialEntity={specialEntity}
         specialEntityType={specialEntityType}
         viewType={viewType}
+        darkMode={darkMode}
       />
-      <EntityGraphs />
+      <EntityGraphs specialEntity={specialEntity} darkMode={darkMode} />
     </section>
   );
 };

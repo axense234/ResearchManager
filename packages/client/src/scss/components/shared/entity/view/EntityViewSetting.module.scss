@@ -1,10 +1,8 @@
 @use "../../../../abstracts" as *;
 
-.toggleContaienr {
+.settingContainer {
   @include flexCenter(row);
-  position: absolute;
-  top: 4rem;
-  right: 4rem;
+  align-self: flex-end;
 
   padding: 0.5rem 1rem;
 

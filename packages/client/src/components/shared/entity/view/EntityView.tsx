@@ -10,15 +10,15 @@ import EntityViewNoEntities from "./EntityViewNoEntities";
 // SCSS
 import entityViewStyles from "@/scss/components/shared/entity/view/EntityView.module.scss";
 // Redux and Hooks
-import { useAppDispatch, useSelectEntity } from "@/hooks";
+import { useSelectEntity } from "@/hooks";
 
 const EntityView: FC<EntityViewProps> = ({
   viewType,
   entityType,
   entityId,
   isLoading,
+  darkMode,
 }) => {
-  const dispatch = useAppDispatch();
   const entity = useSelectEntity(viewType, entityType, entityId) as
     | ResearchActivityRedux
     | ResearchPhaseRedux;
@@ -37,11 +37,13 @@ const EntityView: FC<EntityViewProps> = ({
         containerType={viewType}
         entityType={entityType}
         entityId={entityId}
+        darkMode={viewType === "example" ? true : darkMode}
       />
       <EntityDetails
         specialEntity={entity}
         specialEntityType={entityType}
         viewType={viewType}
+        darkMode={viewType === "example" ? true : darkMode}
       />
     </section>
   );

@@ -12,11 +12,15 @@
     border-radius: 0.5rem;
     width: 50%;
     background-color: getColor("main-black-100");
+
+    transition: background-color 0.2s ease-in;
   }
 
   > h6 {
     @include heading("h6", "laptop", "black");
     font-weight: 550;
     letter-spacing: 1px;
+
+    transition: color 0.2s ease-in;
   }
 }

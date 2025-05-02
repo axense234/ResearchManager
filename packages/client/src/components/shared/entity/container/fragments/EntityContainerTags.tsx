@@ -4,19 +4,19 @@ import { EntityContainerTagsProps } from "@/core/interfaces";
 // SCSS
 import entityContainerTagsStyles from "@/scss/components/shared/entity/container/fragments/EntityContainerTags.module.scss";
 // Components
-import TagComponent from "../../tag/TagComponent";
+import TagsOptions from "../../tag/options/TagsOptions";
+import TagsList from "../../tag/TagsList";
 // Data
 import {
-  createGreenColor,
   DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN,
   MAX_ENTITY_CONTAINER_TAGS_SHOWN,
 } from "@/data/general";
-import TagsOptions from "../../tag/options/TagsOptions";
 
 const EntityContainerTags: FC<EntityContainerTagsProps> = ({
-  tagsIds,
+  sourceTagsIds,
   containerType,
-  dtoUpdateFunction,
+  onAddTagFunction,
+  onRemoveTagFunction,
 }) => {
   const [showAllTags, setShowAllTags] = useState<boolean>(false);
 
@@ -26,50 +26,21 @@ const EntityContainerTags: FC<EntityContainerTagsProps> = ({
 
   return (
     <div className={entityContainerTagsStyles.entityContainerTagsContainer}>
-      <ul className={entityContainerTagsStyles.entityContainerTagsList}>
-        {tagsIds?.length > 0 ? (
-          tagsIds?.slice(0, tagsShownCount).map((id) => {
-            return (
-              <TagComponent tagId={id} key={id} containerType={containerType} />
-            );
-          })
-        ) : (
-          <p>Untagged</p>
-        )}
-        <div className={entityContainerTagsStyles.entityContainerTagsOptions}>
-          {tagsIds?.length > DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN ? (
-            <button
-              className={
-                entityContainerTagsStyles.entityContainerTagsShowButton
-              }
-              onClick={() => setShowAllTags(!showAllTags)}
-              title={showAllTags ? "Show Less" : "Show More"}
-              aria-label={showAllTags ? "Show Less" : "Show More"}
-            >
-              {showAllTags ? "Show Less" : "Show More"}
-            </button>
-          ) : null}
-          {containerType !== "example" ? (
-            <button
-              className={
-                entityContainerTagsStyles.entityContainerTagsShowButton
-              }
-              style={{ color: createGreenColor }}
-              onClick={() => {}}
-              title="Add Tag"
-              aria-label="Add Tag"
-            >
-              Add Tag
-            </button>
-          ) : null}
-        </div>
-        <TagsOptions
-          tags={tagsIds}
-          onRemoveTagFunction={dtoUpdateFunction}
-          showAllTags={showAllTags}
-          setShowAllTags={setShowAllTags}
-        />
-      </ul>
+      <TagsList
+        sourceTagsIds={sourceTagsIds}
+        numberOfTagsShown={tagsShownCount}
+        noTagsAvailableMessage="No Tags."
+        containerType={containerType}
+      />
+      <TagsOptions
+        sourceTagsIds={sourceTagsIds}
+        showAllTags={showAllTags}
+        setShowAllTags={setShowAllTags}
+        containerType={containerType}
+        location="container"
+        onRemoveTagFunction={onRemoveTagFunction}
+        onAddTagFunction={onAddTagFunction}
+      />
     </div>
   );
 };

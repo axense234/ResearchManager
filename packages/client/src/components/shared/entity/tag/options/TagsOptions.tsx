@@ -1,71 +1,79 @@
 // React
-import { FC, useState } from "react";
+import { FC } from "react";
 // Interfaces
 import { TagsOptionsProps } from "@/core/interfaces";
 // SCSS
 import tagsOptionsStyles from "@/scss/components/shared/entity/tag/options/TagsOptions.module.scss";
 // Components
 import AddTagModal from "@/components/shared/modal/tag/add/AddTagModal";
+import TagsOptionsButton from "./TagsOptionsButton";
 // Data
 import {
   DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN,
+  DEFAULT_ENTITY_OVERLAY_TAGS_SHOWN,
   createGreenColor,
   deleteRedColor,
+  mainPastelRedColor,
 } from "@/data/general";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   selectAddTagModal,
-  selectSelectedTagId,
+  selectSelectedTagsIds,
   setAddTagModal,
 } from "@/redux/slices/tag";
 
 const TagsOptions: FC<TagsOptionsProps> = ({
-  onRemoveTagFunction,
-  tags,
+  sourceTagsIds,
   showAllTags,
   setShowAllTags,
+  containerType,
+  location,
+  onRemoveTagFunction,
+  onAddTagFunction,
 }) => {
   const dispatch = useAppDispatch();
 
   const addTagModal = useAppSelector(selectAddTagModal);
-  const selectedTagId = useAppSelector(selectSelectedTagId);
+  const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
+
+  const DEFAULT_ENTITY_TAGS_SHOWN =
+    location === "overlay"
+      ? DEFAULT_ENTITY_OVERLAY_TAGS_SHOWN
+      : DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN;
 
   return (
-    <div className={tagsOptionsStyles.tagsOptionsContainer}>
-      {tags?.length > DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN ? (
-        <button
-          className={tagsOptionsStyles.tagOptionButton}
-          onClick={() => setShowAllTags(!showAllTags)}
-          title={showAllTags ? "Show Less" : "Show More"}
-          aria-label={showAllTags ? "Show Less" : "Show More"}
-        >
-          {showAllTags ? "Show Less" : "Show More"}
-        </button>
-      ) : null}
-      <AddTagModal />
-      <button
-        className={tagsOptionsStyles.tagOptionButton}
-        style={{ color: createGreenColor }}
-        onClick={() =>
-          dispatch(setAddTagModal({ ...addTagModal, isClosed: false }))
+    <div
+      className={tagsOptionsStyles.tagsOptionsContainer}
+      style={{ alignSelf: location === "overlay" ? "flex-start" : "center" }}
+    >
+      <AddTagModal
+        location={location}
+        onAddTagFunction={onAddTagFunction}
+        sourceTagsIds={sourceTagsIds}
+      />
+      <TagsOptionsButton
+        showButton={sourceTagsIds?.length > DEFAULT_ENTITY_TAGS_SHOWN}
+        onButtonClickFunction={() => setShowAllTags(!showAllTags)}
+        buttonColor={mainPastelRedColor}
+        buttonLabel={showAllTags ? "Show Less" : "Show More"}
+      />
+      <TagsOptionsButton
+        showButton={containerType !== "example"}
+        onButtonClickFunction={() =>
+          dispatch(
+            setAddTagModal({ ...addTagModal, location, isClosed: false }),
+          )
         }
-        title="Add Tag"
-        aria-label="Add Tag"
-      >
-        Add Tag
-      </button>
-      {selectedTagId !== undefined && addTagModal.isClosed && (
-        <button
-          className={tagsOptionsStyles.tagOptionButton}
-          title="Remove Tag"
-          aria-label="Remove Tag"
-          style={{ color: deleteRedColor }}
-          onClick={onRemoveTagFunction}
-        >
-          Remove Tag
-        </button>
-      )}
+        buttonColor={createGreenColor}
+        buttonLabel="Add Tag"
+      />
+      <TagsOptionsButton
+        showButton={selectedTagsIds.length > 0 && addTagModal.isClosed}
+        onButtonClickFunction={onRemoveTagFunction}
+        buttonColor={deleteRedColor}
+        buttonLabel="Remove Tag"
+      />
     </div>
   );
 };

@@ -8,10 +8,14 @@ import {
 // Helpers
 import { transformAndSortSpecialEntityExamplesByRP } from "@/helpers";
 // Mock Data
-import { createResearchActivityMockData } from "@researchmanager/shared/mock";
+import {
+  createResearchActivityMockData,
+  updateResearchActivityMockData,
+} from "@researchmanager/shared/mock";
 
 export const researchActivitiesSliceInitialState = {
   createResearchActivityDto: { ...createResearchActivityMockData[0], tags: [] },
+  updateResearchActivityDto: { ...updateResearchActivityMockData[0], tags: [] },
   researchActivitiesExamples:
     transformAndSortSpecialEntityExamplesByRP("researchActivity"),
   loadingCreateResearchActivity: "IDLE",
@@ -21,7 +25,6 @@ export const researchActivitiesSliceInitialState = {
   loadingGetUserResearchActivity: "IDLE",
   currentResearchActivityExampleIndex: 1,
   currentResearchActivityIndex: 1,
-  showProfileResearchActivitiesExamples: false,
   createDefaultResearchPhase: true,
 } as ResearchActivitiesSliceInitialStateType;
 

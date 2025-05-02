@@ -23,11 +23,15 @@ export const updateResearchActivityFulfilled: ExtraReducerFuncType<
   const researchActivity = action.payload as ResearchActivity;
   const axiosError = action.payload as AxiosError;
 
+  console.log(JSON.parse(JSON.stringify(researchActivity)));
+
   if (!axiosError?.isAxiosError) {
     const researchActivityRedux = transformEntityIntoEntityRedux(
       researchActivity,
       "researchActivity",
     ) as ResearchActivityRedux;
+
+    console.log(JSON.parse(JSON.stringify(researchActivityRedux)));
 
     researchActivitiesAdapter.updateOne(state, {
       changes: { ...researchActivityRedux },

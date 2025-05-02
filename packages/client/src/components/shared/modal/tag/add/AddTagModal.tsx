@@ -1,5 +1,5 @@
 // React
-import { FC, useRef, useState } from "react";
+import { FC, useRef } from "react";
 // Components
 import AddTagModalOptions from "./AddTagModalOptions";
 import CloseInterfaceButton from "../../../general/CloseInterfaceButton";
@@ -11,74 +11,59 @@ import { useAppDispatch, useAppSelector, useModalTransition } from "@/hooks";
 // Redux
 import {
   selectAddTagModal,
-  selectSelectedTagId,
+  selectSelectedTagsIds,
   selectTagsIds,
   setAddTagModal,
-  setSelectedTagId,
+  setSelectedTagsIds,
 } from "@/redux/slices/tag";
-import {
-  selectCreateResearchActivityDto,
-  updateCreateResearchActivityDto,
-} from "@/redux/slices/research/activity";
+// Interface
+import { AddTagModalProps } from "@/core/interfaces";
 
-const AddTagModal: FC = () => {
+const AddTagModal: FC<AddTagModalProps> = ({
+  location,
+  onAddTagFunction,
+  sourceTagsIds,
+}) => {
   const dispatch = useAppDispatch();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
   const addTagModal = useAppSelector(selectAddTagModal);
-  const selectedTagId = useAppSelector(selectSelectedTagId);
 
-  const tagsIds = useAppSelector(selectTagsIds);
+  const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
+  const totalTagsIds = useAppSelector(selectTagsIds);
 
-  const createResearchActivityDto = useAppSelector(
-    selectCreateResearchActivityDto,
+  const tagsToBeSelected = totalTagsIds?.filter(
+    (entityTag) => !sourceTagsIds?.includes(entityTag),
   );
-  let currentDto = createResearchActivityDto;
-  let currentDtoUpdateFunction = updateCreateResearchActivityDto;
 
-  switch (addTagModal.entityType) {
-    case "researchActivity":
-      currentDto = createResearchActivityDto;
-      currentDtoUpdateFunction = updateCreateResearchActivityDto;
-      break;
-    default:
-      throw new Error("Invalid addTagModal entityType.");
-  }
+  const onCloseInterfaceFunction = () => {
+    dispatch(setAddTagModal({ ...addTagModal, location, isClosed: true }));
+    dispatch(setSelectedTagsIds([]));
+  };
 
-  const shownTags = tagsIds.filter((tag) => !currentDto.tags.includes(tag));
-
-  useModalTransition(!addTagModal.isClosed, modalRef);
+  useModalTransition(
+    !addTagModal.isClosed && addTagModal.location === location,
+    modalRef,
+  );
 
   return (
     <div className={addTagModalStyles.modalContainer} ref={modalRef}>
       <CloseInterfaceButton
-        closeInterfaceFunction={() => {
-          dispatch(setAddTagModal({ ...addTagModal, isClosed: true }));
-          dispatch(setSelectedTagId(undefined));
-        }}
+        closeInterfaceFunction={onCloseInterfaceFunction}
         color="mainBlack"
         title="Close Modal"
         size="medium"
       />
       <AddTagModalList
-        shownTags={shownTags}
-        currentTagId={selectedTagId}
-        setCurrentTagId={(tagId) => dispatch(setSelectedTagId(tagId))}
+        tagsToBeSelected={tagsToBeSelected}
+        selectedTagsIds={selectedTagsIds}
       />
       <AddTagModalOptions
-        currentTagId={selectedTagId}
-        selectedTags={currentDto.tags}
-        totalTags={tagsIds}
-        currentDtoUpdateFunction={() => {
-          dispatch(
-            currentDtoUpdateFunction({
-              key: "tags",
-              value: [...currentDto.tags, selectedTagId],
-            }),
-          );
-          dispatch(setSelectedTagId(undefined));
-        }}
+        selectedTagsIds={selectedTagsIds}
+        sourceTagsIds={sourceTagsIds}
+        totalTagsIds={totalTagsIds}
+        onAddTagButtonClickFunction={onAddTagFunction}
       />
     </div>
   );

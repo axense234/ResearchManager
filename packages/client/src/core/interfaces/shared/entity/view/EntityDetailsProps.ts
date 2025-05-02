@@ -9,4 +9,5 @@ export interface EntityDetailsProps {
   specialEntity: ResearchActivityRedux | ResearchPhaseRedux;
   specialEntityType: "researchActivity" | "researchPhase";
   viewType: EntityViewType;
+  darkMode: boolean;
 }

@@ -14,6 +14,7 @@ const EntityImages: FC<EntityImagesProps> = ({
   specialEntity,
   specialEntityType,
   viewType,
+  darkMode,
 }) => {
   const [showImagesOverlay, setShowImagesOverlay] = useState<boolean>(false);
 
@@ -26,7 +27,10 @@ const EntityImages: FC<EntityImagesProps> = ({
   const entityName = specialEntity?.name;
 
   return (
-    <article className={entityImagesStyles.entityImagesContainer}>
+    <article
+      className={entityImagesStyles.entityImagesContainer}
+      style={{ backgroundColor: specialEntity.backgroundColorOrImageSrc }}
+    >
       <EntityImagesOverlay
         entityImages={entityImages}
         entityName={entityName}
@@ -34,10 +38,11 @@ const EntityImages: FC<EntityImagesProps> = ({
         closeOverlayFunction={() => setShowImagesOverlay(false)}
         specialEntityType={specialEntityType}
       />
-      <EntityImagesTitle title="Images" />
+      <EntityImagesTitle title="Images" darkMode={darkMode} />
       <EntityImage
         imageSrc={entityImages[0]?.src}
         onClickFunction={() => setShowImagesOverlay(true)}
+        darkMode={darkMode}
       />
     </article>
   );

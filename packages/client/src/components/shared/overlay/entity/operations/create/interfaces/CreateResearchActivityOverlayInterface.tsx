@@ -20,7 +20,13 @@ import {
   updateCreateResearchActivityDto,
 } from "@/redux/slices/research/activity";
 import { createResearchActivity } from "@/redux/slices/research/activity/thunks";
-import { selectSelectedTagId, setSelectedTagId } from "@/redux/slices/tag";
+import {
+  selectAddTagModal,
+  selectSelectedTagsIds,
+  setAddTagModal,
+  setSelectedTagsIds,
+} from "@/redux/slices/tag";
+import { onEditTagFunction } from "@/helpers";
 
 const CreateResearchActivityOverlayInterface: FC = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +36,9 @@ const CreateResearchActivityOverlayInterface: FC = () => {
 
   const entityOverlay = useAppSelector(selectEntityOverlay);
 
-  const selectedTagId = useAppSelector(selectSelectedTagId);
+  const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
+
+  const addTagModal = useAppSelector(selectAddTagModal);
 
   const createDefaultResearchPhase = useAppSelector(
     selectCreateDefaultResearchPhase,
@@ -52,6 +60,20 @@ const CreateResearchActivityOverlayInterface: FC = () => {
     loadingUpdateResearchActivity === "PENDING";
 
   useOverlayTransition(entityOverlay.showOverlay, overlayRef);
+
+  const onEditTagFunctionUsed = (type: "remove" | "add") => {
+    onEditTagFunction(
+      type,
+      createResearchActivityDto.tags,
+      selectedTagsIds,
+      (editedTags: string[]) =>
+        updateCreateResearchActivityDto({
+          key: "tags",
+          value: editedTags,
+        }),
+      dispatch,
+    );
+  };
 
   return (
     <div
@@ -76,22 +98,9 @@ const CreateResearchActivityOverlayInterface: FC = () => {
         />
         <hr />
         <EntityOverlayTags
-          tags={createResearchActivityDto.tags}
-          dtoUpdateFunction={() => {
-            dispatch(
-              updateCreateResearchActivityDto({
-                key: "tags",
-                value: [
-                  ...createResearchActivityDto.tags.filter(
-                    (tag) => tag !== selectedTagId,
-                  ),
-                ],
-              }),
-            );
-            dispatch(setSelectedTagId(undefined));
-          }}
-          entityType="researchActivity"
-          method="create"
+          sourceTagsIds={createResearchActivityDto.tags}
+          onAddTagFunction={() => onEditTagFunctionUsed("add")}
+          onRemoveTagFunction={() => onEditTagFunctionUsed("remove")}
         />
         <hr />
         <FunctionalButton

@@ -10,7 +10,7 @@ export type TagsSliceInitialStateType = {
   tagsExamples: TagRedux[];
 
   addTagModal: AddTagModalType;
-  selectedTagId: string;
+  selectedTagsIds: string[];
 
   loadingCreateTag: LoadingStateType;
   loadingDeleteTag: LoadingStateType;

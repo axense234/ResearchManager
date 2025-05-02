@@ -14,11 +14,18 @@ export const updateResearchActivity = createAsyncThunk<
 >(
   "researchActivities/updateResearchActivity",
   async ({ dto, researchActivityId }) => {
+    console.log(JSON.parse(JSON.stringify(dto)));
     try {
       const res = (
         await axiosInstance.patch(
           `/researchActivities/${researchActivityId}/update`,
           dto,
+          {
+            params: {
+              includeValues: "researchPhases, tags",
+              chosenOptionType: "include",
+            },
+          },
         )
       ).data as ReturnObjectBuilderReturnObject;
 

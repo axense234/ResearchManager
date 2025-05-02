@@ -13,10 +13,8 @@ const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
   return (
     <div
       className={checkboxFormControlStyles.checkboxFormControlContainer}
-      title={entityProperty ? "Stop displaying Examples." : "Show Examples"}
-      aria-label={
-        entityProperty ? "Stop displaying Examples." : "Show Examples"
-      }
+      title={labelContent}
+      aria-label={labelContent}
     >
       <label htmlFor={id}>{labelContent}</label>
       <input

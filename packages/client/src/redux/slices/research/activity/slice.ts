@@ -23,7 +23,6 @@ export const {
   handleResearchActivityExampleCarouselStepDirection,
   setResearchActivities,
   setResearchActivityExamples,
-  setShowProfileResearchActivitiesExamples,
   setCreateDefaultResearchPhase,
 } = researchActivitiesSlice.actions;
 

@@ -2,6 +2,7 @@
 
 .entityContainerOptionsContainer {
   @include flexCenter(row);
+  justify-content: flex-start;
   width: 100%;
-  gap: 3rem;
+  gap: 2rem;
 }

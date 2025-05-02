@@ -85,28 +85,34 @@ export class DataObjectBuilderService {
       }
     }
 
+    const methodBasedOnActionType = actionType === 'CREATE' ? 'connect' : 'set';
+
     allowedConnectValues.forEach((connectValue) => {
       if (dto[connectValue.entityType]) {
         switch (connectValue.rel) {
           case 'OTO':
             dataObject[connectValue.entityType] = {
               ...dataObject[connectValue.entityType],
-              connect: { id: dto[connectValue.entityType] },
+              [methodBasedOnActionType]: { id: dto[connectValue.entityType] },
             };
             break;
           case 'MTM':
             dataObject[connectValue.entityType] = {
-              connect: dto[connectValue.entityType].map((id: string) => {
-                return { id };
-              }),
+              [methodBasedOnActionType]: dto[connectValue.entityType].map(
+                (id: string) => {
+                  return { id };
+                },
+              ),
             };
             break;
           case 'OTM':
             dataObject[connectValue.entityType] = {
               ...dataObject[connectValue.entityType],
-              connect: dto[connectValue.entityType].map((id: string) => {
-                return { id };
-              }),
+              [methodBasedOnActionType]: dto[connectValue.entityType].map(
+                (id: string) => {
+                  return { id };
+                },
+              ),
             };
             break;
           default:

@@ -8,31 +8,38 @@ import addTagModalListStyles from "@/scss/components/shared/modal/tag/add/AddTag
 import { AddTagModalListProps } from "@/core/interfaces";
 // Helpers
 import { onTagComponentClick } from "@/helpers";
+// Redux
+import { useAppDispatch } from "@/hooks";
+import { setSelectedTagsIds } from "@/redux/slices/tag";
 
 const AddTagModalList: FC<AddTagModalListProps> = ({
-  shownTags,
-  currentTagId,
-  setCurrentTagId,
+  tagsToBeSelected,
+  selectedTagsIds,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const onTagComponentClickFunction = (...args: any) => {
+    dispatch(setSelectedTagsIds(...args));
+  };
+
   return (
     <ul className={addTagModalListStyles.modalTagsList}>
-      {shownTags?.length > 0 ? (
-        shownTags.map((tagId) => {
+      {tagsToBeSelected?.length > 0 ? (
+        tagsToBeSelected.map((tagId) => {
           return (
-            <li
-              key={tagId}
-              onClick={() =>
-                onTagComponentClick(tagId, currentTagId, setCurrentTagId)
-              }
-            >
+            <li key={tagId}>
               <TagComponent
                 tagId={tagId}
                 key={tagId}
                 containerType="entity"
                 onClickFunction={() =>
-                  onTagComponentClick(tagId, currentTagId, setCurrentTagId)
+                  onTagComponentClick(
+                    tagId,
+                    selectedTagsIds,
+                    onTagComponentClickFunction,
+                  )
                 }
-                selectedTagToAdd={tagId === currentTagId}
+                isTagSelected={selectedTagsIds.includes(tagId)}
               />
             </li>
           );
