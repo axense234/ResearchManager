@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC, useState } from "react";
+// Interfaces
 import { EntityImagesOverlayContentProps } from "@/core/interfaces";
 // Components
 import ResearchActivityImagesOverlayContent from "./ResearchActivityImagesOverlayContent";

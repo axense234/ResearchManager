@@ -14,7 +14,6 @@ export const updateResearchActivity = createAsyncThunk<
 >(
   "researchActivities/updateResearchActivity",
   async ({ dto, researchActivityId }) => {
-    console.log(JSON.parse(JSON.stringify(dto)));
     try {
       const res = (
         await axiosInstance.patch(

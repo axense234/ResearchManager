@@ -29,6 +29,14 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   entityOverlay: {
     showOverlay: false,
     entityType: "researchActivity",
+    method: "create",
+  },
+
+  entityImagesOverlay: {
+    showOverlay: false,
+    entityType: "researchActivity",
+    entityName: "Default Entity Name",
+    entityImages: [],
   },
 
   // Modals

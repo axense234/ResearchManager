@@ -1,12 +1,24 @@
 // Types
-import { SignInDto, SignUpDto } from "@researchmanager/shared/types";
+import {
+  CreateResearchActivityDto,
+  SignInDto,
+  SignUpDto,
+} from "@researchmanager/shared/types";
 import { UserRedux } from "@/core/types";
+// Mock Data
+import { createResearchActivityMockData } from "@researchmanager/shared/mock";
 
 export const signInMockDataRedux: SignInDto = { email: "", password: "" };
 export const signUpMockDataRedux: SignUpDto = {
   username: "",
   email: "",
   password: "",
+};
+
+export const defaultCreateResearchActivityDto: CreateResearchActivityDto = {
+  ...createResearchActivityMockData[0],
+  tags: [],
+  researchPhases: [],
 };
 
 export const userProfileMockDataRedux: UserRedux = {

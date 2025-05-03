@@ -13,7 +13,7 @@ import { profileResearchPhasesData } from "@/data/general/profile";
 import {
   useAppDispatch,
   useAppSelector,
-  useGetEntityIdByCurrentIndex,
+  useGetCurrentEntityIdAndIndex,
 } from "@/hooks";
 import {
   selectLoadingGetProfileJWT,
@@ -36,7 +36,7 @@ const ProfileResearchPhases: FC = () => {
 
   const usedViewType = showExamples ? "example" : "entity";
 
-  const entityId = useGetEntityIdByCurrentIndex("researchPhase", usedViewType);
+  const entityId = useGetCurrentEntityIdAndIndex("researchPhase", usedViewType);
 
   return (
     <section className={profileResearchPhasesStyles.sectionContainer}>

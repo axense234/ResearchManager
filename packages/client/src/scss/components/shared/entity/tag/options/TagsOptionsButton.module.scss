@@ -12,6 +12,8 @@
   transition: transform 0.15s ease-in;
   width: max-content;
 
+  cursor: pointer;
+
   &:hover {
     transform: scale(1.05);
   }

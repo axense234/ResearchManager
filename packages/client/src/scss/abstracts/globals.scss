@@ -60,3 +60,36 @@ textarea:focus-visible {
 select:focus-visible {
   outline: 2.5px solid #ff0000;
 }
+
+.prev {
+  transform: translateX(-100%);
+  filter: blur(0px);
+  opacity: 0;
+
+  transition:
+    transform 0.35s ease-in-out,
+    opacity 0.4s ease-in,
+    filter 0.35s ease-in-out;
+}
+
+.current {
+  transform: translateX(0%);
+  filter: blur(0px);
+  opacity: 1;
+
+  transition:
+    transform 0.35s ease-in-out,
+    opacity 0.4s ease-in,
+    filter 0.35s ease-in-out;
+}
+
+.next {
+  transform: translateX(100%);
+  filter: blur(0px);
+  opacity: 0;
+
+  transition:
+    transform 0.35s ease-in-out,
+    opacity 0.4s ease-in,
+    filter 0.35s ease-in-out;
+}

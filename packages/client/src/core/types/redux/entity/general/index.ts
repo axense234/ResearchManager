@@ -4,3 +4,5 @@ export * from "./ModalType";
 export * from "./UserRedux";
 export * from "./OverlayType";
 export * from "./AddTagModalType";
+export * from "./EntityPositionType";
+export * from "./EntityImagesOverlayType";

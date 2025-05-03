@@ -10,16 +10,16 @@ import profileResearchActivitiesStyles from "@/scss/components/page/profile/Prof
 // Data
 import { profileResearchActivitiesData } from "@/data/general/profile";
 // Redux and Hooks
-import {
-  useAppDispatch,
-  useAppSelector,
-  useGetEntityIdByCurrentIndex,
-} from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
 } from "@/redux/slices/general";
 import { setEntityOverlay } from "@/redux/slices/general/slice";
+import {
+  selectResearchActivitiesExamples,
+  selectResearchActivitiesIds,
+} from "@/redux/slices/research/activity";
 
 const ProfileResearchActivities: FC = () => {
   const dispatch = useAppDispatch();
@@ -37,10 +37,15 @@ const ProfileResearchActivities: FC = () => {
 
   const usedViewType = showExamples ? "example" : "entity";
 
-  const entityId = useGetEntityIdByCurrentIndex(
-    "researchActivity",
-    usedViewType,
-  );
+  const researchActivitiesIds = useAppSelector(selectResearchActivitiesIds);
+  const researchActivitiesExamplesIds = useAppSelector(
+    selectResearchActivitiesExamples,
+  ).map((example) => example.id);
+
+  const usedIds =
+    usedViewType === "entity"
+      ? researchActivitiesIds
+      : researchActivitiesExamplesIds;
 
   return (
     <section className={profileResearchActivitiesStyles.sectionContainer}>
@@ -70,6 +75,7 @@ const ProfileResearchActivities: FC = () => {
               dispatch(
                 setEntityOverlay({
                   entityType: "researchActivity",
+                  method: "create",
                   showOverlay: true,
                 }),
               )
@@ -79,9 +85,10 @@ const ProfileResearchActivities: FC = () => {
         <EntityView
           entityType="researchActivity"
           viewType={usedViewType}
-          entityId={entityId}
           isLoading={entityViewIsLoading}
           darkMode={darkMode}
+          entitiesIds={usedIds}
+          setShowEntityExamples={(value: boolean) => setShowExamples(value)}
         />
       </div>
     </section>

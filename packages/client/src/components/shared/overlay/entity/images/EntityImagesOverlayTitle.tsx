@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { EntityImagesOverlayTitleProps } from "@/core/interfaces";
 // SCSS
 import entityImagesOverlayTitleStyles from "@/scss/components/shared/overlay/entity/images/EntityImagesOverlayTitle.module.scss";

@@ -10,6 +10,7 @@ const EntityOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
   dto,
   entityType,
   method,
+  dtoUpdateFunction,
 }) => {
   switch (entityType) {
     case "researchActivity":
@@ -18,6 +19,7 @@ const EntityOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
           dto={dto}
           entityType="researchActivity"
           method={method}
+          dtoUpdateFunction={dtoUpdateFunction}
         />
       );
     case "researchPhase":

@@ -12,7 +12,7 @@ const ProfilePage: FC = () => {
     <section className={profilePageStyles.profilePageContainer}>
       <ProfileDescription />
       <ProfileResearchActivities />
-      <ProfileResearchPhases />
+      {/* <ProfileResearchPhases /> */}
     </section>
   );
 };

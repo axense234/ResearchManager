@@ -10,6 +10,8 @@
   border-radius: 0.5rem;
   background-color: getColor("main-white");
 
+  transition-delay: 200ms;
+
   > p {
     @include paragraph("laptop", "black");
   }

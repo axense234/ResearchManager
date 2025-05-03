@@ -4,4 +4,6 @@ import { EntityType } from "@researchmanager/shared/types";
 export type OverlayType = {
   showOverlay: boolean;
   entityType: EntityType;
+  method: "create" | "update";
+  entityId?: string;
 };

@@ -1,17 +1,17 @@
-// Interfaces
+// React
 import { FC } from "react";
 // Components
-import CreateResearchActivityOverlayInterface from "./interfaces/CreateResearchActivityOverlayInterface";
+import UpsertResearchActivityOverlayInterface from "./interfaces/UpsertResearchActivityOverlayInterface";
 // Redux
 import { useAppSelector } from "@/hooks";
 import { selectEntityOverlay } from "@/redux/slices/general";
 
-const CreateEntityOverlay: FC = () => {
+const UpsertEntityOverlay: FC = () => {
   const entityOverlay = useAppSelector(selectEntityOverlay);
 
   switch (entityOverlay.entityType) {
     case "researchActivity":
-      return <CreateResearchActivityOverlayInterface />;
+      return <UpsertResearchActivityOverlayInterface />;
     case "researchPhase":
       return null;
     case "researchLog":
@@ -21,4 +21,4 @@ const CreateEntityOverlay: FC = () => {
   }
 };
 
-export default CreateEntityOverlay;
+export default UpsertEntityOverlay;

@@ -5,4 +5,4 @@ export * from "./useNavButtonTransition";
 export * from "./useNavigateToPathname";
 export * from "./useOverlayTransition";
 export * from "./useRedirect";
-export * from "./useGetEntityIdByCurrentIndex";
+export * from "./useGetCurrentEntityIdAndIndex";

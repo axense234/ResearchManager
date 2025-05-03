@@ -7,11 +7,10 @@ import entityViewNoEntitiesStyles from "@/scss/components/shared/entity/view/Ent
 import FunctionalButton from "../../general/FunctionalButton";
 // Redux
 import { useAppDispatch } from "@/hooks";
-import { setShowProfileResearchActivitiesExamples } from "@/redux/slices/research/activity";
-import { setShowProfileResearchPhasesExamples } from "@/redux/slices/research/phase";
 
 const EntityViewNoEntities: FC<EntityViewNoEntitiesProps> = ({
   entityType,
+  setShowEntityExamples,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -25,11 +24,6 @@ const EntityViewNoEntities: FC<EntityViewNoEntitiesProps> = ({
       ? "Create Research Activity"
       : "Create Research Phase";
 
-  const setShownExamplesFunc =
-    entityType === "researchActivity"
-      ? setShowProfileResearchActivitiesExamples
-      : setShowProfileResearchPhasesExamples;
-
   return (
     <div className={entityViewNoEntitiesStyles.viewContainer}>
       <h6>{messageShown}</h6>
@@ -39,7 +33,7 @@ const EntityViewNoEntities: FC<EntityViewNoEntitiesProps> = ({
           disabled={false}
           onHoverContent="Show Examples"
           onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-          onClickFunction={() => dispatch(setShownExamplesFunc(true))}
+          onClickFunction={() => setShowEntityExamples(true)}
           colorScheme="brown"
         />
         <FunctionalButton

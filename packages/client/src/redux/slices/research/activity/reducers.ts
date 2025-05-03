@@ -6,7 +6,11 @@ import {
   ResearchActivityRedux,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ActionType } from "@researchmanager/shared/types";
+import {
+  ActionType,
+  CreateResearchActivityDto,
+  UpdateResearchActivityDto,
+} from "@researchmanager/shared/types";
 // Helpers
 import { handleCarouselStepDirection } from "@/helpers";
 // Adapter
@@ -46,6 +50,12 @@ export const researchActivitiesSliceReducers = {
       state.ids.length,
     );
   },
+  setCurrentResearchActivityIndex(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<number>,
+  ) {
+    state.currentResearchActivityIndex = action.payload;
+  },
   updateLoadingResearchActivityState(
     state: ResearchActivitiesSliceStateType,
     action: PayloadAction<{ actionType: ActionType; value: LoadingStateType }>,
@@ -84,6 +94,27 @@ export const researchActivitiesSliceReducers = {
       ...state.createResearchActivityDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  updateUpdateResearchActivityDto(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<ObjectKeyValueType>,
+  ) {
+    state.updateResearchActivityDto = {
+      ...state.updateResearchActivityDto,
+      [action.payload.key]: action.payload.value,
+    };
+  },
+  setCreateResearchActivityDto(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<CreateResearchActivityDto>,
+  ) {
+    state.createResearchActivityDto = action.payload;
+  },
+  setUpdateResearchActivityDto(
+    state: ResearchActivitiesSliceStateType,
+    action: PayloadAction<UpdateResearchActivityDto>,
+  ) {
+    state.updateResearchActivityDto = action.payload;
   },
   setResearchActivities(
     state: ResearchActivitiesSliceStateType,

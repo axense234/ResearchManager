@@ -1,5 +1,6 @@
 // Types
 import {
+  EntityPositionType,
   EntityViewType,
   ResearchActivityRedux,
   ResearchPhaseRedux,
@@ -10,4 +11,5 @@ export interface EntityDetailsProps {
   specialEntityType: "researchActivity" | "researchPhase";
   viewType: EntityViewType;
   darkMode: boolean;
+  position: EntityPositionType;
 }

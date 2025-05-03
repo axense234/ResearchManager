@@ -1,6 +1,6 @@
-"use client";
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { ResearchPhaseImagesOverlayContentProps } from "@/core/interfaces";
 // SCSS
 import overlayContentStyles from "@/scss/components/shared/overlay/entity/images/content/ResearchPhaseImagesOverlayContent.module.scss";
@@ -25,7 +25,7 @@ const ResearchPhaseImagesOverlayContent: FC<
         imagePayload={currentImagePayload}
       />
       <ul className={overlayContentStyles.contentContainerItems}>
-        {researchLogsImages.map((logImages, index) => {
+        {researchLogsImages.map((logImages) => {
           return (
             <li key={logImages.entityName}>
               <EntityImagesOverlayItem

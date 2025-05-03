@@ -29,6 +29,7 @@ export const {
   resetErrorFields,
   updateContactUsDto,
   setEntityOverlay,
+  setEntityImagesOverlay,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

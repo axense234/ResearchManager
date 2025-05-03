@@ -1,22 +1,25 @@
+// React
+import { FC } from "react";
 // Interfaces
-import { FC, useState } from "react";
 import { EntityImagesProps } from "@/core/interfaces";
 // SCSS
 import entityImagesStyles from "@/scss/components/shared/entity/view/images/EntityImages.module.scss";
 // Components
 import EntityImage from "./EntityImage";
-import EntityImagesOverlay from "@/components/shared/overlay/entity/images/EntityImagesOverlay";
 import EntityImagesTitle from "./EntityImagesTitle";
-// Hooks
+// Redux
 import { useSelectEntityImages } from "@/hooks/redux/selector";
+import { useAppDispatch } from "@/hooks";
+import { setEntityImagesOverlay } from "@/redux/slices/general/slice";
 
 const EntityImages: FC<EntityImagesProps> = ({
   specialEntity,
   specialEntityType,
   viewType,
   darkMode,
+  position,
 }) => {
-  const [showImagesOverlay, setShowImagesOverlay] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const entityImages = useSelectEntityImages(
     specialEntity,
@@ -24,24 +27,26 @@ const EntityImages: FC<EntityImagesProps> = ({
     viewType,
   );
 
-  const entityName = specialEntity?.name;
+  const onEntityImageClickFunction = () => {
+    dispatch(
+      setEntityImagesOverlay({
+        entityImages,
+        entityName: specialEntity.name,
+        entityType: specialEntityType,
+        showOverlay: true,
+      }),
+    );
+  };
 
   return (
     <article
-      className={entityImagesStyles.entityImagesContainer}
+      className={`${entityImagesStyles.entityImagesContainer} ${position}`}
       style={{ backgroundColor: specialEntity.backgroundColorOrImageSrc }}
     >
-      <EntityImagesOverlay
-        entityImages={entityImages}
-        entityName={entityName}
-        showOverlay={showImagesOverlay}
-        closeOverlayFunction={() => setShowImagesOverlay(false)}
-        specialEntityType={specialEntityType}
-      />
       <EntityImagesTitle title="Images" darkMode={darkMode} />
       <EntityImage
         imageSrc={entityImages[0]?.src}
-        onClickFunction={() => setShowImagesOverlay(true)}
+        onClickFunction={() => onEntityImageClickFunction()}
         darkMode={darkMode}
       />
     </article>

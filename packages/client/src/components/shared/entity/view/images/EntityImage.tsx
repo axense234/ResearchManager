@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { EntityImageProps } from "@/core/interfaces";
 // SCSS
 import entityImageStyles from "@/scss/components/shared/entity/view/images/EntityImage.module.scss";

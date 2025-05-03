@@ -92,7 +92,6 @@ export class DataObjectBuilderService {
         switch (connectValue.rel) {
           case 'OTO':
             dataObject[connectValue.entityType] = {
-              ...dataObject[connectValue.entityType],
               [methodBasedOnActionType]: { id: dto[connectValue.entityType] },
             };
             break;
@@ -107,7 +106,6 @@ export class DataObjectBuilderService {
             break;
           case 'OTM':
             dataObject[connectValue.entityType] = {
-              ...dataObject[connectValue.entityType],
               [methodBasedOnActionType]: dto[connectValue.entityType].map(
                 (id: string) => {
                   return { id };

@@ -126,7 +126,9 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
             dispatch(
               setEntityOverlay({
                 entityType: "researchPhase",
+                method: "update",
                 showOverlay: true,
+                entityId: researchPhase.id,
               }),
             )
           }

@@ -1,4 +1,6 @@
-// Typess
+// Types
+import { ObjectKeyValueType } from "@/core/types";
+import { UnknownAction } from "@reduxjs/toolkit";
 import {
   CreateResearchActivityDto,
   CreateResearchLogDto,
@@ -17,6 +19,7 @@ export interface EntityOverlayFormControlsProps {
     | UpdateResearchPhaseDto
     | CreateResearchLogDto
     | UpdateResearchLogDto;
+  dtoUpdateFunction: (updateObj: ObjectKeyValueType) => UnknownAction;
   entityType: EntityType;
   method: "create" | "update";
 }

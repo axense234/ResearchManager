@@ -1,6 +1,9 @@
 // Redux
 import { addErrorField, setGeneralModal } from "@/redux/slices/general/slice";
-import { createResearchActivity } from "@/redux/slices/research/activity/thunks";
+import {
+  createResearchActivity,
+  updateResearchActivity,
+} from "@/redux/slices/research/activity/thunks";
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { State } from "@/redux/api/store";
 // Helper
@@ -15,29 +18,50 @@ setModalListener.startListening({
     createResearchActivity.pending,
     createResearchActivity.fulfilled,
     createResearchActivity.rejected,
+    updateResearchActivity.pending,
+    updateResearchActivity.fulfilled,
+    updateResearchActivity.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
 
     const state = getState() as State;
 
-    if (createResearchActivity.pending.match(action)) {
+    let methodUsed = "create";
+    let entityUsed = "Research Activity";
+    if (action.type.includes("researchActivities")) {
+      entityUsed = "Research Activity";
+    } else if (action.type.includes("researchPhases")) {
+      entityUsed = "Research Phase";
+    }
+
+    if (action.type.includes("create")) {
+      methodUsed = "create";
+    } else if (action.type.includes("update")) {
+      methodUsed = "update";
+    }
+
+    const modalMessagePending = `Trying to ${methodUsed} your ${entityUsed}.`;
+    const modalMessageFulfilled = `Successfully ${methodUsed + "d"} your ${entityUsed}.`;
+    const modalMessageRejected = `Could not ${methodUsed} your ${entityUsed}. Something went wrong.`;
+
+    if (action.type.endsWith("pending")) {
       dispatch(
         setGeneralModal({
           isClosed: false,
-          message: "Trying to create your Research Activity.",
+          message: modalMessagePending,
           type: "general",
           isLoading: true,
         }),
       );
-    } else if (createResearchActivity.fulfilled.match(action)) {
+    } else if (action.type.endsWith("fulfilled")) {
       const axiosError = action.payload as AxiosError;
 
       if (!axiosError.isAxiosError) {
         dispatch(
           setGeneralModal({
             isClosed: false,
-            message: "Successfully created Research Activity.",
+            message: modalMessageFulfilled,
             type: "general",
             isLoading: false,
           }),
@@ -63,12 +87,11 @@ setModalListener.startListening({
           }),
         );
       }
-    } else if (createResearchActivity.rejected.match(action)) {
+    } else if (action.type.endsWith("pending")) {
       dispatch(
         setGeneralModal({
           isClosed: false,
-          message:
-            "Could not create your Research Activity. Something went wrong.",
+          message: modalMessageRejected,
           type: "general",
           isLoading: false,
         }),

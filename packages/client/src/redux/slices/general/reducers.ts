@@ -1,5 +1,6 @@
 // Types
 import {
+  EntityImagesOverlayType,
   GeneralSliceInitialStateType,
   ModalType,
   ObjectKeyValueType,
@@ -17,6 +18,12 @@ export const generalSliceReducers = {
     action: PayloadAction<OverlayType>,
   ) {
     state.entityOverlay = { ...action.payload };
+  },
+  setEntityImagesOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<EntityImagesOverlayType>,
+  ) {
+    state.entityImagesOverlay = { ...action.payload };
   },
   updateContactUsDto(
     state: GeneralSliceInitialStateType,

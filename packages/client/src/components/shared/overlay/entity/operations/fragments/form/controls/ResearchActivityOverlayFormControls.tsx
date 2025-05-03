@@ -16,7 +16,6 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   selectCreateDefaultResearchPhase,
   setCreateDefaultResearchPhase,
-  updateCreateResearchActivityDto,
 } from "@/redux/slices/research/activity";
 import { selectErrorFields } from "@/redux/slices/general";
 // Data
@@ -24,7 +23,7 @@ import { formErrorInputBorder } from "@/data/general";
 
 const ResearchActivityOverlayFormControls: FC<
   EntityOverlayFormControlsProps
-> = ({ dto, method }) => {
+> = ({ dto, method, dtoUpdateFunction }) => {
   const dispatch = useAppDispatch();
 
   const errorFields = useAppSelector(selectErrorFields);
@@ -37,43 +36,43 @@ const ResearchActivityOverlayFormControls: FC<
     | CreateResearchActivityDto
     | UpdateResearchActivityDto;
 
-  if (method === "create") {
-    return (
-      <form className={entityOverlayFormControlsStyles.formControlsContainer}>
-        <TextFormControl
-          labelContent="Activity Name:"
-          type="text"
-          entityProperty={researchActivityDto?.name}
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateCreateResearchActivityDto({
-                key: "name",
-                value: e.target.value,
-              }),
-            )
-          }
-          inputColorType="dark"
-          labelColorType="dark"
-          placeholderContent="ex: Gardening"
-          border={errorFields.includes("name") ? formErrorInputBorder : "none"}
-        />
-        <TextFormControl
-          labelContent="Background Color:"
-          type="color"
-          entityProperty={researchActivityDto?.backgroundColorOrImageSrc}
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateCreateResearchActivityDto({
-                key: "backgroundColorOrImageSrc",
-                value: e.target.value,
-              }),
-            )
-          }
-          labelColorType="dark"
-          placeholderContent="ex: blue"
-          inputHeight={64}
-          flexDirection="column"
-        />
+  return (
+    <form className={entityOverlayFormControlsStyles.formControlsContainer}>
+      <TextFormControl
+        labelContent="Activity Name:"
+        type="text"
+        entityProperty={researchActivityDto?.name}
+        onEntityPropertyValueChange={(e) =>
+          dispatch(
+            dtoUpdateFunction({
+              key: "name",
+              value: e.target.value,
+            }),
+          )
+        }
+        inputColorType="dark"
+        labelColorType="dark"
+        placeholderContent="ex: Gardening"
+        border={errorFields.includes("name") ? formErrorInputBorder : "none"}
+      />
+      <TextFormControl
+        labelContent="Background Color:"
+        type="color"
+        entityProperty={researchActivityDto?.backgroundColorOrImageSrc}
+        onEntityPropertyValueChange={(e) =>
+          dispatch(
+            dtoUpdateFunction({
+              key: "backgroundColorOrImageSrc",
+              value: e.target.value,
+            }),
+          )
+        }
+        labelColorType="dark"
+        placeholderContent="ex: blue"
+        inputHeight={64}
+        flexDirection="column"
+      />
+      {method === "create" && (
         <CheckboxFormControl
           labelContent="Create Default Research Phase:"
           entityProperty={createDefaultResearchPhase}
@@ -82,11 +81,9 @@ const ResearchActivityOverlayFormControls: FC<
           }
           id="createDefaultResearchPhase"
         />
-      </form>
-    );
-  } else if (method === "update") {
-    return null;
-  }
+      )}
+    </form>
+  );
 };
 
 export default ResearchActivityOverlayFormControls;

@@ -37,6 +37,7 @@ const HomeIntro: FC = () => {
           dispatch(
             setEntityOverlay({
               entityType: "researchActivity",
+              method: "create",
               showOverlay: true,
             }),
           )

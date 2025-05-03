@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { EntityContainerProps } from "@/core/interfaces";
 // Components
 import ResearchActivityInterface from "./interfaces/ResearchActivityInterface";
@@ -13,6 +14,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
   entityId,
   containerType,
   darkMode,
+  entityIndex,
+  position,
 }) => {
   switch (entityType) {
     case "researchActivity":
@@ -21,6 +24,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
+          entityIndex={entityIndex}
+          position={position}
         />
       );
     case "researchPhase":
@@ -29,6 +34,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
+          entityIndex={entityIndex}
+          position={position}
         />
       );
     case "researchLog":
@@ -37,6 +44,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
+          entityIndex={entityIndex}
+          position={position}
         />
       );
     case "researchSession":
@@ -45,6 +54,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
+          entityIndex={entityIndex}
+          position={position}
         />
       );
     case "tag":
@@ -53,6 +64,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
+          entityIndex={entityIndex}
+          position={position}
         />
       );
     default:

@@ -1,4 +1,3 @@
-"use client";
 // Interfaces
 import { FC, useState } from "react";
 import { ResearchActivityImagesOverlayContentProps } from "@/core/interfaces";

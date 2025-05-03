@@ -3,7 +3,8 @@
 import LanguageSwitcher from "@/components/shared/general/language/LanguageSwitcher";
 import GeneralModal from "@/components/shared/modal/GeneralModal";
 import SideBar from "@/components/layout/sidebar/SideBar";
-import CreateEntityOverlay from "@/components/shared/overlay/entity/operations/create/CreateEntityOverlay";
+import UpsertEntityOverlay from "@/components/shared/overlay/entity/operations/upsert/UpsertEntityOverlay";
+import EntityImagesOverlay from "@/components/shared/overlay/entity/images/EntityImagesOverlay";
 // Redux and Custom Hooks
 import { useCreateUserOAuthTrigger } from "@/hooks";
 // ChartTS
@@ -18,7 +19,8 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <SideBar />
-      <CreateEntityOverlay />
+      <UpsertEntityOverlay />
+      <EntityImagesOverlay />
       <GeneralModal type="general" />
       <LanguageSwitcher position="absolute" />
       {children}

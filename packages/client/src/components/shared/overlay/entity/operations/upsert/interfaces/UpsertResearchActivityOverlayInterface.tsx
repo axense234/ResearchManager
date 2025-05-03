@@ -1,7 +1,7 @@
 // React
 import { FC, useRef } from "react";
 // SCSS
-import createEntityOverlayStyles from "@/scss/components/shared/overlay/entity/create/CreateEntityOverlayInterface.module.scss";
+import upsertEntityOverlayStyles from "@/scss/components/shared/overlay/entity/upsert/UpsertEntityOverlayInterface.module.scss";
 // Components and Fragments
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
 import CloseInterfaceButton from "@/components/shared/general/CloseInterfaceButton";
@@ -17,28 +17,33 @@ import {
   selectCreateResearchActivityDto,
   selectLoadingCreateResearchActivity,
   selectLoadingUpdateResearchActivity,
+  selectNumberOfResearchActivities,
+  selectUpdateResearchActivityDto,
+  setCreateResearchActivityDto,
+  setCurrentResearchActivityIndex,
   updateCreateResearchActivityDto,
+  updateUpdateResearchActivityDto,
 } from "@/redux/slices/research/activity";
-import { createResearchActivity } from "@/redux/slices/research/activity/thunks";
 import {
-  selectAddTagModal,
-  selectSelectedTagsIds,
-  setAddTagModal,
-  setSelectedTagsIds,
-} from "@/redux/slices/tag";
+  createResearchActivity,
+  updateResearchActivity,
+} from "@/redux/slices/research/activity/thunks";
+import { selectSelectedTagsIds } from "@/redux/slices/tag";
+// Helpers
 import { onEditTagFunction } from "@/helpers";
+import { defaultCreateResearchActivityDto } from "@/data/redux";
 
-const CreateResearchActivityOverlayInterface: FC = () => {
+const UpsertResearchActivityOverlayInterface: FC = () => {
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const userProfile = useAppSelector(selectUserProfile);
-
   const entityOverlay = useAppSelector(selectEntityOverlay);
-
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
 
-  const addTagModal = useAppSelector(selectAddTagModal);
+  const numberOfResearchActivities = useAppSelector(
+    selectNumberOfResearchActivities,
+  );
 
   const createDefaultResearchPhase = useAppSelector(
     selectCreateDefaultResearchPhase,
@@ -47,6 +52,9 @@ const CreateResearchActivityOverlayInterface: FC = () => {
   const createResearchActivityDto = useAppSelector(
     selectCreateResearchActivityDto,
   );
+  const updateResearchActivityDto = useAppSelector(
+    selectUpdateResearchActivityDto,
+  );
 
   const loadingCreateResearchActivity = useAppSelector(
     selectLoadingCreateResearchActivity,
@@ -54,20 +62,56 @@ const CreateResearchActivityOverlayInterface: FC = () => {
   const loadingUpdateResearchActivity = useAppSelector(
     selectLoadingUpdateResearchActivity,
   );
-
   const isRequestPending =
     loadingCreateResearchActivity === "PENDING" ||
     loadingUpdateResearchActivity === "PENDING";
 
-  useOverlayTransition(entityOverlay.showOverlay, overlayRef);
+  const interfaceTitle =
+    entityOverlay.method === "create"
+      ? "Create Research Activity"
+      : "Update Research Activity";
+
+  const dtoUsed =
+    entityOverlay.method === "create"
+      ? createResearchActivityDto
+      : updateResearchActivityDto;
+
+  const dtoUsedUpdateFunction =
+    entityOverlay.method === "create"
+      ? updateCreateResearchActivityDto
+      : updateUpdateResearchActivityDto;
+
+  const onResearchActivityCreateFunction = () => {
+    dispatch(
+      createResearchActivity({
+        dto: { ...createResearchActivityDto, userId: userProfile.id },
+        createDefaultResearchPhase,
+      }),
+    );
+    dispatch(setEntityOverlay({ ...entityOverlay, showOverlay: false }));
+    dispatch(setCurrentResearchActivityIndex(numberOfResearchActivities + 1));
+    dispatch(
+      setCreateResearchActivityDto({ ...defaultCreateResearchActivityDto }),
+    );
+  };
+
+  const onResearchActivityUpdateFunction = () => {
+    dispatch(
+      updateResearchActivity({
+        dto: { ...updateResearchActivityDto, userId: userProfile.id },
+        researchActivityId: entityOverlay.entityId,
+      }),
+    );
+    dispatch(setEntityOverlay({ ...entityOverlay, showOverlay: false }));
+  };
 
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
     onEditTagFunction(
       type,
-      createResearchActivityDto.tags,
+      dtoUsed.tags,
       selectedTagsIds,
       (editedTags: string[]) =>
-        updateCreateResearchActivityDto({
+        dtoUsedUpdateFunction({
           key: "tags",
           value: editedTags,
         }),
@@ -75,9 +119,16 @@ const CreateResearchActivityOverlayInterface: FC = () => {
     );
   };
 
+  const dtoUsedUpsertFunction =
+    entityOverlay.method === "create"
+      ? onResearchActivityCreateFunction
+      : onResearchActivityUpdateFunction;
+
+  useOverlayTransition(entityOverlay.showOverlay, overlayRef);
+
   return (
     <div
-      className={createEntityOverlayStyles.overlayContainerWrapper}
+      className={upsertEntityOverlayStyles.overlayContainerWrapper}
       ref={overlayRef}
     >
       <CloseInterfaceButton
@@ -88,38 +139,32 @@ const CreateResearchActivityOverlayInterface: FC = () => {
         title="Close Interface"
         size="large"
       />
-      <div className={createEntityOverlayStyles.overlayContainer}>
+      <div className={upsertEntityOverlayStyles.overlayContainer}>
         <GeneralModal type="form" />
-        <h5>Create Research Activity</h5>
+        <h5>{interfaceTitle}</h5>
         <EntityOverlayFormControls
           entityType="researchActivity"
-          dto={createResearchActivityDto}
-          method="create"
+          dto={dtoUsed}
+          method={entityOverlay.method}
+          dtoUpdateFunction={dtoUsedUpdateFunction}
         />
         <hr />
         <EntityOverlayTags
-          sourceTagsIds={createResearchActivityDto.tags}
+          sourceTagsIds={dtoUsed.tags}
           onAddTagFunction={() => onEditTagFunctionUsed("add")}
           onRemoveTagFunction={() => onEditTagFunctionUsed("remove")}
         />
         <hr />
         <FunctionalButton
-          content="Create Research Activity"
+          content={interfaceTitle}
           disabled={isRequestPending}
-          onHoverContent="Create Research Activity"
+          onHoverContent={interfaceTitle}
           onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-          onClickFunction={() =>
-            dispatch(
-              createResearchActivity({
-                dto: { ...createResearchActivityDto, userId: userProfile.id },
-                createDefaultResearchPhase,
-              }),
-            )
-          }
+          onClickFunction={() => dtoUsedUpsertFunction()}
         />
       </div>
     </div>
   );
 };
 
-export default CreateResearchActivityOverlayInterface;
+export default UpsertResearchActivityOverlayInterface;

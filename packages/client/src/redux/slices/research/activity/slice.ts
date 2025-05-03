@@ -24,6 +24,10 @@ export const {
   setResearchActivities,
   setResearchActivityExamples,
   setCreateDefaultResearchPhase,
+  updateUpdateResearchActivityDto,
+  setUpdateResearchActivityDto,
+  setCurrentResearchActivityIndex,
+  setCreateResearchActivityDto,
 } = researchActivitiesSlice.actions;
 
 export default researchActivitiesSlice.reducer;

@@ -36,5 +36,8 @@ export const selectErrorFields = (state: State) => state.general.errorFields;
 export const selectEntityOverlay = (state: State) =>
   state.general.entityOverlay;
 
+export const selectEntityImagesOverlay = (state: State) =>
+  state.general.entityImagesOverlay;
+
 // Contact
 export const selectContactUsDto = (state: State) => state.general.contactUsDto;

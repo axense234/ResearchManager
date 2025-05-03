@@ -9,12 +9,16 @@ import { Line } from "react-chartjs-2";
 // Data
 import { mainBlackColor, secondaryWhiteColor } from "@/data/general";
 
-const EntityGraphs: FC<EntityGraphsProps> = ({ specialEntity, darkMode }) => {
+const EntityGraphs: FC<EntityGraphsProps> = ({
+  specialEntity,
+  darkMode,
+  position,
+}) => {
   const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
 
   return (
     <article
-      className={entityGraphsStyles.entityGraphsContainer}
+      className={`${entityGraphsStyles.entityGraphsContainer} ${position}`}
       style={{ backgroundColor: specialEntity.backgroundColorOrImageSrc }}
     >
       <div className={entityGraphsStyles.entityGraphsTitle}>

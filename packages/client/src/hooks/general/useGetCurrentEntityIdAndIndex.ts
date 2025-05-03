@@ -38,10 +38,10 @@ const currentEntityIdSelectors = {
   },
 };
 
-export const useGetEntityIdByCurrentIndex = (
+export const useGetCurrentEntityIdAndIndex = (
   entityType: EntityType,
   viewType: EntityViewType,
-): string => {
+): { currentEntityIndex: number; currentEntityId: string } => {
   const currentEntityIndexSelector =
     currentEntityIndexSelectors[entityType][viewType];
 
@@ -54,11 +54,13 @@ export const useGetEntityIdByCurrentIndex = (
   if (!currentEntityIndexSelector)
     throw new Error("No currentEntityIdSelector was found.");
 
-  const currentEntityIndex = useAppSelector(currentEntityIndexSelector);
+  const currentEntityIndex = useAppSelector(
+    currentEntityIndexSelector,
+  ) as number;
 
   const currentEntityId = useAppSelector((state) =>
     currentEntityIdSelector(state, currentEntityIndex),
   );
 
-  return currentEntityId;
+  return { currentEntityIndex, currentEntityId };
 };

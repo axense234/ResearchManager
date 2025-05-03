@@ -1,6 +1,8 @@
-// Types and Interfaces
-import { FC } from "react";
+// React
+import { FC, useEffect, useRef } from "react";
+// Interfaces
 import { EntityContainerInterfaceProps } from "@/core/interfaces";
+// Types
 import { ResearchActivityRedux } from "@/core/types";
 // SCSS
 import entityContainerStyles from "@/scss/components/shared/entity/container/EntityContainer.module.scss";
@@ -25,27 +27,26 @@ import {
   selectCurrentResearchActivityExampleIndex,
   selectCurrentResearchActivityIndex,
   selectNumberOfResearchActivities,
+  setUpdateResearchActivityDto,
 } from "@/redux/slices/research/activity";
 import { updateResearchActivity } from "@/redux/slices/research/activity/thunks";
-import {
-  selectAddTagModal,
-  selectSelectedTagsIds,
-  setAddTagModal,
-  setSelectedTagsIds,
-} from "@/redux/slices/tag";
+import { selectSelectedTagsIds } from "@/redux/slices/tag";
 import { setEntityOverlay } from "@/redux/slices/general/slice";
+// Helpers
 import { onEditTagFunction } from "@/helpers";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
   entityId,
   darkMode,
+  entityIndex,
+  position,
 }) => {
   const dispatch = useAppDispatch();
 
-  const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
+  const interfaceRef = useRef<HTMLDivElement>(null);
 
-  const addTagModal = useAppSelector(selectAddTagModal);
+  const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
 
   const currentResearchActivityExampleIndex = useAppSelector(
     selectCurrentResearchActivityExampleIndex,
@@ -80,6 +81,18 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     containerType,
   );
 
+  useEffect(() => {
+    if (researchActivity && currentResearchActivityIndex === entityIndex) {
+      dispatch(
+        setUpdateResearchActivityDto({
+          ...researchActivity,
+          tags: researchActivity.tagsIds,
+          researchPhases: researchActivity.researchPhasesIds,
+        }),
+      );
+    }
+  }, [researchActivity, currentResearchActivityIndex]);
+
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
     onEditTagFunction(
       type,
@@ -110,10 +123,11 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
       }
     >
       <div
-        className={entityContainerStyles.entityContainer}
+        className={`${entityContainerStyles.entityContainer} ${position}`}
+        ref={interfaceRef}
         style={{
           backgroundColor:
-            researchActivity.backgroundColorOrImageSrc || mainWhiteColor,
+            researchActivity?.backgroundColorOrImageSrc || mainWhiteColor,
         }}
       >
         <EntityContainerTags
@@ -135,7 +149,9 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
             dispatch(
               setEntityOverlay({
                 entityType: "researchActivity",
+                method: "update",
                 showOverlay: true,
+                entityId: researchActivity.id,
               }),
             )
           }

@@ -1,5 +1,9 @@
 // Types
-import { EntityViewType, SpecialEntityRedux } from "@/core/types";
+import {
+  EntityPositionType,
+  EntityViewType,
+  SpecialEntityRedux,
+} from "@/core/types";
 import { SpecialEntityType } from "@researchmanager/shared/types";
 
 export interface EntityImagesProps {
@@ -7,4 +11,5 @@ export interface EntityImagesProps {
   specialEntityType: SpecialEntityType;
   viewType: EntityViewType;
   darkMode: boolean;
+  position: EntityPositionType;
 }

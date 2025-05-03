@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { EntityDetailsProps } from "@/core/interfaces";
 // Components
 import EntityGraphs from "./graphs/EntityGraphs";
@@ -12,6 +13,7 @@ const EntityDetails: FC<EntityDetailsProps> = ({
   specialEntityType,
   viewType,
   darkMode,
+  position,
 }) => {
   return (
     <section className={entityDetailsStyles.entityDetailsContainer}>
@@ -20,8 +22,13 @@ const EntityDetails: FC<EntityDetailsProps> = ({
         specialEntityType={specialEntityType}
         viewType={viewType}
         darkMode={darkMode}
+        position={position}
       />
-      <EntityGraphs specialEntity={specialEntity} darkMode={darkMode} />
+      <EntityGraphs
+        specialEntity={specialEntity}
+        darkMode={darkMode}
+        position={position}
+      />
     </section>
   );
 };

@@ -4,6 +4,7 @@ import { LoadingStateType } from "../../other";
 import { ModalType } from "./ModalType";
 import { UserRedux } from "./UserRedux";
 import { OverlayType } from "./OverlayType";
+import { EntityImagesOverlayType } from "./EntityImagesOverlayType";
 
 export type GeneralSliceInitialStateType = {
   // Auth
@@ -28,6 +29,7 @@ export type GeneralSliceInitialStateType = {
 
   // Overlays
   entityOverlay: OverlayType;
+  entityImagesOverlay: EntityImagesOverlayType;
 
   // Modals
   generalModal: ModalType;
