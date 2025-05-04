@@ -1,4 +1,4 @@
-// Interfaces
+// React
 import { FC } from "react";
 // SCSS
 import homeExamplesStyles from "@/scss/components/page/home/examples/HomeExamples.module.scss";
@@ -9,21 +9,12 @@ import PageSectionTitle from "@/components/shared/general/PageSectionTitle";
 import { homeExamplesData } from "@/data/general/home";
 // Redux
 import { useAppSelector } from "@/hooks";
-import {
-  selectCurrentResearchActivityExampleIndex,
-  selectResearchActivityExampleIdByIndex,
-} from "@/redux/slices/research/activity";
+import { selectResearchActivitiesExamples } from "@/redux/slices/research/activity";
 
 const HomeExamples: FC = () => {
-  const currentResearchActivityExampleIndex = useAppSelector(
-    selectCurrentResearchActivityExampleIndex,
-  );
-  const researchActivityExampleId = useAppSelector((state) =>
-    selectResearchActivityExampleIdByIndex(
-      state,
-      currentResearchActivityExampleIndex,
-    ),
-  );
+  const researchActivitiesExamplesIds = useAppSelector(
+    selectResearchActivitiesExamples,
+  ).map((example) => example.id);
 
   return (
     <section className={homeExamplesStyles.homeExamplesContainer}>
@@ -34,7 +25,9 @@ const HomeExamples: FC = () => {
       <EntityView
         entityType="researchActivity"
         viewType="example"
-        entityId={researchActivityExampleId}
+        entitiesIds={researchActivitiesExamplesIds}
+        darkMode={true}
+        isLoading={false}
       />
     </section>
   );

@@ -5,6 +5,7 @@ import { ModalType } from "./ModalType";
 import { UserRedux } from "./UserRedux";
 import { OverlayType } from "./OverlayType";
 import { EntityImagesOverlayType } from "./EntityImagesOverlayType";
+import { DeleteEntityOverlayType } from "./DeleteEntityOverlayType";
 
 export type GeneralSliceInitialStateType = {
   // Auth
@@ -29,6 +30,7 @@ export type GeneralSliceInitialStateType = {
 
   // Overlays
   entityOverlay: OverlayType;
+  deleteEntityOverlay: DeleteEntityOverlayType;
   entityImagesOverlay: EntityImagesOverlayType;
 
   // Modals

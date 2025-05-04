@@ -5,6 +5,7 @@ import GeneralModal from "@/components/shared/modal/GeneralModal";
 import SideBar from "@/components/layout/sidebar/SideBar";
 import UpsertEntityOverlay from "@/components/shared/overlay/entity/operations/upsert/UpsertEntityOverlay";
 import EntityImagesOverlay from "@/components/shared/overlay/entity/images/EntityImagesOverlay";
+import DeleteEntityOverlay from "@/components/shared/overlay/entity/operations/delete/DeleteEntityOverlay";
 // Redux and Custom Hooks
 import { useCreateUserOAuthTrigger } from "@/hooks";
 // ChartTS
@@ -20,6 +21,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <SideBar />
       <UpsertEntityOverlay />
+      <DeleteEntityOverlay />
       <EntityImagesOverlay />
       <GeneralModal type="general" />
       <LanguageSwitcher position="absolute" />

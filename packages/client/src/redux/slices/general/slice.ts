@@ -30,6 +30,7 @@ export const {
   updateContactUsDto,
   setEntityOverlay,
   setEntityImagesOverlay,
+  setDeleteEntityOverlay,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

@@ -26,6 +26,12 @@ export const routing = defineRouting({
       fr: "/profil",
       de: "/profil",
     },
+    "/dashboard": {
+      ro: "/bord",
+      en: "/dashboard",
+      fr: "/dashboard",
+      de: "/armaturenbrett",
+    },
   },
 });
 

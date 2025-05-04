@@ -1,0 +1,7 @@
+@use "../../../../../../abstracts" as *;
+
+.overlayOptions {
+  @include flexCenter(row);
+  gap: 3rem;
+  width: 100%;
+}

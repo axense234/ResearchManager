@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { FunctionalButtonProps } from "@/core/interfaces";
 // SCSS
 import functionalButtonStyles from "@/scss/components/shared/general/FunctionalButton.module.scss";
@@ -7,6 +8,7 @@ import functionalButtonStyles from "@/scss/components/shared/general/FunctionalB
 import {
   buttonHeading1,
   buttonHeading2,
+  cancelGrayColor,
   createGreenColor,
   deleteRedColor,
   mainDarkBlueColor,
@@ -40,6 +42,9 @@ const FunctionalButton: FC<FunctionalButtonProps> = ({
     case "darkBlue":
       colorSchemeShown = mainDarkBlueColor;
       break;
+    case "gray":
+      colorSchemeShown = cancelGrayColor;
+      break;
     default:
       throw new Error("Invalid colorScheme on FunctionalButton.");
   }
@@ -47,6 +52,7 @@ const FunctionalButton: FC<FunctionalButtonProps> = ({
   const buttonFontSize = size === "small" ? buttonHeading2 : buttonHeading1;
   const buttonPadding = size === "small" ? "0.25rem 0.75rem" : "0.5rem 1rem";
   const buttonBorderWidth = size === "small" ? "2px" : "3px";
+  const buttonMinWidth = size === "small" ? "1rem" : "5rem";
 
   return (
     <button
@@ -62,6 +68,7 @@ const FunctionalButton: FC<FunctionalButtonProps> = ({
         padding: buttonPadding,
         color: colorSchemeShown,
         fontSize: buttonFontSize,
+        minWidth: buttonMinWidth,
       }}
     >
       {content}

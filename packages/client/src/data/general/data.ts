@@ -13,6 +13,7 @@ export const createGreenColor = "#008000";
 export const resumeYellowColor = "#adad00";
 export const mockBrownColor = "#6f4e37";
 export const deleteRedColor = "#ff0000";
+export const cancelGrayColor = "#666666";
 
 export const buttonHeading1 = "20px";
 export const buttonHeading2 = "16px";

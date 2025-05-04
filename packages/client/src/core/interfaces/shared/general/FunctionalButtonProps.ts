@@ -3,7 +3,7 @@ import { MouseEventHandler } from "react";
 
 export interface FunctionalButtonProps {
   size?: "small" | "medium";
-  colorScheme?: "green" | "brown" | "red" | "yellow" | "darkBlue";
+  colorScheme?: "green" | "brown" | "red" | "yellow" | "darkBlue" | "gray";
 
   content: string;
   disabled: boolean;

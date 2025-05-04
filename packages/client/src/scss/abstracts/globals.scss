@@ -62,12 +62,12 @@ select:focus-visible {
 }
 
 .prev {
-  transform: translateX(-100%);
+  transform: translateX(-150%);
   filter: blur(0px);
   opacity: 0;
 
   transition:
-    transform 0.35s ease-in-out,
+    transform 0.45s ease-in-out,
     opacity 0.4s ease-in,
     filter 0.35s ease-in-out;
 }
@@ -78,18 +78,18 @@ select:focus-visible {
   opacity: 1;
 
   transition:
-    transform 0.35s ease-in-out,
+    transform 0.45s ease-in-out,
     opacity 0.4s ease-in,
     filter 0.35s ease-in-out;
 }
 
 .next {
-  transform: translateX(100%);
+  transform: translateX(150%);
   filter: blur(0px);
   opacity: 0;
 
   transition:
-    transform 0.35s ease-in-out,
+    transform 0.45s ease-in-out,
     opacity 0.4s ease-in,
     filter 0.35s ease-in-out;
 }

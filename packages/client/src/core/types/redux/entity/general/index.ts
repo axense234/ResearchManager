@@ -6,3 +6,4 @@ export * from "./OverlayType";
 export * from "./AddTagModalType";
 export * from "./EntityPositionType";
 export * from "./EntityImagesOverlayType";
+export * from "./DeleteEntityOverlayType";

@@ -27,11 +27,15 @@ import {
   selectCurrentResearchActivityExampleIndex,
   selectCurrentResearchActivityIndex,
   selectNumberOfResearchActivities,
+  selectNumberOfUnarchivedResearchActivities,
   setUpdateResearchActivityDto,
 } from "@/redux/slices/research/activity";
 import { updateResearchActivity } from "@/redux/slices/research/activity/thunks";
 import { selectSelectedTagsIds } from "@/redux/slices/tag";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
+import {
+  setDeleteEntityOverlay,
+  setEntityOverlay,
+} from "@/redux/slices/general/slice";
 // Helpers
 import { onEditTagFunction } from "@/helpers";
 
@@ -72,7 +76,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   ) as ResearchActivityRedux;
 
   const numberOfResearchActivities = useAppSelector(
-    selectNumberOfResearchActivities,
+    selectNumberOfUnarchivedResearchActivities,
   );
 
   const entityResearchPoints = useCalculateEntityResearchPoints(
@@ -155,7 +159,15 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
               }),
             )
           }
-          onEntityDeleteFunction={() => {}}
+          onEntityDeleteFunction={() =>
+            dispatch(
+              setDeleteEntityOverlay({
+                entityType: "researchActivity",
+                showOverlay: true,
+                entityId: researchActivity.id,
+              }),
+            )
+          }
         />
       </div>
     </EntityContainerInterfaceWrapper>

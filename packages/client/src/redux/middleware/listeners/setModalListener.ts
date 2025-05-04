@@ -2,6 +2,7 @@
 import { addErrorField, setGeneralModal } from "@/redux/slices/general/slice";
 import {
   createResearchActivity,
+  deleteResearchActivity,
   updateResearchActivity,
 } from "@/redux/slices/research/activity/thunks";
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
@@ -21,6 +22,9 @@ setModalListener.startListening({
     updateResearchActivity.pending,
     updateResearchActivity.fulfilled,
     updateResearchActivity.rejected,
+    deleteResearchActivity.pending,
+    deleteResearchActivity.fulfilled,
+    deleteResearchActivity.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
@@ -39,6 +43,8 @@ setModalListener.startListening({
       methodUsed = "create";
     } else if (action.type.includes("update")) {
       methodUsed = "update";
+    } else if (action.type.includes("delete")) {
+      methodUsed = "delete";
     }
 
     const modalMessagePending = `Trying to ${methodUsed} your ${entityUsed}.`;

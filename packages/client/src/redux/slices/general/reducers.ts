@@ -1,5 +1,6 @@
 // Types
 import {
+  DeleteEntityOverlayType,
   EntityImagesOverlayType,
   GeneralSliceInitialStateType,
   ModalType,
@@ -18,6 +19,12 @@ export const generalSliceReducers = {
     action: PayloadAction<OverlayType>,
   ) {
     state.entityOverlay = { ...action.payload };
+  },
+  setDeleteEntityOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<DeleteEntityOverlayType>,
+  ) {
+    state.deleteEntityOverlay = { ...action.payload };
   },
   setEntityImagesOverlay(
     state: GeneralSliceInitialStateType,

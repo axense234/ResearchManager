@@ -32,6 +32,12 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
     method: "create",
   },
 
+  deleteEntityOverlay: {
+    showOverlay: false,
+    entityType: "researchActivity",
+    entityId: "",
+  },
+
   entityImagesOverlay: {
     showOverlay: false,
     entityType: "researchActivity",

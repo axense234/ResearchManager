@@ -17,8 +17,8 @@ import {
 } from "@/redux/slices/general";
 import { setEntityOverlay } from "@/redux/slices/general/slice";
 import {
+  selectAllUnarchivedResearchActivitiesIds,
   selectResearchActivitiesExamples,
-  selectResearchActivitiesIds,
 } from "@/redux/slices/research/activity";
 
 const ProfileResearchActivities: FC = () => {
@@ -37,7 +37,9 @@ const ProfileResearchActivities: FC = () => {
 
   const usedViewType = showExamples ? "example" : "entity";
 
-  const researchActivitiesIds = useAppSelector(selectResearchActivitiesIds);
+  const researchActivitiesIds = useAppSelector(
+    selectAllUnarchivedResearchActivitiesIds,
+  );
   const researchActivitiesExamplesIds = useAppSelector(
     selectResearchActivitiesExamples,
   ).map((example) => example.id);

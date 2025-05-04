@@ -37,7 +37,9 @@ export const researchActivitiesSliceReducers = {
     state.currentResearchActivityExampleIndex = handleCarouselStepDirection(
       action.payload.direction,
       state.currentResearchActivityExampleIndex,
-      state.researchActivitiesExamples.length,
+      state.researchActivitiesExamples.filter(
+        (researchActivity) => !researchActivity.archived,
+      ).length,
     );
   },
   handleResearchActivityCarouselStepDirection(
@@ -47,7 +49,7 @@ export const researchActivitiesSliceReducers = {
     state.currentResearchActivityIndex = handleCarouselStepDirection(
       action.payload.direction,
       state.currentResearchActivityIndex,
-      state.ids.length,
+      state.ids.filter((id) => !state.entities[id].archived).length,
     );
   },
   setCurrentResearchActivityIndex(

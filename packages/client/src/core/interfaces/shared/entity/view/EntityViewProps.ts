@@ -6,5 +6,5 @@ export interface EntityViewProps {
   isLoading: boolean;
   darkMode: boolean;
   entitiesIds: string[];
-  setShowEntityExamples: (value: boolean) => void;
+  setShowEntityExamples?: (value: boolean) => void;
 }
