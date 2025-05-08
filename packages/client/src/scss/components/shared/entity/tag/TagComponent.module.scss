@@ -3,8 +3,13 @@
 .tagComponentContainer {
   @include flexCenter(row);
   padding: 0.5rem 1rem;
-  letter-spacing: 0.75px;
+
   height: 100%;
+  width: auto;
+  min-width: 3rem;
+
+  text-align: center;
+  letter-spacing: 0.75px;
 
   border-radius: 0.25rem;
 

@@ -1,12 +1,17 @@
 // Types
 import {
   CreateResearchActivityDto,
+  CreateTagDto,
   SignInDto,
   SignUpDto,
 } from "@researchmanager/shared/types";
 import { UserRedux } from "@/core/types";
 // Mock Data
-import { createResearchActivityMockData } from "@researchmanager/shared/mock";
+import {
+  createResearchActivityMockData,
+  createTagMockData,
+} from "@researchmanager/shared/mock";
+import { TagFontFamily } from "@prisma/client";
 
 export const signInMockDataRedux: SignInDto = { email: "", password: "" };
 export const signUpMockDataRedux: SignUpDto = {
@@ -19,6 +24,10 @@ export const defaultCreateResearchActivityDto: CreateResearchActivityDto = {
   ...createResearchActivityMockData[0],
   tags: [],
   researchPhases: [],
+};
+
+export const defaultCreateTagDto: CreateTagDto = {
+  ...createTagMockData[0],
 };
 
 export const userProfileMockDataRedux: UserRedux = {
@@ -37,3 +46,20 @@ export const userProfileMockDataRedux: UserRedux = {
   settingsId: "",
   tagsIds: [],
 };
+
+export const availableTagFontFamilies: TagFontFamily[] = [
+  "ARIAL",
+  "BRADLEY_HAND",
+  "COMIC_SANS_MS",
+  "COURIER_NEW",
+  "GEORGIA",
+  "HELVETICA",
+  "IMPACT",
+  "LUCIDA",
+  "LUMINARY",
+  "MONACO",
+  "TAHOMA",
+  "TIMES_NEW_ROMAN",
+  "TREBUCHET_MS",
+  "VERDANA",
+];

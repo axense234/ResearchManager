@@ -9,3 +9,4 @@ export * from "./useCalculateResearchActivityResearchPoints";
 export * from "./selector/useSelectResearchActivityImages";
 export * from "./selector/useSelectResearchPhaseImages";
 export * from "./useCalculateEntityResearchPoints";
+export * from "./useHandleUpsertEntityOverlaySideEffects";

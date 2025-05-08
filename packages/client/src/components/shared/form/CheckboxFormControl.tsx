@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import CheckboxFormControlProps from "@/core/interfaces/shared/form/CheckboxFormControlProps";
 // SCSS
 import checkboxFormControlStyles from "@/scss/components/shared/form/CheckboxFormControl.module.scss";

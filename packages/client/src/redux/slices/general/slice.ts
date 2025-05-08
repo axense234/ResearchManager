@@ -31,6 +31,7 @@ export const {
   setEntityOverlay,
   setEntityImagesOverlay,
   setDeleteEntityOverlay,
+  closeEntityOverlay,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

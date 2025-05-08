@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { EntityOverlayFormControlsProps } from "@/core/interfaces";
 // Types
 import {

@@ -8,8 +8,15 @@ import CloseInterfaceButton from "@/components/shared/general/CloseInterfaceButt
 import EntityOverlayFormControls from "../../fragments/form/EntityOverlayFormControls";
 import EntityOverlayTags from "../../fragments/tags/EntityOverlayTags";
 import GeneralModal from "@/components/shared/modal/GeneralModal";
+// Helpers
+import { onEditTagFunction } from "@/helpers";
 // Redux and Hooks
-import { useAppDispatch, useAppSelector, useOverlayTransition } from "@/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useHandleUpsertEntityOverlaySideEffects,
+  useOverlayTransition,
+} from "@/hooks";
 import { selectEntityOverlay, selectUserProfile } from "@/redux/slices/general";
 import { setEntityOverlay } from "@/redux/slices/general/slice";
 import {
@@ -17,10 +24,7 @@ import {
   selectCreateResearchActivityDto,
   selectLoadingCreateResearchActivity,
   selectLoadingUpdateResearchActivity,
-  selectNumberOfResearchActivities,
   selectUpdateResearchActivityDto,
-  setCreateResearchActivityDto,
-  setCurrentResearchActivityIndex,
   updateCreateResearchActivityDto,
   updateUpdateResearchActivityDto,
 } from "@/redux/slices/research/activity";
@@ -29,9 +33,6 @@ import {
   updateResearchActivity,
 } from "@/redux/slices/research/activity/thunks";
 import { selectSelectedTagsIds } from "@/redux/slices/tag";
-// Helpers
-import { onEditTagFunction } from "@/helpers";
-import { defaultCreateResearchActivityDto } from "@/data/redux";
 
 const UpsertResearchActivityOverlayInterface: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,10 +41,6 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
   const userProfile = useAppSelector(selectUserProfile);
   const entityOverlay = useAppSelector(selectEntityOverlay);
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
-
-  const numberOfResearchActivities = useAppSelector(
-    selectNumberOfResearchActivities,
-  );
 
   const createDefaultResearchPhase = useAppSelector(
     selectCreateDefaultResearchPhase,
@@ -62,6 +59,12 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
   const loadingUpdateResearchActivity = useAppSelector(
     selectLoadingUpdateResearchActivity,
   );
+
+  const loadingUpsertResearchActivity =
+    entityOverlay.method === "create"
+      ? loadingCreateResearchActivity
+      : loadingUpdateResearchActivity;
+
   const isRequestPending =
     loadingCreateResearchActivity === "PENDING" ||
     loadingUpdateResearchActivity === "PENDING";
@@ -88,11 +91,6 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
         createDefaultResearchPhase,
       }),
     );
-    dispatch(setEntityOverlay({ ...entityOverlay, showOverlay: false }));
-    dispatch(setCurrentResearchActivityIndex(numberOfResearchActivities + 1));
-    dispatch(
-      setCreateResearchActivityDto({ ...defaultCreateResearchActivityDto }),
-    );
   };
 
   const onResearchActivityUpdateFunction = () => {
@@ -102,7 +100,6 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
         researchActivityId: entityOverlay.entityId,
       }),
     );
-    dispatch(setEntityOverlay({ ...entityOverlay, showOverlay: false }));
   };
 
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
@@ -123,6 +120,12 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
     entityOverlay.method === "create"
       ? onResearchActivityCreateFunction
       : onResearchActivityUpdateFunction;
+
+  useHandleUpsertEntityOverlaySideEffects(
+    "researchActivity",
+    loadingUpsertResearchActivity,
+    entityOverlay.method,
+  );
 
   useOverlayTransition(entityOverlay.showOverlay, overlayRef);
 

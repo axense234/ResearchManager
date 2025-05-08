@@ -1,0 +1,7 @@
+@use "../../../../../abstracts" as *;
+
+.modalContent {
+  @include flexCenter(row);
+  width: 100%;
+  gap: 6rem;
+}

@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { FormControlsProps } from "@/core/interfaces";
 // Components
 import ReCaptchaFormControl from "../../../form/ReCaptchaFormControl";

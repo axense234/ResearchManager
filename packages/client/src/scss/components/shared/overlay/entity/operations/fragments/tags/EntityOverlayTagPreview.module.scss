@@ -1,0 +1,12 @@
+@use "../../../../../../../abstracts" as *;
+
+.tagPreviewContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+
+  > h5 {
+    @include heading("h5", "tablet", "black");
+    letter-spacing: 0.5px;
+  }
+}

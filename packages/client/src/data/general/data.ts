@@ -22,7 +22,7 @@ export const selectedTagOutline = `3px solid ${mainBlackColor}`;
 export const formErrorInputBorder = `3px solid ${mainPastelRedColor}`;
 
 export const DEFAULT_ENTITY_CONTAINER_TAGS_SHOWN = 6;
-export const MAX_ENTITY_CONTAINER_TAGS_SHOWN = 20;
+export const MAX_ENTITY_CONTAINER_TAGS_SHOWN = 16;
 
 export const DEFAULT_ENTITY_OVERLAY_TAGS_SHOWN = 13;
 export const MAX_ENTITY_OVERLAY_TAGS_SHOWN = 26;

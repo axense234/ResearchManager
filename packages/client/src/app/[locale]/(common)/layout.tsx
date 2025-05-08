@@ -19,11 +19,15 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
+      {/* Main */}
       <SideBar />
+      {/* Overlays */}
       <UpsertEntityOverlay />
       <DeleteEntityOverlay />
       <EntityImagesOverlay />
+      {/* Modals */}
       <GeneralModal type="general" />
+      {/* Fixed */}
       <LanguageSwitcher position="absolute" />
       {children}
     </>

@@ -11,11 +11,13 @@ import { State } from "@/redux/api/store";
 import { handleFormErrorInputsAndModalMessage } from "@/helpers";
 // Types
 import { AxiosError } from "axios";
+import { createTag } from "@/redux/slices/tag/thunks";
 
 export const setModalListener = createListenerMiddleware();
 
 setModalListener.startListening({
   matcher: isAnyOf(
+    // Research Activity
     createResearchActivity.pending,
     createResearchActivity.fulfilled,
     createResearchActivity.rejected,
@@ -25,6 +27,9 @@ setModalListener.startListening({
     deleteResearchActivity.pending,
     deleteResearchActivity.fulfilled,
     deleteResearchActivity.rejected,
+    createTag.pending,
+    createTag.fulfilled,
+    createTag.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
@@ -33,10 +38,13 @@ setModalListener.startListening({
 
     let methodUsed = "create";
     let entityUsed = "Research Activity";
+
     if (action.type.includes("researchActivities")) {
       entityUsed = "Research Activity";
     } else if (action.type.includes("researchPhases")) {
       entityUsed = "Research Phase";
+    } else if (action.type.includes("tags")) {
+      entityUsed = "Tag";
     }
 
     if (action.type.includes("create")) {
@@ -82,6 +90,8 @@ setModalListener.startListening({
         const { message, errorFields } = handleFormErrorInputsAndModalMessage(
           errorData.message,
         );
+        console.log(message);
+        console.log(errorFields);
         errorFields.forEach((field) => dispatch(addErrorField(field)));
 
         dispatch(

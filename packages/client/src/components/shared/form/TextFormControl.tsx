@@ -1,6 +1,7 @@
+// React
+import { FC } from "react";
 // Interfaces
 import { TextFormControlProps } from "@/core/interfaces";
-import { FC } from "react";
 // SCSS
 import textFormControlStyles from "@/scss/components/shared/form/TextFormControl.module.scss";
 // Data

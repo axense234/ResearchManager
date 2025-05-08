@@ -26,7 +26,7 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
 
   const entityImagesOverlay = useAppSelector(selectEntityImagesOverlay);
 
-  const useEntityImagesOverlayValues = specialEntityType === "researchActivity";
+  const useEntityImagesOverlayValues = true;
 
   const usedEntityName = useEntityImagesOverlayValues
     ? entityImagesOverlay.entityName

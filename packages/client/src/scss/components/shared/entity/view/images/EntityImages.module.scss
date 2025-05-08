@@ -2,6 +2,7 @@
 
 .entityImagesContainer {
   @include flexCenter(column);
+  position: relative;
   align-items: flex-start;
   max-width: 50%;
   min-width: 37.5rem;

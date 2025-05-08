@@ -45,7 +45,7 @@ const EntityImages: FC<EntityImagesProps> = ({
     >
       <EntityImagesTitle title="Images" darkMode={darkMode} />
       <EntityImage
-        imageSrc={entityImages[0]?.src}
+        imagesSrc={entityImages.map((entityImage) => entityImage.src)}
         onClickFunction={() => onEntityImageClickFunction()}
         darkMode={darkMode}
       />

@@ -47,7 +47,6 @@ const EntityView: FC<EntityViewProps> = ({
           currentEntityIndex,
           entitiesIds.length,
         );
-
         return (
           <EntityViewContent
             viewType={viewType}

@@ -1,5 +1,5 @@
 // React
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, MutableRefObject } from "react";
 
 export interface FunctionalButtonProps {
   size?: "small" | "medium";

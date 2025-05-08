@@ -44,8 +44,6 @@ export const useAuthorization = () => {
     );
   }, [loadingSignInUser]);
 
-  console.log(canTryFetchingProfile);
-
   useEffect(() => {
     if (loadingGetProfileJWT === "IDLE" && canTryFetchingProfile) {
       dispatch(getProfileJWT());
@@ -66,8 +64,6 @@ export const useAuthorization = () => {
     canTryFetchingProfile,
     dispatch,
   ]);
-
-  console.log(loadingGetProfileJWT, loadingGetProfileOAuth, canRedirect);
 
   useRedirect(pathname, router, canRedirect, profile.id.length > 0);
 };

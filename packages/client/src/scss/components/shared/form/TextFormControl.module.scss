@@ -6,6 +6,7 @@
   width: 100%;
   height: auto;
   gap: 0.5rem;
+  column-gap: 1.5rem;
 
   label {
     @include paragraph("laptop", "black");

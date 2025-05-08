@@ -1,4 +1,4 @@
-// Interfaces
+// React
 import { FC } from "react";
 // Components
 import Logo from "@/components/shared/general/Logo";

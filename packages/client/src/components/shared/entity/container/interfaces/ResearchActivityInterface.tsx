@@ -26,7 +26,6 @@ import {
   handleResearchActivityExampleCarouselStepDirection,
   selectCurrentResearchActivityExampleIndex,
   selectCurrentResearchActivityIndex,
-  selectNumberOfResearchActivities,
   selectNumberOfUnarchivedResearchActivities,
   setUpdateResearchActivityDto,
 } from "@/redux/slices/research/activity";

@@ -23,6 +23,8 @@ export const {
   setAddTagModal,
   setSelectedTagsIds,
   closeAddTagModal,
+  setCreateTagDto,
+  updateUpdateTagDto,
 } = tagsSlice.actions;
 
 export default tagsSlice.reducer;

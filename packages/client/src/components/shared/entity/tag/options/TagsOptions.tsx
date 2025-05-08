@@ -1,5 +1,5 @@
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Interfaces
 import { TagsOptionsProps } from "@/core/interfaces";
 // SCSS
@@ -34,6 +34,8 @@ const TagsOptions: FC<TagsOptionsProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  const optionsRef = useRef<HTMLDivElement>(null);
+
   const addTagModal = useAppSelector(selectAddTagModal);
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
 
@@ -45,12 +47,13 @@ const TagsOptions: FC<TagsOptionsProps> = ({
   return (
     <div
       className={tagsOptionsStyles.tagsOptionsContainer}
+      ref={optionsRef}
       style={{ alignSelf: location === "overlay" ? "flex-start" : "center" }}
     >
       <AddTagModal
         location={location}
-        onAddTagFunction={onAddTagFunction}
         sourceTagsIds={sourceTagsIds}
+        onAddTagFunction={onAddTagFunction}
       />
       <TagsOptionsButton
         showButton={sourceTagsIds?.length > DEFAULT_ENTITY_TAGS_SHOWN}

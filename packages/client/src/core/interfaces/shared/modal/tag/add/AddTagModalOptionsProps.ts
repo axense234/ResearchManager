@@ -4,5 +4,4 @@ export interface AddTagModalOptionsProps {
   totalTagsIds: string[];
 
   onAddTagButtonClickFunction: () => void;
-  onCreateTagButtonClickFunction?: () => void;
 }

@@ -15,7 +15,6 @@ export const createResearchActivity = createAsyncThunk<
   "researchActivities/createResearchActivity",
   async ({ dto, createDefaultResearchPhase }) => {
     try {
-      console.log(dto);
       const res = (
         await axiosInstance.post("/researchActivities/create", dto, {
           params: {

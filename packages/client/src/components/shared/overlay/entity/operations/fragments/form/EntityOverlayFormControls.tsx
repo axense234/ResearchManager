@@ -1,10 +1,12 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { EntityOverlayFormControlsProps } from "@/core/interfaces";
 // Components
 import ResearchActivityOverlayFormControls from "./controls/ResearchActivityOverlayFormControls";
 import ResearchPhaseOverlayFormControls from "./controls/ResearchPhaseOverlayFormControls";
 import ResearchLogOverlayFormControls from "./controls/ResearchLogOverlayFormControls";
+import TagOverlayFormControls from "./controls/TagOverlayFormControls";
 
 const EntityOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
   dto,
@@ -26,6 +28,15 @@ const EntityOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
       return <ResearchPhaseOverlayFormControls />;
     case "researchLog":
       return <ResearchLogOverlayFormControls />;
+    case "tag":
+      return (
+        <TagOverlayFormControls
+          dto={dto}
+          entityType="tag"
+          method={method}
+          dtoUpdateFunction={dtoUpdateFunction}
+        />
+      );
     default:
       throw new Error("Invalid entity type.");
   }

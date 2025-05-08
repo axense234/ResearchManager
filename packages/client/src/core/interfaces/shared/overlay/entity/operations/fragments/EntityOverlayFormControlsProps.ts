@@ -5,10 +5,12 @@ import {
   CreateResearchActivityDto,
   CreateResearchLogDto,
   CreateResearchPhaseDto,
+  CreateTagDto,
   EntityType,
   UpdateResearchActivityDto,
   UpdateResearchLogDto,
   UpdateResearchPhaseDto,
+  UpdateTagDto,
 } from "@researchmanager/shared/types";
 
 export interface EntityOverlayFormControlsProps {
@@ -18,7 +20,9 @@ export interface EntityOverlayFormControlsProps {
     | CreateResearchPhaseDto
     | UpdateResearchPhaseDto
     | CreateResearchLogDto
-    | UpdateResearchLogDto;
+    | UpdateResearchLogDto
+    | CreateTagDto
+    | UpdateTagDto;
   dtoUpdateFunction: (updateObj: ObjectKeyValueType) => UnknownAction;
   entityType: EntityType;
   method: "create" | "update";

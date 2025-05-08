@@ -2,6 +2,7 @@
 
 .modalOptions {
   @include flexCenter(row);
+  position: relative;
   width: 100%;
   gap: 1.5rem;
 }

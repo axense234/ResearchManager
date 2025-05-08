@@ -2,6 +2,7 @@
 import {
   IsArray,
   IsBoolean,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -13,6 +14,7 @@ import { TagFontFamily } from "@prisma/client";
 export class CreateTagDto {
   @IsString()
   @IsOptional()
+  @IsNotEmpty()
   title?: string;
 
   @IsString()

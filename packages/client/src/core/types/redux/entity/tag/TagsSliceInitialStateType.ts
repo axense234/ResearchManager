@@ -1,11 +1,12 @@
 // Types
-import { CreateTagDto } from "@researchmanager/shared/types";
+import { CreateTagDto, UpdateTagDto } from "@researchmanager/shared/types";
 import { TagRedux } from "./TagRedux";
 import { LoadingStateType } from "../../other";
-import { AddTagModalType } from "../general";
+import { AddTagModalType, CreateTagModalType } from "../general";
 
 export type TagsSliceInitialStateType = {
   createTagDto: CreateTagDto;
+  updateTagDto: UpdateTagDto;
 
   tagsExamples: TagRedux[];
 

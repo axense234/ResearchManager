@@ -2,6 +2,7 @@
 import { FC } from "react";
 // Components
 import UpsertResearchActivityOverlayInterface from "./interfaces/UpsertResearchActivityOverlayInterface";
+import UpsertTagOverlayInterface from "./interfaces/UpsertTagOverlayInterface";
 // Redux
 import { useAppSelector } from "@/hooks";
 import { selectEntityOverlay } from "@/redux/slices/general";
@@ -16,6 +17,8 @@ const UpsertEntityOverlay: FC = () => {
       return null;
     case "researchLog":
       return null;
+    case "tag":
+      return <UpsertTagOverlayInterface />;
     default:
       throw new Error("Invalid entity type.");
   }

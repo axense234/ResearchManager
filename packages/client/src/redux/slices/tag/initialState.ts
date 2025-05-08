@@ -4,13 +4,15 @@ import { TagsSliceStateType } from "@/core/types/redux/entity/tag/TagsSliceState
 import { TagRedux } from "@/core/types";
 // Adapter
 import { tagsAdapter } from "./adapter";
-// Mock Data
-import { createTagMockData, tagsMockData } from "@researchmanager/shared/mock";
+// Mock Data & Data
+import { tagsMockData, updateTagMockData } from "@researchmanager/shared/mock";
+import { defaultCreateTagDto } from "@/data/redux";
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
 
 export const tagsSliceInitialState = {
-  createTagDto: createTagMockData[0],
+  createTagDto: defaultCreateTagDto,
+  updateTagDto: updateTagMockData[0],
   tagsExamples: tagsMockData.map((tag) => {
     return transformEntityIntoEntityRedux(tag, "tag") as TagRedux;
   }),
@@ -23,6 +25,7 @@ export const tagsSliceInitialState = {
     isClosed: true,
     entityType: "researchActivity",
     method: "create",
+    location: "overlay",
   },
   selectedTagsIds: [],
 } as TagsSliceInitialStateType;

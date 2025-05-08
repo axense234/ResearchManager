@@ -7,11 +7,14 @@ export const {
   selectAll: selectAllTags,
   selectById: selectTagById,
   selectIds: selectTagsIds,
+  selectTotal: selectNumberOfTags,
 } = tagsAdapter.getSelectors<State>((state) => state.tags);
 
 export const selectTagsExamples = (state: State) => state.tags.tagsExamples;
 
 export const selectCreateTagDto = (state: State) => state.tags.createTagDto;
+
+export const selectUpdateTagDto = (state: State) => state.tags.updateTagDto;
 
 export const selectLoadingGetUserTags = (state: State) =>
   state.tags.loadingGetUserTags;

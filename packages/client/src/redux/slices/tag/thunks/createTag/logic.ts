@@ -14,7 +14,6 @@ export const createTag = createAsyncThunk<Tag | AxiosError, CreateTagDto>(
   "tags/createTag",
   async (createTagDto) => {
     try {
-      console.log(createTagDto);
       const res = (await axiosInstance.post("/tags/create", createTagDto))
         .data as ReturnObjectBuilderReturnObject;
 

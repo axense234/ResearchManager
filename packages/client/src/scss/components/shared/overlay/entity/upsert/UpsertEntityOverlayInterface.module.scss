@@ -31,7 +31,8 @@
   padding: 3rem;
   gap: 4rem;
 
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 0px;

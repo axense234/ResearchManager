@@ -1,43 +1,39 @@
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Components
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
 // Styles
 import addTagModalOptionsStyles from "@/scss/components/shared/modal/tag/add/AddTagModalOptions.module.scss";
 // Interfaces
 import { AddTagModalOptionsProps } from "@/core/interfaces";
+// Hooks
+import { useAppDispatch, useDetermineAddTagButtonDisabledInfo } from "@/hooks";
+import { setEntityOverlay } from "@/redux/slices/general/slice";
 
 const AddTagModalOptions: FC<AddTagModalOptionsProps> = ({
   selectedTagsIds,
   sourceTagsIds,
   totalTagsIds,
   onAddTagButtonClickFunction,
-  onCreateTagButtonClickFunction,
 }) => {
-  const isAddTagButtonDisabled =
-    selectedTagsIds.length < 1 ||
-    selectedTagsIds.some((selectedTagId) =>
-      sourceTagsIds?.includes(selectedTagId),
-    ) ||
-    selectedTagsIds.length === totalTagsIds.length;
+  const dispatch = useAppDispatch();
+  const optionsRef = useRef<HTMLDivElement>(null);
 
-  let addTagButtonDisabledMessage = "Please select some Tag!";
-  if (
-    selectedTagsIds.some((selectedTagId) =>
-      sourceTagsIds?.includes(selectedTagId),
-    )
-  ) {
-    addTagButtonDisabledMessage = "Please select other Tags!";
-  } else if (selectedTagsIds.length === totalTagsIds.length) {
-    addTagButtonDisabledMessage = "No Tags to select from!";
-  }
+  const { addTagButtonDisabledMessage, isAddTagButtonDisabled } =
+    useDetermineAddTagButtonDisabledInfo(
+      selectedTagsIds,
+      totalTagsIds,
+      sourceTagsIds,
+    );
 
   return (
-    <div className={addTagModalOptionsStyles.modalOptions}>
+    <div className={addTagModalOptionsStyles.modalOptions} ref={optionsRef}>
       <FunctionalButton
-        content="Add Tag"
+        content={selectedTagsIds.length > 1 ? "Add Tags" : "Add Tag"}
         disabled={isAddTagButtonDisabled}
-        onHoverContent="Add Selected Tag"
+        onHoverContent={
+          selectedTagsIds.length > 1 ? "Add Selected Tags" : "Add Selected Tag"
+        }
         onHoverContentDisabled={addTagButtonDisabledMessage}
         onClickFunction={onAddTagButtonClickFunction}
         size="small"
@@ -48,9 +44,17 @@ const AddTagModalOptions: FC<AddTagModalOptionsProps> = ({
         disabled={false}
         onHoverContent="Create Tag"
         onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-        onClickFunction={onCreateTagButtonClickFunction}
+        onClickFunction={() =>
+          dispatch(
+            setEntityOverlay({
+              entityType: "tag",
+              method: "create",
+              showOverlay: true,
+            }),
+          )
+        }
         size="small"
-        colorScheme="darkBlue"
+        colorScheme="green"
       />
     </div>
   );

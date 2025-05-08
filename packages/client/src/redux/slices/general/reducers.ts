@@ -32,6 +32,12 @@ export const generalSliceReducers = {
   ) {
     state.entityImagesOverlay = { ...action.payload };
   },
+  closeEntityOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction,
+  ) {
+    state.entityOverlay = { ...state.entityOverlay, showOverlay: false };
+  },
   updateContactUsDto(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<ObjectKeyValueType>,

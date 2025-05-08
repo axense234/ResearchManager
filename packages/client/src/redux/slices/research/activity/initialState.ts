@@ -5,16 +5,14 @@ import {
   ResearchActivitiesSliceInitialStateType,
   ResearchActivitiesSliceStateType,
 } from "@/core/types";
+import { defaultCreateResearchActivityDto } from "@/data/redux";
 // Helpers
 import { transformAndSortSpecialEntityExamplesByRP } from "@/helpers";
 // Mock Data
-import {
-  createResearchActivityMockData,
-  updateResearchActivityMockData,
-} from "@researchmanager/shared/mock";
+import { updateResearchActivityMockData } from "@researchmanager/shared/mock";
 
 export const researchActivitiesSliceInitialState = {
-  createResearchActivityDto: { ...createResearchActivityMockData[0], tags: [] },
+  createResearchActivityDto: defaultCreateResearchActivityDto,
   updateResearchActivityDto: { ...updateResearchActivityMockData[0], tags: [] },
   researchActivitiesExamples:
     transformAndSortSpecialEntityExamplesByRP("researchActivity"),

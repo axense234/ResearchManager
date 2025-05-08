@@ -3,17 +3,17 @@ import { CreateTagDto } from "../../types";
 
 export const createTagMockData: CreateTagDto[] = [
   {
+    title: "Relaxing",
+    backgroundColorOrImageSrc: "#FFFFFF",
+    fontSize: 16,
+    fontFamily: "GEORGIA",
+    userId: "put your user id here",
+  },
+  {
     title: "Goofy",
     backgroundColorOrImageSrc: "#FFFFFF",
     fontSize: 36,
     fontFamily: "COMIC_SANS_MS",
-    userId: "put your user id here",
-  },
-  {
-    title: "Serious",
-    backgroundColorOrImageSrc: "#FFFFFF",
-    fontSize: 16,
-    fontFamily: "ARIAL",
     userId: "put your user id here",
   },
   {

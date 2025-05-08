@@ -1,13 +1,14 @@
 // Types
 import {
   AddTagModalType,
+  CreateTagModalType,
   LoadingStateType,
   ObjectKeyValueType,
   TagRedux,
 } from "@/core/types";
 import { TagsSliceStateType } from "@/core/types/redux/entity/tag/TagsSliceStateType";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ActionType } from "@researchmanager/shared/types";
+import { ActionType, CreateTagDto } from "@researchmanager/shared/types";
 // Adapter
 import { tagsAdapter } from "./adapter";
 
@@ -18,9 +19,11 @@ export const tagsSliceReducers = {
   ) {
     state.addTagModal = action.payload;
   },
+
   closeAddTagModal(state: TagsSliceStateType, action: PayloadAction) {
     state.addTagModal = { ...state.addTagModal, isClosed: true };
   },
+
   updateLoadingTagState(
     state: TagsSliceStateType,
     action: PayloadAction<{ actionType: ActionType; value: LoadingStateType }>,
@@ -60,6 +63,22 @@ export const tagsSliceReducers = {
       ...state.createTagDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+
+  updateUpdateTagDto(
+    state: TagsSliceStateType,
+    action: PayloadAction<ObjectKeyValueType>,
+  ) {
+    state.updateTagDto = {
+      ...state.updateTagDto,
+      [action.payload.key]: action.payload.value,
+    };
+  },
+  setCreateTagDto(
+    state: TagsSliceStateType,
+    action: PayloadAction<CreateTagDto>,
+  ) {
+    state.createTagDto = action.payload;
   },
 
   setTags(state: TagsSliceStateType, action: PayloadAction<TagRedux[]>) {

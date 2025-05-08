@@ -7,3 +7,5 @@ export * from "./useOverlayTransition";
 export * from "./useRedirect";
 export * from "./useGetCurrentEntityIdAndIndex";
 export * from "./useCountdown";
+export * from "./useGetElementRelativePosition";
+export * from "./useDetermineAddTagButtonDisabledInfo";

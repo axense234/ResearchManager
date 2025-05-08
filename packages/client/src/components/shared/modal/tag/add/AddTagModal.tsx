@@ -21,8 +21,8 @@ import { AddTagModalProps } from "@/core/interfaces";
 
 const AddTagModal: FC<AddTagModalProps> = ({
   location,
-  onAddTagFunction,
   sourceTagsIds,
+  onAddTagFunction,
 }) => {
   const dispatch = useAppDispatch();
 
