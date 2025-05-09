@@ -1,16 +1,12 @@
 // Types
-import {
-  EntityImagePayloadType,
-  SpecialEntityImagesPayloadType,
-} from "@/core/types";
+import { SpecialEntityImagesPayloadType } from "@/core/types";
 import { Dispatch, SetStateAction } from "react";
 
 export interface ResearchPhaseImagesOverlayContentProps {
-  currentImagePayload: EntityImagePayloadType;
-  researchLogsImages: SpecialEntityImagesPayloadType;
-
-  setCurrentImageSrc: Dispatch<SetStateAction<string>>;
-
+  currentResearchLogsImages: SpecialEntityImagesPayloadType;
+  researchLogsImages: SpecialEntityImagesPayloadType[];
   showImageOverlay: boolean;
   setShowImageOverlay: Dispatch<SetStateAction<boolean>>;
+
+  onImageClickFunction: (parentName: string, index: number) => void;
 }

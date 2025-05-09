@@ -7,14 +7,26 @@ import ResearchActivityImagesOverlayContent from "./ResearchActivityImagesOverla
 import ResearchPhaseImagesOverlayContent from "./ResearchPhaseImagesOverlayContent";
 // Helpers
 import { organizeEntityImagesByEntityNames } from "@/helpers";
+// Redux
+import { useAppDispatch } from "@/hooks";
+import {
+  setCurrentEntityImageOverlayCarouselId,
+  setResearchPhaseImagesOverlay,
+} from "@/redux/slices/general/slice";
 
 const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
   specialEntityType,
   entityImages,
 }) => {
-  const [currentEntityName, setCurrentEntityName] = useState<string>("");
-  const [currentImageSrc, setCurrentImageSrc] = useState<string>(null);
+  const dispatch = useAppDispatch();
+
   const [showImageOverlay, setShowImageOverlay] = useState<boolean>(false);
+
+  const [currentResearchLogName, setCurrentResearchLogName] =
+    useState<string>("Default Name");
+
+  const [currentResearchPhaseName, setCurrentResearchPhaseName] =
+    useState<string>("Default Name");
 
   const entityImagesLogsNames =
     new Set(
@@ -44,36 +56,52 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
       "researchPhase",
     ) || [];
 
-  const currentEntityImages =
-    entityImages.filter(
-      (entityImage) => entityImage.researchPhaseName === currentEntityName,
-    ) || entityImages;
+  const currentResearchLogImages = entityImagesLogsImages.find(
+    (logsImages) => logsImages.entityName === currentResearchLogName,
+  );
+  const currentResearchPhaseImages = entityImagesResearchPhasesImages.find(
+    (phasesImages) => phasesImages.entityName === currentResearchPhaseName,
+  );
 
-  const currentEntityImage =
-    entityImages.find((entityImage) => entityImage.src === currentImageSrc) ||
-    entityImages[0];
+  const onResearchPhaseItemClickFunction = (entityName: string) => {
+    dispatch(
+      setResearchPhaseImagesOverlay({
+        showOverlay: true,
+        entityName,
+        entityImages: entityImages.filter(
+          (entityImage) => entityImage.researchPhaseName === entityName,
+        ),
+      }),
+    );
+  };
 
   if (specialEntityType === "researchPhase") {
     return (
       <ResearchPhaseImagesOverlayContent
-        currentImagePayload={currentEntityImage}
+        currentResearchLogsImages={currentResearchLogImages}
         researchLogsImages={entityImagesLogsImages}
-        setCurrentImageSrc={setCurrentImageSrc}
         showImageOverlay={showImageOverlay}
         setShowImageOverlay={setShowImageOverlay}
+        onImageClickFunction={(parentName: string, index: number) => {
+          setCurrentResearchLogName(parentName);
+          dispatch(setCurrentEntityImageOverlayCarouselId(index));
+          setShowImageOverlay(true);
+        }}
       />
     );
   } else if (specialEntityType === "researchActivity") {
     return (
       <ResearchActivityImagesOverlayContent
-        currentImagePayload={currentEntityImage}
-        currentImagesPayload={currentEntityImages}
+        currentResearchPhasesImages={currentResearchPhaseImages}
         researchPhasesImages={entityImagesResearchPhasesImages}
-        currentResearchPhaseName={currentEntityName}
-        setCurrentResearchPhaseName={setCurrentEntityName}
-        setCurrentImageSrc={setCurrentImageSrc}
         showImageOverlay={showImageOverlay}
         setShowImageOverlay={setShowImageOverlay}
+        onImageClickFunction={(parentName: string, index: number) => {
+          setCurrentResearchPhaseName(parentName);
+          dispatch(setCurrentEntityImageOverlayCarouselId(index));
+          setShowImageOverlay(true);
+        }}
+        onSectionTitleClickFunction={onResearchPhaseItemClickFunction}
       />
     );
   }

@@ -10,7 +10,10 @@ import EntityImagesTitle from "./EntityImagesTitle";
 // Redux
 import { useSelectEntityImages } from "@/hooks/redux/selector";
 import { useAppDispatch } from "@/hooks";
-import { setEntityImagesOverlay } from "@/redux/slices/general/slice";
+import {
+  setResearchActivityImagesOverlay,
+  setResearchPhaseImagesOverlay,
+} from "@/redux/slices/general/slice";
 
 const EntityImages: FC<EntityImagesProps> = ({
   specialEntity,
@@ -18,6 +21,7 @@ const EntityImages: FC<EntityImagesProps> = ({
   viewType,
   darkMode,
   position,
+  isCurrentView,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -27,12 +31,16 @@ const EntityImages: FC<EntityImagesProps> = ({
     viewType,
   );
 
+  const usedEntityImagesOverlayUpdater =
+    specialEntityType === "researchActivity"
+      ? setResearchActivityImagesOverlay
+      : setResearchPhaseImagesOverlay;
+
   const onEntityImageClickFunction = () => {
     dispatch(
-      setEntityImagesOverlay({
+      usedEntityImagesOverlayUpdater({
         entityImages,
         entityName: specialEntity.name,
-        entityType: specialEntityType,
         showOverlay: true,
       }),
     );
@@ -48,6 +56,7 @@ const EntityImages: FC<EntityImagesProps> = ({
         imagesSrc={entityImages.map((entityImage) => entityImage.src)}
         onClickFunction={() => onEntityImageClickFunction()}
         darkMode={darkMode}
+        isCurrentView={isCurrentView}
       />
     </article>
   );

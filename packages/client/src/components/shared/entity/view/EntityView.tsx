@@ -54,7 +54,7 @@ const EntityView: FC<EntityViewProps> = ({
             darkMode={darkMode}
             entityId={entityId}
             position={position}
-            entityIndex={entityIndex + 1}
+            isCurrentView={currentEntityIndex === entityIndex + 1}
             key={entityId}
           />
         );

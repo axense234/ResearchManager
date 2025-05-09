@@ -63,7 +63,7 @@ select:focus-visible {
 
 .prev {
   transform: translateX(-150%);
-  filter: blur(0px);
+  filter: blur(3px);
   opacity: 0;
 
   transition:
@@ -74,7 +74,7 @@ select:focus-visible {
 
 .current {
   transform: translateX(0%);
-  filter: blur(0px);
+  filter: blur(px);
   opacity: 1;
 
   transition:
@@ -85,7 +85,7 @@ select:focus-visible {
 
 .next {
   transform: translateX(150%);
-  filter: blur(0px);
+  filter: blur(3px);
   opacity: 0;
 
   transition:

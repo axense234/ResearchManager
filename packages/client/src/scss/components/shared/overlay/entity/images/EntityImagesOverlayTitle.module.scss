@@ -5,7 +5,7 @@
   width: 100%;
 
   > h4 {
-    @include heading("h4", "laptop", "white");
+    @include heading("h4", "laptop", "black");
     letter-spacing: 2px;
   }
 }

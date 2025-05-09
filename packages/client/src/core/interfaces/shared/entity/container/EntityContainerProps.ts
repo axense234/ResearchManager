@@ -10,6 +10,6 @@ export interface EntityContainerProps {
   containerType: EntityContainerType;
   entityId: string;
   darkMode: boolean;
-  entityIndex: number;
   position: EntityPositionType;
+  isCurrentView: boolean;
 }

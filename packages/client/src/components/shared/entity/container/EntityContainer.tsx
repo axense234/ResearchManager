@@ -14,8 +14,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
   entityId,
   containerType,
   darkMode,
-  entityIndex,
   position,
+  isCurrentView,
 }) => {
   switch (entityType) {
     case "researchActivity":
@@ -24,8 +24,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
-          entityIndex={entityIndex}
           position={position}
+          isCurrentView={isCurrentView}
         />
       );
     case "researchPhase":
@@ -34,8 +34,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
-          entityIndex={entityIndex}
           position={position}
+          isCurrentView={isCurrentView}
         />
       );
     case "researchLog":
@@ -44,8 +44,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
-          entityIndex={entityIndex}
           position={position}
+          isCurrentView={isCurrentView}
         />
       );
     case "researchSession":
@@ -54,8 +54,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
-          entityIndex={entityIndex}
           position={position}
+          isCurrentView={isCurrentView}
         />
       );
     case "tag":
@@ -64,8 +64,8 @@ const EntityContainer: FC<EntityContainerProps> = ({
           containerType={containerType}
           entityId={entityId}
           darkMode={darkMode}
-          entityIndex={entityIndex}
           position={position}
+          isCurrentView={isCurrentView}
         />
       );
     default:

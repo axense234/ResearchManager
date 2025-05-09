@@ -9,7 +9,7 @@ export interface EntityViewContentProps {
   viewType: EntityViewType;
   entityType: EntityViewEntityType;
   entityId: string;
-  entityIndex: number;
   darkMode: boolean;
   position: EntityPositionType;
+  isCurrentView: boolean;
 }

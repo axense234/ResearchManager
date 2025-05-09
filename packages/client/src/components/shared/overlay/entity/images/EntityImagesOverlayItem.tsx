@@ -16,7 +16,7 @@ const EntityImagesOverlayItem: FC<EntityImagesOverlayItemProps> = ({
   return (
     <div className={entityImagesOverlayItemStyles.itemContainer}>
       <h6
-        onClick={onItemClickFunction}
+        onClick={() => onItemClickFunction(itemName)}
         style={{
           cursor: itemEntityType === "researchPhase" ? "pointer" : "initial",
         }}
@@ -32,7 +32,10 @@ const EntityImagesOverlayItem: FC<EntityImagesOverlayItemProps> = ({
       <ul className={entityImagesOverlayItemStyles.itemImages}>
         {itemImages?.map((entityImage, index) => {
           return (
-            <li key={index} onClick={() => onImageClickFunction(entityImage)}>
+            <li
+              key={index}
+              onClick={() => onImageClickFunction(itemName, index + 1)}
+            >
               <Image
                 width={256}
                 height={256}

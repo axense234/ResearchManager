@@ -10,8 +10,15 @@ import {
 export const useAutoCarousel = (
   allowAutoCarousel: boolean,
   handleNextIncrement: () => void,
-  setAllowAutoCarousel: () => void,
+  setAllowAutoCarousel?: () => void,
+  sliderDelay?: number,
+  sliderFrequency?: number,
+  sliderRestartDelay?: number,
 ) => {
+  const carouselDelay = sliderDelay || AUTO_SLIDER_DELAY;
+  const carouselFrequency = sliderFrequency || AUTO_SLIDER_FREQUENCY;
+  const carouselRestart = sliderRestartDelay || AUTO_SLIDER_RESTART;
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
     let timeout: NodeJS.Timeout;
@@ -20,14 +27,14 @@ export const useAutoCarousel = (
       timeout = setTimeout(() => {
         interval = setInterval(() => {
           handleNextIncrement();
-        }, AUTO_SLIDER_FREQUENCY);
-      }, AUTO_SLIDER_DELAY);
+        }, carouselFrequency);
+      }, carouselDelay);
     }
     return () => {
       clearTimeout(timeout);
       clearInterval(interval);
     };
-  }, [AUTO_SLIDER_DELAY, AUTO_SLIDER_FREQUENCY, allowAutoCarousel]);
+  }, [carouselDelay, carouselFrequency, allowAutoCarousel]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -35,11 +42,11 @@ export const useAutoCarousel = (
     if (!allowAutoCarousel) {
       timeout = setTimeout(() => {
         setAllowAutoCarousel();
-      }, AUTO_SLIDER_RESTART);
+      }, carouselRestart);
     }
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [AUTO_SLIDER_RESTART, setAllowAutoCarousel, allowAutoCarousel]);
+  }, [carouselRestart, setAllowAutoCarousel, allowAutoCarousel]);
 };

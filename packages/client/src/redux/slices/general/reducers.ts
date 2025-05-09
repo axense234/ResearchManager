@@ -26,11 +26,17 @@ export const generalSliceReducers = {
   ) {
     state.deleteEntityOverlay = { ...action.payload };
   },
-  setEntityImagesOverlay(
+  setResearchActivityImagesOverlay(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<EntityImagesOverlayType>,
   ) {
-    state.entityImagesOverlay = { ...action.payload };
+    state.researchActivityImagesOverlay = { ...action.payload };
+  },
+  setResearchPhaseImagesOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<EntityImagesOverlayType>,
+  ) {
+    state.researchPhaseImagesOverlay = { ...action.payload };
   },
   closeEntityOverlay(
     state: GeneralSliceInitialStateType,
@@ -77,6 +83,12 @@ export const generalSliceReducers = {
   ) {
     state.currentAuthCarouselId = action.payload;
   },
+  setCurrentEntityImageOverlayCarouselId(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<number>,
+  ) {
+    state.currentEntityImageOverlayCarouselId = action.payload;
+  },
   handleAuthCarouselStepDirection(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<{ direction: "left" | "right" }>,
@@ -85,6 +97,32 @@ export const generalSliceReducers = {
       action.payload.direction,
       state.currentAuthCarouselId,
       authCarouselContent.length,
+    );
+  },
+  handleEntityImageCarouselStepDirection(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<{
+      direction: "left" | "right";
+      numberOfImages: number;
+    }>,
+  ) {
+    state.currentEntityImageCarouselId = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentEntityImageCarouselId,
+      action.payload.numberOfImages,
+    );
+  },
+  handleEntityImageOverlayCarouselStepDirection(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<{
+      direction: "left" | "right";
+      numberOfImages: number;
+    }>,
+  ) {
+    state.currentEntityImageOverlayCarouselId = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentEntityImageOverlayCarouselId,
+      action.payload.numberOfImages,
     );
   },
   changeCanTryFetchingProfile(

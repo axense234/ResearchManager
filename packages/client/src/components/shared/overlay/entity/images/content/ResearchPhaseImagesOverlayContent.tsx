@@ -11,18 +11,18 @@ import EntityImagesOverlayItem from "../EntityImagesOverlayItem";
 const ResearchPhaseImagesOverlayContent: FC<
   ResearchPhaseImagesOverlayContentProps
 > = ({
+  currentResearchLogsImages,
   researchLogsImages,
-  currentImagePayload,
-  setCurrentImageSrc,
   showImageOverlay,
   setShowImageOverlay,
+  onImageClickFunction,
 }) => {
   return (
     <div className={overlayContentStyles.contentContainer}>
       <EntityImageOverlay
         showOverlay={showImageOverlay}
         closeOverlayFunction={() => setShowImageOverlay(false)}
-        imagePayload={currentImagePayload}
+        imagesPayload={currentResearchLogsImages}
       />
       <ul className={overlayContentStyles.contentContainerItems}>
         {researchLogsImages.map((logImages) => {
@@ -33,10 +33,7 @@ const ResearchPhaseImagesOverlayContent: FC<
                 itemName={logImages.entityName}
                 itemImages={logImages.imagesSrc}
                 itemId={logImages.entityId}
-                onImageClickFunction={(imageSrc) => {
-                  setCurrentImageSrc(imageSrc);
-                  setShowImageOverlay(true);
-                }}
+                onImageClickFunction={onImageClickFunction}
               />
             </li>
           );

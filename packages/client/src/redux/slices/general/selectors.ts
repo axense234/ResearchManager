@@ -22,11 +22,15 @@ export const selectCanTryFetchingProfile = (state: State) =>
 export const selectLoadingLogOutUser = (state: State) =>
   state.general.loadingLogOutUser;
 
-// Auth Carousel
+// Carousel
 export const selectCurrentAuthCarouselId = (state: State) =>
   state.general.currentAuthCarouselId;
 export const selectAllowAutoCarousel = (state: State) =>
   state.general.allowAutoCarousel;
+export const selectCurrentEntityImageCarouselId = (state: State) =>
+  state.general.currentEntityImageCarouselId;
+export const selectCurrentEntityOverlayImageCarouselId = (state: State) =>
+  state.general.currentEntityImageOverlayCarouselId;
 
 // Modals
 export const selectGeneralModal = (state: State) => state.general.generalModal;
@@ -39,8 +43,11 @@ export const selectEntityOverlay = (state: State) =>
 export const selectDeleteEntityOverlay = (state: State) =>
   state.general.deleteEntityOverlay;
 
-export const selectEntityImagesOverlay = (state: State) =>
-  state.general.entityImagesOverlay;
+export const selectResearchActivityImagesOverlay = (state: State) =>
+  state.general.researchActivityImagesOverlay;
+
+export const selectResearchPhaseImagesOverlay = (state: State) =>
+  state.general.researchPhaseImagesOverlay;
 
 // Contact
 export const selectContactUsDto = (state: State) => state.general.contactUsDto;

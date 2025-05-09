@@ -7,7 +7,6 @@ import entityImagesOverlayTitleStyles from "@/scss/components/shared/overlay/ent
 
 const EntityImagesOverlayTitle: FC<EntityImagesOverlayTitleProps> = ({
   entityName,
-  specialEntityType,
 }) => {
   return (
     <div
@@ -15,13 +14,7 @@ const EntityImagesOverlayTitle: FC<EntityImagesOverlayTitleProps> = ({
         entityImagesOverlayTitleStyles.entityImagesOverlayTitleContainer
       }
     >
-      <h4
-        style={{
-          marginTop: specialEntityType === "researchPhase" ? "3rem" : "0",
-        }}
-      >
-        {entityName}
-      </h4>
+      <h4>{entityName}</h4>
     </div>
   );
 };

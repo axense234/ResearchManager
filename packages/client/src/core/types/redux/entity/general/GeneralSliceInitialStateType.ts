@@ -24,14 +24,18 @@ export type GeneralSliceInitialStateType = {
 
   canTryFetchingProfile: boolean;
 
-  // Auth Carousel
+  // Carousels
   currentAuthCarouselId: number;
   allowAutoCarousel: boolean;
+
+  currentEntityImageCarouselId: number;
+  currentEntityImageOverlayCarouselId: number;
 
   // Overlays
   entityOverlay: OverlayType;
   deleteEntityOverlay: DeleteEntityOverlayType;
-  entityImagesOverlay: EntityImagesOverlayType;
+  researchActivityImagesOverlay: EntityImagesOverlayType;
+  researchPhaseImagesOverlay: EntityImagesOverlayType;
 
   // Modals
   generalModal: ModalType;

@@ -8,7 +8,7 @@
   gap: 2rem;
 
   > h6 {
-    @include heading("h6", "laptop", "white");
+    @include heading("h6", "laptop", "black");
     letter-spacing: 0.5px;
   }
 }
@@ -34,8 +34,10 @@
 
       transition: transform 0.15s ease-in;
 
+      cursor: pointer;
+
       &:hover {
-        transform: rotate(-5deg) scale(1.03);
+        transform: rotate(-5deg) scale(1.005);
       }
     }
   }

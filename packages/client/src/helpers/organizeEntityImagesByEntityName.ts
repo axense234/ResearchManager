@@ -28,7 +28,7 @@ export const organizeEntityImagesByEntityNames = (
         (entityImage) => entityImage[specialEntityNameSelector] === entityName,
       )[specialEntityIdSelector],
     };
-  }) as SpecialEntityImagesPayloadType;
+  }) as SpecialEntityImagesPayloadType[];
 
   return organizedEntityImages;
 };

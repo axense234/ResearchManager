@@ -1,5 +1,6 @@
+// React
+import { FC } from "react";
 // Interfaces
-import { FC, useState } from "react";
 import { ResearchActivityImagesOverlayContentProps } from "@/core/interfaces";
 // SCSS
 import overlayContentStyles from "@/scss/components/shared/overlay/entity/images/content/ResearchActivityImagesOverlayContent.module.scss";
@@ -11,31 +12,21 @@ import EntityImagesOverlayItem from "../EntityImagesOverlayItem";
 const ResearchActivityImagesOverlayContent: FC<
   ResearchActivityImagesOverlayContentProps
 > = ({
-  currentImagePayload,
-  currentImagesPayload,
+  currentResearchPhasesImages,
   researchPhasesImages,
-  currentResearchPhaseName,
-  setCurrentResearchPhaseName,
-  setCurrentImageSrc,
   showImageOverlay,
   setShowImageOverlay,
+  onImageClickFunction,
+  onSectionTitleClickFunction,
 }) => {
-  const [showImagesOverlay, setShowImagesOverlay] = useState<boolean>(false);
-
   return (
     <div className={overlayContentStyles.contentContainer}>
       <EntityImageOverlay
         showOverlay={showImageOverlay}
         closeOverlayFunction={() => setShowImageOverlay(false)}
-        imagePayload={currentImagePayload}
+        imagesPayload={currentResearchPhasesImages}
       />
-      <EntityImagesOverlay
-        closeOverlayFunction={() => setShowImagesOverlay(false)}
-        showOverlay={showImagesOverlay}
-        entityName={currentResearchPhaseName}
-        specialEntityType="researchPhase"
-        entityImages={currentImagesPayload}
-      />
+      <EntityImagesOverlay specialEntityType="researchPhase" />
       <ul className={overlayContentStyles.contentContainerItems}>
         {researchPhasesImages.map((phaseImages) => {
           return (
@@ -45,14 +36,8 @@ const ResearchActivityImagesOverlayContent: FC<
                 itemName={phaseImages.entityName}
                 itemImages={phaseImages.imagesSrc}
                 itemId={phaseImages.entityId}
-                onItemClickFunction={() => {
-                  setCurrentResearchPhaseName(phaseImages.entityName);
-                  setShowImagesOverlay(true);
-                }}
-                onImageClickFunction={(imageSrc) => {
-                  setCurrentImageSrc(imageSrc);
-                  setShowImageOverlay(true);
-                }}
+                onItemClickFunction={onSectionTitleClickFunction}
+                onImageClickFunction={onImageClickFunction}
               />
             </li>
           );

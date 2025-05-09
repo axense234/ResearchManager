@@ -11,50 +11,39 @@ import CloseInterfaceButton from "../../../general/CloseInterfaceButton";
 import EntityImagesOverlayContent from "./content/EntityImagesOverlayContent";
 import EntityImagesOverlayTitle from "./EntityImagesOverlayTitle";
 // Redux
-import { selectEntityImagesOverlay } from "@/redux/slices/general";
-import { setEntityImagesOverlay } from "@/redux/slices/general/slice";
+import {
+  selectResearchActivityImagesOverlay,
+  selectResearchPhaseImagesOverlay,
+} from "@/redux/slices/general";
+import {
+  setResearchActivityImagesOverlay,
+  setResearchPhaseImagesOverlay,
+} from "@/redux/slices/general/slice";
 
 const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
-  entityName,
-  showOverlay,
-  closeOverlayFunction,
-  entityImages,
   specialEntityType,
 }) => {
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const entityImagesOverlay = useAppSelector(selectEntityImagesOverlay);
+  const researchActivityImagesOverlay = useAppSelector(
+    selectResearchActivityImagesOverlay,
+  );
+  const researchPhaseImagesOverlay = useAppSelector(
+    selectResearchPhaseImagesOverlay,
+  );
 
-  const useEntityImagesOverlayValues = true;
+  const usedImagesOverlay =
+    specialEntityType === "researchActivity"
+      ? researchActivityImagesOverlay
+      : researchPhaseImagesOverlay;
 
-  const usedEntityName = useEntityImagesOverlayValues
-    ? entityImagesOverlay.entityName
-    : entityName;
+  const usedEntityImagesOverlayUpdater =
+    specialEntityType === "researchActivity"
+      ? setResearchActivityImagesOverlay
+      : setResearchPhaseImagesOverlay;
 
-  const usedShowOverlay = useEntityImagesOverlayValues
-    ? entityImagesOverlay.showOverlay
-    : showOverlay;
-
-  const usedEntityImages = useEntityImagesOverlayValues
-    ? entityImagesOverlay.entityImages
-    : entityImages;
-
-  const usedEntityType = useEntityImagesOverlayValues
-    ? entityImagesOverlay.entityType
-    : specialEntityType;
-
-  const usedCloseOverlayFunction = useEntityImagesOverlayValues
-    ? () =>
-        dispatch(
-          setEntityImagesOverlay({
-            ...entityImagesOverlay,
-            showOverlay: false,
-          }),
-        )
-    : () => closeOverlayFunction();
-
-  useOverlayTransition(usedShowOverlay, overlayRef);
+  useOverlayTransition(usedImagesOverlay.showOverlay, overlayRef);
 
   return (
     <div
@@ -62,19 +51,25 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
       ref={overlayRef}
     >
       <CloseInterfaceButton
-        closeInterfaceFunction={usedCloseOverlayFunction}
+        closeInterfaceFunction={() =>
+          dispatch(
+            usedEntityImagesOverlayUpdater({
+              ...usedImagesOverlay,
+              showOverlay: false,
+            }),
+          )
+        }
         color="pastelRed"
         title="Close Overlay"
         size="large"
       />
-      <EntityImagesOverlayTitle
-        entityName={usedEntityName}
-        specialEntityType={usedEntityType}
-      />
-      <EntityImagesOverlayContent
-        specialEntityType={usedEntityType}
-        entityImages={usedEntityImages || []}
-      />
+      <div className={entityImagesOverlayStyles.entityImagesOverlayContent}>
+        <EntityImagesOverlayTitle entityName={usedImagesOverlay.entityName} />
+        <EntityImagesOverlayContent
+          specialEntityType={specialEntityType}
+          entityImages={usedImagesOverlay.entityImages || []}
+        />
+      </div>
     </div>
   );
 };

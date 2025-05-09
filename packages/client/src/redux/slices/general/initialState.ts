@@ -21,9 +21,12 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   loadingGetProfileOAuth: "IDLE",
   loadingLogOutUser: "IDLE",
 
-  // Auth Carousel
+  // Carousel
   currentAuthCarouselId: 1,
   allowAutoCarousel: true,
+
+  currentEntityImageCarouselId: 1,
+  currentEntityImageOverlayCarouselId: 1,
 
   // Overlays
   entityOverlay: {
@@ -38,10 +41,15 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
     entityId: "",
   },
 
-  entityImagesOverlay: {
+  researchActivityImagesOverlay: {
     showOverlay: false,
-    entityType: "researchActivity",
-    entityName: "Default Entity Name",
+    entityName: "Default RA Name",
+    entityImages: [],
+  },
+
+  researchPhaseImagesOverlay: {
+    showOverlay: false,
+    entityName: "Default RP Name",
     entityImages: [],
   },
 

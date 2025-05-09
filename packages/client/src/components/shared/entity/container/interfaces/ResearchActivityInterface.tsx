@@ -42,8 +42,8 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
   entityId,
   darkMode,
-  entityIndex,
   position,
+  isCurrentView,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -85,7 +85,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   );
 
   useEffect(() => {
-    if (researchActivity && currentResearchActivityIndex === entityIndex) {
+    if (researchActivity && isCurrentView) {
       dispatch(
         setUpdateResearchActivityDto({
           ...researchActivity,

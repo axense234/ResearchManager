@@ -12,4 +12,5 @@ export interface EntityDetailsProps {
   viewType: EntityViewType;
   darkMode: boolean;
   position: EntityPositionType;
+  isCurrentView: boolean;
 }

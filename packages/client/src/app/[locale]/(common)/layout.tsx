@@ -24,7 +24,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
       {/* Overlays */}
       <UpsertEntityOverlay />
       <DeleteEntityOverlay />
-      <EntityImagesOverlay />
+      <EntityImagesOverlay specialEntityType="researchActivity" />
       {/* Modals */}
       <GeneralModal type="general" />
       {/* Fixed */}

@@ -18,7 +18,7 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
   darkMode,
   entityId,
   position,
-  entityIndex,
+  isCurrentView,
 }) => {
   const entity = useSelectEntity(viewType, entityType, entityId) as
     | ResearchActivityRedux
@@ -31,8 +31,8 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         entityType={entityType}
         entityId={entity?.id}
         darkMode={viewType === "example" ? true : darkMode}
-        entityIndex={entityIndex}
         position={position}
+        isCurrentView={isCurrentView}
       />
       <EntityDetails
         specialEntity={entity}
@@ -40,6 +40,7 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         viewType={viewType}
         darkMode={viewType === "example" ? true : darkMode}
         position={position}
+        isCurrentView={isCurrentView}
       />
     </div>
   );

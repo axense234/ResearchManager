@@ -1,8 +1,8 @@
 // Types
-import { EntityImagePayloadType } from "@/core/types";
+import { SpecialEntityImagesPayloadType } from "@/core/types";
 
 export interface EntityImageOverlayProps {
   showOverlay: boolean;
   closeOverlayFunction: (imageSrc?: string) => void;
-  imagePayload: EntityImagePayloadType;
+  imagesPayload: SpecialEntityImagesPayloadType;
 }
