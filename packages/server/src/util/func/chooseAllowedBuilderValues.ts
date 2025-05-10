@@ -1,5 +1,5 @@
 // Types
-import { EntityType, EntityTypePlural } from '@researchmanager/shared/types';
+import { EntityType } from '@researchmanager/shared/types';
 // Data
 import {
   activityDayAllowedIncludeValues,
@@ -72,6 +72,7 @@ import {
   userAllowedConnectValues,
 } from 'src/modules/entity/user/data';
 import {
+  AllowedIncludeValue,
   ChooseAllowedBuilderValuesReturnObject,
   DataObjectBuilderAllowedConnectValue,
 } from 'src/modules/util/builder/types';
@@ -79,7 +80,7 @@ import {
 export const chooseAllowedBuilderValues = (
   entityType: EntityType,
 ): ChooseAllowedBuilderValuesReturnObject => {
-  let allowedIncludeValues: (EntityType | EntityTypePlural)[] = [];
+  let allowedIncludeValues: AllowedIncludeValue[] = [];
   let allowedSelectValues: string[] = [];
   let allowedSearchByKeyValues: string[] = [];
   let allowedSortByKeysValues: string[] = [];

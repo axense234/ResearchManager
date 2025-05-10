@@ -2,9 +2,10 @@
 
 .carouselContentContainer {
   @include flexCenter(column);
+  position: absolute;
   width: 100%;
   height: 100%;
-  gap: 2rem;
+  gap: 1rem;
 
   > h4 {
     @include heading("h4", "laptop", "white");
@@ -17,6 +18,8 @@
   width: 100%;
   gap: 1rem;
   min-height: 10rem;
+
+  transition-delay: 30ms;
 
   > h6 {
     @include heading("h6", "laptop", "white");

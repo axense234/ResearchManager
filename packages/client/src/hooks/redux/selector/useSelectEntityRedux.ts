@@ -4,10 +4,12 @@ import { selectResearchPhaseById } from "@/redux/slices/research/phase";
 import { useAppSelector } from "../redux";
 // Types
 import { EntityType } from "@researchmanager/shared/types";
+import { selectTagById } from "@/redux/slices/tag";
 
 const selectors = {
   researchActivity: selectResearchActivityById,
   researchPhase: selectResearchPhaseById,
+  tag: selectTagById,
 };
 
 export const useSelectEntityRedux = (

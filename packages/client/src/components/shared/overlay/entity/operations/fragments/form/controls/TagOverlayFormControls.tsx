@@ -77,7 +77,10 @@ const TagOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
         maxInputSize={24}
       />
       <SelectFormControl
-        entityProperty={availableTagFontFamilies}
+        entityProperty={availableTagFontFamilies.map((fontFamily) => {
+          return { value: fontFamily, label: fontFamily };
+        })}
+        noEntityPropertyMessage="Something is very wrong."
         labelContent="Font Family:"
         onEntityPropertyValueChange={(e) =>
           dispatch(

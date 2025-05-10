@@ -6,6 +6,7 @@ import {
   ModalType,
   ObjectKeyValueType,
   OverlayType,
+  UpsertTagOverlayType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 // Data
@@ -19,6 +20,12 @@ export const generalSliceReducers = {
     action: PayloadAction<OverlayType>,
   ) {
     state.entityOverlay = { ...action.payload };
+  },
+  setUpsertTagOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<UpsertTagOverlayType>,
+  ) {
+    state.upsertTagOverlay = { ...action.payload };
   },
   setDeleteEntityOverlay(
     state: GeneralSliceInitialStateType,
@@ -43,6 +50,12 @@ export const generalSliceReducers = {
     action: PayloadAction,
   ) {
     state.entityOverlay = { ...state.entityOverlay, showOverlay: false };
+  },
+  closeUpsertTagOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction,
+  ) {
+    state.upsertTagOverlay = { ...state.upsertTagOverlay, showOverlay: false };
   },
   updateContactUsDto(
     state: GeneralSliceInitialStateType,

@@ -3,7 +3,7 @@
 .sectionContainer {
   @include flexCenter(column);
   width: 100%;
-  gap: 4rem;
+  gap: 5rem;
 
   padding: 4rem;
   padding-bottom: 6rem;
@@ -16,7 +16,7 @@
 .sectionContent {
   @include flexCenter(column);
   width: 100%;
-  gap: 8rem;
+  gap: 10rem;
 }
 
 .sectionSettings {

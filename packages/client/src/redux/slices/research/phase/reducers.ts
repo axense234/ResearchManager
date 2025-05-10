@@ -6,7 +6,11 @@ import {
   ResearchPhasesSliceStateType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ActionType } from "@researchmanager/shared/types";
+import {
+  ActionType,
+  CreateResearchPhaseDto,
+  UpdateResearchPhaseDto,
+} from "@researchmanager/shared/types";
 // Adapter
 import { researchPhasesAdapter } from "./adapter";
 // Helpers
@@ -72,6 +76,27 @@ export const researchPhasesSliceReducers = {
       ...state.createResearchPhaseDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  updateUpdateResearchPhaseDto(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<ObjectKeyValueType>,
+  ) {
+    state.updateResearchPhaseDto = {
+      ...state.updateResearchPhaseDto,
+      [action.payload.key]: action.payload.value,
+    };
+  },
+  setCreateResearchPhaseDto(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<CreateResearchPhaseDto>,
+  ) {
+    state.createResearchPhaseDto = action.payload;
+  },
+  setUpdateResearchPhaseDto(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<UpdateResearchPhaseDto>,
+  ) {
+    state.updateResearchPhaseDto = action.payload;
   },
   setResearchPhases(
     state: ResearchPhasesSliceStateType,

@@ -13,12 +13,16 @@ export const {
   (state) => state.researchActivities,
 );
 
-export const selectAllUnarchivedResearchActivitiesIds = createSelector(
+export const selectAllUnarchivedResearchActivities = createSelector(
   [selectAllResearchActivities],
   (researchActivities) =>
-    researchActivities
-      .filter((researchActivity) => !researchActivity.archived)
-      .map((researchActivity) => researchActivity.id),
+    researchActivities.filter((researchActivity) => !researchActivity.archived),
+);
+
+export const selectAllUnarchivedResearchActivitiesIds = createSelector(
+  [selectAllUnarchivedResearchActivities],
+  (researchActivities) =>
+    researchActivities.map((researchActivity) => researchActivity.id),
 );
 
 export const selectNumberOfUnarchivedResearchActivities = createSelector(

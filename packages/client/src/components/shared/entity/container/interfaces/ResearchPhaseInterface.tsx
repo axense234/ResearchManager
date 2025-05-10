@@ -1,7 +1,9 @@
-// Types and Interfaces
-import { FC } from "react";
+// React
+import { FC, useEffect } from "react";
+// Interfaces
 import { EntityContainerInterfaceProps } from "@/core/interfaces";
-import { ResearchLogRedux, ResearchPhaseRedux } from "@/core/types";
+// Types
+import { ResearchPhaseRedux } from "@/core/types";
 // SCSS
 import entityContainerStyles from "@/scss/components/shared/entity/container/EntityContainer.module.scss";
 // Fragments
@@ -9,23 +11,31 @@ import EntityContainerTags from "../fragments/EntityContainerTags";
 import EntityContainerLabel from "../fragments/EntityContainerLabel";
 import EntityContainerOptions from "../fragments/EntityContainerOptions";
 // Helpers
-import { calculateSpecialEntityRP, onEditTagFunction } from "@/helpers";
+import { onEditTagFunction } from "@/helpers";
 // Wrapper
 import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper";
 // Redux and Hooks
-import { useAppDispatch, useAppSelector, useSelectEntity } from "@/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCalculateEntityResearchPoints,
+  useSelectEntity,
+} from "@/hooks";
 // Redux
 import {
   handleResearchPhaseCarouselStepDirection,
   handleResearchPhaseExampleCarouselStepDirection,
   selectCurrentResearchPhaseExampleIndex,
   selectCurrentResearchPhaseIndex,
-  selectNumberOfResearchPhases,
+  selectNumberOfUnarchivedResearchPhases,
+  setUpdateResearchPhaseDto,
   updateResearchPhase,
 } from "@/redux/slices/research/phase";
-import { useSelectEntitiesByIds } from "@/hooks/redux/selector";
 import { selectSelectedTagsIds } from "@/redux/slices/tag";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
+import {
+  setDeleteEntityOverlay,
+  setEntityOverlay,
+} from "@/redux/slices/general/slice";
 // Data
 import { mainWhiteColor } from "@/data/general";
 
@@ -33,6 +43,8 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
   entityId,
   darkMode,
+  isCurrentView,
+  position,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -61,15 +73,29 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
     entityId,
   ) as ResearchPhaseRedux;
 
-  const researchPhaseLogs = useSelectEntitiesByIds(
+  const numberOfResearchPhases = useAppSelector(
+    selectNumberOfUnarchivedResearchPhases,
+  );
+
+  const entityResearchPoints = useCalculateEntityResearchPoints(
+    researchPhase,
+    "researchPhase",
     containerType,
-    "researchLog",
-    researchPhase?.researchLogsIds || [],
-  ) as ResearchLogRedux[];
+  );
 
-  const numberOfResearchPhases = useAppSelector(selectNumberOfResearchPhases);
-
-  const entityResearchPoints = calculateSpecialEntityRP(researchPhaseLogs);
+  useEffect(() => {
+    if (researchPhase && isCurrentView) {
+      console.log("yeee");
+      dispatch(
+        setUpdateResearchPhaseDto({
+          ...researchPhase,
+          tags: researchPhase.tagsIds,
+          researchLogs: researchPhase.researchLogsIds,
+          researchSessions: researchPhase.researchSessionsIds,
+        }),
+      );
+    }
+  }, [researchPhase, isCurrentView]);
 
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
     onEditTagFunction(
@@ -101,10 +127,10 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
       }
     >
       <div
-        className={entityContainerStyles.entityContainer}
+        className={`${entityContainerStyles.entityContainer} ${position}`}
         style={{
           backgroundColor:
-            researchPhase.backgroundColorOrImageSrc || mainWhiteColor,
+            researchPhase?.backgroundColorOrImageSrc || mainWhiteColor,
         }}
       >
         <EntityContainerTags
@@ -132,7 +158,15 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
               }),
             )
           }
-          onEntityDeleteFunction={() => {}}
+          onEntityDeleteFunction={() =>
+            dispatch(
+              setDeleteEntityOverlay({
+                entityType: "researchPhase",
+                showOverlay: true,
+                entityId: researchPhase.id,
+              }),
+            )
+          }
         />
       </div>
     </EntityContainerInterfaceWrapper>

@@ -10,15 +10,16 @@ import profileResearchPhasesStyles from "@/scss/components/page/profile/ProfileR
 // Data
 import { profileResearchPhasesData } from "@/data/general/profile";
 // Redux
-import {
-  useAppDispatch,
-  useAppSelector,
-  useGetCurrentEntityIdAndIndex,
-} from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
 } from "@/redux/slices/general";
+import {
+  selectAllUnarchivedResearchPhasesIds,
+  selectResearchPhasesExamples,
+} from "@/redux/slices/research/phase";
+import { setEntityOverlay } from "@/redux/slices/general/slice";
 
 const ProfileResearchPhases: FC = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +37,16 @@ const ProfileResearchPhases: FC = () => {
 
   const usedViewType = showExamples ? "example" : "entity";
 
-  const entityId = useGetCurrentEntityIdAndIndex("researchPhase", usedViewType);
+  const researchPhasesIds = useAppSelector(
+    selectAllUnarchivedResearchPhasesIds,
+  );
+
+  const researchPhasesExamplesIds = useAppSelector(
+    selectResearchPhasesExamples,
+  ).map((example) => example.id);
+
+  const usedIds =
+    usedViewType === "entity" ? researchPhasesIds : researchPhasesExamplesIds;
 
   return (
     <section className={profileResearchPhasesStyles.sectionContainer}>
@@ -62,15 +72,24 @@ const ProfileResearchPhases: FC = () => {
             disabled={false}
             onHoverContent="Create Research Phase"
             onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-            onClickFunction={() => dispatch(() => {})}
+            onClickFunction={() =>
+              dispatch(
+                setEntityOverlay({
+                  entityType: "researchPhase",
+                  method: "create",
+                  showOverlay: true,
+                }),
+              )
+            }
           />
         </div>
         <EntityView
           entityType="researchPhase"
           viewType={usedViewType}
-          entityId={entityId}
           isLoading={entityViewIsLoading}
           darkMode={darkMode}
+          entitiesIds={usedIds}
+          setShowEntityExamples={(value: boolean) => setShowExamples(value)}
         />
       </div>
     </section>

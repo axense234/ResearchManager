@@ -6,6 +6,7 @@ import { UserRedux } from "./UserRedux";
 import { OverlayType } from "./OverlayType";
 import { EntityImagesOverlayType } from "./EntityImagesOverlayType";
 import { DeleteEntityOverlayType } from "./DeleteEntityOverlayType";
+import { UpsertTagOverlayType } from "./UpsertTagOverlayType";
 
 export type GeneralSliceInitialStateType = {
   // Auth
@@ -33,6 +34,7 @@ export type GeneralSliceInitialStateType = {
 
   // Overlays
   entityOverlay: OverlayType;
+  upsertTagOverlay: UpsertTagOverlayType;
   deleteEntityOverlay: DeleteEntityOverlayType;
   researchActivityImagesOverlay: EntityImagesOverlayType;
   researchPhaseImagesOverlay: EntityImagesOverlayType;

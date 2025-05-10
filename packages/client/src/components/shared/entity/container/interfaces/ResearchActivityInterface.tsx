@@ -1,5 +1,5 @@
 // React
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect } from "react";
 // Interfaces
 import { EntityContainerInterfaceProps } from "@/core/interfaces";
 // Types
@@ -47,8 +47,6 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const interfaceRef = useRef<HTMLDivElement>(null);
-
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
 
   const currentResearchActivityExampleIndex = useAppSelector(
@@ -94,7 +92,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
         }),
       );
     }
-  }, [researchActivity, currentResearchActivityIndex]);
+  }, [researchActivity, isCurrentView]);
 
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
     onEditTagFunction(
@@ -127,7 +125,6 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     >
       <div
         className={`${entityContainerStyles.entityContainer} ${position}`}
-        ref={interfaceRef}
         style={{
           backgroundColor:
             researchActivity?.backgroundColorOrImageSrc || mainWhiteColor,

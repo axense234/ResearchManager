@@ -12,6 +12,7 @@ import { handleFormErrorInputsAndModalMessage } from "@/helpers";
 // Types
 import { AxiosError } from "axios";
 import { createTag } from "@/redux/slices/tag/thunks";
+import { createResearchPhase } from "@/redux/slices/research/phase";
 
 export const setModalListener = createListenerMiddleware();
 
@@ -27,6 +28,11 @@ setModalListener.startListening({
     deleteResearchActivity.pending,
     deleteResearchActivity.fulfilled,
     deleteResearchActivity.rejected,
+    // Research Phase
+    createResearchPhase.pending,
+    createResearchPhase.fulfilled,
+    createResearchPhase.rejected,
+    // Tag
     createTag.pending,
     createTag.fulfilled,
     createTag.rejected,

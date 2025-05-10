@@ -11,6 +11,19 @@ export const {
   selectTotal: selectNumberOfResearchPhases,
 } = researchPhasesAdapter.getSelectors<State>((state) => state.researchPhases);
 
+export const selectAllUnarchivedResearchPhasesIds = createSelector(
+  [selectAllResearchPhases],
+  (researchPhases) =>
+    researchPhases
+      .filter((researchPhase) => !researchPhase.archived)
+      .map((researchPhase) => researchPhase.id),
+);
+
+export const selectNumberOfUnarchivedResearchPhases = createSelector(
+  [selectAllUnarchivedResearchPhasesIds],
+  (ids) => ids.length,
+);
+
 export const selectResearchPhasesExamples = (state: State) =>
   state.researchPhases.researchPhasesExamples;
 
@@ -48,6 +61,9 @@ export const selectCurrentResearchPhaseIndex = (state: State) =>
 
 export const selectCreateResearchPhaseDto = (state: State) =>
   state.researchPhases.createResearchPhaseDto;
+
+export const selectUpdateResearchPhaseDto = (state: State) =>
+  state.researchPhases.updateResearchPhaseDto;
 
 export const selectLoadingGetUserResearchPhases = (state: State) =>
   state.researchPhases.loadingGetUserResearchPhases;

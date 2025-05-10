@@ -15,8 +15,27 @@
 
   select {
     background-color: getColor("main-light-blue");
-    padding: 0.5rem;
-    font-size: getFontSize("button-heading-2");
     border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: getFontSize("button-heading");
+
+    transition: transform 0.15s ease-in;
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  p {
+    border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: getFontSize("button-heading");
+
+    transition: transform 0.15s ease-in;
+
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 }

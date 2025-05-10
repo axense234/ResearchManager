@@ -9,6 +9,7 @@ import DeleteCacheDeepType from '../types/DeleteCacheDeep';
 import { DeleteCacheShallowService } from './deleteCacheShallow.service';
 // Util
 import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
+import { AllowedIncludeValue } from 'src/modules/util/builder/types';
 
 @Injectable()
 export class DeleteCacheDeepService {
@@ -34,7 +35,12 @@ export class DeleteCacheDeepService {
     // Deep
     const { allowedIncludeValues } = chooseAllowedBuilderValues(entityType);
 
-    allowedIncludeValues.map((allowedIncludeValue) => {
+    const experimentalAllowedIncludeValues = [
+      ...allowedIncludeValues,
+      'users',
+    ] as AllowedIncludeValue[];
+
+    experimentalAllowedIncludeValues.map((allowedIncludeValue) => {
       return this.deleteCacheShallowService.deleteCacheShallow({
         base: entityTypeToPlural(allowedIncludeValue),
         actionType: 'UPDATE',
@@ -43,7 +49,11 @@ export class DeleteCacheDeepService {
         specifiers: [
           {
             label: 'includeValues',
-            possibleValues: [entityType, entityTypeToPlural(entityType)],
+            possibleValues: [
+              entityType,
+              entityTypeToPlural(entityType),
+              entityTypeToPlural(allowedIncludeValues[0]),
+            ],
           },
           { label: 'chosenOptionType', possibleValues: ['include'] },
         ],

@@ -6,12 +6,14 @@ import {
 // Adapter
 import { researchPhasesAdapter } from "./adapter";
 // Mock Data
-import { createResearchPhaseMockData } from "@researchmanager/shared/mock";
+import { updateResearchPhaseMockData } from "@researchmanager/shared/mock";
+import { defaultCreateResearchPhaseDto } from "@/data/redux";
 // Helpers
 import { transformAndSortSpecialEntityExamplesByRP } from "@/helpers";
 
 export const researchPhasesSliceInitialState = {
-  createResearchPhaseDto: createResearchPhaseMockData[0],
+  createResearchPhaseDto: defaultCreateResearchPhaseDto,
+  updateResearchPhaseDto: { ...updateResearchPhaseMockData[0], tags: [] },
   researchPhasesExamples:
     transformAndSortSpecialEntityExamplesByRP("researchPhase"),
   loadingCreateResearchPhase: "IDLE",

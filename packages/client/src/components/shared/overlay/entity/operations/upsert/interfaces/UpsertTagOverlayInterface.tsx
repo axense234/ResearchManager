@@ -7,6 +7,7 @@ import FunctionalButton from "@/components/shared/general/FunctionalButton";
 import CloseInterfaceButton from "@/components/shared/general/CloseInterfaceButton";
 import EntityOverlayFormControls from "../../fragments/form/EntityOverlayFormControls";
 import GeneralModal from "@/components/shared/modal/GeneralModal";
+import EntityOverlayTagPreview from "../../fragments/tags/EntityOverlayTagPreview";
 // Redux and Hooks
 import {
   useAppDispatch,
@@ -14,12 +15,11 @@ import {
   useHandleUpsertEntityOverlaySideEffects,
   useOverlayTransition,
 } from "@/hooks";
-import { selectEntityOverlay, selectUserProfile } from "@/redux/slices/general";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
 import {
-  updateCreateResearchActivityDto,
-  updateUpdateResearchActivityDto,
-} from "@/redux/slices/research/activity";
+  selectUpsertTagOverlay,
+  selectUserProfile,
+} from "@/redux/slices/general";
+import { closeUpsertTagOverlay } from "@/redux/slices/general/slice";
 import {
   selectCreateTagDto,
   selectLoadingCreateTag,
@@ -29,14 +29,13 @@ import {
   updateUpdateTagDto,
 } from "@/redux/slices/tag";
 import { createTag, updateTag } from "@/redux/slices/tag/thunks";
-import EntityOverlayTagPreview from "../../fragments/tags/EntityOverlayTagPreview";
 
 const UpsertTagOverlayInterface: FC = () => {
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const userProfile = useAppSelector(selectUserProfile);
-  const entityOverlay = useAppSelector(selectEntityOverlay);
+  const upsertTagOverlay = useAppSelector(selectUpsertTagOverlay);
 
   const createTagDto = useAppSelector(selectCreateTagDto);
   const updateTagDto = useAppSelector(selectUpdateTagDto);
@@ -45,19 +44,21 @@ const UpsertTagOverlayInterface: FC = () => {
   const loadingUpdateTag = useAppSelector(selectLoadingUpdateTag);
 
   const loadingUpsertTag =
-    entityOverlay.method === "create" ? loadingCreateTag : loadingUpdateTag;
+    upsertTagOverlay.method === "create" ? loadingCreateTag : loadingUpdateTag;
 
   const isRequestPending =
     loadingCreateTag === "PENDING" || loadingUpdateTag === "PENDING";
 
   const interfaceTitle =
-    entityOverlay.method === "create" ? "Create Tag" : "Update Tag";
+    upsertTagOverlay.method === "create" ? "Create Tag" : "Update Tag";
 
   const dtoUsed =
-    entityOverlay.method === "create" ? createTagDto : updateTagDto;
+    upsertTagOverlay.method === "create" ? createTagDto : updateTagDto;
 
   const dtoUsedUpdateFunction =
-    entityOverlay.method === "create" ? updateCreateTagDto : updateUpdateTagDto;
+    upsertTagOverlay.method === "create"
+      ? updateCreateTagDto
+      : updateUpdateTagDto;
 
   const onTagCreateFunction = () => {
     dispatch(createTag({ ...createTagDto, userId: userProfile.id }));
@@ -67,23 +68,23 @@ const UpsertTagOverlayInterface: FC = () => {
     dispatch(
       updateTag({
         dto: { ...updateTagDto, userId: userProfile.id },
-        tagId: entityOverlay.entityId,
+        tagId: upsertTagOverlay.entityId,
       }),
     );
   };
 
   const dtoUsedUpsertFunction =
-    entityOverlay.method === "create"
+    upsertTagOverlay.method === "create"
       ? onTagCreateFunction
       : onTagUpdateFunction;
 
   useHandleUpsertEntityOverlaySideEffects(
     "tag",
     loadingUpsertTag,
-    entityOverlay.method,
+    upsertTagOverlay.method,
   );
 
-  useOverlayTransition(entityOverlay.showOverlay, overlayRef);
+  useOverlayTransition(upsertTagOverlay.showOverlay, overlayRef);
 
   return (
     <div
@@ -91,9 +92,7 @@ const UpsertTagOverlayInterface: FC = () => {
       ref={overlayRef}
     >
       <CloseInterfaceButton
-        closeInterfaceFunction={() =>
-          dispatch(setEntityOverlay({ ...entityOverlay, showOverlay: false }))
-        }
+        closeInterfaceFunction={() => dispatch(closeUpsertTagOverlay())}
         color="pastelRed"
         title="Close Interface"
         size="large"
@@ -104,7 +103,7 @@ const UpsertTagOverlayInterface: FC = () => {
         <EntityOverlayFormControls
           entityType="tag"
           dto={dtoUsed}
-          method={entityOverlay.method}
+          method={upsertTagOverlay.method}
           dtoUpdateFunction={dtoUsedUpdateFunction}
         />
         <hr />

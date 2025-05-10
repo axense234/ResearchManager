@@ -4,3 +4,6 @@ export * from "./EntityImagesOverlayItemProps";
 export * from "./EntityImageOverlayProps";
 export * from "./EntityImagesOverlayTitleProps";
 export * from "./content";
+export * from "./EntityImageOverlayImageProps";
+export * from "./EntityImageOverlaySliderProps";
+export * from "./EntityImageOverlayContentProps";

@@ -7,21 +7,32 @@ import selectFormControlStyles from "@/scss/components/shared/form/SelectFormCon
 
 const SelectFormControl: FC<SelectFormControlProps> = ({
   entityProperty,
+  noEntityPropertyMessage,
   onEntityPropertyValueChange,
   labelContent,
 }) => {
   return (
     <div className={selectFormControlStyles.selectFormControlContainer}>
       <label htmlFor={labelContent}>{labelContent}</label>
-      <select
-        name={labelContent}
-        id={labelContent}
-        onChange={onEntityPropertyValueChange}
-      >
-        {entityProperty.map((property) => {
-          return <option key={property}>{property}</option>;
-        })}
-      </select>
+      {entityProperty.length > 0 ? (
+        <select
+          name={labelContent}
+          id={labelContent}
+          onChange={onEntityPropertyValueChange}
+        >
+          {entityProperty.map((property) => {
+            return (
+              <option key={property.value} value={property.value}>
+                {property.label}
+              </option>
+            );
+          })}
+        </select>
+      ) : (
+        <p title={noEntityPropertyMessage} aria-label={noEntityPropertyMessage}>
+          {noEntityPropertyMessage}
+        </p>
+      )}
     </div>
   );
 };

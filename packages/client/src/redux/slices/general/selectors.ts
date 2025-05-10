@@ -40,6 +40,9 @@ export const selectErrorFields = (state: State) => state.general.errorFields;
 export const selectEntityOverlay = (state: State) =>
   state.general.entityOverlay;
 
+export const selectUpsertTagOverlay = (state: State) =>
+  state.general.upsertTagOverlay;
+
 export const selectDeleteEntityOverlay = (state: State) =>
   state.general.deleteEntityOverlay;
 

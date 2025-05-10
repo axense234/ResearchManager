@@ -8,7 +8,7 @@ import addTagModalOptionsStyles from "@/scss/components/shared/modal/tag/add/Add
 import { AddTagModalOptionsProps } from "@/core/interfaces";
 // Hooks
 import { useAppDispatch, useDetermineAddTagButtonDisabledInfo } from "@/hooks";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
+import { setUpsertTagOverlay } from "@/redux/slices/general/slice";
 
 const AddTagModalOptions: FC<AddTagModalOptionsProps> = ({
   selectedTagsIds,
@@ -46,8 +46,7 @@ const AddTagModalOptions: FC<AddTagModalOptionsProps> = ({
         onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
         onClickFunction={() =>
           dispatch(
-            setEntityOverlay({
-              entityType: "tag",
+            setUpsertTagOverlay({
               method: "create",
               showOverlay: true,
             }),

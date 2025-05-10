@@ -1,12 +1,14 @@
 // Validators
 import { IsArray } from 'class-validator';
 // Types
-import { DataObjectBuilderAllowedConnectValue } from '../data';
-import { EntityType, EntityTypePlural } from '@researchmanager/shared/types';
+import {
+  AllowedIncludeValue,
+  DataObjectBuilderAllowedConnectValue,
+} from '../data';
 
 export class ChooseAllowedBuilderValuesReturnObject {
   @IsArray()
-  allowedIncludeValues: (EntityType | EntityTypePlural)[];
+  allowedIncludeValues: AllowedIncludeValue[];
 
   @IsArray()
   allowedSelectValues: string[];

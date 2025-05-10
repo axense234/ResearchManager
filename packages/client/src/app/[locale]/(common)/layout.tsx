@@ -6,6 +6,7 @@ import SideBar from "@/components/layout/sidebar/SideBar";
 import UpsertEntityOverlay from "@/components/shared/overlay/entity/operations/upsert/UpsertEntityOverlay";
 import EntityImagesOverlay from "@/components/shared/overlay/entity/images/EntityImagesOverlay";
 import DeleteEntityOverlay from "@/components/shared/overlay/entity/operations/delete/DeleteEntityOverlay";
+import UpsertTagOverlayInterface from "@/components/shared/overlay/entity/operations/upsert/interfaces/UpsertTagOverlayInterface";
 // Redux and Custom Hooks
 import { useCreateUserOAuthTrigger } from "@/hooks";
 // ChartTS
@@ -23,6 +24,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
       <SideBar />
       {/* Overlays */}
       <UpsertEntityOverlay />
+      <UpsertTagOverlayInterface />
       <DeleteEntityOverlay />
       <EntityImagesOverlay specialEntityType="researchActivity" />
       {/* Modals */}

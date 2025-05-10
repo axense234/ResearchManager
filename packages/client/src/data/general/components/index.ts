@@ -1,6 +1,10 @@
 // Types
 import { SocialMediaIconProps } from "@/core/interfaces";
-import { OAuthOptionContent, NavigationButtonContentType } from "@/core/types";
+import {
+  OAuthOptionContent,
+  NavigationButtonContentType,
+  AuthCarouselSection,
+} from "@/core/types";
 // React Icons
 import { FaGithub, FaHome, FaUser } from "react-icons/fa";
 import { FaRankingStar, FaBookOpenReader } from "react-icons/fa6";
@@ -78,7 +82,7 @@ export const langFlagsImages = [
   },
 ];
 
-export const authCarouselContent = [
+export const authCarouselContent: AuthCarouselSection[] = [
   {
     id: 1,
     title: "Systemize your Research",

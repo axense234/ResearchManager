@@ -35,6 +35,11 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
     method: "create",
   },
 
+  upsertTagOverlay: {
+    showOverlay: false,
+    method: "create",
+  },
+
   deleteEntityOverlay: {
     showOverlay: false,
     entityType: "researchActivity",

@@ -1,0 +1,20 @@
+@use "../../../../../abstracts" as *;
+
+.imagesContainer {
+  @include flexCenter(row);
+  position: relative;
+  height: 100%;
+  width: 80%;
+
+  > img {
+    position: absolute;
+    max-height: 90%;
+    width: auto;
+
+    &:hover {
+      transition: transform 0.15s ease-in;
+
+      transform: scale(1.005);
+    }
+  }
+}

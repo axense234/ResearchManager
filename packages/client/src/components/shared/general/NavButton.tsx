@@ -21,11 +21,7 @@ const NavButton: FC<NavButtonProps> = ({
 
   const navButtonColor = type === "dark" ? mainBlackColor : mainWhiteColor;
   const navButtonIcon =
-    direction === "next" ? (
-      <FaChevronRight color={navButtonColor} />
-    ) : (
-      <FaChevronLeft color={navButtonColor} />
-    );
+    direction === "next" ? <FaChevronRight /> : <FaChevronLeft />;
   const navButtonTitle = direction === "next" ? "Next" : "Previous";
 
   useNavButtonTransition(showButton, navButtonRef);
@@ -35,6 +31,7 @@ const NavButton: FC<NavButtonProps> = ({
       className={navButtonStyles.navButtonContainer}
       style={{
         visibility: showButton ? "visible" : "hidden",
+        color: navButtonColor,
       }}
       title={navButtonTitle}
       aria-label={navButtonTitle}

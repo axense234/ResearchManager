@@ -8,3 +8,4 @@ export * from "./EntityPositionType";
 export * from "./EntityImagesOverlayType";
 export * from "./DeleteEntityOverlayType";
 export * from "./CreateTagModalType";
+export * from "./UpsertTagOverlayType";

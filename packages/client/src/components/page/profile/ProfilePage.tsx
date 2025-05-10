@@ -1,4 +1,4 @@
-// Interfaces
+// React
 import { FC } from "react";
 // SCSS
 import profilePageStyles from "@/scss/components/page/profile/ProfilePage.module.scss";
@@ -12,7 +12,7 @@ const ProfilePage: FC = () => {
     <section className={profilePageStyles.profilePageContainer}>
       <ProfileDescription />
       <ProfileResearchActivities />
-      {/* <ProfileResearchPhases /> */}
+      <ProfileResearchPhases />
     </section>
   );
 };
