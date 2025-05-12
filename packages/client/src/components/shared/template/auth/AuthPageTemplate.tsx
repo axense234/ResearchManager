@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { AuthPageTemplateProps } from "@/core/interfaces";
 // SCSS
 import authPageTemplateStyles from "@/scss/components/shared/template/auth/AuthPageTemplate.module.scss";

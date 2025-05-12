@@ -1,19 +1,22 @@
 // Types
-import { ReturnObjectBuilderReturnObject } from "@researchmanager/shared/types";
-import { ResearchActivity } from "@prisma/client";
+import {
+  ResearchActivityPayload,
+  ReturnObjectBuilderReturnObject,
+} from "@researchmanager/shared/types";
+import { CreateResearchActivityDtoRedux } from "@/core/types";
 // Axios
 import { axiosInstance } from "@/utils";
 import { AxiosError } from "axios";
 // Redux
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { CreateResearchActivityDtoRedux } from "@/core/types";
 
 export const createResearchActivity = createAsyncThunk<
-  ResearchActivity | AxiosError,
+  ResearchActivityPayload | AxiosError,
   CreateResearchActivityDtoRedux
 >(
   "researchActivities/createResearchActivity",
   async ({ dto, createDefaultResearchPhase }) => {
+    console.log(createDefaultResearchPhase);
     try {
       const res = (
         await axiosInstance.post("/researchActivities/create", dto, {
@@ -25,7 +28,7 @@ export const createResearchActivity = createAsyncThunk<
         })
       ).data as ReturnObjectBuilderReturnObject;
 
-      return res.payload as ResearchActivity;
+      return res.payload as ResearchActivityPayload;
     } catch (error) {
       console.log(error);
       return error as AxiosError;

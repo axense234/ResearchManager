@@ -20,10 +20,13 @@ export const createResearchActivityPending: ExtraReducerFuncType<
 export const createResearchActivityFulfilled: ExtraReducerFuncType<
   ResearchActivitiesSliceStateType
 > = (state, action) => {
-  const researchActivity = action.payload as ResearchActivity;
   const axiosError = action.payload as AxiosError;
 
   if (!axiosError?.isAxiosError) {
+    const researchActivity = action.payload as ResearchActivity;
+
+    console.log(researchActivity);
+
     const researchActivityRedux = transformEntityIntoEntityRedux(
       researchActivity,
       "researchActivity",

@@ -11,12 +11,25 @@ import useCountdown from "@/hooks/general/useCountdown";
 
 const DeleteEntityOverlayOptions: FC<DeleteEntityOverlayOptionsProps> = ({
   showOverlay,
+  entityType,
   onCancelFunction,
   onArchiveFunction,
   onPurgeFunction,
 }) => {
   const archiveCountdown = useCountdown(5, showOverlay);
   const purgeCountdown = useCountdown(10, showOverlay);
+
+  let entityLabel = "Research Activity";
+  switch (entityType) {
+    case "researchActivity":
+      entityLabel = "Research Activity";
+      break;
+    case "researchPhase":
+      entityLabel = "Research Phase";
+      break;
+    default:
+      throw new Error("Invalid entity type.");
+  }
 
   return (
     <div className={deleteEntityOverlayOptionsStyles.overlayOptions}>
@@ -31,16 +44,16 @@ const DeleteEntityOverlayOptions: FC<DeleteEntityOverlayOptionsProps> = ({
       <FunctionalButton
         content={archiveCountdown > 0 ? `${archiveCountdown}` : "Archive"}
         disabled={archiveCountdown > 0}
-        onHoverContent="Archive your Entity"
-        onHoverContentDisabled="Please wait to Archive your entity!"
+        onHoverContent={`Archive your ${entityLabel}`}
+        onHoverContentDisabled={`Please wait to Archive your ${entityLabel}!`}
         onClickFunction={onArchiveFunction}
         colorScheme="brown"
       />
       <FunctionalButton
         content={purgeCountdown > 0 ? `${purgeCountdown}` : "Purge"}
         disabled={purgeCountdown > 0}
-        onHoverContent="Permanently delete your Entity"
-        onHoverContentDisabled="Please wait to Permanently Delete your entity!"
+        onHoverContent={`Permanently delete your ${entityLabel}`}
+        onHoverContentDisabled={`Please wait to Permanently Delete your ${entityLabel}!`}
         onClickFunction={onPurgeFunction}
         colorScheme="red"
       />

@@ -35,7 +35,7 @@ export const researchPhasesSliceReducers = {
     state.currentResearchPhaseIndex = handleCarouselStepDirection(
       action.payload.direction,
       state.currentResearchPhaseIndex,
-      state.ids.length,
+      state.ids.filter((id) => !state.entities[id].archived).length,
     );
   },
   updateLoadingResearchPhaseState(
@@ -103,5 +103,11 @@ export const researchPhasesSliceReducers = {
     action: PayloadAction<ResearchPhaseRedux[]>,
   ) {
     researchPhasesAdapter.setAll(state, action.payload);
+  },
+  addResearchPhase(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<ResearchPhaseRedux>,
+  ) {
+    researchPhasesAdapter.addOne(state, action.payload);
   },
 };

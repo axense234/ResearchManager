@@ -14,14 +14,13 @@
 .overlayInfoOptions {
   @include flexCenter(column);
   width: 100%;
-  align-items: flex-start;
   gap: 3rem;
 }
 
 .overlayInfoOption {
   @include flexCenter(column);
   align-items: flex-start;
-  width: 80%;
+  width: 90%;
   gap: 1rem;
 
   > h6 {

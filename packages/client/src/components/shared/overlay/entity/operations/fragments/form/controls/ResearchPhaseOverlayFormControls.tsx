@@ -44,9 +44,12 @@ const ResearchPhaseOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
     | CreateResearchPhaseDto
     | UpdateResearchPhaseDto;
 
+  console.log(researchPhaseDto);
+
   return (
     <form className={entityOverlayFormControlsStyles.formControlsContainer}>
       <SelectFormControl
+        currentEntityProperty={researchPhaseDto?.researchActivityId}
         entityProperty={researchActivitiesForSelect}
         labelContent="Research Activity:"
         noEntityPropertyMessage="No Research Activities."

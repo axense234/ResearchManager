@@ -7,49 +7,28 @@ import DeleteEntityOverlayOptions from "./DeleteEntityOverlayOptions";
 // SCSS
 import deleteEntityOverlayStyles from "@/scss/components/shared/overlay/entity/operations/delete/DeleteEntityOverlay.module.scss";
 // Redux
-import { useAppDispatch, useAppSelector, useOverlayTransition } from "@/hooks";
-import { selectDeleteEntityOverlay } from "@/redux/slices/general";
-import { setDeleteEntityOverlay } from "@/redux/slices/general/slice";
 import {
-  deleteResearchActivity,
-  updateResearchActivity,
-} from "@/redux/slices/research/activity/thunks";
+  useAppDispatch,
+  useAppSelector,
+  useDetermineDeleteEntityOverlayFunctions,
+  useOverlayTransition,
+} from "@/hooks";
+import { selectDeleteEntityOverlay } from "@/redux/slices/general";
+import { closeDeleteEntityOverlay } from "@/redux/slices/general/slice";
 
 const DeleteEntityOverlay: FC = () => {
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const entityOverlay = useAppSelector(selectDeleteEntityOverlay);
+  const deleteEntityOverlay = useAppSelector(selectDeleteEntityOverlay);
 
-  const closeEntityOverlayFunction = () =>
-    dispatch(setDeleteEntityOverlay({ ...entityOverlay, showOverlay: false }));
+  const { onArchiveFunctionUsed, onPurgeFunctionUsed } =
+    useDetermineDeleteEntityOverlayFunctions(
+      deleteEntityOverlay.entityType,
+      deleteEntityOverlay.entityId,
+    );
 
-  let onArchiveFunctionUsed: () => void;
-  let onPurgeFunctionUsed: () => void;
-
-  switch (entityOverlay.entityType) {
-    case "researchActivity":
-      onArchiveFunctionUsed = () => {
-        {
-          dispatch(
-            updateResearchActivity({
-              dto: { archived: true },
-              researchActivityId: entityOverlay.entityId,
-            }),
-          );
-        }
-        closeEntityOverlayFunction();
-      };
-      onPurgeFunctionUsed = () => {
-        dispatch(deleteResearchActivity(entityOverlay.entityId));
-        closeEntityOverlayFunction();
-      };
-      break;
-    default:
-      throw new Error("invalid Entity Type.");
-  }
-
-  useOverlayTransition(entityOverlay.showOverlay, overlayRef);
+  useOverlayTransition(deleteEntityOverlay.showOverlay, overlayRef);
 
   return (
     <div
@@ -57,16 +36,17 @@ const DeleteEntityOverlay: FC = () => {
       ref={overlayRef}
     >
       <CloseInterfaceButton
-        closeInterfaceFunction={closeEntityOverlayFunction}
+        closeInterfaceFunction={() => dispatch(closeDeleteEntityOverlay())}
         color="pastelRed"
         title="Close Overlay"
         size="large"
       />
       <div className={deleteEntityOverlayStyles.overlayContent}>
-        <DeleteEntityOverlayInfo />
+        <DeleteEntityOverlayInfo entityType={deleteEntityOverlay.entityType} />
         <DeleteEntityOverlayOptions
-          showOverlay={entityOverlay.showOverlay}
-          onCancelFunction={closeEntityOverlayFunction}
+          showOverlay={deleteEntityOverlay.showOverlay}
+          entityType={deleteEntityOverlay.entityType}
+          onCancelFunction={() => dispatch(closeDeleteEntityOverlay())}
           onArchiveFunction={onArchiveFunctionUsed}
           onPurgeFunction={onPurgeFunctionUsed}
         />

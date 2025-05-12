@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { FormContainerProps } from "@/core/interfaces";
 // SCSS
 import formContainerStyles from "@/scss/components/shared/template/auth/form/FormContainer.module.scss";

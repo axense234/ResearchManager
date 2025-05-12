@@ -9,6 +9,7 @@ import researchLogsSliceReducer from "../slices/research/log/slice";
 import researchSessionsSliceReducer from "../slices/research/session/slice";
 // Middleware
 import {
+  addDefaultResearchPhaseListener,
   setEntitiesStateFromUserPayloadListener,
   setModalListener,
 } from "../middleware";
@@ -26,6 +27,7 @@ const store = configureStore({
     getDefaultMiddleware().prepend(
       setEntitiesStateFromUserPayloadListener.middleware,
       setModalListener.middleware,
+      addDefaultResearchPhaseListener.middleware,
     ),
 });
 

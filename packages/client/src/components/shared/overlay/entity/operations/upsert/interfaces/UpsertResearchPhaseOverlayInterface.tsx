@@ -30,6 +30,7 @@ import {
   updateResearchPhase,
   updateUpdateResearchPhaseDto,
 } from "@/redux/slices/research/phase";
+import { selectAllUnarchivedResearchActivitiesIds } from "@/redux/slices/research/activity";
 
 const UpsertResearchPhaseOverlayInterface: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,6 +41,10 @@ const UpsertResearchPhaseOverlayInterface: FC = () => {
 
   const createResearchPhaseDto = useAppSelector(selectCreateResearchPhaseDto);
   const updateResearchPhaseDto = useAppSelector(selectUpdateResearchPhaseDto);
+
+  const researchActivitiesIds = useAppSelector(
+    selectAllUnarchivedResearchActivitiesIds,
+  );
 
   const loadingCreateResearchPhase = useAppSelector(
     selectLoadingCreateResearchPhase,
@@ -76,6 +81,8 @@ const UpsertResearchPhaseOverlayInterface: FC = () => {
     dispatch(
       createResearchPhase({
         ...createResearchPhaseDto,
+        researchActivityId:
+          createResearchPhaseDto.researchActivityId || researchActivitiesIds[0],
       }),
     );
   };
@@ -90,6 +97,7 @@ const UpsertResearchPhaseOverlayInterface: FC = () => {
   };
 
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
+    console.log(dtoUsed);
     onEditTagFunction(
       type,
       dtoUsed.tags,

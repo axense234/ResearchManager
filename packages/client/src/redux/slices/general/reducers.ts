@@ -57,6 +57,15 @@ export const generalSliceReducers = {
   ) {
     state.upsertTagOverlay = { ...state.upsertTagOverlay, showOverlay: false };
   },
+  closeDeleteEntityOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction,
+  ) {
+    state.deleteEntityOverlay = {
+      ...state.deleteEntityOverlay,
+      showOverlay: false,
+    };
+  },
   updateContactUsDto(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<ObjectKeyValueType>,

@@ -7,6 +7,7 @@ import selectFormControlStyles from "@/scss/components/shared/form/SelectFormCon
 
 const SelectFormControl: FC<SelectFormControlProps> = ({
   entityProperty,
+  currentEntityProperty,
   noEntityPropertyMessage,
   onEntityPropertyValueChange,
   labelContent,
@@ -19,6 +20,7 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
           name={labelContent}
           id={labelContent}
           onChange={onEntityPropertyValueChange}
+          value={currentEntityProperty}
         >
           {entityProperty.map((property) => {
             return (

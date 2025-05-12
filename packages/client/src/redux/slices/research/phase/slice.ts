@@ -25,6 +25,7 @@ export const {
   setUpdateResearchPhaseDto,
   updateUpdateResearchPhaseDto,
   setCreateResearchPhaseDto,
+  addResearchPhase,
 } = researchPhasesSlice.actions;
 
 export default researchPhasesSlice.reducer;

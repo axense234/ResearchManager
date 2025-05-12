@@ -83,9 +83,10 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
     containerType,
   );
 
+  console.log(researchPhase);
+
   useEffect(() => {
     if (researchPhase && isCurrentView) {
-      console.log("yeee");
       dispatch(
         setUpdateResearchPhaseDto({
           ...researchPhase,

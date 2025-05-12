@@ -38,6 +38,7 @@ export const {
   setCurrentEntityImageOverlayCarouselId,
   closeUpsertTagOverlay,
   setUpsertTagOverlay,
+  closeDeleteEntityOverlay,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

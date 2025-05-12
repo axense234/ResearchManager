@@ -4,7 +4,7 @@ import { CreateResearchPhaseDto } from "../../../types";
 export const createResearchPhaseMockData: CreateResearchPhaseDto[] = [
   {
     researchActivityId: "put your research activity id here",
-    name: "First Project",
+    name: "Web Development",
     backgroundColorOrImageSrc: "#d8e5e4",
   },
   {

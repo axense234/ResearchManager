@@ -77,6 +77,7 @@ const TagOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
         maxInputSize={24}
       />
       <SelectFormControl
+        currentEntityProperty={tagDto?.fontFamily}
         entityProperty={availableTagFontFamilies.map((fontFamily) => {
           return { value: fontFamily, label: fontFamily };
         })}

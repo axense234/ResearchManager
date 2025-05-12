@@ -34,6 +34,7 @@ export class DataObjectBuilderService {
     } = options;
 
     const dtoPassword = (dto as UserCreateDataObject).password;
+    let skipRelationshipsConnections = false;
 
     if (dtoPassword && entityType === 'user') {
       if (dtoPassword === this.configService.get('OAUTH_PASSWORD_LABEL')) {
@@ -77,6 +78,7 @@ export class DataObjectBuilderService {
         };
       }
       if (createDefaultResearchPhase === 'true') {
+        skipRelationshipsConnections = true;
         (dataObject as ResearchActivityCreateDataObject).researchPhases = {
           create: {
             name: (dataObject as ResearchActivityCreateDataObject).name,
@@ -105,13 +107,15 @@ export class DataObjectBuilderService {
             };
             break;
           case 'OTM':
-            dataObject[connectValue.entityType] = {
-              [methodBasedOnActionType]: dto[connectValue.entityType].map(
-                (id: string) => {
-                  return { id };
-                },
-              ),
-            };
+            if (!skipRelationshipsConnections) {
+              dataObject[connectValue.entityType] = {
+                [methodBasedOnActionType]: dto[connectValue.entityType].map(
+                  (id: string) => {
+                    return { id };
+                  },
+                ),
+              };
+            }
             break;
           default:
             break;
