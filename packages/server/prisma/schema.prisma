@@ -118,11 +118,6 @@ model ResearchLog {
   updatedAt DateTime @updatedAt
 }
 
-// when creatingm rp = 0
-// when pausing, rp = last rp + (currentStatusDate - last currentStatusDate)
-// when resuming, rp doesnt change, but the currentStatusDate updates
-// when finishing, rp = last rp + (currentStatusDate - last currentStatusDate)
-
 model ResearchSession {
   id                        String   @id @default(uuid())
   name                      String   @default("Research Session")

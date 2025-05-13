@@ -1,0 +1,40 @@
+@use "../../../../abstracts" as *;
+
+.dayContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+}
+
+.dayTitleContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 0.5rem;
+
+  > h6 {
+    @include heading("h6", "tablet", "black");
+  }
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 30%;
+    background-color: getColor("main-black-100");
+
+    transition: background-color 0.2s ease-in;
+  }
+}
+
+.dayLogsContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  list-style: none;
+
+  > li {
+    @include flexCenter(row);
+    width: 100%;
+  }
+}

@@ -1,0 +1,7 @@
+@use "../../../../abstracts" as *;
+
+.logContainer {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  width: 100%;
+}

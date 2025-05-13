@@ -1,0 +1,14 @@
+@use "../../../abstracts" as *;
+
+.sectionContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 5rem;
+
+  padding: 4rem;
+  padding-bottom: 6rem;
+
+  border-radius: 0.5rem;
+
+  background-color: getColor("main-dark-blue");
+}

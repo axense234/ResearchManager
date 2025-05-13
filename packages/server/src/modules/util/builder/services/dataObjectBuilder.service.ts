@@ -54,7 +54,19 @@ export class DataObjectBuilderService {
       }
       if (createActivityFeed === 'true') {
         (dataObject as UserCreateDataObject).activityFeed = {
-          create: { type: 'USER' },
+          create: {
+            type: 'USER',
+            activityDays: {
+              create: {
+                activityLogs: {
+                  create: {
+                    subject: 'CREATE',
+                    message: `Successfully created account named ${(dataObject as UserCreateDataObject).username}! Hello!`,
+                  },
+                },
+              },
+            },
+          },
         };
       }
       if (createDefaultTags === 'true') {

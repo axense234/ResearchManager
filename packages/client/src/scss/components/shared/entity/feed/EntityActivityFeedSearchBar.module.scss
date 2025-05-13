@@ -1,0 +1,15 @@
+@use "../../../../abstracts" as *;
+
+.searchBarContainer {
+  @include flexCenter(row);
+  width: 100%;
+
+  min-height: 3rem;
+
+  padding: 1rem;
+
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+
+  background-color: getColor("secondary-pastel-cyan");
+}

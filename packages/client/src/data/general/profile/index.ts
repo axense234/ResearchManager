@@ -12,3 +12,9 @@ export const profileResearchPhasesData: PageSectionTitleProps = {
   description:
     "View your Research Phases for this respective Research Activity. Each Research Phase contains a collection of logs, which can be seen in detail.",
 };
+
+export const profileActivityFeedData: PageSectionTitleProps = {
+  title: "Activity Feed",
+  description:
+    "View the history of your account activity based on the date, type and message of the respective activity.",
+};
