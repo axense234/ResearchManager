@@ -1,14 +1,16 @@
 // Redux
 import { createSlice } from "@reduxjs/toolkit";
 // Initial State
-import { activityFeedsSliceInitialState } from "./initialState";
+import { activityFeedsSliceState } from "./initialState";
+// Reducers
+import { activityFeedsSliceReducers } from "./reducers";
 
 const activityFeedsSlice = createSlice({
   name: "activityFeeds",
-  initialState: activityFeedsSliceInitialState,
-  reducers: {},
+  initialState: activityFeedsSliceState,
+  reducers: activityFeedsSliceReducers,
 });
 
-export const {} = activityFeedsSlice.actions;
+export const { setActivityFeed } = activityFeedsSlice.actions;
 
 export default activityFeedsSlice.reducer;

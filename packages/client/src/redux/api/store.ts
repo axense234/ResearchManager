@@ -8,6 +8,8 @@ import researchPhasesSliceReducer from "../slices/research/phase/slice";
 import researchLogsSliceReducer from "../slices/research/log/slice";
 import researchSessionsSliceReducer from "../slices/research/session/slice";
 import activityFeedsSliceReducer from "../slices/activity/feed/slice";
+import activityDaysSliceReducer from "../slices/activity/day/slice";
+import activityLogsSliceReducer from "../slices/activity/log/slice";
 // Middleware
 import {
   addDefaultResearchPhaseListener,
@@ -24,6 +26,8 @@ const store = configureStore({
     researchLogs: researchLogsSliceReducer,
     researchSessions: researchSessionsSliceReducer,
     activityFeeds: activityFeedsSliceReducer,
+    activityDays: activityDaysSliceReducer,
+    activityLogs: activityLogsSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(

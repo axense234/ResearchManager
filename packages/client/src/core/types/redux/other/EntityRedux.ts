@@ -1,5 +1,8 @@
 // Types
 import {
+  ActivityDayRedux,
+  ActivityFeedRedux,
+  ActivityLogRedux,
   ResearchActivityRedux,
   ResearchLogRedux,
   ResearchPhaseRedux,
@@ -14,4 +17,7 @@ export type EntityRedux =
   | ResearchActivityRedux
   | ResearchPhaseRedux
   | ResearchLogRedux
-  | ResearchSessionRedux;
+  | ResearchSessionRedux
+  | ActivityFeedRedux
+  | ActivityDayRedux
+  | ActivityLogRedux;

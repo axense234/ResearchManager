@@ -1,5 +1,8 @@
 // Types
 import {
+  ActivityDayPayload,
+  ActivityFeedPayload,
+  ActivityLogPayload,
   EntityPayload,
   EntityType,
   ResearchActivityPayload,
@@ -25,6 +28,7 @@ export const transformEntityIntoEntityRedux = (
 ): EntityRedux => {
   // Turning relationship entities into ids
   // Also turning entity date fields into string fields
+  // NOTE: can probably code this one better
   switch (entityType) {
     case "user":
       const entityAsUser = { ...entity } as UserPayload;
@@ -149,6 +153,51 @@ export const transformEntityIntoEntityRedux = (
         createdAt: new Date(entityAsTag.createdAt).toISOString(),
         updatedAt: new Date(entityAsTag.updatedAt).toISOString(),
       } as TagRedux;
+    case "activityFeed":
+      const entityAsActivityFeed = { ...entity } as ActivityFeedPayload;
+      const entityAsActivityFeedWithoutRelationships = {
+        ...entity,
+      } as ActivityFeedPayload;
+
+      delete entityAsActivityFeedWithoutRelationships.user;
+      delete entityAsActivityFeedWithoutRelationships.researchActivity;
+      delete entityAsActivityFeedWithoutRelationships.activityDays;
+
+      return {
+        ...entityAsActivityFeedWithoutRelationships,
+        activityDaysIds: entityAsActivityFeed.activityDays?.map((ad) => ad.id),
+        createdAt: new Date(entityAsActivityFeed.createdAt).toISOString(),
+        updatedAt: new Date(entityAsActivityFeed.updatedAt).toISOString(),
+      };
+    case "activityDay":
+      const entityAsActivityDay = { ...entity } as ActivityDayPayload;
+      const entityAsActivityDayWithoutRelationships = {
+        ...entity,
+      } as ActivityDayPayload;
+
+      delete entityAsActivityDayWithoutRelationships.activityLogs;
+      delete entityAsActivityDayWithoutRelationships.activityFeed;
+
+      return {
+        ...entityAsActivityDayWithoutRelationships,
+        activityLogsIds: entityAsActivityDay.activityLogs?.map((al) => al.id),
+        createdAt: new Date(entityAsActivityDay.createdAt).toISOString(),
+        updatedAt: new Date(entityAsActivityDay.updatedAt).toISOString(),
+      };
+    case "activityLog":
+      const entityAsActivityLog = { ...entity } as ActivityLogPayload;
+      const entityAsActivityLogWithoutRelationships = {
+        ...entity,
+      } as ActivityLogPayload;
+
+      delete entityAsActivityLogWithoutRelationships.activityDays;
+
+      return {
+        ...entityAsActivityLogWithoutRelationships,
+        activityDaysIds: entityAsActivityLog.activityDays?.map((ad) => ad.id),
+        createdAt: new Date(entityAsActivityLog.createdAt).toISOString(),
+        updatedAt: new Date(entityAsActivityLog.updatedAt).toISOString(),
+      };
     default:
       throw new Error("Invalid entity type.");
   }

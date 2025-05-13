@@ -1,11 +1,16 @@
 // Types
 import {
+  ActivityDayPayload,
+  ActivityLogPayload,
   ResearchLogPayload,
   ResearchPhasePayload,
   ResearchSessionPayload,
   UserPayload,
 } from "@researchmanager/shared/types";
 import {
+  ActivityDayRedux,
+  ActivityFeedRedux,
+  ActivityLogRedux,
   ResearchActivityRedux,
   ResearchLogRedux,
   ResearchPhaseRedux,
@@ -22,7 +27,7 @@ export const transformEntitiesFromUserPayloadToEntitiesRedux = (
 
   const userResearchActivities = userPayload.researchActivities;
 
-  const userResearchPhases = userPayload.researchActivities
+  const userResearchPhases = userResearchActivities
     ?.map((ra) => ra.researchPhases)
     .flat();
 
@@ -33,6 +38,12 @@ export const transformEntitiesFromUserPayloadToEntitiesRedux = (
   const userResearchSessions = userResearchPhases
     ?.map((rp) => rp?.researchSessions)
     .flat();
+
+  const userActivityFeed = userPayload.activityFeed;
+
+  const userActivityDays = userActivityFeed.activityDays;
+
+  const userActivityLogs = userActivityDays.map((ad) => ad.activityLogs).flat();
 
   const userTagsRedux = userTags?.map(
     (tag) => transformEntityIntoEntityRedux(tag, "tag") as TagRedux,
@@ -70,11 +81,35 @@ export const transformEntitiesFromUserPayloadToEntitiesRedux = (
       ) as ResearchLogRedux,
   );
 
+  const userActivityFeedRedux = transformEntityIntoEntityRedux(
+    userActivityFeed,
+    "activityFeed",
+  ) as ActivityFeedRedux;
+
+  const userActivityDaysRedux = userActivityDays?.map(
+    (ad) =>
+      transformEntityIntoEntityRedux(
+        ad as ActivityDayPayload,
+        "activityDay",
+      ) as ActivityDayRedux,
+  );
+
+  const userActivityLogsRedux = userActivityLogs?.map(
+    (al) =>
+      transformEntityIntoEntityRedux(
+        al as ActivityLogPayload,
+        "activityLog",
+      ) as ActivityLogRedux,
+  );
+
   return {
     tags: userTagsRedux,
     researchActivities: userResearchActivitiesRedux,
     researchPhases: userResearchPhasesRedux,
     researchSessions: userResearchSessionsRedux,
     researchLogs: userResearchLogsRedux,
+    activityFeed: userActivityFeedRedux,
+    activityDays: userActivityDaysRedux,
+    activityLogs: userActivityLogsRedux,
   };
 };

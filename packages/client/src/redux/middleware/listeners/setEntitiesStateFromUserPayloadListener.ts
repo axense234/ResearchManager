@@ -17,6 +17,9 @@ import { setResearchActivities } from "@/redux/slices/research/activity";
 import { setResearchPhases } from "@/redux/slices/research/phase";
 import { setResearchLogs } from "@/redux/slices/research/log";
 import { setResearchSessions } from "@/redux/slices/research/session";
+import { setActivityFeed } from "@/redux/slices/activity/feed";
+import { setActivityDays } from "@/redux/slices/activity/day";
+import { setActivityLogs } from "@/redux/slices/activity/log";
 
 export const setEntitiesStateFromUserPayloadListener =
   createListenerMiddleware();
@@ -40,13 +43,23 @@ setEntitiesStateFromUserPayloadListener.startListening({
         researchLogs,
         researchPhases,
         researchSessions,
+        activityFeed,
+        activityLogs,
+        activityDays,
       } = transformEntitiesFromUserPayloadToEntitiesRedux(userPayload);
+
+      console.log(activityFeed);
+      console.log(activityDays);
+      console.log(activityLogs);
 
       tags && dispatch(setTags(tags));
       researchActivities && dispatch(setResearchActivities(researchActivities));
       researchPhases && dispatch(setResearchPhases(researchPhases));
       researchLogs && dispatch(setResearchLogs(researchLogs));
       researchSessions && dispatch(setResearchSessions(researchSessions));
+      activityFeed && dispatch(setActivityFeed(activityFeed));
+      activityDays && dispatch(setActivityDays(activityDays));
+      activityLogs && dispatch(setActivityLogs(activityLogs));
     }
   },
 });
