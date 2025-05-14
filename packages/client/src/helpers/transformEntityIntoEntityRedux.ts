@@ -190,6 +190,8 @@ export const transformEntityIntoEntityRedux = (
         ...entity,
       } as ActivityLogPayload;
 
+      console.log(entityAsActivityLog);
+
       delete entityAsActivityLogWithoutRelationships.activityDays;
 
       return {

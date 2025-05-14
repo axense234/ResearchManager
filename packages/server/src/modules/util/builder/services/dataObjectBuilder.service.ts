@@ -12,6 +12,7 @@ import { ConfigService } from '@nestjs/config';
 // Util
 import { chooseAllowedBuilderValues } from 'src/util/func/chooseAllowedBuilderValues';
 import { tagsMockData } from '@researchmanager/shared/mock';
+import { ActivityDayCreateDataObject } from 'src/modules/entity/activity/day/types';
 
 @Injectable()
 export class DataObjectBuilderService {
@@ -31,6 +32,8 @@ export class DataObjectBuilderService {
       createSettings = 'true',
       createDefaultResearchPhase = 'true',
       createDefaultTags = 'true',
+      createActivityLog = 'false',
+      createActivityLogDto = {},
     } = options;
 
     const dtoPassword = (dto as UserCreateDataObject).password;
@@ -97,6 +100,19 @@ export class DataObjectBuilderService {
           },
         };
       }
+    }
+
+    if (
+      entityType === 'activityDay' &&
+      actionType === 'CREATE' &&
+      createActivityLog === 'true' &&
+      createActivityLogDto
+    ) {
+      delete createActivityLogDto.activityDays;
+      skipRelationshipsConnections = true;
+      (dataObject as ActivityDayCreateDataObject).activityLogs = {
+        create: { ...createActivityLogDto },
+      };
     }
 
     const methodBasedOnActionType = actionType === 'CREATE' ? 'connect' : 'set';

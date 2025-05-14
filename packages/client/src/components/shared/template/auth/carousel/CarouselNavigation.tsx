@@ -1,10 +1,9 @@
-"use client";
-// Interfaces
+// React
 import { FC } from "react";
 // SCSS
 import carouselNavigationStyles from "@/scss/components/shared/template/auth/carousel/CarouselNavigation.module.scss";
-// React Icons
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+// Components
+import NavButton from "@/components/shared/general/NavButton";
 // Data
 import { mainPastelRedColor, mainWhiteColor } from "@/data/general";
 import { authCarouselContent } from "@/data/general/components";
@@ -23,13 +22,15 @@ const CarouselNavigation: FC = () => {
 
   return (
     <div className={carouselNavigationStyles.carouselNavigationContainer}>
-      <FaChevronLeft
-        title="Previous"
-        aria-label="Previous"
-        onClick={() => {
+      <NavButton
+        direction="prev"
+        showButton={true}
+        onNavButtonClick={() => {
           dispatch(changeAllowAutoCarousel(false));
           dispatch(handleAuthCarouselStepDirection({ direction: "left" }));
         }}
+        type="light"
+        size="small"
       />
       <ul className={carouselNavigationStyles.carouselNavigationButtons}>
         {authCarouselContent.map((content) => {
@@ -54,13 +55,15 @@ const CarouselNavigation: FC = () => {
           );
         })}
       </ul>
-      <FaChevronRight
-        title="Next"
-        aria-label="Next"
-        onClick={() => {
+      <NavButton
+        direction="next"
+        showButton={true}
+        onNavButtonClick={() => {
           dispatch(changeAllowAutoCarousel(false));
           dispatch(handleAuthCarouselStepDirection({ direction: "right" }));
         }}
+        type="light"
+        size="small"
       />
     </div>
   );

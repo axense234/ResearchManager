@@ -7,5 +7,5 @@ export class ActivityDayCreateDataObject {
 
   @IsObject()
   @IsOptional()
-  activityLogs: { connect: { id: string }[] };
+  activityLogs: { connect?: { id: string }[]; create?: object };
 }

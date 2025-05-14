@@ -22,4 +22,18 @@ export class CreateActivityDayQueryParams {
   @IsString()
   @IsOptional()
   chosenOptionType: 'include' | 'select';
+
+  @ApiProperty(
+    createActivityDayQueryParamsApiPropertyOptions['createActivityLog'],
+  )
+  @IsString()
+  @IsOptional()
+  createActivityLog: 'false' | 'true';
+
+  @ApiProperty(
+    createActivityDayQueryParamsApiPropertyOptions['createActivityLogDto'],
+  )
+  @IsString()
+  @IsOptional()
+  createActivityLogDto: string;
 }

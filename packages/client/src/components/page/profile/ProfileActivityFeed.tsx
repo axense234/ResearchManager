@@ -14,12 +14,10 @@ import { selectUserProfile } from "@/redux/slices/general";
 const ProfileActivityFeed: FC = () => {
   const userProfile = useAppSelector(selectUserProfile);
 
-  console.log(JSON.parse(JSON.stringify(userProfile)));
-
   return (
     <section className={profileActivityFeedStyles.sectionContainer}>
       <PageSectionTitle {...profileActivityFeedData} />
-      <EntityActivityFeed activityDaysIds={["1", "2"]} />
+      <EntityActivityFeed activityFeedId={userProfile.activityFeedId} />
     </section>
   );
 };

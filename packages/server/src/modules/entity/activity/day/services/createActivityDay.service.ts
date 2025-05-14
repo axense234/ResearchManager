@@ -29,13 +29,24 @@ export class CreateActivityDayService {
     dto: CreateActivityDayDto,
   ): Promise<ReturnObjectBuilderReturnObjectSwaggerWrapper> {
     try {
-      const { includeValues, selectValues, chosenOptionType } = queryParams;
+      const {
+        includeValues,
+        selectValues,
+        chosenOptionType,
+        createActivityLog,
+        createActivityLogDto,
+      } = queryParams;
 
       const dataObject = (await this.objectBuilder.buildDataObject({
         entityType: 'activityDay',
         dto,
         actionType: 'CREATE',
-        options: {},
+        options: {
+          createActivityLog,
+          createActivityLogDto: JSON.parse(
+            decodeURIComponent(createActivityLogDto),
+          ),
+        },
       })) as ActivityDayCreateDataObject;
 
       const createObject: ActivityDayCreateObject = {

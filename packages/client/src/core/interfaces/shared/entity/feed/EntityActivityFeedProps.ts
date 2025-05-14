@@ -1,3 +1,3 @@
 export interface EntityActivityFeedProps {
-  activityDaysIds: string[];
+  activityFeedId: string;
 }

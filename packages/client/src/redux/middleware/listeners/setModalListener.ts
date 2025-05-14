@@ -119,7 +119,7 @@ setModalListener.startListening({
           }),
         );
       }
-    } else if (action.type.endsWith("pending")) {
+    } else if (action.type.endsWith("rejected")) {
       dispatch(
         setGeneralModal({
           isClosed: false,

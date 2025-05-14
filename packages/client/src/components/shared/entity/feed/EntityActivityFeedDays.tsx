@@ -12,7 +12,7 @@ const EntityActivityFeedDays: FC<EntityActivityFeedDaysProps> = ({
 }) => {
   return (
     <div className={entityActivityFeedDaysStyles.daysContainer}>
-      {activityDaysIds.map((activityDayId) => {
+      {activityDaysIds?.map((activityDayId) => {
         return (
           <EntityActivityFeedDay
             key={activityDayId}

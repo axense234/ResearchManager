@@ -13,6 +13,7 @@ import activityLogsSliceReducer from "../slices/activity/log/slice";
 // Middleware
 import {
   addDefaultResearchPhaseListener,
+  handleActivityLogsListener,
   setEntitiesStateFromUserPayloadListener,
   setModalListener,
 } from "../middleware";
@@ -34,6 +35,7 @@ const store = configureStore({
       setEntitiesStateFromUserPayloadListener.middleware,
       setModalListener.middleware,
       addDefaultResearchPhaseListener.middleware,
+      handleActivityLogsListener.middleware,
     ),
 });
 

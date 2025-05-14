@@ -6,7 +6,7 @@ import {
   SignInDto,
   SignUpDto,
 } from "@researchmanager/shared/types";
-import { UserRedux } from "@/core/types";
+import { ActivityLogsDataType, UserRedux } from "@/core/types";
 // Mock Data
 import {
   createResearchActivityMockData,
@@ -73,3 +73,27 @@ export const availableTagFontFamilies: TagFontFamily[] = [
   "TREBUCHET_MS",
   "VERDANA",
 ];
+
+export const activityLogsMessages = (
+  activityDayId?: string,
+): ActivityLogsDataType => {
+  return {
+    researchActivity: {
+      create: {
+        subject: "CREATE",
+        message: "create ra",
+        activityDays: [activityDayId],
+      },
+      update: {
+        subject: "UPDATE",
+        message: "update ra",
+        activityDays: [activityDayId],
+      },
+      delete: {
+        subject: "DELETE",
+        message: "delete ra",
+        activityDays: [activityDayId],
+      },
+    },
+  };
+};

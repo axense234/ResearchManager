@@ -4,4 +4,20 @@
   @include flexCenter(row);
   justify-content: flex-start;
   width: 100%;
+  gap: 1rem;
+
+  p {
+    @include paragraph("tablet", "black");
+    letter-spacing: 0.2px;
+
+    &:nth-of-type(3) {
+      font-weight: 550;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  > span {
+    @include flexCenter(row);
+    gap: 0.5rem;
+  }
 }

@@ -16,13 +16,19 @@ const NavButton: FC<NavButtonProps> = ({
   onNavButtonClick,
   direction,
   type = "dark",
+  size = "medium",
 }) => {
   const navButtonRef = useRef<HTMLDivElement>(null);
 
   const navButtonColor = type === "dark" ? mainBlackColor : mainWhiteColor;
-  const navButtonIcon =
-    direction === "next" ? <FaChevronRight /> : <FaChevronLeft />;
+  const navButtonSize = size === "medium" ? "4rem" : "2rem";
   const navButtonTitle = direction === "next" ? "Next" : "Previous";
+  const navButtonIcon =
+    direction === "next" ? (
+      <FaChevronRight style={{ fontSize: navButtonSize }} />
+    ) : (
+      <FaChevronLeft style={{ fontSize: navButtonSize }} />
+    );
 
   useNavButtonTransition(showButton, navButtonRef);
 

@@ -37,13 +37,11 @@ export class OptionObjectBuilderService {
             .replace(/\s+/g, '')
             .split(',') as (EntityType | EntityTypePlural)[];
 
-          // Filter
           const filteredIncludeValuesArray = filterAllowedValues(
             includeValuesArray,
             allowedIncludeValues,
           );
 
-          // Im losing it
           const nestedIncludeObject = buildAllowedIncludeValuesObject(
             filteredIncludeValuesArray as (EntityType | EntityTypePlural)[],
             includeObject,

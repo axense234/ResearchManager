@@ -48,10 +48,6 @@ setEntitiesStateFromUserPayloadListener.startListening({
         activityDays,
       } = transformEntitiesFromUserPayloadToEntitiesRedux(userPayload);
 
-      console.log(activityFeed);
-      console.log(activityDays);
-      console.log(activityLogs);
-
       tags && dispatch(setTags(tags));
       researchActivities && dispatch(setResearchActivities(researchActivities));
       researchPhases && dispatch(setResearchPhases(researchPhases));

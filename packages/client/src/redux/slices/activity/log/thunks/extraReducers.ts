@@ -1,5 +1,5 @@
 // Types
-import { ActivityLOgsSliceStateType } from "@/core/types";
+import { ActivityLogsSliceStateType } from "@/core/types";
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 // Extra Reducers
 import {
@@ -10,7 +10,7 @@ import {
 } from "./createActivityLog";
 
 export const activityLogsSliceExtraReducers: (
-  builder: ActionReducerMapBuilder<ActivityLOgsSliceStateType>,
+  builder: ActionReducerMapBuilder<ActivityLogsSliceStateType>,
 ) => void = (builder) => {
   builder
     .addCase(createActivityLog.pending, createActivityLogPending)

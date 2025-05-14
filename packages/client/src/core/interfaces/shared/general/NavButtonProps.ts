@@ -3,4 +3,5 @@ export interface NavButtonProps {
   onNavButtonClick: () => void;
   direction: "prev" | "next";
   type?: "light" | "dark";
+  size?: "small" | "medium";
 }

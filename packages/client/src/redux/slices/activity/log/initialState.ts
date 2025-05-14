@@ -1,7 +1,7 @@
 // Types
 import {
   ActivityLogsSliceInitialStateType,
-  ActivityLOgsSliceStateType,
+  ActivityLogsSliceStateType,
 } from "@/core/types";
 // Adapter
 import { activityLogsAdapter } from "./adapter";
@@ -11,4 +11,4 @@ export const activityLogsSliceInitialState =
 
 export const activityLogsSliceState = activityLogsAdapter.getInitialState(
   activityLogsSliceInitialState,
-) as ActivityLOgsSliceStateType;
+) as ActivityLogsSliceStateType;

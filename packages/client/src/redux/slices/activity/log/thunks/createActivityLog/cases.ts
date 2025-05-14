@@ -1,7 +1,7 @@
 // Types
 import {
   ActivityLogRedux,
-  ActivityLOgsSliceStateType,
+  ActivityLogsSliceStateType,
   ExtraReducerFuncType,
 } from "@/core/types";
 import { ActivityLogPayload } from "@researchmanager/shared/types";
@@ -12,18 +12,16 @@ import { transformEntityIntoEntityRedux } from "@/helpers";
 import { activityLogsAdapter } from "../../adapter";
 
 export const createActivityLogPending: ExtraReducerFuncType<
-  ActivityLOgsSliceStateType
+  ActivityLogsSliceStateType
 > = (state, action) => {};
 
 export const createActivityLogFulfilled: ExtraReducerFuncType<
-  ActivityLOgsSliceStateType
+  ActivityLogsSliceStateType
 > = (state, action) => {
   const axiosError = action.payload as AxiosError;
 
   if (!axiosError?.isAxiosError) {
     const activityLog = action.payload as ActivityLogPayload;
-
-    console.log(activityLog);
 
     const activityLogRedux = transformEntityIntoEntityRedux(
       activityLog,
@@ -36,5 +34,5 @@ export const createActivityLogFulfilled: ExtraReducerFuncType<
 };
 
 export const createActivityLogRejected: ExtraReducerFuncType<
-  ActivityLOgsSliceStateType
+  ActivityLogsSliceStateType
 > = (state, action) => {};

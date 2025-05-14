@@ -25,7 +25,12 @@ export const buildAllowedIncludeValuesObject = (
 
     if (singleEntity === currentRoot) return;
 
-    if (visitedEntities.has(singleEntity)) return;
+    // this could be something like ALLOWED_NESTED_VISITS or smth but ehh i dont get paid for this
+    const isActivityDaysUnderLogs =
+      singleEntity === 'activityDay' &&
+      currentPath[currentPath.length - 1] === 'activityLog';
+
+    if (!isActivityDaysUnderLogs && visitedEntities.has(singleEntity)) return;
 
     if (includeDepth === 1) {
       newOptionObject[value] = true;
@@ -33,9 +38,9 @@ export const buildAllowedIncludeValuesObject = (
       const { allowedIncludeValues } = chooseAllowedBuilderValues(singleEntity);
       const newVisited = new Set(visitedEntities);
 
-      newVisited.add(singleEntity);
-
-      // Finally, a use case for recursion
+      if (!isActivityDaysUnderLogs) {
+        newVisited.add(singleEntity);
+      }
 
       const nestedInclude = buildAllowedIncludeValuesObject(
         allowedIncludeValues,

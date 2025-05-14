@@ -4,22 +4,39 @@ import { FC } from "react";
 import { EntityActivityFeedLogProps } from "@/core/interfaces";
 // SCSS
 import entityActivityFeedLogStyles from "@/scss/components/shared/entity/feed/EntityActivityFeedLog.module.scss";
+// Redux
+import { useAppSelector } from "@/hooks";
+import { selectActivityLogById } from "@/redux/slices/activity/log";
+import { createGreenColor } from "@/data/general";
 
 const EntityActivityFeedLog: FC<EntityActivityFeedLogProps> = ({
   activityLogId,
 }) => {
-  const date = "date";
-  const message = "message ooo";
-  const subject = "CREATE";
+  const activityLog = useAppSelector((state) =>
+    selectActivityLogById(state, activityLogId),
+  );
+
+  let activityLogSubjectColor = createGreenColor;
+
+  console.log(activityLog?.subject);
+  switch (activityLog?.subject) {
+    case "CREATE":
+      activityLogSubjectColor = createGreenColor;
+      break;
+    default:
+      break;
+  }
 
   return (
     <div className={entityActivityFeedLogStyles.logContainer}>
       <span>
-        <p>{date}</p>
-        {"-"}
-        <p>{subject}:</p>
+        <p>{new Date(activityLog?.createdAt).toLocaleString()}</p>
+        <p>-</p>
+        <p style={{ color: activityLogSubjectColor }}>
+          {activityLog?.subject}:
+        </p>
       </span>
-      <p>{message}</p>
+      <p>{activityLog?.message}</p>
     </div>
   );
 };

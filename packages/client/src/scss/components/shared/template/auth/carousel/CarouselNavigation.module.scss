@@ -7,14 +7,7 @@
   margin-top: auto;
 
   > svg {
-    @include heading("h6", "laptop", "white");
-    cursor: pointer;
-
-    transition: transform 0.2s ease-in;
-
-    &:hover {
-      transform: scale(1.3);
-    }
+    font-size: 2rem;
   }
 }
 
