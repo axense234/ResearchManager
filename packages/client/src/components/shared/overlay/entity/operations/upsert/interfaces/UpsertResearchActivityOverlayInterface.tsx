@@ -18,7 +18,10 @@ import {
   useOverlayTransition,
 } from "@/hooks";
 import { selectEntityOverlay, selectUserProfile } from "@/redux/slices/general";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
+import {
+  setCurrentActivityLogSubject,
+  setEntityOverlay,
+} from "@/redux/slices/general/slice";
 import {
   selectCreateDefaultResearchPhase,
   selectCreateResearchActivityDto,
@@ -85,6 +88,7 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
       : updateUpdateResearchActivityDto;
 
   const onResearchActivityCreateFunction = () => {
+    dispatch(setCurrentActivityLogSubject("CREATE"));
     dispatch(
       createResearchActivity({
         dto: { ...createResearchActivityDto, userId: userProfile.id },
@@ -94,6 +98,7 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
   };
 
   const onResearchActivityUpdateFunction = () => {
+    dispatch(setCurrentActivityLogSubject("UPDATE"));
     dispatch(
       updateResearchActivity({
         dto: { ...updateResearchActivityDto, userId: userProfile.id },

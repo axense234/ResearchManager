@@ -1,5 +1,4 @@
 // Redux
-import { addErrorField, setGeneralModal } from "@/redux/slices/general/slice";
 import {
   createResearchActivity,
   deleteResearchActivity,
@@ -7,24 +6,21 @@ import {
 } from "@/redux/slices/research/activity/thunks";
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { State } from "@/redux/api/store";
-// Helper
-import { handleFormErrorInputsAndModalMessage } from "@/helpers";
-// Types
+// Data
+import { activityLogsMessages } from "@/data/redux";
+// Redux
 import { AxiosError } from "axios";
-import { createTag } from "@/redux/slices/tag/thunks";
-import {
-  createResearchPhase,
-  deleteResearchPhase,
-  updateResearchPhase,
-} from "@/redux/slices/research/phase";
 import { selectActivityDayIdBasedOnLocaleDate } from "@/redux/slices/activity/day";
 import { createActivityDay } from "@/redux/slices/activity/day/thunks";
-import { activityLogsMessages } from "@/data/redux";
+import { createActivityLog } from "@/redux/slices/activity/log/thunks";
+// Types
 import {
   CreateActivityLogDto,
   EntityType,
+  ResearchActivityPayload,
+  ResearchPhasePayload,
+  TagPayload,
 } from "@researchmanager/shared/types";
-import { createActivityLog } from "@/redux/slices/activity/log/thunks";
 
 export const handleActivityLogsListener = createListenerMiddleware();
 
@@ -43,23 +39,19 @@ handleActivityLogsListener.startListening({
 
     const state = getState() as State;
 
-    let methodUsed = "create";
+    const activityLogSubject = state.general.currentActivityLogSubject;
     let entityUsed: EntityType = "researchActivity";
+    let entityName = "Unknown";
 
     if (action.type.includes("researchActivities")) {
       entityUsed = "researchActivity";
+      entityName = (action.payload as ResearchActivityPayload)?.name;
     } else if (action.type.includes("researchPhases")) {
       entityUsed = "researchPhase";
+      entityName = (action.payload as ResearchPhasePayload)?.name;
     } else if (action.type.includes("tags")) {
       entityUsed = "tag";
-    }
-
-    if (action.type.includes("create")) {
-      methodUsed = "create";
-    } else if (action.type.includes("update")) {
-      methodUsed = "update";
-    } else if (action.type.includes("delete")) {
-      methodUsed = "delete";
+      entityName = (action.payload as TagPayload)?.title;
     }
 
     if (action.type.endsWith("fulfilled")) {
@@ -70,12 +62,9 @@ handleActivityLogsListener.startListening({
           selectActivityDayIdBasedOnLocaleDate(state);
 
         if (activityDayIdBasedOnLocaleDate === null) {
-          const activityLogDto = activityLogsMessages()[entityUsed][
-            methodUsed
+          const activityLogDto = activityLogsMessages(entityName)[entityUsed][
+            activityLogSubject
           ] as CreateActivityLogDto;
-
-          const test = activityLogsMessages();
-          console.log(test);
 
           delete activityLogDto.activityDays;
 
@@ -88,12 +77,10 @@ handleActivityLogsListener.startListening({
             }),
           );
         } else {
-          const test = activityLogsMessages(activityDayIdBasedOnLocaleDate);
-          console.log(test);
-
           const activityLogDto = activityLogsMessages(
+            entityName,
             activityDayIdBasedOnLocaleDate,
-          )[entityUsed][methodUsed] as CreateActivityLogDto;
+          )[entityUsed][activityLogSubject] as CreateActivityLogDto;
 
           dispatch(createActivityLog({ ...activityLogDto }));
         }

@@ -39,6 +39,7 @@ export const {
   closeUpsertTagOverlay,
   setUpsertTagOverlay,
   closeDeleteEntityOverlay,
+  setCurrentActivityLogSubject,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

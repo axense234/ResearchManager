@@ -110,4 +110,10 @@ export const researchPhasesSliceReducers = {
   ) {
     researchPhasesAdapter.addOne(state, action.payload);
   },
+  setCurrentResearchPhaseIndex(
+    state: ResearchPhasesSliceStateType,
+    action: PayloadAction<number>,
+  ) {
+    state.currentResearchPhaseIndex = action.payload;
+  },
 };

@@ -54,3 +54,7 @@ export const selectResearchPhaseImagesOverlay = (state: State) =>
 
 // Contact
 export const selectContactUsDto = (state: State) => state.general.contactUsDto;
+
+// Util
+export const selectCurrentActivityLogSubject = (state: State) =>
+  state.general.currentActivityLogSubject;

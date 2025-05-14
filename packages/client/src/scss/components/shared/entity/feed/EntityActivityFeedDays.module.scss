@@ -12,11 +12,6 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
-  &::-webkit-scrollbar {
-    width: 0px;
-    visibility: hidden;
-  }
-
   background-color: getColor("main-white");
 
   border-bottom-left-radius: 0.25rem;

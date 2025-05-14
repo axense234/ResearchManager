@@ -69,4 +69,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
 
   // Contact
   contactUsDto: { title: "", message: "" },
+
+  // Util
+  currentActivityLogSubject: "CREATE",
 };

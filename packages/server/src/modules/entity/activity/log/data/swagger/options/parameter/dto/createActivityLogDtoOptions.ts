@@ -11,7 +11,7 @@ export const createActivityLogDtoOptions: CreateActivityLogDtoOptionsType = {
   subject: {
     example: 'CREATE',
     description:
-      'The subject of your Activity Log. Available options: CREATE, UPDATE, DELETE, RESTORE, PURGE, RESEARCH_START, RESEARCH_PAUSE, RESEARCH_RESUME, RESEARCH_END, SETTINGS, OTHER.',
+      'The subject of your Activity Log. Available options: CREATE, UPDATE, DELETE, ARCHIVE, RESTORE, PURGE, RESEARCH_START, RESEARCH_PAUSE, RESEARCH_RESUME, RESEARCH_END, SETTINGS, OTHER.',
   },
   message: {
     example: 'Created a Research Activity.',

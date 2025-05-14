@@ -6,8 +6,9 @@ import {
 
 export type ActivityLogsDataType = {
   [key in EntityType]?: {
-    create: CreateActivityLogDto;
-    update: CreateActivityLogDto;
-    delete: CreateActivityLogDto;
+    CREATE: CreateActivityLogDto;
+    UPDATE: CreateActivityLogDto;
+    PURGE: CreateActivityLogDto;
+    ARCHIVE: CreateActivityLogDto;
   };
 };

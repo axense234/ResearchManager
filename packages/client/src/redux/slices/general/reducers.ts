@@ -13,6 +13,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { authCarouselContent } from "@/data/general/components";
 // Helpers
 import { handleCarouselStepDirection } from "@/helpers";
+import { ActivitySubject } from "@prisma/client";
 
 export const generalSliceReducers = {
   setEntityOverlay(
@@ -173,5 +174,11 @@ export const generalSliceReducers = {
   },
   resetErrorFields(state: GeneralSliceInitialStateType) {
     state.errorFields = [];
+  },
+  setCurrentActivityLogSubject(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<ActivitySubject>,
+  ) {
+    state.currentActivityLogSubject = action.payload;
   },
 };

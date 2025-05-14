@@ -11,7 +11,7 @@ export const updateActivityLogDtoOptions: UpdateActivityLogDtoOptionsType = {
   subject: {
     example: 'UPDATE',
     description:
-      'The subject of your Activity Log. Available options: CREATE, UPDATE, DELETE, RESTORE, PURGE, RESEARCH_START, RESEARCH_PAUSE, RESEARCH_RESUME, RESEARCH_END, SETTINGS, OTHER.',
+      'The subject of your Activity Log. Available options: CREATE, UPDATE, DELETE, ARCHIVE, RESTORE, PURGE, RESEARCH_START, RESEARCH_PAUSE, RESEARCH_RESUME, RESEARCH_END, SETTINGS, OTHER.',
   },
   message: {
     example: 'Updated a Research Activity.',

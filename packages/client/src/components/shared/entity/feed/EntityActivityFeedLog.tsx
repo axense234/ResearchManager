@@ -7,7 +7,13 @@ import entityActivityFeedLogStyles from "@/scss/components/shared/entity/feed/En
 // Redux
 import { useAppSelector } from "@/hooks";
 import { selectActivityLogById } from "@/redux/slices/activity/log";
-import { createGreenColor } from "@/data/general";
+// Data
+import {
+  createGreenColor,
+  deleteRedColor,
+  mockBrownColor,
+  updateOrangeColor,
+} from "@/data/general";
 
 const EntityActivityFeedLog: FC<EntityActivityFeedLogProps> = ({
   activityLogId,
@@ -18,10 +24,18 @@ const EntityActivityFeedLog: FC<EntityActivityFeedLogProps> = ({
 
   let activityLogSubjectColor = createGreenColor;
 
-  console.log(activityLog?.subject);
   switch (activityLog?.subject) {
     case "CREATE":
       activityLogSubjectColor = createGreenColor;
+      break;
+    case "UPDATE":
+      activityLogSubjectColor = updateOrangeColor;
+      break;
+    case "ARCHIVE":
+      activityLogSubjectColor = mockBrownColor;
+      break;
+    case "PURGE":
+      activityLogSubjectColor = deleteRedColor;
       break;
     default:
       break;

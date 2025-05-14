@@ -7,6 +7,7 @@ import { OverlayType } from "./OverlayType";
 import { EntityImagesOverlayType } from "./EntityImagesOverlayType";
 import { DeleteEntityOverlayType } from "./DeleteEntityOverlayType";
 import { UpsertTagOverlayType } from "./UpsertTagOverlayType";
+import { ActivitySubject } from "@prisma/client";
 
 export type GeneralSliceInitialStateType = {
   // Auth
@@ -48,4 +49,7 @@ export type GeneralSliceInitialStateType = {
     title: string;
     message: string;
   };
+
+  // Util
+  currentActivityLogSubject: ActivitySubject;
 };

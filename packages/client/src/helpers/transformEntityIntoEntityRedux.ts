@@ -46,10 +46,9 @@ export const transformEntityIntoEntityRedux = (
         ...entityAsUserWithoutRelationships,
         settingsId: entityAsUser.settings?.id,
         activityFeedId: entityAsUser.activityFeed?.id,
-        researchActivitiesIds: entityAsUser.researchActivities?.map(
-          (activity) => activity.id,
-        ),
-        tagsIds: entityAsUser.tags?.map((tag) => tag.id),
+        researchActivitiesIds:
+          entityAsUser.researchActivities?.map((activity) => activity.id) || [],
+        tagsIds: entityAsUser.tags?.map((tag) => tag.id) || [],
         createdAt: new Date(entityAsUser.createdAt).toISOString(),
         updatedAt: new Date(entityAsUser.updatedAt).toISOString(),
       } as UserRedux;
@@ -67,10 +66,10 @@ export const transformEntityIntoEntityRedux = (
       return {
         ...entityAsResearchActivityWithoutRelationships,
         activityFeedId: entityAsResearchActivity.activityFeed?.id,
-        researchPhasesIds: entityAsResearchActivity.researchPhases?.map(
-          (phase) => phase.id,
-        ),
-        tagsIds: entityAsResearchActivity.tags?.map((tag) => tag.id),
+        researchPhasesIds:
+          entityAsResearchActivity.researchPhases?.map((phase) => phase.id) ||
+          [],
+        tagsIds: entityAsResearchActivity.tags?.map((tag) => tag.id) || [],
         createdAt: new Date(entityAsResearchActivity.createdAt).toISOString(),
         updatedAt: new Date(entityAsResearchActivity.updatedAt).toISOString(),
       } as ResearchActivityRedux;
@@ -87,13 +86,13 @@ export const transformEntityIntoEntityRedux = (
 
       return {
         ...entityAsResearchPhaseWithoutRelationships,
-        researchLogsIds: entityAsResearchPhase.researchLogs?.map(
-          (log) => log.id,
-        ),
-        researchSessionsIds: entityAsResearchPhase.researchSessions?.map(
-          (session) => session.id,
-        ),
-        tagsIds: entityAsResearchPhase.tags?.map((tag) => tag.id),
+        researchLogsIds:
+          entityAsResearchPhase.researchLogs?.map((log) => log.id) || [],
+        researchSessionsIds:
+          entityAsResearchPhase.researchSessions?.map(
+            (session) => session.id,
+          ) || [],
+        tagsIds: entityAsResearchPhase.tags?.map((tag) => tag.id) || [],
         createdAt: new Date(entityAsResearchPhase.createdAt).toISOString(),
         updatedAt: new Date(entityAsResearchPhase.updatedAt).toISOString(),
       } as ResearchPhaseRedux;
@@ -108,7 +107,7 @@ export const transformEntityIntoEntityRedux = (
 
       return {
         ...entityAsResearchSessionWithoutRelationships,
-        tagsIds: entityAsResearchSession.tags?.map((tag) => tag.id),
+        tagsIds: entityAsResearchSession.tags?.map((tag) => tag.id) || [],
         createdAt: new Date(entityAsResearchSession.createdAt).toISOString(),
         updatedAt: new Date(entityAsResearchSession.updatedAt).toISOString(),
         currentStatusDate: new Date(
@@ -126,7 +125,7 @@ export const transformEntityIntoEntityRedux = (
 
       return {
         ...entityAsResearchLogWithoutRelationships,
-        tagsIds: entityAsResearchLog.tags?.map((tag) => tag.id),
+        tagsIds: entityAsResearchLog.tags?.map((tag) => tag.id) || [],
         createdAt: new Date(entityAsResearchLog.createdAt).toISOString(),
         updatedAt: new Date(entityAsResearchLog.updatedAt).toISOString(),
       } as ResearchLogRedux;
@@ -142,14 +141,13 @@ export const transformEntityIntoEntityRedux = (
 
       return {
         ...entityAsTagWithoutRelationships,
-        researchActivitiesIds: entityAsTag.researchActivities?.map(
-          (activity) => activity.id,
-        ),
-        researchPhasesIds: entityAsTag.researchPhases?.map((phase) => phase.id),
-        researchLogsIds: entityAsTag.researchLogs?.map((log) => log.id),
-        researchSessionsIds: entityAsTag.researchSessions?.map(
-          (session) => session.id,
-        ),
+        researchActivitiesIds:
+          entityAsTag.researchActivities?.map((activity) => activity.id) || [],
+        researchPhasesIds:
+          entityAsTag.researchPhases?.map((phase) => phase.id) || [],
+        researchLogsIds: entityAsTag.researchLogs?.map((log) => log.id) || [],
+        researchSessionsIds:
+          entityAsTag.researchSessions?.map((session) => session.id) || [],
         createdAt: new Date(entityAsTag.createdAt).toISOString(),
         updatedAt: new Date(entityAsTag.updatedAt).toISOString(),
       } as TagRedux;
@@ -165,7 +163,8 @@ export const transformEntityIntoEntityRedux = (
 
       return {
         ...entityAsActivityFeedWithoutRelationships,
-        activityDaysIds: entityAsActivityFeed.activityDays?.map((ad) => ad.id),
+        activityDaysIds:
+          entityAsActivityFeed.activityDays?.map((ad) => ad.id) || [],
         createdAt: new Date(entityAsActivityFeed.createdAt).toISOString(),
         updatedAt: new Date(entityAsActivityFeed.updatedAt).toISOString(),
       };
@@ -196,7 +195,8 @@ export const transformEntityIntoEntityRedux = (
 
       return {
         ...entityAsActivityLogWithoutRelationships,
-        activityDaysIds: entityAsActivityLog.activityDays?.map((ad) => ad.id),
+        activityDaysIds:
+          entityAsActivityLog.activityDays?.map((ad) => ad.id) || [],
         createdAt: new Date(entityAsActivityLog.createdAt).toISOString(),
         updatedAt: new Date(entityAsActivityLog.updatedAt).toISOString(),
       };

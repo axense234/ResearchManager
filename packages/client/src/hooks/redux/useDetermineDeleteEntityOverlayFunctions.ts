@@ -1,8 +1,11 @@
 // Types
 import { EntityType } from "@researchmanager/shared/types";
 // Redux
-import { useAppDispatch } from "./redux";
-import { closeDeleteEntityOverlay } from "@/redux/slices/general/slice";
+import { useAppDispatch, useAppSelector } from "./redux";
+import {
+  closeDeleteEntityOverlay,
+  setCurrentActivityLogSubject,
+} from "@/redux/slices/general/slice";
 import {
   updateResearchActivity,
   deleteResearchActivity,
@@ -10,7 +13,14 @@ import {
 import {
   updateResearchPhase,
   deleteResearchPhase,
+  selectNumberOfUnarchivedResearchPhases,
+  selectCurrentResearchPhaseIndex,
+  setCurrentResearchPhaseIndex,
 } from "@/redux/slices/research/phase";
+import {
+  selectNumberOfUnarchivedResearchActivities,
+  setCurrentResearchActivityIndex,
+} from "@/redux/slices/research/activity";
 
 export const useDetermineDeleteEntityOverlayFunctions = (
   entityType: EntityType,
@@ -20,6 +30,14 @@ export const useDetermineDeleteEntityOverlayFunctions = (
 
   let onArchiveFunctionUsed: () => void;
   let onPurgeFunctionUsed: () => void;
+
+  const numberOfResearchActivities = useAppSelector(
+    selectNumberOfUnarchivedResearchActivities,
+  );
+
+  const numberOfResearchPhases = useAppSelector(
+    selectNumberOfUnarchivedResearchPhases,
+  );
 
   switch (entityType) {
     case "researchActivity":
@@ -31,10 +49,18 @@ export const useDetermineDeleteEntityOverlayFunctions = (
           }),
         );
         dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
+        dispatch(
+          setCurrentResearchActivityIndex(numberOfResearchActivities - 1),
+        );
       };
       onPurgeFunctionUsed = () => {
         dispatch(deleteResearchActivity(entityId));
         dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentActivityLogSubject("PURGE"));
+        dispatch(
+          setCurrentResearchActivityIndex(numberOfResearchActivities - 1),
+        );
       };
       break;
     case "researchPhase":
@@ -46,10 +72,14 @@ export const useDetermineDeleteEntityOverlayFunctions = (
           }),
         );
         dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
+        dispatch(setCurrentResearchPhaseIndex(numberOfResearchPhases - 1));
       };
       onPurgeFunctionUsed = () => {
         dispatch(deleteResearchPhase(entityId));
         dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentActivityLogSubject("PURGE"));
+        dispatch(setCurrentResearchPhaseIndex(numberOfResearchPhases - 1));
       };
       break;
     default:

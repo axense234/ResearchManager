@@ -75,23 +75,29 @@ export const availableTagFontFamilies: TagFontFamily[] = [
 ];
 
 export const activityLogsMessages = (
+  entityName: string,
   activityDayId?: string,
 ): ActivityLogsDataType => {
   return {
     researchActivity: {
-      create: {
+      CREATE: {
         subject: "CREATE",
-        message: "create ra",
+        message: `Successfully created Research Activity named ${entityName}.`,
         activityDays: [activityDayId],
       },
-      update: {
+      UPDATE: {
         subject: "UPDATE",
-        message: "update ra",
+        message: `Successfully updated Research Activity named ${entityName}.`,
         activityDays: [activityDayId],
       },
-      delete: {
-        subject: "DELETE",
-        message: "delete ra",
+      PURGE: {
+        subject: "PURGE",
+        message: `Successfully permanently deleted Research Activity named ${entityName}.`,
+        activityDays: [activityDayId],
+      },
+      ARCHIVE: {
+        subject: "ARCHIVE",
+        message: `Successfully archived Research Activity named ${entityName}.`,
         activityDays: [activityDayId],
       },
     },
