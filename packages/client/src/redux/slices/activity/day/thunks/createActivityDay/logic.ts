@@ -23,6 +23,7 @@ export const createActivityDay = createAsyncThunk<
             JSON.stringify(createActivityLogDto),
           ),
           includeValues: "activityLogs",
+          includeDepth: 2,
           chosenOptionType: "include",
         },
       })

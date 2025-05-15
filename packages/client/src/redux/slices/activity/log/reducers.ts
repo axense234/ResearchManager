@@ -11,4 +11,10 @@ export const activityLogsSliceReducers = {
   ) {
     activityLogsAdapter.setAll(state, action.payload);
   },
+  addActivityLog(
+    state: ActivityLogsSliceStateType,
+    action: PayloadAction<ActivityLogRedux>,
+  ) {
+    activityLogsAdapter.addOne(state, action.payload);
+  },
 };

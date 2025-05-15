@@ -8,6 +8,7 @@ export const {
   selectAll: selectAllResearchLogs,
   selectById: selectResearchLogById,
   selectIds: selectResearchLogsIds,
+  selectTotal: selectNumberOfResearchLogs,
 } = researchLogsAdapter.getSelectors<State>((state) => state.researchLogs);
 
 // Examples

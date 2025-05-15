@@ -8,6 +8,7 @@ import ProfileResearchActivities from "./ProfileResearchActivities";
 import ProfileResearchPhases from "./ProfileResearchPhases";
 import Footer from "@/components/layout/footer/Footer";
 import ProfileActivityFeed from "./ProfileActivityFeed";
+import ProfileGeneralStatistics from "./statistics/ProfileGeneralStatistics";
 
 const ProfilePage: FC = () => {
   return (
@@ -16,6 +17,7 @@ const ProfilePage: FC = () => {
       <ProfileResearchActivities />
       <ProfileResearchPhases />
       <ProfileActivityFeed />
+      <ProfileGeneralStatistics />
       <Footer />
     </section>
   );

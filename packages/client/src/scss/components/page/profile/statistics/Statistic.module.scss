@@ -1,0 +1,13 @@
+@use "../../../../abstracts" as *;
+
+.statisticContainer {
+  @include flexCenter(row);
+  width: 100%;
+  justify-content: space-between;
+
+  > p {
+    font-size: getFontSize("button-heading");
+    font-weight: 550;
+    letter-spacing: 0.35px;
+  }
+}

@@ -18,7 +18,10 @@ import {
   useOverlayTransition,
 } from "@/hooks";
 import { selectEntityOverlay } from "@/redux/slices/general";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
+import {
+  setCurrentActivityLogSubject,
+  setEntityOverlay,
+} from "@/redux/slices/general/slice";
 import { selectSelectedTagsIds } from "@/redux/slices/tag";
 import {
   createResearchPhase,
@@ -78,6 +81,7 @@ const UpsertResearchPhaseOverlayInterface: FC = () => {
       : updateUpdateResearchPhaseDto;
 
   const onResearchPhaseCreateFunction = () => {
+    dispatch(setCurrentActivityLogSubject("CREATE"));
     dispatch(
       createResearchPhase({
         ...createResearchPhaseDto,
@@ -88,6 +92,7 @@ const UpsertResearchPhaseOverlayInterface: FC = () => {
   };
 
   const onResearchPhaseUpdateFunction = () => {
+    dispatch(setCurrentActivityLogSubject("UPDATE"));
     dispatch(
       updateResearchPhase({
         dto: { ...updateResearchPhaseDto },

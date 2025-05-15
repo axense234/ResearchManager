@@ -36,3 +36,18 @@ export const selectActivityDaysIdsByActivityFeedId = createSelector(
       .map((activityDay) => activityDay.id);
   },
 );
+
+export const selectActivityDaysByActivityDaysIds = createSelector(
+  [
+    selectAllActivityDays,
+    (state, activityDaysIds: string[]) => activityDaysIds,
+  ],
+  (activityDays, activityDaysIds) => {
+    return activityDays.filter((activityDay) =>
+      activityDaysIds.includes(activityDay.id),
+    );
+  },
+);
+
+export const selectCurrentActivityDayId = (state: State) =>
+  state.activityDays.currentActivityDayId;

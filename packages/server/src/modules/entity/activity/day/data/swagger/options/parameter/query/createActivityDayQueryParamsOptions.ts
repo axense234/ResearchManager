@@ -10,6 +10,7 @@ import {
 
 type CreateActivityDayQueryParamsApiPropertyOptionsType = {
   includeValues: ApiPropertyOptions;
+  includeDepth: ApiPropertyOptions;
   selectValues: ApiPropertyOptions;
   chosenOptionType: ApiPropertyOptions;
   createActivityLog: ApiPropertyOptions;
@@ -24,6 +25,11 @@ export const createActivityDayQueryParamsApiPropertyOptions: CreateActivityDayQu
         'include',
         activityDayAllowedIncludeValues,
       ),
+    },
+    includeDepth: {
+      required: false,
+      description:
+        'The depth of the include object. Experimental. Available options: between 1-4, 1 being the default.',
     },
     selectValues: {
       required: false,

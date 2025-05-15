@@ -20,7 +20,9 @@ const EntityActivityFeed: FC<EntityActivityFeedProps> = ({
 
   return (
     <section className={entityActivityFeedStyles.feedContainer}>
-      <EntityActivityFeedSearchBar />
+      <EntityActivityFeedSearchBar
+        activityDaysIds={activityFeedActivityDaysIds}
+      />
       <EntityActivityFeedDays activityDaysIds={activityFeedActivityDaysIds} />
     </section>
   );

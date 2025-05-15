@@ -2,6 +2,7 @@
 
 .searchBarContainer {
   @include flexCenter(row);
+  justify-content: flex-start;
   width: 100%;
 
   min-height: 3rem;
@@ -12,4 +13,9 @@
   border-top-right-radius: 0.25rem;
 
   background-color: getColor("secondary-pastel-cyan");
+}
+
+.searchBarFormControls {
+  @include flexCenter(row);
+  align-items: flex-start;
 }

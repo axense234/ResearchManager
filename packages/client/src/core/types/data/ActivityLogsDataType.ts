@@ -1,14 +1,7 @@
 // Types
-import {
-  CreateActivityLogDto,
-  EntityType,
-} from "@researchmanager/shared/types";
+import { ActivitySubject } from "@prisma/client";
+import { CreateActivityLogDto } from "@researchmanager/shared/types";
 
 export type ActivityLogsDataType = {
-  [key in EntityType]?: {
-    CREATE: CreateActivityLogDto;
-    UPDATE: CreateActivityLogDto;
-    PURGE: CreateActivityLogDto;
-    ARCHIVE: CreateActivityLogDto;
-  };
+  [key in ActivitySubject]?: CreateActivityLogDto;
 };

@@ -11,4 +11,11 @@ export const activityDaysSliceReducers = {
   ) {
     activityDaysAdapter.setAll(state, action.payload);
   },
+  setCurrentActivityDayId(
+    state: ActivityDaysSliceStateType,
+    action: PayloadAction<string>,
+  ) {
+    console.log(action.payload);
+    state.currentActivityDayId = action.payload;
+  },
 };

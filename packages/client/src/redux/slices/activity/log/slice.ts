@@ -16,6 +16,6 @@ const activityLogsSlice = createSlice({
   },
 });
 
-export const { setActivityLogs } = activityLogsSlice.actions;
+export const { setActivityLogs, addActivityLog } = activityLogsSlice.actions;
 
 export default activityLogsSlice.reducer;

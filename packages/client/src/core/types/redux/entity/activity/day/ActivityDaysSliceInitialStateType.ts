@@ -1,1 +1,3 @@
-export type ActivityDaysSliceInitialStateType = {};
+export type ActivityDaysSliceInitialStateType = {
+  currentActivityDayId: string;
+};

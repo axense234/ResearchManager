@@ -12,6 +12,7 @@ import activityDaysSliceReducer from "../slices/activity/day/slice";
 import activityLogsSliceReducer from "../slices/activity/log/slice";
 // Middleware
 import {
+  addActivityLogWhenCreatingActivityDayListener,
   addDefaultResearchPhaseListener,
   handleActivityLogsListener,
   setEntitiesStateFromUserPayloadListener,
@@ -36,6 +37,7 @@ const store = configureStore({
       setModalListener.middleware,
       addDefaultResearchPhaseListener.middleware,
       handleActivityLogsListener.middleware,
+      addActivityLogWhenCreatingActivityDayListener.middleware,
     ),
 });
 

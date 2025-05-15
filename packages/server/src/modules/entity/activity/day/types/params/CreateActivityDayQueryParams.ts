@@ -11,6 +11,11 @@ export class CreateActivityDayQueryParams {
   @IsOptional()
   includeValues: string;
 
+  @ApiProperty(createActivityDayQueryParamsApiPropertyOptions['includeDepth'])
+  @IsString()
+  @IsOptional()
+  includeDepth: string;
+
   @ApiProperty(createActivityDayQueryParamsApiPropertyOptions['selectValues'])
   @IsString()
   @IsOptional()

@@ -32,6 +32,7 @@ import {
 import { updateResearchActivity } from "@/redux/slices/research/activity/thunks";
 import { selectSelectedTagsIds } from "@/redux/slices/tag";
 import {
+  setCurrentActivityLogSubject,
   setDeleteEntityOverlay,
   setEntityOverlay,
 } from "@/redux/slices/general/slice";
@@ -95,6 +96,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   }, [researchActivity, isCurrentView]);
 
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
+    dispatch(setCurrentActivityLogSubject("UPDATE"));
     onEditTagFunction(
       type,
       researchActivity.tagsIds,

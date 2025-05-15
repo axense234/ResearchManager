@@ -35,6 +35,7 @@ export class CreateActivityDayService {
         chosenOptionType,
         createActivityLog,
         createActivityLogDto,
+        includeDepth,
       } = queryParams;
 
       const dataObject = (await this.objectBuilder.buildDataObject({
@@ -59,6 +60,7 @@ export class CreateActivityDayService {
           chosenOptionType,
           includeValues,
           selectValues,
+          includeDepth: Number(includeDepth),
         });
 
       if (chosenOptionType && optionObject) {

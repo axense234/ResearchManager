@@ -1,3 +1,13 @@
+// Data
+import { activityLogsMessages } from "@/data/redux";
+// Types
+import {
+  CreateActivityLogDto,
+  ResearchActivityPayload,
+  ResearchPhasePayload,
+  TagPayload,
+} from "@researchmanager/shared/types";
+import { AxiosError } from "axios";
 // Redux
 import {
   createResearchActivity,
@@ -6,21 +16,15 @@ import {
 } from "@/redux/slices/research/activity/thunks";
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { State } from "@/redux/api/store";
-// Data
-import { activityLogsMessages } from "@/data/redux";
-// Redux
-import { AxiosError } from "axios";
 import { selectActivityDayIdBasedOnLocaleDate } from "@/redux/slices/activity/day";
 import { createActivityDay } from "@/redux/slices/activity/day/thunks";
 import { createActivityLog } from "@/redux/slices/activity/log/thunks";
-// Types
+import { createTag } from "@/redux/slices/tag/thunks";
 import {
-  CreateActivityLogDto,
-  EntityType,
-  ResearchActivityPayload,
-  ResearchPhasePayload,
-  TagPayload,
-} from "@researchmanager/shared/types";
+  createResearchPhase,
+  deleteResearchPhase,
+  updateResearchPhase,
+} from "@/redux/slices/research/phase";
 
 export const handleActivityLogsListener = createListenerMiddleware();
 
@@ -33,6 +37,17 @@ handleActivityLogsListener.startListening({
     updateResearchActivity.rejected,
     deleteResearchActivity.fulfilled,
     deleteResearchActivity.rejected,
+    // Research Phase
+    createResearchPhase.fulfilled,
+    createResearchPhase.rejected,
+    updateResearchPhase.fulfilled,
+    updateResearchPhase.rejected,
+    deleteResearchPhase.fulfilled,
+    deleteResearchPhase.rejected,
+    // Tag
+    createTag.pending,
+    createTag.fulfilled,
+    createTag.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
@@ -40,17 +55,18 @@ handleActivityLogsListener.startListening({
     const state = getState() as State;
 
     const activityLogSubject = state.general.currentActivityLogSubject;
-    let entityUsed: EntityType = "researchActivity";
+
+    let entityLabel = "Research Activity";
     let entityName = "Unknown";
 
     if (action.type.includes("researchActivities")) {
-      entityUsed = "researchActivity";
+      entityLabel = "Research Activity";
       entityName = (action.payload as ResearchActivityPayload)?.name;
     } else if (action.type.includes("researchPhases")) {
-      entityUsed = "researchPhase";
+      entityLabel = "Research Phase";
       entityName = (action.payload as ResearchPhasePayload)?.name;
     } else if (action.type.includes("tags")) {
-      entityUsed = "tag";
+      entityLabel = "Tag";
       entityName = (action.payload as TagPayload)?.title;
     }
 
@@ -62,7 +78,7 @@ handleActivityLogsListener.startListening({
           selectActivityDayIdBasedOnLocaleDate(state);
 
         if (activityDayIdBasedOnLocaleDate === null) {
-          const activityLogDto = activityLogsMessages(entityName)[entityUsed][
+          const activityLogDto = activityLogsMessages(entityName, entityLabel)[
             activityLogSubject
           ] as CreateActivityLogDto;
 
@@ -79,8 +95,9 @@ handleActivityLogsListener.startListening({
         } else {
           const activityLogDto = activityLogsMessages(
             entityName,
+            entityLabel,
             activityDayIdBasedOnLocaleDate,
-          )[entityUsed][activityLogSubject] as CreateActivityLogDto;
+          )[activityLogSubject] as CreateActivityLogDto;
 
           dispatch(createActivityLog({ ...activityLogDto }));
         }

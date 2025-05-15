@@ -16,6 +16,7 @@ const activityDaysSlice = createSlice({
   },
 });
 
-export const { setActivityDays } = activityDaysSlice.actions;
+export const { setActivityDays, setCurrentActivityDayId } =
+  activityDaysSlice.actions;
 
 export default activityDaysSlice.reducer;

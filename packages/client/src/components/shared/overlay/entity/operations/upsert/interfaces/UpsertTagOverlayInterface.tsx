@@ -19,7 +19,10 @@ import {
   selectUpsertTagOverlay,
   selectUserProfile,
 } from "@/redux/slices/general";
-import { closeUpsertTagOverlay } from "@/redux/slices/general/slice";
+import {
+  closeUpsertTagOverlay,
+  setCurrentActivityLogSubject,
+} from "@/redux/slices/general/slice";
 import {
   selectCreateTagDto,
   selectLoadingCreateTag,
@@ -61,10 +64,12 @@ const UpsertTagOverlayInterface: FC = () => {
       : updateUpdateTagDto;
 
   const onTagCreateFunction = () => {
+    dispatch(setCurrentActivityLogSubject("CREATE"));
     dispatch(createTag({ ...createTagDto, userId: userProfile.id }));
   };
 
   const onTagUpdateFunction = () => {
+    dispatch(setCurrentActivityLogSubject("UPDATE"));
     dispatch(
       updateTag({
         dto: { ...updateTagDto, userId: userProfile.id },

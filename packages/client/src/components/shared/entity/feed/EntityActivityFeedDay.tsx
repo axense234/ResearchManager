@@ -1,19 +1,25 @@
 // React
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 // Interfaces
 import { EntityActivityFeedDayProps } from "@/core/interfaces";
 // SCSS
 import entityActivityFeedDayStyles from "@/scss/components/shared/entity/feed/EntityActivityFeedDay.module.scss";
 // Components
 import EntityActivityFeedLog from "./EntityActivityFeedLog";
-// Redux
-import { useAppSelector } from "@/hooks";
-import { selectActivityDayById } from "@/redux/slices/activity/day";
+// Redux and Hooks
+import { useAppSelector, useHandleScrollToActivityDay } from "@/hooks";
+import {
+  selectActivityDayById,
+  selectCurrentActivityDayId,
+} from "@/redux/slices/activity/day";
 import { selectActivityLogsIdsByActivityDayId } from "@/redux/slices/activity/log";
 
 const EntityActivityFeedDay: FC<EntityActivityFeedDayProps> = ({
   activityDayId,
+  containerRef,
 }) => {
+  const activityDayRef = useRef<HTMLDivElement>(null);
+
   const activityDay = useAppSelector((state) =>
     selectActivityDayById(state, activityDayId),
   );
@@ -22,8 +28,20 @@ const EntityActivityFeedDay: FC<EntityActivityFeedDayProps> = ({
     selectActivityLogsIdsByActivityDayId(state, activityDayId),
   );
 
+  const currentActivityDayId = useAppSelector(selectCurrentActivityDayId);
+
+  useHandleScrollToActivityDay(
+    currentActivityDayId,
+    activityDay.id,
+    activityDayRef,
+    containerRef,
+  );
+
   return (
-    <div className={entityActivityFeedDayStyles.dayContainer}>
+    <div
+      className={entityActivityFeedDayStyles.dayContainer}
+      ref={activityDayRef}
+    >
       <div className={entityActivityFeedDayStyles.dayTitleContainer}>
         <h6>
           {new Date(activityDay?.createdAt).toLocaleString(undefined, {

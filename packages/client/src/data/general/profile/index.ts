@@ -18,3 +18,9 @@ export const profileActivityFeedData: PageSectionTitleProps = {
   description:
     "View the history of your account activity based on the date, type and message of the respective activity.",
 };
+
+export const profileGeneralStatistics: PageSectionTitleProps = {
+  title: "General Statistics",
+  description:
+    "Statistics regarding your account. For example, total research points(sum of all of your research activities research points), least used tag, most used tag, number of research activities, etc.",
+};

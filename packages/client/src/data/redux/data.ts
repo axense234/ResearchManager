@@ -76,30 +76,29 @@ export const availableTagFontFamilies: TagFontFamily[] = [
 
 export const activityLogsMessages = (
   entityName: string,
+  entityLabel: string,
   activityDayId?: string,
 ): ActivityLogsDataType => {
   return {
-    researchActivity: {
-      CREATE: {
-        subject: "CREATE",
-        message: `Successfully created Research Activity named ${entityName}.`,
-        activityDays: [activityDayId],
-      },
-      UPDATE: {
-        subject: "UPDATE",
-        message: `Successfully updated Research Activity named ${entityName}.`,
-        activityDays: [activityDayId],
-      },
-      PURGE: {
-        subject: "PURGE",
-        message: `Successfully permanently deleted Research Activity named ${entityName}.`,
-        activityDays: [activityDayId],
-      },
-      ARCHIVE: {
-        subject: "ARCHIVE",
-        message: `Successfully archived Research Activity named ${entityName}.`,
-        activityDays: [activityDayId],
-      },
+    CREATE: {
+      subject: "CREATE",
+      message: `Successfully created ${entityLabel} named ${entityName}.`,
+      activityDays: [activityDayId],
+    },
+    UPDATE: {
+      subject: "UPDATE",
+      message: `Successfully updated ${entityLabel} named ${entityName}.`,
+      activityDays: [activityDayId],
+    },
+    PURGE: {
+      subject: "PURGE",
+      message: `Successfully permanently deleted ${entityLabel} named ${entityName}.`,
+      activityDays: [activityDayId],
+    },
+    ARCHIVE: {
+      subject: "ARCHIVE",
+      message: `Successfully archived ${entityLabel} named ${entityName}.`,
+      activityDays: [activityDayId],
     },
   };
 };

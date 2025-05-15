@@ -1,5 +1,5 @@
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Interfaces
 import { EntityActivityFeedDaysProps } from "@/core/interfaces";
 // SCSS
@@ -10,13 +10,19 @@ import EntityActivityFeedDay from "./EntityActivityFeedDay";
 const EntityActivityFeedDays: FC<EntityActivityFeedDaysProps> = ({
   activityDaysIds,
 }) => {
+  const activityFeedDaysRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className={entityActivityFeedDaysStyles.daysContainer}>
+    <div
+      className={entityActivityFeedDaysStyles.daysContainer}
+      ref={activityFeedDaysRef}
+    >
       {activityDaysIds?.map((activityDayId) => {
         return (
           <EntityActivityFeedDay
             key={activityDayId}
             activityDayId={activityDayId}
+            containerRef={activityFeedDaysRef}
           />
         );
       })}

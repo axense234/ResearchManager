@@ -9,3 +9,4 @@ export * from "./useGetCurrentEntityIdAndIndex";
 export * from "./useCountdown";
 export * from "./useGetElementRelativePosition";
 export * from "./useDetermineAddTagButtonDisabledInfo";
+export * from "./useHandleScrollToActivityDay";

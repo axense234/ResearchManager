@@ -14,7 +14,6 @@ export const {
 export const selectActivityLogsIdsByActivityDayId = createSelector(
   [selectAllActivityLogs, (state, activityDayId) => activityDayId],
   (activityLogs, activityDayId) => {
-    console.log(activityLogs);
     return activityLogs
       .filter((activityLog) =>
         activityLog.activityDaysIds?.includes(activityDayId),

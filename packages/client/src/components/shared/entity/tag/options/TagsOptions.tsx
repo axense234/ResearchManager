@@ -75,7 +75,7 @@ const TagsOptions: FC<TagsOptionsProps> = ({
         showButton={selectedTagsIds.length > 0 && addTagModal.isClosed}
         onButtonClickFunction={onRemoveTagFunction}
         buttonColor={deleteRedColor}
-        buttonLabel="Remove Tag"
+        buttonLabel={selectedTagsIds.length > 1 ? "Remove Tags" : "Remove Tag"}
       />
     </div>
   );
