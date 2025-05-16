@@ -7,6 +7,7 @@ import entityViewStyles from "@/scss/components/shared/entity/view/EntityView.mo
 // Components
 import EntityContainer from "../container/EntityContainer";
 import EntityDetails from "./EntityDetails";
+import EntitySessions from "./sessions/EntitySessions";
 // Types
 import { ResearchActivityRedux, ResearchPhaseRedux } from "@/core/types";
 // Redux
@@ -24,6 +25,8 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
     | ResearchActivityRedux
     | ResearchPhaseRedux;
 
+  console.log(entityType, entityId);
+
   return (
     <div className={`${entityViewStyles.entityViewContent} ${position}`}>
       <EntityContainer
@@ -34,6 +37,9 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         position={position}
         isCurrentView={isCurrentView}
       />
+      {entityType === "researchActivity" && (
+        <EntitySessions entityId={entityId} entityType={entityType} />
+      )}
       <EntityDetails
         specialEntity={entity}
         specialEntityType={entityType}

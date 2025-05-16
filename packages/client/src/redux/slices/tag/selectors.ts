@@ -1,9 +1,12 @@
 // Redux
 import { State } from "@/redux/api/store";
+import { createSelector } from "@reduxjs/toolkit";
 // Adapater
 import { tagsAdapter } from "./adapter";
-import { createSelector } from "@reduxjs/toolkit";
+// Types
 import { StatisticTagReturnType } from "@/core/types";
+// Helpers
+import { calculateFrequencyOfGivenTag } from "@/helpers";
 
 export const {
   selectAll: selectAllTags,
@@ -13,51 +16,40 @@ export const {
 } = tagsAdapter.getSelectors<State>((state) => state.tags);
 
 export const selectStatisticTag = createSelector(
-  [selectAllTags, (state, type: "most" | "least") => type],
-  (tags, type): StatisticTagReturnType | null => {
+  [
+    selectAllTags,
+    (state: State) => state,
+    (_: State, type: "most" | "least") => type,
+  ],
+  (tags, state, type): StatisticTagReturnType | null => {
     if (tags.length === 0) {
       return null;
     }
 
     let usedTag = tags[0];
-    let usedTagNumberOfEntitiesAttached =
-      tags[0].researchActivitiesIds.length +
-      tags[0].researchPhasesIds.length +
-      tags[0].researchLogsIds.length;
+    let usedTagFrequency = calculateFrequencyOfGivenTag(state, tags[0]);
 
     if (tags.length === 1) {
       return {
         tag: usedTag,
-        numberOfEntitiesAttached: usedTagNumberOfEntitiesAttached,
+        tagFrequency: usedTagFrequency,
       };
     }
 
-    if (tags.length > 1) {
-      tags.forEach((tag) => {
-        const numberOfEntitiesAttached =
-          tag.researchActivitiesIds.length +
-          tag.researchPhasesIds.length +
-          tag.researchLogsIds.length;
-
-        if (
-          type === "most" &&
-          numberOfEntitiesAttached > usedTagNumberOfEntitiesAttached
-        ) {
-          usedTag = tag;
-          usedTagNumberOfEntitiesAttached = numberOfEntitiesAttached;
-        } else if (
-          type === "least" &&
-          numberOfEntitiesAttached < usedTagNumberOfEntitiesAttached
-        ) {
-          usedTag = tag;
-          usedTagNumberOfEntitiesAttached = numberOfEntitiesAttached;
-        }
-      });
-    }
+    tags.forEach((tag) => {
+      const tagFrequency = calculateFrequencyOfGivenTag(state, tag);
+      if (type === "most" && tagFrequency > usedTagFrequency) {
+        usedTag = tag;
+        usedTagFrequency = tagFrequency;
+      } else if (type === "least" && tagFrequency < usedTagFrequency) {
+        usedTag = tag;
+        usedTagFrequency = tagFrequency;
+      }
+    });
 
     return {
       tag: usedTag,
-      numberOfEntitiesAttached: usedTagNumberOfEntitiesAttached,
+      tagFrequency: usedTagFrequency,
     };
   },
 );

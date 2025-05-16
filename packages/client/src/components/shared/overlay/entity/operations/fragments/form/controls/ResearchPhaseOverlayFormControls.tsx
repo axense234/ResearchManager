@@ -20,7 +20,7 @@ import { formErrorInputBorder } from "@/data/general";
 // Redux and Hoooks
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { selectErrorFields } from "@/redux/slices/general";
-import { selectAllUnarchivedResearchActivities } from "@/redux/slices/research/activity";
+import { selectResearchActivitiesCustom } from "@/redux/slices/research/activity";
 
 const ResearchPhaseOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
   dto,
@@ -30,8 +30,8 @@ const ResearchPhaseOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
 
   const errorFields = useAppSelector(selectErrorFields);
 
-  const researchActivities = useAppSelector(
-    selectAllUnarchivedResearchActivities,
+  const researchActivities = useAppSelector((state) =>
+    selectResearchActivitiesCustom(state, { sorted: true, unarchived: true }),
   );
 
   const researchActivitiesForSelect = researchActivities.map(

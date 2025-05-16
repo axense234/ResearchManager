@@ -14,11 +14,10 @@ import {
   updateResearchPhase,
   deleteResearchPhase,
   selectNumberOfUnarchivedResearchPhases,
-  selectCurrentResearchPhaseIndex,
   setCurrentResearchPhaseIndex,
 } from "@/redux/slices/research/phase";
 import {
-  selectNumberOfUnarchivedResearchActivities,
+  selectResearchActivitiesCustom,
   setCurrentResearchActivityIndex,
 } from "@/redux/slices/research/activity";
 
@@ -31,9 +30,9 @@ export const useDetermineDeleteEntityOverlayFunctions = (
   let onArchiveFunctionUsed: () => void;
   let onPurgeFunctionUsed: () => void;
 
-  const numberOfResearchActivities = useAppSelector(
-    selectNumberOfUnarchivedResearchActivities,
-  );
+  const numberOfResearchActivities = useAppSelector((state) =>
+    selectResearchActivitiesCustom(state, { sorted: true, unarchived: true }),
+  ).length;
 
   const numberOfResearchPhases = useAppSelector(
     selectNumberOfUnarchivedResearchPhases,

@@ -1,1 +1,1 @@
-export type EntityPositionType = "current" | "prev" | "next";
+export type EntityPositionType = "current" | "prev" | "next" | "not-needed";

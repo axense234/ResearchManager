@@ -1,8 +1,10 @@
 // Redux
 import { State } from "@/redux/api/store";
+import { createSelector } from "@reduxjs/toolkit";
 // Adapter
 import { researchPhasesAdapter } from "./adapter";
-import { createSelector } from "@reduxjs/toolkit";
+// Selectors
+import { calculateResearchPhaseRP } from "@/helpers";
 
 export const {
   selectAll: selectAllResearchPhases,
@@ -10,6 +12,59 @@ export const {
   selectIds: selectResearchPhasesIds,
   selectTotal: selectNumberOfResearchPhases,
 } = researchPhasesAdapter.getSelectors<State>((state) => state.researchPhases);
+
+export const selectResearchPhasesByIds = createSelector(
+  [
+    selectAllResearchPhases,
+    (state, researchPhasesIds: string[]) => researchPhasesIds,
+  ],
+  (researchPhases, researchPhasesIds) => {
+    return researchPhases.filter((researchPhase) =>
+      researchPhasesIds.includes(researchPhase.id),
+    );
+  },
+);
+
+export const selectStatisticResearchPhase = createSelector(
+  [
+    selectAllResearchPhases,
+    (state: State) => state,
+    (_: State, type: "most" | "least") => type,
+  ],
+  (researchPhases, state, type) => {
+    if (researchPhases.length === 0) {
+      return null;
+    }
+
+    if (researchPhases.length === 1) {
+      const researchPhaseRP = calculateResearchPhaseRP(
+        state,
+        researchPhases[0],
+      );
+      return { researchPhase: researchPhases[0], researchPhaseRP };
+    }
+
+    let statisticResearchPhase = researchPhases[0];
+    let statisticRP = calculateResearchPhaseRP(state, researchPhases[0]);
+
+    researchPhases.forEach((researchPhase) => {
+      const researchPhaseRP = calculateResearchPhaseRP(state, researchPhase);
+
+      if (type === "most" && researchPhaseRP > statisticRP) {
+        statisticResearchPhase = researchPhase;
+        statisticRP = researchPhaseRP;
+      } else if (type === "least" && researchPhaseRP < statisticRP) {
+        statisticResearchPhase = researchPhase;
+        statisticRP = researchPhaseRP;
+      }
+    });
+
+    return {
+      researchPhase: statisticResearchPhase,
+      researchPhaseRP: statisticRP,
+    };
+  },
+);
 
 export const selectAllUnarchivedResearchPhasesIds = createSelector(
   [selectAllResearchPhases],
@@ -22,6 +77,16 @@ export const selectAllUnarchivedResearchPhasesIds = createSelector(
 export const selectNumberOfUnarchivedResearchPhases = createSelector(
   [selectAllUnarchivedResearchPhasesIds],
   (ids) => ids.length,
+);
+
+export const selectResearchPhasesByResearchActivityId = createSelector(
+  [selectAllResearchPhases, (state, researchActivityId) => researchActivityId],
+  (researchPhases, researchActivityId) => {
+    return researchPhases.filter(
+      (researchPhase) =>
+        researchPhase.researchActivityId === researchActivityId,
+    );
+  },
 );
 
 export const selectResearchPhasesExamples = (state: State) =>

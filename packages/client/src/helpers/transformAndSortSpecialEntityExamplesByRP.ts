@@ -8,7 +8,7 @@ import {
   researchActivitiesMockData,
 } from "@researchmanager/shared/mock";
 // Helpers
-import { calculateSpecialEntityRP } from "./calculateSpecialEntityRP";
+import { calculateResearchLogRP } from "./calculateResearchLogRP";
 import { transformEntityIntoEntityRedux } from "./transformEntityIntoEntityRedux";
 
 export const transformAndSortSpecialEntityExamplesByRP = (
@@ -39,10 +39,10 @@ export const transformAndSortSpecialEntityExamplesByRP = (
           .map((activityPhase) => activityPhase.researchLogs)
           .flat();
 
-        const firstResearchActivityRP = calculateSpecialEntityRP(
+        const firstResearchActivityRP = calculateResearchLogRP(
           firstResearchActivityLogs,
         );
-        const secondResearchActivityRP = calculateSpecialEntityRP(
+        const secondResearchActivityRP = calculateResearchLogRP(
           secondResearchActivityLogs,
         );
 
@@ -64,10 +64,10 @@ export const transformAndSortSpecialEntityExamplesByRP = (
           secondResearchPhase.researchLogsIds.includes(log.id),
         );
 
-        const firstResearchPhaseRP = calculateSpecialEntityRP(
+        const firstResearchPhaseRP = calculateResearchLogRP(
           firstResearchPhaseLogs,
         );
-        const secondResearchPhaseRP = calculateSpecialEntityRP(
+        const secondResearchPhaseRP = calculateResearchLogRP(
           secondResearchPhaseLogs,
         );
 

@@ -1,5 +1,5 @@
 // React
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 // Interfaces
 import { EntityViewProps } from "@/core/interfaces";
 // SCSS
@@ -47,6 +47,11 @@ const EntityView: FC<EntityViewProps> = ({
           currentEntityIndex,
           entitiesIds.length,
         );
+
+        console.log(position);
+
+        if (position === "not-needed") return null;
+
         return (
           <EntityViewContent
             viewType={viewType}

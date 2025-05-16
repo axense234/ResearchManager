@@ -1,0 +1,14 @@
+@use "../../../../../abstracts" as *;
+
+.sessionContainer {
+  @include flexCenter(row);
+  width: 100%;
+
+  justify-content: space-between;
+
+  border: 1px solid black;
+
+  border-radius: 50px;
+
+  padding: 1.25rem 2rem;
+}

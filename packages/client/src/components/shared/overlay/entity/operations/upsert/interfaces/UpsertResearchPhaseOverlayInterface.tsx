@@ -33,7 +33,7 @@ import {
   updateResearchPhase,
   updateUpdateResearchPhaseDto,
 } from "@/redux/slices/research/phase";
-import { selectAllUnarchivedResearchActivitiesIds } from "@/redux/slices/research/activity";
+import { selectResearchActivitiesCustom } from "@/redux/slices/research/activity";
 
 const UpsertResearchPhaseOverlayInterface: FC = () => {
   const dispatch = useAppDispatch();
@@ -45,9 +45,12 @@ const UpsertResearchPhaseOverlayInterface: FC = () => {
   const createResearchPhaseDto = useAppSelector(selectCreateResearchPhaseDto);
   const updateResearchPhaseDto = useAppSelector(selectUpdateResearchPhaseDto);
 
-  const researchActivitiesIds = useAppSelector(
-    selectAllUnarchivedResearchActivitiesIds,
-  );
+  const researchActivitiesIds = useAppSelector((state) =>
+    selectResearchActivitiesCustom(state, {
+      sorted: true,
+      unarchived: true,
+    }),
+  ).map((ra) => ra.id);
 
   const loadingCreateResearchPhase = useAppSelector(
     selectLoadingCreateResearchPhase,

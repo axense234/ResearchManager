@@ -3,5 +3,5 @@ import { TagRedux } from "../entity";
 
 export type StatisticTagReturnType = {
   tag: TagRedux;
-  numberOfEntitiesAttached: number;
+  tagFrequency: number;
 };

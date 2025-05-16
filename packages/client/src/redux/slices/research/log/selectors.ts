@@ -1,6 +1,6 @@
 // Redux
 import { State } from "@/redux/api/store";
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 // Adapter
 import { researchLogsAdapter } from "./adapter";
 
@@ -10,6 +10,49 @@ export const {
   selectIds: selectResearchLogsIds,
   selectTotal: selectNumberOfResearchLogs,
 } = researchLogsAdapter.getSelectors<State>((state) => state.researchLogs);
+
+export const selectResearchLogsByIds = createSelector(
+  [
+    selectAllResearchLogs,
+    (state, researchLogsIds: string[]) => researchLogsIds,
+  ],
+  (researchLogs, researchLogsIds) => {
+    return researchLogs.filter((researchLog) =>
+      researchLogsIds.includes(researchLog.id),
+    );
+  },
+);
+
+export const selectStatisticResearchLog = createSelector(
+  [selectAllResearchLogs, (state, type: "longest" | "shortest") => type],
+  (researchLogs, type) => {
+    if (researchLogs.length === 0) {
+      return null;
+    }
+
+    if (researchLogs.length === 1) {
+      return researchLogs[0];
+    }
+
+    let statisticResearchLog = researchLogs[0];
+
+    researchLogs.forEach((researchLog) => {
+      if (
+        type === "longest" &&
+        researchLog.researchPoints > statisticResearchLog.researchPoints
+      ) {
+        statisticResearchLog = researchLog;
+      } else if (
+        type === "shortest" &&
+        researchLog.researchPoints < statisticResearchLog.researchPoints
+      ) {
+        statisticResearchLog = researchLog;
+      }
+    });
+
+    return statisticResearchLog;
+  },
+);
 
 // Examples
 export const selectResearchLogsExamples = (state: State) =>

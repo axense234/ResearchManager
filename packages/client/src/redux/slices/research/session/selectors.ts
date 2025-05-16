@@ -1,7 +1,10 @@
 // Redux
 import { State } from "@/redux/api/store";
+import { createSelector } from "@reduxjs/toolkit";
 // Adapter
 import { researchSessionsAdapter } from "./adapter";
+// Selectors
+import { selectResearchPhasesByResearchActivityId } from "../phase";
 
 export const {
   selectAll: selectAllResearchSessions,
@@ -9,6 +12,29 @@ export const {
   selectIds: selectResearchSessionsIds,
 } = researchSessionsAdapter.getSelectors<State>(
   (state) => state.researchSessions,
+);
+
+export const selectResearchSessionsByResearchActivityId = createSelector(
+  [
+    selectAllResearchSessions,
+    (state: State) => state,
+    (_: State, researchActivityId: string) => researchActivityId,
+  ],
+  (researchSessions, state, researchActivityId) => {
+    const researchActivityResearchPhases =
+      selectResearchPhasesByResearchActivityId(state, researchActivityId);
+
+    const researchActivityResearchSessionsIds = researchActivityResearchPhases
+      .map((researchPhase) => researchPhase.researchSessionsIds)
+      .flat();
+
+    const researchActivityResearchSessions = researchSessions.filter(
+      (researchSession) =>
+        researchActivityResearchSessionsIds.includes(researchSession.id),
+    );
+
+    return researchActivityResearchSessions;
+  },
 );
 
 export const selectResearchSessionsExamples = (state: State) =>

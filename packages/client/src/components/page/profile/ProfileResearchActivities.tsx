@@ -17,7 +17,7 @@ import {
 } from "@/redux/slices/general";
 import { setEntityOverlay } from "@/redux/slices/general/slice";
 import {
-  selectAllUnarchivedResearchActivitiesIds,
+  selectResearchActivitiesCustom,
   selectResearchActivitiesExamples,
 } from "@/redux/slices/research/activity";
 
@@ -37,9 +37,13 @@ const ProfileResearchActivities: FC = () => {
 
   const usedViewType = showExamples ? "example" : "entity";
 
-  const researchActivitiesIds = useAppSelector(
-    selectAllUnarchivedResearchActivitiesIds,
-  );
+  const researchActivitiesIds = useAppSelector((state) =>
+    selectResearchActivitiesCustom(state, {
+      unarchived: true,
+      sorted: true,
+    }),
+  ).map((ra) => ra.id);
+
   const researchActivitiesExamplesIds = useAppSelector(
     selectResearchActivitiesExamples,
   ).map((example) => example.id);

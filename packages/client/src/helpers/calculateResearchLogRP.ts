@@ -2,7 +2,7 @@
 import { ResearchLogRedux } from "@/core/types";
 import { ResearchLog } from "@prisma/client";
 
-export const calculateSpecialEntityRP = (
+export const calculateResearchLogRP = (
   researchLogs: ResearchLog[] | ResearchLogRedux[],
 ) => {
   const entityRP = researchLogs.reduce(

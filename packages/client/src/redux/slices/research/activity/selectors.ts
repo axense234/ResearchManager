@@ -3,6 +3,7 @@ import { State } from "@/redux/api/store";
 import { createSelector } from "@reduxjs/toolkit";
 // Adapter
 import { researchActivitiesAdapter } from "./adapter";
+import { calculateResearchActivityRP } from "@/helpers/calculateResearchActivityRP";
 
 export const {
   selectAll: selectAllResearchActivities,
@@ -13,21 +14,81 @@ export const {
   (state) => state.researchActivities,
 );
 
-export const selectAllUnarchivedResearchActivities = createSelector(
-  [selectAllResearchActivities],
-  (researchActivities) =>
-    researchActivities.filter((researchActivity) => !researchActivity.archived),
+export const selectStatisticResearchActivity = createSelector(
+  [
+    selectAllResearchActivities,
+    (state: State) => state,
+    (_: State, type: "most" | "least") => type,
+  ],
+  (researchActivities, state, type) => {
+    if (researchActivities.length === 0) {
+      return null;
+    }
+
+    if (researchActivities.length === 1) {
+      const researchActivityRP =
+        calculateResearchActivityRP(state, researchActivities[0]) || 0;
+
+      return { researchActivity: researchActivities[0], researchActivityRP };
+    }
+
+    let statisticResearchActivity = researchActivities[0];
+    let statisticRP = calculateResearchActivityRP(state, researchActivities[0]);
+
+    researchActivities.forEach((researchActivity) => {
+      const researchActivityRP = calculateResearchActivityRP(
+        state,
+        researchActivity,
+      );
+
+      if (type === "most" && researchActivityRP > statisticRP) {
+        statisticResearchActivity = researchActivity;
+        statisticRP = researchActivityRP;
+      } else if (type === "least" && researchActivityRP < statisticRP) {
+        statisticResearchActivity = researchActivity;
+        statisticRP = researchActivityRP;
+      }
+    });
+
+    return {
+      researchActivity: statisticResearchActivity,
+      researchActivityRP: statisticRP || 0,
+    };
+  },
 );
 
-export const selectAllUnarchivedResearchActivitiesIds = createSelector(
-  [selectAllUnarchivedResearchActivities],
-  (researchActivities) =>
-    researchActivities.map((researchActivity) => researchActivity.id),
+export const selectResearchActivitiesCustom = createSelector(
+  [
+    selectAllResearchActivities,
+    (state: State) => state,
+    (_: State, options: { sorted: boolean; unarchived: boolean }) => options,
+  ],
+  (researchActivities, state, options) => {
+    let researchActivitiesToReturn = researchActivities;
+
+    if (options.unarchived) {
+      researchActivitiesToReturn.filter(
+        (researchActivity) => !researchActivity.archived,
+      );
+    }
+
+    if (options.sorted) {
+      researchActivitiesToReturn.sort((first, second) => {
+        const firstRP = calculateResearchActivityRP(state, first);
+        const secondRP = calculateResearchActivityRP(state, second);
+        return secondRP - firstRP;
+      });
+    }
+
+    return researchActivitiesToReturn;
+  },
 );
 
-export const selectNumberOfUnarchivedResearchActivities = createSelector(
-  [selectAllUnarchivedResearchActivitiesIds],
-  (ids) => ids.length,
+export const selectNumberOfResearchActivitiesCustom = createSelector(
+  [selectResearchActivitiesCustom],
+  (researchActivities) => {
+    return researchActivities.length;
+  },
 );
 
 export const selectResearchActivitiesExamples = (state: State) =>

@@ -15,6 +15,7 @@ import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper"
 // Data
 import { mainWhiteColor } from "@/data/general";
 // Redux
+import { shallowEqual } from "react-redux";
 import {
   useAppDispatch,
   useAppSelector,
@@ -26,7 +27,7 @@ import {
   handleResearchActivityExampleCarouselStepDirection,
   selectCurrentResearchActivityExampleIndex,
   selectCurrentResearchActivityIndex,
-  selectNumberOfUnarchivedResearchActivities,
+  selectNumberOfResearchActivitiesCustom,
   setUpdateResearchActivityDto,
 } from "@/redux/slices/research/activity";
 import { updateResearchActivity } from "@/redux/slices/research/activity/thunks";
@@ -38,6 +39,7 @@ import {
 } from "@/redux/slices/general/slice";
 // Helpers
 import { onEditTagFunction } from "@/helpers";
+import { calculateResearchActivityRP } from "@/helpers/calculateResearchActivityRP";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -73,11 +75,14 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     entityId,
   ) as ResearchActivityRedux;
 
-  const numberOfResearchActivities = useAppSelector(
-    selectNumberOfUnarchivedResearchActivities,
+  const numberOfResearchActivities = useAppSelector((state) =>
+    selectNumberOfResearchActivitiesCustom(state, {
+      sorted: false,
+      unarchived: true,
+    }),
   );
 
-  const entityResearchPoints = useCalculateEntityResearchPoints(
+  const researchActivityRP = useCalculateEntityResearchPoints(
     researchActivity,
     "researchActivity",
     containerType,
@@ -140,7 +145,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
         />
         <EntityContainerLabel
           entityRanking={usedEntityRanking}
-          entityResearchPoints={entityResearchPoints}
+          entityResearchPoints={researchActivityRP}
           entityTitle={researchActivity.name}
           darkMode={darkMode}
         />

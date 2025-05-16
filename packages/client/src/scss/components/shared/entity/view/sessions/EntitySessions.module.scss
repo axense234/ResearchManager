@@ -1,0 +1,14 @@
+@use "../../../../../abstracts" as *;
+
+.entitySessionsContainer {
+  @include flexCenter(column);
+  position: relative;
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: getColor("main-white");
+
+  transition-delay: 25ms;
+}
