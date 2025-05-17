@@ -2,6 +2,7 @@
 import {
   CreateResearchActivityDto,
   CreateResearchPhaseDto,
+  CreateResearchSessionDto,
   CreateTagDto,
   SignInDto,
   SignUpDto,
@@ -11,6 +12,7 @@ import { ActivityLogsDataType, UserRedux } from "@/core/types";
 import {
   createResearchActivityMockData,
   createResearchPhaseMockData,
+  createResearchSessionMockData,
   createTagMockData,
 } from "@researchmanager/shared/mock";
 import { TagFontFamily } from "@prisma/client";
@@ -38,6 +40,11 @@ export const defaultCreateResearchPhaseDto: CreateResearchPhaseDto = {
 
 export const defaultCreateTagDto: CreateTagDto = {
   ...createTagMockData[0],
+};
+
+export const defaultCreateResearchSessionDto: CreateResearchSessionDto = {
+  ...createResearchSessionMockData[0],
+  tags: [],
 };
 
 export const userProfileMockDataRedux: UserRedux = {

@@ -12,6 +12,7 @@ const EntityContainerOptions: FC<EntityContainerOptionsProps> = ({
   containerType,
   onEntityDeleteFunction,
   onEntityUpdateFunction,
+  onEntityResearchFunction,
 }) => {
   if (containerType === "example") {
     return null;
@@ -37,6 +38,15 @@ const EntityContainerOptions: FC<EntityContainerOptionsProps> = ({
       <div
         className={entityContainerOptionsStyles.entityContainerOptionsContainer}
       >
+        <FunctionalButton
+          content="Research"
+          disabled={false}
+          onHoverContent="Start a Research Session!"
+          onHoverContentDisabled="Need to update this."
+          onClickFunction={onEntityResearchFunction}
+          size="small"
+          colorScheme="green"
+        />
         <FunctionalButton
           content="Update"
           disabled={false}

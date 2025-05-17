@@ -29,7 +29,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   currentEntityImageOverlayCarouselId: 1,
 
   // Overlays
-  entityOverlay: {
+  upsertEntityOverlay: {
     showOverlay: false,
     entityType: "researchActivity",
     method: "create",
@@ -38,6 +38,11 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   upsertTagOverlay: {
     showOverlay: false,
     method: "create",
+  },
+
+  viewEntityOverlay: {
+    showOverlay: false,
+    entityType: "researchSession",
   },
 
   deleteEntityOverlay: {

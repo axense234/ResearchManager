@@ -5,8 +5,9 @@ import {
   GeneralSliceInitialStateType,
   ModalType,
   ObjectKeyValueType,
-  OverlayType,
+  UpsertEntityOverlayType,
   UpsertTagOverlayType,
+  ViewEntityOverlayType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 // Data
@@ -16,17 +17,23 @@ import { handleCarouselStepDirection } from "@/helpers";
 import { ActivitySubject } from "@prisma/client";
 
 export const generalSliceReducers = {
-  setEntityOverlay(
+  setUpsertEntityOverlay(
     state: GeneralSliceInitialStateType,
-    action: PayloadAction<OverlayType>,
+    action: PayloadAction<UpsertEntityOverlayType>,
   ) {
-    state.entityOverlay = { ...action.payload };
+    state.upsertEntityOverlay = { ...action.payload };
   },
   setUpsertTagOverlay(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<UpsertTagOverlayType>,
   ) {
     state.upsertTagOverlay = { ...action.payload };
+  },
+  setViewEntityOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<ViewEntityOverlayType>,
+  ) {
+    state.viewEntityOverlay = { ...action.payload };
   },
   setDeleteEntityOverlay(
     state: GeneralSliceInitialStateType,
@@ -46,17 +53,29 @@ export const generalSliceReducers = {
   ) {
     state.researchPhaseImagesOverlay = { ...action.payload };
   },
-  closeEntityOverlay(
+  closeUpsertEntityOverlay(
     state: GeneralSliceInitialStateType,
     action: PayloadAction,
   ) {
-    state.entityOverlay = { ...state.entityOverlay, showOverlay: false };
+    state.upsertEntityOverlay = {
+      ...state.upsertEntityOverlay,
+      showOverlay: false,
+    };
   },
   closeUpsertTagOverlay(
     state: GeneralSliceInitialStateType,
     action: PayloadAction,
   ) {
     state.upsertTagOverlay = { ...state.upsertTagOverlay, showOverlay: false };
+  },
+  closeViewEntityOverlay(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction,
+  ) {
+    state.viewEntityOverlay = {
+      ...state.viewEntityOverlay,
+      showOverlay: false,
+    };
   },
   closeDeleteEntityOverlay(
     state: GeneralSliceInitialStateType,

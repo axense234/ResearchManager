@@ -1,4 +1,9 @@
+// Types
+import { ResearchActivityRedux, ResearchPhaseRedux } from "@/core/types";
+
 export interface EntitySessionsListProps {
-  entityId: string;
+  entity: ResearchActivityRedux | ResearchPhaseRedux;
   entityType: "researchActivity" | "researchPhase";
+  darkMode: boolean;
+  showSessions: boolean;
 }

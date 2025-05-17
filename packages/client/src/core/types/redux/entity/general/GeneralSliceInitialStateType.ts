@@ -3,11 +3,12 @@ import { SignInDto, SignUpDto } from "@researchmanager/shared/types";
 import { LoadingStateType } from "../../other";
 import { ModalType } from "./ModalType";
 import { UserRedux } from "./UserRedux";
-import { OverlayType } from "./OverlayType";
 import { EntityImagesOverlayType } from "./EntityImagesOverlayType";
 import { DeleteEntityOverlayType } from "./DeleteEntityOverlayType";
 import { UpsertTagOverlayType } from "./UpsertTagOverlayType";
 import { ActivitySubject } from "@prisma/client";
+import { UpsertEntityOverlayType } from "./UpsertEntityOverlayType";
+import { ViewEntityOverlayType } from "./ViewEntityOverlayType";
 
 export type GeneralSliceInitialStateType = {
   // Auth
@@ -34,8 +35,9 @@ export type GeneralSliceInitialStateType = {
   currentEntityImageOverlayCarouselId: number;
 
   // Overlays
-  entityOverlay: OverlayType;
+  upsertEntityOverlay: UpsertEntityOverlayType;
   upsertTagOverlay: UpsertTagOverlayType;
+  viewEntityOverlay: ViewEntityOverlayType;
   deleteEntityOverlay: DeleteEntityOverlayType;
   researchActivityImagesOverlay: EntityImagesOverlayType;
   researchPhaseImagesOverlay: EntityImagesOverlayType;

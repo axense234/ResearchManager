@@ -1,6 +1,6 @@
 // Redux
 import { State } from "@/redux/api/store";
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 // Adapter
 import { researchSessionsAdapter } from "./adapter";
 // Selectors
@@ -14,6 +14,19 @@ export const {
   (state) => state.researchSessions,
 );
 
+export const selectResearchSessionsByResearchPhaseId = createSelector(
+  [
+    selectAllResearchSessions,
+    (state: State) => state,
+    (_: State, researchPhaseId: string) => researchPhaseId,
+  ],
+  (researchSessions, state, researchPhaseId) => {
+    return researchSessions.filter(
+      (researchSession) => researchSession.researchPhaseId === researchPhaseId,
+    );
+  },
+);
+
 export const selectResearchSessionsByResearchActivityId = createSelector(
   [
     selectAllResearchSessions,
@@ -21,19 +34,19 @@ export const selectResearchSessionsByResearchActivityId = createSelector(
     (_: State, researchActivityId: string) => researchActivityId,
   ],
   (researchSessions, state, researchActivityId) => {
-    const researchActivityResearchPhases =
+    const researchPhasesByResearchActivityId =
       selectResearchPhasesByResearchActivityId(state, researchActivityId);
 
-    const researchActivityResearchSessionsIds = researchActivityResearchPhases
-      .map((researchPhase) => researchPhase.researchSessionsIds)
-      .flat();
-
-    const researchActivityResearchSessions = researchSessions.filter(
-      (researchSession) =>
-        researchActivityResearchSessionsIds.includes(researchSession.id),
+    const researchPhasesIds = researchPhasesByResearchActivityId.map(
+      (rp) => rp.id,
     );
 
-    return researchActivityResearchSessions;
+    const researchSessionsToReturn = researchSessions.filter(
+      (researchSession) =>
+        researchPhasesIds.includes(researchSession.researchPhaseId),
+    );
+
+    return researchSessionsToReturn;
   },
 );
 
@@ -42,6 +55,9 @@ export const selectResearchSessionsExamples = (state: State) =>
 
 export const selectCreateResearchSessionDto = (state: State) =>
   state.researchSessions.createResearchSessionDto;
+
+export const selectUpdateResearchSessionDto = (state: State) =>
+  state.researchSessions.updateResearchSessionDto;
 
 export const selectLoadingGetUserResearchSessions = (state: State) =>
   state.researchSessions.loadingGetUserResearchSessions;

@@ -1,9 +1,8 @@
 // Types
 import { EntityType } from "@researchmanager/shared/types";
 
-export type OverlayType = {
+export type ViewEntityOverlayType = {
   showOverlay: boolean;
   entityType: EntityType;
-  method: "create" | "update";
   entityId?: string;
 };

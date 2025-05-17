@@ -4,30 +4,35 @@ import { FC } from "react";
 import { EntitySessionsListProps } from "@/core/interfaces";
 // SCSS
 import entitySessionsListStyles from "@/scss/components/shared/entity/view/sessions/EntitySessionsList.module.scss";
-// Types
-import { ResearchActivityRedux, ResearchPhaseRedux } from "@/core/types";
 // Components
 import EntitySessionItem from "./EntitySessionItem";
 // Redux
-import { useAppSelector, useSelectEntity } from "@/hooks";
-import { selectResearchPhasesByResearchActivityId } from "@/redux/slices/research/phase";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import {
+  selectResearchSessionsByResearchActivityId,
+  selectResearchSessionsByResearchPhaseId,
+} from "@/redux/slices/research/session";
+// Data
+import { mainBlackColor, secondaryWhiteColor } from "@/data/general";
+import { setUpsertEntityOverlay } from "@/redux/slices/general/slice";
 
 const EntitySessionsList: FC<EntitySessionsListProps> = ({
-  entityId,
   entityType,
+  entity,
+  darkMode,
+  showSessions,
 }) => {
-  const entity = useSelectEntity("entity", entityType, entityId) as
-    | ResearchActivityRedux
-    | ResearchPhaseRedux;
+  const dispatch = useAppDispatch();
 
-  const researchPhaseSessionsIds = (entity as ResearchPhaseRedux)
-    .researchSessionsIds;
+  const researchPhaseSessionsIds = useAppSelector((state) =>
+    selectResearchSessionsByResearchPhaseId(state, entity.id),
+  ).map((rs) => rs.id);
 
   const researchActivitySessionsIds = useAppSelector((state) =>
-    selectResearchPhasesByResearchActivityId(state, entityId),
-  )
-    ?.map((researchPhase) => researchPhase.researchSessionsIds)
-    ?.flat();
+    selectResearchSessionsByResearchActivityId(state, entity.id),
+  ).map((rs) => rs.id);
+
+  const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
 
   const usedSessionsIds =
     entityType === "researchPhase"
@@ -37,17 +42,26 @@ const EntitySessionsList: FC<EntitySessionsListProps> = ({
   return (
     <div className={entitySessionsListStyles.sessionsListContainer}>
       {usedSessionsIds?.length > 0 ? (
-        <ul className={entitySessionsListStyles.sessionsList}>
-          {usedSessionsIds?.map((researchSessionIds) => {
+        <ul
+          className={entitySessionsListStyles.sessionsList}
+          style={{
+            maxHeight: showSessions ? "30rem" : "0",
+            padding: showSessions ? "1rem" : "0",
+          }}
+        >
+          {usedSessionsIds?.map((researchSessionId, index) => {
             return (
-              <li key={researchSessionIds}>
-                <EntitySessionItem researchSessionId={researchSessionIds} />
+              <li key={researchSessionId}>
+                <EntitySessionItem
+                  researchSessionId={researchSessionId}
+                  researchSessionIndex={index + 1}
+                />
               </li>
             );
           })}
         </ul>
       ) : (
-        <p>No Research Session Found.</p>
+        <p style={{ color: textColor }}>No Research Session Found.</p>
       )}
     </div>
   );

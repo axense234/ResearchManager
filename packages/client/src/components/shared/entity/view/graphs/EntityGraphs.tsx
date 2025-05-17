@@ -1,36 +1,32 @@
 // React
-import { FC } from "react";
+import { FC, useState } from "react";
 // Interfaces
 import { EntityGraphsProps } from "@/core/interfaces";
 // SCSS
 import entityGraphsStyles from "@/scss/components/shared/entity/view/graphs/EntityGraphs.module.scss";
-// Graphs
-import { Line } from "react-chartjs-2";
-// Data
-import { mainBlackColor, secondaryWhiteColor } from "@/data/general";
+// Components
+import EntityGraphsTitle from "./EntityGraphsTitle";
+import EntityGraphsContent from "./EntityGraphsContent";
 
 const EntityGraphs: FC<EntityGraphsProps> = ({
   specialEntity,
   darkMode,
   position,
 }) => {
-  const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
+  const [showGraph, setShowGraph] = useState<boolean>(false);
 
   return (
     <article
       className={`${entityGraphsStyles.entityGraphsContainer} ${position}`}
       style={{ backgroundColor: specialEntity.backgroundColorOrImageSrc }}
     >
-      <div className={entityGraphsStyles.entityGraphsTitle}>
-        <h6 style={{ color: textColor }}>Graphs</h6>
-        <hr style={{ backgroundColor: textColor }} />
-      </div>
-      <Line
-        data={{
-          labels: ["Test-1", "Test-2"],
-          datasets: [{ label: "Test 3", data: [3, 4] }],
-        }}
+      <EntityGraphsTitle
+        title="Graphs"
+        darkMode={darkMode}
+        showGraph={showGraph}
+        setShowGraph={setShowGraph}
       />
+      <EntityGraphsContent showGraph={showGraph} />
     </article>
   );
 };

@@ -17,6 +17,7 @@ const EntityContainerTags: FC<EntityContainerTagsProps> = ({
   containerType,
   onAddTagFunction,
   onRemoveTagFunction,
+  tagSize = "normal",
 }) => {
   const [showAllTags, setShowAllTags] = useState<boolean>(false);
 
@@ -31,6 +32,7 @@ const EntityContainerTags: FC<EntityContainerTagsProps> = ({
         numberOfTagsShown={tagsShownCount}
         noTagsAvailableMessage="No Tags."
         containerType={containerType}
+        tagSize={tagSize}
       />
       <TagsOptions
         sourceTagsIds={sourceTagsIds}

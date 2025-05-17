@@ -48,8 +48,6 @@ const EntityView: FC<EntityViewProps> = ({
           entitiesIds.length,
         );
 
-        console.log(position);
-
         if (position === "not-needed") return null;
 
         return (

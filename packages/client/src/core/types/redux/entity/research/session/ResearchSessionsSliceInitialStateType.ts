@@ -1,10 +1,14 @@
 // Types
-import { CreateResearchSessionDto } from "@researchmanager/shared/types";
+import {
+  CreateResearchSessionDto,
+  UpdateResearchSessionDto,
+} from "@researchmanager/shared/types";
 import { ResearchSessionRedux } from "./ResearchSessionRedux";
 import { LoadingStateType } from "../../../other";
 
 export type ResearchSessionsSliceInitialStateType = {
   createResearchSessionDto: CreateResearchSessionDto;
+  updateResearchSessionDto: UpdateResearchSessionDto;
 
   researchSessionsExamples: ResearchSessionRedux[];
 

@@ -14,6 +14,7 @@ import {
   mainDarkBlueColor,
   mockBrownColor,
   resumeYellowColor,
+  updateOrangeColor,
 } from "@/data/general";
 
 const FunctionalButton: FC<FunctionalButtonProps> = ({
@@ -44,6 +45,9 @@ const FunctionalButton: FC<FunctionalButtonProps> = ({
       break;
     case "gray":
       colorSchemeShown = cancelGrayColor;
+      break;
+    case "orange":
+      colorSchemeShown = updateOrangeColor;
       break;
     default:
       throw new Error("Invalid colorScheme on FunctionalButton.");

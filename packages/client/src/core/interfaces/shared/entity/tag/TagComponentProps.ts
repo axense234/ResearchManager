@@ -8,4 +8,5 @@ export interface TagComponentProps {
   isTagSelected?: boolean;
   onClickFunction?: () => void;
   tagShowcase?: CreateTagDto | UpdateTagDto;
+  componentSize?: "normal" | "small";
 }

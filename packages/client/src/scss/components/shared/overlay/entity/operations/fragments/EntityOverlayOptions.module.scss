@@ -1,0 +1,23 @@
+@use "../../../../../../abstracts" as *;
+
+.overlayOptionsContainer {
+  @include flexCenter(column);
+  background-color: getColor("main-white");
+}
+
+.overlayOptionContainer {
+  @include flexCenter(row);
+  padding: 0.5rem;
+
+  > svg {
+    font-size: 2rem;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease-in;
+
+    &:hover {
+      transform: rotate(-5deg) scale(1.1);
+    }
+  }
+}

@@ -15,7 +15,6 @@ import EntityContainerInterfaceWrapper from "../EntityContainerInterfaceWrapper"
 // Data
 import { mainWhiteColor } from "@/data/general";
 // Redux
-import { shallowEqual } from "react-redux";
 import {
   useAppDispatch,
   useAppSelector,
@@ -35,11 +34,12 @@ import { selectSelectedTagsIds } from "@/redux/slices/tag";
 import {
   setCurrentActivityLogSubject,
   setDeleteEntityOverlay,
-  setEntityOverlay,
+  setUpsertEntityOverlay,
 } from "@/redux/slices/general/slice";
 // Helpers
 import { onEditTagFunction } from "@/helpers";
-import { calculateResearchActivityRP } from "@/helpers/calculateResearchActivityRP";
+import { defaultCreateResearchSessionDto } from "@/data/redux";
+import { setCreateResearchSessionDto } from "@/redux/slices/research/session";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -75,6 +75,8 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     entityId,
   ) as ResearchActivityRedux;
 
+  researchActivity.researchPhasesIds[0];
+
   const numberOfResearchActivities = useAppSelector((state) =>
     selectNumberOfResearchActivitiesCustom(state, {
       sorted: false,
@@ -95,6 +97,12 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
           ...researchActivity,
           tags: researchActivity.tagsIds,
           researchPhases: researchActivity.researchPhasesIds,
+        }),
+      );
+      dispatch(
+        setCreateResearchSessionDto({
+          ...defaultCreateResearchSessionDto,
+          researchPhaseId: researchActivity.researchPhasesIds[0],
         }),
       );
     }
@@ -154,7 +162,7 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
           containerType={containerType}
           onEntityUpdateFunction={() =>
             dispatch(
-              setEntityOverlay({
+              setUpsertEntityOverlay({
                 entityType: "researchActivity",
                 method: "update",
                 showOverlay: true,
@@ -171,6 +179,15 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
               }),
             )
           }
+          onEntityResearchFunction={() => {
+            dispatch(
+              setUpsertEntityOverlay({
+                entityType: "researchSession",
+                method: "create",
+                showOverlay: true,
+              }),
+            );
+          }}
         />
       </div>
     </EntityContainerInterfaceWrapper>

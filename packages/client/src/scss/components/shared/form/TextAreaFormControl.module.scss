@@ -1,0 +1,33 @@
+@use "../../../abstracts" as *;
+
+.textAreaFormControlContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 0.5rem;
+
+  label {
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
+  }
+
+  textarea {
+    background-color: getColor("main-light-blue");
+    border-radius: 0.5rem;
+    border: none;
+
+    min-height: 20rem;
+    height: 100%;
+
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+
+    font-size: 1rem;
+    padding: 1rem;
+    font-weight: 550;
+
+    word-wrap: break-word;
+    transition: background-color 0.135s linear;
+  }
+}

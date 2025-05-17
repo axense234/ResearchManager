@@ -17,6 +17,7 @@ const TagsList: FC<TagsListProps> = ({
   numberOfTagsShown,
   noTagsAvailableMessage,
   containerType,
+  tagSize = "normal",
 }) => {
   const dispatch = useAppDispatch();
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
@@ -26,7 +27,10 @@ const TagsList: FC<TagsListProps> = ({
   };
 
   return (
-    <ul className={tagsListStyles.tagsListContainer}>
+    <ul
+      className={tagsListStyles.tagsListContainer}
+      style={{ gap: tagSize === "small" ? "1rem" : "2rem" }}
+    >
       {sourceTagsIds?.length > 0 ? (
         sourceTagsIds.slice(0, numberOfTagsShown).map((tagId) => {
           return (
@@ -43,6 +47,7 @@ const TagsList: FC<TagsListProps> = ({
                   )
                 }
                 isTagSelected={selectedTagsIds.includes(tagId)}
+                componentSize={tagSize}
               />
             </li>
           );

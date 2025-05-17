@@ -6,7 +6,11 @@ import {
   ResearchSessionsSliceStateType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ActionType } from "@researchmanager/shared/types";
+import {
+  ActionType,
+  CreateResearchSessionDto,
+  UpdateResearchSessionDto,
+} from "@researchmanager/shared/types";
 import { researchSessionsAdapter } from "./adapter";
 
 export const researchSessionsSliceReducers = {
@@ -48,6 +52,27 @@ export const researchSessionsSliceReducers = {
       ...state.createResearchSessionDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  updateUpdateResearchSessionDto(
+    state: ResearchSessionsSliceStateType,
+    action: PayloadAction<ObjectKeyValueType>,
+  ) {
+    state.updateResearchSessionDto = {
+      ...state.updateResearchSessionDto,
+      [action.payload.key]: action.payload.value,
+    };
+  },
+  setCreateResearchSessionDto(
+    state: ResearchSessionsSliceStateType,
+    action: PayloadAction<CreateResearchSessionDto>,
+  ) {
+    state.createResearchSessionDto = action.payload;
+  },
+  setUpdateResearchSessionDto(
+    state: ResearchSessionsSliceStateType,
+    action: PayloadAction<UpdateResearchSessionDto>,
+  ) {
+    state.updateResearchSessionDto = action.payload;
   },
   setResearchSessions(
     state: ResearchSessionsSliceStateType,

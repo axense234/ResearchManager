@@ -1,8 +1,9 @@
 @use "../../../../../abstracts" as *;
 
 .overlayContainerWrapper {
-  @include flexCenter(column);
+  @include flexCenter(row);
   position: fixed;
+  align-items: flex-start;
   top: 0;
   left: 0;
   width: 100%;
@@ -30,12 +31,12 @@
   height: 100%;
   width: 42.5rem;
   border-radius: 0.3rem;
+  border-top-right-radius: 0;
   background-color: getColor("main-white");
   padding: 3rem;
   gap: 4rem;
 
   overflow-y: scroll;
-  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 0px;

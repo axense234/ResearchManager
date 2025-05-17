@@ -28,6 +28,8 @@ const EntityImageOverlayImage: FC<EntityImageOverlayImageProps> = ({
           imagesPayload.imagesSrc.length,
         );
 
+        if (position === "not-needed") return null;
+
         return (
           <Image
             alt={imagesPayload?.entityName}

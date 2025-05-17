@@ -24,6 +24,8 @@ const CarouselSlider: FC = () => {
           authCarouselContent.length,
         );
 
+        if (position === "not-needed") return null;
+
         return (
           <CarouselContent
             section={section}

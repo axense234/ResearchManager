@@ -19,6 +19,12 @@ export const updateResearchSession = createAsyncThunk<
         await axiosInstance.patch(
           `/researchSessions/${researchSessionId}/update`,
           dto,
+          {
+            params: {
+              includeValues: "tags",
+              chosenOptionType: "include",
+            },
+          },
         )
       ).data as ReturnObjectBuilderReturnObject;
 

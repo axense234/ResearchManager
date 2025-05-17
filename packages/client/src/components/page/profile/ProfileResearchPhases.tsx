@@ -19,7 +19,7 @@ import {
   selectAllUnarchivedResearchPhasesIds,
   selectResearchPhasesExamples,
 } from "@/redux/slices/research/phase";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
+import { setUpsertEntityOverlay } from "@/redux/slices/general/slice";
 
 const ProfileResearchPhases: FC = () => {
   const dispatch = useAppDispatch();
@@ -74,7 +74,7 @@ const ProfileResearchPhases: FC = () => {
             onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
             onClickFunction={() =>
               dispatch(
-                setEntityOverlay({
+                setUpsertEntityOverlay({
                   entityType: "researchPhase",
                   method: "create",
                   showOverlay: true,

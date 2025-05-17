@@ -19,6 +19,7 @@ const TagComponent: FC<TagComponentProps> = ({
   onClickFunction,
   isTagSelected = false,
   tagShowcase,
+  componentSize = "normal",
 }) => {
   const tag = useAppSelector((state) => selectTagById(state, tagId));
   const tagExample = useAppSelector(selectTagsExamples).find(
@@ -44,12 +45,15 @@ const TagComponent: FC<TagComponentProps> = ({
       throw new Error("Invalid container type.");
   }
 
+  const usedTagFontSize =
+    componentSize === "small" ? usedTag?.fontSize / 2 + 2 : usedTag?.fontSize;
+
   return (
     <div
       className={tagComponentStyles.tagComponentContainer}
       style={{
         backgroundColor: usedTag?.backgroundColorOrImageSrc,
-        fontSize: usedTag?.fontSize,
+        fontSize: usedTagFontSize,
         fontFamily: usedTag?.fontFamily,
         outline: isTagSelected ? selectedTagOutline : "initial",
       }}

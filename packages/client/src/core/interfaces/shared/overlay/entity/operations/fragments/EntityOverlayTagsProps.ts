@@ -1,6 +1,8 @@
 export interface EntityOverlayTagsProps {
   sourceTagsIds: string[];
 
-  onRemoveTagFunction: () => void;
-  onAddTagFunction: () => void;
+  type: "view" | "upsert";
+
+  onRemoveTagFunction?: () => void;
+  onAddTagFunction?: () => void;
 }

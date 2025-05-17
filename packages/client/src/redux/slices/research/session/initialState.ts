@@ -8,19 +8,16 @@ import {
 import { researchSessionsAdapter } from "./adapter";
 // Mock Data
 import {
-  createResearchSessionMockData,
   researchSessionsMockData,
+  updateResearchSessionMockData,
 } from "@researchmanager/shared/mock";
+import { defaultCreateResearchSessionDto } from "@/data/redux";
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
 
 export const researchSessionsSliceInitialState = {
-  createResearchSessionDto: {
-    ...createResearchSessionMockData[0],
-    currentStatusDate: new Date(
-      createResearchSessionMockData[0]?.currentStatusDate as Date,
-    ).toISOString(),
-  } as unknown,
+  createResearchSessionDto: defaultCreateResearchSessionDto,
+  updateResearchSessionDto: { ...updateResearchSessionMockData[0] },
   researchSessionsExamples: researchSessionsMockData.map((session) => {
     return transformEntityIntoEntityRedux(
       session,

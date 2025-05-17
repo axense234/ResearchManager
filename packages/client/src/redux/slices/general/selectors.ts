@@ -37,11 +37,14 @@ export const selectGeneralModal = (state: State) => state.general.generalModal;
 export const selectErrorFields = (state: State) => state.general.errorFields;
 
 // Overlays
-export const selectEntityOverlay = (state: State) =>
-  state.general.entityOverlay;
+export const selectUpsertEntityOverlay = (state: State) =>
+  state.general.upsertEntityOverlay;
 
 export const selectUpsertTagOverlay = (state: State) =>
   state.general.upsertTagOverlay;
+
+export const selectViewEntityOverlay = (state: State) =>
+  state.general.viewEntityOverlay;
 
 export const selectDeleteEntityOverlay = (state: State) =>
   state.general.deleteEntityOverlay;

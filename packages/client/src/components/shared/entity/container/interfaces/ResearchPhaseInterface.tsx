@@ -35,7 +35,7 @@ import { selectSelectedTagsIds } from "@/redux/slices/tag";
 import {
   setCurrentActivityLogSubject,
   setDeleteEntityOverlay,
-  setEntityOverlay,
+  setUpsertEntityOverlay,
 } from "@/redux/slices/general/slice";
 // Data
 import { mainWhiteColor } from "@/data/general";
@@ -151,7 +151,7 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
           containerType={containerType}
           onEntityUpdateFunction={() =>
             dispatch(
-              setEntityOverlay({
+              setUpsertEntityOverlay({
                 entityType: "researchPhase",
                 method: "update",
                 showOverlay: true,

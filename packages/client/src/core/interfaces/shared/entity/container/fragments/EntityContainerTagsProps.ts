@@ -5,6 +5,8 @@ export type EntityContainerTagsProps = {
   sourceTagsIds: string[];
   containerType: EntityContainerType;
 
-  onRemoveTagFunction: () => void;
-  onAddTagFunction: () => void;
+  tagSize?: "normal" | "small";
+
+  onRemoveTagFunction?: () => void;
+  onAddTagFunction?: () => void;
 };

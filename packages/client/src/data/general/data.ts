@@ -11,9 +11,12 @@ export const mainPastelRedColor = "#d54e5d";
 
 export const createGreenColor = "#008000";
 export const resumeYellowColor = "#adad00";
+export const pauseGreenColor = "#00d500";
 export const mockBrownColor = "#6f4e37";
 export const deleteRedColor = "#ff0000";
 export const cancelGrayColor = "#666666";
+export const viewPurpleColor = "#800080";
+
 // i have no idea what my overall "update" color should be
 export const updateOrangeColor = "#e67e22";
 

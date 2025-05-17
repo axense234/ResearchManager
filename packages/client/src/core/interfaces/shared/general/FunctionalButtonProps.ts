@@ -1,9 +1,16 @@
 // React
-import { MouseEventHandler, MutableRefObject } from "react";
+import { MouseEventHandler } from "react";
 
 export interface FunctionalButtonProps {
   size?: "small" | "medium";
-  colorScheme?: "green" | "brown" | "red" | "yellow" | "darkBlue" | "gray";
+  colorScheme?:
+    | "green"
+    | "brown"
+    | "red"
+    | "yellow"
+    | "darkBlue"
+    | "gray"
+    | "orange";
 
   content: string;
   disabled: boolean;

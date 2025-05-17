@@ -23,10 +23,9 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
-  &::-webkit-scrollbar {
-    width: 0px;
-    visibility: hidden;
-  }
+  transition:
+    max-height 0.2s linear,
+    padding 0.1s linear;
 
   > li {
     @include flexCenter(row);

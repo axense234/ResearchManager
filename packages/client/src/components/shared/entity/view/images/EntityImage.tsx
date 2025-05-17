@@ -20,25 +20,36 @@ const EntityImage: FC<EntityImageProps> = ({
   onClickFunction,
   darkMode,
   isCurrentView,
+  showImages,
 }) => {
   const currentEntityImageCarouselId = useAppSelector(
     selectCurrentEntityImageCarouselId,
   );
 
-  useHandleEntityImageAutoCarousel(isCurrentView, imagesSrc.length);
+  useHandleEntityImageAutoCarousel(
+    isCurrentView && showImages,
+    imagesSrc.length,
+  );
 
   const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
 
   return (
     <div className={entityImageStyles.entityImageContainer}>
       {imagesSrc.length > 0 ? (
-        <div className={entityImageStyles.entityImage}>
+        <div
+          className={entityImageStyles.entityImage}
+          style={{
+            height: showImages ? "17.5rem" : "0",
+          }}
+        >
           {imagesSrc?.map((imageSrc, imageSrcIndex) => {
             const position = determineContentPosition(
               imageSrcIndex + 1,
               currentEntityImageCarouselId,
               imagesSrc.length,
             );
+
+            if (position === "not-needed") return null;
 
             return (
               <Image

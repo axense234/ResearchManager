@@ -12,7 +12,7 @@ import { homeIntroData } from "@/data/general/home";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { selectUserProfile } from "@/redux/slices/general";
-import { setEntityOverlay } from "@/redux/slices/general/slice";
+import { setUpsertEntityOverlay } from "@/redux/slices/general/slice";
 
 const HomeIntro: FC = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +35,7 @@ const HomeIntro: FC = () => {
         onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
         onClickFunction={() =>
           dispatch(
-            setEntityOverlay({
+            setUpsertEntityOverlay({
               entityType: "researchActivity",
               method: "create",
               showOverlay: true,

@@ -20,6 +20,9 @@ export const {
   updateCreateResearchSessionDto,
   updateLoadingResearchSessionState,
   setResearchSessions,
+  updateUpdateResearchSessionDto,
+  setCreateResearchSessionDto,
+  setUpdateResearchSessionDto,
 } = researchSessionsSlice.actions;
 
 export default researchSessionsSlice.reducer;

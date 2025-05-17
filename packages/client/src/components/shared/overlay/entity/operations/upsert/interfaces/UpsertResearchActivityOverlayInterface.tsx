@@ -17,10 +17,13 @@ import {
   useHandleUpsertEntityOverlaySideEffects,
   useOverlayTransition,
 } from "@/hooks";
-import { selectEntityOverlay, selectUserProfile } from "@/redux/slices/general";
+import {
+  selectUpsertEntityOverlay,
+  selectUserProfile,
+} from "@/redux/slices/general";
 import {
   setCurrentActivityLogSubject,
-  setEntityOverlay,
+  setUpsertEntityOverlay,
 } from "@/redux/slices/general/slice";
 import {
   selectCreateDefaultResearchPhase,
@@ -42,7 +45,7 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const userProfile = useAppSelector(selectUserProfile);
-  const entityOverlay = useAppSelector(selectEntityOverlay);
+  const upsertEntityOverlay = useAppSelector(selectUpsertEntityOverlay);
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
 
   const createDefaultResearchPhase = useAppSelector(
@@ -64,7 +67,7 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
   );
 
   const loadingUpsertResearchActivity =
-    entityOverlay.method === "create"
+    upsertEntityOverlay.method === "create"
       ? loadingCreateResearchActivity
       : loadingUpdateResearchActivity;
 
@@ -73,17 +76,17 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
     loadingUpdateResearchActivity === "PENDING";
 
   const interfaceTitle =
-    entityOverlay.method === "create"
+    upsertEntityOverlay.method === "create"
       ? "Create Research Activity"
       : "Update Research Activity";
 
   const dtoUsed =
-    entityOverlay.method === "create"
+    upsertEntityOverlay.method === "create"
       ? createResearchActivityDto
       : updateResearchActivityDto;
 
   const dtoUsedUpdateFunction =
-    entityOverlay.method === "create"
+    upsertEntityOverlay.method === "create"
       ? updateCreateResearchActivityDto
       : updateUpdateResearchActivityDto;
 
@@ -102,7 +105,7 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
     dispatch(
       updateResearchActivity({
         dto: { ...updateResearchActivityDto, userId: userProfile.id },
-        researchActivityId: entityOverlay.entityId,
+        researchActivityId: upsertEntityOverlay.entityId,
       }),
     );
   };
@@ -122,17 +125,17 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
   };
 
   const dtoUsedUpsertFunction =
-    entityOverlay.method === "create"
+    upsertEntityOverlay.method === "create"
       ? onResearchActivityCreateFunction
       : onResearchActivityUpdateFunction;
 
   useHandleUpsertEntityOverlaySideEffects(
     "researchActivity",
     loadingUpsertResearchActivity,
-    entityOverlay.method,
+    upsertEntityOverlay.method,
   );
 
-  useOverlayTransition(entityOverlay.showOverlay, overlayRef);
+  useOverlayTransition(upsertEntityOverlay.showOverlay, overlayRef);
 
   return (
     <div
@@ -141,7 +144,12 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
     >
       <CloseInterfaceButton
         closeInterfaceFunction={() =>
-          dispatch(setEntityOverlay({ ...entityOverlay, showOverlay: false }))
+          dispatch(
+            setUpsertEntityOverlay({
+              ...upsertEntityOverlay,
+              showOverlay: false,
+            }),
+          )
         }
         color="pastelRed"
         title="Close Interface"
@@ -153,11 +161,12 @@ const UpsertResearchActivityOverlayInterface: FC = () => {
         <EntityOverlayFormControls
           entityType="researchActivity"
           dto={dtoUsed}
-          method={entityOverlay.method}
+          method={upsertEntityOverlay.method}
           dtoUpdateFunction={dtoUsedUpdateFunction}
         />
         <hr />
         <EntityOverlayTags
+          type="upsert"
           sourceTagsIds={dtoUsed.tags}
           onAddTagFunction={() => onEditTagFunctionUsed("add")}
           onRemoveTagFunction={() => onEditTagFunctionUsed("remove")}

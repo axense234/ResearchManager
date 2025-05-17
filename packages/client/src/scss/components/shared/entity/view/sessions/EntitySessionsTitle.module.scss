@@ -15,9 +15,17 @@
 
     transition: background-color 0.2s ease-in;
   }
+}
+
+.sessionsTitleContent {
+  @include flexCenter(row);
+  width: 100%;
+  justify-content: flex-start;
+  gap: 1.25rem;
 
   > h6 {
     @include heading("h6", "laptop", "black");
+
     font-weight: 550;
     letter-spacing: 1px;
 

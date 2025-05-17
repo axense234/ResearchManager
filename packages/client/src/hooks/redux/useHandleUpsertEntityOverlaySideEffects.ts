@@ -6,23 +6,27 @@ import { EntityType } from "@researchmanager/shared/types";
 // Redux
 import { useAppDispatch } from "./redux";
 import {
-  closeEntityOverlay,
+  closeUpsertEntityOverlay,
   closeUpsertTagOverlay,
 } from "@/redux/slices/general/slice";
 import { setCreateResearchActivityDto } from "@/redux/slices/research/activity";
 import {
   defaultCreateResearchActivityDto,
   defaultCreateResearchPhaseDto,
+  defaultCreateResearchSessionDto,
   defaultCreateTagDto,
 } from "@/data/redux";
 import { setCreateTagDto } from "@/redux/slices/tag";
 import { setCreateResearchPhaseDto } from "@/redux/slices/research/phase";
+import { setCreateResearchSessionDto } from "@/redux/slices/research/session";
 
 const setCreateEntityDtos = {
   researchActivity: () =>
     setCreateResearchActivityDto({ ...defaultCreateResearchActivityDto }),
   researchPhase: () =>
     setCreateResearchPhaseDto({ ...defaultCreateResearchPhaseDto }),
+  researchSession: () =>
+    setCreateResearchSessionDto({ ...defaultCreateResearchSessionDto }),
   tag: () => setCreateTagDto({ ...defaultCreateTagDto }),
 };
 
@@ -41,7 +45,7 @@ export const useHandleUpsertEntityOverlaySideEffects = (
         dispatch(setCreateEntityDto);
       }
       if (entityType !== "tag") {
-        dispatch(closeEntityOverlay());
+        dispatch(closeUpsertEntityOverlay());
       } else if (entityType === "tag") {
         dispatch(closeUpsertTagOverlay());
       }

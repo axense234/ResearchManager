@@ -1,0 +1,16 @@
+@use "../../../../abstracts" as *;
+
+.sectionControlContainer {
+  @include flexCenter(row);
+  justify-content: flex-start;
+
+  > svg {
+    font-size: 2rem;
+
+    transition: transform 0.2s ease-in;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

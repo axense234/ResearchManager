@@ -17,6 +17,10 @@ import {
   deleteResearchPhase,
   updateResearchPhase,
 } from "@/redux/slices/research/phase";
+import {
+  createResearchSession,
+  updateResearchSession,
+} from "@/redux/slices/research/session";
 
 export const setModalListener = createListenerMiddleware();
 
@@ -46,6 +50,13 @@ setModalListener.startListening({
     createTag.pending,
     createTag.fulfilled,
     createTag.rejected,
+    // Research Session
+    createResearchSession.pending,
+    createResearchSession.fulfilled,
+    createResearchSession.rejected,
+    updateResearchSession.pending,
+    updateResearchSession.fulfilled,
+    updateResearchSession.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
@@ -61,6 +72,8 @@ setModalListener.startListening({
       entityUsed = "Research Phase";
     } else if (action.type.includes("tags")) {
       entityUsed = "Tag";
+    } else if (action.type.includes("researchSessions")) {
+      entityUsed = "Research Session";
     }
 
     if (action.type.includes("create")) {
@@ -69,6 +82,13 @@ setModalListener.startListening({
       methodUsed = "update";
     } else if (action.type.includes("delete")) {
       methodUsed = "delete";
+    }
+
+    if (
+      action.type.includes("create") &&
+      action.type.includes("researchSessions")
+    ) {
+      methodUsed = "started";
     }
 
     const modalMessagePending = `Trying to ${methodUsed} your ${entityUsed}.`;

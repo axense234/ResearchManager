@@ -25,8 +25,6 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
     | ResearchActivityRedux
     | ResearchPhaseRedux;
 
-  console.log(entityType, entityId);
-
   return (
     <div className={`${entityViewStyles.entityViewContent} ${position}`}>
       <EntityContainer
@@ -37,8 +35,13 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         position={position}
         isCurrentView={isCurrentView}
       />
-      {entityType === "researchActivity" && (
-        <EntitySessions entityId={entityId} entityType={entityType} />
+      {entityType === "researchActivity" && viewType === "entity" && (
+        <EntitySessions
+          entity={entity}
+          entityType={entityType}
+          darkMode={darkMode}
+          position={position}
+        />
       )}
       <EntityDetails
         specialEntity={entity}

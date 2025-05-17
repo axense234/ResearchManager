@@ -6,9 +6,48 @@
 
   justify-content: space-between;
 
-  border: 1px solid black;
-
   border-radius: 50px;
 
   padding: 1.25rem 2rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease-in,
+    box-shadow 0.2s ease-in;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow:
+      0 4px 8px getColorWithOpacity("main-black-100", 0.1),
+      0 6px 12px getColorWithOpacity("main-black-100", 0.1);
+  }
+
+  > p {
+    @include paragraph("tablet", "black");
+    font-weight: 550;
+    letter-spacing: 0.5px;
+  }
+}
+
+.sessionTitle {
+  @include flexCenter(row);
+  gap: 1rem;
+
+  > span {
+    @include flexCenter(row);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    font-size: getFontSize("h6-tablet");
+    letter-spacing: 1px;
+    font-weight: 550;
+
+    transition: color 0.2s ease-in;
+  }
+
+  > h6 {
+    font-size: getFontSize("button-heading");
+    font-weight: 550;
+  }
 }

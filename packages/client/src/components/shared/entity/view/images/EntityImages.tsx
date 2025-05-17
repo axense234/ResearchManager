@@ -1,5 +1,5 @@
 // React
-import { FC } from "react";
+import { FC, useState } from "react";
 // Interfaces
 import { EntityImagesProps } from "@/core/interfaces";
 // SCSS
@@ -24,6 +24,8 @@ const EntityImages: FC<EntityImagesProps> = ({
   isCurrentView,
 }) => {
   const dispatch = useAppDispatch();
+
+  const [showImages, setShowImages] = useState<boolean>(false);
 
   const entityImages = useSelectEntityImages(
     specialEntity,
@@ -51,12 +53,18 @@ const EntityImages: FC<EntityImagesProps> = ({
       className={`${entityImagesStyles.entityImagesContainer} ${position}`}
       style={{ backgroundColor: specialEntity.backgroundColorOrImageSrc }}
     >
-      <EntityImagesTitle title="Images" darkMode={darkMode} />
+      <EntityImagesTitle
+        title="Images"
+        darkMode={darkMode}
+        showImages={showImages}
+        setShowImages={setShowImages}
+      />
       <EntityImage
         imagesSrc={entityImages.map((entityImage) => entityImage.src)}
         onClickFunction={() => onEntityImageClickFunction()}
         darkMode={darkMode}
         isCurrentView={isCurrentView}
+        showImages={showImages}
       />
     </article>
   );

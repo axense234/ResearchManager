@@ -3,18 +3,21 @@ import { FC } from "react";
 // Components
 import UpsertResearchActivityOverlayInterface from "./interfaces/UpsertResearchActivityOverlayInterface";
 import UpsertResearchPhaseOverlayInterface from "./interfaces/UpsertResearchPhaseOverlayInterface";
+import UpsertResearchSessionOverlayInterface from "./interfaces/UpsertResearchSessionOverlayInterface";
 // Redux
 import { useAppSelector } from "@/hooks";
-import { selectEntityOverlay } from "@/redux/slices/general";
+import { selectUpsertEntityOverlay } from "@/redux/slices/general";
 
 const UpsertEntityOverlay: FC = () => {
-  const entityOverlay = useAppSelector(selectEntityOverlay);
+  const upsertEntityOverlay = useAppSelector(selectUpsertEntityOverlay);
 
-  switch (entityOverlay.entityType) {
+  switch (upsertEntityOverlay.entityType) {
     case "researchActivity":
       return <UpsertResearchActivityOverlayInterface />;
     case "researchPhase":
       return <UpsertResearchPhaseOverlayInterface />;
+    case "researchSession":
+      return <UpsertResearchSessionOverlayInterface />;
     case "researchLog":
       return null;
     case "tag":

@@ -10,3 +10,4 @@ export * from "./useCountdown";
 export * from "./useGetElementRelativePosition";
 export * from "./useDetermineAddTagButtonDisabledInfo";
 export * from "./useHandleScrollToActivityDay";
+export * from "./useDetermineEntitySessionItemDetails";

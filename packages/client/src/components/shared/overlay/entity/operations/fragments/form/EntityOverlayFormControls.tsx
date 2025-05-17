@@ -7,6 +7,7 @@ import ResearchActivityOverlayFormControls from "./controls/ResearchActivityOver
 import ResearchPhaseOverlayFormControls from "./controls/ResearchPhaseOverlayFormControls";
 import ResearchLogOverlayFormControls from "./controls/ResearchLogOverlayFormControls";
 import TagOverlayFormControls from "./controls/TagOverlayFormControls";
+import ResearchSessionOverlayFormControls from "./controls/ResearchSessionOverlayFormControls";
 
 const EntityOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
   dto,
@@ -29,6 +30,15 @@ const EntityOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
         <ResearchPhaseOverlayFormControls
           dto={dto}
           entityType="researchPhase"
+          method={method}
+          dtoUpdateFunction={dtoUpdateFunction}
+        />
+      );
+    case "researchSession":
+      return (
+        <ResearchSessionOverlayFormControls
+          dto={dto}
+          entityType="researchSession"
           method={method}
           dtoUpdateFunction={dtoUpdateFunction}
         />

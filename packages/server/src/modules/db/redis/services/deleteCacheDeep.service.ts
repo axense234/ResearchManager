@@ -48,11 +48,13 @@ export class DeleteCacheDeepService {
         deepCall: true,
         specifiers: [
           {
+            // I do not like how this works, it is basically a bandaid solution
             label: 'includeValues',
             possibleValues: [
               entityType,
               entityTypeToPlural(entityType),
               entityTypeToPlural(allowedIncludeValues[0]),
+              'researchActivities',
             ],
           },
           { label: 'chosenOptionType', possibleValues: ['include'] },

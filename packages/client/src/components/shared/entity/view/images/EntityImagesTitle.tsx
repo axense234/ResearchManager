@@ -6,13 +6,26 @@ import { EntityImagesTitleProps } from "@/core/interfaces";
 import entityImagesTitleStyles from "@/scss/components/shared/entity/view/images/EntityImagesTitle.module.scss";
 // Data
 import { mainBlackColor, secondaryWhiteColor } from "@/data/general";
+// Components
+import EntityViewSectionControl from "../EntityViewSectionControl";
 
-const EntityImagesTitle: FC<EntityImagesTitleProps> = ({ title, darkMode }) => {
+const EntityImagesTitle: FC<EntityImagesTitleProps> = ({
+  title,
+  darkMode,
+  setShowImages,
+  showImages,
+}) => {
   const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
 
   return (
     <div className={entityImagesTitleStyles.entityImagesTitleContainer}>
-      <h6 style={{ color: textColor }}>{title}</h6>
+      <div className={entityImagesTitleStyles.entityImagesTitleContent}>
+        <h6 style={{ color: textColor }}>{title}</h6>
+        <EntityViewSectionControl
+          showSectionContent={showImages}
+          setShowSectionContent={setShowImages}
+        />
+      </div>
       <hr style={{ backgroundColor: textColor }} />
     </div>
   );
