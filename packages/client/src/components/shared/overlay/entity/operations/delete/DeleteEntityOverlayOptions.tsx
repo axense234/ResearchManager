@@ -27,6 +27,9 @@ const DeleteEntityOverlayOptions: FC<DeleteEntityOverlayOptionsProps> = ({
     case "researchPhase":
       entityLabel = "Research Phase";
       break;
+    case "researchSession":
+      entityLabel = "Research Session";
+      break;
     default:
       throw new Error("Invalid entity type.");
   }

@@ -18,13 +18,13 @@
   width: 100%;
   gap: 2rem;
 
-  max-height: 30rem;
-
   overflow-y: scroll;
   overflow-x: hidden;
 
+  max-height: 25rem;
+
   transition:
-    max-height 0.2s linear,
+    height 0.2s linear,
     padding 0.1s linear;
 
   > li {

@@ -18,10 +18,12 @@ const ResearchActivityImagesOverlayContent: FC<
   setShowImageOverlay,
   onImageClickFunction,
   onSectionTitleClickFunction,
+  viewType,
 }) => {
   return (
     <div className={overlayContentStyles.contentContainer}>
       <EntityImageOverlay
+        optionsType={viewType}
         showOverlay={showImageOverlay}
         closeOverlayFunction={() => setShowImageOverlay(false)}
         imagesPayload={currentResearchPhasesImages}

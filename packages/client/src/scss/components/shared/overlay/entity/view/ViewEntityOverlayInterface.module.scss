@@ -35,7 +35,7 @@
   border-top-right-radius: 0;
   background-color: getColor("main-white");
   padding: 3rem;
-  gap: 2.5rem;
+  gap: 3rem;
 
   overflow-y: scroll;
 
@@ -44,17 +44,29 @@
     visibility: hidden;
   }
 
+  > hr {
+    border-radius: 0.5rem;
+    width: 100%;
+    border: 1px solid getColor("main-black-100");
+  }
+}
+
+.overlayTitleContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
   > h5 {
     @include heading("h5", "laptop", "black");
     width: 100%;
     text-align: center;
     letter-spacing: 0.75px;
-    margin-bottom: 2rem;
   }
 
-  > hr {
-    border-radius: 0.5rem;
+  > h6 {
+    @include heading("h6", "tablet", "black");
     width: 100%;
-    border: 1px solid getColor("main-black-100");
+    text-align: center;
+    letter-spacing: 0.5px;
   }
 }

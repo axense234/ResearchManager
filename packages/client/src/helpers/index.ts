@@ -12,3 +12,4 @@ export * from "./onEditTagFunction";
 export * from "./determineContentPosition";
 export * from "./calculateResearchPhaseRP";
 export * from "./calculateFrequencyOfGivenTag";
+export * from "./onEditImageFunction";

@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { EntityImagesOverlayItemProps } from "@/core/interfaces";
 // Next
 import Image from "next/image";
@@ -7,6 +8,7 @@ import Image from "next/image";
 import entityImagesOverlayItemStyles from "@/scss/components/shared/overlay/entity/images/EntityImagesOverlayItem.module.scss";
 
 const EntityImagesOverlayItem: FC<EntityImagesOverlayItemProps> = ({
+  itemId,
   itemName,
   itemImages,
   itemEntityType,

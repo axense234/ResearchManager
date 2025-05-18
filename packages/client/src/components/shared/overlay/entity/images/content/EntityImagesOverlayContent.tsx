@@ -10,6 +10,7 @@ import { organizeEntityImagesByEntityNames } from "@/helpers";
 // Redux
 import { useAppDispatch } from "@/hooks";
 import {
+  setChosenImageResearchLogId,
   setCurrentEntityImageOverlayCarouselId,
   setResearchPhaseImagesOverlay,
 } from "@/redux/slices/general/slice";
@@ -17,6 +18,7 @@ import {
 const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
   specialEntityType,
   entityImages,
+  viewType,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -71,6 +73,7 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
         entityImages: entityImages.filter(
           (entityImage) => entityImage.researchPhaseName === entityName,
         ),
+        viewType,
       }),
     );
   };
@@ -84,9 +87,10 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
         setShowImageOverlay={setShowImageOverlay}
         onImageClickFunction={(parentName: string, index: number) => {
           setCurrentResearchLogName(parentName);
-          dispatch(setCurrentEntityImageOverlayCarouselId(index));
           setShowImageOverlay(true);
+          dispatch(setCurrentEntityImageOverlayCarouselId(index));
         }}
+        viewType={viewType}
       />
     );
   } else if (specialEntityType === "researchActivity") {
@@ -96,12 +100,13 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
         researchPhasesImages={entityImagesResearchPhasesImages}
         showImageOverlay={showImageOverlay}
         setShowImageOverlay={setShowImageOverlay}
+        onSectionTitleClickFunction={onResearchPhaseItemClickFunction}
+        viewType={viewType}
         onImageClickFunction={(parentName: string, index: number) => {
           setCurrentResearchPhaseName(parentName);
-          dispatch(setCurrentEntityImageOverlayCarouselId(index));
           setShowImageOverlay(true);
+          dispatch(setCurrentEntityImageOverlayCarouselId(index));
         }}
-        onSectionTitleClickFunction={onResearchPhaseItemClickFunction}
       />
     );
   }

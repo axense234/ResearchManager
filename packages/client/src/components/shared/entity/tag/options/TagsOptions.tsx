@@ -62,7 +62,7 @@ const TagsOptions: FC<TagsOptionsProps> = ({
         buttonLabel={showAllTags ? "Show Less" : "Show More"}
       />
       <TagsOptionsButton
-        showButton={containerType !== "example"}
+        showButton={containerType !== "example" && containerType !== "view"}
         onButtonClickFunction={() =>
           dispatch(
             setAddTagModal({ ...addTagModal, location, isClosed: false }),
@@ -72,7 +72,11 @@ const TagsOptions: FC<TagsOptionsProps> = ({
         buttonLabel="Add Tag"
       />
       <TagsOptionsButton
-        showButton={selectedTagsIds.length > 0 && addTagModal.isClosed}
+        showButton={
+          selectedTagsIds.length > 0 &&
+          addTagModal.isClosed &&
+          containerType !== "view"
+        }
         onButtonClickFunction={onRemoveTagFunction}
         buttonColor={deleteRedColor}
         buttonLabel={selectedTagsIds.length > 1 ? "Remove Tags" : "Remove Tag"}

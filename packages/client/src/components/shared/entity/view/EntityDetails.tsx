@@ -15,6 +15,10 @@ const EntityDetails: FC<EntityDetailsProps> = ({
   darkMode,
   position,
   isCurrentView,
+  showImages,
+  showGraph,
+  setShowImages,
+  setShowGraph,
 }) => {
   return (
     <section className={entityDetailsStyles.entityDetailsContainer}>
@@ -25,11 +29,15 @@ const EntityDetails: FC<EntityDetailsProps> = ({
         darkMode={darkMode}
         position={position}
         isCurrentView={isCurrentView}
+        showImages={showImages}
+        setShowImages={setShowImages}
       />
       <EntityGraphs
         specialEntity={specialEntity}
         darkMode={darkMode}
         position={position}
+        showGraph={showGraph}
+        setShowGraph={setShowGraph}
       />
     </section>
   );

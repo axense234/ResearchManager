@@ -68,6 +68,7 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
         <EntityImagesOverlayContent
           specialEntityType={specialEntityType}
           entityImages={usedImagesOverlay.entityImages || []}
+          viewType={usedImagesOverlay.viewType}
         />
       </div>
     </div>

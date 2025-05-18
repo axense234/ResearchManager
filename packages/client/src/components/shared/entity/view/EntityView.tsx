@@ -1,5 +1,5 @@
 // React
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 // Interfaces
 import { EntityViewProps } from "@/core/interfaces";
 // SCSS
@@ -9,7 +9,10 @@ import EntityViewContent from "./EntityViewContent";
 import EntityViewLoading from "./EntityViewLoading";
 import EntityViewNoEntities from "./EntityViewNoEntities";
 // Hooks
-import { useGetCurrentEntityIdAndIndex } from "@/hooks";
+import {
+  useCalculateEntityViewHeight,
+  useGetCurrentEntityIdAndIndex,
+} from "@/hooks";
 // Helpers
 import { determineContentPosition } from "@/helpers";
 
@@ -21,9 +24,22 @@ const EntityView: FC<EntityViewProps> = ({
   setShowEntityExamples,
   entitiesIds,
 }) => {
-  const { currentEntityIndex } = useGetCurrentEntityIdAndIndex(
+  const [showSessions, setShowSessions] = useState<boolean>(false);
+  const [showImages, setShowImages] = useState<boolean>(false);
+  const [showGraph, setShowGraph] = useState<boolean>(false);
+
+  const { currentEntityIndex, currentEntityId } = useGetCurrentEntityIdAndIndex(
     entityType,
     viewType,
+  );
+
+  const entityViewHeight = useCalculateEntityViewHeight(
+    currentEntityId,
+    entityType,
+    viewType,
+    showSessions,
+    showImages,
+    showGraph,
   );
 
   if (isLoading) {
@@ -40,7 +56,10 @@ const EntityView: FC<EntityViewProps> = ({
   }
 
   return (
-    <section className={entityViewStyles.entityViewContainer}>
+    <section
+      className={entityViewStyles.entityViewContainer}
+      style={{ height: entityViewHeight }}
+    >
       {entitiesIds?.map((entityId, entityIndex) => {
         const position = determineContentPosition(
           entityIndex + 1,
@@ -52,13 +71,19 @@ const EntityView: FC<EntityViewProps> = ({
 
         return (
           <EntityViewContent
+            key={entityId}
             viewType={viewType}
             entityType={entityType}
             darkMode={darkMode}
             entityId={entityId}
             position={position}
             isCurrentView={currentEntityIndex === entityIndex + 1}
-            key={entityId}
+            showSessions={showSessions}
+            showImages={showImages}
+            showGraph={showGraph}
+            setShowSessions={setShowSessions}
+            setShowImages={setShowImages}
+            setShowGraph={setShowGraph}
           />
         );
       })}

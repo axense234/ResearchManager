@@ -4,6 +4,8 @@ import { EntityType } from "@researchmanager/shared/types";
 import { useAppDispatch, useAppSelector } from "./redux";
 import {
   closeDeleteEntityOverlay,
+  closeUpsertEntityOverlay,
+  closeViewEntityOverlay,
   setCurrentActivityLogSubject,
 } from "@/redux/slices/general/slice";
 import {
@@ -20,6 +22,10 @@ import {
   selectResearchActivitiesCustom,
   setCurrentResearchActivityIndex,
 } from "@/redux/slices/research/activity";
+import {
+  deleteResearchSession,
+  updateResearchSession,
+} from "@/redux/slices/research/session";
 
 export const useDetermineDeleteEntityOverlayFunctions = (
   entityType: EntityType,
@@ -79,6 +85,27 @@ export const useDetermineDeleteEntityOverlayFunctions = (
         dispatch(closeDeleteEntityOverlay());
         dispatch(setCurrentActivityLogSubject("PURGE"));
         dispatch(setCurrentResearchPhaseIndex(numberOfResearchPhases - 1));
+      };
+      break;
+    case "researchSession":
+      onArchiveFunctionUsed = () => {
+        dispatch(
+          updateResearchSession({
+            dto: { archived: true },
+            researchSessionId: entityId,
+          }),
+        );
+        dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
+        dispatch(closeViewEntityOverlay());
+        dispatch(closeUpsertEntityOverlay());
+      };
+      onPurgeFunctionUsed = () => {
+        dispatch(deleteResearchSession(entityId));
+        dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentActivityLogSubject("PURGE"));
+        dispatch(closeViewEntityOverlay());
+        dispatch(closeUpsertEntityOverlay());
       };
       break;
     default:

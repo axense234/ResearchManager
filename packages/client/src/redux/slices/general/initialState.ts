@@ -55,12 +55,14 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
     showOverlay: false,
     entityName: "Default RA Name",
     entityImages: [],
+    viewType: "example",
   },
 
   researchPhaseImagesOverlay: {
     showOverlay: false,
     entityName: "Default RP Name",
     entityImages: [],
+    viewType: "example",
   },
 
   // Modals
@@ -77,4 +79,9 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
 
   // Util
   currentActivityLogSubject: "CREATE",
+  chosenImageResearchLogId: "",
+
+  // Images
+  loadingUploadImageToCloudinary: "IDLE",
+  selectedImagesSrc: [],
 };

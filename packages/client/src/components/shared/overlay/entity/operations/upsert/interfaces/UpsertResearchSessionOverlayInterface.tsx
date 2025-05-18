@@ -1,9 +1,9 @@
 // React
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 // SCSS
 import upsertEntityOverlayStyles from "@/scss/components/shared/overlay/entity/upsert/UpsertEntityOverlayInterface.module.scss";
 // Helpers
-import { onEditTagFunction } from "@/helpers";
+import { onEditImageFunction, onEditTagFunction } from "@/helpers";
 // Components
 import CloseInterfaceButton from "@/components/shared/general/CloseInterfaceButton";
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
@@ -12,6 +12,7 @@ import EntityOverlayFormControls from "../../fragments/form/EntityOverlayFormCon
 import EntityOverlayTags from "../../fragments/tags/EntityOverlayTags";
 import EntityOverlayLogContent from "../../fragments/log/EntityOverlayLogContent";
 import EntityOverlayOptions from "../../fragments/EntityOverlayOptions";
+import EntityOverlayImages from "../../fragments/images/EntityOverlayImages";
 // Redux and Hooks
 import {
   useAppDispatch,
@@ -19,7 +20,10 @@ import {
   useHandleUpsertEntityOverlaySideEffects,
   useOverlayTransition,
 } from "@/hooks";
-import { selectUpsertEntityOverlay } from "@/redux/slices/general";
+import {
+  selectLoadingUploadImageToCloudinary,
+  selectUpsertEntityOverlay,
+} from "@/redux/slices/general";
 import {
   setCurrentActivityLogSubject,
   setUpsertEntityOverlay,
@@ -35,19 +39,32 @@ import {
   updateResearchSession,
   updateUpdateResearchSessionDto,
 } from "@/redux/slices/research/session";
+import {
+  selectNumberOfResearchPhases,
+  selectResearchPhaseById,
+} from "@/redux/slices/research/phase";
+import { selectResearchActivityById } from "@/redux/slices/research/activity";
 
 const UpsertResearchSessionOverlayInterface: FC = () => {
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
 
+  const [showImageOverlay, setShowImageOverlay] = useState<boolean>(false);
+
   const upsertEntityOverlay = useAppSelector(selectUpsertEntityOverlay);
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
+
+  const numberOfResearchPhases = useAppSelector(selectNumberOfResearchPhases);
 
   const createResearchSessionDto = useAppSelector(
     selectCreateResearchSessionDto,
   );
   const updateResearchSessionDto = useAppSelector(
     selectUpdateResearchSessionDto,
+  );
+
+  const loadingUploadImageToCloudinary = useAppSelector(
+    selectLoadingUploadImageToCloudinary,
   );
 
   const loadingCreateResearchSession = useAppSelector(
@@ -64,7 +81,8 @@ const UpsertResearchSessionOverlayInterface: FC = () => {
 
   const isRequestPending =
     loadingCreateResearchSession === "PENDING" ||
-    loadingUpdateResearchSession === "PENDING";
+    loadingUpdateResearchSession === "PENDING" ||
+    loadingUploadImageToCloudinary === "PENDING";
 
   const entityLogContentSectionTitle =
     upsertEntityOverlay.method === "create" ? "Initial Content" : "Content";
@@ -83,6 +101,19 @@ const UpsertResearchSessionOverlayInterface: FC = () => {
     upsertEntityOverlay.method === "create"
       ? updateCreateResearchSessionDto
       : updateUpdateResearchSessionDto;
+
+  const onUpserButtonDisabledMessage = isRequestPending
+    ? "Please wait."
+    : numberOfResearchPhases === 0
+      ? "No Research Phases!"
+      : "Something is wrong.";
+
+  const researchPhase = useAppSelector((state) =>
+    selectResearchPhaseById(state, dtoUsed?.researchPhaseId),
+  );
+  const researchActivity = useAppSelector((state) =>
+    selectResearchActivityById(state, researchPhase?.researchActivityId),
+  );
 
   const onResearchSessionCreateFunction = () => {
     dispatch(setCurrentActivityLogSubject("CREATE"));
@@ -113,6 +144,23 @@ const UpsertResearchSessionOverlayInterface: FC = () => {
         dtoUsedUpdateFunction({
           key: "tags",
           value: editedTags,
+        }),
+      dispatch,
+    );
+  };
+
+  const onEditImageFunctionUsed = (
+    type: "remove" | "add",
+    images?: string[],
+  ) => {
+    onEditImageFunction(
+      type,
+      dtoUsed?.imagesSrc,
+      images,
+      (imagesSrc: string[]) =>
+        dtoUsedUpdateFunction({
+          key: "imagesSrc",
+          value: imagesSrc,
         }),
       dispatch,
     );
@@ -151,7 +199,13 @@ const UpsertResearchSessionOverlayInterface: FC = () => {
       />
       <div className={upsertEntityOverlayStyles.overlayContainer}>
         <GeneralModal type="form" />
-        <h5>{interfaceTitle}</h5>
+        <div className={upsertEntityOverlayStyles.overlayTitleContainer}>
+          <h5>{interfaceTitle}</h5>
+          <h6>
+            {researchActivity?.name} - {researchPhase?.name}
+          </h6>
+          <h6>{dtoUsed?.researchPoints} RP</h6>
+        </div>
         <EntityOverlayFormControls
           entityType="researchSession"
           dto={dtoUsed}
@@ -180,15 +234,29 @@ const UpsertResearchSessionOverlayInterface: FC = () => {
           onRemoveTagFunction={() => onEditTagFunctionUsed("remove")}
         />
         <hr />
+        <EntityOverlayImages
+          type="upsert"
+          showImageOverlay={showImageOverlay}
+          setShowImageOverlay={setShowImageOverlay}
+          dto={dtoUsed}
+          onAddImagesFunction={(images: string[]) =>
+            onEditImageFunctionUsed("add", images)
+          }
+          onRemoveImagesFunction={(imageSrc: string) => {
+            onEditImageFunctionUsed("remove", [imageSrc]);
+            setShowImageOverlay(false);
+          }}
+        />
+        <hr />
         <FunctionalButton
           content={
             upsertEntityOverlay.method === "create"
               ? interfaceTitle
               : "Save Changes"
           }
-          disabled={isRequestPending}
+          disabled={isRequestPending || numberOfResearchPhases === 0}
           onHoverContent={interfaceTitle}
-          onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
+          onHoverContentDisabled={onUpserButtonDisabledMessage}
           onClickFunction={() => dtoUsedUpsertFunction()}
           colorScheme={
             upsertEntityOverlay.method === "create" ? "green" : "orange"

@@ -95,10 +95,10 @@ const ProfileGeneralStatisticsContent: FC = () => {
     : "No Research Phase found.";
   const longestResearchSessionLabel = longestResearchLog?.name
     ? `${longestResearchLog?.name} (${longestResearchLog?.researchPoints} RP)`
-    : "No Research Session found.";
+    : "No Research Log found.";
   const shortestResearchSessionLabel = shortestResearchLog?.name
     ? `${shortestResearchLog?.name} (${shortestResearchLog?.researchPoints} RP)`
-    : "No Research Session found.";
+    : "No Research Log found.";
 
   return (
     <div className={profileGeneralStatisticsContentStyles.contentContainer}>

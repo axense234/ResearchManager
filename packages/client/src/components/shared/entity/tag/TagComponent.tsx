@@ -31,6 +31,9 @@ const TagComponent: FC<TagComponentProps> = ({
     case "entity":
       usedTag = tag;
       break;
+    case "view":
+      usedTag = tag;
+      break;
     case "example":
       usedTag = tagExample;
       break;

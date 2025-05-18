@@ -14,6 +14,7 @@ const EntityImagesTitle: FC<EntityImagesTitleProps> = ({
   darkMode,
   setShowImages,
   showImages,
+  showSectionControl,
 }) => {
   const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
 
@@ -21,10 +22,12 @@ const EntityImagesTitle: FC<EntityImagesTitleProps> = ({
     <div className={entityImagesTitleStyles.entityImagesTitleContainer}>
       <div className={entityImagesTitleStyles.entityImagesTitleContent}>
         <h6 style={{ color: textColor }}>{title}</h6>
-        <EntityViewSectionControl
-          showSectionContent={showImages}
-          setShowSectionContent={setShowImages}
-        />
+        {showSectionControl && (
+          <EntityViewSectionControl
+            showSectionContent={showImages}
+            setShowSectionContent={setShowImages}
+          />
+        )}
       </div>
       <hr style={{ backgroundColor: textColor }} />
     </div>

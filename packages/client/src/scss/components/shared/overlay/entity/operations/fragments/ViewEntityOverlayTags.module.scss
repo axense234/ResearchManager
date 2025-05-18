@@ -1,0 +1,12 @@
+@use "../../../../../../abstracts" as *;
+
+.viewOverlayTagsContainer {
+  @include flexCenter(row);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 2rem;
+  row-gap: 1rem;
+  list-style: none;
+}

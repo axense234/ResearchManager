@@ -55,3 +55,23 @@
     border: 1px solid getColor("main-black-100");
   }
 }
+
+.overlayTitleContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  > h5 {
+    @include heading("h5", "laptop", "black");
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.75px;
+  }
+
+  > h6 {
+    @include heading("h6", "tablet", "black");
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+}

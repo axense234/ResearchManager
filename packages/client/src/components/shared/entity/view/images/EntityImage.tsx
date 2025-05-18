@@ -1,5 +1,5 @@
 // React
-import { FC } from "react";
+import { FC, useEffect } from "react";
 // Interfaces
 import { EntityImageProps } from "@/core/interfaces";
 // SCSS
@@ -13,7 +13,10 @@ import { determineContentPosition } from "@/helpers";
 // Redux
 import { useAppDispatch, useAppSelector, useAutoCarousel } from "@/hooks";
 import { selectCurrentEntityImageCarouselId } from "@/redux/slices/general";
-import { handleEntityImageCarouselStepDirection } from "@/redux/slices/general/slice";
+import {
+  handleEntityImageCarouselStepDirection,
+  setCurrentEntityImageCarouselId,
+} from "@/redux/slices/general/slice";
 
 const EntityImage: FC<EntityImageProps> = ({
   imagesSrc,
@@ -22,9 +25,16 @@ const EntityImage: FC<EntityImageProps> = ({
   isCurrentView,
   showImages,
 }) => {
+  const dispatch = useAppDispatch();
   const currentEntityImageCarouselId = useAppSelector(
     selectCurrentEntityImageCarouselId,
   );
+
+  useEffect(() => {
+    if (isCurrentView) {
+      dispatch(setCurrentEntityImageCarouselId(1));
+    }
+  }, [isCurrentView]);
 
   useHandleEntityImageAutoCarousel(
     isCurrentView && showImages,
@@ -78,6 +88,7 @@ const useHandleEntityImageAutoCarousel = (
   numberOfImages: number,
 ) => {
   const dispatch = useAppDispatch();
+
   useAutoCarousel(
     isCurrentView,
     () =>

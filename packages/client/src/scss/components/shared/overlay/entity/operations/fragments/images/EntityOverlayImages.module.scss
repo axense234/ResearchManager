@@ -1,0 +1,28 @@
+@use "../../../../../../../abstracts" as *;
+
+.overlayImagesContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 1.5rem;
+
+  > h5 {
+    @include heading("h5", "tablet", "black");
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+  }
+
+  > h6 {
+    @include heading("h6", "tablet", "black");
+    width: 100%;
+    letter-spacing: 0.5px;
+  }
+}
+
+.overlayImagesContent {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 2rem;
+}

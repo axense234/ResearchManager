@@ -8,6 +8,10 @@ import {
 export interface EntitySessionsProps {
   entityType: "researchActivity" | "researchPhase";
   entity: ResearchActivityRedux | ResearchPhaseRedux;
+
   darkMode: boolean;
   position: EntityPositionType;
+
+  showSessions: boolean;
+  setShowSessions: (show: boolean) => void;
 }

@@ -6,3 +6,6 @@ export * from "./EntityOverlayTagPreviewProps";
 export * from "./EntityOverlayLogContentProps";
 export * from "./EntityOverlayOptionsProps";
 export * from "./EntityOverlayOptionProps";
+export * from "./ViewEntityOverlayTagsProps";
+export * from "./EntityOverlayImagesProps";
+export * from "./EntityOverlayImagesListProps";

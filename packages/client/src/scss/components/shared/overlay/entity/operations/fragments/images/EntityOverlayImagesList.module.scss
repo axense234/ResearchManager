@@ -1,0 +1,33 @@
+@use "../../../../../../../abstracts" as *;
+
+.imagesListContainer {
+  @include flexCenter(row);
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2rem;
+  list-style: none;
+
+  > li {
+    @include flexCenter(row);
+
+    > img {
+      width: 5rem;
+      height: auto;
+
+      transition: transform 0.15s ease-in;
+
+      cursor: pointer;
+
+      &:hover {
+        transform: rotate(-5deg) scale(1.005);
+      }
+    }
+  }
+
+  > p {
+    @include paragraph("laptop", "black");
+    letter-spacing: 0.5px;
+  }
+}

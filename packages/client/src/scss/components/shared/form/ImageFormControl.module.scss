@@ -1,0 +1,33 @@
+@use "../../../abstracts" as *;
+
+.imageFormControlContainer {
+  @include flexCenter(row);
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  gap: 0.5rem;
+  column-gap: 1.5rem;
+
+  label {
+    font-weight: 550;
+    letter-spacing: 1px;
+
+    color: getColor("create-green");
+    font-size: 14px;
+    font-weight: 550;
+    letter-spacing: 0.35px;
+
+    transition: transform 0.15s ease-in;
+    width: max-content;
+
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  input {
+    visibility: hidden;
+  }
+}

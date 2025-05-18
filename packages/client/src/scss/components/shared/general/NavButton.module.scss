@@ -14,6 +14,8 @@
   opacity: 0;
   display: none;
 
+  z-index: 50;
+
   > svg {
     border-radius: 50%;
     font-size: 4rem;

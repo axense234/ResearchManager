@@ -13,8 +13,8 @@ const researchSessionCurrentStatusTypePriorities = {
 export const researchSessionsAdapter =
   createEntityAdapter<ResearchSessionRedux>({
     sortComparer: (a, b) =>
-      new Date(b.currentStatusDate).getTime() -
-        new Date(a.currentStatusDate).getTime() &&
+      new Date(a.currentStatusDate).getTime() -
+        new Date(b.currentStatusDate).getTime() &&
       researchSessionCurrentStatusTypePriorities[b.currentStatusType] -
         researchSessionCurrentStatusTypePriorities[a.currentStatusType],
   });

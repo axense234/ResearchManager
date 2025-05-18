@@ -20,6 +20,12 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
   entityId,
   position,
   isCurrentView,
+  showSessions,
+  showImages,
+  showGraph,
+  setShowSessions,
+  setShowImages,
+  setShowGraph,
 }) => {
   const entity = useSelectEntity(viewType, entityType, entityId) as
     | ResearchActivityRedux
@@ -41,6 +47,8 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
           entityType={entityType}
           darkMode={darkMode}
           position={position}
+          showSessions={showSessions}
+          setShowSessions={setShowSessions}
         />
       )}
       <EntityDetails
@@ -50,6 +58,10 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         darkMode={viewType === "example" ? true : darkMode}
         position={position}
         isCurrentView={isCurrentView}
+        showImages={showImages}
+        showGraph={showGraph}
+        setShowImages={setShowImages}
+        setShowGraph={setShowGraph}
       />
     </div>
   );

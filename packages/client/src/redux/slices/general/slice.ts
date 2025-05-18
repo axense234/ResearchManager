@@ -36,12 +36,15 @@ export const {
   setResearchPhaseImagesOverlay,
   handleEntityImageOverlayCarouselStepDirection,
   setCurrentEntityImageOverlayCarouselId,
+  setCurrentEntityImageCarouselId,
   closeUpsertTagOverlay,
   setUpsertTagOverlay,
   closeDeleteEntityOverlay,
   setCurrentActivityLogSubject,
   closeViewEntityOverlay,
   setViewEntityOverlay,
+  setSelectedImagesSrc,
+  setChosenImageResearchLogId,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

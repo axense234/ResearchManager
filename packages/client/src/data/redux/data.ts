@@ -45,6 +45,7 @@ export const defaultCreateTagDto: CreateTagDto = {
 export const defaultCreateResearchSessionDto: CreateResearchSessionDto = {
   ...createResearchSessionMockData[0],
   tags: [],
+  imagesSrc: [],
 };
 
 export const userProfileMockDataRedux: UserRedux = {

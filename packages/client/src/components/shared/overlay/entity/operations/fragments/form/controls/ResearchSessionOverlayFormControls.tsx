@@ -12,19 +12,19 @@ import {
 } from "@researchmanager/shared/types";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
+import SelectFormControl from "@/components/shared/form/SelectFormControl";
 // SCSS
 import entityOverlayFormControlsStyles from "@/scss/components/shared/overlay/entity/operations/fragments/form/controls/EntityOverlayFormControls.module.scss";
+// Data
+import { formErrorInputBorder } from "@/data/general";
 // Redux and Hoooks
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { selectErrorFields } from "@/redux/slices/general";
-// Data
-import { formErrorInputBorder } from "@/data/general";
-import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import { selectAllResearchPhases } from "@/redux/slices/research/phase";
 
 const ResearchSessionOverlayFormControls: FC<
   EntityOverlayFormControlsProps
-> = ({ dto, dtoUpdateFunction }) => {
+> = ({ dto, dtoUpdateFunction, method }) => {
   const dispatch = useAppDispatch();
 
   const errorFields = useAppSelector(selectErrorFields);
@@ -73,7 +73,11 @@ const ResearchSessionOverlayFormControls: FC<
         border={errorFields.includes("name") ? formErrorInputBorder : "none"}
       />
       <TextFormControl
-        labelContent="Starting Research Points:"
+        labelContent={
+          method === "create"
+            ? "Starting Research Points:"
+            : "Current Research Points"
+        }
         type="number"
         entityProperty={researchSessionDto?.researchPoints}
         onEntityPropertyValueChange={(e) =>
@@ -88,6 +92,7 @@ const ResearchSessionOverlayFormControls: FC<
         labelColorType="dark"
         inputColorType="dark"
         minInputSize={0}
+        disabled={method === "update"}
       />
       <TextFormControl
         labelContent="Background Color:"

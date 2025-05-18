@@ -28,6 +28,10 @@ const DeleteEntityOverlayInfo: FC<DeleteEntityOverlayInfoProps> = ({
       entityLabel = "Research Phase";
       entityPluralLabel = "Research Phases";
       break;
+    case "researchSession":
+      entityLabel = "Research Session";
+      entityPluralLabel = "Research Sessions";
+      break;
     default:
       throw new Error("Invalid Entity Type.");
   }

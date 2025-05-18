@@ -7,3 +7,4 @@ export * from "./content";
 export * from "./EntityImageOverlayImageProps";
 export * from "./EntityImageOverlaySliderProps";
 export * from "./EntityImageOverlayContentProps";
+export * from "./EntityImageOverlayOptionsProps";

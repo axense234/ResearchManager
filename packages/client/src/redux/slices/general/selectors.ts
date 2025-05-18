@@ -61,3 +61,13 @@ export const selectContactUsDto = (state: State) => state.general.contactUsDto;
 // Util
 export const selectCurrentActivityLogSubject = (state: State) =>
   state.general.currentActivityLogSubject;
+
+export const selectChosenImageResearchLogId = (state: State) =>
+  state.general.chosenImageResearchLogId;
+
+// Images
+export const selectLoadingUploadImageToCloudinary = (state: State) =>
+  state.general.loadingUploadImageToCloudinary;
+
+export const selectSelectedImagesSrc = (state: State) =>
+  state.general.selectedImagesSrc;

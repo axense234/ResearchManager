@@ -14,6 +14,8 @@ const EntityImageOverlay: FC<EntityImageOverlayProps> = ({
   showOverlay,
   closeOverlayFunction,
   imagesPayload,
+  optionsType,
+  onRemoveImageFunction,
 }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -30,7 +32,11 @@ const EntityImageOverlay: FC<EntityImageOverlayProps> = ({
         title="Close Overlay"
         size="large"
       />
-      <EntityImageOverlayContent imagesPayload={imagesPayload} />
+      <EntityImageOverlayContent
+        imagesPayload={imagesPayload}
+        optionsType={optionsType}
+        onRemoveImageFunction={onRemoveImageFunction}
+      />
     </div>
   );
 };

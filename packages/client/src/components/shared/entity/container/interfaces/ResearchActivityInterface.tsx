@@ -40,6 +40,7 @@ import {
 import { onEditTagFunction } from "@/helpers";
 import { defaultCreateResearchSessionDto } from "@/data/redux";
 import { setCreateResearchSessionDto } from "@/redux/slices/research/session";
+import { selectResearchPhasesByResearchActivityId } from "@/redux/slices/research/phase";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -57,6 +58,10 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   );
   const currentResearchActivityIndex = useAppSelector(
     selectCurrentResearchActivityIndex,
+  );
+
+  const researchPhasesById = useAppSelector((state) =>
+    selectResearchPhasesByResearchActivityId(state, entityId),
   );
 
   const usedOnDirectionButtonClick =
@@ -102,11 +107,11 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
       dispatch(
         setCreateResearchSessionDto({
           ...defaultCreateResearchSessionDto,
-          researchPhaseId: researchActivity.researchPhasesIds[0],
+          researchPhaseId: researchPhasesById[0]?.id,
         }),
       );
     }
-  }, [researchActivity, isCurrentView]);
+  }, [researchActivity, researchPhasesById, isCurrentView]);
 
   const onEditTagFunctionUsed = (type: "remove" | "add") => {
     dispatch(setCurrentActivityLogSubject("UPDATE"));

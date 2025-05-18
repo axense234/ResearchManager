@@ -1,5 +1,5 @@
 // React
-import { FC, useState } from "react";
+import { FC } from "react";
 // Interfaces
 import { EntityImagesProps } from "@/core/interfaces";
 // SCSS
@@ -22,10 +22,10 @@ const EntityImages: FC<EntityImagesProps> = ({
   darkMode,
   position,
   isCurrentView,
+  showImages,
+  setShowImages,
 }) => {
   const dispatch = useAppDispatch();
-
-  const [showImages, setShowImages] = useState<boolean>(false);
 
   const entityImages = useSelectEntityImages(
     specialEntity,
@@ -44,6 +44,7 @@ const EntityImages: FC<EntityImagesProps> = ({
         entityImages,
         entityName: specialEntity.name,
         showOverlay: true,
+        viewType,
       }),
     );
   };
@@ -58,6 +59,7 @@ const EntityImages: FC<EntityImagesProps> = ({
         darkMode={darkMode}
         showImages={showImages}
         setShowImages={setShowImages}
+        showSectionControl={entityImages.length > 0}
       />
       <EntityImage
         imagesSrc={entityImages.map((entityImage) => entityImage.src)}

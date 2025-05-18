@@ -68,7 +68,11 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
               onClickFunction={() =>
                 dispatch(
                   updateResearchSession({
-                    dto: { ...dtoUsed, currentStatusType: "RESUMED" },
+                    dto: {
+                      ...dtoUsed,
+                      currentStatusType: "RESUMED",
+                      currentStatusDate: new Date(),
+                    },
                     researchSessionId: entityId,
                   }),
                 )
@@ -80,7 +84,15 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
               onClickFunction={() =>
                 dispatch(
                   updateResearchSession({
-                    dto: { ...dtoUsed, currentStatusType: "PAUSED" },
+                    dto: {
+                      ...dtoUsed,
+                      currentStatusType: "PAUSED",
+                      currentStatusDate: new Date(),
+                      researchPoints:
+                        dtoUsed?.researchPoints +
+                        (new Date().getMinutes() -
+                          new Date(dtoUsed?.currentStatusDate).getMinutes()),
+                    },
                     researchSessionId: entityId,
                   }),
                 )
@@ -92,7 +104,15 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
             onClickFunction={() =>
               dispatch(
                 updateResearchSession({
-                  dto: { ...dtoUsed, currentStatusType: "FINISHED" },
+                  dto: {
+                    ...dtoUsed,
+                    currentStatusType: "FINISHED",
+                    currentStatusDate: new Date(),
+                    researchPoints:
+                      dtoUsed?.researchPoints +
+                      (new Date().getMinutes() -
+                        new Date(dtoUsed?.currentStatusDate).getMinutes()),
+                  },
                   researchSessionId: entityId,
                 }),
               )

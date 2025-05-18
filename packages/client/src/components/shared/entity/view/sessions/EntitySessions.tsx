@@ -1,5 +1,5 @@
 // React
-import { FC, useState } from "react";
+import { FC } from "react";
 // Interfaces
 import { EntitySessionsProps } from "@/core/interfaces";
 // SCSS
@@ -7,14 +7,37 @@ import entitySessionsStyles from "@/scss/components/shared/entity/view/sessions/
 // Components
 import EntitySessionsTitle from "./EntitySessionsTitle";
 import EntitySessionsList from "./EntitySessionsList";
+// Redux
+import { useAppSelector } from "@/hooks";
+import {
+  selectResearchSessionsByResearchPhaseId,
+  selectResearchSessionsByResearchActivityId,
+} from "@/redux/slices/research/session";
 
 const EntitySessions: FC<EntitySessionsProps> = ({
   entity,
   entityType,
   darkMode,
   position,
+  showSessions,
+  setShowSessions,
 }) => {
-  const [showSessions, setShowSessions] = useState<boolean>(false);
+  const researchPhaseSessionsIds = useAppSelector((state) =>
+    selectResearchSessionsByResearchPhaseId(state, entity.id),
+  )
+    .filter((rs) => !rs.archived)
+    .map((rs) => rs.id);
+
+  const researchActivitySessionsIds = useAppSelector((state) =>
+    selectResearchSessionsByResearchActivityId(state, entity.id),
+  )
+    .filter((rs) => !rs.archived)
+    .map((rs) => rs.id);
+
+  const usedSessionsIds =
+    entityType === "researchPhase"
+      ? researchPhaseSessionsIds
+      : researchActivitySessionsIds;
 
   return (
     <section
@@ -26,10 +49,10 @@ const EntitySessions: FC<EntitySessionsProps> = ({
         darkMode={darkMode}
         showSessions={showSessions}
         setShowSessions={setShowSessions}
+        showSectionControl={usedSessionsIds.length > 0}
       />
       <EntitySessionsList
-        entity={entity}
-        entityType={entityType}
+        sessionsIds={usedSessionsIds}
         darkMode={darkMode}
         showSessions={showSessions}
       />

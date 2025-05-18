@@ -15,6 +15,8 @@ export interface TextFormControlProps {
 
   border?: string;
 
+  disabled?: boolean;
+
   placeholderContent?: string;
 
   flexDirection?: "column" | "row";

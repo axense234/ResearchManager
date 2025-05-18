@@ -5,8 +5,10 @@
   align-items: flex-start;
   position: relative;
   width: 100%;
-  height: 85rem;
+  height: 45rem;
   gap: 10rem;
+
+  transition: height 0.2s linear;
 }
 
 .entityViewContent {

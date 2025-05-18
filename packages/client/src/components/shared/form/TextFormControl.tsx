@@ -27,6 +27,7 @@ const TextFormControl: FC<TextFormControlProps> = ({
   placeholderContent,
   inputColorType = "dark",
   flexDirection = "row",
+  disabled = false,
 }) => {
   const labelColor =
     labelColorType === "dark" ? mainBlackColor : mainWhiteColor;
@@ -48,22 +49,26 @@ const TextFormControl: FC<TextFormControlProps> = ({
       >
         {labelContent}
       </label>
-      <input
-        type={type}
-        name={labelContent}
-        min={minInputSize}
-        max={maxInputSize}
-        minLength={minInputLength}
-        maxLength={maxInputLength}
-        value={entityProperty as string | number}
-        placeholder={placeholderContent}
-        onChange={onEntityPropertyValueChange}
-        style={{
-          height: inputHeight,
-          border,
-          backgroundColor: inputColor,
-        }}
-      />
+      {disabled ? (
+        <p>{`${entityProperty}`}</p>
+      ) : (
+        <input
+          type={type}
+          name={labelContent}
+          min={minInputSize}
+          max={maxInputSize}
+          minLength={minInputLength}
+          maxLength={maxInputLength}
+          value={entityProperty as string | number}
+          placeholder={placeholderContent}
+          onChange={onEntityPropertyValueChange}
+          style={{
+            height: inputHeight,
+            border,
+            backgroundColor: inputColor,
+          }}
+        />
+      )}
     </div>
   );
 };

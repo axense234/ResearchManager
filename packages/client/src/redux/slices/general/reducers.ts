@@ -131,6 +131,12 @@ export const generalSliceReducers = {
   ) {
     state.currentEntityImageOverlayCarouselId = action.payload;
   },
+  setCurrentEntityImageCarouselId(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<number>,
+  ) {
+    state.currentEntityImageCarouselId = action.payload;
+  },
   handleAuthCarouselStepDirection(
     state: GeneralSliceInitialStateType,
     action: PayloadAction<{ direction: "left" | "right" }>,
@@ -199,5 +205,17 @@ export const generalSliceReducers = {
     action: PayloadAction<ActivitySubject>,
   ) {
     state.currentActivityLogSubject = action.payload;
+  },
+  setSelectedImagesSrc(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<string[]>,
+  ) {
+    state.selectedImagesSrc = action.payload;
+  },
+  setChosenImageResearchLogId(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<string>,
+  ) {
+    state.chosenImageResearchLogId = action.payload;
   },
 };

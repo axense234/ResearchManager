@@ -10,11 +10,17 @@ import EntityImageOverlayOptions from "./EntityImageOverlayOptions";
 
 const EntityImageOverlayContent: FC<EntityImageOverlayContentProps> = ({
   imagesPayload,
+  optionsType,
+  onRemoveImageFunction,
 }) => {
   return (
     <div className={entityImageOverlayContentStyles.contentContainer}>
       <EntityImageOverlaySlider imagesPayload={imagesPayload} />
-      <EntityImageOverlayOptions />
+      <EntityImageOverlayOptions
+        optionsType={optionsType}
+        onRemoveImageFunction={onRemoveImageFunction}
+        imagesPayload={imagesPayload}
+      />
     </div>
   );
 };

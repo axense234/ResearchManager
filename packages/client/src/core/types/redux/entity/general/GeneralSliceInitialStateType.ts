@@ -54,4 +54,9 @@ export type GeneralSliceInitialStateType = {
 
   // Util
   currentActivityLogSubject: ActivitySubject;
+  chosenImageResearchLogId: string;
+
+  // Images
+  loadingUploadImageToCloudinary: LoadingStateType;
+  selectedImagesSrc: string[];
 };

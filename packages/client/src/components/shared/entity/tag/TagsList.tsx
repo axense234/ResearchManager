@@ -39,13 +39,15 @@ const TagsList: FC<TagsListProps> = ({
                 tagId={tagId}
                 key={tagId}
                 containerType={containerType}
-                onClickFunction={() =>
-                  onTagComponentClick(
-                    tagId,
-                    selectedTagsIds,
-                    onTagComponentClickFunction,
-                  )
-                }
+                onClickFunction={() => {
+                  if (containerType !== "view") {
+                    onTagComponentClick(
+                      tagId,
+                      selectedTagsIds,
+                      onTagComponentClickFunction,
+                    );
+                  }
+                }}
                 isTagSelected={selectedTagsIds.includes(tagId)}
                 componentSize={tagSize}
               />

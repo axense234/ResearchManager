@@ -92,7 +92,7 @@ setModalListener.startListening({
     }
 
     const modalMessagePending = `Trying to ${methodUsed} your ${entityUsed}.`;
-    const modalMessageFulfilled = `Successfully ${methodUsed + "d"} your ${entityUsed}.`;
+    const modalMessageFulfilled = `Successfully ${methodUsed.endsWith("d") ? methodUsed : methodUsed + "d"} your ${entityUsed}.`;
     const modalMessageRejected = `Could not ${methodUsed} your ${entityUsed}. Something went wrong.`;
 
     if (action.type.endsWith("pending")) {
@@ -126,8 +126,6 @@ setModalListener.startListening({
         const { message, errorFields } = handleFormErrorInputsAndModalMessage(
           errorData.message,
         );
-        console.log(message);
-        console.log(errorFields);
         errorFields.forEach((field) => dispatch(addErrorField(field)));
 
         dispatch(

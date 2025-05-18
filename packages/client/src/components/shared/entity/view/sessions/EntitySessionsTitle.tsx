@@ -14,6 +14,7 @@ const EntitySessionsTitle: FC<EntitySessionsTitleProps> = ({
   darkMode,
   showSessions,
   setShowSessions,
+  showSectionControl,
 }) => {
   const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
 
@@ -21,10 +22,12 @@ const EntitySessionsTitle: FC<EntitySessionsTitleProps> = ({
     <div className={entitySessionsTitleStyles.sessionsTitle}>
       <div className={entitySessionsTitleStyles.sessionsTitleContent}>
         <h6 style={{ color: textColor }}>{title}</h6>
-        <EntityViewSectionControl
-          showSectionContent={showSessions}
-          setShowSectionContent={setShowSessions}
-        />
+        {showSectionControl && (
+          <EntityViewSectionControl
+            showSectionContent={showSessions}
+            setShowSectionContent={setShowSessions}
+          />
+        )}
       </div>
       <hr style={{ backgroundColor: textColor }} />
     </div>

@@ -5,6 +5,6 @@ export interface TagsListProps {
   sourceTagsIds: string[];
   numberOfTagsShown: number;
   noTagsAvailableMessage: string;
-  containerType: EntityContainerType;
+  containerType: EntityContainerType | "view";
   tagSize?: "normal" | "small";
 }

@@ -12,9 +12,9 @@ const EntityGraphs: FC<EntityGraphsProps> = ({
   specialEntity,
   darkMode,
   position,
+  showGraph,
+  setShowGraph,
 }) => {
-  const [showGraph, setShowGraph] = useState<boolean>(false);
-
   return (
     <article
       className={`${entityGraphsStyles.entityGraphsContainer} ${position}`}

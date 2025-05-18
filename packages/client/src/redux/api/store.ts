@@ -14,6 +14,7 @@ import activityLogsSliceReducer from "../slices/activity/log/slice";
 import {
   addActivityLogWhenCreatingActivityDayListener,
   addDefaultResearchPhaseListener,
+  createResearchLogOnResearchSessionFinishListener,
   handleActivityLogsListener,
   setEntitiesStateFromUserPayloadListener,
   setModalListener,
@@ -38,6 +39,7 @@ const store = configureStore({
       addDefaultResearchPhaseListener.middleware,
       handleActivityLogsListener.middleware,
       addActivityLogWhenCreatingActivityDayListener.middleware,
+      createResearchLogOnResearchSessionFinishListener.middleware,
     ),
 });
 
