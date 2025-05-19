@@ -45,16 +45,24 @@ const DeleteEntityOverlayOptions: FC<DeleteEntityOverlayOptionsProps> = ({
         colorScheme="gray"
       />
       <FunctionalButton
-        content={archiveCountdown > 0 ? `${archiveCountdown}` : "Archive"}
-        disabled={archiveCountdown > 0}
+        content={
+          archiveCountdown > 0 && process.env.NODE_ENV === "production"
+            ? `${archiveCountdown}`
+            : "Archive"
+        }
+        disabled={archiveCountdown > 0 && process.env.NODE_ENV === "production"}
         onHoverContent={`Archive your ${entityLabel}`}
         onHoverContentDisabled={`Please wait to Archive your ${entityLabel}!`}
         onClickFunction={onArchiveFunction}
         colorScheme="brown"
       />
       <FunctionalButton
-        content={purgeCountdown > 0 ? `${purgeCountdown}` : "Purge"}
-        disabled={purgeCountdown > 0}
+        content={
+          purgeCountdown > 0 && process.env.NODE_ENV === "production"
+            ? `${purgeCountdown}`
+            : "Purge"
+        }
+        disabled={purgeCountdown > 0 && process.env.NODE_ENV === "production"}
         onHoverContent={`Permanently delete your ${entityLabel}`}
         onHoverContentDisabled={`Please wait to Permanently Delete your ${entityLabel}!`}
         onClickFunction={onPurgeFunction}

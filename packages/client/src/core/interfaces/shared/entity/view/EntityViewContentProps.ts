@@ -19,8 +19,10 @@ export interface EntityViewContentProps {
   showSessions: boolean;
   showImages: boolean;
   showGraph: boolean;
+  showLogs: boolean;
 
   setShowSessions: (show: boolean) => void;
   setShowImages: (show: boolean) => void;
   setShowGraph: (show: boolean) => void;
+  setShowLogs: (show: boolean) => void;
 }

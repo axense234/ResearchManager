@@ -38,9 +38,13 @@ import {
 } from "@/redux/slices/general/slice";
 // Helpers
 import { onEditTagFunction } from "@/helpers";
-import { defaultCreateResearchSessionDto } from "@/data/redux";
+import {
+  defaultCreateResearchLogDto,
+  defaultCreateResearchSessionDto,
+} from "@/data/redux";
 import { setCreateResearchSessionDto } from "@/redux/slices/research/session";
 import { selectResearchPhasesByResearchActivityId } from "@/redux/slices/research/phase";
+import { setCreateResearchLogDto } from "@/redux/slices/research/log";
 
 const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -80,8 +84,6 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
     entityId,
   ) as ResearchActivityRedux;
 
-  researchActivity.researchPhasesIds[0];
-
   const numberOfResearchActivities = useAppSelector((state) =>
     selectNumberOfResearchActivitiesCustom(state, {
       sorted: false,
@@ -107,6 +109,12 @@ const ResearchActivityInterface: FC<EntityContainerInterfaceProps> = ({
       dispatch(
         setCreateResearchSessionDto({
           ...defaultCreateResearchSessionDto,
+          researchPhaseId: researchPhasesById[0]?.id,
+        }),
+      );
+      dispatch(
+        setCreateResearchLogDto({
+          ...defaultCreateResearchLogDto,
           researchPhaseId: researchPhasesById[0]?.id,
         }),
       );

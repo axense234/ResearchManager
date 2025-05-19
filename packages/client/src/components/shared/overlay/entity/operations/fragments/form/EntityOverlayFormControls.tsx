@@ -44,7 +44,14 @@ const EntityOverlayFormControls: FC<EntityOverlayFormControlsProps> = ({
         />
       );
     case "researchLog":
-      return <ResearchLogOverlayFormControls />;
+      return (
+        <ResearchLogOverlayFormControls
+          dto={dto}
+          entityType="researchLog"
+          method={method}
+          dtoUpdateFunction={dtoUpdateFunction}
+        />
+      );
     case "tag":
       return (
         <TagOverlayFormControls

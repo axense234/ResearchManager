@@ -4,6 +4,7 @@
   @include flexCenter(column);
   position: relative;
   align-items: flex-start;
+  align-self: flex-start;
   width: 100%;
   gap: 1rem;
   padding: 2rem;

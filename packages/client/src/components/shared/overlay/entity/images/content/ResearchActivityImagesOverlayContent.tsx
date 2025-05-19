@@ -15,10 +15,11 @@ const ResearchActivityImagesOverlayContent: FC<
   currentResearchPhasesImages,
   researchPhasesImages,
   showImageOverlay,
+  viewType,
   setShowImageOverlay,
   onImageClickFunction,
   onSectionTitleClickFunction,
-  viewType,
+  onRemoveImageFunction,
 }) => {
   return (
     <div className={overlayContentStyles.contentContainer}>
@@ -27,17 +28,18 @@ const ResearchActivityImagesOverlayContent: FC<
         showOverlay={showImageOverlay}
         closeOverlayFunction={() => setShowImageOverlay(false)}
         imagesPayload={currentResearchPhasesImages}
+        onRemoveImageFunction={onRemoveImageFunction}
       />
       <EntityImagesOverlay specialEntityType="researchPhase" />
       <ul className={overlayContentStyles.contentContainerItems}>
-        {researchPhasesImages.map((phaseImages) => {
+        {researchPhasesImages.map((phaseImages, index) => {
           return (
-            <li key={phaseImages.entityName}>
+            <li key={index}>
               <EntityImagesOverlayItem
                 itemEntityType="researchPhase"
-                itemName={phaseImages.entityName}
-                itemImages={phaseImages.imagesSrc}
-                itemId={phaseImages.entityId}
+                itemTitle={phaseImages.parentLabel}
+                parentId={phaseImages.parentId}
+                specialImages={phaseImages.specialImages}
                 onItemClickFunction={onSectionTitleClickFunction}
                 onImageClickFunction={onImageClickFunction}
               />

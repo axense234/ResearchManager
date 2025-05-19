@@ -1,34 +1,54 @@
 // Types
-import {
-  EntityContainerType,
-  EntityImagePayloadType,
-  ResearchLogRedux,
-  ResearchPhaseRedux,
-} from "@/core/types";
+import { EntityContainerType, EntityImagePayloadType } from "@/core/types";
 // Hooks
-import { useSelectEntitiesByIds } from "./useSelectEntitiesByIds";
+import { useAppSelector } from "../redux";
+import {
+  selectResearchLogsByResearchPhaseId,
+  selectResearchLogsExamples,
+} from "@/redux/slices/research/log";
+import {
+  selectResearchPhaseById,
+  selectResearchPhasesExamples,
+} from "@/redux/slices/research/phase";
 
 export const useSelectResearchPhaseImages = (
-  researchPhase: ResearchPhaseRedux,
+  researchPhaseId: string,
   viewType: EntityContainerType,
 ): EntityImagePayloadType[] => {
-  const researchPhaseLogs = useSelectEntitiesByIds(
-    viewType,
-    "researchLog",
-    researchPhase?.researchLogsIds || [],
-  ) as ResearchLogRedux[];
+  const researchLogsExamples = useAppSelector(
+    selectResearchLogsExamples,
+  ).filter(
+    (researchLogExample) =>
+      researchLogExample.researchPhaseId === researchPhaseId,
+  );
+  const researchLogs = useAppSelector((state) =>
+    selectResearchLogsByResearchPhaseId(state, researchPhaseId),
+  );
 
-  const researchPhaseLogsImages = researchPhaseLogs
+  const usedResearchLogs =
+    viewType === "example" ? researchLogsExamples : researchLogs;
+
+  const researchPhaseExample = useAppSelector(
+    selectResearchPhasesExamples,
+  ).find((example) => example.id === researchPhaseId);
+  const researchPhase = useAppSelector((state) =>
+    selectResearchPhaseById(state, researchPhaseId),
+  );
+
+  const usedResearchPhase =
+    viewType === "example" ? researchPhaseExample : researchPhase;
+
+  const researchPhaseLogsImages = usedResearchLogs
     .map((log) => {
-      return log.imagesSrc.map((image) => {
+      return log?.imagesSrc.map((image) => {
         return {
           src: image,
           researchLogId: log.id,
           researchLogName: log.name,
-          researchPhaseId: researchPhase.id,
-          researchPhaseName: researchPhase.name,
-        };
-      }) as EntityImagePayloadType[];
+          researchPhaseId: researchPhaseId,
+          researchPhaseName: usedResearchPhase?.name,
+        } as EntityImagePayloadType;
+      });
     })
     .flat();
 

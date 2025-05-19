@@ -27,6 +27,7 @@ const EntityView: FC<EntityViewProps> = ({
   const [showSessions, setShowSessions] = useState<boolean>(false);
   const [showImages, setShowImages] = useState<boolean>(false);
   const [showGraph, setShowGraph] = useState<boolean>(false);
+  const [showLogs, setShowLogs] = useState<boolean>(false);
 
   const { currentEntityIndex, currentEntityId } = useGetCurrentEntityIdAndIndex(
     entityType,
@@ -40,6 +41,7 @@ const EntityView: FC<EntityViewProps> = ({
     showSessions,
     showImages,
     showGraph,
+    showLogs,
   );
 
   if (isLoading) {
@@ -81,9 +83,11 @@ const EntityView: FC<EntityViewProps> = ({
             showSessions={showSessions}
             showImages={showImages}
             showGraph={showGraph}
+            showLogs={showLogs}
             setShowSessions={setShowSessions}
             setShowImages={setShowImages}
             setShowGraph={setShowGraph}
+            setShowLogs={setShowLogs}
           />
         );
       })}

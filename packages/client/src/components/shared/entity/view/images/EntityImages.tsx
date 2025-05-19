@@ -28,7 +28,7 @@ const EntityImages: FC<EntityImagesProps> = ({
   const dispatch = useAppDispatch();
 
   const entityImages = useSelectEntityImages(
-    specialEntity,
+    specialEntity?.id,
     specialEntityType,
     viewType,
   );
@@ -41,10 +41,10 @@ const EntityImages: FC<EntityImagesProps> = ({
   const onEntityImageClickFunction = () => {
     dispatch(
       usedEntityImagesOverlayUpdater({
-        entityImages,
-        entityName: specialEntity.name,
         showOverlay: true,
+        entityImages,
         viewType,
+        parentLabel: specialEntity?.name,
       }),
     );
   };
@@ -63,7 +63,7 @@ const EntityImages: FC<EntityImagesProps> = ({
       />
       <EntityImage
         imagesSrc={entityImages.map((entityImage) => entityImage.src)}
-        onClickFunction={() => onEntityImageClickFunction()}
+        onClickFunction={onEntityImageClickFunction}
         darkMode={darkMode}
         isCurrentView={isCurrentView}
         showImages={showImages}

@@ -14,6 +14,8 @@ export interface EntityOverlayImagesProps {
     | UpdateResearchSessionDto
     | UpdateResearchLogDto;
 
+  entityId: string;
+
   showImageOverlay: boolean;
   setShowImageOverlay: (show: boolean) => void;
 

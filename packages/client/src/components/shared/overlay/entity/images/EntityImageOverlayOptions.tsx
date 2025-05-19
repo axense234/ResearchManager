@@ -30,7 +30,8 @@ const EntityImageOverlayOptions: FC<EntityImageOverlayOptionsProps> = ({
           colorScheme="red"
           onClickFunction={() => {
             onRemoveImageFunction(
-              imagesPayload?.imagesSrc[currentEntityImageOverlayIndex - 1],
+              imagesPayload?.specialImages?.[currentEntityImageOverlayIndex - 1]
+                ?.src,
             );
           }}
         />

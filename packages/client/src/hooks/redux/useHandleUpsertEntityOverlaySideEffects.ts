@@ -12,6 +12,7 @@ import {
 import { setCreateResearchActivityDto } from "@/redux/slices/research/activity";
 import {
   defaultCreateResearchActivityDto,
+  defaultCreateResearchLogDto,
   defaultCreateResearchPhaseDto,
   defaultCreateResearchSessionDto,
   defaultCreateTagDto,
@@ -19,6 +20,7 @@ import {
 import { setCreateTagDto } from "@/redux/slices/tag";
 import { setCreateResearchPhaseDto } from "@/redux/slices/research/phase";
 import { setCreateResearchSessionDto } from "@/redux/slices/research/session";
+import { setCreateResearchLogDto } from "@/redux/slices/research/log";
 
 const setCreateEntityDtos = {
   researchActivity: () =>
@@ -27,6 +29,8 @@ const setCreateEntityDtos = {
     setCreateResearchPhaseDto({ ...defaultCreateResearchPhaseDto }),
   researchSession: () =>
     setCreateResearchSessionDto({ ...defaultCreateResearchSessionDto }),
+  researchLog: () =>
+    setCreateResearchLogDto({ ...defaultCreateResearchLogDto }),
   tag: () => setCreateTagDto({ ...defaultCreateTagDto }),
 };
 

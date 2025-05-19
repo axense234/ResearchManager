@@ -6,7 +6,7 @@ import {
 
 export type EntityImagesOverlayType = {
   showOverlay: boolean;
-  entityName: string;
-  entityImages: EntityImagePayloadType[];
   viewType: EntityContainerType;
+  entityImages: EntityImagePayloadType[];
+  parentLabel: string;
 };

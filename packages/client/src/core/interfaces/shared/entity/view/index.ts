@@ -1,6 +1,7 @@
 export * from "./graphs";
 export * from "./images";
 export * from "./sessions";
+export * from "./logs";
 export * from "./EntityViewProps";
 export * from "./EntityDetailsProps";
 export * from "./EntityViewSettingProps";

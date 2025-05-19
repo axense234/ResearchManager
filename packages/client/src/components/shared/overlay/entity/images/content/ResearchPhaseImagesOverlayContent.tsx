@@ -17,7 +17,9 @@ const ResearchPhaseImagesOverlayContent: FC<
   setShowImageOverlay,
   onImageClickFunction,
   viewType,
+  onRemoveImageFunction,
 }) => {
+  console.log(currentResearchLogsImages);
   return (
     <div className={overlayContentStyles.contentContainer}>
       <EntityImageOverlay
@@ -25,17 +27,19 @@ const ResearchPhaseImagesOverlayContent: FC<
         showOverlay={showImageOverlay}
         closeOverlayFunction={() => setShowImageOverlay(false)}
         imagesPayload={currentResearchLogsImages}
+        onRemoveImageFunction={onRemoveImageFunction}
       />
       <ul className={overlayContentStyles.contentContainerItems}>
-        {researchLogsImages.map((logImages) => {
+        {researchLogsImages.map((logImages, index) => {
           return (
-            <li key={logImages.entityName}>
+            <li key={index}>
               <EntityImagesOverlayItem
                 itemEntityType="researchLog"
-                itemName={logImages.entityName}
-                itemImages={logImages.imagesSrc}
-                itemId={logImages.entityId}
+                itemTitle={logImages.parentLabel}
+                parentId={logImages.parentId}
+                specialImages={logImages.specialImages}
                 onImageClickFunction={onImageClickFunction}
+                onItemClickFunction={() => {}}
               />
             </li>
           );

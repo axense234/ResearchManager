@@ -53,16 +53,16 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
 
   researchActivityImagesOverlay: {
     showOverlay: false,
-    entityName: "Default RA Name",
     entityImages: [],
     viewType: "example",
+    parentLabel: "",
   },
 
   researchPhaseImagesOverlay: {
     showOverlay: false,
-    entityName: "Default RP Name",
     entityImages: [],
     viewType: "example",
+    parentLabel: "",
   },
 
   // Modals

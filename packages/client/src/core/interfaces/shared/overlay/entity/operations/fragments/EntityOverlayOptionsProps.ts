@@ -10,5 +10,5 @@ export interface EntityOverlayOptionsProps {
   entityId: string;
   type: "view" | "upsert";
   dtoUsed: UpdateResearchSessionDto;
-  currentStatusType: ResearchSessionStatusType;
+  currentStatusType?: ResearchSessionStatusType;
 }

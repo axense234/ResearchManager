@@ -25,6 +25,7 @@ const FunctionalButton: FC<FunctionalButtonProps> = ({
   onHoverContentDisabled,
   colorScheme = "green",
   size = "medium",
+  alignment = "center",
 }) => {
   let colorSchemeShown = createGreenColor;
   switch (colorScheme) {
@@ -73,6 +74,7 @@ const FunctionalButton: FC<FunctionalButtonProps> = ({
         color: colorSchemeShown,
         fontSize: buttonFontSize,
         minWidth: buttonMinWidth,
+        alignSelf: alignment,
       }}
     >
       {content}

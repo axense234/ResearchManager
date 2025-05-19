@@ -1,5 +1,5 @@
 // React
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 // Interfaces
 import { EntityImagesOverlayProps } from "@/core/interfaces";
 // SCSS
@@ -12,6 +12,7 @@ import EntityImagesOverlayContent from "./content/EntityImagesOverlayContent";
 import EntityImagesOverlayTitle from "./EntityImagesOverlayTitle";
 // Redux
 import {
+  selectChosenImageResearchLogId,
   selectResearchActivityImagesOverlay,
   selectResearchPhaseImagesOverlay,
 } from "@/redux/slices/general";
@@ -19,6 +20,10 @@ import {
   setResearchActivityImagesOverlay,
   setResearchPhaseImagesOverlay,
 } from "@/redux/slices/general/slice";
+import {
+  selectResearchLogById,
+  updateResearchLog,
+} from "@/redux/slices/research/log";
 
 const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
   specialEntityType,
@@ -26,11 +31,21 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
 
+  const [showImageOverlay, setShowImageOverlay] = useState<boolean>(false);
+
   const researchActivityImagesOverlay = useAppSelector(
     selectResearchActivityImagesOverlay,
   );
   const researchPhaseImagesOverlay = useAppSelector(
     selectResearchPhaseImagesOverlay,
+  );
+
+  const chosenImageResearchLogId = useAppSelector(
+    selectChosenImageResearchLogId,
+  );
+
+  const chosenImageResearchLog = useAppSelector((state) =>
+    selectResearchLogById(state, chosenImageResearchLogId),
   );
 
   const usedImagesOverlay =
@@ -64,11 +79,34 @@ const EntityImagesOverlay: FC<EntityImagesOverlayProps> = ({
         size="large"
       />
       <div className={entityImagesOverlayStyles.entityImagesOverlayContent}>
-        <EntityImagesOverlayTitle entityName={usedImagesOverlay.entityName} />
+        <EntityImagesOverlayTitle entityName={usedImagesOverlay.parentLabel} />
         <EntityImagesOverlayContent
           specialEntityType={specialEntityType}
           entityImages={usedImagesOverlay.entityImages || []}
           viewType={usedImagesOverlay.viewType}
+          showImageOverlay={showImageOverlay}
+          setShowImageOverlay={setShowImageOverlay}
+          onRemoveImageFunction={(givenImageSrc: string) => {
+            dispatch(
+              updateResearchLog({
+                dto: {
+                  imagesSrc: chosenImageResearchLog?.imagesSrc?.filter(
+                    (imageSrc) => imageSrc !== givenImageSrc,
+                  ),
+                },
+                researchLogId: chosenImageResearchLogId,
+              }),
+            );
+            setShowImageOverlay(false);
+            dispatch(
+              usedEntityImagesOverlayUpdater({
+                ...usedImagesOverlay,
+                entityImages: usedImagesOverlay?.entityImages?.filter(
+                  (entityImage) => entityImage.src !== givenImageSrc,
+                ),
+              }),
+            );
+          }}
         />
       </div>
     </div>

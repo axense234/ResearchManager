@@ -19,6 +19,8 @@ export const {
   updateCreateResearchLogDto,
   updateLoadingResearchLogState,
   setResearchLogs,
+  updateUpdateResearchLogDto,
+  setCreateResearchLogDto,
 } = researchLogsSlice.actions;
 
 export default researchLogsSlice.reducer;

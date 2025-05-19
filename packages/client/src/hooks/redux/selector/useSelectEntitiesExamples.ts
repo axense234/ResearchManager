@@ -4,10 +4,12 @@ import { EntityType } from "@researchmanager/shared/types";
 // Redux
 import { selectResearchActivitiesExamples } from "@/redux/slices/research/activity";
 import { useAppSelector } from "../redux";
+import { selectResearchLogsExamples } from "@/redux/slices/research/log";
 
 const selectors = {
   researchActivity: selectResearchActivitiesExamples,
   researchPhase: selectResearchActivitiesExamples,
+  researchLog: selectResearchLogsExamples,
 };
 
 export const useSelectEntitiesExamples = (

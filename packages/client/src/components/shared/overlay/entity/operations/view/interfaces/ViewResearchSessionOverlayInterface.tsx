@@ -72,6 +72,7 @@ const ViewResearchSessionOverlayInterface: FC = () => {
         <hr />
         <EntityOverlayImages
           type="view"
+          entityId={viewEntityOverlay.entityId}
           dto={researchSession}
           showImageOverlay={showImageOverlay}
           setShowImageOverlay={setShowImageOverlay}

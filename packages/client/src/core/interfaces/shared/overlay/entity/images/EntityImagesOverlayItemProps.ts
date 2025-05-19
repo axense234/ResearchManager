@@ -1,8 +1,13 @@
 export interface EntityImagesOverlayItemProps {
-  itemName: string;
-  itemId: string;
-  itemImages: string[];
+  itemTitle: string;
+  parentId: string;
+  specialImages: { src: string; logId: string }[];
   itemEntityType: "researchPhase" | "researchLog";
+
   onItemClickFunction?: (entityName: string) => void;
-  onImageClickFunction: (parentName: string, index: number) => void;
+  onImageClickFunction: (
+    logId: string,
+    parentId: string,
+    index: number,
+  ) => void;
 }

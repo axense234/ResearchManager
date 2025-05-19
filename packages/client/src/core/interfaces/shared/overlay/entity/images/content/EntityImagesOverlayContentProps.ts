@@ -6,4 +6,6 @@ export interface EntityImagesOverlayContentProps {
   entityImages: EntityImagePayloadType[];
   onRemoveImageFunction?: (imageSrc: string) => void;
   viewType: EntityContainerType;
+  showImageOverlay: boolean;
+  setShowImageOverlay: (show: boolean) => void;
 }

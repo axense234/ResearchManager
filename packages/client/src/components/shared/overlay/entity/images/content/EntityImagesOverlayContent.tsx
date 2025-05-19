@@ -6,7 +6,7 @@ import { EntityImagesOverlayContentProps } from "@/core/interfaces";
 import ResearchActivityImagesOverlayContent from "./ResearchActivityImagesOverlayContent";
 import ResearchPhaseImagesOverlayContent from "./ResearchPhaseImagesOverlayContent";
 // Helpers
-import { organizeEntityImagesByEntityNames } from "@/helpers";
+import { organizeEntityImagesByEntityIds } from "@/helpers";
 // Redux
 import { useAppDispatch } from "@/hooks";
 import {
@@ -19,61 +19,44 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
   specialEntityType,
   entityImages,
   viewType,
+  showImageOverlay,
+  setShowImageOverlay,
+  onRemoveImageFunction,
 }) => {
   const dispatch = useAppDispatch();
 
-  const [showImageOverlay, setShowImageOverlay] = useState<boolean>(false);
+  const [currentResearchLogId, setCurrentResearchLogId] = useState<string>("");
+  const [currentResearchPhaseId, setCurrentResearchPhaseId] =
+    useState<string>("");
 
-  const [currentResearchLogName, setCurrentResearchLogName] =
-    useState<string>("Default Name");
-
-  const [currentResearchPhaseName, setCurrentResearchPhaseName] =
-    useState<string>("Default Name");
-
-  const entityImagesLogsNames =
-    new Set(
-      entityImages.map((entityImage) => {
-        return entityImage.researchLogName;
-      }),
-    ) || new Set([]);
-
-  const entityImagesLogsImages =
-    organizeEntityImagesByEntityNames(
-      entityImages,
-      entityImagesLogsNames || new Set([]),
-      "researchLog",
-    ) || [];
-
-  const entityImagesResearchPhasesNames =
-    new Set(
-      entityImages.map((entityImage) => {
-        return entityImage.researchPhaseName;
-      }),
-    ) || new Set([]);
-
-  const entityImagesResearchPhasesImages =
-    organizeEntityImagesByEntityNames(
-      entityImages,
-      entityImagesResearchPhasesNames || new Set([]),
-      "researchPhase",
-    ) || [];
-
-  const currentResearchLogImages = entityImagesLogsImages.find(
-    (logsImages) => logsImages.entityName === currentResearchLogName,
+  const researchPhaseImagesOverlayImages = organizeEntityImagesByEntityIds(
+    entityImages || [],
+    "researchLog",
   );
-  const currentResearchPhaseImages = entityImagesResearchPhasesImages.find(
-    (phasesImages) => phasesImages.entityName === currentResearchPhaseName,
+  const researchActivityImagesOverlayImages = organizeEntityImagesByEntityIds(
+    entityImages || [],
+    "researchPhase",
   );
 
-  const onResearchPhaseItemClickFunction = (entityName: string) => {
+  const currentResearchPhaseImagesOverlayImages =
+    researchPhaseImagesOverlayImages.find(
+      (logImages) => logImages.parentId === currentResearchLogId,
+    );
+
+  const currentResearchActivityImagesOverlayImages =
+    researchActivityImagesOverlayImages.find(
+      (phaseImages) => phaseImages.parentId === currentResearchPhaseId,
+    );
+
+  const onResearchPhaseItemClickFunction = (researchPhaseName: string) => {
     dispatch(
       setResearchPhaseImagesOverlay({
         showOverlay: true,
-        entityName,
-        entityImages: entityImages.filter(
-          (entityImage) => entityImage.researchPhaseName === entityName,
-        ),
         viewType,
+        parentLabel: researchPhaseName,
+        entityImages: entityImages.filter(
+          (entityImage) => entityImage.researchPhaseName === researchPhaseName,
+        ),
       }),
     );
   };
@@ -81,30 +64,42 @@ const EntityImagesOverlayContent: FC<EntityImagesOverlayContentProps> = ({
   if (specialEntityType === "researchPhase") {
     return (
       <ResearchPhaseImagesOverlayContent
-        currentResearchLogsImages={currentResearchLogImages}
-        researchLogsImages={entityImagesLogsImages}
+        currentResearchLogsImages={currentResearchPhaseImagesOverlayImages}
+        researchLogsImages={researchPhaseImagesOverlayImages}
         showImageOverlay={showImageOverlay}
+        viewType={viewType}
+        onRemoveImageFunction={onRemoveImageFunction}
         setShowImageOverlay={setShowImageOverlay}
-        onImageClickFunction={(parentName: string, index: number) => {
-          setCurrentResearchLogName(parentName);
+        onImageClickFunction={(
+          logId: string,
+          parentId: string,
+          index: number,
+        ) => {
           setShowImageOverlay(true);
+          setCurrentResearchLogId(parentId);
+          dispatch(setChosenImageResearchLogId(logId));
           dispatch(setCurrentEntityImageOverlayCarouselId(index));
         }}
-        viewType={viewType}
       />
     );
   } else if (specialEntityType === "researchActivity") {
     return (
       <ResearchActivityImagesOverlayContent
-        currentResearchPhasesImages={currentResearchPhaseImages}
-        researchPhasesImages={entityImagesResearchPhasesImages}
+        currentResearchPhasesImages={currentResearchActivityImagesOverlayImages}
+        researchPhasesImages={researchActivityImagesOverlayImages}
         showImageOverlay={showImageOverlay}
+        viewType={viewType}
         setShowImageOverlay={setShowImageOverlay}
         onSectionTitleClickFunction={onResearchPhaseItemClickFunction}
-        viewType={viewType}
-        onImageClickFunction={(parentName: string, index: number) => {
-          setCurrentResearchPhaseName(parentName);
+        onRemoveImageFunction={onRemoveImageFunction}
+        onImageClickFunction={(
+          logId: string,
+          parentId: string,
+          index: number,
+        ) => {
           setShowImageOverlay(true);
+          setCurrentResearchPhaseId(parentId);
+          dispatch(setChosenImageResearchLogId(logId));
           dispatch(setCurrentEntityImageOverlayCarouselId(index));
         }}
       />

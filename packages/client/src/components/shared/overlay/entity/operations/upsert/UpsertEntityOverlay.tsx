@@ -4,6 +4,7 @@ import { FC } from "react";
 import UpsertResearchActivityOverlayInterface from "./interfaces/UpsertResearchActivityOverlayInterface";
 import UpsertResearchPhaseOverlayInterface from "./interfaces/UpsertResearchPhaseOverlayInterface";
 import UpsertResearchSessionOverlayInterface from "./interfaces/UpsertResearchSessionOverlayInterface";
+import UpsertResearchLogOverlayInterface from "./interfaces/UpsertResearchLogOverlayInterface";
 // Redux
 import { useAppSelector } from "@/hooks";
 import { selectUpsertEntityOverlay } from "@/redux/slices/general";
@@ -19,7 +20,7 @@ const UpsertEntityOverlay: FC = () => {
     case "researchSession":
       return <UpsertResearchSessionOverlayInterface />;
     case "researchLog":
-      return null;
+      return <UpsertResearchLogOverlayInterface />;
     case "tag":
       throw new Error(
         "Entity Overlay should never allow the tag entity type since it is automatically placed in the layout.",

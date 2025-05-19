@@ -21,6 +21,8 @@ import {
   useCalculateEntityResearchPoints,
   useSelectEntity,
 } from "@/hooks";
+// Data
+import { mainWhiteColor } from "@/data/general";
 // Redux
 import {
   handleResearchPhaseCarouselStepDirection,
@@ -37,8 +39,12 @@ import {
   setDeleteEntityOverlay,
   setUpsertEntityOverlay,
 } from "@/redux/slices/general/slice";
-// Data
-import { mainWhiteColor } from "@/data/general";
+import { setCreateResearchSessionDto } from "@/redux/slices/research/session";
+import {
+  defaultCreateResearchLogDto,
+  defaultCreateResearchSessionDto,
+} from "@/data/redux";
+import { setCreateResearchLogDto } from "@/redux/slices/research/log";
 
 const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
   containerType,
@@ -92,6 +98,18 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
           tags: researchPhase.tagsIds,
           researchLogs: researchPhase.researchLogsIds,
           researchSessions: researchPhase.researchSessionsIds,
+        }),
+      );
+      dispatch(
+        setCreateResearchSessionDto({
+          ...defaultCreateResearchSessionDto,
+          researchPhaseId: researchPhase?.id,
+        }),
+      );
+      dispatch(
+        setCreateResearchLogDto({
+          ...defaultCreateResearchLogDto,
+          researchPhaseId: researchPhase?.id,
         }),
       );
     }
@@ -168,6 +186,15 @@ const ResearchPhaseInterface: FC<EntityContainerInterfaceProps> = ({
               }),
             )
           }
+          onEntityResearchFunction={() => {
+            dispatch(
+              setUpsertEntityOverlay({
+                entityType: "researchSession",
+                method: "create",
+                showOverlay: true,
+              }),
+            );
+          }}
         />
       </div>
     </EntityContainerInterfaceWrapper>

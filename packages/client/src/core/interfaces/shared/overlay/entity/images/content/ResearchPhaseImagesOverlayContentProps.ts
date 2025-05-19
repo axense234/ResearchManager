@@ -14,7 +14,11 @@ export interface ResearchPhaseImagesOverlayContentProps {
   showImageOverlay: boolean;
   setShowImageOverlay: Dispatch<SetStateAction<boolean>>;
 
-  onImageClickFunction: (parentName: string, index: number) => void;
+  onImageClickFunction: (
+    logId: string,
+    parentId: string,
+    index: number,
+  ) => void;
 
   onRemoveImageFunction?: (imageSrc: string) => void;
 }

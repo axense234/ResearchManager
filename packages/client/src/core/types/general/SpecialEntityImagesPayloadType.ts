@@ -1,5 +1,5 @@
 export type SpecialEntityImagesPayloadType = {
-  imagesSrc: string[];
-  entityName: string;
-  entityId: string;
+  specialImages: { src: string; logId: string }[];
+  parentId: string;
+  parentLabel: string;
 };

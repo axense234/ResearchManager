@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/hooks";
 import {
   closeViewEntityOverlay,
   setDeleteEntityOverlay,
+  setUpsertEntityOverlay,
   setViewEntityOverlay,
 } from "@/redux/slices/general/slice";
 import { updateResearchSession } from "@/redux/slices/research/session";
@@ -25,7 +26,6 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
   const dispatch = useAppDispatch();
   return (
     <div className={entityOverlayOptionsStyles.overlayOptionsContainer}>
-      {/* View/Edit */}
       {type === "upsert" ? (
         <EntityOverlayOption
           type="view"
@@ -43,7 +43,16 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
         currentStatusType !== "FINISHED" && (
           <EntityOverlayOption
             type="edit"
-            onClickFunction={() => dispatch(closeViewEntityOverlay())}
+            onClickFunction={() =>
+              dispatch(
+                setUpsertEntityOverlay({
+                  entityType: "researchLog",
+                  method: "update",
+                  showOverlay: true,
+                  entityId,
+                }),
+              )
+            }
           />
         )
       )}

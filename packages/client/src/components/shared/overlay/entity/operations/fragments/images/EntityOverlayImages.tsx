@@ -16,6 +16,7 @@ import { selectLoadingUploadImageToCloudinary } from "@/redux/slices/general";
 
 const EntityOverlayImages: FC<EntityOverlayImagesProps> = ({
   dto,
+  entityId,
   type,
   onAddImagesFunction,
   onRemoveImagesFunction,
@@ -41,9 +42,11 @@ const EntityOverlayImages: FC<EntityOverlayImagesProps> = ({
         showOverlay={showImageOverlay}
         closeOverlayFunction={() => setShowImageOverlay(false)}
         imagesPayload={{
-          entityId: dto?.researchPhaseId,
-          entityName: dto?.name,
-          imagesSrc: dto?.imagesSrc,
+          parentId: dto?.researchPhaseId,
+          parentLabel: dto?.name,
+          specialImages: dto?.imagesSrc?.map((imageSrc) => {
+            return { src: imageSrc, logId: entityId };
+          }),
         }}
         onRemoveImageFunction={onRemoveImagesFunction}
       />

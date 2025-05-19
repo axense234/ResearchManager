@@ -1,0 +1,29 @@
+@use "../../../../../abstracts" as *;
+
+.logContainer {
+  @include flexCenter(row);
+  width: 100%;
+  justify-content: flex-start;
+
+  gap: 0.5rem;
+
+  cursor: pointer;
+
+  padding: 0.5rem;
+  color: getColor("link-blue");
+  font-weight: 550;
+  font-size: getFontSize("button-heading");
+
+  transition: transform 0.2s ease-in;
+
+  > span {
+    &:nth-of-type(1) {
+      @include heading("h6", "phone", "black");
+      color: inherit;
+    }
+  }
+
+  &:hover {
+    transform: translateX(5%);
+  }
+}

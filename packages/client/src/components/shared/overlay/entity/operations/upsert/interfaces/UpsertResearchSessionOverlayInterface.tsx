@@ -239,6 +239,7 @@ const UpsertResearchSessionOverlayInterface: FC = () => {
           showImageOverlay={showImageOverlay}
           setShowImageOverlay={setShowImageOverlay}
           dto={dtoUsed}
+          entityId={upsertEntityOverlay.entityId}
           onAddImagesFunction={(images: string[]) =>
             onEditImageFunctionUsed("add", images)
           }

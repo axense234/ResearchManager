@@ -1,35 +1,58 @@
 // Types
-import {
-  EntityContainerType,
-  EntityImagePayloadType,
-  ResearchActivityRedux,
-  ResearchLogRedux,
-  ResearchPhaseRedux,
-} from "@/core/types";
+import { EntityContainerType, EntityImagePayloadType } from "@/core/types";
 // Hooks
-import { useSelectEntitiesByIds } from "./useSelectEntitiesByIds";
+import { useAppSelector } from "../redux";
+import {
+  selectResearchPhasesByResearchActivityId,
+  selectResearchPhasesExamples,
+} from "@/redux/slices/research/phase";
+import {
+  selectAllResearchLogs,
+  selectResearchLogsExamples,
+} from "@/redux/slices/research/log";
+import {
+  selectResearchActivityById,
+  selectResearchActivityExampleById,
+} from "@/redux/slices/research/activity";
 
 export const useSelectResearchActivityImages = (
-  researchActivity: ResearchActivityRedux,
+  researchActivityId: string,
   viewType: EntityContainerType,
 ): EntityImagePayloadType[] => {
-  const researchActivityPhases = useSelectEntitiesByIds(
-    viewType,
-    "researchPhase",
-    researchActivity.researchPhasesIds,
-  ) as ResearchPhaseRedux[];
+  const researchPhasesExamples = useAppSelector(
+    selectResearchPhasesExamples,
+  ).filter((example) => example.researchActivityId === researchActivityId);
+  const researchPhases = useAppSelector((state) =>
+    selectResearchPhasesByResearchActivityId(state, researchActivityId),
+  );
 
-  const researchPhasesLogsIds = researchActivityPhases
-    .map((phase) => phase.researchLogsIds)
-    .flat();
+  const usedResearchPhases =
+    viewType === "example" ? researchPhasesExamples : researchPhases;
+  const usedResearchPhasesIds = usedResearchPhases.map((rp) => rp.id);
 
-  const researchPhaseLogs = useSelectEntitiesByIds(
-    viewType,
-    "researchLog",
-    researchPhasesLogsIds || [],
-  ) as ResearchLogRedux[];
+  const researchLogsExamples = useAppSelector(
+    selectResearchLogsExamples,
+  ).filter((example) =>
+    usedResearchPhasesIds.includes(example?.researchPhaseId),
+  );
+  const researchLogs = useAppSelector(selectAllResearchLogs).filter((log) =>
+    usedResearchPhasesIds.includes(log.researchPhaseId),
+  );
 
-  const researchPhaseLogsImages = researchPhaseLogs
+  const usedResearchLogs =
+    viewType === "example" ? researchLogsExamples : researchLogs;
+
+  const researchActivityExample = useAppSelector((state) =>
+    selectResearchActivityExampleById(state, researchActivityId),
+  );
+  const researchActivity = useAppSelector((state) =>
+    selectResearchActivityById(state, researchActivityId),
+  );
+
+  const usedResearchActivity =
+    viewType === "example" ? researchActivityExample : researchActivity;
+
+  const researchPhaseLogsImages = usedResearchLogs
     .map((log) => {
       return log.imagesSrc.map((image) => {
         return {
@@ -37,11 +60,11 @@ export const useSelectResearchActivityImages = (
           researchLogId: log.id,
           researchLogName: log.name,
           researchPhaseId: log.researchPhaseId,
-          researchPhaseName: researchActivityPhases.find(
-            (actvityPhase) => actvityPhase.id === log.researchPhaseId,
+          researchPhaseName: usedResearchPhases?.find(
+            (researchPhase) => researchPhase.id === log.researchPhaseId,
           ).name,
-        };
-      }) as EntityImagePayloadType[];
+        } as EntityImagePayloadType;
+      });
     })
     .flat();
 

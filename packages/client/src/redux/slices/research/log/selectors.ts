@@ -3,6 +3,7 @@ import { State } from "@/redux/api/store";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 // Adapter
 import { researchLogsAdapter } from "./adapter";
+import { selectResearchPhasesByResearchActivityId } from "../phase";
 
 export const {
   selectAll: selectAllResearchLogs,
@@ -10,6 +11,41 @@ export const {
   selectIds: selectResearchLogsIds,
   selectTotal: selectNumberOfResearchLogs,
 } = researchLogsAdapter.getSelectors<State>((state) => state.researchLogs);
+
+export const selectResearchLogsByResearchPhaseId = createSelector(
+  [
+    selectAllResearchLogs,
+    (state: State) => state,
+    (_: State, researchPhaseId: string) => researchPhaseId,
+  ],
+  (researchLogs, state, researchPhaseId) => {
+    return researchLogs.filter(
+      (researchLog) => researchLog.researchPhaseId === researchPhaseId,
+    );
+  },
+);
+
+export const selectResearchLogsByResearchActivityId = createSelector(
+  [
+    selectAllResearchLogs,
+    (state: State) => state,
+    (_: State, researchActivityId: string) => researchActivityId,
+  ],
+  (researchLogs, state, researchActivityId) => {
+    const researchPhasesByResearchActivityId =
+      selectResearchPhasesByResearchActivityId(state, researchActivityId);
+
+    const researchPhasesIds = researchPhasesByResearchActivityId.map(
+      (rp) => rp.id,
+    );
+
+    const researchLogsToReturn = researchLogs.filter((researchLog) =>
+      researchPhasesIds.includes(researchLog.researchPhaseId),
+    );
+
+    return researchLogsToReturn;
+  },
+);
 
 export const selectResearchLogsByIds = createSelector(
   [
@@ -73,6 +109,9 @@ export const selectResearchLogsExamplesByIds = createSelector(
 // General
 export const selectCreateResearchLogDto = (state: State) =>
   state.researchLogs.createResearchLogDto;
+
+export const selectUpdateResearchLogDto = (state: State) =>
+  state.researchLogs.updateResearchLogDto;
 
 export const selectLoadingGetUserResearchLogs = (state: State) =>
   state.researchLogs.loadingGetUserResearchLogs;

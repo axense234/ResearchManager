@@ -1,10 +1,5 @@
 // Types
-import {
-  EntityImagePayloadType,
-  EntityViewType,
-  ResearchActivityRedux,
-  ResearchPhaseRedux,
-} from "@/core/types";
+import { EntityImagePayloadType, EntityViewType } from "@/core/types";
 // Redux
 import {
   useSelectResearchActivityImages,
@@ -12,24 +7,18 @@ import {
 } from "@/hooks";
 
 export const useSelectEntityImages = (
-  specialEntity: ResearchActivityRedux | ResearchPhaseRedux,
+  specialEntityId: string,
   specialEntityType: "researchActivity" | "researchPhase",
   viewType: EntityViewType,
 ): EntityImagePayloadType[] => {
-  const researchPhase = specialEntity as ResearchPhaseRedux;
-  const researchActivity = specialEntity as ResearchActivityRedux;
-
   let entityImages: EntityImagePayloadType[] = [];
 
   switch (specialEntityType) {
     case "researchPhase":
-      entityImages = useSelectResearchPhaseImages(researchPhase, viewType);
+      entityImages = useSelectResearchPhaseImages(specialEntityId, viewType);
       return entityImages;
     case "researchActivity":
-      entityImages = useSelectResearchActivityImages(
-        researchActivity,
-        viewType,
-      );
+      entityImages = useSelectResearchActivityImages(specialEntityId, viewType);
       return entityImages;
     default:
       throw new Error(

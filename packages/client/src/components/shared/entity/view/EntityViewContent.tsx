@@ -12,6 +12,7 @@ import EntitySessions from "./sessions/EntitySessions";
 import { ResearchActivityRedux, ResearchPhaseRedux } from "@/core/types";
 // Redux
 import { useSelectEntity } from "@/hooks";
+import EntityLogs from "./logs/EntityLogs";
 
 const EntityViewContent: FC<EntityViewContentProps> = ({
   viewType,
@@ -23,9 +24,11 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
   showSessions,
   showImages,
   showGraph,
+  showLogs,
   setShowSessions,
   setShowImages,
   setShowGraph,
+  setShowLogs,
 }) => {
   const entity = useSelectEntity(viewType, entityType, entityId) as
     | ResearchActivityRedux
@@ -41,16 +44,6 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         position={position}
         isCurrentView={isCurrentView}
       />
-      {entityType === "researchActivity" && viewType === "entity" && (
-        <EntitySessions
-          entity={entity}
-          entityType={entityType}
-          darkMode={darkMode}
-          position={position}
-          showSessions={showSessions}
-          setShowSessions={setShowSessions}
-        />
-      )}
       <EntityDetails
         specialEntity={entity}
         specialEntityType={entityType}
@@ -63,6 +56,27 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         setShowImages={setShowImages}
         setShowGraph={setShowGraph}
       />
+      {viewType === "entity" && (
+        <EntitySessions
+          entity={entity}
+          entityType={entityType}
+          darkMode={darkMode}
+          position={position}
+          showSessions={showSessions}
+          setShowSessions={setShowSessions}
+        />
+      )}
+
+      {viewType === "entity" && entityType === "researchPhase" && (
+        <EntityLogs
+          entity={entity}
+          entityType={entityType}
+          darkMode={darkMode}
+          position={position}
+          showLogs={showLogs}
+          setShowLogs={setShowLogs}
+        />
+      )}
     </div>
   );
 };

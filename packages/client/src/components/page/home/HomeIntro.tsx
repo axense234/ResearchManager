@@ -1,5 +1,4 @@
-"use client";
-// Interfaces
+// React
 import { FC } from "react";
 // SCSS
 import homeIntroStyles from "@/scss/components/page/home/HomeIntro.module.scss";

@@ -8,14 +8,16 @@ import {
 import { researchLogsAdapter } from "./adapter";
 // Mock Data
 import {
-  createResearchLogMockData,
   researchLogsMockData,
+  updateResearchLogMockData,
 } from "@researchmanager/shared/mock";
+import { defaultCreateResearchLogDto } from "@/data/redux";
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
 
 export const researchLogsSliceInitialState = {
-  createResearchLogDto: createResearchLogMockData[0],
+  createResearchLogDto: defaultCreateResearchLogDto,
+  updateResearchLogDto: { ...updateResearchLogMockData[0] },
   researchLogsExamples: researchLogsMockData.map((log) => {
     return transformEntityIntoEntityRedux(
       log,

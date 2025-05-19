@@ -8,43 +8,47 @@ import Image from "next/image";
 import entityImagesOverlayItemStyles from "@/scss/components/shared/overlay/entity/images/EntityImagesOverlayItem.module.scss";
 
 const EntityImagesOverlayItem: FC<EntityImagesOverlayItemProps> = ({
-  itemId,
-  itemName,
-  itemImages,
   itemEntityType,
+  specialImages,
+  itemTitle,
+  parentId,
   onItemClickFunction,
   onImageClickFunction,
 }) => {
   return (
     <div className={entityImagesOverlayItemStyles.itemContainer}>
       <h6
-        onClick={() => onItemClickFunction(itemName)}
+        onClick={() => onItemClickFunction(itemTitle)}
         style={{
           cursor: itemEntityType === "researchPhase" ? "pointer" : "initial",
         }}
         title={
-          itemEntityType === "researchPhase" ? `${itemName} Phase Images` : null
+          itemEntityType === "researchPhase"
+            ? `${itemTitle} Phase Images`
+            : null
         }
         aria-label={
-          itemEntityType === "researchPhase" ? `${itemName} Phase Images` : null
+          itemEntityType === "researchPhase"
+            ? `${itemTitle} Phase Images`
+            : null
         }
       >
-        {itemName}
+        {itemTitle}
       </h6>
       <ul className={entityImagesOverlayItemStyles.itemImages}>
-        {itemImages?.map((entityImage, index) => {
+        {specialImages?.map(({ src, logId }, index) => {
           return (
             <li
               key={index}
-              onClick={() => onImageClickFunction(itemName, index + 1)}
+              onClick={() => onImageClickFunction(logId, parentId, index + 1)}
             >
               <Image
                 width={256}
                 height={256}
-                alt={`${itemName} Image`}
-                title={`View ${itemName} Image`}
-                aria-label={`View ${itemName} Image`}
-                src={entityImage}
+                alt={`${itemTitle} Image`}
+                title={`View ${itemTitle} Image`}
+                aria-label={`View ${itemTitle} Image`}
+                src={src}
               />
             </li>
           );

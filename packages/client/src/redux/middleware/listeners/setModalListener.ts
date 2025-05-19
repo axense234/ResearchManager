@@ -19,8 +19,14 @@ import {
 } from "@/redux/slices/research/phase";
 import {
   createResearchSession,
+  deleteResearchSession,
   updateResearchSession,
 } from "@/redux/slices/research/session";
+import {
+  createResearchLog,
+  deleteResearchLog,
+  updateResearchLog,
+} from "@/redux/slices/research/log";
 
 export const setModalListener = createListenerMiddleware();
 
@@ -57,6 +63,19 @@ setModalListener.startListening({
     updateResearchSession.pending,
     updateResearchSession.fulfilled,
     updateResearchSession.rejected,
+    deleteResearchSession.pending,
+    deleteResearchSession.fulfilled,
+    deleteResearchSession.rejected,
+    // Research Log
+    createResearchLog.pending,
+    createResearchLog.fulfilled,
+    createResearchLog.rejected,
+    updateResearchLog.pending,
+    updateResearchLog.fulfilled,
+    updateResearchLog.rejected,
+    deleteResearchLog.pending,
+    deleteResearchLog.fulfilled,
+    deleteResearchLog.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
@@ -74,6 +93,8 @@ setModalListener.startListening({
       entityUsed = "Tag";
     } else if (action.type.includes("researchSessions")) {
       entityUsed = "Research Session";
+    } else if (action.type.includes("researchLogs")) {
+      entityUsed = "Research Log";
     }
 
     if (action.type.includes("create")) {

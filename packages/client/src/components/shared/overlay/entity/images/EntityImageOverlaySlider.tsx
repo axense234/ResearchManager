@@ -26,7 +26,7 @@ const EntityImageOverlaySlider: FC<EntityImageOverlaySliderProps> = ({
           dispatch(
             handleEntityImageOverlayCarouselStepDirection({
               direction: "left",
-              numberOfImages: imagesPayload.imagesSrc?.length,
+              numberOfImages: imagesPayload.specialImages?.length,
             }),
           )
         }
@@ -40,7 +40,7 @@ const EntityImageOverlaySlider: FC<EntityImageOverlaySliderProps> = ({
           dispatch(
             handleEntityImageOverlayCarouselStepDirection({
               direction: "right",
-              numberOfImages: imagesPayload.imagesSrc?.length,
+              numberOfImages: imagesPayload.specialImages?.length,
             }),
           )
         }

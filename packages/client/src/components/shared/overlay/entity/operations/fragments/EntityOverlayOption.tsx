@@ -18,7 +18,6 @@ import {
   cancelGrayColor,
   createGreenColor,
   deleteRedColor,
-  pauseGreenColor,
   viewPurpleColor,
 } from "@/data/general";
 

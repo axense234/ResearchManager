@@ -4,7 +4,7 @@ export * from "./transformEntitiesFromUserPayloadToEntitiesRedux";
 export * from "./handleCarouselStepDirection";
 export * from "./getResearchActivityExampleImages";
 export * from "./selectOnButtonClickFunction";
-export * from "./organizeEntityImagesByEntityName";
+export * from "./organizeEntityImagesByEntityIds";
 export * from "./calculateResearchLogRP";
 export * from "./transformAndSortSpecialEntityExamplesByRP";
 export * from "./onTagComponentClick";

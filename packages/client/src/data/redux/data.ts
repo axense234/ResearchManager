@@ -1,6 +1,7 @@
 // Types
 import {
   CreateResearchActivityDto,
+  CreateResearchLogDto,
   CreateResearchPhaseDto,
   CreateResearchSessionDto,
   CreateTagDto,
@@ -11,6 +12,7 @@ import { ActivityLogsDataType, UserRedux } from "@/core/types";
 // Mock Data
 import {
   createResearchActivityMockData,
+  createResearchLogMockData,
   createResearchPhaseMockData,
   createResearchSessionMockData,
   createTagMockData,
@@ -44,6 +46,12 @@ export const defaultCreateTagDto: CreateTagDto = {
 
 export const defaultCreateResearchSessionDto: CreateResearchSessionDto = {
   ...createResearchSessionMockData[0],
+  tags: [],
+  imagesSrc: [],
+};
+
+export const defaultCreateResearchLogDto: CreateResearchLogDto = {
+  ...createResearchLogMockData[0],
   tags: [],
   imagesSrc: [],
 };

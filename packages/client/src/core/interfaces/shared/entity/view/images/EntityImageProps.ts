@@ -1,5 +1,5 @@
 export interface EntityImageProps {
-  imagesSrc?: string[];
+  imagesSrc: string[];
   onClickFunction: () => void;
   darkMode: boolean;
   isCurrentView: boolean;

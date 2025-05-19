@@ -6,7 +6,10 @@ import {
   ResearchLogsSliceStateType,
 } from "@/core/types";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ActionType } from "@researchmanager/shared/types";
+import {
+  ActionType,
+  CreateResearchLogDto,
+} from "@researchmanager/shared/types";
 // Adapter
 import { researchLogsAdapter } from "./adapter";
 
@@ -49,6 +52,21 @@ export const researchLogsSliceReducers = {
       ...state.createResearchLogDto,
       [action.payload.key]: action.payload.value,
     };
+  },
+  updateUpdateResearchLogDto(
+    state: ResearchLogsSliceStateType,
+    action: PayloadAction<ObjectKeyValueType>,
+  ) {
+    state.updateResearchLogDto = {
+      ...state.updateResearchLogDto,
+      [action.payload.key]: action.payload.value,
+    };
+  },
+  setCreateResearchLogDto(
+    state: ResearchLogsSliceStateType,
+    action: PayloadAction<CreateResearchLogDto>,
+  ) {
+    state.createResearchLogDto = action.payload;
   },
   setResearchLogs(
     state: ResearchLogsSliceStateType,

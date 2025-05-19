@@ -21,24 +21,24 @@ const EntityImageOverlayImage: FC<EntityImageOverlayImageProps> = ({
 
   return (
     <div className={entityImageOverlayImageStyles.imagesContainer}>
-      {imagesPayload?.imagesSrc?.map((imagePayload, imagePayloadIndex) => {
+      {imagesPayload?.specialImages?.map((imagePayload, imagePayloadIndex) => {
         const position = determineContentPosition(
           imagePayloadIndex + 1,
           currentEntityImageOverlayIndex,
-          imagesPayload.imagesSrc.length,
+          imagesPayload.specialImages.length,
         );
 
         if (position === "not-needed") return null;
 
         return (
           <Image
-            alt={imagesPayload?.entityName}
-            title={imagesPayload?.entityName}
-            aria-label={imagesPayload?.entityName}
-            src={imagePayload}
+            alt={imagesPayload?.parentLabel}
+            title={imagesPayload?.parentLabel}
+            aria-label={imagesPayload?.parentLabel}
+            src={imagePayload.src}
             width={1520}
             height={780}
-            key={imagePayload}
+            key={imagePayload.src}
             className={position}
           />
         );
