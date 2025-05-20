@@ -4,9 +4,10 @@ import { applyDecorators, UseGuards } from '@nestjs/common';
 import { JwtGuard } from 'src/modules/entity/auth/guard';
 
 export const JwtAuth = (options?: { profileRoute?: boolean }) => {
-  if (process.env.NODE_ENV !== 'development' || options?.profileRoute) {
-    return applyDecorators(UseGuards(JwtGuard));
-  } else {
-    return applyDecorators();
-  }
+  const shouldSkipJwt =
+    process.env.NODE_ENV === 'development' || options?.profileRoute;
+
+  return shouldSkipJwt
+    ? applyDecorators()
+    : applyDecorators(UseGuards(JwtGuard));
 };
