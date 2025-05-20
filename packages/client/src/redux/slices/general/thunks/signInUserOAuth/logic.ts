@@ -6,8 +6,6 @@ import { SignInOAuthDto } from "@/core/types";
 import { signIn } from "next-auth/react";
 // Config
 import { baseSiteUrl } from "@/config";
-// i18
-import { routing } from "@/i18n/routing";
 
 export const signInUserOAuth = createAsyncThunk<
   "signup" | "signin" | unknown,
@@ -16,7 +14,7 @@ export const signInUserOAuth = createAsyncThunk<
   try {
     await signIn(provider, {
       redirect: true,
-      callbackUrl: `${baseSiteUrl}/${locale}${routing.pathnames["/home"][locale]}`,
+      callbackUrl: `${baseSiteUrl}/${locale}/home`,
     });
     localStorage.setItem("rm-user-prev-created-account", "true");
     return pageType;
