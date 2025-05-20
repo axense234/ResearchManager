@@ -17,7 +17,6 @@ export const getProfileJWT = createAsyncThunk<UserPayload | AxiosError>(
       const res = (
         await axiosInstance.get(`/users/profile`, {
           params: {
-            uniqueIdentifierType: "id",
             includeValues: "researchActivities, settings, activityFeed, tags",
             includeDepth: 4,
             chosenOptionType: "include",
