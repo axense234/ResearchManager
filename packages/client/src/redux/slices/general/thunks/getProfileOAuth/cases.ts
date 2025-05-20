@@ -52,13 +52,13 @@ export const getProfileOAuthFulfilled: ExtraReducerFuncType<
       type: "general",
     };
   } else {
+    state.loadingGetProfileOAuth = "REJECTED";
     state.generalModal = {
       isClosed: hasUserCreatedAccountBefore !== "true",
       isLoading: false,
       message: `Could not fetch your Account :(`,
       type: "general",
     };
-    state.loadingGetProfileOAuth = "REJECTED";
   }
 };
 

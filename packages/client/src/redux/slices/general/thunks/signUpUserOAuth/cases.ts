@@ -54,6 +54,8 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
       state.loadingSignUpUser = "REJECTED";
       state.loadingSignInUser = "SUCCEEDED";
 
+      console.log("hello");
+
       state.generalModal = {
         isClosed: false,
         message: `Successfully signed in your Account.`,

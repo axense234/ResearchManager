@@ -40,10 +40,11 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
 
-  const documentFactory = () =>
-    SwaggerModule.createDocument(app, config, { autoTagControllers: false });
-
-  SwaggerModule.setup('api', app, documentFactory);
+  if (process.env.NODE_ENV === 'development') {
+    const documentFactory = () =>
+      SwaggerModule.createDocument(app, config, { autoTagControllers: false });
+    SwaggerModule.setup('api', app, documentFactory);
+  }
 
   await app.listen(PORT);
 }
