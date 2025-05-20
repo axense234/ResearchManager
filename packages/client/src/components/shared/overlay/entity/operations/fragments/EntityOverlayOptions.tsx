@@ -10,6 +10,7 @@ import EntityOverlayOption from "./EntityOverlayOption";
 import { useAppDispatch } from "@/hooks";
 import {
   closeViewEntityOverlay,
+  setCurrentActivityLogSubject,
   setDeleteEntityOverlay,
   setUpsertEntityOverlay,
   setViewEntityOverlay,
@@ -74,7 +75,8 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
           {currentStatusType === "PAUSED" ? (
             <EntityOverlayOption
               type="resume"
-              onClickFunction={() =>
+              onClickFunction={() => {
+                dispatch(setCurrentActivityLogSubject("RESEARCH_RESUME"));
                 dispatch(
                   updateResearchSession({
                     dto: {
@@ -84,13 +86,14 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
                     },
                     researchSessionId: entityId,
                   }),
-                )
-              }
+                );
+              }}
             />
           ) : (
             <EntityOverlayOption
               type="pause"
-              onClickFunction={() =>
+              onClickFunction={() => {
+                dispatch(setCurrentActivityLogSubject("RESEARCH_PAUSE"));
                 dispatch(
                   updateResearchSession({
                     dto: {
@@ -104,13 +107,14 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
                     },
                     researchSessionId: entityId,
                   }),
-                )
-              }
+                );
+              }}
             />
           )}
           <EntityOverlayOption
             type="finish"
-            onClickFunction={() =>
+            onClickFunction={() => {
+              dispatch(setCurrentActivityLogSubject("RESEARCH_END"));
               dispatch(
                 updateResearchSession({
                   dto: {
@@ -124,8 +128,8 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
                   },
                   researchSessionId: entityId,
                 }),
-              )
-            }
+              );
+            }}
           />
         </>
       )}

@@ -25,6 +25,11 @@ import {
   deleteResearchPhase,
   updateResearchPhase,
 } from "@/redux/slices/research/phase";
+import {
+  createResearchSession,
+  deleteResearchSession,
+  updateResearchSession,
+} from "@/redux/slices/research/session";
 
 export const handleActivityLogsListener = createListenerMiddleware();
 
@@ -48,6 +53,13 @@ handleActivityLogsListener.startListening({
     createTag.pending,
     createTag.fulfilled,
     createTag.rejected,
+    // Research Session
+    updateResearchSession.pending,
+    updateResearchSession.fulfilled,
+    updateResearchSession.rejected,
+    deleteResearchSession.pending,
+    deleteResearchSession.fulfilled,
+    deleteResearchSession.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
