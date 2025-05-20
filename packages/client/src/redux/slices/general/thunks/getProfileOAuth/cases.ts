@@ -5,9 +5,9 @@ import {
   GeneralSliceInitialStateType,
   UserRedux,
 } from "@/core/types";
+import { UserPayload } from "@researchmanager/shared/types";
 // Helpers
 import { transformEntityIntoEntityRedux } from "@/helpers";
-import { UserPayload } from "@researchmanager/shared/types";
 
 export const getProfileOAuthPending: ExtraReducerFuncType<
   GeneralSliceInitialStateType
