@@ -2,7 +2,6 @@
 import axios from "axios";
 // Base Server URL
 import { baseServerUrl } from "@/config";
-import { MdToken } from "react-icons/md";
 
 export const axiosInstance = axios.create({
   baseURL: baseServerUrl,

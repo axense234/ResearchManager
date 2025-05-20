@@ -51,17 +51,15 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
     };
 
     if (errorData.error === "Forbidden") {
-      state.loadingSignUpUser = "REJECTED";
-      state.loadingSignInUser = "SUCCEEDED";
-
-      console.log("hello");
-
       state.generalModal = {
         isClosed: false,
         message: `Successfully signed in your Account.`,
         type: "general",
         isLoading: false,
       };
+      state.loadingSignUpUser = "REJECTED";
+
+      console.log("hello");
     } else {
       state.loadingSignUpUser = "REJECTED";
 
