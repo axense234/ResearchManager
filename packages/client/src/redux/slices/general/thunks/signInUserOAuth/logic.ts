@@ -16,7 +16,7 @@ export const signInUserOAuth = createAsyncThunk<
   try {
     await signIn(provider, {
       redirect: true,
-      callbackUrl: `${baseSiteUrl}/${locale}/${routing.pathnames["/home"][locale]}`,
+      callbackUrl: `${baseSiteUrl}/${locale}${routing.pathnames["/home"][locale]}`,
     });
     localStorage.setItem("rm-user-prev-created-account", "true");
     return pageType;
