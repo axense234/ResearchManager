@@ -81,6 +81,7 @@ export class GetUserService {
         additionalNotes,
       });
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }
