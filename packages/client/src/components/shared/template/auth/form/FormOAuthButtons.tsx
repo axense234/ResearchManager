@@ -1,4 +1,3 @@
-"use client";
 // Components
 import OAuthButton from "../../../general/OAuthButton";
 // Data

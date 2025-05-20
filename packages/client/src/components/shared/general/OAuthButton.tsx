@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { OAuthButtonProps } from "@/core/interfaces";
 // SCSS
 import oAuthButtonStyles from "@/scss/components/shared/general/OAuthButton.module.scss";
