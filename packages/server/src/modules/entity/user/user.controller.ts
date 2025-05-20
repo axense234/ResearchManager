@@ -73,6 +73,7 @@ export class UserController {
     @Param('uniqueIdentifier') uniqueIdentifier: string,
     @Req() req: Request,
   ) {
+    console.log(req);
     return this.userService.getUser(queryParams, uniqueIdentifier, req.url);
   }
 
