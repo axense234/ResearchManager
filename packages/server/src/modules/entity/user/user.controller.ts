@@ -62,18 +62,17 @@ export class UserController {
     return this.userService.getProfile(userId, queryParams, req.url);
   }
 
-  @JwtAuth({ alwaysSkipAuthentication: true })
-  @SwaggerAuth({ alwaysSkipAuthentication: true })
   @SwaggerHead('user', 'GET SINGLE')
   @SwaggerResponses('user', 'GET SINGLE')
   @SwaggerPathParams('user', 'GET SINGLE')
+  @JwtAuth({ alwaysSkipAuthentication: true })
+  @SwaggerAuth({ alwaysSkipAuthentication: true })
   @Get(':uniqueIdentifier')
   getUser(
     @Query() queryParams: GetUserQueryParams,
     @Param('uniqueIdentifier') uniqueIdentifier: string,
     @Req() req: Request,
   ) {
-    console.log(req);
     return this.userService.getUser(queryParams, uniqueIdentifier, req.url);
   }
 

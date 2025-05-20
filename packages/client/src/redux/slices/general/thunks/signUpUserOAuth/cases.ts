@@ -58,6 +58,7 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
         isLoading: false,
       };
       state.loadingSignUpUser = "REJECTED";
+      state.loadingSignInUser = "SUCCEEDED";
 
       console.log("hello");
     } else {
