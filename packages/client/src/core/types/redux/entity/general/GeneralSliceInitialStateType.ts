@@ -9,6 +9,7 @@ import { UpsertTagOverlayType } from "./UpsertTagOverlayType";
 import { ActivitySubject } from "@prisma/client";
 import { UpsertEntityOverlayType } from "./UpsertEntityOverlayType";
 import { ViewEntityOverlayType } from "./ViewEntityOverlayType";
+import { CreateEntityModalType } from "./CreateEntityModalType";
 
 export type GeneralSliceInitialStateType = {
   // Auth
@@ -44,6 +45,7 @@ export type GeneralSliceInitialStateType = {
 
   // Modals
   generalModal: ModalType;
+  createEntityModal: CreateEntityModalType;
   errorFields: string[];
 
   // Contact
@@ -55,6 +57,7 @@ export type GeneralSliceInitialStateType = {
   // Util
   currentActivityLogSubject: ActivitySubject;
   chosenImageResearchLogId: string;
+  currentEntityOverlayPriority: "view" | "upsert" | "delete";
 
   // Images
   loadingUploadImageToCloudinary: LoadingStateType;

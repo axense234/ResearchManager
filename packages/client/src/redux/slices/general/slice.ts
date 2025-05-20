@@ -45,6 +45,9 @@ export const {
   setViewEntityOverlay,
   setSelectedImagesSrc,
   setChosenImageResearchLogId,
+  setCurrentEntityOverlayPriority,
+  closeCreateEntityModal,
+  setCreateEntityModal,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

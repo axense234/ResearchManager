@@ -1,13 +1,21 @@
-// Interface
+// React
 import { FC } from "react";
+// Interfaces
 import { FooterLinkProps } from "@/core/interfaces/layout/footer";
 // SCSS
 import footerLinkStyles from "@/scss/components/layout/footer/FooterLink.module.scss";
 // i18n
 import { Link } from "@/i18n/routing";
+// Redux
+import { useSelectOnButtonClickFunction } from "@/hooks";
 
-const FooterLink: FC<FooterLinkProps> = ({ link, onClickFunction }) => {
+const FooterLink: FC<FooterLinkProps> = ({ link }) => {
   const { buttonLabel, buttonType, buttonDest } = link;
+
+  const onButtonClickFunction = useSelectOnButtonClickFunction(
+    buttonLabel,
+    "footer",
+  );
 
   if (buttonType === "link") {
     return (
@@ -28,7 +36,7 @@ const FooterLink: FC<FooterLinkProps> = ({ link, onClickFunction }) => {
         title={buttonLabel}
         aria-label={buttonLabel}
         className={footerLinkStyles.footerLinkContainer}
-        onClick={onClickFunction}
+        onClick={onButtonClickFunction}
       >
         {buttonLabel}
       </button>

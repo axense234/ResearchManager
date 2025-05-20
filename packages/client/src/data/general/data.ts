@@ -17,7 +17,6 @@ export const deleteRedColor = "#ff0000";
 export const cancelGrayColor = "#666666";
 export const viewPurpleColor = "#800080";
 
-// i have no idea what my overall "update" color should be
 export const updateOrangeColor = "#e67e22";
 
 export const buttonHeading1 = "20px";

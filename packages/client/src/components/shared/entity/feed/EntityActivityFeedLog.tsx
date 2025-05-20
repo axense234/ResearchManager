@@ -9,9 +9,12 @@ import { useAppSelector } from "@/hooks";
 import { selectActivityLogById } from "@/redux/slices/activity/log";
 // Data
 import {
+  cancelGrayColor,
   createGreenColor,
   deleteRedColor,
   mockBrownColor,
+  pauseGreenColor,
+  resumeYellowColor,
   updateOrangeColor,
 } from "@/data/general";
 
@@ -35,6 +38,18 @@ const EntityActivityFeedLog: FC<EntityActivityFeedLogProps> = ({
       activityLogSubjectColor = mockBrownColor;
       break;
     case "PURGE":
+      activityLogSubjectColor = deleteRedColor;
+      break;
+    case "RESEARCH_START":
+      activityLogSubjectColor = pauseGreenColor;
+      break;
+    case "RESEARCH_PAUSE":
+      activityLogSubjectColor = cancelGrayColor;
+      break;
+    case "RESEARCH_RESUME":
+      activityLogSubjectColor = resumeYellowColor;
+      break;
+    case "RESEARCH_END":
       activityLogSubjectColor = deleteRedColor;
       break;
     default:

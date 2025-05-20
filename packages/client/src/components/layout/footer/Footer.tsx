@@ -1,11 +1,11 @@
-// Interfaces
+// React
 import { FC } from "react";
+// SCSS
+import footerStyles from "@/scss/components/layout/footer/Footer.module.scss";
 // Components
 import FooterLinks from "./FooterLinks";
 import FooterContact from "./FooterContact";
 import FooterBar from "./FooterBar";
-// SCSS
-import footerStyles from "@/scss/components/layout/footer/Footer.module.scss";
 
 const Footer: FC = () => {
   return (

@@ -3,7 +3,6 @@ export * from "./handleFormErrorInputsAndModalMessage";
 export * from "./transformEntitiesFromUserPayloadToEntitiesRedux";
 export * from "./handleCarouselStepDirection";
 export * from "./getResearchActivityExampleImages";
-export * from "./selectOnButtonClickFunction";
 export * from "./organizeEntityImagesByEntityIds";
 export * from "./calculateResearchLogRP";
 export * from "./transformAndSortSpecialEntityExamplesByRP";

@@ -12,7 +12,10 @@ import EntityOverlayImages from "../../fragments/images/EntityOverlayImages";
 // Redux
 import { useAppDispatch, useAppSelector, useOverlayTransition } from "@/hooks";
 import { closeViewEntityOverlay } from "@/redux/slices/general/slice";
-import { selectViewEntityOverlay } from "@/redux/slices/general";
+import {
+  selectCurrentEntityOverlayPriority,
+  selectViewEntityOverlay,
+} from "@/redux/slices/general";
 import { selectResearchSessionById } from "@/redux/slices/research/session";
 import { selectResearchPhaseById } from "@/redux/slices/research/phase";
 import { selectResearchActivityById } from "@/redux/slices/research/activity";
@@ -24,6 +27,9 @@ const ViewResearchSessionOverlayInterface: FC = () => {
   const [showImageOverlay, setShowImageOverlay] = useState<boolean>(false);
 
   const viewEntityOverlay = useAppSelector(selectViewEntityOverlay);
+  const entityOverlayPriority = useAppSelector(
+    selectCurrentEntityOverlayPriority,
+  );
 
   const researchSession = useAppSelector((state) =>
     selectResearchSessionById(state, viewEntityOverlay?.entityId),
@@ -42,6 +48,7 @@ const ViewResearchSessionOverlayInterface: FC = () => {
   return (
     <div
       className={viewEntityOverlayStyles.overlayContainerWrapper}
+      style={{ zIndex: entityOverlayPriority === "view" ? "101" : "100" }}
       ref={overlayRef}
     >
       <CloseInterfaceButton

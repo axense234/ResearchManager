@@ -6,8 +6,10 @@ import entityLogItemStyles from "@/scss/components/shared/entity/view/logs/Entit
 import { EntityLogItemProps } from "@/core/interfaces";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { selectResearchLogById } from "@/redux/slices/research/log";
-import { setUpdateResearchSessionDto as setUpdateResearchLogDto } from "@/redux/slices/research/session";
+import {
+  selectResearchLogById,
+  setUpdateResearchLogDto,
+} from "@/redux/slices/research/log";
 import { setViewEntityOverlay } from "@/redux/slices/general/slice";
 
 const EntityLogItem: FC<EntityLogItemProps> = ({
@@ -19,6 +21,8 @@ const EntityLogItem: FC<EntityLogItemProps> = ({
   const researchLog = useAppSelector((state) =>
     selectResearchLogById(state, researchLogId),
   );
+
+  console.log(researchLog);
 
   return (
     <div

@@ -72,6 +72,10 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
     type: "general",
     isLoading: false,
   },
+  createEntityModal: {
+    isClosed: true,
+    currentLocation: "sidebar",
+  },
   errorFields: [],
 
   // Contact
@@ -80,6 +84,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   // Util
   currentActivityLogSubject: "CREATE",
   chosenImageResearchLogId: "",
+  currentEntityOverlayPriority: "view",
 
   // Images
   loadingUploadImageToCloudinary: "IDLE",

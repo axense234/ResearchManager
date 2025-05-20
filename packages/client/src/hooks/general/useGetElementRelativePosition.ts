@@ -4,7 +4,9 @@ import { MutableRefObject, useEffect, useState } from "react";
 import { ElementPositionType } from "@/core/types";
 
 export const useGetElementRelativePosition = (
-  elementRef: MutableRefObject<HTMLDivElement>,
+  elementRef: MutableRefObject<
+    HTMLDivElement | HTMLButtonElement | HTMLAnchorElement
+  >,
   showElement?: boolean,
 ) => {
   const [position, setPosition] = useState<ElementPositionType>({

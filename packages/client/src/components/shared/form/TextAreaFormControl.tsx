@@ -11,15 +11,17 @@ const TextAreaFormControl: FC<TextAreaFormControlProps> = ({
   hideLabel,
   onEntityPropertyValueChange,
   maxInputLength,
+  readOnly,
 }) => {
   return (
     <div className={textAreaFormControlStyles.textAreaFormControlContainer}>
       {!hideLabel && <label htmlFor={labelContent}>{labelContent}</label>}
       <textarea
         name={labelContent}
+        onChange={onEntityPropertyValueChange}
         maxLength={maxInputLength}
         value={entityProperty}
-        onChange={onEntityPropertyValueChange}
+        readOnly={readOnly}
       />
     </div>
   );

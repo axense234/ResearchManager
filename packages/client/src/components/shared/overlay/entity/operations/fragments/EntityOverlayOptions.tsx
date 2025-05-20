@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/hooks";
 import {
   closeViewEntityOverlay,
   setCurrentActivityLogSubject,
+  setCurrentEntityOverlayPriority,
   setDeleteEntityOverlay,
   setUpsertEntityOverlay,
   setViewEntityOverlay,
@@ -30,44 +31,47 @@ const EntityOverlayOptions: FC<EntityOverlayOptionsProps> = ({
       {type === "upsert" ? (
         <EntityOverlayOption
           type="view"
-          onClickFunction={() =>
+          onClickFunction={() => {
+            dispatch(setCurrentEntityOverlayPriority("view"));
             dispatch(
               setViewEntityOverlay({
                 entityType,
                 showOverlay: true,
                 entityId,
               }),
-            )
-          }
+            );
+          }}
         />
       ) : (
         currentStatusType !== "FINISHED" && (
           <EntityOverlayOption
             type="edit"
-            onClickFunction={() =>
+            onClickFunction={() => {
+              dispatch(setCurrentEntityOverlayPriority("upsert"));
               dispatch(
                 setUpsertEntityOverlay({
-                  entityType: "researchLog",
+                  entityType,
                   method: "update",
                   showOverlay: true,
                   entityId,
                 }),
-              )
-            }
+              );
+            }}
           />
         )
       )}
       <EntityOverlayOption
         type="delete"
-        onClickFunction={() =>
+        onClickFunction={() => {
+          dispatch(setCurrentEntityOverlayPriority("delete"));
           dispatch(
             setDeleteEntityOverlay({
               entityId,
               entityType,
               showOverlay: true,
             }),
-          )
-        }
+          );
+        }}
       />
       {/* Research Session Options Only */}
       {type === "upsert" && entityType === "researchSession" && (

@@ -6,6 +6,8 @@ export interface TextAreaFormControlProps {
 
   maxInputLength?: number;
 
+  readOnly?: boolean;
+
   entityProperty: string | number | undefined;
   onEntityPropertyValueChange: ChangeEventHandler<HTMLTextAreaElement>;
 }

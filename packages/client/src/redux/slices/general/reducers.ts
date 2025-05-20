@@ -1,5 +1,6 @@
 // Types
 import {
+  CreateEntityModalType,
   DeleteEntityOverlayType,
   EntityImagesOverlayType,
   GeneralSliceInitialStateType,
@@ -9,7 +10,7 @@ import {
   UpsertTagOverlayType,
   ViewEntityOverlayType,
 } from "@/core/types";
-import { PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, PayloadActionCreator } from "@reduxjs/toolkit";
 // Data
 import { authCarouselContent } from "@/data/general/components";
 // Helpers
@@ -217,5 +218,23 @@ export const generalSliceReducers = {
     action: PayloadAction<string>,
   ) {
     state.chosenImageResearchLogId = action.payload;
+  },
+  setCurrentEntityOverlayPriority(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<"view" | "upsert" | "delete">,
+  ) {
+    state.currentEntityOverlayPriority = action.payload;
+  },
+  setCreateEntityModal(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<CreateEntityModalType>,
+  ) {
+    state.createEntityModal = action.payload;
+  },
+  closeCreateEntityModal(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction,
+  ) {
+    state.createEntityModal = { ...state.createEntityModal, isClosed: true };
   },
 };

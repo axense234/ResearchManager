@@ -34,6 +34,8 @@ export const selectCurrentEntityOverlayImageCarouselId = (state: State) =>
 
 // Modals
 export const selectGeneralModal = (state: State) => state.general.generalModal;
+export const selectCreateEntityModal = (state: State) =>
+  state.general.createEntityModal;
 export const selectErrorFields = (state: State) => state.general.errorFields;
 
 // Overlays
@@ -64,6 +66,9 @@ export const selectCurrentActivityLogSubject = (state: State) =>
 
 export const selectChosenImageResearchLogId = (state: State) =>
   state.general.chosenImageResearchLogId;
+
+export const selectCurrentEntityOverlayPriority = (state: State) =>
+  state.general.currentEntityOverlayPriority;
 
 // Images
 export const selectLoadingUploadImageToCloudinary = (state: State) =>

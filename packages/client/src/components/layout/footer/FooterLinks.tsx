@@ -1,4 +1,4 @@
-// Interfaces
+// React
 import { FC } from "react";
 // Data
 import { navigationButtonsContent } from "@/data/general/components";
@@ -6,26 +6,18 @@ import { navigationButtonsContent } from "@/data/general/components";
 import footerLinksStyles from "@/scss/components/layout/footer/FooterLinks.module.scss";
 // Components
 import FooterLink from "./FooterLink";
-// Helper
-import { selectOnButtonClickFunction } from "@/helpers";
-// Redux
-import { useAppDispatch } from "@/hooks";
+import CreateEntityModal from "@/components/shared/modal/CreateEntityModal";
 
 const FooterLinks: FC = () => {
-  const dispatch = useAppDispatch();
-
   return (
     <ul className={footerLinksStyles.footerLinksContainer}>
       {navigationButtonsContent.map((navButtonContent) => {
         return (
           <li key={navButtonContent.id}>
-            <FooterLink
-              link={navButtonContent}
-              onClickFunction={selectOnButtonClickFunction(
-                dispatch,
-                navButtonContent.buttonLabel,
-              )}
-            />
+            {navButtonContent.buttonLabel === "Create" && (
+              <CreateEntityModal location="footer" />
+            )}
+            <FooterLink link={navButtonContent} />
           </li>
         );
       })}

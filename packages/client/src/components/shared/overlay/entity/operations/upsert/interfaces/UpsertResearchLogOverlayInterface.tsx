@@ -21,6 +21,7 @@ import {
   useOverlayTransition,
 } from "@/hooks";
 import {
+  selectCurrentEntityOverlayPriority,
   selectLoadingUploadImageToCloudinary,
   selectUpsertEntityOverlay,
 } from "@/redux/slices/general";
@@ -52,6 +53,11 @@ const UpsertResearchLogOverlayInterface: FC = () => {
   const [showImageOverlay, setShowImageOverlay] = useState<boolean>(false);
 
   const upsertEntityOverlay = useAppSelector(selectUpsertEntityOverlay);
+
+  const entityOverlayPriority = useAppSelector(
+    selectCurrentEntityOverlayPriority,
+  );
+
   const selectedTagsIds = useAppSelector(selectSelectedTagsIds);
 
   const numberOfResearchPhases = useAppSelector(selectNumberOfResearchPhases);
@@ -178,6 +184,7 @@ const UpsertResearchLogOverlayInterface: FC = () => {
   return (
     <div
       className={upsertEntityOverlayStyles.overlayContainerWrapper}
+      style={{ zIndex: entityOverlayPriority === "upsert" ? "101" : "100" }}
       ref={overlayRef}
     >
       <CloseInterfaceButton

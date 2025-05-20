@@ -12,3 +12,4 @@ export * from "./useDetermineAddTagButtonDisabledInfo";
 export * from "./useHandleScrollToActivityDay";
 export * from "./useDetermineEntitySessionItemDetails";
 export * from "./useCalculateEntityViewHeight";
+export * from "./UseSelectOnButtonClickFunction";

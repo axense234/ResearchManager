@@ -1,4 +1,4 @@
-// Interfaces
+// React
 import { FC } from "react";
 // SCSS
 import sideBarStyles from "@/scss/components/layout/sidebar/SideBar.module.scss";

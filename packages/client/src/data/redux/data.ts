@@ -93,6 +93,7 @@ export const availableTagFontFamilies: TagFontFamily[] = [
 export const activityLogsMessages = (
   entityName: string,
   entityLabel: string,
+  entityTime: string,
   activityDayId?: string,
 ): ActivityLogsDataType => {
   return {
@@ -114,6 +115,26 @@ export const activityLogsMessages = (
     ARCHIVE: {
       subject: "ARCHIVE",
       message: `Successfully archived ${entityLabel} named ${entityName}.`,
+      activityDays: [activityDayId],
+    },
+    RESEARCH_START: {
+      subject: "RESEARCH_START",
+      message: `Started ${entityLabel} named ${entityName} at ${entityTime}.`,
+      activityDays: [activityDayId],
+    },
+    RESEARCH_PAUSE: {
+      subject: "RESEARCH_PAUSE",
+      message: `Paused ${entityLabel} named ${entityName} at ${entityTime}.`,
+      activityDays: [activityDayId],
+    },
+    RESEARCH_RESUME: {
+      subject: "RESEARCH_RESUME",
+      message: `Resumed ${entityLabel} named ${entityName} at ${entityTime}.`,
+      activityDays: [activityDayId],
+    },
+    RESEARCH_END: {
+      subject: "RESEARCH_END",
+      message: `Finished ${entityLabel} named ${entityName} at ${entityTime}.`,
       activityDays: [activityDayId],
     },
   };

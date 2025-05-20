@@ -9,9 +9,11 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import {
   ActionType,
   CreateResearchLogDto,
+  UpdateResearchLogDto,
 } from "@researchmanager/shared/types";
 // Adapter
 import { researchLogsAdapter } from "./adapter";
+import { selectUpdateResearchLogDto } from "./selectors";
 
 export const researchLogsSliceReducers = {
   updateLoadingResearchLogState(
@@ -67,6 +69,12 @@ export const researchLogsSliceReducers = {
     action: PayloadAction<CreateResearchLogDto>,
   ) {
     state.createResearchLogDto = action.payload;
+  },
+  setUpdateResearchLogDto(
+    state: ResearchLogsSliceStateType,
+    action: PayloadAction<UpdateResearchLogDto>,
+  ) {
+    state.updateResearchLogDto = action.payload;
   },
   setResearchLogs(
     state: ResearchLogsSliceStateType,

@@ -13,7 +13,11 @@ import {
   useDetermineDeleteEntityOverlayFunctions,
   useOverlayTransition,
 } from "@/hooks";
-import { selectDeleteEntityOverlay } from "@/redux/slices/general";
+import {
+  selectCurrentEntityOverlayPriority,
+  selectDeleteEntityOverlay,
+  selectViewEntityOverlay,
+} from "@/redux/slices/general";
 import { closeDeleteEntityOverlay } from "@/redux/slices/general/slice";
 
 const DeleteEntityOverlay: FC = () => {
@@ -21,6 +25,9 @@ const DeleteEntityOverlay: FC = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const deleteEntityOverlay = useAppSelector(selectDeleteEntityOverlay);
+  const entityOverlayPriority = useAppSelector(
+    selectCurrentEntityOverlayPriority,
+  );
 
   const { onArchiveFunctionUsed, onPurgeFunctionUsed } =
     useDetermineDeleteEntityOverlayFunctions(
@@ -33,6 +40,7 @@ const DeleteEntityOverlay: FC = () => {
   return (
     <div
       className={deleteEntityOverlayStyles.overlayContainer}
+      style={{ zIndex: entityOverlayPriority === "delete" ? "101" : "100" }}
       ref={overlayRef}
     >
       <CloseInterfaceButton

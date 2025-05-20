@@ -4,7 +4,9 @@ import { activityLogsMessages } from "@/data/redux";
 import {
   CreateActivityLogDto,
   ResearchActivityPayload,
+  ResearchLogPayload,
   ResearchPhasePayload,
+  ResearchSessionPayload,
   TagPayload,
 } from "@researchmanager/shared/types";
 import { AxiosError } from "axios";
@@ -30,6 +32,11 @@ import {
   deleteResearchSession,
   updateResearchSession,
 } from "@/redux/slices/research/session";
+import {
+  createResearchLog,
+  deleteResearchLog,
+  updateResearchLog,
+} from "@/redux/slices/research/log";
 
 export const handleActivityLogsListener = createListenerMiddleware();
 
@@ -50,16 +57,22 @@ handleActivityLogsListener.startListening({
     deleteResearchPhase.fulfilled,
     deleteResearchPhase.rejected,
     // Tag
-    createTag.pending,
     createTag.fulfilled,
     createTag.rejected,
     // Research Session
-    updateResearchSession.pending,
+    createResearchSession.fulfilled,
+    createResearchSession.rejected,
     updateResearchSession.fulfilled,
     updateResearchSession.rejected,
-    deleteResearchSession.pending,
     deleteResearchSession.fulfilled,
     deleteResearchSession.rejected,
+    // Research Log
+    createResearchLog.fulfilled,
+    createResearchLog.rejected,
+    updateResearchLog.fulfilled,
+    updateResearchLog.rejected,
+    deleteResearchLog.fulfilled,
+    deleteResearchLog.rejected,
   ),
   effect: async (action, listenerApi) => {
     const { dispatch, getState } = listenerApi;
@@ -80,6 +93,12 @@ handleActivityLogsListener.startListening({
     } else if (action.type.includes("tags")) {
       entityLabel = "Tag";
       entityName = (action.payload as TagPayload)?.title;
+    } else if (action.type.includes("researchSessions")) {
+      entityLabel = "Research Session";
+      entityName = (action.payload as ResearchSessionPayload)?.name;
+    } else if (action.type.includes("researchLogs")) {
+      entityLabel = "Research Log";
+      entityName = (action.payload as ResearchLogPayload)?.name;
     }
 
     if (action.type.endsWith("fulfilled")) {
@@ -90,9 +109,11 @@ handleActivityLogsListener.startListening({
           selectActivityDayIdBasedOnLocaleDate(state);
 
         if (activityDayIdBasedOnLocaleDate === null) {
-          const activityLogDto = activityLogsMessages(entityName, entityLabel)[
-            activityLogSubject
-          ] as CreateActivityLogDto;
+          const activityLogDto = activityLogsMessages(
+            entityName,
+            new Date().toLocaleTimeString(),
+            entityLabel,
+          )[activityLogSubject] as CreateActivityLogDto;
 
           delete activityLogDto.activityDays;
 
@@ -108,14 +129,17 @@ handleActivityLogsListener.startListening({
           const activityLogDto = activityLogsMessages(
             entityName,
             entityLabel,
+            new Date().toLocaleTimeString(),
             activityDayIdBasedOnLocaleDate,
           )[activityLogSubject] as CreateActivityLogDto;
 
           dispatch(createActivityLog({ ...activityLogDto }));
         }
       } else {
+        // same as rejected
       }
     } else if (action.type.endsWith("rejected")) {
+      // same as the above
     }
   },
 });

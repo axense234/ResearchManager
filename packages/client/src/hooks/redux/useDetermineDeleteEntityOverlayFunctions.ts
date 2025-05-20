@@ -26,6 +26,10 @@ import {
   deleteResearchSession,
   updateResearchSession,
 } from "@/redux/slices/research/session";
+import {
+  deleteResearchLog,
+  updateResearchLog,
+} from "@/redux/slices/research/log";
 
 export const useDetermineDeleteEntityOverlayFunctions = (
   entityType: EntityType,
@@ -47,6 +51,7 @@ export const useDetermineDeleteEntityOverlayFunctions = (
   switch (entityType) {
     case "researchActivity":
       onArchiveFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
         dispatch(
           updateResearchActivity({
             dto: { archived: true },
@@ -54,15 +59,14 @@ export const useDetermineDeleteEntityOverlayFunctions = (
           }),
         );
         dispatch(closeDeleteEntityOverlay());
-        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
         dispatch(
           setCurrentResearchActivityIndex(numberOfResearchActivities - 1),
         );
       };
       onPurgeFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("PURGE"));
         dispatch(deleteResearchActivity(entityId));
         dispatch(closeDeleteEntityOverlay());
-        dispatch(setCurrentActivityLogSubject("PURGE"));
         dispatch(
           setCurrentResearchActivityIndex(numberOfResearchActivities - 1),
         );
@@ -70,6 +74,7 @@ export const useDetermineDeleteEntityOverlayFunctions = (
       break;
     case "researchPhase":
       onArchiveFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
         dispatch(
           updateResearchPhase({
             dto: { archived: true },
@@ -77,18 +82,18 @@ export const useDetermineDeleteEntityOverlayFunctions = (
           }),
         );
         dispatch(closeDeleteEntityOverlay());
-        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
         dispatch(setCurrentResearchPhaseIndex(numberOfResearchPhases - 1));
       };
       onPurgeFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("PURGE"));
         dispatch(deleteResearchPhase(entityId));
         dispatch(closeDeleteEntityOverlay());
-        dispatch(setCurrentActivityLogSubject("PURGE"));
         dispatch(setCurrentResearchPhaseIndex(numberOfResearchPhases - 1));
       };
       break;
     case "researchSession":
       onArchiveFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
         dispatch(
           updateResearchSession({
             dto: { archived: true },
@@ -96,14 +101,34 @@ export const useDetermineDeleteEntityOverlayFunctions = (
           }),
         );
         dispatch(closeDeleteEntityOverlay());
-        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
         dispatch(closeViewEntityOverlay());
         dispatch(closeUpsertEntityOverlay());
       };
       onPurgeFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("PURGE"));
         dispatch(deleteResearchSession(entityId));
         dispatch(closeDeleteEntityOverlay());
+        dispatch(closeViewEntityOverlay());
+        dispatch(closeUpsertEntityOverlay());
+      };
+      break;
+    case "researchLog":
+      onArchiveFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
+        dispatch(
+          updateResearchLog({
+            dto: { archived: true },
+            researchLogId: entityId,
+          }),
+        );
+        dispatch(closeDeleteEntityOverlay());
+        dispatch(closeViewEntityOverlay());
+        dispatch(closeUpsertEntityOverlay());
+      };
+      onPurgeFunctionUsed = () => {
         dispatch(setCurrentActivityLogSubject("PURGE"));
+        dispatch(deleteResearchLog(entityId));
+        dispatch(closeDeleteEntityOverlay());
         dispatch(closeViewEntityOverlay());
         dispatch(closeUpsertEntityOverlay());
       };

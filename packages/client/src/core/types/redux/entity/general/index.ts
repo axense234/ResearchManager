@@ -10,3 +10,4 @@ export * from "./DeleteEntityOverlayType";
 export * from "./CreateTagModalType";
 export * from "./UpsertTagOverlayType";
 export * from "./ViewEntityOverlayType";
+export * from "./CreateEntityModalType";

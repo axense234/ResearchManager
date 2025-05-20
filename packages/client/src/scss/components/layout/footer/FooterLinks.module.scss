@@ -2,7 +2,13 @@
 
 .footerLinksContainer {
   @include flexCenter(row);
+  position: relative;
   width: 100%;
   justify-content: space-between;
   list-style: none;
+
+  > li {
+    @include flexCenter(column);
+    position: relative;
+  }
 }

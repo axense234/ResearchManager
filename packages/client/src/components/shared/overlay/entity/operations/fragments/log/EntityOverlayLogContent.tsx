@@ -12,6 +12,7 @@ const EntityOverlayLogContent: FC<EntityOverlayLogContentProps> = ({
   dto,
   onContentChange,
   sectionTitle,
+  type,
 }) => {
   return (
     <div className={entityOverlayLogContentStyles.logContentContainer}>
@@ -23,6 +24,7 @@ const EntityOverlayLogContent: FC<EntityOverlayLogContentProps> = ({
           maxInputLength={1000}
           entityProperty={dto?.content}
           onEntityPropertyValueChange={onContentChange}
+          readOnly={type === "view"}
         />
       </div>
     </div>
