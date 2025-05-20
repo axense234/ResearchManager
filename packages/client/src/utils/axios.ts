@@ -2,6 +2,7 @@
 import axios from "axios";
 // Base Server URL
 import { baseServerUrl } from "@/config";
+import { MdToken } from "react-icons/md";
 
 export const axiosInstance = axios.create({
   baseURL: baseServerUrl,
@@ -16,6 +17,10 @@ axiosInstance.interceptors.request.use((config) => {
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log(token);
   }
+
+  console.log("intercepted");
+
   return config;
 });
