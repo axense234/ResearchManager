@@ -31,6 +31,7 @@ export const getProfileOAuth = createAsyncThunk<UserPayload | AxiosError>(
 
       return res.payload as UserPayload;
     } catch (error) {
+      console.log(error);
       return error as AxiosError;
     }
   },
