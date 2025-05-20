@@ -62,8 +62,8 @@ export class UserController {
     return this.userService.getProfile(userId, queryParams, req.url);
   }
 
-  @JwtAuth({ profileRoute: true })
-  @SwaggerAuth({ profileRoute: true })
+  @JwtAuth({ alwaysSkipAuthentication: true })
+  @SwaggerAuth({ alwaysSkipAuthentication: true })
   @SwaggerHead('user', 'GET SINGLE')
   @SwaggerResponses('user', 'GET SINGLE')
   @SwaggerPathParams('user', 'GET SINGLE')

@@ -3,11 +3,18 @@ import { applyDecorators, UseGuards } from '@nestjs/common';
 // Guard
 import { JwtGuard } from 'src/modules/entity/auth/guard';
 
-export const JwtAuth = (options?: { profileRoute?: boolean }) => {
-  const shouldSkipJwt =
-    process.env.NODE_ENV === 'development' || options?.profileRoute;
+export const JwtAuth = (options?: {
+  profileRoute?: boolean;
+  alwaysSkipAuthentication?: boolean;
+}) => {
+  if (options?.alwaysSkipAuthentication) {
+    return applyDecorators();
+  }
 
-  return shouldSkipJwt
+  const shouldSkipAuthentication =
+    process.env.NODE_ENV === 'development' && !options?.profileRoute;
+
+  return shouldSkipAuthentication
     ? applyDecorators()
     : applyDecorators(UseGuards(JwtGuard));
 };
