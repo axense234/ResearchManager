@@ -18,8 +18,11 @@ export const signUpUser = createAsyncThunk<User | AxiosError, SignUpDto>(
       const res = (
         await axiosInstance.post("/auth/signup", signUpUserDto, {
           params: {
-            includeValues: "createdAt, updatedAt",
-            chosenOptionType: "include",
+            params: {
+              includeValues: "researchActivities, settings, activityFeed, tags",
+              includeDepth: 4,
+              chosenOptionType: "include",
+            },
           },
         })
       ).data as ReturnObjectBuilderReturnObject;
