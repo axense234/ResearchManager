@@ -15,7 +15,7 @@ const DashboardPage: FC = () => {
       <DashboardDescription />
       <EntityResearchActivities pageType="dashboard" />
       <EntityResearchPhases pageType="dashboard" />
-      <EntityTags />
+      <EntityTags pageType="dashboard" />
       <Footer />
     </section>
   );
