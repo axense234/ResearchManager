@@ -32,13 +32,13 @@ import { SwaggerBody } from 'src/decorators/swagger/swaggerBody.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger/swaggerAuth.decorator';
 import { JwtAuth } from 'src/decorators/auth/jwtAuth.decorator';
 
-@JwtAuth()
 @SwaggerAuth()
 @ApiTags('Users')
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @JwtAuth()
   @SwaggerHead('user', 'GET MULTIPLE')
   @SwaggerResponses('user', 'GET MULTIPLE')
   @Get()
@@ -62,11 +62,11 @@ export class UserController {
     return this.userService.getProfile(userId, queryParams, req.url);
   }
 
+  @JwtAuth({ alwaysSkipAuthentication: true })
+  @SwaggerAuth({ alwaysSkipAuthentication: true })
   @SwaggerHead('user', 'GET SINGLE')
   @SwaggerResponses('user', 'GET SINGLE')
   @SwaggerPathParams('user', 'GET SINGLE')
-  @JwtAuth({ alwaysSkipAuthentication: true })
-  @SwaggerAuth({ alwaysSkipAuthentication: true })
   @Get(':uniqueIdentifier')
   getUser(
     @Query() queryParams: GetUserQueryParams,
@@ -76,6 +76,7 @@ export class UserController {
     return this.userService.getUser(queryParams, uniqueIdentifier, req.url);
   }
 
+  @JwtAuth()
   @SwaggerHead('user', 'UPDATE')
   @SwaggerBody('user', 'UPDATE')
   @SwaggerResponses('user', 'UPDATE')
@@ -89,6 +90,7 @@ export class UserController {
     return this.userService.updateUser(queryParams, dto, uniqueIdentifier);
   }
 
+  @JwtAuth()
   @SwaggerHead('user', 'DELETE')
   @SwaggerResponses('user', 'DELETE')
   @SwaggerPathParams('user', 'DELETE')
