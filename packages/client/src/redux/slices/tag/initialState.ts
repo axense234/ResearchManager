@@ -28,6 +28,8 @@ export const tagsSliceInitialState = {
     location: "overlay",
   },
   selectedTagsIds: [],
+  currentTagExampleIndex: 1,
+  currentTagIndex: 1,
 } as TagsSliceInitialStateType;
 
 export const tagsSliceState = tagsAdapter.getInitialState(

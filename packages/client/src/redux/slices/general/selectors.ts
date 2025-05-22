@@ -70,6 +70,9 @@ export const selectChosenImageResearchLogId = (state: State) =>
 export const selectCurrentEntityOverlayPriority = (state: State) =>
   state.general.currentEntityOverlayPriority;
 
+export const selectNumberOfCurrentTagUsedOnEntities = (state: State) =>
+  state.general.numberOfCurrentTagUsedOnEntities;
+
 // Images
 export const selectLoadingUploadImageToCloudinary = (state: State) =>
   state.general.loadingUploadImageToCloudinary;

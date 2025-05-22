@@ -22,8 +22,6 @@ const EntityLogItem: FC<EntityLogItemProps> = ({
     selectResearchLogById(state, researchLogId),
   );
 
-  console.log(researchLog);
-
   return (
     <div
       className={entityLogItemStyles.logContainer}

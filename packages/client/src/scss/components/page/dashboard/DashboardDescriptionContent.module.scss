@@ -1,0 +1,62 @@
+@use "../../../abstracts" as *;
+
+.contentContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 3rem;
+
+  > h3 {
+    @include heading("h3", "laptop", "white");
+    letter-spacing: 2px;
+  }
+}
+
+.contentDescriptionContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  > h6 {
+    @include heading("h6", "tablet", "white");
+    letter-spacing: 0.2px;
+  }
+
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 80%;
+    background-color: getColor("main-white");
+
+    transition: background-color 0.2s ease-in;
+  }
+}
+
+.contentDescriptionList {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem;
+
+  gap: 1rem;
+
+  > li {
+    @include flexCenter(row);
+    width: 100%;
+
+    position: relative;
+    padding-left: 1rem;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: getColor("main-white");
+    }
+
+    > p {
+      @include paragraph("laptop", "white");
+      width: 100%;
+    }
+  }
+}

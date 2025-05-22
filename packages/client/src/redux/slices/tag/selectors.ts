@@ -4,9 +4,12 @@ import { createSelector } from "@reduxjs/toolkit";
 // Adapater
 import { tagsAdapter } from "./adapter";
 // Types
-import { StatisticTagReturnType } from "@/core/types";
+import { EntityByIdSelectorType, StatisticTagReturnType } from "@/core/types";
 // Helpers
 import { calculateFrequencyOfGivenTag } from "@/helpers";
+import { selectAllResearchActivities } from "../research/activity";
+import { selectAllResearchPhases } from "../research/phase";
+import { selectAllResearchLogs } from "../research/log";
 
 export const {
   selectAll: selectAllTags,
@@ -54,7 +57,60 @@ export const selectStatisticTag = createSelector(
   },
 );
 
+export const selectTagEntitiesIdsById = createSelector(
+  [
+    selectAllResearchActivities,
+    selectAllResearchPhases,
+    selectAllResearchLogs,
+    (state, tagId) => tagId,
+  ],
+  (researchActivities, researchPhases, researchLogs, tagId) => {
+    const tagResearchActivitiesIds = researchActivities
+      .filter((ra) => ra.tagsIds.includes(tagId))
+      .map((ra) => {
+        return { entityId: ra.id, entityType: "researchActivity" };
+      }) as EntityByIdSelectorType[];
+
+    const tagResearchPhasesIds = researchPhases
+      .filter((rp) => rp.tagsIds.includes(tagId))
+      .map((rp) => {
+        return { entityId: rp.id, entityType: "researchPhase" };
+      }) as EntityByIdSelectorType[];
+
+    const tagResearchLogsIds = researchLogs
+      .filter((rl) => rl.tagsIds.includes(tagId))
+      .map((rl) => {
+        return { entityId: rl.id, entityType: "researchLog" };
+      }) as EntityByIdSelectorType[];
+
+    return tagResearchActivitiesIds
+      .concat(tagResearchPhasesIds)
+      .concat(tagResearchLogsIds);
+  },
+);
+
 export const selectTagsExamples = (state: State) => state.tags.tagsExamples;
+
+export const selectAllTagsIds = createSelector([selectAllTags], (tags) => {
+  return tags.map((tag) => tag.id);
+});
+
+export const selectTagExampleById = createSelector(
+  [selectTagsExamples, (state, tagId) => tagId],
+  (tags, tagId) => tags.find((tag) => tag.id === tagId),
+);
+
+export const selectTagIdByIndex = createSelector(
+  [selectTagsIds, (state, index) => index],
+  (tagsIds, index) => {
+    return tagsIds[index - 1];
+  },
+);
+
+export const selectTagExampleIdByIndex = createSelector(
+  [selectTagsExamples, (state, index) => index],
+  (tags, index) => tags[index - 1].id,
+);
 
 export const selectCreateTagDto = (state: State) => state.tags.createTagDto;
 
@@ -74,6 +130,12 @@ export const selectLoadingUpdateTag = (state: State) =>
 
 export const selectLoadingDeleteTag = (state: State) =>
   state.tags.loadingDeleteTag;
+
+export const selectCurrentTagExampleIndex = (state: State) =>
+  state.tags.currentTagExampleIndex;
+
+export const selectCurrentTagIndex = (state: State) =>
+  state.tags.currentTagIndex;
 
 export const selectAddTagModal = (state: State) => state.tags.addTagModal;
 

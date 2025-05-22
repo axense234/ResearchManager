@@ -22,7 +22,7 @@ const EntitySessionsList: FC<EntitySessionsListProps> = ({
         <ul
           className={entitySessionsListStyles.sessionsList}
           style={{
-            height: showSessions ? `${sessionsIds.length * 8}rem` : "0",
+            height: showSessions ? `${sessionsIds.length * 7}rem` : "0",
             padding: showSessions ? "1rem" : "0",
           }}
         >

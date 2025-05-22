@@ -8,11 +8,16 @@ import entityViewStyles from "@/scss/components/shared/entity/view/EntityView.mo
 import EntityContainer from "../container/EntityContainer";
 import EntityDetails from "./EntityDetails";
 import EntitySessions from "./sessions/EntitySessions";
+import EntityLogs from "./logs/EntityLogs";
+import EntityUsedOn from "./usedOn/EntityUsedOn";
 // Types
-import { ResearchActivityRedux, ResearchPhaseRedux } from "@/core/types";
+import {
+  ResearchActivityRedux,
+  ResearchPhaseRedux,
+  TagRedux,
+} from "@/core/types";
 // Redux
 import { useSelectEntity } from "@/hooks";
-import EntityLogs from "./logs/EntityLogs";
 
 const EntityViewContent: FC<EntityViewContentProps> = ({
   viewType,
@@ -25,14 +30,42 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
   showImages,
   showGraph,
   showLogs,
+  showEntities,
   setShowSessions,
   setShowImages,
   setShowGraph,
   setShowLogs,
+  setShowEntities,
 }) => {
   const entity = useSelectEntity(viewType, entityType, entityId) as
     | ResearchActivityRedux
-    | ResearchPhaseRedux;
+    | ResearchPhaseRedux
+    | TagRedux;
+
+  if (entityType === "tag") {
+    return (
+      <div className={`${entityViewStyles.entityViewContent} ${position}`}>
+        <EntityContainer
+          containerType={viewType}
+          entityType={entityType}
+          entityId={entity?.id}
+          darkMode={viewType === "example" ? true : darkMode}
+          position={position}
+          isCurrentView={isCurrentView}
+        />
+        <EntityUsedOn
+          darkMode={viewType === "example" ? true : darkMode}
+          position={position}
+          setShowEntities={setShowEntities}
+          showEntities={showEntities}
+          isCurrentView={isCurrentView}
+          tag={entity as TagRedux}
+        />
+      </div>
+    );
+  }
+
+  const specialEntity = entity as ResearchActivityRedux | ResearchPhaseRedux;
 
   return (
     <div className={`${entityViewStyles.entityViewContent} ${position}`}>
@@ -45,7 +78,7 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
         isCurrentView={isCurrentView}
       />
       <EntityDetails
-        specialEntity={entity}
+        specialEntity={specialEntity}
         specialEntityType={entityType}
         viewType={viewType}
         darkMode={viewType === "example" ? true : darkMode}
@@ -58,7 +91,7 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
       />
       {viewType === "entity" && (
         <EntitySessions
-          entity={entity}
+          entity={specialEntity}
           entityType={entityType}
           darkMode={darkMode}
           position={position}
@@ -69,7 +102,7 @@ const EntityViewContent: FC<EntityViewContentProps> = ({
 
       {viewType === "entity" && entityType === "researchPhase" && (
         <EntityLogs
-          entity={entity}
+          entity={specialEntity}
           entityType={entityType}
           darkMode={darkMode}
           position={position}

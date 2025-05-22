@@ -4,18 +4,18 @@ import { FC } from "react";
 import profilePageStyles from "@/scss/components/page/profile/ProfilePage.module.scss";
 // Components
 import ProfileDescription from "./description/ProfileDescription";
-import ProfileResearchActivities from "./ProfileResearchActivities";
-import ProfileResearchPhases from "./ProfileResearchPhases";
 import Footer from "@/components/layout/footer/Footer";
 import ProfileActivityFeed from "./ProfileActivityFeed";
 import ProfileGeneralStatistics from "./statistics/ProfileGeneralStatistics";
+import EntityResearchActivities from "@/components/shared/entity/EntityResearchActivities";
+import EntityResearchPhases from "@/components/shared/entity/EntityResearchPhases";
 
 const ProfilePage: FC = () => {
   return (
     <section className={profilePageStyles.profilePageContainer}>
       <ProfileDescription />
-      <ProfileResearchActivities />
-      <ProfileResearchPhases />
+      <EntityResearchActivities pageType="profile" />
+      <EntityResearchPhases pageType="profile" />
       <ProfileActivityFeed />
       <ProfileGeneralStatistics />
       <Footer />

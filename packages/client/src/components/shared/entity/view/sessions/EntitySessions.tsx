@@ -6,7 +6,7 @@ import { EntitySessionsProps } from "@/core/interfaces";
 import entitySessionsStyles from "@/scss/components/shared/entity/view/sessions/EntitySessions.module.scss";
 // Components
 import EntitySessionsTitle from "./EntitySessionsTitle";
-import EntitySessionsList from "./EntitySessionsList";
+import EntitySessionsContent from "./EntitySessionsContent";
 // Redux
 import { useAppSelector } from "@/hooks";
 import {
@@ -51,7 +51,7 @@ const EntitySessions: FC<EntitySessionsProps> = ({
         setShowSessions={setShowSessions}
         showSectionControl={usedSessionsIds.length > 0}
       />
-      <EntitySessionsList
+      <EntitySessionsContent
         sessionsIds={usedSessionsIds}
         darkMode={darkMode}
         showSessions={showSessions}

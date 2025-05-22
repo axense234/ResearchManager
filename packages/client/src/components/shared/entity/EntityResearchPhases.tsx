@@ -6,22 +6,25 @@ import FunctionalButton from "@/components/shared/general/FunctionalButton";
 import EntityView from "@/components/shared/entity/view/EntityView";
 import EntityViewSetting from "@/components/shared/entity/view/EntityViewSetting";
 // SCSS
-import profileResearchActivitiesStyles from "@/scss/components/page/profile/ProfileResearchActivities.module.scss";
+import entityResearchActivitiesStyles from "@/scss/components/shared/entity/EntityResearchActivities.module.scss";
 // Data
-import { profileResearchActivitiesData } from "@/data/general/profile";
-// Redux and Hooks
+import { dashboardResearchPhasesData } from "@/data/general/dashboard";
+import { profileResearchPhasesData } from "@/data/general/profile";
+// Redux
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   selectLoadingGetProfileJWT,
   selectLoadingGetProfileOAuth,
 } from "@/redux/slices/general";
-import { setUpsertEntityOverlay } from "@/redux/slices/general/slice";
 import {
-  selectResearchActivitiesCustom,
-  selectResearchActivitiesExamples,
-} from "@/redux/slices/research/activity";
+  selectResearchPhasesCustom,
+  selectResearchPhasesExamples,
+} from "@/redux/slices/research/phase";
+import { setUpsertEntityOverlay } from "@/redux/slices/general/slice";
+// Interfacse
+import { EntityViewEntitiesProps } from "@/core/interfaces";
 
-const ProfileResearchActivities: FC = () => {
+const EntityResearchPhases: FC<EntityViewEntitiesProps> = ({ pageType }) => {
   const dispatch = useAppDispatch();
 
   const [showExamples, setShowExamples] = useState<boolean>(false);
@@ -37,50 +40,50 @@ const ProfileResearchActivities: FC = () => {
 
   const usedViewType = showExamples ? "example" : "entity";
 
-  const researchActivitiesIds = useAppSelector((state) =>
-    selectResearchActivitiesCustom(state, {
-      unarchived: true,
-      sorted: true,
-    }),
-  ).map((ra) => ra.id);
+  const researchPhasesIds = useAppSelector((state) =>
+    selectResearchPhasesCustom(state, { sorted: true, unarchived: true }),
+  ).map((rp) => rp.id);
 
-  const researchActivitiesExamplesIds = useAppSelector(
-    selectResearchActivitiesExamples,
+  const researchPhasesExamplesIds = useAppSelector(
+    selectResearchPhasesExamples,
   ).map((example) => example.id);
 
   const usedIds =
-    usedViewType === "entity"
-      ? researchActivitiesIds
-      : researchActivitiesExamplesIds;
+    usedViewType === "entity" ? researchPhasesIds : researchPhasesExamplesIds;
+
+  const usedPageTitleData =
+    pageType === "dashboard"
+      ? dashboardResearchPhasesData
+      : profileResearchPhasesData;
 
   return (
-    <section className={profileResearchActivitiesStyles.sectionContainer}>
-      <div className={profileResearchActivitiesStyles.sectionSettings}>
+    <section className={entityResearchActivitiesStyles.sectionContainer}>
+      <div className={entityResearchActivitiesStyles.sectionSettings}>
         <EntityViewSetting
           value={darkMode}
           onValueChange={(e) => setDarkMode(e.target.value !== "true")}
           labelContent="Dark Mode:"
-          id="profileResearchActivitiesDarkMode"
+          id={`${pageType}-darkMode`}
         />
         <EntityViewSetting
           value={showExamples}
           onValueChange={(e) => setShowExamples(e.target.value !== "true")}
           labelContent="Examples:"
-          id="profileResearchActivitiesExamples"
+          id={`${pageType}-examples`}
         />
       </div>
-      <div className={profileResearchActivitiesStyles.sectionContent}>
-        <div className={profileResearchActivitiesStyles.sectionTitle}>
-          <PageSectionTitle {...profileResearchActivitiesData} />
+      <div className={entityResearchActivitiesStyles.sectionContent}>
+        <div className={entityResearchActivitiesStyles.sectionTitle}>
+          <PageSectionTitle {...usedPageTitleData} pageType={pageType} />
           <FunctionalButton
-            content="Create Research Activity"
+            content="Create Research Phase"
             disabled={false}
-            onHoverContent="Create Research Activity"
+            onHoverContent="Create Research Phase"
             onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
             onClickFunction={() =>
               dispatch(
                 setUpsertEntityOverlay({
-                  entityType: "researchActivity",
+                  entityType: "researchPhase",
                   method: "create",
                   showOverlay: true,
                 }),
@@ -89,16 +92,17 @@ const ProfileResearchActivities: FC = () => {
           />
         </div>
         <EntityView
-          entityType="researchActivity"
+          entityType="researchPhase"
           viewType={usedViewType}
           isLoading={entityViewIsLoading}
           darkMode={darkMode}
           entitiesIds={usedIds}
           setShowEntityExamples={(value: boolean) => setShowExamples(value)}
+          pageType={pageType}
         />
       </div>
     </section>
   );
 };
 
-export default ProfileResearchActivities;
+export default EntityResearchPhases;

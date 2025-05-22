@@ -1,18 +1,44 @@
 // Types
 import {
   AddTagModalType,
-  CreateTagModalType,
   LoadingStateType,
   ObjectKeyValueType,
   TagRedux,
 } from "@/core/types";
 import { TagsSliceStateType } from "@/core/types/redux/entity/tag/TagsSliceStateType";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ActionType, CreateTagDto } from "@researchmanager/shared/types";
+import {
+  ActionType,
+  CreateTagDto,
+  UpdateTagDto,
+} from "@researchmanager/shared/types";
 // Adapter
 import { tagsAdapter } from "./adapter";
+// Helpers
+import { handleCarouselStepDirection } from "@/helpers";
 
 export const tagsSliceReducers = {
+  handleTagExampleCarouselStepDirection(
+    state: TagsSliceStateType,
+    action: PayloadAction<{ direction: "left" | "right" }>,
+  ) {
+    console.log("hit");
+    state.currentTagExampleIndex = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentTagExampleIndex,
+      state.tagsExamples.length,
+    );
+  },
+  handleTagCarouselStepDirection(
+    state: TagsSliceStateType,
+    action: PayloadAction<{ direction: "left" | "right" }>,
+  ) {
+    state.currentTagIndex = handleCarouselStepDirection(
+      action.payload.direction,
+      state.currentTagIndex,
+      state.ids.filter((id) => !state.entities[id].archived).length,
+    );
+  },
   setAddTagModal(
     state: TagsSliceStateType,
     action: PayloadAction<AddTagModalType>,
@@ -80,7 +106,12 @@ export const tagsSliceReducers = {
   ) {
     state.createTagDto = action.payload;
   },
-
+  setUpdateTagDto(
+    state: TagsSliceStateType,
+    action: PayloadAction<UpdateTagDto>,
+  ) {
+    state.updateTagDto = action.payload;
+  },
   setTags(state: TagsSliceStateType, action: PayloadAction<TagRedux[]>) {
     tagsAdapter.setAll(state, action.payload);
   },
@@ -89,5 +120,8 @@ export const tagsSliceReducers = {
     action: PayloadAction<string[]>,
   ) {
     state.selectedTagsIds = action.payload;
+  },
+  setCurrentTagIndex(state: TagsSliceStateType, action: PayloadAction<number>) {
+    state.currentTagIndex = action.payload;
   },
 };

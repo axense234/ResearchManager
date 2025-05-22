@@ -85,6 +85,7 @@ export const generalSliceInitialState: GeneralSliceInitialStateType = {
   currentActivityLogSubject: "CREATE",
   chosenImageResearchLogId: "",
   currentEntityOverlayPriority: "view",
+  numberOfCurrentTagUsedOnEntities: 0,
 
   // Images
   loadingUploadImageToCloudinary: "IDLE",

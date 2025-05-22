@@ -48,8 +48,25 @@ const TagComponent: FC<TagComponentProps> = ({
       throw new Error("Invalid container type.");
   }
 
-  const usedTagFontSize =
-    componentSize === "small" ? usedTag?.fontSize / 2 + 2 : usedTag?.fontSize;
+  let usedTagFontSize = usedTag?.fontSize;
+  let usedTagPadding = "0.5rem 1rem";
+  switch (componentSize) {
+    case "small":
+      usedTagFontSize = usedTag?.fontSize / 2 + 2;
+      usedTagPadding = "0.35rem 0.75rem";
+      break;
+    case "normal":
+      usedTagFontSize = usedTag?.fontSize;
+      usedTagPadding = "0.5rem 1rem";
+
+      break;
+    case "big":
+      usedTagFontSize = usedTag?.fontSize * 2;
+      usedTagPadding = "1rem 2rem";
+      break;
+    default:
+      throw new Error("Invalid component size.");
+  }
 
   return (
     <div
@@ -58,6 +75,7 @@ const TagComponent: FC<TagComponentProps> = ({
         backgroundColor: usedTag?.backgroundColorOrImageSrc,
         fontSize: usedTagFontSize,
         fontFamily: usedTag?.fontFamily,
+        padding: usedTagPadding,
         outline: isTagSelected ? selectedTagOutline : "initial",
       }}
       onClick={onClickFunction}

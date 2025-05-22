@@ -6,6 +6,7 @@ import { EntityContainerOptionsProps } from "@/core/interfaces";
 import entityContainerOptionsStyles from "@/scss/components/shared/entity/container/fragments/EntityContainerOptions.module.scss";
 // Components
 import FunctionalButton from "@/components/shared/general/FunctionalButton";
+import { mainWhiteColor } from "@/data/general";
 
 const EntityContainerOptions: FC<EntityContainerOptionsProps> = ({
   entityType,
@@ -26,6 +27,9 @@ const EntityContainerOptions: FC<EntityContainerOptionsProps> = ({
     case "researchPhase":
       entityContainerOptionEntityLabel = "Research Phase";
       break;
+    case "tag":
+      entityContainerOptionEntityLabel = "Tag";
+      break;
     default:
       throw new Error("Invalid entity type.");
   }
@@ -37,23 +41,28 @@ const EntityContainerOptions: FC<EntityContainerOptionsProps> = ({
     return (
       <div
         className={entityContainerOptionsStyles.entityContainerOptionsContainer}
+        style={{
+          justifyContent: entityType === "tag" ? "center" : "flex-start",
+        }}
       >
-        <FunctionalButton
-          content="Research"
-          disabled={false}
-          onHoverContent="Start a Research Session!"
-          onHoverContentDisabled="Need to update this."
-          onClickFunction={onEntityResearchFunction}
-          size="small"
-          colorScheme="green"
-        />
+        {entityType !== "tag" && (
+          <FunctionalButton
+            content="Research"
+            disabled={false}
+            onHoverContent="Start a Research Session!"
+            onHoverContentDisabled="Need to update this."
+            onClickFunction={onEntityResearchFunction}
+            size="small"
+            colorScheme="green"
+          />
+        )}
         <FunctionalButton
           content="Update"
           disabled={false}
           onHoverContent={updateOptionLabel}
           onHoverContentDisabled="Need to update this."
           onClickFunction={onEntityUpdateFunction}
-          size="small"
+          size={entityType === "tag" ? "medium" : "small"}
           colorScheme="green"
         />
         <FunctionalButton
@@ -62,7 +71,7 @@ const EntityContainerOptions: FC<EntityContainerOptionsProps> = ({
           onHoverContent={deleteOptionLabel}
           onHoverContentDisabled="Need to update this."
           onClickFunction={onEntityDeleteFunction}
-          size="small"
+          size={entityType === "tag" ? "medium" : "small"}
           colorScheme="red"
         />
       </div>

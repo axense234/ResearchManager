@@ -16,7 +16,6 @@ import {
 import {
   selectCurrentEntityOverlayPriority,
   selectDeleteEntityOverlay,
-  selectViewEntityOverlay,
 } from "@/redux/slices/general";
 import { closeDeleteEntityOverlay } from "@/redux/slices/general/slice";
 

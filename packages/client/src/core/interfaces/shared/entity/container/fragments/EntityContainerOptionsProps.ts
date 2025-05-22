@@ -8,5 +8,5 @@ export interface EntityContainerOptionsProps {
 
   onEntityUpdateFunction: () => void;
   onEntityDeleteFunction: () => void;
-  onEntityResearchFunction: () => void;
+  onEntityResearchFunction?: () => void;
 }

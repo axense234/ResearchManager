@@ -84,6 +84,16 @@ export const selectResearchActivitiesCustom = createSelector(
   },
 );
 
+export const selectResearchActivityIndexById = createSelector(
+  [
+    (state: State, researchActivityId: string) =>
+      selectResearchActivitiesCustom(state, { sorted: true, unarchived: true }),
+    (state: State, researchActivityId: string) => researchActivityId,
+  ],
+  (researchActivities, researchActivityId) =>
+    researchActivities.findIndex((ra) => ra.id === researchActivityId),
+);
+
 export const selectNumberOfResearchActivitiesCustom = createSelector(
   [selectResearchActivitiesCustom],
   (researchActivities) => {

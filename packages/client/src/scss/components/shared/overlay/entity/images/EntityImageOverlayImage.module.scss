@@ -11,6 +11,8 @@
     max-height: 90%;
     width: auto;
 
+    user-select: none;
+
     &:hover {
       transition: transform 0.15s ease-in;
 

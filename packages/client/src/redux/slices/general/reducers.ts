@@ -237,4 +237,10 @@ export const generalSliceReducers = {
   ) {
     state.createEntityModal = { ...state.createEntityModal, isClosed: true };
   },
+  setNumberOfCurrentTagUsedOnEntities(
+    state: GeneralSliceInitialStateType,
+    action: PayloadAction<number>,
+  ) {
+    state.numberOfCurrentTagUsedOnEntities = action.payload;
+  },
 };

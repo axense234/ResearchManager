@@ -2,7 +2,7 @@
 import { CreateTagDto, UpdateTagDto } from "@researchmanager/shared/types";
 import { TagRedux } from "./TagRedux";
 import { LoadingStateType } from "../../other";
-import { AddTagModalType, CreateTagModalType } from "../general";
+import { AddTagModalType } from "../general";
 
 export type TagsSliceInitialStateType = {
   createTagDto: CreateTagDto;
@@ -12,6 +12,9 @@ export type TagsSliceInitialStateType = {
 
   addTagModal: AddTagModalType;
   selectedTagsIds: string[];
+
+  currentTagExampleIndex: number;
+  currentTagIndex: number;
 
   loadingCreateTag: LoadingStateType;
   loadingDeleteTag: LoadingStateType;

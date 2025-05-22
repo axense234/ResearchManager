@@ -16,13 +16,17 @@ const EntityLogsList: FC<EntityLogsListProps> = ({
 }) => {
   const textColor = darkMode ? mainBlackColor : secondaryWhiteColor;
 
+  const entityLogsListHeight = showLogs
+    ? Math.min(25, Math.ceil(logsIds.length / 3) * 3.2)
+    : 0;
+
   return (
     <div className={entityLogsListStyles.logsListContainer}>
       {logsIds?.length > 0 ? (
         <ul
           className={entityLogsListStyles.logsList}
           style={{
-            height: showLogs ? `${(logsIds.length * 5) / 3}rem` : "0",
+            height: `${entityLogsListHeight}rem`,
             padding: showLogs ? "1rem" : "0",
           }}
         >

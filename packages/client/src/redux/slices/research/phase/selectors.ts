@@ -25,6 +25,41 @@ export const selectResearchPhasesByIds = createSelector(
   },
 );
 
+export const selectResearchPhasesCustom = createSelector(
+  [
+    selectAllResearchPhases,
+    (state: State) => state,
+    (_: State, options: { sorted: boolean; unarchived: boolean }) => options,
+  ],
+  (researchPhases, state, options) => {
+    let researchPhasesToReturn = researchPhases;
+
+    if (options.unarchived) {
+      researchPhasesToReturn.filter((researchPhase) => !researchPhase.archived);
+    }
+
+    if (options.sorted) {
+      researchPhasesToReturn.sort((first, second) => {
+        const firstRP = calculateResearchPhaseRP(state, first);
+        const secondRP = calculateResearchPhaseRP(state, second);
+        return secondRP - firstRP;
+      });
+    }
+
+    return researchPhasesToReturn;
+  },
+);
+
+export const selectResearchPhaseIndexById = createSelector(
+  [
+    (state: State, researchPhaseId: string) =>
+      selectResearchPhasesCustom(state, { sorted: true, unarchived: true }),
+    (state: State, researchPhaseId: string) => researchPhaseId,
+  ],
+  (researchPhases, researchPhaseId) =>
+    researchPhases.findIndex((rp) => rp.id === researchPhaseId),
+);
+
 export const selectStatisticResearchPhase = createSelector(
   [
     selectAllResearchPhases,

@@ -5,6 +5,14 @@
   width: 100%;
   gap: 3rem;
 
+  > hr {
+    border: none;
+    height: 2px;
+    border-radius: 0.5rem;
+    width: 80%;
+    background-color: getColor("main-white");
+  }
+
   > h3 {
     @include heading("h3", "laptop", "white");
     letter-spacing: 1.5px;

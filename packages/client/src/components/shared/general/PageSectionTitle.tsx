@@ -1,5 +1,6 @@
 // React
 import { FC } from "react";
+// Interfaces
 import { PageSectionTitleProps } from "@/core/interfaces";
 // SCSS
 import pageSectionTitleStyles from "@/scss/components/shared/general/PageSectionTitle.module.scss";
@@ -7,10 +8,12 @@ import pageSectionTitleStyles from "@/scss/components/shared/general/PageSection
 const PageSectionTitle: FC<PageSectionTitleProps> = ({
   title,
   description,
+  pageType = "profile",
 }) => {
   return (
     <div className={pageSectionTitleStyles.pageSectionTitleContainer}>
       <h3>{title}</h3>
+      {pageType === "dashboard" && <hr />}
       <div className={pageSectionTitleStyles.pageSectionTitleDescription}>
         {typeof description === "string" ? (
           <p>{description}</p>

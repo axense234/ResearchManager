@@ -11,7 +11,7 @@ import { State } from "@/redux/api/store";
 import { handleFormErrorInputsAndModalMessage } from "@/helpers";
 // Types
 import { AxiosError } from "axios";
-import { createTag } from "@/redux/slices/tag/thunks";
+import { createTag, deleteTag, updateTag } from "@/redux/slices/tag/thunks";
 import {
   createResearchPhase,
   deleteResearchPhase,
@@ -56,6 +56,12 @@ setModalListener.startListening({
     createTag.pending,
     createTag.fulfilled,
     createTag.rejected,
+    updateTag.pending,
+    updateTag.fulfilled,
+    updateTag.rejected,
+    deleteTag.pending,
+    deleteTag.fulfilled,
+    deleteTag.rejected,
     // Research Session
     createResearchSession.pending,
     createResearchSession.fulfilled,

@@ -58,6 +58,7 @@ export type GeneralSliceInitialStateType = {
   currentActivityLogSubject: ActivitySubject;
   chosenImageResearchLogId: string;
   currentEntityOverlayPriority: "view" | "upsert" | "delete";
+  numberOfCurrentTagUsedOnEntities: number;
 
   // Images
   loadingUploadImageToCloudinary: LoadingStateType;

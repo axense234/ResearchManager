@@ -23,11 +23,13 @@ const EntityView: FC<EntityViewProps> = ({
   darkMode,
   setShowEntityExamples,
   entitiesIds,
+  pageType,
 }) => {
   const [showSessions, setShowSessions] = useState<boolean>(false);
   const [showImages, setShowImages] = useState<boolean>(false);
   const [showGraph, setShowGraph] = useState<boolean>(false);
   const [showLogs, setShowLogs] = useState<boolean>(false);
+  const [showEntities, setShowEntities] = useState<boolean>(false);
 
   const { currentEntityIndex, currentEntityId } = useGetCurrentEntityIdAndIndex(
     entityType,
@@ -42,6 +44,7 @@ const EntityView: FC<EntityViewProps> = ({
     showImages,
     showGraph,
     showLogs,
+    showEntities,
   );
 
   if (isLoading) {
@@ -61,6 +64,7 @@ const EntityView: FC<EntityViewProps> = ({
     <section
       className={entityViewStyles.entityViewContainer}
       style={{ height: entityViewHeight }}
+      id={`${pageType}-${entityType}-view`}
     >
       {entitiesIds?.map((entityId, entityIndex) => {
         const position = determineContentPosition(
@@ -84,10 +88,12 @@ const EntityView: FC<EntityViewProps> = ({
             showImages={showImages}
             showGraph={showGraph}
             showLogs={showLogs}
+            showEntities={showEntities}
             setShowSessions={setShowSessions}
             setShowImages={setShowImages}
             setShowGraph={setShowGraph}
             setShowLogs={setShowLogs}
+            setShowEntities={setShowEntities}
           />
         );
       })}

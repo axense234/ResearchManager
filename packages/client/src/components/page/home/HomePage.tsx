@@ -1,5 +1,5 @@
 "use client";
-// Interfaces
+// React
 import { FC } from "react";
 // SCSS
 import homePageStyles from "@/scss/components/page/home/HomePage.module.scss";

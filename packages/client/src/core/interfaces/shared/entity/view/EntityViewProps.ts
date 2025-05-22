@@ -7,4 +7,5 @@ export interface EntityViewProps {
   darkMode: boolean;
   entitiesIds: string[];
   setShowEntityExamples?: (value: boolean) => void;
+  pageType: "profile" | "dashboard";
 }

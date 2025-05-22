@@ -48,6 +48,7 @@ export const {
   setCurrentEntityOverlayPriority,
   closeCreateEntityModal,
   setCreateEntityModal,
+  setNumberOfCurrentTagUsedOnEntities,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

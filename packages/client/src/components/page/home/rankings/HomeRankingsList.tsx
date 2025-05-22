@@ -44,7 +44,42 @@ const HomeRankingsList: FC = () => {
     ],
   };
 
-  return <Bar data={horizontalBarGraphData} options={{ indexAxis: "y" }} />;
+  return (
+    <Bar
+      data={horizontalBarGraphData}
+      options={{
+        indexAxis: "y",
+        scales: {
+          y: {
+            ticks: {
+              color: mainWhiteColor,
+              font: {
+                size: 18,
+              },
+            },
+          },
+          x: {
+            ticks: {
+              color: mainWhiteColor,
+              font: {
+                size: 18,
+              },
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: mainWhiteColor,
+              font: {
+                size: 20,
+              },
+            },
+          },
+        },
+      }}
+    />
+  );
 };
 
 export default HomeRankingsList;

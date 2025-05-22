@@ -30,6 +30,12 @@ import {
   deleteResearchLog,
   updateResearchLog,
 } from "@/redux/slices/research/log";
+import { deleteTag, updateTag } from "@/redux/slices/tag/thunks";
+import {
+  selectCurrentTagIndex,
+  selectNumberOfTags,
+  setCurrentTagIndex,
+} from "@/redux/slices/tag";
 
 export const useDetermineDeleteEntityOverlayFunctions = (
   entityType: EntityType,
@@ -47,6 +53,8 @@ export const useDetermineDeleteEntityOverlayFunctions = (
   const numberOfResearchPhases = useAppSelector(
     selectNumberOfUnarchivedResearchPhases,
   );
+
+  const numberOfTags = useAppSelector(selectNumberOfTags);
 
   switch (entityType) {
     case "researchActivity":
@@ -131,6 +139,20 @@ export const useDetermineDeleteEntityOverlayFunctions = (
         dispatch(closeDeleteEntityOverlay());
         dispatch(closeViewEntityOverlay());
         dispatch(closeUpsertEntityOverlay());
+      };
+      break;
+    case "tag":
+      onArchiveFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("ARCHIVE"));
+        dispatch(updateTag({ dto: { archived: true }, tagId: entityId }));
+        dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentTagIndex(numberOfTags - 1));
+      };
+      onPurgeFunctionUsed = () => {
+        dispatch(setCurrentActivityLogSubject("PURGE"));
+        dispatch(deleteTag(entityId));
+        dispatch(closeDeleteEntityOverlay());
+        dispatch(setCurrentTagIndex(numberOfTags - 1));
       };
       break;
     default:

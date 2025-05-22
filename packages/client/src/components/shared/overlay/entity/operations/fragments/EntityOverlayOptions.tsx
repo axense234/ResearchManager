@@ -9,7 +9,6 @@ import EntityOverlayOption from "./EntityOverlayOption";
 // Redux
 import { useAppDispatch } from "@/hooks";
 import {
-  closeViewEntityOverlay,
   setCurrentActivityLogSubject,
   setCurrentEntityOverlayPriority,
   setDeleteEntityOverlay,

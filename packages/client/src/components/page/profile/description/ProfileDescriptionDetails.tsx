@@ -1,5 +1,6 @@
-// Interfaces
+// React
 import { FC } from "react";
+// Interfaces
 import { ProfileDescriptionDetailsProps } from "@/core/interfaces";
 // Next
 import Image from "next/image";

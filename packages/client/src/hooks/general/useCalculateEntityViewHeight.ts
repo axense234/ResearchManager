@@ -5,20 +5,22 @@ import {
 } from "@/redux/slices/research/session";
 import { useAppSelector } from "../redux";
 // Types
-import { EntityViewType } from "@/core/types";
+import { EntityViewEntityType, EntityViewType } from "@/core/types";
 import {
   selectResearchLogsByResearchActivityId,
   selectResearchLogsByResearchPhaseId,
 } from "@/redux/slices/research/log";
+import { selectNumberOfCurrentTagUsedOnEntities } from "@/redux/slices/general";
 
 export const useCalculateEntityViewHeight = (
   currentEntityId: string,
-  entityType: "researchActivity" | "researchPhase",
+  entityType: EntityViewEntityType,
   viewType: EntityViewType,
   showSessions: boolean,
   showImages: boolean,
   showGraph: boolean,
   showLogs: boolean,
+  showEntities: boolean,
 ) => {
   const numberOfResearchActivityResearchSessions = useAppSelector((state) =>
     selectResearchSessionsByResearchActivityId(state, currentEntityId),
@@ -31,9 +33,14 @@ export const useCalculateEntityViewHeight = (
   const numberOfResearchActivityResearchLogs = useAppSelector((state) =>
     selectResearchLogsByResearchActivityId(state, currentEntityId),
   ).length;
+
   const numberOfResearchPhaseResearchLogs = useAppSelector((state) =>
     selectResearchLogsByResearchPhaseId(state, currentEntityId),
   ).length;
+
+  const numberOfCurrentTagUsedOnEntities = useAppSelector(
+    selectNumberOfCurrentTagUsedOnEntities,
+  );
 
   const usedNumberOfEntityResearchSessions =
     entityType === "researchActivity"
@@ -45,27 +52,46 @@ export const useCalculateEntityViewHeight = (
       ? numberOfResearchActivityResearchLogs
       : numberOfResearchPhaseResearchLogs;
 
-  const defaultEntityViewHeight = 27.5;
-  const entityViewHeightFromResearchSessions = showSessions
-    ? Math.min(usedNumberOfEntityResearchSessions * 8, 25)
-    : 0;
-  const entityViewHeightFromResearchLogs =
-    entityType === "researchPhase"
-      ? showLogs
-        ? Math.min(usedNumberOfEntityResearchLogs * 5, 35)
-        : 15
+  const defaultEntityViewHeight = viewType === "entity" ? 30 : 20;
+  const defaultTagViewHeight = 20;
+
+  const entityViewHeightFromEntityDetails =
+    showImages || showGraph ? 25.625 : 8.15;
+
+  const entityViewHeightFromEntitySessions = showSessions
+    ? Math.min(25, usedNumberOfEntityResearchSessions * 7) + 15
+    : 15;
+
+  const entityViewHeightFromEntityLogs = showLogs
+    ? Math.min(25, Math.ceil(usedNumberOfEntityResearchLogs / 3) * 3.2) + 15
+    : 15;
+
+  const usedEntityViewHeightFromEntityLogs =
+    viewType === "entity"
+      ? entityType == "researchPhase"
+        ? entityViewHeightFromEntityLogs
+        : 0
       : 0;
-  const entityViewHeightFromViewType = viewType === "entity" ? 20 : 0;
-  const entityViewHeightFromEntityDetails = showImages || showGraph ? 15 : 0;
+
+  const usedEntityViewHeightFromEntitySessions =
+    viewType === "example" ? 0 : entityViewHeightFromEntitySessions;
+
+  const entityViewHeightFromEntityUsedOnTags = showEntities
+    ? Math.min(25, numberOfCurrentTagUsedOnEntities * 7) + 15
+    : 15;
+
+  const tagViewHeightResult =
+    defaultTagViewHeight + entityViewHeightFromEntityUsedOnTags;
 
   const entityViewHeightResult =
     defaultEntityViewHeight +
-    entityViewHeightFromResearchSessions +
-    entityViewHeightFromResearchLogs +
-    entityViewHeightFromViewType +
-    entityViewHeightFromEntityDetails;
+    entityViewHeightFromEntityDetails +
+    usedEntityViewHeightFromEntitySessions +
+    usedEntityViewHeightFromEntityLogs;
 
-  const entityViewHeight = `${entityViewHeightResult}rem`;
-
-  return entityViewHeight;
+  if (entityType === "tag") {
+    return `${tagViewHeightResult}rem`;
+  } else {
+    return `${entityViewHeightResult}rem`;
+  }
 };

@@ -2,6 +2,7 @@
 import { selectResearchActivityById } from "@/redux/slices/research/activity";
 import { selectResearchPhaseById } from "@/redux/slices/research/phase";
 import { useAppSelector } from "../redux";
+import { selectResearchLogById } from "@/redux/slices/research/log";
 // Types
 import { EntityType } from "@researchmanager/shared/types";
 import { selectTagById } from "@/redux/slices/tag";
@@ -9,6 +10,7 @@ import { selectTagById } from "@/redux/slices/tag";
 const selectors = {
   researchActivity: selectResearchActivityById,
   researchPhase: selectResearchPhaseById,
+  researchLog: selectResearchLogById,
   tag: selectTagById,
 };
 

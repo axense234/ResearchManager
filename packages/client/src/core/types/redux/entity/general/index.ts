@@ -11,3 +11,4 @@ export * from "./CreateTagModalType";
 export * from "./UpsertTagOverlayType";
 export * from "./ViewEntityOverlayType";
 export * from "./CreateEntityModalType";
+export * from "./EntityByIdSelectorType";

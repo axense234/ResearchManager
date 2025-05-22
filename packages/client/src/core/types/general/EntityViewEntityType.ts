@@ -1,1 +1,1 @@
-export type EntityViewEntityType = "researchActivity" | "researchPhase";
+export type EntityViewEntityType = "researchActivity" | "researchPhase" | "tag";

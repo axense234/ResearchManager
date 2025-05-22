@@ -21,7 +21,7 @@ import { State } from "@/redux/api/store";
 import { selectActivityDayIdBasedOnLocaleDate } from "@/redux/slices/activity/day";
 import { createActivityDay } from "@/redux/slices/activity/day/thunks";
 import { createActivityLog } from "@/redux/slices/activity/log/thunks";
-import { createTag } from "@/redux/slices/tag/thunks";
+import { createTag, deleteTag, updateTag } from "@/redux/slices/tag/thunks";
 import {
   createResearchPhase,
   deleteResearchPhase,
@@ -59,6 +59,10 @@ handleActivityLogsListener.startListening({
     // Tag
     createTag.fulfilled,
     createTag.rejected,
+    updateTag.fulfilled,
+    updateTag.rejected,
+    deleteTag.fulfilled,
+    deleteTag.rejected,
     // Research Session
     createResearchSession.fulfilled,
     createResearchSession.rejected,

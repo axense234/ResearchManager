@@ -1,3 +1,6 @@
+// Types
+import { EntityType } from "@researchmanager/shared/types";
+import { EntityViewType } from "@/core/types";
 // Redux
 import {
   selectCurrentResearchActivityExampleIndex,
@@ -12,9 +15,12 @@ import {
   selectCurrentResearchPhaseExampleIndex,
 } from "@/redux/slices/research/phase";
 import { useAppSelector } from "../redux";
-// Types
-import { EntityType } from "@researchmanager/shared/types";
-import { EntityViewType } from "@/core/types";
+import {
+  selectCurrentTagExampleIndex,
+  selectCurrentTagIndex,
+  selectTagExampleIdByIndex,
+  selectTagIdByIndex,
+} from "@/redux/slices/tag";
 
 const currentEntityIndexSelectors = {
   researchActivity: {
@@ -24,6 +30,10 @@ const currentEntityIndexSelectors = {
   researchPhase: {
     entity: selectCurrentResearchPhaseIndex,
     example: selectCurrentResearchPhaseExampleIndex,
+  },
+  tag: {
+    entity: selectCurrentTagIndex,
+    example: selectCurrentTagExampleIndex,
   },
 };
 
@@ -35,6 +45,10 @@ const currentEntityIdSelectors = {
   researchPhase: {
     entity: selectResearchPhaseIdByIndex,
     example: selectResearchPhaseExampleIdByIndex,
+  },
+  tag: {
+    entity: selectTagIdByIndex,
+    example: selectTagExampleIdByIndex,
   },
 };
 

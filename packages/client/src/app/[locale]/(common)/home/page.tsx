@@ -1,5 +1,5 @@
 "use client";
-// Interfaces
+// React
 import { FC } from "react";
 // Hooks
 import { useAuthorization } from "@/hooks/general/useAuthorization";

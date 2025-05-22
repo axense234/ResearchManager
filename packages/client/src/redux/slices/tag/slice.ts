@@ -25,6 +25,10 @@ export const {
   closeAddTagModal,
   setCreateTagDto,
   updateUpdateTagDto,
+  handleTagCarouselStepDirection,
+  handleTagExampleCarouselStepDirection,
+  setUpdateTagDto,
+  setCurrentTagIndex,
 } = tagsSlice.actions;
 
 export default tagsSlice.reducer;
