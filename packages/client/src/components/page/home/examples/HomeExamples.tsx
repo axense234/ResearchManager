@@ -28,6 +28,7 @@ const HomeExamples: FC = () => {
         entitiesIds={researchActivitiesExamplesIds}
         darkMode={true}
         isLoading={false}
+        pageType="home"
       />
     </section>
   );
