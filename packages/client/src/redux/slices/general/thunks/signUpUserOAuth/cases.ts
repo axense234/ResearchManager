@@ -26,10 +26,10 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
 > = (state, action) => {
   localStorage.removeItem("createResearchManagerAccount");
 
-  const user = action.payload as User;
   const axiosError = action.payload as AxiosError;
 
   if (!axiosError?.isAxiosError) {
+    const user = action.payload as User;
     console.log(user);
 
     state.userProfile = transformEntityIntoEntityRedux(
@@ -50,7 +50,9 @@ export const signUpUserOAuthFulfilled: ExtraReducerFuncType<
       error: string;
     };
 
-    if (errorData.error === "Forbidden") {
+    console.log(errorData);
+
+    if (errorData.message === "Credentials Taken.") {
       state.generalModal = {
         isClosed: false,
         message: `Successfully signed in your Account.`,

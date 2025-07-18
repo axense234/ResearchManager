@@ -54,6 +54,8 @@ export class ReturnObjectBuilderService {
     // Status Code
     if (actionType === 'CREATE') {
       returnObject.statusCode = StatusCodes.CREATED;
+    } else if (actionType === 'FORBIDDEN') {
+      returnObject.statusCode = StatusCodes.FORBIDDEN;
     } else {
       returnObject.statusCode = StatusCodes.OK;
     }

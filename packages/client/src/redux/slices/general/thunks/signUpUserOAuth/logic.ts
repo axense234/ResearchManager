@@ -28,8 +28,13 @@ export const signUpUserOAuth = createAsyncThunk<User | AxiosError>(
       signUpUserDto.profileImageSrc =
         (session?.user?.image as string) || signUpUserDto.profileImageSrc;
 
-      const res = (await axiosInstance.post("/auth/signup", signUpUserDto))
-        .data as ReturnObjectBuilderReturnObject;
+      const res = (
+        await axiosInstance.post("/auth/signup", signUpUserDto, {
+          params: { throughOAuth: "true" },
+        })
+      ).data as ReturnObjectBuilderReturnObject;
+
+      console.log(res);
 
       localStorage.setItem(
         process.env.NEXT_PUBLIC_JWT_KEY_LABEL || "rm-jwt",
