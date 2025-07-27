@@ -21,6 +21,10 @@ export class SignUpQueryParams {
   @IsOptional()
   chosenOptionType: 'include' | 'select';
 
+  @IsString()
+  @IsOptional()
+  throughOAuth: 'false' | 'true';
+
   @ApiProperty(signUpQueryParamsApiPropertyOptions['createSettings'])
   @IsString()
   @IsOptional()

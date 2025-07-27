@@ -1,9 +1,10 @@
 export type ActionType =
-  | 'GET SINGLE'
-  | 'GET MULTIPLE'
-  | 'CREATE'
-  | 'UPDATE'
-  | 'DELETE'
-  | 'SIGNIN'
-  | 'LOGOUT'
-  | 'GET PROFILE';
+  | "GET SINGLE"
+  | "GET MULTIPLE"
+  | "CREATE"
+  | "UPDATE"
+  | "DELETE"
+  | "SIGNIN"
+  | "LOGOUT"
+  | "GET PROFILE"
+  | "FORBIDDEN";

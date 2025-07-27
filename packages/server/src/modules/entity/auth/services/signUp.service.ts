@@ -99,7 +99,28 @@ export class SignUpService {
         error instanceof PrismaClientKnownRequestError &&
         error.code === 'P2002'
       ) {
-        throw new ForbiddenException('Credentials taken.');
+        const { throughOAuth } = queryParams;
+        console.log(throughOAuth);
+        if (throughOAuth) {
+          const foundUser = await this.prisma.user.findUnique({
+            where: { email: dto?.email },
+          });
+
+          console.log(dto.email, foundUser);
+
+          const jwtResponse = await this.signTokenService.signToken(
+            foundUser.id,
+            foundUser.email,
+          );
+
+          return await this.objectBuilder.buildReturnObject({
+            actionType: 'FORBIDDEN',
+            message: 'Credentials Taken.',
+            access_token: jwtResponse.access_token,
+          });
+        } else {
+          throw new ForbiddenException('Credentials Taken');
+        }
       } else {
         throw error;
       }
