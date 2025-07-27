@@ -18,6 +18,7 @@ export const handleFormErrorInputsAndModalMessage = (
         (message as string[])[0][0].toUpperCase() +
         (message as string[])[0].slice(1) +
         ".";
+
       console.log(returnMessage);
     }
   }

@@ -7,6 +7,10 @@ import entityViewNoEntitiesStyles from "@/scss/components/shared/entity/view/Ent
 import FunctionalButton from "../../general/FunctionalButton";
 // Redux
 import { useAppDispatch } from "@/hooks";
+import {
+  setUpsertEntityOverlay,
+  setUpsertTagOverlay,
+} from "@/redux/slices/general/slice";
 
 const EntityViewNoEntities: FC<EntityViewNoEntitiesProps> = ({
   entityType,
@@ -14,15 +18,27 @@ const EntityViewNoEntities: FC<EntityViewNoEntitiesProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const messageShown =
-    entityType === "researchActivity"
-      ? "No Research Activities"
-      : "No Research Phases";
+  let messageShown = "No Research Activities";
+  let createEntityButtonTitleShown = "Create Research Activity";
+  let onCreateEntityButtonFunctionUsed =
+    entityType === "tag" ? setUpsertTagOverlay : setUpsertEntityOverlay;
 
-  const createEntityButtonTitleShown =
-    entityType === "researchActivity"
-      ? "Create Research Activity"
-      : "Create Research Phase";
+  switch (entityType) {
+    case "researchActivity":
+      messageShown = "No Research Activities";
+      createEntityButtonTitleShown = "Create Research Activity";
+      break;
+    case "researchPhase":
+      messageShown = "No Research Phases";
+      createEntityButtonTitleShown = "Create Research Phase";
+      break;
+    case "tag":
+      messageShown = "No Tags";
+      createEntityButtonTitleShown = "Create Tag";
+      break;
+    default:
+      break;
+  }
 
   return (
     <div className={entityViewNoEntitiesStyles.viewContainer}>
@@ -41,7 +57,15 @@ const EntityViewNoEntities: FC<EntityViewNoEntitiesProps> = ({
           disabled={false}
           onHoverContent={createEntityButtonTitleShown}
           onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
-          onClickFunction={() => dispatch(() => {})}
+          onClickFunction={() =>
+            dispatch(
+              onCreateEntityButtonFunctionUsed({
+                entityType,
+                method: "create",
+                showOverlay: true,
+              }),
+            )
+          }
         />
       </div>
     </div>

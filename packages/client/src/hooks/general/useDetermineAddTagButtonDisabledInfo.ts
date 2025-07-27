@@ -7,8 +7,7 @@ export const useDetermineAddTagButtonDisabledInfo = (
     selectedTagsIds.length < 1 ||
     selectedTagsIds.some((selectedTagId) =>
       sourceTagsIds?.includes(selectedTagId),
-    ) ||
-    selectedTagsIds.length === totalTagsIds.length;
+    );
 
   let addTagButtonDisabledMessage = "Please select some Tag!";
   if (

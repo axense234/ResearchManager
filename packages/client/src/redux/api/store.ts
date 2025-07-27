@@ -33,7 +33,9 @@ const store = configureStore({
     activityLogs: activityLogsSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().prepend(
+    getDefaultMiddleware({
+      serializableCheck: { ignoredActionPaths: ["payload"] },
+    }).prepend(
       setEntitiesStateFromUserPayloadListener.middleware,
       setModalListener.middleware,
       addDefaultResearchPhaseListener.middleware,

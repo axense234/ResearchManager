@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: false,
   distDir: "build",
   compiler: {
-    removeConsole: false,
+    removeConsole: process.env.NODE_ENV === "production",
   },
   images: {
     unoptimized: true,

@@ -28,6 +28,7 @@ import {
   selectCreateResearchPhaseDto,
   selectLoadingCreateResearchPhase,
   selectLoadingUpdateResearchPhase,
+  selectNumberOfUnarchivedResearchPhases,
   selectUpdateResearchPhaseDto,
   updateCreateResearchPhaseDto,
   updateResearchPhase,
@@ -169,9 +170,13 @@ const UpsertResearchPhaseOverlayInterface: FC = () => {
         <hr />
         <FunctionalButton
           content={interfaceTitle}
-          disabled={isRequestPending}
+          disabled={isRequestPending || researchActivitiesIds.length === 0}
           onHoverContent={interfaceTitle}
-          onHoverContentDisabled="Please wait, we are doing some tech stuff right now."
+          onHoverContentDisabled={
+            isRequestPending
+              ? "Please wait, we are doing some tech stuff right now."
+              : "No Research Activities found. Create some."
+          }
           onClickFunction={() => dtoUsedUpsertFunction()}
         />
       </div>

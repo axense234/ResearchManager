@@ -40,6 +40,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
 
+  // Only have Swagger Documentation in a web dev environment
   if (process.env.NODE_ENV === 'development') {
     const documentFactory = () =>
       SwaggerModule.createDocument(app, config, { autoTagControllers: false });

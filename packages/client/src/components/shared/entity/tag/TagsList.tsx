@@ -40,7 +40,7 @@ const TagsList: FC<TagsListProps> = ({
                 key={tagId}
                 containerType={containerType}
                 onClickFunction={() => {
-                  if (containerType !== "view") {
+                  if (containerType !== "view" && containerType !== "example") {
                     onTagComponentClick(
                       tagId,
                       selectedTagsIds,
