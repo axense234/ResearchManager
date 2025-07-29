@@ -40,7 +40,7 @@ export const transformEntityIntoEntityRedux = (
       delete entityAsUserWithoutRelationships?.researchActivities;
       delete entityAsUserWithoutRelationships?.tags;
 
-      console.log(entityAsUser);
+      console.log(JSON.parse(JSON.stringify(entityAsUser)));
 
       return {
         ...entityAsUserWithoutRelationships,

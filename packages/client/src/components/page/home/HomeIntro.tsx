@@ -18,6 +18,8 @@ const HomeIntro: FC = () => {
 
   const profile = useAppSelector(selectUserProfile);
 
+  console.log(profile);
+
   const isFunctionalButtonDisabled = profile.id.length <= 0;
 
   return (

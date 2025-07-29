@@ -44,7 +44,9 @@ export class ReturnObjectBuilderService {
 
     // Access Token
     if (
-      (actionType === 'CREATE' || actionType === 'SIGNIN') &&
+      (actionType === 'CREATE' ||
+        actionType === 'SIGNIN' ||
+        actionType === 'FORBIDDEN') &&
       entityType === 'user'
     ) {
       returnObject.access_token = access_token;
@@ -59,6 +61,8 @@ export class ReturnObjectBuilderService {
     } else {
       returnObject.statusCode = StatusCodes.OK;
     }
+
+    console.log(returnObject);
 
     return returnObject;
   }

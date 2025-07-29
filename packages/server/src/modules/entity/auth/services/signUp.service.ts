@@ -100,23 +100,25 @@ export class SignUpService {
         error.code === 'P2002'
       ) {
         const { throughOAuth } = queryParams;
-        console.log(throughOAuth);
-        if (throughOAuth) {
+        if (throughOAuth === 'true') {
           const foundUser = await this.prisma.user.findUnique({
             where: { email: dto?.email },
+            include: { activityFeed: true, settings: true, tags: true },
           });
-
-          console.log(dto.email, foundUser);
 
           const jwtResponse = await this.signTokenService.signToken(
             foundUser.id,
             foundUser.email,
           );
 
+          console.log(jwtResponse);
+
           return await this.objectBuilder.buildReturnObject({
             actionType: 'FORBIDDEN',
             message: 'Credentials Taken.',
             access_token: jwtResponse.access_token,
+            entityType: 'user',
+            entity: foundUser,
           });
         } else {
           throw new ForbiddenException('Credentials Taken');
