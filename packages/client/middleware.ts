@@ -1,7 +1,7 @@
 // Next INTL
 import createMiddleware from "next-intl/middleware";
 // Routing
-import { routing } from "./i18n/routing";
+import { routing } from "./src/i18n/routing";
 
 export default createMiddleware(routing);
 
