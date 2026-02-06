@@ -1,2 +1,7 @@
 [[plugins]]
 package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NETLIFY_NEXTJS_SECURITY_BYPASS = "true"
+  DISABLE_SECURITY_HEADERS = "false"
