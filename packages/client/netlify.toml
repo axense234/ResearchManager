@@ -1,4 +1,2 @@
-[build]
-  command = "cd packages/client && npm ci && npm run build"
-  publish = "packages/client/.next"
-  base = "packages/client"
+[[plugins]]
+package = "@netlify/plugin-nextjs"
